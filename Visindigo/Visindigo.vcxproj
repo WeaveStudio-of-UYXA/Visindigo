@@ -97,6 +97,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="VisindigoUI\VIGuiAnimation.cpp" />
+    <ClCompile Include="Visindigo\VIType.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="VIPyAPI\VIPyAPI.h" />
+    <ClInclude Include="VIPyAPI\VIPyMacro.h" />
+    <QtMoc Include="VisindigoUI\VIGuiAnimation.h" />
+    <QtMoc Include="VisindigoUI\VIPlayerWidget.h" />
+    <ClInclude Include="Visindigo\Interpreter.h" />
+    <ClInclude Include="Visindigo\VIMacro.h" />
+    <ClInclude Include="Visindigo\VIObject.h" />
+    <ClInclude Include="Visindigo\VIType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

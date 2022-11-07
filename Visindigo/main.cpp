@@ -1,8 +1,9 @@
 ﻿#pragma execution_character_set("utf-8")
 #include <QtCore>
 #include <Python.h>
-
-int main(int* argc, char* argv[]) {
+#include "VisindigoUI/VIPlayerWidget.h"
+int main(int argc, char* argv[]) {
+	QApplication app(argc, argv);
 	Py_SetPythonHome(L"./Python");
 	qDebug() << "Visindigo正在初始化内置Python核心";
 	Py_Initialize();
@@ -13,6 +14,7 @@ int main(int* argc, char* argv[]) {
 	PyRun_SimpleString("import Users_Data.repos.PyVIApplication1.main as UserMain");
 	qDebug() << "定位VImain主函数";
 	PyRun_SimpleString("main = UserMain.Main()");
-	getchar();
-	return 0;
+	AWidget* w = new AWidget();
+	w->show();
+	return app.exec();
 }

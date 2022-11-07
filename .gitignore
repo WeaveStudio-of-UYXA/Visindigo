@@ -41,6 +41,7 @@ x64/Visindigo/Users_Data
 x64/Visindigo/Program_Data
 x64/Visindigo/translations
 *.pyc
+*dll
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
