@@ -1,7 +1,7 @@
 ﻿#pragma execution_character_set("utf-8")
 #include <QtCore>
 #include <Python.h>
-#include "VisindigoUI/VIPlayerWidget.h"
+#include "VIUI/VIPlayerWidget.h"
 int main(int argc, char* argv[]) {
 	QApplication app(argc, argv);
 	Py_SetPythonHome(L"./Python");

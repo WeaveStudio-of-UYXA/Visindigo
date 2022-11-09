@@ -3,7 +3,7 @@
 #include <QtGui>
 #include <QtWidgets>
 
-#include "VIGuiAnimation.h"
+#include "Visindigo/VICore/VIGuiAnimation.h"
 class AEvent :public VIAnimationEvent 
 {
 	Q_OBJECT
@@ -12,7 +12,7 @@ signals:
 public:
 	int max;
 	AEvent INIT{
-		this->setMaxMsec(1000);
+		this->setMaxMsec(500);
 		max = 100;
 	}
 	void event() {
@@ -24,16 +24,17 @@ class AWidget :public QWidget
 	Q_OBJECT
 private:
 	VIAnimationEventProcess* Process;
-	QLabel* flameLabel;
+	QLabel* frameLabel;
 	QLabel* TestLabel;
 	QLabel* Test2Label;
 	QPushButton* TestButton;
 	QVBoxLayout* CurrentLayout;
 	AEvent* Event;
+	AEvent* Event2;
 public:
 	AWidget(QWidget* parent = Q_NULLPTR) : QWidget(parent) {
 		Process = new VIAnimationEventProcess(this);
-		flameLabel = new QLabel(this);
+		frameLabel = new QLabel(this);
 		TestLabel = new QLabel(this);
 		Test2Label = new QLabel(this);
 		TestLabel->resize(30, 30);
@@ -44,24 +45,30 @@ public:
 		Test2Label->setStyleSheet("QLabel{background-color:#000000;}");
 		CurrentLayout = new QVBoxLayout(this);
 		Event = new AEvent(this);
-		CurrentLayout->addWidget(flameLabel);
+		Event2 = new AEvent(this);
+		
+		CurrentLayout->addWidget(frameLabel);
 		CurrentLayout->addWidget(TestButton);
-		connect(Process, SIGNAL(currentFlame(float)), this, SLOT(changeFlame(float)));
+		connect(Process, SIGNAL(currentFrame(float)), this, SLOT(changeFrame(float)));
 		Process->start();
 		Event->setAnimationProcess(Process);
+		Event2->setAnimationProcess(Process);
 		BIND(Event, SIGNAL(move(float, float)), this, SLOT(moveB(float, float)));
+		BIND(Event2, SIGNAL(move(float, float)), this, SLOT(moveB2(float, float)));
 		connect(TestButton, SIGNAL(clicked()), this, SLOT(active()));
 	}
 public slots:
-	void changeFlame(float flame) {
-		flameLabel->setText(QString::number(flame));
+	void changeFrame(float frame) {
+		frameLabel->setText(QString::number((int)frame));
 	}
 	void moveB(float x, float y) {
 		this->TestLabel->move(x, y);
+	}
+	void moveB2(float x, float y) {
 		this->Test2Label->move(200 - x, y);
 	}
 	void active() {
-		Event->init();
 		Event->active();
+		Event2->active();
 	}
 };

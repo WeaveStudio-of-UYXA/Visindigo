@@ -31,13 +31,13 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>5.12.11</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;</QtModules>
+    <QtInstall>5.15.2</QtInstall>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;webengine;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>5.12.11</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;</QtModules>
+    <QtInstall>5.15.2</QtInstall>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;webengine;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -69,6 +69,11 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Link>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -91,20 +96,24 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="VisindigoUI\VIGuiAnimation.cpp" />
+    <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
     <ClCompile Include="Visindigo\VIType.cpp" />
+    <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VIPyAPI\VIPyAPI.h" />
     <ClInclude Include="VIPyAPI\VIPyMacro.h" />
-    <QtMoc Include="VisindigoUI\VIGuiAnimation.h" />
-    <QtMoc Include="VisindigoUI\VIPlayerWidget.h" />
+    <ClInclude Include="VIUI\MRW\MRWGlobal.h" />
+    <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h" />
+    <QtMoc Include="VIUI\VIPlayerWidget.h" />
+    <QtMoc Include="VIUI\MRW\VisindigoRuntime.h" />
+    <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h" />
     <ClInclude Include="Visindigo\Interpreter.h" />
     <ClInclude Include="Visindigo\VIMacro.h" />
     <ClInclude Include="Visindigo\VIObject.h" />

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include<QtCore>
+#include <chrono>
 #define INIT (QWidget* parent = Q_NULLPTR) :VIAnimationEvent(parent) {} void init() 
 #define BIND(objP1,signal,objP2,slot) connect(objP1,signal,objP2,slot,Qt::BlockingQueuedConnection)
 class VIAnimationEventProcess;
@@ -32,9 +33,10 @@ public:
 	void setMaxMsec(float msec) {
 		this->MaxMsec = msec;
 	}
-	void preDoEvent(int msTime) {
+	void preDoEvent(float msTime) {
 		if (ALIVE) {
 			CurrentMsec += msTime;
+			
 			if (Percentage < 1) {
 				Percentage = CurrentMsec / MaxMsec;
 			}
@@ -58,19 +60,19 @@ class VIAnimationEventProcess : public QThread
 {
 	Q_OBJECT
 signals:
-	void currentFlame(float);
+	void currentFrame(float);
 private:
 	QList<VIAnimationEvent*> EventQueue;
 	QMutex ProcessMutex;
 	QMutex SleepMutex;
 	QWaitCondition Condition;
-	int LASTTIME = 1;
+	float LASTTIME = 1;
 	QDateTime Time;
 	bool RUN = true;
 	bool WAIT = true;
 	int START = 0;
 	int END = 0;
-	float FLAME = 0;
+	float FRAME = 0;
 	int P30 = 300;
 public:
 	VIAnimationEventProcess(QObject* parent = Q_NULLPTR) : QThread(parent) {
@@ -84,20 +86,22 @@ public:
 				Condition.wait(&SleepMutex);
 			}
 			else {
-				START = QDateTime::currentMSecsSinceEpoch();
+				//START = QDateTime::currentMSecsSinceEpoch();
+				std::chrono::system_clock::time_point TPS = std::chrono::system_clock::now();
 				for (auto i = EventQueue.begin(); i != EventQueue.end(); i++) {
 					(*i)->preDoEvent(LASTTIME);
 				}
-				if (LASTTIME == 0) { LASTTIME = 1; }
+				if (LASTTIME == 0) { LASTTIME = 0.001; }
 				if (P30 < 1) {
-					FLAME = 1000 / LASTTIME;
-					emit currentFlame(FLAME);
-					P30 = 300;
+					FRAME = 1000 / LASTTIME;
+					emit currentFrame(FRAME);
+					P30 = 3000;
 				}
 				else { P30--; }
-				//if (5 - LASTTIME > 0) { this->sleep(5 - LASTTIME); }
-				END = QDateTime::currentMSecsSinceEpoch();
-				LASTTIME = END - START;
+				//END = QDateTime::currentMSecsSinceEpoch();
+				std::chrono::system_clock::time_point TPE = std::chrono::system_clock::now();
+				LASTTIME = (float)(std::chrono::duration_cast<std::chrono::microseconds>(TPE.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::microseconds>(TPS.time_since_epoch()).count()) / 1000;
+				//qDebug() << LASTTIME;
 				this->ProcessMutex.unlock();
 			}
 		}

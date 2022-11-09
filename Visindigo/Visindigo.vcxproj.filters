@@ -29,7 +29,10 @@
     <ClCompile Include="Visindigo\VIType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VisindigoUI\VIGuiAnimation.cpp">
+    <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIUI\MRW\MRWGlobal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -52,12 +55,21 @@
     <ClInclude Include="VIPyAPI\VIPyMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VIUI\MRW\MRWGlobal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="VisindigoUI\VIGuiAnimation.h">
+    <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VisindigoUI\VIPlayerWidget.h">
+    <QtMoc Include="VIUI\VIPlayerWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIUI\MRW\VisindigoRuntime.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
