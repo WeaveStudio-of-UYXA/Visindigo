@@ -31,6 +31,7 @@ private:
 	QVBoxLayout* CurrentLayout;
 	AEvent* Event;
 	AEvent* Event2;
+	QList<AEvent*> EventList;
 public:
 	AWidget(QWidget* parent = Q_NULLPTR) : QWidget(parent) {
 		Process = new VIAnimationEventProcess(this);
@@ -70,5 +71,10 @@ public slots:
 	void active() {
 		Event->active();
 		Event2->active();
+
+			EventList.append(new AEvent(this));
+			EventList.last()->setAnimationProcess(Process);
+			EventList.last()->active();
+		
 	}
 };
