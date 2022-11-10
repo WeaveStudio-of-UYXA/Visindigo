@@ -102,14 +102,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="VIJSAPI\GUI2DObject.cpp" />
+    <ClCompile Include="VIJSAPI\JSVIAPI.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
     <ClCompile Include="Visindigo\VIType.cpp" />
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VIJSAPI\VIJSHost.h" />
-    <QtMoc Include="VIJSAPI\GUI2DObject.h" />
+    <QtMoc Include="VIJSAPI\JSVIAPI.h" />
     <ClInclude Include="VIUI\MRW\MRWGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h" />
     <QtMoc Include="VIUI\VIPlayerWidget.h" />

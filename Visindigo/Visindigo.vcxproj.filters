@@ -35,7 +35,7 @@
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VIJSAPI\GUI2DObject.cpp">
+    <ClCompile Include="VIJSAPI\JSVIAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -72,7 +72,7 @@
     <QtMoc Include="VIJSAPI\VIJSHost.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\GUI2DObject.h">
+    <QtMoc Include="VIJSAPI\JSVIAPI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

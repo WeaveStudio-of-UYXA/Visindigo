@@ -48,12 +48,13 @@ public:
 		CentralWidget = new VICentralWidget(this);
 		this->setCentralWidget(CentralWidget);
 		connect(MRWJSHost, SIGNAL(initJSEngine(QScriptEngine*)), this, SLOT(initJSEngine(QScriptEngine*)), Qt::DirectConnection);
+		connect(MRWJSVIAPI, SIGNAL(SsetWindowTitle(QString)), this, SLOT(setWindowTitle(QString)), Qt::BlockingQueuedConnection);
 		MRWAniProcess->start();
 		this->loadJS();
 	}
 	void loadJS() {
 		QFile File;
-		File.setFileName("./Users_Data/repos/VIStory1/test.js");
+		File.setFileName("../../Visindigo/Dev/test.js");
 		File.open(QIODevice::ReadOnly);
 		QTextStream Text(&File);
 		Text.setCodec("UTF-8");
@@ -69,12 +70,6 @@ public slots:
 	}
 	void output(QString output) {
 		qDebug() << output;
-	}
-	void showFScreen() {
-		this->showFullScreen();
-	}
-	void setTitle(QString Title) {
-		this->setWindowTitle(Title);
 	}
 };
 
