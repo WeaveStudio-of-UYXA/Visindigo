@@ -1,3 +1,0 @@
-#There is only a definition here, but no specific implementation. The implementation code is in the Visindigo main program in the form of C++.
-class VIObject:
-    def __init__(this, parent)->None: ...
