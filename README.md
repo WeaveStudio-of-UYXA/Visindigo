@@ -1,6 +1,6 @@
 # Visindigo
 
-Visindigo这个仓库，除去操作Git错误导致重建之外，前前后后建了又删删了又建四次。就不算Weave Studio或者Studio Indigo作出的官方恢复，我本人22年初也在一直说Visindigo大概年底见的事情。现在我的评价是几乎不可能。
+Visindigo这个仓库，除去操作Git错误导致重建之外，前前后后建了又删删了又建四次。Weave Studio和Studio Indigo作出的官方回复一直说Visindigo大概年底见的事情。不过现在我的评价是几乎不可能。
 
 Visindigo的初始概念太完美了，完美到完全超出我的编程能力和学习能力，所以每次建了又删就代表着一次设计失败的Visindigo架构。
 

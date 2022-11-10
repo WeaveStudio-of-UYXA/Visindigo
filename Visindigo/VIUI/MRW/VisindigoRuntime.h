@@ -2,17 +2,8 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtWidgets>
-
-#include "GUI2D/VI2DGUI.h"
+#include "VIGUI2D.h"
 #include "MRWGlobal.h"
-class VIGUI2DWidget :public QWidget
-{
-	Q_OBJECT
-public:
-	VIGUI2DWidget(QWidget* parent = Q_NULLPTR) :QWidget(parent) {
-		
-	}
-};
 class VI3DWidget :public QWidget
 {
 	Q_OBJECT
@@ -25,11 +16,16 @@ class VICentralWidget :public QWidget
 {
 	Q_OBJECT
 public:
+	VI3DWidget* Widget3D;
+	VIGUI2DWidget* GUI2D;
+public:
 	VICentralWidget(QWidget* parent = Q_NULLPTR) :QWidget(parent) {
-		qDebug() << "We hope there will be finished soon.";
+		Widget3D = new VI3DWidget(this);
+		GUI2D = new VIGUI2DWidget(this);
 	}
-	void output(QString output) {
-		qDebug() << output;
+	void resizeEvent(QResizeEvent* event) {
+		GUI2D->resize(this->size());
+		Widget3D->resize(this->size());
 	}
 };
 
@@ -40,17 +36,22 @@ public:
 	VICentralWidget* CentralWidget;
 	QThread* JSHostThread;
 	VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
+		QPalette PAL;
+		PAL.setColor(QPalette::Background, Qt::black);
+		this->setPalette(PAL);
+		CentralWidget = new VICentralWidget(this);
+		this->setCentralWidget(CentralWidget);
+		
 		MRWGlobal::Process = new VIAnimationEventProcess(this);
 		MRWGlobal::JSHost = new VIJSHost();
 		JSHostThread = new QThread(this);
 		MRWJSHost->moveToThread(JSHostThread);
 		JSHostThread->start();
-		CentralWidget = new VICentralWidget(this);
-		this->setCentralWidget(CentralWidget);
+		
 		connect(MRWJSHost, SIGNAL(initJSEngine(QScriptEngine*)), this, SLOT(initJSEngine(QScriptEngine*)), Qt::DirectConnection);
 		connect(MRWJSVIAPI, SIGNAL(SsetWindowTitle(QString)), this, SLOT(setWindowTitle(QString)), Qt::BlockingQueuedConnection);
 		MRWAniProcess->start();
-		this->loadJS();
+		//this->loadJS();
 	}
 	void loadJS() {
 		QFile File;

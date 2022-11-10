@@ -75,5 +75,8 @@
     <QtMoc Include="VIJSAPI\JSVIAPI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="VIUI\MRW\VIGUI2D.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
