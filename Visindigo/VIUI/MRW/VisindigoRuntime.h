@@ -28,6 +28,9 @@ public:
 	VICentralWidget(QWidget* parent = Q_NULLPTR) :QWidget(parent) {
 		qDebug() << "We hope there will be finished soon.";
 	}
+	void output(QString output) {
+		qDebug() << output;
+	}
 };
 
 class VIRuntimeWindow :public QMainWindow
@@ -49,7 +52,14 @@ public:
 		this->loadJS();
 	}
 	void loadJS() {
-		MRWJSHost->boot("function main() {VIRTWin.output(\"Hello World!\");}");
+		QFile File;
+		File.setFileName("./Users_Data/repos/VIStory1/test.js");
+		File.open(QIODevice::ReadOnly);
+		QTextStream Text(&File);
+		Text.setCodec("UTF-8");
+		QString String = Text.readAll();
+		qDebug() << String;
+		MRWJSHost->boot(String);
 	}
 public slots:
 	void initJSEngine(QScriptEngine* Engine) {
@@ -59,6 +69,12 @@ public slots:
 	}
 	void output(QString output) {
 		qDebug() << output;
+	}
+	void showFScreen() {
+		this->showFullScreen();
+	}
+	void setTitle(QString Title) {
+		this->setWindowTitle(Title);
 	}
 };
 

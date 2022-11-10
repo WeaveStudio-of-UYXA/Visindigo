@@ -19,8 +19,8 @@ public slots:
 	void eval(QString code) {
 		emit initJSEngine(Engine);
 		int RTN = 0;
-		Engine->evaluate(code);
-		QScriptValue result = Engine->evaluate("main()");
+		qDebug() << "EVAL";
+		QScriptValue result = Engine->evaluate(code+"main();");
 		if (result.isError()) {
 			qDebug() << "Uncaught exception at line" << result.property("lineNumber").toInt32() << ":" << result.toString();
 			RTN =  1;
