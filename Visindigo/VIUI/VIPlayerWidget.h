@@ -19,6 +19,21 @@ public:
 		emit move(max * (1 + qCos(3.14 * Percentage)), max * (1 + qCos(3.14 * Percentage)));
 	}
 };
+class BEvent :public VIAnimationEvent
+{
+	Q_OBJECT
+signals:
+	void move(float, float);
+public:
+	int max;
+	BEvent INIT{
+		this->setMaxMsec(50000);
+		max = 100;
+	}
+	void event() {
+		emit move(max * (1 + qCos(3.14 * Percentage)), max * (1 + qCos(3.14 * Percentage)));
+	}
+};
 class AWidget :public QWidget 
 {
 	Q_OBJECT
@@ -30,7 +45,7 @@ private:
 	QPushButton* TestButton;
 	QVBoxLayout* CurrentLayout;
 	AEvent* Event;
-	AEvent* Event2;
+	BEvent* Event2;
 	QList<AEvent*> EventList;
 public:
 	AWidget(QWidget* parent = Q_NULLPTR) : QWidget(parent) {
@@ -46,7 +61,7 @@ public:
 		Test2Label->setStyleSheet("QLabel{background-color:#000000;}");
 		CurrentLayout = new QVBoxLayout(this);
 		Event = new AEvent(this);
-		Event2 = new AEvent(this);
+		Event2 = new BEvent(this);
 		
 		CurrentLayout->addWidget(frameLabel);
 		CurrentLayout->addWidget(TestButton);
@@ -57,6 +72,7 @@ public:
 		BIND(Event, SIGNAL(move(float, float)), this, SLOT(moveB(float, float)));
 		BIND(Event2, SIGNAL(move(float, float)), this, SLOT(moveB2(float, float)));
 		connect(TestButton, SIGNAL(clicked()), this, SLOT(active()));
+		Event2->active();
 	}
 public slots:
 	void changeFrame(float frame) {
@@ -70,11 +86,6 @@ public slots:
 	}
 	void active() {
 		Event->active();
-		Event2->active();
-
-			EventList.append(new AEvent(this));
-			EventList.last()->setAnimationProcess(Process);
-			EventList.last()->active();
 		
 	}
 };

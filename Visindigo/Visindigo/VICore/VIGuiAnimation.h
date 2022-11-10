@@ -58,6 +58,7 @@ signals:
 private:
 	QList<VIAnimationEvent*> EventQueue;
 	QList<VIAnimationEvent*> EventDel;
+	QList<VIAnimationEvent*> EventAdd;
 	QMutex ProcessMutex;
 	QMutex SleepMutex;
 	QWaitCondition Condition;
@@ -76,44 +77,46 @@ public:
 	}
 	void run() {
 		while (RUN) {
-			
-			if (WAIT) {
-				
-				qDebug() << "Sleep with EventQueue" << EventQueue.length();
-				Condition.wait(&SleepMutex);
-				qDebug() << "Wake up with EventQueue" << EventQueue.length();
+			if (EventQueue.isEmpty()) { 
+				Condition.wait(&SleepMutex); 			
+			}
+			std::chrono::system_clock::time_point TPS = std::chrono::system_clock::now();
+			this->ProcessMutex.lock();
+			if (!EventAdd.isEmpty()) {
+				for (auto i = EventAdd.begin(); i != EventAdd.end(); i++) {
+					EventQueue.append(*i);
+				}
+				EventAdd.clear();
 				WAIT = false;
 			}
-			else {
-				std::chrono::system_clock::time_point TPS = std::chrono::system_clock::now();
-				this->ProcessMutex.lock();
-				for (auto i = EventQueue.begin(); i != EventQueue.end(); i++) {
-					if ((*i)->ALIVE) {
-						(*i)->preDoEvent(LASTTIME);
-					}
-					else {
-						EventDel.append((*i));
-					}
+			this->ProcessMutex.unlock();
+			for (auto i = EventQueue.begin(); i != EventQueue.end(); i++) {
+				if ((*i)->ALIVE) {
+					(*i)->preDoEvent(LASTTIME);
 				}
-				for (auto i = EventDel.begin(); i != EventDel.end(); i++) {
-					EventQueue.removeOne((*i));
+				else {
+					EventDel.append((*i));
 				}
-				if (!EventDel.isEmpty()) { EventDel.clear(); }
-				if (EventQueue.isEmpty()) { WAIT = true; }
-				this->ProcessMutex.unlock();
-				if (LASTTIME == 0) { LASTTIME = 0.001; }
-				if (P30 < 1) {
-					LFO5[LFOINDEX] = 1000 / LASTTIME;
-					LFOINDEX += 1;
-					emit currentFrame((LFO5[0]+ LFO5[1] + LFO5[2] + LFO5[3] + LFO5[4])/5);
-					if (LFOINDEX == 5) { LFOINDEX = 0; }
-					P30 = 30;
-				}
-				else { P30--; }
-				std::chrono::system_clock::time_point TPE = std::chrono::system_clock::now();
-				LASTTIME = (float)(std::chrono::duration_cast<std::chrono::microseconds>(TPE.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::microseconds>(TPS.time_since_epoch()).count()) / 1000;
-				qDebug() << LASTTIME;
 			}
+			for (auto i = EventDel.begin(); i != EventDel.end(); i++) {
+				EventQueue.removeOne((*i));
+			}
+			if (!EventDel.isEmpty()) { EventDel.clear(); }
+			this->ProcessMutex.lock();
+			if (EventQueue.isEmpty()) {WAIT = true;}
+			this->ProcessMutex.unlock();
+			if (LASTTIME == 0) { LASTTIME = 0.001; }
+			if (P30 < 1) {
+				LFO5[LFOINDEX] = 1000 / LASTTIME;
+				LFOINDEX += 1;
+				emit currentFrame((LFO5[0]+ LFO5[1] + LFO5[2] + LFO5[3] + LFO5[4])/5);
+				if (LFOINDEX == 5) { LFOINDEX = 0; }
+				P30 = 300;
+			}
+			
+			else { P30--; }
+			std::chrono::system_clock::time_point TPE = std::chrono::system_clock::now();
+			LASTTIME = (float)(std::chrono::duration_cast<std::chrono::microseconds>(TPE.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::microseconds>(TPS.time_since_epoch()).count()) / 1000;			
 		}
 	}
 	void stop() {
@@ -124,11 +127,8 @@ public:
 public slots:
 	void addEvent(VIAnimationEvent* Event) {
 		this->ProcessMutex.lock();
-		bool WAKEUP = this->EventQueue.isEmpty();
-		qDebug() << WAKEUP;
-		this->EventQueue.append(Event);
-		qDebug() << "Just add a event";
-		this->ProcessMutex.unlock();
-		if (WAKEUP) { Condition.wakeAll(); }
+		this->EventAdd.append(Event);
+		if (WAIT) { Condition.wakeAll(); };
+		this->ProcessMutex.unlock();	
 	}
 };
