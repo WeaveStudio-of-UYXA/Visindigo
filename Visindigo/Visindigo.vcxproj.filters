@@ -35,6 +35,9 @@
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VIJSAPI\GUI2DObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visindigo\VIObject.h">
@@ -47,12 +50,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VIType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIPyAPI\VIPyAPI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIPyAPI\VIPyMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIUI\MRW\MRWGlobal.h">
@@ -70,6 +67,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIJSAPI\VIJSHost.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIJSAPI\GUI2DObject.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

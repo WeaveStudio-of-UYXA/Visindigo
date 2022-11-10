@@ -35,7 +35,7 @@ public:
 		this->MSPT = MsPT;
 	}
 	void setWait(int MsW) {
-		this->MSW = MSW;
+		this->MSW = MsW;
 	}
 	void event() {
 		if (CurrentMsec >= LMS && Char != Text.end()) {

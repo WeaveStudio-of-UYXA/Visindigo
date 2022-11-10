@@ -32,12 +32,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;webengine;</QtModules>
+    <QtModules>core;network;gui;testlib;script;multimedia;widgets;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;webengine;</QtModules>
+    <QtModules>core;network;gui;testlib;script;multimedia;widgets;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -102,13 +102,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="VIJSAPI\GUI2DObject.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
     <ClCompile Include="Visindigo\VIType.cpp" />
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VIPyAPI\VIPyAPI.h" />
-    <ClInclude Include="VIPyAPI\VIPyMacro.h" />
+    <QtMoc Include="VIJSAPI\VIJSHost.h" />
+    <QtMoc Include="VIJSAPI\GUI2DObject.h" />
     <ClInclude Include="VIUI\MRW\MRWGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h" />
     <QtMoc Include="VIUI\VIPlayerWidget.h" />

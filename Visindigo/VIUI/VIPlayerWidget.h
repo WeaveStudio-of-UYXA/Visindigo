@@ -12,7 +12,7 @@ signals:
 public:
 	int max;
 	AEvent INIT{
-		this->setMaxMsec(500);
+		this->setMaxMsec(5000);
 		max = 100;
 	}
 	void event() {
@@ -27,7 +27,7 @@ signals:
 public:
 	int max;
 	BEvent INIT{
-		this->setMaxMsec(50000);
+		this->setMaxMsec(5000);
 		max = 100;
 	}
 	void event() {
@@ -72,7 +72,7 @@ public:
 		BIND(Event, SIGNAL(move(float, float)), this, SLOT(moveB(float, float)));
 		BIND(Event2, SIGNAL(move(float, float)), this, SLOT(moveB2(float, float)));
 		connect(TestButton, SIGNAL(clicked()), this, SLOT(active()));
-		Event2->active();
+		
 	}
 public slots:
 	void changeFrame(float frame) {
@@ -86,6 +86,12 @@ public slots:
 	}
 	void active() {
 		Event->active();
-		
+		Event2->active();
+		EventList.clear();
+		for (int i = 0; i < 50; i++) {
+			EventList.append(new AEvent(this));
+			EventList.last()->setAnimationProcess(Process);
+			EventList.last()->active();
+		}
 	}
 };

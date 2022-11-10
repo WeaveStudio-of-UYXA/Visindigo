@@ -69,14 +69,14 @@ private:
 	bool WAIT = true;
 	float FRAME = 0;
 	short P30 = 300;
-	short LFO5[5] = { 120, 120, 120, 120, 120 };
+	int LFO5[5] = { 120, 120, 120, 120, 120 };
 	short LFOINDEX = 0;
 public:
 	VIAnimationEventProcess(QObject* parent = Q_NULLPTR) : QThread(parent) {
 		this->SleepMutex.lock();
 	}
 	void run() {
-		while (RUN) {
+		while (true) {
 			if (EventQueue.isEmpty()) { 
 				Condition.wait(&SleepMutex); 			
 			}
@@ -98,12 +98,15 @@ public:
 					EventDel.append((*i));
 				}
 			}
-			for (auto i = EventDel.begin(); i != EventDel.end(); i++) {
-				EventQueue.removeOne((*i));
+			if (!EventDel.isEmpty()) { 
+				for (auto i = EventDel.begin(); i != EventDel.end(); i++) {
+					EventQueue.removeOne((*i));
+				}
+				EventDel.clear(); 
 			}
-			if (!EventDel.isEmpty()) { EventDel.clear(); }
 			this->ProcessMutex.lock();
 			if (EventQueue.isEmpty()) {WAIT = true;}
+			if (!RUN) { break; }
 			this->ProcessMutex.unlock();
 			if (LASTTIME == 0) { LASTTIME = 0.001; }
 			if (P30 < 1) {
@@ -113,7 +116,6 @@ public:
 				if (LFOINDEX == 5) { LFOINDEX = 0; }
 				P30 = 300;
 			}
-			
 			else { P30--; }
 			std::chrono::system_clock::time_point TPE = std::chrono::system_clock::now();
 			LASTTIME = (float)(std::chrono::duration_cast<std::chrono::microseconds>(TPE.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::microseconds>(TPS.time_since_epoch()).count()) / 1000;			
