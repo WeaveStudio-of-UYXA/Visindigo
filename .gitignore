@@ -34,12 +34,7 @@ bld/
 [Ll]ogs/
 
 #PyVI
-x64/Visindigo/*.exe
-x64/Visindigo/*.dll
-x64/Visindigo/Python
-x64/Visindigo/Users_Data
-x64/Visindigo/Program_Data
-x64/Visindigo/translations
+x64/
 *.pyc
 *dll
 
