@@ -10,6 +10,7 @@ VIJSHost -- connect --> VIRuntime
 VIJSAPI -- api --> VIJSHost
 VIJSAPI -- api --> VIRuntime
 VIJSAPI -- api --> VI2DGUI
+VIJSHost -- JavaScript --> VIJSAPI
 VIAniEvent -- api --> VI2DGUI
 VI2DGUI -- api --> VIRuntime
 ```
