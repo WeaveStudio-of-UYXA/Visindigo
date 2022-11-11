@@ -108,6 +108,8 @@
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="VIUI\PW\VisindigoProject.h" />
+    <ClInclude Include="VIUI\RW\VisindigoRepos.h" />
     <QtMoc Include="VIUI\MRW\VIGUI2D.h" />
     <QtMoc Include="VIJSAPI\VIJSHost.h" />
     <QtMoc Include="VIJSAPI\JSVIAPI.h" />

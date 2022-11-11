@@ -55,6 +55,12 @@
     <ClInclude Include="VIUI\MRW\MRWGlobal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VIUI\PW\VisindigoProject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIUI\RW\VisindigoRepos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h">
