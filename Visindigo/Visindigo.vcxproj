@@ -32,12 +32,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;script;multimedia;widgets;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;script;multimedia;widgets;</QtModules>
+    <QtModules>core;network;gui;testlib;qml;multimedia;widgets;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">

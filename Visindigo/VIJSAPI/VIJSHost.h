@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <QtScript>
+#include <QtQml>
 #include <QtCore>
 #include "JSVIAPI.h"
 #undef VIJSHostWait
@@ -7,33 +7,36 @@ class VIJSHost : public QObject
 {
 	Q_OBJECT
 signals:
-	void initJSEngine(QScriptEngine*);
+	void initJSEngine(QJSEngine*);
 	void boot(QString);
 public:
-	QScriptEngine* Engine;
+	QJSEngine* Engine;
 	JSVIAPI::GUI::Host* GUIHost;
 	VIJSHost(QObject* parent = Q_NULLPTR):QObject(parent) {
-		Engine = new QScriptEngine(this);
+		Engine = new QJSEngine(this);
 		GUIHost = new JSVIAPI::GUI::Host(this);
 		connect(this, SIGNAL(boot(QString)), this, SLOT(eval(QString)));
 	}
 public slots:
-	void eval(QString code) {
+	void eval(QString filename) {
 		emit initJSEngine(Engine);
 		initEngine();
 		VIJSMutex.lock();
 		int RTN = 0;
 		qDebug() << "EVAL";
-		QScriptValue result = Engine->evaluate(code+"main();");
+		qDebug() << filename;
+		QJSValue Main = Engine->importModule(filename);
+		QJSValue MainFuncation = Main.property("main");
+		QJSValue result = MainFuncation.call();
 		if (result.isError()) {
-			qDebug() << "Uncaught exception at line" << result.property("lineNumber").toInt32() << ":" << result.toString();
+			qDebug() << "Uncaught exception at line" << result.property("lineNumber").toNumber() << ":" << result.toString();
 			RTN =  1;
 		}
 		VIJSMutex.unlock();
 	}
 	void initEngine() {
-		QScriptValue VI2D = Engine->newQObject(GUIHost);
-		Engine->globalObject().setProperty("GUI", VI2D);
+		QJSValue VI2D = Engine->newQObject(GUIHost);
+		Engine->globalObject().setProperty("VIGUI", VI2D);
 		
 	}
 };

@@ -36,6 +36,7 @@ public:
 	VICentralWidget* CentralWidget;
 	QThread* JSHostThread;
 	VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
+		
 		QPalette PAL;
 		PAL.setColor(QPalette::Background, Qt::black);
 		this->setPalette(PAL);
@@ -48,26 +49,22 @@ public:
 		MRWJSHost->moveToThread(JSHostThread);
 		JSHostThread->start();
 		
-		connect(MRWJSHost, SIGNAL(initJSEngine(QScriptEngine*)), this, SLOT(initJSEngine(QScriptEngine*)), Qt::DirectConnection);
+		connect(MRWJSHost, SIGNAL(initJSEngine(QJSEngine*)), this, SLOT(initJSEngine(QJSEngine*)), Qt::DirectConnection);
 		connect(MRWJSVIAPI, SIGNAL(SsetWindowTitle(QString)), this, SLOT(setWindowTitle(QString)), Qt::BlockingQueuedConnection);
 		MRWAniProcess->start();
-		//this->loadJS();
+		this->loadJS();
 	}
 	void loadJS() {
-		QFile File;
-		File.setFileName("../../Visindigo/Dev/test.js");
-		File.open(QIODevice::ReadOnly);
-		QTextStream Text(&File);
-		Text.setCodec("UTF-8");
-		QString String = Text.readAll();
-		qDebug() << String;
-		MRWJSHost->boot(String);
+		MRWJSHost->boot("../../Visindigo/Dev/test.js");
 	}
 public slots:
-	void initJSEngine(QScriptEngine* Engine) {
+	void initJSEngine(QJSEngine* Engine) {
 		qDebug() << "INIT";
-		QScriptValue VIRTWin = Engine->newQObject(this);
+		QJSValue VIRTWin = Engine->newQObject(this);
 		Engine->globalObject().setProperty("VIRTWin", VIRTWin);
+	}
+	VIRuntimeWindow* getWin() {
+		return this;
 	}
 	void output(QString output) {
 		qDebug() << output;

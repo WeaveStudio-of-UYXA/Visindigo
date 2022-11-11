@@ -71,6 +71,9 @@ namespace JSVIAPI
 			void setWindowTitle(QString title) {
 				emit SsetWindowTitle(title);
 			}
+			void debug(QString info) {
+				qDebug() << info;
+			}
 		};
 	}
 }

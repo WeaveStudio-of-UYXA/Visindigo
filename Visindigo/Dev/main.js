@@ -1,6 +1,3 @@
-function main(){
-    凯尔希 = VIManager.build("凯尔希");
-    凯尔希.say("这片大地上从来都有敢于直面天灾的勇士，他们不会因为天灾而退缩，而是会用自己的力量去拯救这片大地。");
-    凯尔希.say("我是凯尔希");
-    凯尔希.say("你好，世界");
+﻿export function main2(){
+    VIGUI.debug("IMPORT TEST AND FILE PATH TEST");
 }
