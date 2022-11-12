@@ -13,8 +13,8 @@ public:
 	VIGUI2DWidget(QWidget* parent,VIAnimationEventProcess* process) :QWidget(parent) {
 		Process = process;
 	}
-	VITextLabel* newVITextLabel() {
-		VITextLabel* Label = new VITextLabel(this, Process);
-		return Label;
+public slots:
+	void newVITextLabel(VITextLabel** p) {
+		*p = new VITextLabel(this, Process);
 	}
 };

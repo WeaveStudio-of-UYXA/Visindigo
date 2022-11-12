@@ -8,11 +8,7 @@
 #include <QtCore>
 #include "../VIUI/MRW/GUI2D/VI2DGUI.h"
 #include "../VIUI/MRW/VIGUI2D.h"
-static QMutex VIJSMutex;
-static QWaitCondition VIJSWait;
 
-#define VIJSHostWait VIJSWait.wait(&VIJSMutex)
-#define VIJSHostWake VIJSWait.wakeAll()
 namespace JSVIAPI
 {
 	namespace System

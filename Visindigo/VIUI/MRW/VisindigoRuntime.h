@@ -48,9 +48,10 @@ public:
 		
 		
 		Process = new VIAnimationEventProcess(this);
-		JSHost = new VIJSHost();
+		
 		CentralWidget = new VICentralWidget(this, Process);
 		this->setCentralWidget(CentralWidget);
+		JSHost = new VIJSHost(CentralWidget->GUI2D);
 		JSHostThread = new QThread(this);
 		JSHost->moveToThread(JSHostThread);
 		JSHostThread->start();
@@ -66,9 +67,8 @@ public:
 	}
 public slots:
 	void initJSEngine(QJSEngine* Engine) {
-		qDebug() << "INIT";
-		QJSValue VIRTWin = Engine->newQObject(this);
-		Engine->globalObject().setProperty("VIRTWin", VIRTWin);
+		//QJSValue VIRTWin = Engine->newQObject(this);
+		//Engine->globalObject().setProperty("VIRTWin", VIRTWin);
 	}
 	VIRuntimeWindow* getWin() {
 		return this;

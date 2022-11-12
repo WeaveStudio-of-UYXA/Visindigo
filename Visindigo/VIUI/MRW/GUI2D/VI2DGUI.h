@@ -3,7 +3,7 @@
 #include<QtGui>
 #include<QtWidgets>
 #include "../../../../Visindigo/VICore/VIGuiAnimation.h"
-
+#include "../../../../VIJSAPI/VIJSGlobal.h"
 
 class VITextAnimation : public VIAnimationEvent
 {
@@ -13,15 +13,13 @@ signals:
 public:
 	QString Text;
 	QString Output;
-	int MSPT;
-	int MSW;
+	int MSPT = 100;
+	int MSW = 1500;
 	int INDEX;
 	float TEXTPERCENT;
 	float LMS;
 	QString::iterator Char;
 	VITextAnimation INIT{
-		MSPT = 300;
-		MSW = 1500;
 		INDEX = 0;
 		LMS = 0;
 	}
@@ -47,34 +45,40 @@ public:
 		}
 	}
 };
-class VITextLabel : private QLabel 
+class VITextLabel : public QLabel 
 {
 	Q_OBJECT
 public:
 	VITextAnimation* Animation;
+	bool Wait = false;
 public:
 	VITextLabel(QWidget* WidgetParent,VIAnimationEventProcess* AniParent) {
 		this->setParent(WidgetParent);
-		this->QObject::setObjectName("VIText");
+		this->setObjectName("VIText");
+		this->setWordWrap(true);
 		Animation = new VITextAnimation(this);
 		BIND(Animation, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
+		BIND(Animation, SIGNAL(done()), this, SLOT(ifWait()));
 		Animation->setAnimationProcess(AniParent);
+		this->setStyleSheet("QLabel#VIText{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:20px;}");
+		this->setAlignment(Qt::AlignLeft);
+		this->setGeometry(QRect(0, 0, 500, 60));
+		this->show();
 	}
 public slots:
-	void setText(QString text, int mspt, int msw) {
+	void setTextAni(QString text, int mspt, int msw, bool wait) {
 		Animation->setSpeed(mspt);
 		Animation->setWait(msw);
 		Animation->setText(text);
 		Animation->active();
+		Wait = wait;
 	}
 	void getText(QString text) {
-		this->QLabel::setText(text);
+		this->setText(text);
 	}
-	void setStyleSheet(QString str) {
-		this->QLabel::setStyleSheet(str);
+	void ifWait() {
+		if (Wait) {
+			VIJSHostWake;
+		}
 	}
-	void setGeometry(int X, int Y, int W, int H) {
-		this->QLabel::setGeometry(X, Y, W, H);
-	}
-
 };

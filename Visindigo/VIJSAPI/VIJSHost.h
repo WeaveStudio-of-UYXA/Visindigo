@@ -2,6 +2,9 @@
 #include <QtQml>
 #include <QtCore>
 #include "JSVIAPI.h"
+#include "VIJSGlobal.h"
+#include "JsVIGUI2D.h"
+#include "../VIUI/MRW/VIGUI2D.h"
 #undef VIJSHostWait
 class VIJSHost : public QObject
 {
@@ -12,20 +15,21 @@ signals:
 public:
 	QJSEngine* Engine;
 	JSVIAPI::GUI::Host* GUIHost;
-	JSVIAPI::System::Host* SystrmHost;
-	VIJSHost(QObject* parent = Q_NULLPTR):QObject(parent) {
+	JSVIAPI::System::Host* SystemHost;
+	JsVI::VIGUI2D* VIGUI2D;
+	VIJSHost(VIGUI2DWidget* gui){
 		Engine = new QJSEngine(this);
 		GUIHost = new JSVIAPI::GUI::Host(this);
-		SystrmHost = new JSVIAPI::System::Host(this);
+		SystemHost = new JSVIAPI::System::Host(this);
+		VIGUI2D = new JsVI::VIGUI2D(this, gui, Engine);
 		connect(this, SIGNAL(boot(QString)), this, SLOT(eval(QString)));
 	}
 public slots:
 	void eval(QString filename) {
 		emit initJSEngine(Engine);
 		initEngine();
-		VIJSMutex.lock();
+		VIJSGlobal::VIJSMutex.lock();
 		int RTN = 0;
-		qDebug() << "EVAL";
 		qDebug() << filename;
 		QJSValue Main = Engine->importModule(filename);
 		QJSValue MainFuncation = Main.property("main");
@@ -34,13 +38,14 @@ public slots:
 			qDebug() << "Uncaught exception at line" << result.property("lineNumber").toNumber() << ":" << result.toString();
 			RTN =  1;
 		}
-		VIJSMutex.unlock();
+		VIJSGlobal::VIJSMutex.unlock();
 	}
 	void initEngine() {
-		QJSValue VI2D = Engine->newQObject(GUIHost);
+		QJSValue VI2D = Engine->newQObject(VIGUI2D);
 		Engine->globalObject().setProperty("VIGUI", VI2D);
-		QJSValue VISys = Engine->newQObject(SystrmHost);
+		QJSValue VISys = Engine->newQObject(SystemHost);
 		Engine->globalObject().setProperty("VISystem", VISys);
-		
+		QJSValue VITextLabel = Engine->newQMetaObject(&JsVI::TextLabel::staticMetaObject);
+		Engine->globalObject().setProperty("VITextLabel", VITextLabel);
 	}
 };
