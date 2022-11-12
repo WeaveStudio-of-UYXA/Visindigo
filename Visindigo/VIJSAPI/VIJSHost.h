@@ -43,9 +43,11 @@ public slots:
 	void initEngine() {
 		QJSValue VI2D = Engine->newQObject(VIGUI2D);
 		Engine->globalObject().setProperty("VIGUI", VI2D);
+		QJSValue VITextLabel = Engine->newQMetaObject(&JsVI::TextLabel::staticMetaObject);
+		VI2D.setProperty("VITextLabel", VITextLabel);
 		QJSValue VISys = Engine->newQObject(SystemHost);
 		Engine->globalObject().setProperty("VISystem", VISys);
-		QJSValue VITextLabel = Engine->newQMetaObject(&JsVI::TextLabel::staticMetaObject);
-		Engine->globalObject().setProperty("VITextLabel", VITextLabel);
+		
+		
 	}
 };
