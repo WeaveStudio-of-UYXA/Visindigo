@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include "VIGUI2D.h"
 #include "MRWGlobal.h"
+#include "../../VIJSAPI/VIJSHost.h"
 class VI3DWidget :public QWidget
 {
 	Q_OBJECT
@@ -18,10 +19,12 @@ class VICentralWidget :public QWidget
 public:
 	VI3DWidget* Widget3D;
 	VIGUI2DWidget* GUI2D;
+	VIAnimationEventProcess* Process;
 public:
-	VICentralWidget(QWidget* parent = Q_NULLPTR) :QWidget(parent) {
+	VICentralWidget(QWidget* parent,VIAnimationEventProcess* process) :QWidget(parent) {
+		Process = process;
 		Widget3D = new VI3DWidget(this);
-		GUI2D = new VIGUI2DWidget(this);
+		GUI2D = new VIGUI2DWidget(this, Process);
 	}
 	void resizeEvent(QResizeEvent* event) {
 		GUI2D->resize(this->size());
@@ -35,27 +38,31 @@ class VIRuntimeWindow :public QMainWindow
 public:
 	VICentralWidget* CentralWidget;
 	QThread* JSHostThread;
+	VIJSHost* JSHost;
+	VIAnimationEventProcess* Process;
 	VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
 		
 		QPalette PAL;
 		PAL.setColor(QPalette::Background, Qt::black);
 		this->setPalette(PAL);
-		CentralWidget = new VICentralWidget(this);
-		this->setCentralWidget(CentralWidget);
 		
-		MRWGlobal::Process = new VIAnimationEventProcess(this);
-		MRWGlobal::JSHost = new VIJSHost();
+		
+		Process = new VIAnimationEventProcess(this);
+		JSHost = new VIJSHost();
+		CentralWidget = new VICentralWidget(this, Process);
+		this->setCentralWidget(CentralWidget);
 		JSHostThread = new QThread(this);
-		MRWJSHost->moveToThread(JSHostThread);
+		JSHost->moveToThread(JSHostThread);
 		JSHostThread->start();
 		
-		connect(MRWJSHost, SIGNAL(initJSEngine(QJSEngine*)), this, SLOT(initJSEngine(QJSEngine*)), Qt::DirectConnection);
-		connect(MRWJSVIAPI, SIGNAL(SsetWindowTitle(QString)), this, SLOT(setWindowTitle(QString)), Qt::BlockingQueuedConnection);
-		MRWAniProcess->start();
+		connect(JSHost, SIGNAL(initJSEngine(QJSEngine*)), this, SLOT(initJSEngine(QJSEngine*)), Qt::DirectConnection);
+		connect(JSHost->GUIHost, SIGNAL(SsetWindowTitle(QString)), this, SLOT(setWindowTitle(QString)), Qt::BlockingQueuedConnection);
+		connect(JSHost->GUIHost, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()), Qt::BlockingQueuedConnection);
+		Process->start();
 		this->loadJS();
 	}
 	void loadJS() {
-		MRWJSHost->boot("../../Visindigo/Dev/test.js");
+		JSHost->boot("../../Visindigo/Dev/test.js");
 	}
 public slots:
 	void initJSEngine(QJSEngine* Engine) {

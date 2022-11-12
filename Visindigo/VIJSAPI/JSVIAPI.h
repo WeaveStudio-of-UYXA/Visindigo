@@ -1,5 +1,13 @@
-﻿#pragma once
+﻿/*
+* 本文件内容危险！
+* 只允许VIJSHost.h实例化本文件内的类，VIJSHostWake只允许其他外部调用
+* 本文件假定所有操作都由VIJSHost线程进行，因此存在类似于sleep()之类的玩意，请勿自行使用
+*/
+
+#pragma once
 #include <QtCore>
+#include "../VIUI/MRW/GUI2D/VI2DGUI.h"
+#include "../VIUI/MRW/VIGUI2D.h"
 static QMutex VIJSMutex;
 static QWaitCondition VIJSWait;
 
@@ -7,69 +15,48 @@ static QWaitCondition VIJSWait;
 #define VIJSHostWake VIJSWait.wakeAll()
 namespace JSVIAPI
 {
-	namespace GUI
+	namespace System
 	{
 		class Host;
-		class VIText :public QObject
-		{
-			Q_OBJECT
-		private:
-			QString TEXT;
-			int MSPT;
-			int MSW;
-		public slots:
-			void setText(QString text) {
-				TEXT = text;
-			}
-			void setSpeed(int MsPT) {
-				MSPT = MsPT;
-			}
-			void setWait(int MsW) {
-				MSW = MsW;
-			}
-		};
-		class VIPicture;
-		class VISound;
-		class VIBranch;
-		class VIChara :public QObject
+		class Host :public QObject
 		{
 			Q_OBJECT
 		public:
-			QString Name;
-			QString DisplayName;
-			Host* Manager;
-			VIChara(QString name, QObject* parent = Q_NULLPTR) :QObject(parent) {
-				Name = name;
-				DisplayName = name;
+			Host(QObject* parent = Q_NULLPTR):QObject(parent) {
+				
 			}
 		public slots:
-			VIChara* displayWith(QString displayname) {
-				DisplayName = displayname;
-				return this;
+			void exit(int code) {
+				QCoreApplication::exit(code);
 			}
-			void say(QString text, int MsPT, int MsW);
+			void print(QString str) {
+				qDebug() << str;
+			}
+			void sleep(int ms) {
+				QThread::msleep(ms);
+			}
 		};
+	}
+	namespace GUI
+	{
+		class Host;
+
 		class Host :public QObject
 		{
 			Q_OBJECT
 		signals:
-			void setDisplayName(QString);
-			void setText(QString);
-			void setFreeText(QString);
 			void SsetWindowTitle(QString);
+			void SshowFullScreen();
 		public:
-			QList<VIChara*> CharaList;
 			Host(QObject* parent = Q_NULLPTR) :QObject(parent) {
 
 			}
 		public slots:
-			VIChara* buildChara(QString name) {
-				VIChara* Chara = new VIChara(name, this);
-				CharaList.append(Chara);
-				return Chara;
-			}
 			void setWindowTitle(QString title) {
 				emit SsetWindowTitle(title);
+			}
+			void showFullScreen() {
+				emit SshowFullScreen();
 			}
 			void debug(QString info) {
 				qDebug() << info;

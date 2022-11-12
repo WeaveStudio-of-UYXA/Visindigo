@@ -12,9 +12,11 @@ signals:
 public:
 	QJSEngine* Engine;
 	JSVIAPI::GUI::Host* GUIHost;
+	JSVIAPI::System::Host* SystrmHost;
 	VIJSHost(QObject* parent = Q_NULLPTR):QObject(parent) {
 		Engine = new QJSEngine(this);
 		GUIHost = new JSVIAPI::GUI::Host(this);
+		SystrmHost = new JSVIAPI::System::Host(this);
 		connect(this, SIGNAL(boot(QString)), this, SLOT(eval(QString)));
 	}
 public slots:
@@ -37,6 +39,8 @@ public slots:
 	void initEngine() {
 		QJSValue VI2D = Engine->newQObject(GUIHost);
 		Engine->globalObject().setProperty("VIGUI", VI2D);
+		QJSValue VISys = Engine->newQObject(SystrmHost);
+		Engine->globalObject().setProperty("VISystem", VISys);
 		
 	}
 };

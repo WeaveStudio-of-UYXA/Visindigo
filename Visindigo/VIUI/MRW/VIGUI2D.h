@@ -8,7 +8,13 @@ class VIGUI2DWidget :public QWidget
 {
 	Q_OBJECT
 public:
-	VIGUI2DWidget(QWidget* parent = Q_NULLPTR) :QWidget(parent) {
-		
+	QList<VITextLabel*> Label;
+	VIAnimationEventProcess* Process;
+	VIGUI2DWidget(QWidget* parent,VIAnimationEventProcess* process) :QWidget(parent) {
+		Process = process;
+	}
+	VITextLabel* newVITextLabel() {
+		VITextLabel* Label = new VITextLabel(this, Process);
+		return Label;
 	}
 };

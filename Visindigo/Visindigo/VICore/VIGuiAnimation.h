@@ -9,7 +9,7 @@ class VIAnimationEvent : public QObject
 {
 	Q_OBJECT
 signals:
-	void destroyLater(VIAnimationEvent* p);
+	void done();
 	void addEventLater(VIAnimationEvent* p);
 public:
 	float Percentage;
@@ -42,6 +42,7 @@ public:
 			this->event();
 			if (Percentage >= 1) {
 				ALIVE = false;
+				emit done();
 			}
 		}
 	}

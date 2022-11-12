@@ -102,7 +102,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="VIJSAPI\JSVIAPI.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
     <ClCompile Include="Visindigo\VIType.cpp" />
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />

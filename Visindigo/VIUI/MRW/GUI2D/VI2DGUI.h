@@ -3,7 +3,7 @@
 #include<QtGui>
 #include<QtWidgets>
 #include "../../../../Visindigo/VICore/VIGuiAnimation.h"
-#include "../MRWGlobal.h"
+
 
 class VITextAnimation : public VIAnimationEvent
 {
@@ -47,7 +47,34 @@ public:
 		}
 	}
 };
-class VITextObject : public QLabel 
+class VITextLabel : private QLabel 
 {
+	Q_OBJECT
+public:
+	VITextAnimation* Animation;
+public:
+	VITextLabel(QWidget* WidgetParent,VIAnimationEventProcess* AniParent) {
+		this->setParent(WidgetParent);
+		this->QObject::setObjectName("VIText");
+		Animation = new VITextAnimation(this);
+		BIND(Animation, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
+		Animation->setAnimationProcess(AniParent);
+	}
+public slots:
+	void setText(QString text, int mspt, int msw) {
+		Animation->setSpeed(mspt);
+		Animation->setWait(msw);
+		Animation->setText(text);
+		Animation->active();
+	}
+	void getText(QString text) {
+		this->QLabel::setText(text);
+	}
+	void setStyleSheet(QString str) {
+		this->QLabel::setStyleSheet(str);
+	}
+	void setGeometry(int X, int Y, int W, int H) {
+		this->QLabel::setGeometry(X, Y, W, H);
+	}
 
 };

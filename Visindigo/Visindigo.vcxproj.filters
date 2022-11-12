@@ -35,9 +35,6 @@
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VIJSAPI\JSVIAPI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visindigo\VIObject.h">
