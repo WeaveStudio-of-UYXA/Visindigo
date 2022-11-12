@@ -13,13 +13,3 @@ void VIAnimationEvent::active() {
 		//this->Process->addEvent(this);
 	}
 };
-void VIAnimationEvent::skipAnimation() {
-	Process->PROTECT;
-	this->skip();
-	Process->RELEASE;
-}
-void VIAnimationEvent::finishAnimation() {
-	Process->PROTECT;
-	this->finish();
-	Process->RELEASE;
-}

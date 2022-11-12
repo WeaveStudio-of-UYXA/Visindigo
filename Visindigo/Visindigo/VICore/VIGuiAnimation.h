@@ -20,8 +20,9 @@ public:
 	VIAnimationEventProcess* Process = Q_NULLPTR;
 	virtual void event() = 0;
 	virtual void init() = 0;
-	virtual void skip();
 	bool ALIVE = false;
+	bool SKIP = false;
+	bool FINISH = false;
 	VIAnimationEvent(QObject* parent = Q_NULLPTR) {
 		this->setParent(parent);
 	}
@@ -51,13 +52,13 @@ public:
 	}
 public:
 	void setAnimationProcess(VIAnimationEventProcess* process);
+	virtual void skip() = 0;
 	virtual void finish() {
 		CurrentMsec = MaxMsec;
 	}
 public slots:
 	void active();
-	void skipAnimation();
-	void finishAnimation();
+	
 };
 class VIAnimationEventProcess : public QThread
 {
@@ -70,6 +71,8 @@ private:
 	QList<VIAnimationEvent*> EventQueue;
 	QList<VIAnimationEvent*> EventDel;
 	QList<VIAnimationEvent*> EventAdd;
+	QList<VIAnimationEvent*> EventSkip;
+	QList<VIAnimationEvent*> EventFinish;
 	QMutex SleepMutex;
 	QWaitCondition Condition;
 	QWaitCondition WakeUp;
@@ -99,13 +102,33 @@ public:
 				EventAdd.clear();
 				WAIT = false;
 			}
+			if (!EventSkip.isEmpty()) {
+				for (auto i = EventSkip.begin(); i != EventSkip.end(); i++) {
+					(*i)->SKIP = true;
+				}
+				EventSkip.clear();
+			}
+			if (!EventFinish.isEmpty()) {
+				for (auto i = EventFinish.begin(); i != EventFinish.end(); i++) {
+					(*i)->FINISH = true;
+				}
+				EventFinish.clear();
+			}
 			this->ProcessMutex.unlock();
 			for (auto i = EventQueue.begin(); i != EventQueue.end(); i++) {
 				if ((*i)->ALIVE) {
 					(*i)->preDoEvent(LASTTIME);
 				}
+				else if ((*i)->SKIP) {
+					(*i)->skip();
+				}
+				else if ((*i)->FINISH) {
+					(*i)->finish();
+				}
 				else {
-					EventDel.append((*i));
+					(*i)->SKIP = false;
+					(*i)->FINISH = false;
+					EventDel.append(*i);
 				}
 			}
 			if (!EventDel.isEmpty()) { 
@@ -132,15 +155,25 @@ public:
 		}
 	}
 	void stop() {
-		this->ProcessMutex.lock();
+		this->PROTECT;
 		this->RUN = false;
-		this->ProcessMutex.unlock();
+		this->RELEASE;
 	}
 public slots:
 	void addEvent(VIAnimationEvent* Event) {
-		this->ProcessMutex.lock();
+		this->PROTECT;
 		this->EventAdd.append(Event);
 		if (WAIT) { Condition.wakeAll(); };
-		this->ProcessMutex.unlock();	
+		this->RELEASE;	
+	}
+	void skipEvent(VIAnimationEvent* Event) {
+		this->PROTECT;
+		this->EventSkip.append(Event);
+		this->RELEASE;
+	}
+	void finishEvent(VIAnimationEvent* Event) {
+		this->PROTECT;
+		this->EventFinish.append(Event);
+		this->RELEASE;
 	}
 };

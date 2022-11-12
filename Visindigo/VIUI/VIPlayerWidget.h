@@ -18,6 +18,9 @@ public:
 	void event() {
 		emit move(max * (1 + qCos(3.14 * Percentage)), max * (1 + qCos(3.14 * Percentage)));
 	}
+	void skip() {
+	
+	}
 };
 class BEvent :public VIAnimationEvent
 {
@@ -32,6 +35,9 @@ public:
 	}
 	void event() {
 		emit move(max * (1 + qCos(3.14 * Percentage)), max * (1 + qCos(3.14 * Percentage)));
+	}
+	void skip() {
+		
 	}
 };
 class AWidget :public QWidget 
