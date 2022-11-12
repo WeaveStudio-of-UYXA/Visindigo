@@ -2,18 +2,25 @@
 
 ```mermaid
 graph TB
-VIRuntime -- addEvent --> VIAniProcess
-VIRuntime -. control .-> VI3DWidget
-VIAniProcess -- operate --> VIAniEvent
-VIAniEvent -- connect --> VIRuntime
-VIRuntime -- control --> VIJSHost
-VIJSHost -- connect --> VIRuntime
-VIJSAPI -- api --> VIJSHost
-VIJSAPI -- api --> VIRuntime
-VIJSAPI -- api --> VI2DGUI
-VIJSHost -- JavaScript --> VIJSAPI
-VIAniEvent -- api --> VI2DGUI
-VI2DGUI -- api --> VIRuntime
+VIAniProcess -. api .-> VI2DGUI
+VI2DGUI -. api .-> VIJSAPI
+VIJSAPI -. api .-> VIJSHost
+VI2DGUI -. api .-> VIRuntime
+VIJSHost -. api .-> VIRuntime
+VIAniProcess -. api .-> VIRuntime
+```
+
+# 现行和计划结构-VIJSAPI
+
+```mermaid
+graph TB
+VI2DGUI -. api .-> VIGUI2D
+VIGUI2D -. invoke ..-> VIGUI
+VIGUI2D -. api .-> YSPGUI
+VI2DGUI -. api .-> VIRuntime
+YSPGUI -. invoke .-> SPOL
+VIRuntime -. api .-> VISys
+VISys -. invoke .->VISystem
 ```
 
 # 计划设计结构-Visindigo窗体逻辑
