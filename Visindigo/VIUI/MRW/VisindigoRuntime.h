@@ -57,7 +57,7 @@ public:
 		connect(JSHost, SIGNAL(initJSEngine(QJSEngine*)), this, SLOT(initJSEngine(QJSEngine*)), Qt::DirectConnection);
 		BIND(JSHost->VIGUI2D, SIGNAL(SsetWindowTitle(QString)), this, SLOT(setWindowTitle(QString)));
 		BIND(JSHost->VIGUI2D, SIGNAL(SsetStyleSheet(QString)), this, SLOT(setStyleSheet(QString)));
-		BIND(JSHost->VIGUI2D, SIGNAL(SsetGeometry(int, int, int, int)), this, SLOT(setGeometry(int, int, int, int)));
+		BIND(JSHost->VIGUI2D, SIGNAL(SsetGeometry(int, int, int, int)), this, SLOT(setGeo(int, int, int, int)));
 		BIND(JSHost->VIGUI2D, SIGNAL(Sresize(int, int)), this, SLOT(setSize(int, int)));
 		BIND(JSHost->VIGUI2D, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()));
 		Process->start();
@@ -70,6 +70,9 @@ public slots:
 	void setSize(int w, int h) {
 		this->resize(w, h);
 		move((QApplication::desktop()->screen()->width() - width()) / 2, (QApplication::desktop()->screen()->height() - height()) / 2);
+	}
+	void setGeo(int x, int y, int z, int w) {
+		this->setGeometry(x, y, z, w);
 	}
 	void initJSEngine(QJSEngine* Engine) {
 		//QJSValue VIRTWin = Engine->newQObject(this);

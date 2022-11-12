@@ -12,5 +12,11 @@ namespace JsVI
 		void print(QString str) {
 			qDebug() << str;
 		}
+		void exit(int code = 0) {
+			qApp->exit(code);
+		}
+		void wait(int ms) {
+			QThread::msleep(ms);
+		}
 	};
 }

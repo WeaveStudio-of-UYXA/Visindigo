@@ -39,7 +39,6 @@ public:
 	}
 	void event() {
 		if (CurrentMsec >= LMS && Char != Text.end() && !SKIPED) {
-			qDebug() << INDEX;
 			Output += *Char;
 			Char++;
 			INDEX++;
@@ -48,7 +47,6 @@ public:
 		}
 	}
 	void skip() {
-		qDebug() << Text;
 		Char = Text.end();
 		CurrentMsec = Text.length() * MSPT;
 		emit getText(Text);
