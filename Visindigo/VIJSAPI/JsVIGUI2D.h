@@ -27,6 +27,12 @@ namespace JsVI {
 	class VIGUI2D :public QObject
 	{
 		Q_OBJECT
+	signals:
+		void SsetWindowTitle(QString);
+		void Sresize(int, int);
+		void SsetGeometry(int, int, int, int);
+		void SsetStyleSheet(QString);
+		void SshowFullScreen();
 	public:
 		VIGUI2DWidget* GUI;
 		QJSEngine* Engine;
@@ -36,8 +42,22 @@ namespace JsVI {
 		}
 	public slots:
 		QJSValue newVIText() {
-			 return Engine->newQObject(new TextLabel(this, GUI));
+			return Engine->newQObject(new TextLabel(this, GUI));
+		}
+		void setWindowTitle(QString title) {
+			emit SsetWindowTitle(title);
+		}
+		void resize(int w, int h) {
+			emit Sresize(w, h);
+		}
+		void setGeometry(int x, int y, int w, int h) {
+			emit SsetGeometry(x, y, w, h);
+		}
+		void setStyleSheet(QString style) {
+			emit SsetStyleSheet(style);
+		}
+		void showFullScreen() {
+			emit SshowFullScreen();
 		}
 	};
-
 }

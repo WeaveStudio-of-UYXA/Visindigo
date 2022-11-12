@@ -21,7 +21,7 @@ public:
 	VIGUI2DWidget* GUI2D;
 	VIAnimationEventProcess* Process;
 public:
-	VICentralWidget(QWidget* parent,VIAnimationEventProcess* process) :QWidget(parent) {
+	VICentralWidget(QWidget* parent, VIAnimationEventProcess* process) :QWidget(parent) {
 		Process = process;
 		Widget3D = new VI3DWidget(this);
 		GUI2D = new VIGUI2DWidget(this, Process);
@@ -41,24 +41,25 @@ public:
 	VIJSHost* JSHost;
 	VIAnimationEventProcess* Process;
 	VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
-		
 		QPalette PAL;
 		PAL.setColor(QPalette::Background, Qt::black);
 		this->setPalette(PAL);
-		
-		
+
 		Process = new VIAnimationEventProcess(this);
-		
+
 		CentralWidget = new VICentralWidget(this, Process);
 		this->setCentralWidget(CentralWidget);
 		JSHost = new VIJSHost(CentralWidget->GUI2D);
 		JSHostThread = new QThread(this);
 		JSHost->moveToThread(JSHostThread);
 		JSHostThread->start();
-		
+
 		connect(JSHost, SIGNAL(initJSEngine(QJSEngine*)), this, SLOT(initJSEngine(QJSEngine*)), Qt::DirectConnection);
-		connect(JSHost->GUIHost, SIGNAL(SsetWindowTitle(QString)), this, SLOT(setWindowTitle(QString)), Qt::BlockingQueuedConnection);
-		connect(JSHost->GUIHost, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()), Qt::BlockingQueuedConnection);
+		BIND(JSHost->VIGUI2D, SIGNAL(SsetWindowTitle(QString)), this, SLOT(setWindowTitle(QString)));
+		BIND(JSHost->VIGUI2D, SIGNAL(SsetStyleSheet(QString)), this, SLOT(setStyleSheet(QString)));
+		BIND(JSHost->VIGUI2D, SIGNAL(SsetGeometry(int, int, int, int)), this, SLOT(setGeometry(int, int, int, int)));
+		BIND(JSHost->VIGUI2D, SIGNAL(Sresize(int, int)), this, SLOT(setSize(int, int)));
+		BIND(JSHost->VIGUI2D, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()));
 		Process->start();
 		this->loadJS();
 	}
@@ -66,6 +67,10 @@ public:
 		JSHost->boot("../../Visindigo/Dev/test.js");
 	}
 public slots:
+	void setSize(int w, int h) {
+		this->resize(w, h);
+		move((QApplication::desktop()->screen()->width() - width()) / 2, (QApplication::desktop()->screen()->height() - height()) / 2);
+	}
 	void initJSEngine(QJSEngine* Engine) {
 		//QJSValue VIRTWin = Engine->newQObject(this);
 		//Engine->globalObject().setProperty("VIRTWin", VIRTWin);
@@ -77,4 +82,3 @@ public slots:
 		qDebug() << output;
 	}
 };
-

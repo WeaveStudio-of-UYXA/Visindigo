@@ -7,14 +7,20 @@
 class VIGUI2DWidget :public QWidget
 {
 	Q_OBJECT
+signals:
+	void mousePressed();
 public:
 	QList<VITextLabel*> Label;
 	VIAnimationEventProcess* Process;
-	VIGUI2DWidget(QWidget* parent,VIAnimationEventProcess* process) :QWidget(parent) {
+	VIGUI2DWidget(QWidget* parent, VIAnimationEventProcess* process) :QWidget(parent) {
 		Process = process;
 	}
 public slots:
 	void newVITextLabel(VITextLabel** p) {
 		*p = new VITextLabel(this, Process);
+		Label.append(*p);
+	}
+	void mousePressEvent(QMouseEvent* event) {
+		emit mousePressed();
 	}
 };

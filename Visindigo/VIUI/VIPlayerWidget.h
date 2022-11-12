@@ -4,7 +4,7 @@
 #include <QtWidgets>
 
 #include "Visindigo/VICore/VIGuiAnimation.h"
-class AEvent :public VIAnimationEvent 
+class AEvent :public VIAnimationEvent
 {
 	Q_OBJECT
 signals:
@@ -15,11 +15,10 @@ public:
 		this->setMaxMsec(5000);
 		max = 100;
 	}
-	void event() {
+		void event() {
 		emit move(max * (1 + qCos(3.14 * Percentage)), max * (1 + qCos(3.14 * Percentage)));
 	}
 	void skip() {
-	
 	}
 };
 class BEvent :public VIAnimationEvent
@@ -33,14 +32,13 @@ public:
 		this->setMaxMsec(5000);
 		max = 100;
 	}
-	void event() {
+		void event() {
 		emit move(max * (1 + qCos(3.14 * Percentage)), max * (1 + qCos(3.14 * Percentage)));
 	}
 	void skip() {
-		
 	}
 };
-class AWidget :public QWidget 
+class AWidget :public QWidget
 {
 	Q_OBJECT
 private:
@@ -68,7 +66,7 @@ public:
 		CurrentLayout = new QVBoxLayout(this);
 		Event = new AEvent(this);
 		Event2 = new BEvent(this);
-		
+
 		CurrentLayout->addWidget(frameLabel);
 		CurrentLayout->addWidget(TestButton);
 		connect(Process, SIGNAL(currentFrame(float)), this, SLOT(changeFrame(float)));
@@ -78,7 +76,6 @@ public:
 		BIND(Event, SIGNAL(move(float, float)), this, SLOT(moveB(float, float)));
 		BIND(Event2, SIGNAL(move(float, float)), this, SLOT(moveB2(float, float)));
 		connect(TestButton, SIGNAL(clicked()), this, SLOT(active()));
-		
 	}
 public slots:
 	void changeFrame(float frame) {

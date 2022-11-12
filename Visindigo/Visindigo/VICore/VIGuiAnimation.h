@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include<QtCore>
 #include <chrono>
-#define INIT (QWidget* parent = Q_NULLPTR) :VIAnimationEvent(parent) {} void init() 
+#define INIT (QWidget* parent = Q_NULLPTR) :VIAnimationEvent(parent) {} void init()
 #define BIND(objP1,signal,objP2,slot) connect(objP1,signal,objP2,slot,Qt::BlockingQueuedConnection)
 #define PROTECT ProcessMutex.lock();
 #define RELEASE ProcessMutex.unlock();
@@ -38,7 +38,7 @@ public:
 	void preDoEvent(float msTime) {
 		if (ALIVE) {
 			CurrentMsec += msTime;
-			
+
 			if (Percentage < 1) {
 				Percentage = CurrentMsec / MaxMsec;
 			}
@@ -58,7 +58,6 @@ public:
 	}
 public slots:
 	void active();
-	
 };
 class VIAnimationEventProcess : public QThread
 {
@@ -90,8 +89,8 @@ public:
 	}
 	void run() {
 		while (true) {
-			if (EventQueue.isEmpty()) { 
-				Condition.wait(&SleepMutex); 			
+			if (EventQueue.isEmpty()) {
+				Condition.wait(&SleepMutex);
 			}
 			std::chrono::system_clock::time_point TPS = std::chrono::system_clock::now();
 			this->ProcessMutex.lock();
@@ -119,39 +118,41 @@ public:
 				if ((*i)->ALIVE) {
 					(*i)->preDoEvent(LASTTIME);
 				}
-				else if ((*i)->SKIP) {
-					(*i)->skip();
-				}
-				else if ((*i)->FINISH) {
-					(*i)->finish();
-				}
 				else {
 					(*i)->SKIP = false;
 					(*i)->FINISH = false;
 					EventDel.append(*i);
 				}
+				if ((*i)->SKIP) {
+					(*i)->skip();
+					(*i)->SKIP = false;
+				}
+				else if ((*i)->FINISH) {
+					(*i)->finish();
+					(*i)->FINISH = false;
+				}
 			}
-			if (!EventDel.isEmpty()) { 
+			if (!EventDel.isEmpty()) {
 				for (auto i = EventDel.begin(); i != EventDel.end(); i++) {
 					EventQueue.removeOne((*i));
 				}
-				EventDel.clear(); 
+				EventDel.clear();
 			}
 			this->ProcessMutex.lock();
-			if (EventQueue.isEmpty()) {WAIT = true;}
+			if (EventQueue.isEmpty()) { WAIT = true; }
 			if (!RUN) { break; }
 			this->ProcessMutex.unlock();
 			if (LASTTIME == 0) { LASTTIME = 0.001; }
 			if (P30 < 1) {
 				LFO5[LFOINDEX] = 1000 / LASTTIME;
 				LFOINDEX += 1;
-				emit currentFrame((LFO5[0]+ LFO5[1] + LFO5[2] + LFO5[3] + LFO5[4])/5);
+				emit currentFrame((LFO5[0] + LFO5[1] + LFO5[2] + LFO5[3] + LFO5[4]) / 5);
 				if (LFOINDEX == 5) { LFOINDEX = 0; }
 				P30 = 300;
 			}
 			else { P30--; }
 			std::chrono::system_clock::time_point TPE = std::chrono::system_clock::now();
-			LASTTIME = (float)(std::chrono::duration_cast<std::chrono::microseconds>(TPE.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::microseconds>(TPS.time_since_epoch()).count()) / 1000;			
+			LASTTIME = (float)(std::chrono::duration_cast<std::chrono::microseconds>(TPE.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::microseconds>(TPS.time_since_epoch()).count()) / 1000;
 		}
 	}
 	void stop() {
@@ -164,7 +165,7 @@ public slots:
 		this->PROTECT;
 		this->EventAdd.append(Event);
 		if (WAIT) { Condition.wakeAll(); };
-		this->RELEASE;	
+		this->RELEASE;
 	}
 	void skipEvent(VIAnimationEvent* Event) {
 		this->PROTECT;

@@ -26,9 +26,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VIType.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -40,18 +37,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Visindigo\VIObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VIMacro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\Interpreter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VIType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VIUI\MRW\MRWGlobal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -62,6 +47,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIJSAPI\VIJSGlobal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -81,13 +69,13 @@
     <QtMoc Include="VIJSAPI\VIJSHost.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\JSVIAPI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="VIUI\MRW\VIGUI2D.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIJSAPI\JsVIGUI2D.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIJSAPI\JsVISystem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
