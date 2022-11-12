@@ -44,22 +44,27 @@ public:
 			emit getText(Output);
 		}
 	}
+	void skip() {
+		CurrentMsec = Text.length() * MSPT;
+	}
 };
 class VITextLabel : public QLabel 
 {
 	Q_OBJECT
 public:
 	VITextAnimation* Animation;
+	VIAnimationEventProcess* Process;
 	bool Wait = false;
 public:
 	VITextLabel(QWidget* WidgetParent,VIAnimationEventProcess* AniParent) {
+		Process = AniParent;
 		this->setParent(WidgetParent);
 		this->setObjectName("VIText");
 		this->setWordWrap(true);
 		Animation = new VITextAnimation(this);
 		BIND(Animation, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
 		BIND(Animation, SIGNAL(done()), this, SLOT(ifWait()));
-		Animation->setAnimationProcess(AniParent);
+		Animation->setAnimationProcess(Process);
 		this->setStyleSheet("QLabel#VIText{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:20px;}");
 		this->setAlignment(Qt::AlignLeft);
 		this->setGeometry(QRect(0, 0, 500, 60));

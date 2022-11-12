@@ -3,6 +3,8 @@
 #include <chrono>
 #define INIT (QWidget* parent = Q_NULLPTR) :VIAnimationEvent(parent) {} void init() 
 #define BIND(objP1,signal,objP2,slot) connect(objP1,signal,objP2,slot,Qt::BlockingQueuedConnection)
+#define PROTECT ProcessMutex.lock();
+#define RELEASE ProcessMutex.unlock();
 class VIAnimationEventProcess;
 
 class VIAnimationEvent : public QObject
@@ -18,6 +20,7 @@ public:
 	VIAnimationEventProcess* Process = Q_NULLPTR;
 	virtual void event() = 0;
 	virtual void init() = 0;
+	virtual void skip();
 	bool ALIVE = false;
 	VIAnimationEvent(QObject* parent = Q_NULLPTR) {
 		this->setParent(parent);
@@ -48,19 +51,25 @@ public:
 	}
 public:
 	void setAnimationProcess(VIAnimationEventProcess* process);
+	virtual void finish() {
+		CurrentMsec = MaxMsec;
+	}
 public slots:
 	void active();
+	void skipAnimation();
+	void finishAnimation();
 };
 class VIAnimationEventProcess : public QThread
 {
 	Q_OBJECT
 signals:
 	void currentFrame(float);
+public:
+	QMutex ProcessMutex;
 private:
 	QList<VIAnimationEvent*> EventQueue;
 	QList<VIAnimationEvent*> EventDel;
 	QList<VIAnimationEvent*> EventAdd;
-	QMutex ProcessMutex;
 	QMutex SleepMutex;
 	QWaitCondition Condition;
 	QWaitCondition WakeUp;
