@@ -10,7 +10,8 @@ Visindigo的初始概念太完美了，完美到完全超出我的编程能力�
 
 [单击跳转到参考文档](https://www.yuque.com/tsingyayin/visindigo)
 
-# Visindigo源码编译
+# Visindigo 源码编译
+**请注意，如果您需要获得发行版本的源码，您应该去WeaveStudio的另外一个仓库，叫做VisindigoRelease，本仓库内的源码是代表最新开发内容的源码，可能含有不稳定因素。**
 ## 编译Windows版本
   * 安装Visual Studio 2022，勾选有关C++的内容和有关桌面开发的内容
     * 不需要勾选和移动设备开发有关的内容
