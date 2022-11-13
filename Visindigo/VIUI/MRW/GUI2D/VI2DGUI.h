@@ -46,6 +46,9 @@ public:
 			emit getText(Output);
 		}
 	}
+	void onFinish() {
+		
+	}
 	void skip() {
 		Char = Text.end();
 		CurrentMsec = Text.length() * MSPT;
@@ -82,6 +85,9 @@ public:
 			float OP = OPBegin - Percentage * OPDelta;
 			emit getOpacity(OP);
 		}
+	}
+	void onFinish() {
+		emit getOpacity(OPEnd);
 	}
 	void skip() {
 		emit getOpacity(OPEnd);

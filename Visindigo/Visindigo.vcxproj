@@ -110,6 +110,7 @@
     <QtMoc Include="VIJSAPI\JsVIGUI2D.h" />
     <QtMoc Include="VIJSAPI\JsVISystem.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="VIJSAPI\JsVIYSP.h" />
     <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
     <ClInclude Include="VIUI\PW\VisindigoProject.h" />
     <ClInclude Include="VIUI\RW\VisindigoRepos.h" />
@@ -117,7 +118,7 @@
     <QtMoc Include="VIJSAPI\VIJSHost.h" />
     <ClInclude Include="VIUI\MRW\MRWGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h" />
-    <QtMoc Include="VIUI\VIPlayerWidget.h" />
+    <ClInclude Include="VIUI\VIPlayerWidget.h" />
     <QtMoc Include="VIUI\MRW\VisindigoRuntime.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h" />
   </ItemGroup>

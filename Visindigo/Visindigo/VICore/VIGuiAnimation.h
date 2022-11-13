@@ -23,6 +23,7 @@ public:
 	VIAnimationEventProcess* Process = Q_NULLPTR;
 	virtual void event() = 0;
 	virtual void init() = 0;
+	virtual void onFinish() = 0;
 	bool ALIVE = false;
 	bool SKIP = false;
 	bool FINISH = false;
@@ -58,6 +59,7 @@ public:
 			}
 			if (Percentage >= 1) {
 				ALIVE = false;
+				this->onFinish();
 				emit done(DONE);
 			}
 		}

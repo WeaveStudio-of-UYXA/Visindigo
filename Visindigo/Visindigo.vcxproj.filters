@@ -52,12 +52,15 @@
     <ClInclude Include="Global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VIJSAPI\JsVIYSP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIUI\VIPlayerWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIUI\VIPlayerWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIUI\MRW\VisindigoRuntime.h">

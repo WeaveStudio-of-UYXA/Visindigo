@@ -61,6 +61,7 @@ namespace JsVI {
 		void SsetGeometry(int, int, int, int);
 		void SsetStyleSheet(QString);
 		void SshowFullScreen();
+		void SenableGUIFrame();
 	public:
 		VIGUI2DWidget* GUI;
 		QJSEngine* Engine;
@@ -69,6 +70,9 @@ namespace JsVI {
 			Engine = engine;
 		}
 	public slots:
+		void enableGUIFrame() {
+			emit SenableGUIFrame();
+		}
 		QJSValue newVIText() {
 			return Engine->newQObject(new TextLabel(this, GUI));
 		}
@@ -87,6 +91,5 @@ namespace JsVI {
 		void showFullScreen() {
 			emit SshowFullScreen();
 		}
-
 	};
 }

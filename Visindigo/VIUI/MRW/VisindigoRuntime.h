@@ -60,6 +60,7 @@ public:
 		BIND(JSHost->VIGUI2D, SIGNAL(SsetGeometry(int, int, int, int)), this, SLOT(setGeo(int, int, int, int)));
 		BIND(JSHost->VIGUI2D, SIGNAL(Sresize(int, int)), this, SLOT(setSize(int, int)));
 		BIND(JSHost->VIGUI2D, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()));
+		BIND(JSHost->VIGUI2D, SIGNAL(SenableGUIFrame()), this, SLOT(enableGUIFrame()));
 		Process->start();
 		this->loadJS();
 	}
@@ -83,5 +84,8 @@ public slots:
 	}
 	void output(QString output) {
 		qDebug() << output;
+	}
+	void enableGUIFrame() {
+		connect(Process, SIGNAL(currentFrame(float)), CentralWidget->GUI2D, SLOT(setFrame(float)), Qt::UniqueConnection);
 	}
 };
