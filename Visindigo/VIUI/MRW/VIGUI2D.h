@@ -23,4 +23,9 @@ public slots:
 	void mousePressEvent(QMouseEvent* event) {
 		emit mousePressed();
 	}
+	void resizeEvent(QResizeEvent* event) {
+		for (auto i = Label.begin(); i != Label.end(); i++) {
+			(*i)->resizeEvent();
+		}
+	}
 };

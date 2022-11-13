@@ -11,29 +11,37 @@ class VIAnimationEvent : public QObject
 {
 	Q_OBJECT
 signals:
-	void done();
-	void addEventLater(VIAnimationEvent* p);
+	void done(bool);
+	void midwaySignal(int, float);
+	void addEventLater(VIAnimationEvent*);
 public:
 	float Percentage;
 	float MaxMsec;
 	float CurrentMsec = 0;
+	QList<float> MidwaySignal;
+	int MidwaySignalIndex = 0;
 	VIAnimationEventProcess* Process = Q_NULLPTR;
 	virtual void event() = 0;
 	virtual void init() = 0;
 	bool ALIVE = false;
 	bool SKIP = false;
 	bool FINISH = false;
+	bool DONE = false;
 	VIAnimationEvent(QObject* parent = Q_NULLPTR) {
 		this->setParent(parent);
 	}
 	void preInit() {
 		Percentage = 0;
 		CurrentMsec = 0;
+		MidwaySignalIndex = 0;
 		ALIVE = true;
 		init();
 	}
 	void setMaxMsec(float msec) {
 		this->MaxMsec = msec;
+	}
+	void setDoneSignal(bool sig) {
+		this->DONE = sig;
 	}
 	void preDoEvent(float msTime) {
 		if (ALIVE) {
@@ -44,11 +52,18 @@ public:
 			}
 			else { Percentage = 1; }
 			this->event();
+			if (MidwaySignalIndex<MidwaySignal.length() && Percentage > MidwaySignal[MidwaySignalIndex]) {
+				emit midwaySignal(MidwaySignalIndex, Percentage);
+				MidwaySignalIndex++;
+			}
 			if (Percentage >= 1) {
 				ALIVE = false;
-				emit done();
+				emit done(DONE);
 			}
 		}
+	}
+	void setMidwaySignal(QList<float>signalList) {
+		MidwaySignal = signalList;
 	}
 public:
 	void setAnimationProcess(VIAnimationEventProcess* process);
