@@ -81,5 +81,8 @@
     <QtMoc Include="VIJSAPI\JsVISystem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIAnimation.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
