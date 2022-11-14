@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include "VIGuiAnimation.h"
-
-
 class VITextAnimation : public VIAnimationEvent
 {
 	Q_OBJECT
@@ -22,11 +20,17 @@ public:
 		LMS = 0;
 		SKIPED = false;
 	}
-		void setText(QString text) {
+	void setText(QString text) {
 		this->Text = text;
 		this->setMaxMsec(Text.length() * MSPT + MSW);
 		Char = Text.begin();
 		Output = "";
+	}
+	void continueText(QString text) {
+		this->Output = this->Text;
+		this->Text = text;
+		this->setMaxMsec(Text.length() * MSPT + MSW);
+		Char = Text.begin();
 	}
 	void setSpeed(int MsPT) {
 		this->MSPT = MsPT;

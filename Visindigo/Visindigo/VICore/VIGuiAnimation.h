@@ -94,6 +94,7 @@ private:
 	QWaitCondition Condition;
 	QWaitCondition WakeUp;
 	float LASTTIME = 1;
+	float Magnification = 1;
 	QDateTime Time;
 	bool RUN = true;
 	bool WAIT = true;

@@ -52,6 +52,14 @@ public slots:
 		Animation->setDoneSignal(wait);
 		Animation->active();
 	}
+	void continueTextAni(QString text, int mspt, int msw, bool wait) {
+		Animation->setSpeed(mspt);
+		Animation->setWait(msw);
+		Animation->continueText(text);
+		SKIP = FINISH = false;
+		Animation->setDoneSignal(wait);
+		Animation->active();
+	}
 	void getText(QString text) {
 		this->setText(text);
 	}
