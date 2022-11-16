@@ -12,7 +12,7 @@ Visindigo的初始概念太完美了，完美到完全超出我的编程能力�
 
 # Visindigo 源码编译
 **请注意，如果您需要获得发行版本的源码，您应该去WeaveStudio的另外一个仓库，叫做VisindigoRelease，本仓库内的源码是代表最新开发内容的源码，可能含有不稳定因素。**
-## 编译Windows版本
+## 编译Windows版本（Windows_x86_64）
   * 安装Visual Studio 2022，勾选有关C++的内容和有关桌面开发的内容
     * 不需要勾选和移动设备开发有关的内容
   * 安装Qt5.15，该项目目前用的是Qt5.15.2，由于项目中**可能含有**新版Qt的特性，因此请不要使用旧版Qt，至少不应该使用5.11以下的版本
@@ -21,8 +21,12 @@ Visindigo的初始概念太完美了，完美到完全超出我的编程能力�
   * 在Visual Studio 2022中克隆此远程仓库，直接运行项目即可
     * 请注意您到底是在运行Visindigo还是VisindigoInstaller，右键项目可以切换启动项
   
-## 编译Android版本
+## 编译Android版本（arm_v7）
   * 首先完成以上Windows版本操作
-  * 启动Qt Creator，定位到已经克隆的仓库，选择打开Qt项目文件以加载项目
+  * 启动Visual Studio并打开本项目，在项目资源管理器中右键“Visindigo”打开右键菜单，在Qt扩展中选择导出pri文件到任意位置
+  * 将AndroidConfig内全部文件直接复制到含有Visual Studio项目文件（vcxproj）的目录
+  * 从Qt Creator选择复制进来的pro文件以打开项目
+  * 将pri文件内的SOURCE和HEAD信息覆盖pro文件内的SOURCE和HEAD信息
   * 将您的安卓设备接入计算机，并启用ADB
-  * 直接运行项目即可
+  * 直接运行项目
+  * 不要用此方法尝试编译Android或任何其他平台（包括Windows_arm）的Visindigo Installer，因为服务器只提供Windows_x86版本的文件，Installer只检查Windows_x86的文件
