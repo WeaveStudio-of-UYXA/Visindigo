@@ -4,7 +4,7 @@
 #include <QtWidgets>
 #include "VIGUI2D.h"
 #include "MRWGlobal.h"
-#include "../../VIJSAPI/VIJSHost.h"
+#include "VIJSAPI/VIJSHost.h"
 class VI3DWidget :public QWidget
 {
 	Q_OBJECT

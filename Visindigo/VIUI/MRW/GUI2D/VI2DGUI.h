@@ -2,8 +2,8 @@
 #include<QtCore>
 #include<QtGui>
 #include<QtWidgets>
-#include "../../../../Visindigo/VICore/VIAnimation.h"
-#include "../../../../VIJSAPI/VIJSGlobal.h"
+#include "Visindigo/VICore/VIAnimation.h"
+#include "VIJSAPI/VIJSGlobal.h"
 
 class VITextLabel : public QLabel
 {

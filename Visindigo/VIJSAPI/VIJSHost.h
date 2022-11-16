@@ -4,7 +4,7 @@
 #include "VIJSGlobal.h"
 #include "JsVIGUI2D.h"
 #include "JsVISystem.h"
-#include "../VIUI/MRW/VIGUI2D.h"
+#include "VIUI/MRW/VIGUI2D.h"
 #undef VIJSHostWait
 class VIJSHost : public QObject
 {
