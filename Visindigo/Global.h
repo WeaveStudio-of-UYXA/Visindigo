@@ -1,9 +1,5 @@
 ﻿#pragma once
-#define WINDOWS_DEPLOY
+#define WINDOWS_DEPLOY 1
+#define ANDROID_DEPLOY 2
 
-#ifdef WINDOWS_DEPLOY
-#define DEPLOY 1
-#endif
-#ifdef ANDROID_DEPLOY
-#define DEPLOY 2
-#endif
+#define DEPLOY WINDOWS_DEPLOY

@@ -84,5 +84,8 @@
     <QtMoc Include="VIJSAPI\JsVIYSP.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

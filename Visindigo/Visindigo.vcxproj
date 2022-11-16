@@ -113,6 +113,7 @@
     <QtMoc Include="VIJSAPI\JsVIYSP.h" />
     <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
+    <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />
     <ClInclude Include="VIUI\PW\VisindigoProject.h" />
     <ClInclude Include="VIUI\RW\VisindigoRepos.h" />
     <QtMoc Include="VIUI\MRW\VIGUI2D.h" />

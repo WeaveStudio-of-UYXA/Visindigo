@@ -3,6 +3,8 @@
 #include "VIJSGlobal.h"
 #include "../VIUI/MRW/GUI2D/VI2DGUI.h"
 #include "../VIUI/MRW/VIGUI2D.h"
+#include "Global.h"
+
 namespace JsVI {
 	class TextLabel :public QObject
 	{
@@ -82,10 +84,14 @@ namespace JsVI {
 			return Engine->newQObject(new TextLabel(this, GUI));
 		}
 		void resize(int w, int h) {
+#if DEPLOY == WINDOWS_DEPLOY
 			emit Sresize(w, h);
+#endif
 		}
 		void setGeometry(int x, int y, int w, int h) {
+#if DEPLOY == WINDOWS_DEPLOY
 			emit SsetGeometry(x, y, w, h);
+#endif
 		}
 		void setStyleSheet(QString style) {
 			emit SsetStyleSheet(style);
