@@ -55,6 +55,9 @@
     <ClInclude Include="VIUI\VIPlayerWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h">

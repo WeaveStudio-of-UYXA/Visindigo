@@ -107,6 +107,7 @@ class VIPictureLabel : public QLabel
 public:
 	VIOpacityAnimation* OpacityAnimation;
 	VIAnimationEventProcess* Process;
+	QImage Image;
 	QWidget* Parent;
 	bool Wait = false;
 	bool SKIP = false;
@@ -130,12 +131,20 @@ public:
 		OpacityAnimation->setAnimationProcess(Process);
 		connect(Parent, SIGNAL(mousePressed()), this, SLOT(skipOrJumpAni()));
 
-		this->setAlignment(Qt::AlignLeft);
+		this->setAlignment(Qt::AlignCenter);
 		this->setGeometry(QRect(0, 0, 500, 60));
 		this->show();
 	}
 public slots:
-
+	void setImage(QString path) {
+		Image.load(path);
+		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		this->setPixmap(QPixmap::fromImage(s));
+	}
+	void resizeEvent(QResizeEvent* event) {
+		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		this->setPixmap(QPixmap::fromImage(s));
+	}
 	void setOpacityAni(float start, float end, int ms, bool wait) {
 		OpacityAnimation->setOpacity(start, end, ms, wait);
 		OpacityAnimation->active();
