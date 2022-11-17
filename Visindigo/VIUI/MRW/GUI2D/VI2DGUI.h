@@ -44,6 +44,9 @@ public:
 		this->show();
 	}
 public slots:
+	void textNonlinerProgress(VIMath::VI2DMatrix mat) {
+		Animation->enableNonlinearProgress(mat);
+	}
 	void setTextAni(QString text, int mspt, int msw, bool wait) {
 		Animation->setSpeed(mspt);
 		Animation->setWait(msw);
@@ -141,9 +144,11 @@ public slots:
 		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 		this->setPixmap(QPixmap::fromImage(s));
 	}
-	void resizeEvent(QResizeEvent* event) {
+	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
 		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 		this->setPixmap(QPixmap::fromImage(s));
+		this->setGeometry(QRect(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->height() * ph));
+		this->setStyleSheet("QLabel#VIText{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:30px;}");
 	}
 	void setOpacityAni(float start, float end, int ms, bool wait) {
 		OpacityAnimation->setOpacity(start, end, ms, wait);
@@ -176,9 +181,5 @@ public slots:
 		this->pw = pw;
 		this->ph = ph;
 		this->resizeEvent();
-	}
-	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
-		this->setGeometry(QRect(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->height() * ph));
-		this->setStyleSheet("QLabel#VIText{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:30px;}");
 	}
 };

@@ -46,7 +46,6 @@ public:
 		this->setPalette(PAL);
 
 		Process = new VIAnimationEventProcess(this);
-
 		CentralWidget = new VICentralWidget(this, Process);
 		this->setCentralWidget(CentralWidget);
 		JSHost = new VIJSHost(CentralWidget->GUI2D);
@@ -76,8 +75,6 @@ public slots:
 		this->setGeometry(x, y, z, w);
 	}
 	void initJSEngine(QJSEngine* Engine) {
-		//QJSValue VIRTWin = Engine->newQObject(this);
-		//Engine->globalObject().setProperty("VIRTWin", VIRTWin);
 	}
 	VIRuntimeWindow* getWin() {
 		return this;

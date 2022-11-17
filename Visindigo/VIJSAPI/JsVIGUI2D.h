@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include <QtQml>
 #include "VIJSGlobal.h"
-#include "../VIUI/MRW/GUI2D/VI2DGUI.h"
-#include "../VIUI/MRW/VIGUI2D.h"
+#include "VIUI/MRW/GUI2D/VI2DGUI.h"
+#include "VIUI/MRW/VIGUI2D.h"
 #include "Global.h"
 
 namespace JsVI {
@@ -12,6 +12,7 @@ namespace JsVI {
 	public:
 		VITextLabel* GUILabel;
 	signals:
+		void StextNonlinerProgress(VIMath::VI2DMatrix mat);
 		void newTextLabel(VITextLabel**);
 		void SsetText(QString, int, int, bool);
 		void ScontinueText(QString, int, int, bool);
@@ -22,6 +23,7 @@ namespace JsVI {
 		TextLabel(QObject* parent, VIGUI2DWidget* gui) :QObject(parent) {
 			BIND(this, SIGNAL(newTextLabel(VITextLabel**)), gui, SLOT(newVITextLabel(VITextLabel**)));
 			emit newTextLabel(&GUILabel);
+			BIND(this, SIGNAL(StextNonlinerProgress(VIMath::VI2DMatrix)), GUILabel, SLOT(textNonlinerProgress(VIMath::VI2DMatrix)));
 			BIND(this, SIGNAL(SsetText(QString, int, int, bool)), GUILabel, SLOT(setTextAni(QString, int, int, bool)));
 			BIND(this, SIGNAL(ScontinueText(QString, int, int, bool)), GUILabel, SLOT(continueTextAni(QString, int, int, bool)));
 			BIND(this, SIGNAL(SsetAlignment(Qt::AlignmentFlag)), GUILabel, SLOT(setAlign(Qt::AlignmentFlag)));
@@ -29,6 +31,15 @@ namespace JsVI {
 			BIND(this, SIGNAL(SsetOpacity(float, float, int, bool)), GUILabel, SLOT(setOpacityAni(float, float, int, bool)));
 		}
 	public slots:
+		void textNonlinerProgress(QList<QList<float>> mat) {
+			VIMath::VIVector2 vec;
+			VIMath::VI2DMatrix rtn;
+			for (auto i = mat.begin(); i != mat.end(); i++) {
+				vec = { (*i).at(0),(*i).at(1) };
+				rtn.append(vec);
+			}
+			emit StextNonlinerProgress(rtn);
+		}
 		void setText(QString str, int mspt = 100, int msw = 1500, bool waitForAnimation = true) {
 			emit SsetText(str, mspt, msw, waitForAnimation);
 			if (waitForAnimation) { VIJSHostWait; }

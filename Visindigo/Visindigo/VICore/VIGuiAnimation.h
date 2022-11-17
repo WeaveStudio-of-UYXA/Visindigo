@@ -2,6 +2,7 @@
 #include<QtCore>
 #include<QtWidgets>
 #include <chrono>
+#include "VIMath.h"
 #define INIT (QWidget* parent = Q_NULLPTR) :VIAnimationEvent(parent) {} void init()
 #define BIND(objP1,signal,objP2,slot) connect(objP1,signal,objP2,slot,Qt::BlockingQueuedConnection)
 #define PROTECT ProcessMutex.lock();
@@ -17,8 +18,10 @@ signals:
 	void addEventLater(VIAnimationEvent*);
 public:
 	float Percentage;
+	float NonlinearPercentage;
 	float MaxMsec;
 	float CurrentMsec = 0;
+	float NonlinearCurrentMsec = 0;
 	QList<float> MidwaySignal;
 	int MidwaySignalIndex = 0;
 	VIAnimationEventProcess* Process = Q_NULLPTR;
@@ -29,15 +32,25 @@ public:
 	bool SKIP = false;
 	bool FINISH = false;
 	bool DONE = false;
+	bool NonlinearProgress = false;
+	VIMath::VI2DMatrix COEFF;
 	VIAnimationEvent(QObject* parent = Q_NULLPTR) {
 		this->setParent(parent);
 	}
 	void preInit() {
 		Percentage = 0;
 		CurrentMsec = 0;
+		NonlinearCurrentMsec = 0;
 		MidwaySignalIndex = 0;
 		ALIVE = true;
 		init();
+	}
+	void enableNonlinearProgress(VIMath::VI2DMatrix mat) {
+		COEFF = VIBessel::getBesselCoefficient(mat);
+		NonlinearProgress = true;
+	}
+	void disableNonlinearProgress() {
+		NonlinearProgress = false;
 	}
 	void setMaxMsec(float msec) {
 		this->MaxMsec = msec;
@@ -45,22 +58,41 @@ public:
 	void setDoneSignal(bool sig) {
 		this->DONE = sig;
 	}
+	float getProgress() {
+		if (NonlinearProgress) {
+			return NonlinearPercentage;
+		}else{
+			return Percentage;
+		}
+	}
+	float getCurrentMsec() {
+		if (NonlinearProgress) {
+			return NonlinearCurrentMsec;
+		}
+		else {
+			return CurrentMsec;
+		}
+	}
 	void preDoEvent(float msTime) {
 		if (ALIVE) {
 			CurrentMsec += msTime;
-
 			if (Percentage < 1) {
 				Percentage = CurrentMsec / MaxMsec;
+				if (NonlinearProgress) {
+					NonlinearPercentage = VIBessel::getBesselValue(COEFF, Percentage).y;
+					NonlinearCurrentMsec = NonlinearPercentage * MaxMsec;
+				}
 			}
 			else { Percentage = 1; }
 			this->event();
-			if (MidwaySignalIndex<MidwaySignal.length() && Percentage > MidwaySignal[MidwaySignalIndex]) {
-				emit midwaySignal(MidwaySignalIndex, Percentage);
+			if (MidwaySignalIndex<MidwaySignal.length() && getProgress() > MidwaySignal[MidwaySignalIndex]) {
+				emit midwaySignal(MidwaySignalIndex, getProgress());
 				MidwaySignalIndex++;
 			}
 			if (Percentage >= 1) {
 				ALIVE = false;
 				this->onFinish();
+				NonlinearProgress = false;
 				emit done(DONE);
 			}
 		}

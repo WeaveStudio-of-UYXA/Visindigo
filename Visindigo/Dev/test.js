@@ -9,7 +9,8 @@
     t.setAlignment("C");
     t.setOpacity(0, 1, 2000);
     t.setText("这片大地上从来都有敢于直面天灾的勇士。");
-    t.continueText("\n他们不会因为天灾而退缩，而是会用自己的力量去拯救这片大地。");
+    t.textNonlinerProgress([[0, 0], [0.8, 0], [0.9, 1], [1, 1]]);
+    t.continueText("\n他们不会因为天灾而退缩，而是会用自己的力量去拯救这片大地。",150,1500);
     t.setOpacity(1, 0, 1000, true);
     t.setOpacity(0, 1, 1000);
     t.setText("我的足迹遍布大地，但却也不是整个泰拉");
