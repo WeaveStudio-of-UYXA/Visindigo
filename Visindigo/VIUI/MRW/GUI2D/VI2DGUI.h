@@ -1,34 +1,16 @@
 ﻿#pragma once
-#include<QtCore>
-#include<QtGui>
-#include<QtWidgets>
-#include "Visindigo/VICore/VIAnimation.h"
-#include "VIJSAPI/VIJSGlobal.h"
+#include "VI2DGUIBase.h"
 
-class VITextLabel : public QLabel
+class VITextLabel : public VI2DGUILabel
 {
 	Q_OBJECT
 public:
 	VITextAnimation* Animation;
 	VIOpacityAnimation* OpacityAnimation;
-	VIAnimationEventProcess* Process;
-	QWidget* Parent;
-	bool Wait = false;
-	bool SKIP = false;
-	bool FINISH = false;
-	QGraphicsOpacityEffect* Opacity;
-	float px, py, pw, ph;
 public:
-	VITextLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) {
-		Process = AniParent;
-		Parent = WidgetParent;
-		px = 0.1; py = 0.4; pw = 0.8; ph = 0.2;
-		this->setParent(WidgetParent);
-		this->setObjectName("VIText");
+	VITextLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent):VI2DGUILabel(WidgetParent, AniParent) {
 		this->setWordWrap(true);
-		Opacity = new QGraphicsOpacityEffect(this);
-		this->setGraphicsEffect(Opacity);
-		Opacity->setOpacity(1);
+		this->setObjectName("VIText");
 		Animation = new VITextAnimation(this);
 		OpacityAnimation = new VIOpacityAnimation(this);
 		BIND(Animation, SIGNAL(getText(QString)), this, SLOT(getText(QString)));

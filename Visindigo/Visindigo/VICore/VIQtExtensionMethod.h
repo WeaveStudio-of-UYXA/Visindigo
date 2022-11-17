@@ -6,7 +6,7 @@ class VIQtExtMethod :public QObject
 {
 	Q_OBJECT
 public:
-	static QString QSSExtension(QString QSS, QWidget* widget) {
+	static QString QSSExtensionAUTOPR(QString QSS, QWidget* widget) {
 		while (true) {
 			if (QSS.contains("AUTO_") && QSS.contains("_PR")) {
 				int Index_b = QSS.indexOf("AUTO_");

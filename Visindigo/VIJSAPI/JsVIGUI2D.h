@@ -70,6 +70,7 @@ namespace JsVI {
 			emit SsetGeometry(xp, yp, wp, hp);
 		}
 	};
+
 	class VIGUI2D :public QObject
 	{
 		Q_OBJECT
