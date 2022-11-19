@@ -1,16 +1,27 @@
-# Visindigo 前言
+# 前言和授权
 
-Visindigo这个仓库，除去操作Git错误导致重建之外，前前后后建了又删删了又建四次。Weave Studio和Studio Indigo作出的官方回复一直说Visindigo大概年底见的事情。不过现在我的评价是几乎不可能。
+Visindigo是Yayin Story Player的下一代程序，旨在提供纯文本（纯代码）描述的简单平面呈现与交互框架。
 
-Visindigo的初始概念太完美了，完美到完全超出我的编程能力和学习能力，所以每次建了又删就代表着一次设计失败的Visindigo架构。
+**Yayin Story Player**是Ayano Aishi提出构想，Tsing Yayin独立开发的应用程序。
 
-反正我现在是想开了，我不需要一开始弄那么复杂，所以我们现在再次重头开始，希望能给所有关注cYSP和Visindigo项目的人带来新的惊喜。
+**Visindigo**是Tsing Yayin主要开发的应用程序。 
 
-# Visindigo 参考文档
+此项目完全开源且使用GPLv3授权，一切基于本程序的二次开发（包括扩展程序本体和编写VIJS程序）必须亦完全开源并使用GPLv3授权。本项目使用的授权许可证随时有可能变更，请用户自行关注当前许可证情况。
+
+# 参考文档
 
 [单击跳转到参考文档](https://www.yuque.com/tsingyayin/visindigo)
 
-# Visindigo 源码编译
+
+# 源代码贡献
+如果您希望增加或修改Visindigo程序中的功能，请Fork本仓库，在修改完毕后提交Pull请求。
+
+请注意：
+* Visindigo主要C++内容只接受含有Qt、STL的源代码，请勿引入任何其他库，例如OpenCV、Windows API，boost等，如果必须引入，请将该库中未能跨平台的部分重新用Qt实现。（例如您如果希望引入Spine之类的东西，您应该取得Spine的全部C++源代码，并将部分内容改为Qt实现）
+* Visindigo Installer主要C++内容允许引入其他第三方库。
+* JsVI API指的是由Visindigo程序提供的JavaScript API，VIJs API指的是直接由JavaScript实现的API，您可以自由扩展VIJs API，只要您写的这些扩展能够在JSVI主机上面运行。
+
+# 源码编译
 **请注意，如果您需要获得发行版本的源码，您应该去StudioIndigo的另外一个仓库，叫做[VisindigoRelease](https://github.com/StudioIndigo-of-CYXIO/VisindigoRelease)，本仓库内的源码是代表最新开发内容的源码，可能含有不稳定因素。**
 ## 编译Windows版本（Windows_x86_64）
   * 安装Visual Studio 2022，勾选有关C++的内容和有关桌面开发的内容
