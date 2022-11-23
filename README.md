@@ -1,17 +1,37 @@
-# Visindigo 前言
+# 前言和授权
 
-Visindigo这个仓库，除去操作Git错误导致重建之外，前前后后建了又删删了又建四次。Weave Studio和Studio Indigo作出的官方回复一直说Visindigo大概年底见的事情。不过现在我的评价是几乎不可能。
+Visindigo是Yayin Story Player的下一代程序，旨在提供纯文本（纯代码）描述的简单平面呈现与交互框架。
 
-Visindigo的初始概念太完美了，完美到完全超出我的编程能力和学习能力，所以每次建了又删就代表着一次设计失败的Visindigo架构。
+**Yayin Story Player**是Ayano Aishi提出构想，Tsing Yayin独立开发的应用程序。
 
-反正我现在是想开了，我不需要一开始弄那么复杂，所以我们现在再次重头开始，希望能给所有关注cYSP和Visindigo项目的人带来新的惊喜。
+**Visindigo**是Tsing Yayin主要开发的应用程序。 
 
-# Visindigo 参考文档
+此项目完全开源且使用GPLv3授权，一切基于本程序的二次开发（包括扩展程序本体和编写VIJS程序）必须亦完全开源并使用GPLv3授权。本项目使用的授权许可证随时有可能变更，请用户自行关注当前许可证情况。
+
+# 参考文档
 
 [单击跳转到参考文档](https://www.yuque.com/tsingyayin/visindigo)
 
-# Visindigo 源码编译
-**请注意，如果您需要获得发行版本的源码，您应该去StudioIndigo的另外一个仓库，叫做VisindigoRelease，本仓库内的源码是代表最新开发内容的源码，可能含有不稳定因素。**
+# 致谢
+
+Visindigo是框架型应用程序，为了向用户讲解如何使用这样的框架，我们必须向用户使用现成的例子进行讲解。鉴于Visindigo的特殊性，我们在例子中大量参考了《明日方舟》中的素材、文案与设计效果，这些内容的版权均归鹰角网络所有，感谢《明日方舟》的好故事为所有在看此文的各位带来了创作的热情与欲望。
+
+Visindigo认为Qt是当今C++中最出色的库，Visindigo大量特性，尤其是JSVI主机依赖于Qt实现，如果没有Qt，Visindigo还有很多很多弯路要走。
+
+Visindigo感谢万维工作室（Weave Studio）的各位同学协助了软件的开发，青雅音本人水平不高，如果没有这些同学的帮助与引导，无法进行Visindigo的开发。
+
+Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭策，如果没有这些同学细致广泛的运用YSP，发现其中的问题，就不会有Visindigo软件的提出与实现。由于我们最初希望的仍然是类似于视觉小说框架之类的东西，所以我们最初的名字是Yayin Visual Story，考虑到Indigo可以作为靛青解释，与本人的姓氏一致，故而使软件得名为Visindigo，译为“流清”。
+
+# 源代码贡献
+如果您希望增加或修改Visindigo程序中的功能，请Fork本仓库，在修改完毕后提交Pull请求。
+
+请注意：
+* Visindigo主要C++内容只接受含有Qt、STL的源代码，请勿引入任何其他库，例如OpenCV、Windows API，boost等，如果必须引入，请将该库中未能跨平台的部分重新用Qt实现。（例如您如果希望引入Spine之类的东西，您应该取得Spine的全部C++源代码，并将部分内容改为Qt实现）
+* Visindigo Installer主要C++内容允许引入其他第三方库。
+* JsVI API指的是由Visindigo程序提供的JavaScript API，VIJs API指的是直接由JavaScript实现的API，您可以自由扩展VIJs API，只要您写的这些扩展能够在JSVI主机上面运行。
+
+# 源码编译
+**请注意，如果您需要获得发行版本的源码，您应该去StudioIndigo的另外一个仓库，叫做[VisindigoRelease](https://github.com/StudioIndigo-of-CYXIO/VisindigoRelease)，本仓库内的源码是代表最新开发内容的源码，可能含有不稳定因素。**
 ## 编译Windows版本（Windows_x86_64）
   * 安装Visual Studio 2022，勾选有关C++的内容和有关桌面开发的内容
     * 不需要勾选和移动设备开发有关的内容
