@@ -32,12 +32,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;quickwidgets;quick;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;qml;multimedia;widgets;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;quickwidgets;quick;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -117,6 +117,7 @@
     <QtMoc Include="VIJSAPI\JsVISystem.h" />
     <ClInclude Include="Global.h" />
     <QtMoc Include="VIJSAPI\JsVIYSP.h" />
+    <QtMoc Include="VIJSAPI\HostExceptionUI.h" />
     <ClInclude Include="VIJSAPI\JsVIGUI2DBase.h" />
     <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
@@ -132,6 +133,9 @@
     <ClInclude Include="VIUI\VIPlayerWidget.h" />
     <QtMoc Include="VIUI\MRW\VisindigoRuntime.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Visindigo\VI3D\NewFile.qml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

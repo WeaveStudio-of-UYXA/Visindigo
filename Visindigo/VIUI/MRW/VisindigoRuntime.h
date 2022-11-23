@@ -5,14 +5,8 @@
 #include "VIGUI2D.h"
 #include "MRWGlobal.h"
 #include "VIJSAPI/VIJSHost.h"
-class VI3DWidget :public QWidget
-{
-	Q_OBJECT
-public:
-	VI3DWidget(QWidget* parent = Q_NULLPTR) :QWidget(parent) {
-		qDebug() << "We hope there will be finished soon.";
-	}
-};
+
+
 class VICentralWidget :public QWidget
 {
 	Q_OBJECT
@@ -23,12 +17,13 @@ public:
 public:
 	VICentralWidget(QWidget* parent, VIAnimationEventProcess* process) :QWidget(parent) {
 		Process = process;
-		Widget3D = new VI3DWidget(this);
+		//Widget3D = new VI3DWidget(this);
 		GUI2D = new VIGUI2DWidget(this, Process);
 	}
 	void resizeEvent(QResizeEvent* event) {
+		//Widget3D->resize(this->size());
 		GUI2D->resize(this->size());
-		Widget3D->resize(this->size());
+		
 	}
 };
 

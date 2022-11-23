@@ -96,5 +96,13 @@
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="VIJSAPI\HostExceptionUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Visindigo\VI3D\NewFile.qml">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
