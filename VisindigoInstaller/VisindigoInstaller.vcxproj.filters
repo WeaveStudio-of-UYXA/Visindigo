@@ -27,4 +27,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="UI\Installer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UI\ProgramPin.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="API\FileMetaData.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
 </Project>
