@@ -6,21 +6,14 @@ class VITextLabel : public VI2DGUILabel
 	Q_OBJECT
 public:
 	VITextAnimation* Animation;
-	VIOpacityAnimation* OpacityAnimation;
 public:
 	VITextLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) :VI2DGUILabel(WidgetParent, AniParent) {
 		this->setWordWrap(true);
 		this->setObjectName("VIText");
 		Animation = new VITextAnimation(this);
-		OpacityAnimation = new VIOpacityAnimation(this);
 		BIND(Animation, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
-		BIND(OpacityAnimation, SIGNAL(getOpacity(float)), this, SLOT(changeOpacity(float)));
-		BIND(Animation, SIGNAL(done(bool)), this, SLOT(ifWait(bool)));
-		BIND(OpacityAnimation, SIGNAL(done(bool)), this, SLOT(ifWait(bool)));
+		BIND_DONE(Animation);
 		Animation->setAnimationProcess(Process);
-		OpacityAnimation->setAnimationProcess(Process);
-		connect(Parent, SIGNAL(mousePressed()), this, SLOT(skipOrJumpAni()));
-
 		this->setAlignment(Qt::AlignLeft);
 		this->setGeometry(QRect(0, 0, 500, 60));
 		this->show();
@@ -48,13 +41,7 @@ public slots:
 	void getText(QString text) {
 		this->setText(text);
 	}
-	void setOpacityAni(float start, float end, int ms, bool wait) {
-		OpacityAnimation->setOpacity(start, end, ms, wait);
-		OpacityAnimation->active();
-	}
-	void changeOpacity(float op) {
-		this->Opacity->setOpacity(op);
-	}
+
 	void skipOrJumpAni() {
 		if (SKIP && !FINISH) {
 			Process->finishEvent(Animation);
@@ -65,24 +52,8 @@ public slots:
 			SKIP = true;
 		}
 	}
-	void ifWait(bool Wait) {
-		if (Wait) {
-			VIJSHostWake;
-		}
-	}
 	void setAlign(Qt::AlignmentFlag flag) {
 		this->setAlignment(flag);
-	}
-	void setGeometryPercent(float px, float py, float pw, float ph) {
-		this->px = px;
-		this->py = py;
-		this->pw = pw;
-		this->ph = ph;
-		this->resizeEvent();
-	}
-	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
-		this->setGeometry(QRect(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->height() * ph));
-		this->setStyleSheet("QLabel#VIText{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:30px;}");
 	}
 };
 
@@ -95,12 +66,6 @@ public:
 public:
 	VIPictureLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) :VI2DGUILabel(WidgetParent, AniParent) {
 		this->setObjectName("VIText");
-		OpacityAnimation = new VIOpacityAnimation(this);
-		BIND(OpacityAnimation, SIGNAL(getOpacity(float)), this, SLOT(changeOpacity(float)));
-		BIND(OpacityAnimation, SIGNAL(done(bool)), this, SLOT(ifWait(bool)));
-		OpacityAnimation->setAnimationProcess(Process);
-		connect(Parent, SIGNAL(mousePressed()), this, SLOT(skipOrJumpAni()));
-
 		this->setAlignment(Qt::AlignCenter);
 		this->setGeometry(QRect(0, 0, 500, 60));
 		this->show();
@@ -117,13 +82,6 @@ public slots:
 		this->setGeometry(QRect(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->height() * ph));
 		this->setStyleSheet("QLabel#VIText{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:30px;}");
 	}
-	void setOpacityAni(float start, float end, int ms, bool wait) {
-		OpacityAnimation->setOpacity(start, end, ms, wait);
-		OpacityAnimation->active();
-	}
-	void changeOpacity(float op) {
-		this->Opacity->setOpacity(op);
-	}
 	void skipOrJumpAni() {
 		if (SKIP && !FINISH) {
 			Process->finishEvent(OpacityAnimation);
@@ -134,19 +92,7 @@ public slots:
 			SKIP = true;
 		}
 	}
-	void ifWait(bool Wait) {
-		if (Wait) {
-			VIJSHostWake;
-		}
-	}
 	void setAlign(Qt::AlignmentFlag flag) {
 		this->setAlignment(flag);
-	}
-	void setGeometryPercent(float px, float py, float pw, float ph) {
-		this->px = px;
-		this->py = py;
-		this->pw = pw;
-		this->ph = ph;
-		this->resizeEvent();
 	}
 };

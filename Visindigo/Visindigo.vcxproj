@@ -118,7 +118,7 @@
     <ClInclude Include="Global.h" />
     <QtMoc Include="VIJSAPI\JsVIYSP.h" />
     <QtMoc Include="VIJSAPI\HostExceptionUI.h" />
-    <ClInclude Include="VIJSAPI\JsVIGUI2DBase.h" />
+    <QtMoc Include="VIJSAPI\JsVIGUI2DBase.h" />
     <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
     <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />

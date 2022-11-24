@@ -58,9 +58,6 @@
     <ClInclude Include="Visindigo\VICore\VIMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIJSAPI\JsVIGUI2DBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h">
@@ -100,6 +97,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIJSAPI\JsVIGUI2DBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

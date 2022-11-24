@@ -1,34 +1,25 @@
 ﻿#pragma once
-#include <QtQml>
-#include "VIJSGlobal.h"
-#include "VIUI/MRW/GUI2D/VI2DGUI.h"
+#include "JsVIGUI2DBase.h"
 #include "VIUI/MRW/VIGUI2D.h"
-#include "Global.h"
 
 namespace JsVI {
-	class TextLabel :public QObject
+	class TextLabel :public GUI2DLabel
 	{
 		Q_OBJECT
-	public:
-		VITextLabel* GUILabel;
+			JsVI_INVOKE(VITextLabel)
 	signals:
 		void StextNonlinerProgress(VIMath::VI2DMatrix mat);
 		void newTextLabel(VITextLabel**);
-		void SsetText(QString, int, int, bool);
-		void ScontinueText(QString, int, int, bool);
 		void SsetAlignment(Qt::AlignmentFlag);
-		void SsetGeometry(float, float, float, float);
-		void SsetOpacity(float, float, int, bool);
 	public:
-		TextLabel(QObject* parent, VIGUI2DWidget* gui) :QObject(parent) {
+		TextLabel(QObject* parent, VIGUI2DWidget* gui) {
 			BIND(this, SIGNAL(newTextLabel(VITextLabel**)), gui, SLOT(newVITextLabel(VITextLabel**)));
-			emit newTextLabel(&GUILabel);
-			BIND(this, SIGNAL(StextNonlinerProgress(VIMath::VI2DMatrix)), GUILabel, SLOT(textNonlinerProgress(VIMath::VI2DMatrix)));
-			BIND(this, SIGNAL(SsetText(QString, int, int, bool)), GUILabel, SLOT(setTextAni(QString, int, int, bool)));
-			BIND(this, SIGNAL(ScontinueText(QString, int, int, bool)), GUILabel, SLOT(continueTextAni(QString, int, int, bool)));
-			BIND(this, SIGNAL(SsetAlignment(Qt::AlignmentFlag)), GUILabel, SLOT(setAlign(Qt::AlignmentFlag)));
-			BIND(this, SIGNAL(SsetGeometry(float, float, float, float)), GUILabel, SLOT(setGeometryPercent(float, float, float, float)));
-			BIND(this, SIGNAL(SsetOpacity(float, float, int, bool)), GUILabel, SLOT(setOpacityAni(float, float, int, bool)));
+			emit newTextLabel(&JsVIGUI);
+			__init__(parent, (VI2DGUILabel*)JsVIGUI);
+			BIND(this, SIGNAL(StextNonlinerProgress(VIMath::VI2DMatrix)), JsVIGUI, SLOT(textNonlinerProgress(VIMath::VI2DMatrix)));
+			BIND(this, SIGNAL(SsetText(QString, int, int, bool)), JsVIGUI, SLOT(setTextAni(QString, int, int, bool)));
+			BIND(this, SIGNAL(ScontinueText(QString, int, int, bool)), JsVIGUI, SLOT(continueTextAni(QString, int, int, bool)));
+			BIND(this, SIGNAL(SsetAlignment(Qt::AlignmentFlag)), JsVIGUI, SLOT(setAlign(Qt::AlignmentFlag)));
 		}
 	public slots:
 		void textNonlinerProgress(QList<QList<float>> mat) {
@@ -40,17 +31,13 @@ namespace JsVI {
 			}
 			emit StextNonlinerProgress(rtn);
 		}
-		void setText(QString str, int mspt = 100, int msw = 1500, bool waitForAnimation = true) {
+		SSDEF(setText, QString str, int mspt = 100, int msw = 1500, bool waitForAnimation = true) {
 			emit SsetText(str, mspt, msw, waitForAnimation);
 			if (waitForAnimation) { VIJSHostWait; }
 		}
-		void continueText(QString str, int mspt = 100, int msw = 1500, bool wFA = true) {
+		SSDEF(continueText, QString str, int mspt = 100, int msw = 1500, bool wFA = true) {
 			emit ScontinueText(str, mspt, msw, wFA);
 			if (wFA) { VIJSHostWait; }
-		}
-		void setOpacity(float start, float end, int ms, bool wait = false) {
-			emit SsetOpacity(start, end, ms, wait);
-			if (wait) { VIJSHostWait; }
 		}
 		void setAlignment(QString align) {
 			if (align == "C") {
@@ -65,9 +52,6 @@ namespace JsVI {
 			else {
 				emit SsetAlignment(Qt::AlignLeft);
 			}
-		}
-		void setGeometry(float xp, float yp, float wp, float hp) {
-			emit SsetGeometry(xp, yp, wp, hp);
 		}
 	};
 
