@@ -9,17 +9,15 @@ namespace JsVI {
 			JsVI_INVOKE(VITextLabel)
 	signals:
 		void StextNonlinerProgress(VIMath::VI2DMatrix mat);
-		void newTextLabel(VITextLabel**);
 		void SsetAlignment(Qt::AlignmentFlag);
 	public:
-		TextLabel(QObject* parent, VIGUI2DWidget* gui) {
-			BIND(this, SIGNAL(newTextLabel(VITextLabel**)), gui, SLOT(newVITextLabel(VITextLabel**)));
-			emit newTextLabel(&JsVIGUI);
-			__init__(parent, (VI2DGUILabel*)JsVIGUI);
+		TextLabel(JsVIGUI_PARA) {
+			JsVI_NewFrom(VITextLabel);
+			JsVI_INIT;
 			BIND(this, SIGNAL(StextNonlinerProgress(VIMath::VI2DMatrix)), JsVIGUI, SLOT(textNonlinerProgress(VIMath::VI2DMatrix)));
-			BIND(this, SIGNAL(SsetText(QString, int, int, bool)), JsVIGUI, SLOT(setTextAni(QString, int, int, bool)));
-			BIND(this, SIGNAL(ScontinueText(QString, int, int, bool)), JsVIGUI, SLOT(continueTextAni(QString, int, int, bool)));
 			BIND(this, SIGNAL(SsetAlignment(Qt::AlignmentFlag)), JsVIGUI, SLOT(setAlign(Qt::AlignmentFlag)));
+			JsVI_AniBIND(setText, QString, int, int, bool);
+			JsVI_AniBIND(continueText, QString, int, int, bool);
 		}
 	public slots:
 		void textNonlinerProgress(QList<QList<float>> mat) {
@@ -31,13 +29,13 @@ namespace JsVI {
 			}
 			emit StextNonlinerProgress(rtn);
 		}
-		SSDEF(setText, QString str, int mspt = 100, int msw = 1500, bool waitForAnimation = true) {
-			emit SsetText(str, mspt, msw, waitForAnimation);
-			if (waitForAnimation) { VIJSHostWait; }
+		SSDEF(setText, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
+			emit SsetText(str, mspt, msw, wait);
+			JsVI_WAIT(wait);
 		}
-		SSDEF(continueText, QString str, int mspt = 100, int msw = 1500, bool wFA = true) {
-			emit ScontinueText(str, mspt, msw, wFA);
-			if (wFA) { VIJSHostWait; }
+		SSDEF(continueText, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
+			emit ScontinueText(str, mspt, msw, wait);
+			JsVI_WAIT(wait);
 		}
 		void setAlignment(QString align) {
 			if (align == "C") {

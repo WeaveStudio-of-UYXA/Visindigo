@@ -1,9 +1,15 @@
 ﻿#pragma once
 #include "VIUI/MRW/GUI2D/VI2DGUIBase.h"
 #include "VIJSGlobal.h"
+#include "JsVIBase.h"
 #define SSDEF(funcName,...) Q_SIGNALS: void S##funcName(__VA_ARGS__);public Q_SLOTS:void funcName(__VA_ARGS__)
-#define JsVI_INVOKE(VIGUI) public: VIGUI* GUILabel;
 #define JsVIGUI GUILabel
+#define JsVIGUI_PARA QObject* parent, VIGUI2DWidget* gui
+#define JsVI_INVOKE(VIGUI) public: VIGUI* GUILabel; Q_SIGNALS: void newGUILabel(VIGUI**);
+#define JsVI_NewFrom(type) BIND(this, SIGNAL(newGUILabel(type**)), gui, SLOT(new##type(type**))); emit newGUILabel(&JsVIGUI);
+#define JsVI_INIT __init__(parent, (VI2DGUILabel*)JsVIGUI);
+#define JsVI_WAIT(para) if (para) { VIJSHostWait; }
+#define JsVI_AniBIND(func, ...) BIND(this, SIGNAL(S##func(__VA_ARGS__)), JsVIGUI, SLOT(func##Ani(__VA_ARGS__)));
 namespace JsVI {
 	class GUI2DLabel :public QObject
 	{

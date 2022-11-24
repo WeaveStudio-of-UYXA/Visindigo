@@ -107,6 +107,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="init.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="VIJSAPI\VIJSGlobal.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
@@ -119,6 +120,8 @@
     <QtMoc Include="VIJSAPI\JsVIYSP.h" />
     <QtMoc Include="VIJSAPI\HostExceptionUI.h" />
     <QtMoc Include="VIJSAPI\JsVIGUI2DBase.h" />
+    <ClInclude Include="init.h" />
+    <ClInclude Include="VIJSAPI\JsVIBase.h" />
     <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
     <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />
