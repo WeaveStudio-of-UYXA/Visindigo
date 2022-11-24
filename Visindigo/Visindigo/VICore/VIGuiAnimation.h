@@ -67,7 +67,8 @@ public:
 	float getProgress() {
 		if (NonlinearProgress) {
 			return NonlinearPercentage;
-		}else{
+		}
+		else {
 			return Percentage;
 		}
 	}

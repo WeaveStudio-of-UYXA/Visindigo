@@ -62,7 +62,7 @@ namespace JsVI {
 			else if (align == "R") {
 				emit SsetAlignment(Qt::AlignRight);
 			}
-			else{
+			else {
 				emit SsetAlignment(Qt::AlignLeft);
 			}
 		}

@@ -23,7 +23,7 @@ public:
 		LMS = 0;
 		SKIPED = false;
 	}
-	void setText(QString text) {
+		void setText(QString text) {
 		this->Text = text;
 		this->setMaxMsec(Text.length() * MSPT + MSW);
 		Char = Text.begin();
@@ -70,7 +70,6 @@ public:
 	float OPEnd;
 	float OPDelta;
 	VIOpacityAnimation INIT{
-
 	}
 	void setOpacity(float begin, float end, int ms, bool wait) {
 		OPBegin = begin;
@@ -110,7 +109,6 @@ public:
 	QSize End;
 	QSize Delta;
 	VIResizeAnimation INIT{
-
 	}
 	void setSize(QSize begin, QSize end, int ms, bool wait) {
 		Begin = begin;
@@ -167,7 +165,7 @@ public:
 			qDebug() << i->x << i->y;
 		}
 	}
-	void event() {
+		void event() {
 		VIMath::VIVector2 trans = VIBessel::getBesselValue(coe, Percentage);
 		qDebug() << trans.x << trans.y;
 	}

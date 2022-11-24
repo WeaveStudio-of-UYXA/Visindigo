@@ -6,7 +6,6 @@
 #include "MRWGlobal.h"
 #include "VIJSAPI/VIJSHost.h"
 
-
 class VICentralWidget :public QWidget
 {
 	Q_OBJECT
@@ -23,7 +22,6 @@ public:
 	void resizeEvent(QResizeEvent* event) {
 		//Widget3D->resize(this->size());
 		GUI2D->resize(this->size());
-		
 	}
 };
 

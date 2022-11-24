@@ -99,6 +99,9 @@
     <QtMoc Include="VIJSAPI\HostExceptionUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="Visindigo\VI3D\NewFile.qml">

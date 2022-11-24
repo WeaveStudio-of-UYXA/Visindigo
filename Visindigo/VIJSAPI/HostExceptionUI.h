@@ -11,6 +11,5 @@ class JSVIExceptionLabel :public VI2DGUILabel
 	Q_OBJECT
 public:
 	JSVIExceptionLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) :VI2DGUILabel(WidgetParent, AniParent) {
-		
 	}
 };

@@ -9,7 +9,6 @@ namespace JsVI {
 		VIYSP() {}
 	public slots:
 		void init() {
-			
 		}
 	};
 }

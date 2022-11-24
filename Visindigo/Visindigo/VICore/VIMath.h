@@ -2,7 +2,7 @@
 #include <QtCore>
 #include <list>
 namespace VIMath {
-	struct VIVector2 
+	struct VIVector2
 	{
 		float x;
 		float y;
@@ -39,7 +39,7 @@ public:
 		return ret;
 	}
 	static VIMath::VIVector2 getBesselValue(VIMath::VI2DMatrix BesselCoefficient, float p) {
-		VIMath::VIVector2 ret = {0, 0};
+		VIMath::VIVector2 ret = { 0, 0 };
 		int n = BesselCoefficient.length() - 1;
 		int m = 0;
 		for (auto i = BesselCoefficient.begin(); i != BesselCoefficient.end(); i++) {

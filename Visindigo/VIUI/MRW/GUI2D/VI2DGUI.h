@@ -8,7 +8,7 @@ public:
 	VITextAnimation* Animation;
 	VIOpacityAnimation* OpacityAnimation;
 public:
-	VITextLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent):VI2DGUILabel(WidgetParent, AniParent) {
+	VITextLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) :VI2DGUILabel(WidgetParent, AniParent) {
 		this->setWordWrap(true);
 		this->setObjectName("VIText");
 		Animation = new VITextAnimation(this);
@@ -20,7 +20,7 @@ public:
 		Animation->setAnimationProcess(Process);
 		OpacityAnimation->setAnimationProcess(Process);
 		connect(Parent, SIGNAL(mousePressed()), this, SLOT(skipOrJumpAni()));
-		
+
 		this->setAlignment(Qt::AlignLeft);
 		this->setGeometry(QRect(0, 0, 500, 60));
 		this->show();
@@ -93,7 +93,7 @@ public:
 	VIOpacityAnimation* OpacityAnimation;
 	QImage Image;
 public:
-	VIPictureLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent):VI2DGUILabel(WidgetParent, AniParent) {
+	VIPictureLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) :VI2DGUILabel(WidgetParent, AniParent) {
 		this->setObjectName("VIText");
 		OpacityAnimation = new VIOpacityAnimation(this);
 		BIND(OpacityAnimation, SIGNAL(getOpacity(float)), this, SLOT(changeOpacity(float)));
