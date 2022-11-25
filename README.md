@@ -50,3 +50,19 @@ Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭�
   * 将您的安卓设备接入计算机，并启用ADB
   * 直接运行项目
   * 不要用此方法尝试编译Android或任何其他平台（包括Windows_arm）的Visindigo Installer，因为服务器只提供Windows_x86版本的文件，Installer只检查Windows_x86的文件
+
+# 部署Visindigo
+## Windows_x86_64
+* 在完成编译工作后，使用qt的MSVC 2019工具对生成文件运行`windeployqt`命令，如果仍未能运行程序，可以从Qt安装目录的`bin`文件夹下找到相关文件
+  
+## Android
+* 项目编译完后即在您的安装设备自动部署。但您可能需要手动在设置中开启各项程序权限。  
+
+# 运行Visindigo项目开发工具（仅限Windows）
+* 确保您的计算机上拥有`Python3.8`（或与之兼容的更高版本）
+* 确保您的Python有PySide2库，如果没有，您应该使用Pypi进行安装，在您的控制台执行以下命令：
+  ```
+  pip install pyside2
+  ```
+* 使用Visual Studio Code打开此项目文件夹，确保您的Visual Studio Code可以正常访问您的Python环境
+* 直接运行项目即可
