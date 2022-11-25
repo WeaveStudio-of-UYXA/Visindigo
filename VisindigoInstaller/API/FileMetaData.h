@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QtCore>
-
+//问问工作室这玩意是不是应该加入CommonEdit而不是在这里待着
 namespace API {
 	class FileMetaData :public QObject
 	{
@@ -45,9 +45,9 @@ namespace API {
 			Dir.setFilter(QDir::Files | QDir::NoSymLinks);
 			QFileInfoList list = Dir.entryInfoList();
 			Dir.setFilter(QDir::NoFilter);
-			foreach(QString subDir, Dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
-				//若存在子目录，则递归调用sizeOf函数
+			foreach(QString subDir, Dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
 				list += getAllFilesInFolder(FolderPath + QDir::separator() + subDir);
+			}
 			return list;
 		}
 		static MetaDataList getAllFilesMD5FromFolder(QString FolderPath) {
@@ -85,7 +85,8 @@ namespace API {
 				Line = Text.readLine();
 				QStringList List = Line.split("||");
 				qDebug() << List;
-				MetaList.append(MetaData{ List[1],List[0] }); //注意：文档保存顺序是FileName-MD5，与构造正好相反
+				MetaList.append(MetaData{ List[1],List[0] }); 
+				//注意：metaData和changeData文档对于meta的保存顺序是FileName-MD5，与构造正好相反
 			}
 			File.close();
 			return MetaList;
