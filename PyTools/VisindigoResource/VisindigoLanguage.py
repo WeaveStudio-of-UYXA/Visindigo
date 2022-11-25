@@ -48,6 +48,7 @@ class CELanguageCreator(QWidget):
         this.Data.setHorizontalHeaderLabels(["Key","Raw","Translation"])
         this.Data.appendRow([QStandardItem("CE_Init_Hello_World"), QStandardItem("Hello world!"), QStandardItem("你好，世界！")])
         this.setWindowTitle("CommonEdit Language Creator - New Project")
+        
     def loadRawFile(this):
         fileName, _ = QFileDialog.getOpenFileName(this, "Open Raw File", "", "CommonEdit Language File (*.celang)")
         if fileName:

@@ -1,0 +1,39 @@
+﻿QLabel#YSPSpeak{
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+QLabel#YSPChara{
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+QLabel#YSPFree{
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+QLabel#YSPButton{
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 5px;
+}

@@ -141,6 +141,12 @@
   <ItemGroup>
     <None Include="Visindigo\VI3D\NewFile.qml" />
   </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resource.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\QSS\YSPStyleSheet.qss" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
