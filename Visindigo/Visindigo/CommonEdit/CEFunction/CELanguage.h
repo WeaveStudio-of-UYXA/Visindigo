@@ -5,12 +5,12 @@
 #define FALSE false
 #endif
 
-#define CEL_TR CELanguage->returnValueOf
+//This macro is used by CommonEdit Language Creator.
+//CELC will ignore the "raw string" after CEL_TR that contains CELC_ESCAPE macro.
+#define CELC_ESCAPE
+#define CEL_TR(str) CE::CELanguage::Instance->returnValueOf(str)
 #define CEL_VERSION 3
 
-//This macro is used by CommonEdit Language Creator.
-//CELC will ignore the "raw string" after CEL_TR that contains this macro.
-#define CELC_ESCAPE
 namespace CE{
     class CELanguage :public QObject {
         Q_OBJECT
@@ -20,6 +20,7 @@ namespace CE{
         QMap<QString, QString> TransDict = {};
         QString DirPath = "";
     public:
+        static CELanguage* Instance;
         CELanguage(QString FilePath = "") {
             DirPath = FilePath;
         }
@@ -70,7 +71,9 @@ namespace CE{
                 return Key;
             }
         }
+        void test() {
+            CEL_TR("ATest");
+        }
     };
 }
 
-CE::CELanguage* CELanguage;

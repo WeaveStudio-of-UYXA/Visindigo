@@ -3,10 +3,13 @@
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
+import os
 
 class CELanguageCreator(QWidget):
     CurrentLayout:QGridLayout
     NewCELProjectButton:QPushButton
+    GetCEKeyFromCppProject:QPushButton
+    GetCEKeyFromPythonProject:QPushButton
     LoadRawFileButton:QPushButton
     LoadTranslationFileButton:QPushButton
     SaveTranslationFileButton:QPushButton
@@ -22,11 +25,15 @@ class CELanguageCreator(QWidget):
         this.LoadTranslationFileButton = QPushButton("Load Translation File", this)
         this.SaveTranslationFileButton = QPushButton("Save Translation File", this)
         this.SaveRawFileButton = QPushButton("Save Raw File", this)
+        this.GetCEKeyFromCppProject = QPushButton("Get Key From C++ Project", this)
+        this.GetCEKeyFromPythonProject = QPushButton("Get Key From Python Project", this)
         this.NewCELProjectButton.clicked.connect(this.newCELProject)
         this.LoadRawFileButton.clicked.connect(this.loadRawFile)
         this.LoadTranslationFileButton.clicked.connect(this.loadTranslationFile)
         this.SaveTranslationFileButton.clicked.connect(this.saveTranslationFile)
         this.SaveRawFileButton.clicked.connect(this.saveRawFile)
+        this.GetCEKeyFromCppProject.clicked.connect(this.getCEKeyFromCppProject)
+        this.GetCEKeyFromPythonProject.clicked.connect(this.getCEKeyFromPythonProject)
         this.EditWidget = QTableView(this)
         this.Data = QStandardItemModel(this)
         this.EditWidget.setModel(this.Data)
@@ -37,7 +44,9 @@ class CELanguageCreator(QWidget):
         this.CurrentLayout.addWidget(this.SaveTranslationFileButton, 0, 2, 1, 1)
         this.CurrentLayout.addWidget(this.NewCELProjectButton, 1, 0, 1, 1)
         this.CurrentLayout.addWidget(this.SaveRawFileButton, 1, 1, 1, 1)
-        this.CurrentLayout.addWidget(this.EditWidget, 2, 0, 1, 3)
+        this.CurrentLayout.addWidget(this.GetCEKeyFromCppProject, 1, 2, 1, 1)
+        this.CurrentLayout.addWidget(this.GetCEKeyFromPythonProject, 1, 3, 1, 1)
+        this.CurrentLayout.addWidget(this.EditWidget, 2, 0, 1, 4)
 
     def newCELProject(this):
         if this.Data.rowCount() > 0:
@@ -101,4 +110,50 @@ class CELanguageCreator(QWidget):
             with open(fileName, "w", encoding="utf-8") as f:
                 for i in range(this.Data.rowCount()):
                     f.write(this.Data.item(i, 0).text() + ":" + this.Data.item(i, 1).text() + "\n" )
+
+    def getCEKeyFromCppProject(this):
+        folderName = QFileDialog.getExistingDirectory(this, "Open C++ Project Folder")
+        if folderName:
+            #if data is not empty, create a warning dialog
+            if this.Data.rowCount() > 0:
+                if QMessageBox.warning(this, "Warning", "Data is not empty, are you sure to continue?", QMessageBox.Yes | QMessageBox.No) == QMessageBox.No:
+                    return
+            # clear data
+            this.Data.clear()
+            this.Data.setHorizontalHeaderLabels(["Key","Raw","Translation"])
+            for root, dirs, files in os.walk(folderName):
+                for file in files:
+                    if file.endswith((".cpp", ".h")):
+                        with open(os.path.join(root, file), "r", encoding="utf-8") as f:
+                            for line in f.readlines():
+                                if ("CEL_TR(" in line ) and ("CELC_ESCAPE" not in line) and ("#" not in line):
+                                    #get string from function CEL_TR
+                                    print(file, line)
+                                    key = line.split("CEL_TR(", 1)[1].split(")", 1)[0].replace("\"","")
+                                    if key != "" and key not in [this.Data.item(i, 0).text() for i in range(this.Data.rowCount())]:
+                                        this.Data.appendRow([QStandardItem(key), QStandardItem(""), QStandardItem("")])
+            this.setWindowTitle("CommonEdit Language Creator - " + folderName)
+
+    def getCEKeyFromPythonProject(this):
+        folderName = QFileDialog.getExistingDirectory(this, "Open Python Project Folder")
+        if folderName:
+            #if data is not empty, create a warning dialog
+            if this.Data.rowCount() > 0:
+                if QMessageBox.warning(this, "Warning", "Data is not empty, are you sure to continue?", QMessageBox.Yes | QMessageBox.No) == QMessageBox.No:
+                    return
+            # clear data
+            this.Data.clear()
+            this.Data.setHorizontalHeaderLabels(["Key","Raw","Translation"])
+            for root, dirs, files in os.walk(folderName):
+                for file in files:
+                    if file.endswith((".py")):
+                        with open(os.path.join(root, file), "r", encoding="utf-8") as f:
+                            for line in f.readlines():
+                                if ("msg(" in line ) and ("#CELC_ESCAPE" not in line):
+                                    #get string from function CEL_TR
+                                    print(file, line)
+                                    key = line.split("msg(", 1)[1].split(")", 1)[0].replace("\"","")
+                                    if key != "" and key not in [this.Data.item(i, 0).text() for i in range(this.Data.rowCount())]:
+                                        this.Data.appendRow([QStandardItem(key), QStandardItem(""), QStandardItem("")])
+            this.setWindowTitle("CommonEdit Language Creator - " + folderName)
         
