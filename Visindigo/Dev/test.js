@@ -4,11 +4,12 @@
     //VIGUI.showFullScreen();
     VISystem.print(VISystem.getSystemProductName());
     VISystem.print("这片大地上从来都有敢于直面天灾的勇士，他们不会因为天灾而退缩，而是会用自己的力量去拯救这片大地。");
-    var t = VIGUI.newVIText();
     var p = VIGUI.newVIPicture();
+    var t = VIGUI.newVIText();
+    p.setGeometry(0.35, 0.15, 0.3, 0.7);
     p.setPicture("./Resource/天雨.png");
-    p.setGeometry(0.1, 0.1, 0.3, 0.7);
     t.setGeometry(0.1, 0.4, 0.8, 0.2);
+    t.setStyleSheet("VITextLabel{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:30px;}")
     t.setAlignment("C");
     t.setOpacity(0, 1, 2000);
     t.setText("这片大地上从来都有敢于直面天灾的勇士。");

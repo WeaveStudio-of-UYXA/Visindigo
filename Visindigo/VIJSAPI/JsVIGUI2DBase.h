@@ -14,6 +14,8 @@ namespace JsVI {
 	class GUI2DLabel :public QObject
 	{
 		Q_OBJECT
+	signals:
+		void SsetAlignment(Qt::AlignmentFlag);
 	public:
 		VI2DGUILabel* GUIBaseLabel;
 	public:
@@ -22,6 +24,8 @@ namespace JsVI {
 			GUIBaseLabel = GUIBase;
 			BIND(this, SIGNAL(SsetGeometry(float, float, float, float)), GUIBaseLabel, SLOT(setGeometryPercent(float, float, float, float)));
 			BIND(this, SIGNAL(SsetOpacity(float, float, int, bool)), GUIBaseLabel, SLOT(setOpacityAni(float, float, int, bool)));
+			BIND(this, SIGNAL(SsetAlignment(Qt::AlignmentFlag)), GUIBaseLabel, SLOT(setAlignment(Qt::AlignmentFlag)));
+			BIND(this, SIGNAL(SsetStyleSheet(QString)), GUIBaseLabel, SLOT(setStyleSheet(QString)));
 		}
 		SSDEF(setOpacity, float start, float end, int ms, bool wait = false) {
 			emit SsetOpacity(start, end, ms, wait);
@@ -29,6 +33,23 @@ namespace JsVI {
 		}
 		SSDEF(setGeometry, float xp, float yp, float wp, float hp) {
 			emit SsetGeometry(xp, yp, wp, hp);
+		}
+		void setAlignment(QString align) {
+			if (align == "C") {
+				emit SsetAlignment(Qt::AlignCenter);
+			}
+			else if (align == "L") {
+				emit SsetAlignment(Qt::AlignLeft);
+			}
+			else if (align == "R") {
+				emit SsetAlignment(Qt::AlignRight);
+			}
+			else {
+				emit SsetAlignment(Qt::AlignLeft);
+			}
+		}
+		SSDEF(setStyleSheet, QString style) {
+			emit SsetStyleSheet(style);
 		}
 	};
 }

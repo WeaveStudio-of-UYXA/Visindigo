@@ -18,6 +18,7 @@ class VIAnimationEventProcess;
 class VIAnimationEvent : public QObject
 {
 	Q_OBJECT
+	friend class VIAnimationEventProcess;
 signals:
 	void done(bool);
 	void midwaySignal(int, float);
@@ -34,12 +35,14 @@ public:
 	virtual void event() = 0;
 	virtual void init() = 0;
 	virtual void onFinish() {};
+	VIMath::VI2DMatrix COEFF;
+protected:
 	bool ALIVE = false;
 	bool SKIP = false;
 	bool FINISH = false;
 	bool DONE = false;
 	bool NonlinearProgress = false;
-	VIMath::VI2DMatrix COEFF;
+public:
 	VIAnimationEvent(QObject* parent = Q_NULLPTR) {
 		this->setParent(parent);
 	}

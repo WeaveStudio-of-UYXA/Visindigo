@@ -3,6 +3,7 @@
 #include<QtGui>
 #include<QtWidgets>
 #include "Visindigo/VICore/VIAnimation.h"
+#include "Visindigo/VICore/VIQtExtensionMethod.h"
 #include "VIJSAPI/VIJSGlobal.h"
 #define BIND_DONE(VIAniEvent) BIND(VIAniEvent, SIGNAL(done(bool)), this, SLOT(ifWait(bool)));
 class VI2DGUILabel :public QLabel
@@ -55,6 +56,13 @@ public slots:
 	}
 	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
 		this->setGeometry(QRect(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->height() * ph));
-		this->setStyleSheet("QLabel#VIText{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:30px;}");
+		QLabel::setStyleSheet(VIQtExtMethod::QSSExtensionAUTOPR(StyleSheets, this));
+	}
+	void setStyleSheet(QString StyleSheet) {
+		this->StyleSheets = StyleSheet;
+		QLabel::setStyleSheet(VIQtExtMethod::QSSExtensionAUTOPR(StyleSheets, this));
+	}
+	void setAlignment(Qt::AlignmentFlag Align) {
+		QLabel::setAlignment(Align);
 	}
 };

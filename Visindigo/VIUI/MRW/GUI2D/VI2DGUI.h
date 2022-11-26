@@ -7,9 +7,10 @@ class VITextLabel : public VI2DGUILabel
 public:
 	VITextAnimation* Animation;
 public:
+	VITextLabel();
 	VITextLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) :VI2DGUILabel(WidgetParent, AniParent) {
 		this->setWordWrap(true);
-		this->setObjectName("VIText");
+		//this->setObjectName("VIText");
 		Animation = new VITextAnimation(this);
 		BIND(Animation, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
 		BIND_DONE(Animation);
@@ -52,37 +53,33 @@ public slots:
 			SKIP = true;
 		}
 	}
-	void setAlign(Qt::AlignmentFlag flag) {
-		this->setAlignment(flag);
-	}
 };
 
 class VIPictureLabel : public VI2DGUILabel
 {
 	Q_OBJECT
 public:
-	VIOpacityAnimation* OpacityAnimation;
 	QImage Image;
 public:
 	VIPictureLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) :VI2DGUILabel(WidgetParent, AniParent) {
-		this->setObjectName("VIText");
 		this->setAlignment(Qt::AlignCenter);
 		this->setGeometry(QRect(0, 0, 500, 60));
-		this->show();
+		
 	}
 public slots:
 	void setImage(QString path) {
 		Image.load(path);
 		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 		this->setPixmap(QPixmap::fromImage(s));
+		this->show();
 	}
 	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
+		VI2DGUILabel::resizeEvent(event);
 		if (!Image.isNull()) {
 			QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 			this->setPixmap(QPixmap::fromImage(s));
 		}
-		this->setGeometry(QRect(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->height() * ph));
-		this->setStyleSheet("QLabel#VIText{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:30px;}");
+		
 	}
 	void skipOrJumpAni() {
 		if (SKIP && !FINISH) {

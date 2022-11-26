@@ -9,13 +9,12 @@ namespace JsVI {
 			JsVI_INVOKE(VITextLabel)
 	signals:
 		void StextNonlinerProgress(VIMath::VI2DMatrix mat);
-		void SsetAlignment(Qt::AlignmentFlag);
+		
 	public:
 		TextLabel(JsVIGUI_PARA) {
 			JsVI_NewFrom(VITextLabel);
 			JsVI_INIT;
 			BIND(this, SIGNAL(StextNonlinerProgress(VIMath::VI2DMatrix)), JsVIGUI, SLOT(textNonlinerProgress(VIMath::VI2DMatrix)));
-			BIND(this, SIGNAL(SsetAlignment(Qt::AlignmentFlag)), JsVIGUI, SLOT(setAlign(Qt::AlignmentFlag)));
 			JsVI_AniBIND(setText, QString, int, int, bool);
 			JsVI_AniBIND(continueText, QString, int, int, bool);
 		}
@@ -37,20 +36,7 @@ namespace JsVI {
 			emit ScontinueText(str, mspt, msw, wait);
 			JsVI_WAIT(wait);
 		}
-		void setAlignment(QString align) {
-			if (align == "C") {
-				emit SsetAlignment(Qt::AlignCenter);
-			}
-			else if (align == "L") {
-				emit SsetAlignment(Qt::AlignLeft);
-			}
-			else if (align == "R") {
-				emit SsetAlignment(Qt::AlignRight);
-			}
-			else {
-				emit SsetAlignment(Qt::AlignLeft);
-			}
-		}
+		
 	};
 
 	class PictureLabel :public GUI2DLabel
