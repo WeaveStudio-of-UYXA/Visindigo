@@ -53,6 +53,24 @@ namespace JsVI {
 		}
 	};
 
+	class PictureLabel :public GUI2DLabel
+	{
+		Q_OBJECT
+			JsVI_INVOKE(VIPictureLabel)
+	signals:
+		void SsetImage(QString);
+	public:
+		PictureLabel(JsVIGUI_PARA) {
+			JsVI_NewFrom(VIPictureLabel);
+			JsVI_INIT;
+			BIND(this, SIGNAL(SsetImage(QString)), JsVIGUI, SLOT(setImage(QString)));
+		}
+	public slots:
+		void setPicture(QString path) {
+			emit SsetImage(VIJSGlobal::getAbsolutePathOf(path));
+		}
+	};
+
 	class VIGUI2D :public QObject
 	{
 		Q_OBJECT
@@ -76,6 +94,9 @@ namespace JsVI {
 		}
 		QJSValue newVIText() {
 			return Engine->newQObject(new TextLabel(this, GUI));
+		}
+		QJSValue newVIPicture() {
+			return Engine->newQObject(new PictureLabel(this, GUI));
 		}
 		void resize(int w, int h) {
 #if DEPLOY == WINDOWS_DEPLOY

@@ -77,8 +77,10 @@ public slots:
 		this->setPixmap(QPixmap::fromImage(s));
 	}
 	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
-		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-		this->setPixmap(QPixmap::fromImage(s));
+		if (!Image.isNull()) {
+			QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+			this->setPixmap(QPixmap::fromImage(s));
+		}
 		this->setGeometry(QRect(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->height() * ph));
 		this->setStyleSheet("QLabel#VIText{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:30px;}");
 	}

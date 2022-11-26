@@ -13,7 +13,7 @@ signals:
 	void mousePressed();
 public:
 	VI3DWidget* Widget3D;
-	QList<VITextLabel*> Label;
+	QList<VI2DGUILabel*> Label;
 	QLabel* DebugInfoLabel;
 	VIAnimationEventProcess* Process;
 	VIGUI2DWidget(QWidget* parent, VIAnimationEventProcess* process) :QWidget(parent) {
@@ -30,6 +30,10 @@ public:
 public slots:
 	void newVITextLabel(VITextLabel** p) {
 		*p = new VITextLabel(this, Process);
+		Label.append(*p);
+	}
+	void newVIPictureLabel(VIPictureLabel** p) {
+		*p = new VIPictureLabel(this, Process);
 		Label.append(*p);
 	}
 	void setFrame(float frame) {

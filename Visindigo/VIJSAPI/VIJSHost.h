@@ -29,6 +29,9 @@ public slots:
 		VIJSGlobal::VIJSMutex.lock();
 		int RTN = 0;
 		qDebug() << filename;
+		QFileInfo fileInfo(filename);
+		VIJSGlobal::Path = fileInfo.absolutePath();
+		qDebug() << VIJSGlobal::Path;
 		QJSValue Main = Engine->importModule(filename);
 		QJSValue MainFuncation = Main.property("main");
 		QJSValue result = MainFuncation.call();
