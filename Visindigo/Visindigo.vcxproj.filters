@@ -122,6 +122,7 @@
     <None Include="Visindigo\VI3D\NewFile.qml">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Resource\Language\zh_CN.celang" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource.qrc">

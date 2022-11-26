@@ -141,6 +141,7 @@
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resource\Language\zh_CN.celang" />
     <None Include="Visindigo\VI3D\NewFile.qml" />
   </ItemGroup>
   <ItemGroup>

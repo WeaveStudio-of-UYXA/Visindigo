@@ -14,6 +14,28 @@ Visindigo是Yayin Story Player的下一代程序，旨在提供纯文本（纯�
 
 [单击跳转到参考文档](https://www.yuque.com/tsingyayin/visindigo)
 
+# 问题反馈和国际化 Feedback & i18n
+
+此项目维护时采用中文进行交流（无论是简体中文或者繁体中文），如果您的母语不是中文，您应该采用双语进行沟通。
+
+我们希望您首先用您的母语进行表达，之后再附上对应的中文翻译。如果您不能自己将其译为中文，您可以考虑采用翻译引擎，例如Bing，Baidu，Google等。
+
+我们的回复也会遵循类似顺序，我们会首先用您的母语进行回复，这一回复是由翻译引擎翻译自中文的，在这之后我们会附上中文原文。
+
+This project is maintained in Chinese (either simplified Chinese or traditional Chinese). If your mother tongue is not Chinese, you should communicate in bilingual.
+
+We hope you will first express in your native language, and then attach the corresponding Chinese translation. If you cannot translate it into Chinese yourself, you can consider using translation engines, such as Bing, Baidu, Google, etc.
+
+Our reply will follow a similar order. We will reply in your native language first. This reply is translated from Chinese by the translation engine. After that, we will attach the original Chinese text.
+
+關於此軟體內的多語言翻譯問題，我們希望有各個語種的用戶能做出貢獻，如果後續確有此需要，我們會指出需要被翻譯的內容。
+
+With regard to multilingual translation in this software, we hope that users of all languages can contribute. If this is really necessary in the future, we will point out what needs to be translated.
+
+このソフトウェア内の多言語翻訳の問題については、各言語のユーザーが貢献することを期待しています。もしその後、この必要があれば、翻訳される必要がある内容を指摘します。
+
+이 소프트웨어 내의 다국어 번역 문제에 관하여, 우리는 각 언어의 사용자가 공헌할 수 있기를 희망하며, 만약 후속으로 확실히 이러한 수요가 있다면, 우리는 번역되어야 할 내용을 지적할 것이다.
+
 # 致谢
 
 Visindigo是框架型应用程序，为了向用户讲解如何使用这样的框架，我们使用了现成的例子进行讲解——鉴于Visindigo的特殊性，我们在例子中大量参考了《明日方舟》中的素材、文案与设计效果，这些内容的版权均归鹰角网络所有，感谢《明日方舟》的好故事为所有在看此文的各位带来了创作的热情与欲望。
