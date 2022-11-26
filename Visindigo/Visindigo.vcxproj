@@ -110,6 +110,7 @@
     <ClCompile Include="init.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="VIJSAPI\VIJSGlobal.cpp" />
+    <ClCompile Include="Visindigo\CommonEdit\CEFunction\CELanguage.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
   </ItemGroup>
@@ -125,6 +126,7 @@
     <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
     <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />
+    <QtMoc Include="Visindigo\CommonEdit\CEFunction\CELanguage.h" />
     <ClInclude Include="Visindigo\VICore\VIMath.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h" />
     <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h" />
@@ -145,7 +147,7 @@
     <QtRcc Include="Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\QSS\YSPStyleSheet.qss" />
+    <Text Include="Resource\QSS\YSPStyleSheet.css" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

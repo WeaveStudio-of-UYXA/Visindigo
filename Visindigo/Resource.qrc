@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/Visindigo">
         <file>Resource/Visindigo.png</file>
-        <file>Resource/QSS/YSPStyleSheet.qss</file>
+        <file>Resource/QSS/YSPStyleSheet.css</file>
     </qresource>
 </RCC>
