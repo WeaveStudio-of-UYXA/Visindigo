@@ -46,6 +46,7 @@ public slots:
 	}
 	void setOpacity(float op) {
 		this->Opacity->setOpacity(op);
+		qDebug() << op;
 	}
 	void setGeometryPercent(float px, float py, float pw, float ph) {
 		this->px = px;

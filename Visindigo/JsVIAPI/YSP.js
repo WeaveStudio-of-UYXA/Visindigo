@@ -10,7 +10,7 @@ class YSPTitlePage{
         this.BG.setGeometry(0, 0, 1, 1);
         this.BlackBG.fillColor(0, 0, 0);
         this.BlackBG.setGeometry(0, 0, 1, 1);
-        this.BlackBG.setOpacity(0, 0, 1);
+        this.BlackBG.setOpacity(0);
         this.Logo.setGeometry(0.367, 0.222, 0.472, 0.472);
         this.Title.setGeometry(0, 0.4, 1, 0.085);
         this.Title.setAlignment("M");
@@ -30,6 +30,15 @@ class YSPTitlePage{
         this.BG.show();
         this.BlackBG.show();
         this.Logo.show();
+        this.Title.show();
+        this.SubTitle.show();
+    }
+    hide(){
+        this.BG.hide();
+        this.BlackBG.hide();
+        this.Logo.hide();
+        this.Title.hide();
+        this.SubTitle.hide();
     }
     setBG(path){
         this.BG.setPicture(path);
@@ -42,6 +51,17 @@ class YSPTitlePage{
     }
     setLogo(path){
         this.Logo.setPicture(path);
+    }
+    doAnimation(){
+        this.show();
+        VISystem.wait(5000);
+        this.BlackBG.setOpacityAni(0, 1, 1000, true);
+        this.BlackBG.setOpacity(1);
+        this.Logo.setOpacityAni(1, 0, 1000);
+        this.Title.setOpacityAni(1, 0, 1000);
+        this.SubTitle.setOpacityAni(1, 0, 1000);
+        VISystem.wait(1000);
+        this.hide();
     }
 }
 class YSPStoryPage{
@@ -58,9 +78,17 @@ class YSPStoryPage{
     }
 }
 
-class SPOL9{
+export default class SPOL9{
     constructor(){
         this.Title = new YSPTitlePage();
+        this.Story = new YSPStoryPage();
+    }
+    title(title, subtitle, logo, bg){
+        this.Title.setBG(bg);
+        this.Title.setTitle(title);
+        this.Title.setSubTitle(subtitle);
+        this.Title.setLogo(logo);
+        this.Title.doAnimation();
     }
 }
 

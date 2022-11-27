@@ -18,10 +18,10 @@ namespace JsVI {
 			JsVI_BIND_SAME(setTextAni, JsVIGUI, QString, int, int, bool);
 			JsVI_BIND_SAME(continueTextAni, JsVIGUI, QString, int, int, bool);
 			JsVI_BIND_SAME(setText, JsVIGUI, QString);
-			for (int i = this->metaObject()->methodCount(); i > 0; i--) {
+			/*for (int i = this->metaObject()->methodCount(); i > 0; i--) {
 				QMetaMethod method = this->metaObject()->method(i);
 				qDebug() << method.typeName() << method.methodSignature();
-			}
+			}*/
 		}
 	public slots:
 		void textNonlinerProgress(QList<QList<float>> mat) {

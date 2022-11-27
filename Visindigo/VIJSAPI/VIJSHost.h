@@ -33,6 +33,8 @@ public slots:
 		VIJSGlobal::Path = fileInfo.absolutePath();
 		qDebug() << VIJSGlobal::Path;
 		QJSValue Main = Engine->importModule(filename);
+		QJSValue YSPModule = Engine->importModule(":/Visindigo/JsVIAPI/YSP.js");
+		Engine->globalObject().setProperty("YSP", YSPModule);
 		QJSValue MainFuncation = Main.property("main");
 		QJSValue result = MainFuncation.call();
 		if (result.isError()) {

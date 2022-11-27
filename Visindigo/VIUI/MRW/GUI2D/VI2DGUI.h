@@ -75,7 +75,7 @@ public slots:
 		this->setPixmap(QPixmap::fromImage(s));
 	}
 	void fillColor(int r, int g, int b, int a) {
-		QImage Image(this->x(), this->y(), QImage::Format_ARGB32);
+		Image = QImage(this->width(), this->height(), QImage::Format_ARGB32);
 		Image.fill(QColor(r, g, b, a));
 		this->setPixmap(QPixmap::fromImage(Image));
 	}
