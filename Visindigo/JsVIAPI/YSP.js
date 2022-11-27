@@ -4,6 +4,7 @@ class YSPTitlePage{
         this.BG = VIGUI.newVIPicture();
         this.BlackBG = VIGUI.newVIPicture();
         this.Logo = VIGUI.newVIPicture();
+        this.Head = VIGUI.newVIText();
         this.Title = VIGUI.newVIText();
         this.SubTitle = VIGUI.newVIText();
 
@@ -11,13 +12,19 @@ class YSPTitlePage{
         this.BlackBG.fillColor(0, 0, 0);
         this.BlackBG.setGeometry(0, 0, 1, 1);
         this.BlackBG.setOpacity(0);
-        this.Logo.setGeometry(0.367, 0.222, 0.472, 0.472);
-        this.Title.setGeometry(0, 0.4, 1, 0.085);
+        this.Logo.move(0.35, 0.222);
+        this.Logo.resizeWidthAndRatio(0.3, 1);
+        this.Logo.setAlignment("M");
+        this.Head.setGeometry(0, 0.33, 1, 0.06);
+        this.Head.setAlignment("M");
+        this.Head.setStyleSheet("VITextLabel{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
+        this.Head.setText("Visindigo SPOL"); 
+        this.Title.setGeometry(0, 0.4, 1, 0.137);
         this.Title.setAlignment("M");
-        this.Title.setStyleSheet("VITextLabel{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_98_PR;}");
-        this.SubTitle.setGeometry(0, 0.5, 1, 0.055);
+        this.Title.setStyleSheet("VITextLabel{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
+        this.SubTitle.setGeometry(0, 0.5, 1, 0.09);
         this.SubTitle.setAlignment("M");
-        this.SubTitle.setStyleSheet("VITextLabel{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_98_PR;}");
+        this.SubTitle.setStyleSheet("VITextLabel{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
     }
     raise(){
         this.BG.raise();
@@ -77,7 +84,6 @@ class YSPStoryPage{
         this.FreeLabel = VIGUI.newVIText();
     }
 }
-
 export default class SPOL9{
     constructor(){
         this.Title = new YSPTitlePage();

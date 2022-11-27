@@ -18,6 +18,7 @@ public:
 	QGraphicsOpacityEffect* Opacity;
 	VIOpacityAnimation* OpacityAnimation;
 	float px, py, pw, ph;
+	bool wToh = false;
 	QString StyleSheets;
 	VI2DGUILabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) {
 		Parent = WidgetParent;
@@ -54,9 +55,15 @@ public slots:
 		this->pw = pw;
 		this->ph = ph;
 		this->resizeEvent();
+		this->wToh = false;
 	}
 	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
-		this->setGeometry(QRect(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->height() * ph));
+		if (wToh) {
+			this->setGeometry(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->width() * ph);
+		}
+		else {
+			this->setGeometry(Parent->width() * px, Parent->height() * py, Parent->width() * pw, Parent->height() * ph);
+		}
 		QLabel::setStyleSheet(VIQtExtMethod::QSSExtensionAUTOPR(StyleSheets, this));
 	}
 	void setStyleSheet(QString StyleSheet) {
@@ -65,5 +72,22 @@ public slots:
 	}
 	void setAlignment(Qt::AlignmentFlag Align) {
 		QLabel::setAlignment(Align);
+	}
+	void movePercent(float px, float py) {
+		this->px = px;
+		this->py = py;
+		this->move(Parent->width() * px, Parent->height() * py);
+	}
+	void resizePercent(float pw, float ph) {
+		this->pw = pw;
+		this->ph = ph;
+		this->resize(Parent->width() * pw, Parent->height() * ph);
+		this->wToh = false;
+	}
+	void resizeWidthAndRatio(float pw, float pwtoph) {
+		this->pw = pw;
+		this->ph = pw * pwtoph;
+		this->resize(Parent->width() * pw, Parent->width() * ph);
+		this->wToh = true;
 	}
 };

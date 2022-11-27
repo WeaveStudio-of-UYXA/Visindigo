@@ -26,6 +26,10 @@ namespace JsVI {
 			this->setParent(parent);
 			GUIBaseLabel = GUIBase;
 			BIND(this, SIGNAL(SsetGeometry(float, float, float, float)), GUIBaseLabel, SLOT(setGeometryPercent(float, float, float, float)));
+			BIND(this, SIGNAL(Sresize(float, float)), GUIBaseLabel, SLOT(resizePercent(float, float)));
+			BIND(this, SIGNAL(Smove(float, float)), GUIBaseLabel, SLOT(movePercent(float, float)));
+			JsVI_BIND_SAME(resizeWidthAndRatio, GUIBaseLabel, float, float);
+			JsVI_BIND_SAME(resizeHeightAndRatio, GUIBaseLabel, float, float);
 			JsVI_BIND_SAME(setOpacityAni, GUIBaseLabel, float, float, int, bool);
 			JsVI_BIND_SAME(setAlignment, GUIBaseLabel, Qt::AlignmentFlag);
 			JsVI_BIND_SAME(setStyleSheet, GUIBaseLabel, QString);
@@ -60,6 +64,18 @@ namespace JsVI {
 		}
 		SSDEF(setStyleSheet, QString style) {
 			emit SsetStyleSheet(style);
+		}
+		SSDEF(move, float px, float py) {
+			emit Smove(px, py);
+		}
+		SSDEF(resize, float pw, float ph) {
+			emit Sresize(pw, ph);
+		}
+		SSDEF(resizeWidthAndRatio, float pw, float wToh) {
+			emit SresizeWidthAndRatio(pw, wToh);
+		}
+		SSDEF(resizeHeightAndRatio, float ph, float hTow) {
+			emit SresizeHeightAndRatio(ph, hTow);
 		}
 		SSDEF_SA_VOID(raise);
 		SSDEF_SA_VOID(show);
