@@ -15,8 +15,13 @@ namespace JsVI {
 			JsVI_NewFrom(VITextLabel);
 			JsVI_INIT;
 			BIND(this, SIGNAL(StextNonlinerProgress(VIMath::VI2DMatrix)), JsVIGUI, SLOT(textNonlinerProgress(VIMath::VI2DMatrix)));
-			JsVI_AniBIND(setText, QString, int, int, bool);
-			JsVI_AniBIND(continueText, QString, int, int, bool);
+			JsVI_BIND_SAME(setTextAni, JsVIGUI, QString, int, int, bool);
+			JsVI_BIND_SAME(continueTextAni, JsVIGUI, QString, int, int, bool);
+			JsVI_BIND_SAME(setText, JsVIGUI, QString);
+			for (int i = this->metaObject()->methodCount(); i > 0; i--) {
+				QMetaMethod method = this->metaObject()->method(i);
+				qDebug() << method.typeName() << method.methodSignature();
+			}
 		}
 	public slots:
 		void textNonlinerProgress(QList<QList<float>> mat) {
@@ -28,13 +33,16 @@ namespace JsVI {
 			}
 			emit StextNonlinerProgress(rtn);
 		}
-		SSDEF(setText, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
-			emit SsetText(str, mspt, msw, wait);
+		SSDEF(setTextAni, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
+			emit SsetTextAni(str, mspt, msw, wait);
 			JsVI_WAIT(wait);
 		}
-		SSDEF(continueText, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
-			emit ScontinueText(str, mspt, msw, wait);
+		SSDEF(continueTextAni, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
+			emit ScontinueTextAni(str, mspt, msw, wait);
 			JsVI_WAIT(wait);
+		}
+		SSDEF(setText, QString str) {
+			emit SsetText(str);
 		}
 		
 	};
@@ -45,15 +53,20 @@ namespace JsVI {
 			JsVI_INVOKE(VIPictureLabel)
 	signals:
 		void SsetImage(QString);
+		void SfillColor(int, int, int, int);
 	public:
 		PictureLabel(JsVIGUI_PARA) {
 			JsVI_NewFrom(VIPictureLabel);
 			JsVI_INIT;
 			BIND(this, SIGNAL(SsetImage(QString)), JsVIGUI, SLOT(setImage(QString)));
+			BIND(this, SIGNAL(SfillColor(int, int, int, int)), JsVIGUI, SLOT(fillColor(int, int, int, int)));
 		}
 	public slots:
 		void setPicture(QString path) {
 			emit SsetImage(VIJSGlobal::getAbsolutePathOf(path));
+		}
+		void fillColor(int r, int g, int b, int a = 255) {
+			emit SfillColor(r, g, b, a);
 		}
 	};
 
@@ -65,8 +78,6 @@ namespace JsVI {
 		void Sresize(int, int);
 		void SsetGeometry(int, int, int, int);
 		void SsetStyleSheet(QString);
-		void SshowFullScreen();
-		void SenableGUIFrame();
 	public:
 		VIGUI2DWidget* GUI;
 		QJSEngine* Engine;
@@ -75,9 +86,7 @@ namespace JsVI {
 			Engine = engine;
 		}
 	public slots:
-		void enableGUIFrame() {
-			emit SenableGUIFrame();
-		}
+		SSDEF_SA_VOID(enableGUIFrame);
 		QJSValue newVIText() {
 			return Engine->newQObject(new TextLabel(this, GUI));
 		}
@@ -100,8 +109,6 @@ namespace JsVI {
 		void setWindowTitle(QString title) {
 			emit SsetWindowTitle(title);
 		}
-		void showFullScreen() {
-			emit SshowFullScreen();
-		}
+		SSDEF_SA_VOID(showFullScreen);
 	};
 }

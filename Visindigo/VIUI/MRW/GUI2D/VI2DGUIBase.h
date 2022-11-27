@@ -27,7 +27,7 @@ public:
 		OpacityAnimation = new VIOpacityAnimation(this);
 		this->setGraphicsEffect(Opacity);
 		Opacity->setOpacity(1);
-		BIND(OpacityAnimation, SIGNAL(getOpacity(float)), this, SLOT(changeOpacity(float)));
+		BIND(OpacityAnimation, SIGNAL(getOpacity(float)), this, SLOT(setOpacity(float)));
 		BIND_DONE(OpacityAnimation);
 		OpacityAnimation->setAnimationProcess(Process);
 		connect(Parent, SIGNAL(mousePressed()), this, SLOT(skipOrJumpAni()));
@@ -44,7 +44,7 @@ public slots:
 		OpacityAnimation->setOpacity(start, end, ms, wait);
 		OpacityAnimation->active();
 	}
-	void changeOpacity(float op) {
+	void setOpacity(float op) {
 		this->Opacity->setOpacity(op);
 	}
 	void setGeometryPercent(float px, float py, float pw, float ph) {

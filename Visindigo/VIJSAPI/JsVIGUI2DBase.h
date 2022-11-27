@@ -10,6 +10,9 @@
 #define JsVI_INIT __init__(parent, (VI2DGUILabel*)JsVIGUI);
 #define JsVI_WAIT(para) if (para) { VIJSHostWait; }
 #define JsVI_AniBIND(func, ...) BIND(this, SIGNAL(S##func(__VA_ARGS__)), JsVIGUI, SLOT(func##Ani(__VA_ARGS__)));
+#define SSDEF_SA_VOID(funcName) SSDEF(funcName){ emit S##funcName();}
+#define JsVI_BIND_SAME(funcName, Target, ...) BIND(this, SIGNAL(S##funcName(__VA_ARGS__)), Target, SLOT(funcName(__VA_ARGS__)));
+#define JsVI_BIND_SAME_VOID(funcName, Target) JsVI_BIND_SAME(funcName, Target);
 namespace JsVI {
 	class GUI2DLabel :public QObject
 	{
@@ -23,19 +26,26 @@ namespace JsVI {
 			this->setParent(parent);
 			GUIBaseLabel = GUIBase;
 			BIND(this, SIGNAL(SsetGeometry(float, float, float, float)), GUIBaseLabel, SLOT(setGeometryPercent(float, float, float, float)));
-			BIND(this, SIGNAL(SsetOpacity(float, float, int, bool)), GUIBaseLabel, SLOT(setOpacityAni(float, float, int, bool)));
-			BIND(this, SIGNAL(SsetAlignment(Qt::AlignmentFlag)), GUIBaseLabel, SLOT(setAlignment(Qt::AlignmentFlag)));
-			BIND(this, SIGNAL(SsetStyleSheet(QString)), GUIBaseLabel, SLOT(setStyleSheet(QString)));
+			JsVI_BIND_SAME(setOpacityAni, GUIBaseLabel, float, float, int, bool);
+			JsVI_BIND_SAME(setAlignment, GUIBaseLabel, Qt::AlignmentFlag);
+			JsVI_BIND_SAME(setStyleSheet, GUIBaseLabel, QString);
+			JsVI_BIND_SAME(setOpacity, GUIBaseLabel, float);
+			JsVI_BIND_SAME_VOID(raise, GUIBaseLabel);
+			JsVI_BIND_SAME_VOID(show, GUIBaseLabel);
+			JsVI_BIND_SAME_VOID(hide, GUIBaseLabel);
 		}
-		SSDEF(setOpacity, float start, float end, int ms, bool wait = false) {
-			emit SsetOpacity(start, end, ms, wait);
+		SSDEF(setOpacityAni, float start, float end, int ms, bool wait = false) {
+			emit SsetOpacityAni(start, end, ms, wait);
 			if (wait) { VIJSHostWait; }
+		}
+		SSDEF(setOpacity, float op) {
+			emit SsetOpacity(op);
 		}
 		SSDEF(setGeometry, float xp, float yp, float wp, float hp) {
 			emit SsetGeometry(xp, yp, wp, hp);
 		}
 		void setAlignment(QString align) {
-			if (align == "C") {
+			if (align == "C" || align == "M") {
 				emit SsetAlignment(Qt::AlignCenter);
 			}
 			else if (align == "L") {
@@ -51,5 +61,8 @@ namespace JsVI {
 		SSDEF(setStyleSheet, QString style) {
 			emit SsetStyleSheet(style);
 		}
+		SSDEF_SA_VOID(raise);
+		SSDEF_SA_VOID(show);
+		SSDEF_SA_VOID(hide);
 	};
 }

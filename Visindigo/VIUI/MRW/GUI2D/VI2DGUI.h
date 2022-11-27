@@ -23,6 +23,9 @@ public slots:
 	void textNonlinerProgress(VIMath::VI2DMatrix mat) {
 		Animation->enableNonlinearProgress(mat);
 	}
+	void setText(QString text) {
+		QLabel::setText(text);
+	}
 	void setTextAni(QString text, int mspt, int msw, bool wait) {
 		Animation->setSpeed(mspt);
 		Animation->setWait(msw);
@@ -40,9 +43,8 @@ public slots:
 		Animation->active();
 	}
 	void getText(QString text) {
-		this->setText(text);
+		QLabel::setText(text);
 	}
-
 	void skipOrJumpAni() {
 		if (SKIP && !FINISH) {
 			Process->finishEvent(Animation);
@@ -71,7 +73,11 @@ public slots:
 		Image.load(path);
 		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 		this->setPixmap(QPixmap::fromImage(s));
-		this->show();
+	}
+	void fillColor(int r, int g, int b, int a) {
+		QImage Image(this->x(), this->y(), QImage::Format_ARGB32);
+		Image.fill(QColor(r, g, b, a));
+		this->setPixmap(QPixmap::fromImage(Image));
 	}
 	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
 		VI2DGUILabel::resizeEvent(event);
@@ -79,7 +85,6 @@ public slots:
 			QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 			this->setPixmap(QPixmap::fromImage(s));
 		}
-		
 	}
 	void skipOrJumpAni() {
 		if (SKIP && !FINISH) {
