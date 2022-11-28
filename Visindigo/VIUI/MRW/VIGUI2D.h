@@ -14,15 +14,12 @@ signals:
 public:
 	VI3DWidget* Widget3D;
 	QList<VI2DGUILabel*> Label;
-	QLabel* DebugInfoLabel;
+	
 	VIAnimationEventProcess* Process;
 	VIGUI2DWidget(QWidget* parent, VIAnimationEventProcess* process) :QWidget(parent) {
 		Widget3D = new VI3DWidget(this);
 		Process = process;
-		DebugInfoLabel = new QLabel(this);
-		DebugInfoLabel->setObjectName("DebugInfo");
-		DebugInfoLabel->setStyleSheet("QLabel#DebugInfo{font-size:30px;color:#0CDB23;font-family:'Microsoft YaHei'}");
-		DebugInfoLabel->resize(200, 30);
+		
 	}
 	void mousePressEvent(QMouseEvent* event) {
 		emit mousePressed();
@@ -35,9 +32,6 @@ public slots:
 	void newVIPictureLabel(VIPictureLabel** p) {
 		*p = new VIPictureLabel(this, Process);
 		Label.append(*p);
-	}
-	void setFrame(float frame) {
-		DebugInfoLabel->setText(QString::number(frame) + " EPPS");
 	}
 	void resizeEvent(QResizeEvent* event) {
 		for (auto i = Label.begin(); i != Label.end(); i++) {

@@ -13,15 +13,24 @@ public:
 	VI3DWidget* Widget3D;
 	VIGUI2DWidget* GUI2D;
 	VIAnimationEventProcess* Process;
+	QLabel* DebugInfoLabel;
 public:
 	VICentralWidget(QWidget* parent, VIAnimationEventProcess* process) :QWidget(parent) {
 		Process = process;
 		//Widget3D = new VI3DWidget(this);
 		GUI2D = new VIGUI2DWidget(this, Process);
+		DebugInfoLabel = new QLabel(this);
+		DebugInfoLabel->setObjectName("DebugInfo");
+		DebugInfoLabel->setStyleSheet("QLabel#DebugInfo{font-size:30px;color:#0CDB23;font-family:'Microsoft YaHei'}");
+		DebugInfoLabel->resize(200, 30);
 	}
 	void resizeEvent(QResizeEvent* event) {
 		//Widget3D->resize(this->size());
 		GUI2D->resize(this->size());
+	}
+public slots:
+	void setFrame(float frame) {
+		DebugInfoLabel->setText(QString::number(frame) + " EPPS");
 	}
 };
 
@@ -76,6 +85,6 @@ public slots:
 		qDebug() << output;
 	}
 	void enableGUIFrame() {
-		connect(Process, SIGNAL(currentFrame(float)), CentralWidget->GUI2D, SLOT(setFrame(float)), Qt::UniqueConnection);
+		connect(Process, SIGNAL(currentFrame(float)), CentralWidget, SLOT(setFrame(float)), Qt::UniqueConnection);
 	}
 };

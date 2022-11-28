@@ -13,6 +13,8 @@
 #define SSDEF_SA_VOID(funcName) SSDEF(funcName){ emit S##funcName();}
 #define JsVI_BIND_SAME(funcName, Target, ...) BIND(this, SIGNAL(S##funcName(__VA_ARGS__)), Target, SLOT(funcName(__VA_ARGS__)));
 #define JsVI_BIND_SAME_VOID(funcName, Target) JsVI_BIND_SAME(funcName, Target);
+#define JsVI_CONNECT_SAME(funcName, Target, ...) connect(this, SIGNAL(S##funcName(__VA_ARGS__)), Target, SLOT(funcName(__VA_ARGS__)));
+#define JsVI_CONNECT_SAME_VOID(funcName, Target) JsVI_CONNECT_SAME(funcName, Target);
 namespace JsVI {
 	class GUI2DLabel :public QObject
 	{
@@ -29,14 +31,13 @@ namespace JsVI {
 			BIND(this, SIGNAL(Sresize(float, float)), GUIBaseLabel, SLOT(resizePercent(float, float)));
 			BIND(this, SIGNAL(Smove(float, float)), GUIBaseLabel, SLOT(movePercent(float, float)));
 			JsVI_BIND_SAME(resizeWidthAndRatio, GUIBaseLabel, float, float);
-			JsVI_BIND_SAME(resizeHeightAndRatio, GUIBaseLabel, float, float);
 			JsVI_BIND_SAME(setOpacityAni, GUIBaseLabel, float, float, int, bool);
 			JsVI_BIND_SAME(setAlignment, GUIBaseLabel, Qt::AlignmentFlag);
 			JsVI_BIND_SAME(setStyleSheet, GUIBaseLabel, QString);
 			JsVI_BIND_SAME(setOpacity, GUIBaseLabel, float);
-			JsVI_BIND_SAME_VOID(raise, GUIBaseLabel);
-			JsVI_BIND_SAME_VOID(show, GUIBaseLabel);
-			JsVI_BIND_SAME_VOID(hide, GUIBaseLabel);
+			JsVI_CONNECT_SAME_VOID(raise, GUIBaseLabel);
+			JsVI_CONNECT_SAME_VOID(show, GUIBaseLabel);
+			JsVI_CONNECT_SAME_VOID(hide, GUIBaseLabel);
 		}
 		SSDEF(setOpacityAni, float start, float end, int ms, bool wait = false) {
 			emit SsetOpacityAni(start, end, ms, wait);
@@ -73,9 +74,6 @@ namespace JsVI {
 		}
 		SSDEF(resizeWidthAndRatio, float pw, float wToh) {
 			emit SresizeWidthAndRatio(pw, wToh);
-		}
-		SSDEF(resizeHeightAndRatio, float ph, float hTow) {
-			emit SresizeHeightAndRatio(ph, hTow);
 		}
 		SSDEF_SA_VOID(raise);
 		SSDEF_SA_VOID(show);

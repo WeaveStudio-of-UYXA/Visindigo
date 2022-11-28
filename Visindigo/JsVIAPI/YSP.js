@@ -29,21 +29,25 @@ class YSPTitlePage{
     raise(){
         this.BG.raise();
         this.BlackBG.raise();
+        this.Head.raise();
         this.Logo.raise();
         this.Title.raise();
         this.SubTitle.raise();
     }
     show(){
+        this.Head.show();
+        this.Title.show();
+        this.SubTitle.show();
         this.BG.show();
         this.BlackBG.show();
         this.Logo.show();
-        this.Title.show();
-        this.SubTitle.show();
+        
     }
     hide(){
         this.BG.hide();
         this.BlackBG.hide();
         this.Logo.hide();
+        this.Head.hide();
         this.Title.hide();
         this.SubTitle.hide();
     }

@@ -17,7 +17,6 @@ public:
 		Animation->setAnimationProcess(Process);
 		this->setAlignment(Qt::AlignLeft);
 		this->setGeometry(QRect(0, 0, 500, 60));
-		this->show();
 	}
 public slots:
 	void textNonlinerProgress(VIMath::VI2DMatrix mat) {
