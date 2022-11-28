@@ -8,7 +8,8 @@ public:
 	static QString getAbsolutePathOf(QString path) {
 		if (path.startsWith("./")) {
 			return path.replace("./", Path + "/");
-		}else{
+		}
+		else {
 			return path;
 		}
 	}

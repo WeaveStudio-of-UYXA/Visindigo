@@ -65,7 +65,6 @@ public:
 	VIPictureLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) :VI2DGUILabel(WidgetParent, AniParent) {
 		this->setAlignment(Qt::AlignCenter);
 		this->setGeometry(QRect(0, 0, 500, 60));
-		
 	}
 public slots:
 	void setImage(QString path) {

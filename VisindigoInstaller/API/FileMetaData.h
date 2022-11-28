@@ -66,7 +66,7 @@ namespace API {
 				return;
 			}
 			for (auto i = MetaDataList.begin(); i != MetaDataList.end(); ++i) {
-				File.write(i->FilePath.toUtf8() +"||"+ i->MD5.toUtf8() + "\n");
+				File.write(i->FilePath.toUtf8() + "||" + i->MD5.toUtf8() + "\n");
 			}
 			File.close();
 		}
@@ -85,7 +85,7 @@ namespace API {
 				Line = Text.readLine();
 				QStringList List = Line.split("||");
 				qDebug() << List;
-				MetaList.append(MetaData{ List[1],List[0] }); 
+				MetaList.append(MetaData{ List[1],List[0] });
 				//注意：metaData和changeData文档对于meta的保存顺序是FileName-MD5，与构造正好相反
 			}
 			File.close();
@@ -102,7 +102,7 @@ namespace API {
 				auto j = MetaListLatest.begin();
 				int d = 0;
 				while (true) {
-					if ((* i).FilePath == ( * j).FilePath) {
+					if ((*i).FilePath == (*j).FilePath) {
 						if ((*i).MD5 != (*j).MD5) {
 							rtn.append(ChangeData{ ChangeState::Update, (*j) });
 						}
@@ -113,7 +113,7 @@ namespace API {
 					d++;
 					if (j == MetaListLatest.end()) {
 						rtn.append(ChangeData{ ChangeState::Delete, (*i) });
-						break; 
+						break;
 					}
 				}
 			}

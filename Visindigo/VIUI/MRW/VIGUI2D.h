@@ -14,12 +14,11 @@ signals:
 public:
 	VI3DWidget* Widget3D;
 	QList<VI2DGUILabel*> Label;
-	
+
 	VIAnimationEventProcess* Process;
 	VIGUI2DWidget(QWidget* parent, VIAnimationEventProcess* process) :QWidget(parent) {
 		Widget3D = new VI3DWidget(this);
 		Process = process;
-		
 	}
 	void mousePressEvent(QMouseEvent* event) {
 		emit mousePressed();

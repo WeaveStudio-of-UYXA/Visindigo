@@ -16,7 +16,7 @@ public:
 	QLabel* DescriptionLabel;
 	QGridLayout* CurrentLayout;
 public:
-	ProgramPin(QWidget* parent):QWidget(parent) {
+	ProgramPin(QWidget* parent) :QWidget(parent) {
 		LogoLabel = new QLabel(this);
 		NameLabel = new QLabel(this);
 		VersionLabel = new QLabel(this);
@@ -27,4 +27,3 @@ public:
 		DeleteButton = new QPushButton(this);
 	}
 };
-

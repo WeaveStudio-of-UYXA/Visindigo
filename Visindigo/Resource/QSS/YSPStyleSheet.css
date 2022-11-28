@@ -1,4 +1,4 @@
-﻿QLabel#YSPSpeak{
+﻿QLabel#YSPSpeak {
     font-family: "Microsoft YaHei";
     font-size: 12px;
     color: #FFFFFF;
@@ -8,7 +8,7 @@
     padding: 5px;
 }
 
-QLabel#YSPChara{
+QLabel#YSPChara {
     font-family: "Microsoft YaHei";
     font-size: 12px;
     color: #FFFFFF;
@@ -18,7 +18,7 @@ QLabel#YSPChara{
     padding: 5px;
 }
 
-QLabel#YSPFree{
+QLabel#YSPFree {
     font-family: "Microsoft YaHei";
     font-size: 12px;
     color: #FFFFFF;
@@ -28,7 +28,7 @@ QLabel#YSPFree{
     padding: 5px;
 }
 
-QLabel#YSPButton{
+QLabel#YSPButton {
     font-family: "Microsoft YaHei";
     font-size: 12px;
     color: #FFFFFF;

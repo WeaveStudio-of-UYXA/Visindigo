@@ -18,7 +18,7 @@ class VIAnimationEventProcess;
 class VIAnimationEvent : public QObject
 {
 	Q_OBJECT
-	friend class VIAnimationEventProcess;
+		friend class VIAnimationEventProcess;
 signals:
 	void done(bool);
 	void midwaySignal(int, float);

@@ -9,7 +9,7 @@ namespace JsVI {
 			JsVI_INVOKE(VITextLabel)
 	signals:
 		void StextNonlinerProgress(VIMath::VI2DMatrix mat);
-		
+
 	public:
 		TextLabel(JsVIGUI_PARA) {
 			JsVI_NewFrom(VITextLabel);
@@ -44,7 +44,6 @@ namespace JsVI {
 		SSDEF(setText, QString str) {
 			emit SsetText(str);
 		}
-		
 	};
 
 	class PictureLabel :public GUI2DLabel

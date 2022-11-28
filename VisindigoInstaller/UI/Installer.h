@@ -2,7 +2,7 @@
 #include <QtCore>
 #include <QtWidgets>
 #include <QtGUI>
-class VisindigoCentralWidget :public QWidget 
+class VisindigoCentralWidget :public QWidget
 {
 	Q_OBJECT
 public:
@@ -20,13 +20,11 @@ public:
 		CurrentLayout = new QGridLayout(this);
 
 		CurrentLayout->addWidget(TitleLabel);
-		
 	}
 	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
 		BG->resize(size());
 	}
 };
-
 
 class VisindigoMainWin :public QMainWindow
 {
