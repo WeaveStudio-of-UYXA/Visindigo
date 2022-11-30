@@ -13,6 +13,7 @@
 #define BIND(objP1,signal,objP2,slot) connect(objP1,signal,objP2,slot,Qt::BlockingQueuedConnection)
 #define PROTECT ProcessMutex.lock();
 #define RELEASE ProcessMutex.unlock();
+#define EVENT void event()
 class VIAnimationEventProcess;
 
 class VIAnimationEvent : public QObject

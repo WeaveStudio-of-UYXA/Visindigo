@@ -27,27 +27,32 @@ namespace JsVI {
 		void __init__(QObject* parent, VI2DGUILabel* GUIBase) {
 			this->setParent(parent);
 			GUIBaseLabel = GUIBase;
-			BIND(this, SIGNAL(SsetGeometry(float, float, float, float)), GUIBaseLabel, SLOT(setGeometryPercent(float, float, float, float)));
-			BIND(this, SIGNAL(Sresize(float, float)), GUIBaseLabel, SLOT(resizePercent(float, float)));
-			BIND(this, SIGNAL(Smove(float, float)), GUIBaseLabel, SLOT(movePercent(float, float)));
-			JsVI_BIND_SAME(resizeWidthAndRatio, GUIBaseLabel, float, float);
-			JsVI_BIND_SAME(setOpacityAni, GUIBaseLabel, float, float, int, bool);
-			JsVI_BIND_SAME(setAlignment, GUIBaseLabel, Qt::AlignmentFlag);
-			JsVI_BIND_SAME(setStyleSheet, GUIBaseLabel, QString);
-			JsVI_BIND_SAME(setOpacity, GUIBaseLabel, float);
-			JsVI_CONNECT_SAME_VOID(raise, GUIBaseLabel);
-			JsVI_CONNECT_SAME_VOID(show, GUIBaseLabel);
 			JsVI_CONNECT_SAME_VOID(hide, GUIBaseLabel);
+			BIND(this, SIGNAL(Smove(float, float)), GUIBaseLabel, SLOT(movePercent(float, float)));
+			JsVI_BIND_SAME(moveCenter, GUIBaseLabel, float, float);
+			JsVI_CONNECT_SAME_VOID(raise, GUIBaseLabel);
+			BIND(this, SIGNAL(Sresize(float, float)), GUIBaseLabel, SLOT(resizePercent(float, float)));
+			JsVI_BIND_SAME(resizeWidthAndRatio, GUIBaseLabel, float, float);
+			JsVI_BIND_SAME(setAlignment, GUIBaseLabel, Qt::AlignmentFlag);
+			BIND(this, SIGNAL(SsetGeometry(float, float, float, float)), GUIBaseLabel, SLOT(setGeometryPercent(float, float, float, float)));
+			JsVI_BIND_SAME(setOpacity, GUIBaseLabel, float);
+			JsVI_BIND_SAME(setOpacityAni, GUIBaseLabel, float, float, int, bool);			
+			JsVI_BIND_SAME(setStyleSheet, GUIBaseLabel, QString);		
+			JsVI_CONNECT_SAME_VOID(show, GUIBaseLabel);	
 		}
-		SSDEF(setOpacityAni, float start, float end, int ms, bool wait = false) {
-			emit SsetOpacityAni(start, end, ms, wait);
-			if (wait) { VIJSHostWait; }
+		SSDEF_SA_VOID(hide);
+		SSDEF(move, float px, float py) {
+			emit Smove(px, py);
 		}
-		SSDEF(setOpacity, float op) {
-			emit SsetOpacity(op);
+		SSDEF(moveCenter, float pcx, float pcy) {
+			emit SmoveCenter(pcx, pcy);
 		}
-		SSDEF(setGeometry, float xp, float yp, float wp, float hp) {
-			emit SsetGeometry(xp, yp, wp, hp);
+		SSDEF_SA_VOID(raise);
+		SSDEF(resize, float pw, float ph) {
+			emit Sresize(pw, ph);
+		}
+		SSDEF(resizeWidthAndRatio, float pw, float wToh) {
+			emit SresizeWidthAndRatio(pw, wToh);
 		}
 		void setAlignment(QString align) {
 			if (align == "C" || align == "M") {
@@ -63,20 +68,20 @@ namespace JsVI {
 				emit SsetAlignment(Qt::AlignLeft);
 			}
 		}
+		SSDEF(setGeometry, float xp, float yp, float wp, float hp) {
+			emit SsetGeometry(xp, yp, wp, hp);
+		}
+		SSDEF(setOpacityAni, float start, float end, int ms, bool wait = false) {
+			emit SsetOpacityAni(start, end, ms, wait);
+			if (wait) { VIJSHostWait; }
+		}
+		SSDEF(setOpacity, float op) {
+			emit SsetOpacity(op);
+		}	
 		SSDEF(setStyleSheet, QString style) {
 			emit SsetStyleSheet(style);
-		}
-		SSDEF(move, float px, float py) {
-			emit Smove(px, py);
-		}
-		SSDEF(resize, float pw, float ph) {
-			emit Sresize(pw, ph);
-		}
-		SSDEF(resizeWidthAndRatio, float pw, float wToh) {
-			emit SresizeWidthAndRatio(pw, wToh);
-		}
-		SSDEF_SA_VOID(raise);
+		}	
 		SSDEF_SA_VOID(show);
-		SSDEF_SA_VOID(hide);
+		
 	};
 }

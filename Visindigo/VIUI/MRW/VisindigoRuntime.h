@@ -23,6 +23,7 @@ public:
 		DebugInfoLabel->setObjectName("DebugInfo");
 		DebugInfoLabel->setStyleSheet("QLabel#DebugInfo{font-size:30px;color:#0CDB23;font-family:'Microsoft YaHei'}");
 		DebugInfoLabel->resize(200, 30);
+		DebugInfoLabel->setText("MAX EPPS");
 	}
 	void resizeEvent(QResizeEvent* event) {
 		//Widget3D->resize(this->size());

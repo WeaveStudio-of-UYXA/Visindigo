@@ -9,21 +9,33 @@ namespace JsVI {
 			JsVI_INVOKE(VITextLabel)
 	signals:
 		void StextNonlinerProgress(VIMath::VI2DMatrix mat);
-
 	public:
 		TextLabel(JsVIGUI_PARA) {
 			JsVI_NewFrom(VITextLabel);
 			JsVI_INIT;
-			BIND(this, SIGNAL(StextNonlinerProgress(VIMath::VI2DMatrix)), JsVIGUI, SLOT(textNonlinerProgress(VIMath::VI2DMatrix)));
-			JsVI_BIND_SAME(setTextAni, JsVIGUI, QString, int, int, bool);
 			JsVI_BIND_SAME(continueTextAni, JsVIGUI, QString, int, int, bool);
+			JsVI_BIND_SAME(setTextAni, JsVIGUI, QString, int, int, bool);
 			JsVI_BIND_SAME(setText, JsVIGUI, QString);
+			BIND(this, SIGNAL(StextNonlinerProgress(VIMath::VI2DMatrix)), JsVIGUI, SLOT(textNonlinerProgress(VIMath::VI2DMatrix)));
 			/*for (int i = this->metaObject()->methodCount(); i > 0; i--) {
 				QMetaMethod method = this->metaObject()->method(i);
 				qDebug() << method.typeName() << method.methodSignature();
 			}*/
+			const QMetaObject* self = this->metaObject();
+			qDebug()<<self->superClass()->className();
 		}
 	public slots:
+		SSDEF(continueTextAni, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
+			emit ScontinueTextAni(str, mspt, msw, wait);
+			JsVI_WAIT(wait);
+		}
+		SSDEF(setTextAni, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
+			emit SsetTextAni(str, mspt, msw, wait);
+			JsVI_WAIT(wait);
+		}
+		SSDEF(setText, QString str) {
+			emit SsetText(str);
+		}
 		void textNonlinerProgress(QList<QList<float>> mat) {
 			VIMath::VIVector2 vec;
 			VIMath::VI2DMatrix rtn;
@@ -32,17 +44,6 @@ namespace JsVI {
 				rtn.append(vec);
 			}
 			emit StextNonlinerProgress(rtn);
-		}
-		SSDEF(setTextAni, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
-			emit SsetTextAni(str, mspt, msw, wait);
-			JsVI_WAIT(wait);
-		}
-		SSDEF(continueTextAni, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
-			emit ScontinueTextAni(str, mspt, msw, wait);
-			JsVI_WAIT(wait);
-		}
-		SSDEF(setText, QString str) {
-			emit SsetText(str);
 		}
 	};
 

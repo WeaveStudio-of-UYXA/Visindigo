@@ -123,6 +123,7 @@
     <QtMoc Include="VIJSAPI\JsVIGUI2DBase.h" />
     <ClInclude Include="init.h" />
     <ClInclude Include="VIJSAPI\JsVIBase.h" />
+    <QtMoc Include="VIJSAPI\JsVIChara.h" />
     <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
     <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />

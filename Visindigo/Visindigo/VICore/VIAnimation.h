@@ -152,21 +152,42 @@ public:
 	}
 };
 
-class VIBesselTest :public VIAnimationEvent
+class VIGaussianBlurAnimation :public VIAnimationEvent
 {
 	Q_OBJECT
 public:
-	VIMath::VI2DMatrix trans;
-	VIMath::VI2DMatrix coe;
-	VIBesselTest INIT{
-		trans = {{0,0},{0,1},{1,1}};
-		coe = VIBessel::getBesselCoefficient(trans);
-		for (auto i = coe.begin(); i != coe.end(); i++) {
-			qDebug() << i->x << i->y;
+	int BLRadiusBegin;
+	int BLRadiusEnd;
+	float BLRadiusDelta;
+signals:
+	void getBlurs(float);
+public:
+	VIGaussianBlurAnimation INIT{
+	}
+	void setBlur(int begin, int end, int ms, bool wait) {
+		BLRadiusBegin = begin;
+		BLRadiusEnd = end;
+		BLRadiusDelta = qAbs(end - begin);
+		this->setMaxMsec(ms);
+		this->setDoneSignal(wait);
+	}
+	void event() {
+		if (BLRadiusEnd > BLRadiusBegin) {
+			float BL = BLRadiusBegin + Percentage * BLRadiusDelta;
+			emit getBlurs(BL);
+		}
+		else {
+			float BL = BLRadiusBegin - Percentage * BLRadiusDelta;
+			emit getBlurs(BL);
 		}
 	}
-		void event() {
-		VIMath::VIVector2 trans = VIBessel::getBesselValue(coe, Percentage);
-		qDebug() << trans.x << trans.y;
+	void onFinish() {
+		emit getBlurs(BLRadiusEnd);
+	}
+	void skip() {
+		emit getBlurs(BLRadiusEnd);
+	}
+	void finish() {
+		emit getBlurs(BLRadiusEnd);
 	}
 };
