@@ -21,5 +21,8 @@ namespace JsVI
 		void wait(int ms) {
 			QThread::msleep(ms);
 		}
+		QStringList argv() {
+			return qApp->arguments();
+		}
 	};
 }

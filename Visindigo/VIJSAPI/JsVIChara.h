@@ -9,23 +9,23 @@ namespace JsVI
 	class VIChara :public QObject
 	{
 		Q_OBJECT
-	public:
-		enum class ResourceMode {
-			Pixmap = 0,
-			Model = 1,
-		};
 	private:
 		QString Name;
+		QString DisplayName;
 		QString ResourcePath;
 		QMap<QString, QImage> ImageList;
 	public:
-		Q_INVOKABLE VIChara(QString name, QObject* parent = Q_NULLPTR) :QObject(parent) {
+		Q_INVOKABLE VIChara(QString name, QString displayName, QObject* parent = Q_NULLPTR) :QObject(parent) {
 			this->setResourcePath("./Resource/Chara/" + name);
 			this->Name = name;
+			this->DisplayName = displayName;
 		}
 	public slots:
 		QString getName() {
 			return this->Name;
+		}
+		QString getDisplayName() {
+			return this->DisplayName;
 		}
 		void setResourcePath(QString resourcePath) {
 			this->ResourcePath = VIJSGlobal::getAbsolutePathOf(resourcePath);
@@ -41,6 +41,7 @@ namespace JsVI
 				QImage image(filePath);
 				this->ImageList.insert(fileName, image);
 			}
+			return this->ImageList.keys();
 		}
 	};
 }

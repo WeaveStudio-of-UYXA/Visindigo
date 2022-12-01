@@ -1,4 +1,4 @@
-//此文档为VIJS版本的YSP实现方式。
+﻿//此文档为VIJS版本的YSP实现方式。
 class YSPTitlePage{
     constructor(){
         this.BG = VIGUI.newVIPicture();
@@ -88,18 +88,21 @@ class YSPStoryPage{
         this.FreeLabel = VIGUI.newVIText();
     }
 }
-export default class SPOL9{
-    constructor(){
-        this.Title = new YSPTitlePage();
-        this.Story = new YSPStoryPage();
-    }
-    title(title, subtitle, logo, bg){
-        this.Title.setBG(bg);
-        this.Title.setTitle(title);
-        this.Title.setSubTitle(subtitle);
-        this.Title.setLogo(logo);
-        this.Title.doAnimation();
-    }
+
+
+var Title;
+var Story;
+
+export function init(){
+    Title = new YSPTitlePage();
+    Story = new YSPStoryPage();
 }
 
-export var SPOL = new SPOL9();
+export function title(title, subtitle, logo, bg){
+    Title.setBG(bg);
+    Title.setTitle(title);
+    Title.setSubTitle(subtitle);
+    Title.setLogo(logo);
+    Title.doAnimation();
+}
+

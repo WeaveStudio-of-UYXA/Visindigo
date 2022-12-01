@@ -120,6 +120,9 @@
     <QtMoc Include="VIJSAPI\JsVIChara.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="VIJSAPI\JsVIContainer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="Visindigo\VI3D\NewFile.qml">

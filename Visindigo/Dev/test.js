@@ -1,12 +1,16 @@
 ﻿export function main() {
+    VISystem.print(VISystem.argv())
     VIGUI.resize(1366, 768);
     VIGUI.enableGUIFrame();
-    YSP.SPOL.title("VI-T1","Visindigo 测试", "./Resource/Logo.png", "./Resource/BG.png");
+    SPOL.init();
+    SPOL.title("VI-T1","Visindigo 测试", "./Resource/Logo.png", "./Resource/BG.png");
     VISystem.wait(500);
     test();
     VISystem.exit();
 }
-
+function user_init(){
+    VISystem.print("U Hello world");
+}
 function test(){
     //VIGUI.showFullScreen();
     VISystem.print(VISystem.getSystemProductName());
@@ -32,3 +36,4 @@ function test(){
     t.setTextAni("你好，世界。");
     VISystem.print("Hello world");
 }
+
