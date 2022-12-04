@@ -27,6 +27,7 @@ namespace JsVI {
 		void __init__(QObject* parent, VI2DGUILabel* GUIBase) {
 			this->setParent(parent);
 			GUIBaseLabel = GUIBase;
+			JsVI_CONNECT_SAME_VOID(del, GUIBaseLabel);
 			JsVI_CONNECT_SAME_VOID(hide, GUIBaseLabel);
 			BIND(this, SIGNAL(Smove(float, float)), GUIBaseLabel, SLOT(movePercent(float, float)));
 			JsVI_BIND_SAME(moveCenter, GUIBaseLabel, float, float);
@@ -40,6 +41,12 @@ namespace JsVI {
 			JsVI_BIND_SAME(setStyleSheet, GUIBaseLabel, QString);		
 			JsVI_CONNECT_SAME_VOID(show, GUIBaseLabel);	
 		}
+		Q_INVOKABLE ~GUI2DLabel() {
+			emit Sdel();
+			qDebug() << "JsVI Deleted";
+			this->disconnect();
+		}
+		SSDEF_SA_VOID(del);
 		SSDEF_SA_VOID(hide);
 		SSDEF(move, float px, float py) {
 			emit Smove(px, py);

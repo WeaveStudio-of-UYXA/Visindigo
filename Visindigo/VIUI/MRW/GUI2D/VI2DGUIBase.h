@@ -9,6 +9,8 @@
 class VI2DGUILabel :public QLabel
 {
 	Q_OBJECT
+signals:
+	void removeThis(VI2DGUILabel*);
 public:
 	QWidget* Parent;
 	VIAnimationEventProcess* Process;
@@ -26,6 +28,7 @@ public:
 		Parent = WidgetParent;
 		Process = AniParent;
 		this->setParent(Parent);
+		connect(this, SIGNAL(removeThis(VI2DGUILabel*)), Parent, SLOT(removeVI2DGUILabel(VI2DGUILabel*)));
 		Opacity = new QGraphicsOpacityEffect(this);
 		OpacityAnimation = new VIOpacityAnimation(this);
 		this->setGraphicsEffect(Opacity);
@@ -36,7 +39,15 @@ public:
 		connect(Parent, SIGNAL(mousePressed()), this, SLOT(skipOrJumpAni()));
 		px = 0.1; py = 0.2; pw = 0.8; ph = 0.6;
 	}
+	~VI2DGUILabel() {
+		qDebug() << "deleted";
+		emit removeThis(this);
+		this->disconnect();
+	}
 public slots:
+	void del() {
+		this->deleteLater();
+	}
 	virtual void skipOrJumpAni() {}
 	void ifWait(bool Wait) {
 		if (Wait) {

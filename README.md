@@ -4,7 +4,7 @@ Visindigo是Yayin Story Player的下一代程序，旨在提供纯文本（纯�
 
 **Yayin Story Player**是Ayano Aishi提出构想，Tsing Yayin独立开发的应用程序。
 
-**Visindigo**是Tsing Yayin主要开发的应用程序。 
+**Visindigo**是Tsing Yayin主要开发的应用程序。Tsing Yayin代码水平极差，因此Visindigo的定位是简单、可扩展的平面呈现和交互框架，不会提供任何专业功能。但Visindigo会一直保证高度的可移植和可扩展性，确保确有需求的用户能够以自己的方式扩展Visindigo。
 
 此项目完全开源且使用GPLv3授权，一切基于本程序的二次开发（包括扩展程序本体和编写VIJS程序）必须亦完全开源并使用GPLv3授权。本项目使用的授权许可证随时有可能变更，请用户自行关注当前许可证情况。
 
@@ -53,6 +53,9 @@ Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭�
 * Visindigo主要C++内容只接受含有Qt、STL的源代码，请勿引入任何其他库，例如OpenCV、Windows API，boost等，如果必须引入，请将该库中未能跨平台的部分重新用Qt实现。（例如您如果希望引入Spine之类的东西，您应该取得Spine的全部C++源代码，并将部分内容改为Qt实现）
 * Visindigo Installer主要C++内容允许引入其他第三方库。
 * JsVI API指的是由Visindigo程序提供的JavaScript API，VIJs API指的是直接由JavaScript实现的API，您可以自由扩展VIJs API，只要您写的这些扩展能够在JSVI主机上面运行。
+* 虽然从传统上而言，C、C++程序应该严格按照声明-实现的方式建构（h-cpp，include-source），但是在任何其他现代语言（尤其是面向对象的）推荐的建构都不再建议这种方式。此项目也是一样，如无编译问题导致必须用cpp文件的，一律使用h文件。
+* 不要使用“从Qt4继承，仍然提供支持但不再继续开发”的旧版Qt组件如Qt Script。
+* 不要使用C++17及之后版本中的新内容，不要使用MSVC支持不了的特性。
 
 # 源码编译
 **请注意，如果您需要获得发行版本的源码，您应该去StudioIndigo的另外一个仓库，叫做[VisindigoRelease](https://github.com/StudioIndigo-of-CYXIO/VisindigoRelease)，本仓库内的源码是代表最新开发内容的源码，可能含有不稳定因素。**

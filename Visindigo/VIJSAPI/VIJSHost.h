@@ -35,17 +35,21 @@ public slots:
 		QJSValue Main = Engine->importModule(filename);
 		QJSValue YSPModule = Engine->importModule(":/Visindigo/JsVIAPI/YSP.js");
 		Engine->globalObject().setProperty("SPOL", YSPModule);
+		Engine->installExtensions(QJSEngine::GarbageCollectionExtension);
 		QJSValue MainFuncation = Main.property("main");
 		QJSValue result = MainFuncation.call();
 		if (result.isError()) {
 			qDebug() << "Uncaught exception at line" << result.property("lineNumber").toNumber() << ":" << result.toString();
 			RTN = 1;
 		}
+		Engine->collectGarbage();
 		VIJSGlobal::VIJSMutex.unlock();
 	}
 	void initEngine() {
 		QJSValue VI2D = Engine->newQObject(VIGUI2D);
 		Engine->globalObject().setProperty("VIGUI", VI2D);
+		QJSValue VIGUI2DLabel = Engine->newQMetaObject(&JsVI::GUI2DLabel::staticMetaObject);
+		VI2D.setProperty("VIGUI2DLabel", VIGUI2DLabel);
 		QJSValue VITextLabel = Engine->newQMetaObject(&JsVI::TextLabel::staticMetaObject);
 		VI2D.setProperty("VITextLabel", VITextLabel);
 		QJSValue VISys = Engine->newQObject(VISystem);

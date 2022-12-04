@@ -6,7 +6,7 @@
     SPOL.title("VI-T1","Visindigo 测试", "./Resource/Logo.png", "./Resource/BG.png");
     VISystem.wait(500);
     test();
-    VISystem.exit();
+    //VISystem.exit();
 }
 function user_init(){
     VISystem.print("U Hello world");
