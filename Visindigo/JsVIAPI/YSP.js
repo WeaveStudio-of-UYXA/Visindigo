@@ -73,6 +73,8 @@ class YSPTitlePage{
         this.SubTitle.setOpacityAni(1, 0, 1000);
         VISystem.wait(1000);
         this.hide();
+        this.BG.releaseMemory();
+        this.Logo.releaseMemory();
     }
 }
 class YSPStoryPage{

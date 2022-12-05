@@ -38,7 +38,7 @@ With regard to multilingual translation in this software, we hope that users of 
 
 # 致谢
 
-Visindigo是框架型应用程序，为了向用户讲解如何使用这样的框架，我们使用了现成的例子进行讲解——鉴于Visindigo的特殊性，我们在例子中大量参考了《明日方舟》中的素材、文案与设计效果，这些内容的版权均归鹰角网络所有，感谢《明日方舟》的好故事为所有在看此文的各位带来了创作的热情与欲望。
+Visindigo是框架型应用程序，为了向用户讲解如何使用这样的框架，我们使用了现成的例子进行讲解——鉴于Visindigo的特殊性，我们在例子中大量参考了《明日方舟》中的设计，感谢《明日方舟》的好故事为所有在看此文的各位带来了创作的热情与欲望。
 
 Visindigo认为Qt是当今C++中最出色的库，Visindigo大量特性，尤其是JSVI主机依赖于Qt实现，如果没有Qt，Visindigo还有很多很多弯路要走。
 

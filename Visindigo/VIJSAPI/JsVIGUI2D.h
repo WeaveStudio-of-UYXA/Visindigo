@@ -58,10 +58,12 @@ namespace JsVI {
 		PictureLabel(JsVIGUI_PARA) {
 			JsVI_NewFrom(VIPictureLabel);
 			JsVI_INIT;
+			JsVI_BIND_SAME_VOID(releaseMemory, JsVIGUI);
 			BIND(this, SIGNAL(SsetImage(QString)), JsVIGUI, SLOT(setImage(QString)));
 			BIND(this, SIGNAL(SfillColor(int, int, int, int)), JsVIGUI, SLOT(fillColor(int, int, int, int)));
 		}
 	public slots:
+		SSDEF_SA_VOID(releaseMemory);
 		void setPicture(QString path) {
 			emit SsetImage(VIJSGlobal::getAbsolutePathOf(path));
 		}
