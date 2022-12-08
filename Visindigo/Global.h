@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Visindigo/CommonEdit/CEFunction/CELanguage.h"
+#include "CommonEdit/CEFunction/CELanguage.h"
 #define WINDOWS_DEPLOY 1
 #define ANDROID_DEPLOY 2
 

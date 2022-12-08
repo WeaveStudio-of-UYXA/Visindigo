@@ -38,7 +38,10 @@
     <ClCompile Include="init.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\CommonEdit\CEFunction\CELanguage.cpp">
+    <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonEdit\CEFunction\CELanguage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,6 +71,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIJSAPI\JsVIBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\private\VIGeneralBehavior_p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonEdit\CEFunction\CE_QtMacro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonEdit\CEFunction\CEMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -114,13 +126,16 @@
     <QtMoc Include="VIJSAPI\JsVIGUI2DBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\CommonEdit\CEFunction\CELanguage.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="VIJSAPI\JsVIChara.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIJSAPI\JsVIContainer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIGeneralBehavior.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CommonEdit\CEFunction\CELanguage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
