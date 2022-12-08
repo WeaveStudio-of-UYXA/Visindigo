@@ -22,7 +22,7 @@ public:
 		DebugInfoLabel = new QLabel(this);
 		DebugInfoLabel->setObjectName("DebugInfo");
 		DebugInfoLabel->setStyleSheet("QLabel#DebugInfo{font-size:30px;color:#0CDB23;font-family:'Microsoft YaHei'}");
-		DebugInfoLabel->resize(200, 30);
+		DebugInfoLabel->resize(300, 30);
 		DebugInfoLabel->setText("MAX EPPS");
 	}
 	void resizeEvent(QResizeEvent* event) {
@@ -31,7 +31,7 @@ public:
 	}
 public slots:
 	void setFrame(float frame) {
-		DebugInfoLabel->setText(QString::number(frame) + " EPPS");
+		DebugInfoLabel->setText(QString::number(frame, 'g', 9) + " EPPS");
 	}
 };
 

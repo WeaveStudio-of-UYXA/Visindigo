@@ -33,9 +33,7 @@ public:
 	QList<float> MidwaySignal;
 	int MidwaySignalIndex = 0;
 	VIAnimationEventProcess* Process = Q_NULLPTR;
-	virtual void event() = 0;
-	virtual void init() = 0;
-	virtual void onFinish() {};
+	
 	VIMath::VI2DMatrix COEFF;
 protected:
 	bool ALIVE = false;
@@ -111,7 +109,9 @@ public:
 	void setMidwaySignal(QList<float>signalList) {
 		MidwaySignal = signalList;
 	}
-public:
+	virtual void event() = 0;
+	virtual void init() = 0;
+	virtual void onFinish() {};
 	void setAnimationProcess(VIAnimationEventProcess* process);
 	virtual void skip() {};
 	virtual void finish() {
@@ -204,7 +204,7 @@ public:
 			if (EventQueue.isEmpty()) { WAIT = true; }
 			if (!RUN) { break; }
 			this->ProcessMutex.unlock();
-			if (LASTTIME == 0) { LASTTIME = 0.001; }
+			if (LASTTIME == 0) { LASTTIME = 0.000001; }
 			if (P30 < 1) {
 				LFO5[LFOINDEX] = 1000 / LASTTIME;
 				LFOINDEX += 1;
@@ -214,7 +214,7 @@ public:
 			}
 			else { P30--; }
 			std::chrono::system_clock::time_point TPE = std::chrono::system_clock::now();
-			LASTTIME = (float)(std::chrono::duration_cast<std::chrono::microseconds>(TPE.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::microseconds>(TPS.time_since_epoch()).count()) / 1000;
+			LASTTIME = (float)(std::chrono::duration_cast<std::chrono::nanoseconds>(TPE.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::nanoseconds>(TPS.time_since_epoch()).count()) / 1000000;
 		}
 	}
 	void stop() {
