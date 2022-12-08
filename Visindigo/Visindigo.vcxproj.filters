@@ -76,10 +76,10 @@
     <ClInclude Include="Visindigo\VICore\private\VIGeneralBehavior_p.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CommonEdit\CEFunction\CE_QtMacro.h">
+    <ClInclude Include="CommonEdit\CECore\CE_QtMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CommonEdit\CEFunction\CEMacro.h">
+    <ClInclude Include="CommonEdit\CECore\CEMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,12 +1,10 @@
 ﻿#include "VIGeneralBehavior.h"
-VIDuration::VIDuration(VIMilliSecond msec) {
-	this->MSEC = msec;
-}
 void VIDuration::init() {
 	CURRENT = 0;
 	PERCENT = 0;
 	PERCENT_NL = 0;
 	TIMEOUTFLAG = false;
+	COEFF = VIBessel::getBesselCoefficient({ {0, 0}, {1, 1} });
 }
 void VIDuration::setDuration(VIMilliSecond msec) {
 	this->MSEC = msec;
@@ -32,7 +30,7 @@ float VIDuration::getPercent(PercentType type = PercentType::Linear) {
 void VIDuration::setBesselCoeff(VIMath::VI2DMatrix matrix) {
 	this->COEFF = matrix;
 }
-void VIDuration::addTime(unsigned int time, Unit unit = Unit::MilliSecond) {
+void VIDuration::addTime(unsigned long long time, Unit unit = Unit::MilliSecond) {
 	if (!TIMEOUTFLAG) {
 		switch (unit) {
 		case Unit::NanoSecond:
@@ -52,4 +50,50 @@ void VIDuration::addTime(unsigned int time, Unit unit = Unit::MilliSecond) {
 			TIMEOUTFLAG = true;
 		}
 	}
+}
+bool VIDuration::isTimeout() {
+	return this->TIMEOUTFLAG;
+}
+
+
+
+void VIGeneralBehavior::setDuration(VIMilliSecond msec) {
+	this->DURATION->setDuration(msec);
+}
+VIMilliSecond VIGeneralBehavior::getDuration() {
+	return this->DURATION->getDuration();
+}
+float VIGeneralBehavior::getPercent(VIDuration::PercentType type) {
+	return this->DURATION->getPercent(type);
+}
+void VIGeneralBehavior::setBesselCoeff(VIMath::VI2DMatrix matrix) {
+	return this->DURATION->setBesselCoeff(matrix);
+}
+void VIGeneralBehavior::setHost(VIGeneralBehaviorHost* host) {
+	if (this->HOST != Q_NULLPTR) {
+		disconnect(this, SIGNAL(addBehaviorLater(VIGeneralBehavior*)), HOST, SLOT(addBehavior(VIGeneralBehavior*)));
+	}
+	this->HOST = host;
+	connect(this, SIGNAL(addBehaviorLater(VIGeneralBehavior*)), HOST, SLOT(addBehavior(VIGeneralBehavior*)));
+}
+func VIGeneralBehavior::active() {
+	if (STATE == State::Idle) {
+		this->DURATION->init();
+		this->onActive();
+		STATE = State::Active;
+		emit addBehaviorLater(this);
+	}
+} 
+void VIGeneralBehavior::preFrame(VINanoSecond duration) {
+	this->DURATION->addTime(duration, VIDuration::Unit::NanoSecond);
+	if (DURATION->isTimeout()) {
+		this->onDone();
+		STATE = State::Done;
+	}
+	else {
+		this->onFrame();
+	}
+}
+VIGeneralBehavior::State VIGeneralBehavior::getBehaviorState() {
+	return this->STATE;
 }

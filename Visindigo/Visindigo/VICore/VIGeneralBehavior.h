@@ -9,80 +9,73 @@
 #include<QtWidgets>
 #include <chrono>
 #include "VIMath.h"
-#define INIT (QWidget* parent = Q_NULLPTR) :VIAnimationEvent(parent) {} void init()
-#define BIND(objP1,signal,objP2,slot) connect(objP1,signal,objP2,slot,Qt::BlockingQueuedConnection)
-#define PROTECT ProcessMutex.lock();
-#define RELEASE ProcessMutex.unlock();
-#define EVENT void event()
+#include "../../CommonEdit/CECore/CEMacro.h"
 typedef unsigned long long VIMilliSecond;
 typedef unsigned long long VINanoSecond;
 typedef unsigned long long VISecond;
 class VIDuration :public QObject
 {
-	Q_OBJECT
-public:
-	enum class Unit {
+	Q_OBJECT;
+	Public ENUM Unit {
 		NanoSecond,
 		MilliSecond,
 		Second,
 	};
-	enum class PercentType {
+	Public ENUM PercentType {
 		Linear, 
 		Nonlinear,
 	};
-signals:
-	void timeout();
-private:
-	VIMilliSecond MSEC = 0;
-	VIMilliSecond CURRENT = 0;
-	float PERCENT = 0;
-	float PERCENT_NL = 0;
-	VIMath::VI2DMatrix COEFF = { {0, 0}, {1, 1} };
-	bool TIMEOUTFLAG = false;
-public:
-	VIDuration(VIMilliSecond);
-public:
-	void init();
-	void setDuration(VIMilliSecond);
-	double getDuration(Unit);
-	float getPercent(PercentType);
-	void setBesselCoeff(VIMath::VI2DMatrix);
-public slots:
-	void addTime(unsigned int, Unit);
+	Signal func timeout();
+	Private VIMilliSecond MSEC = 0;
+	Private VIMilliSecond CURRENT;
+	Private float PERCENT;
+	Private float PERCENT_NL;
+	Private VIMath::VI2DMatrix COEFF;
+	Private bool TIMEOUTFLAG = false;
+	Public VIDuration(QObject* parent = Q_NULLPTR) : QObject(parent) {};
+	Public void init();
+	Public void setDuration(VIMilliSecond);
+	Public double getDuration(Unit);
+	Public float getPercent(PercentType);
+	Public void setBesselCoeff(VIMath::VI2DMatrix);
+	Public bool isTimeout();
+	Slot func addTime(unsigned long long, Unit);
 };
 
-class VIGeneralBehaviorHost;
+
 
 class VIGeneralBehavior :public QObject
 {
-	Q_OBJECT
-private:
-	enum class State {
+	Q_OBJECT;
+	friend class VIGeneralBehaviorHost;
+	Public ENUM State {
 		Idle,
 		Active,
 		Skip,
-		Finish,
+		Done,
 	};
-private:
-	VIGeneralBehaviorHost* HOST = nullptr;
-	VIDuration* DURATION = nullptr;
-protected:
-	State STATE = State::Idle;
-signals:
-	void done();
-private:
-	void preInit(){};
-	void preFrame() {};
-protected:
-	void setHost(VIGeneralBehaviorHost*);
-public:
-	VIGeneralBehavior(QObject*) {};
-	virtual void init() = 0;
-	virtual void onActive() = 0;
-	virtual void frame() = 0;
-	virtual void onSkip() {};
-	virtual void onDone() {};
-public slots:
-	void active() {};
+	Protected VIGeneralBehaviorHost* HOST = nullptr;
+	Protected VIDuration* DURATION = nullptr;
+	Protected State STATE = State::Idle;
+	Signal func addBehaviorLater(VIGeneralBehavior*);
+	Signal func done();
+	Private void preFrame(VINanoSecond);
+	Protected void setHost(VIGeneralBehaviorHost*);
+	Protected void setDuration(VIMilliSecond);
+	Protected VIMilliSecond getDuration();
+	Protected float getPercent(VIDuration::PercentType);
+	Protected void setBesselCoeff(VIMath::VI2DMatrix);
+	Public VIGeneralBehavior(QObject* parent = Q_NULLPTR) :QObject(parent) {
+		this->DURATION = new VIDuration(this);
+	}
+	Public virtual void onActive() = 0;
+	Public virtual void onFrame() = 0;
+	Public virtual void onSkip() {};
+	Public virtual void onDone() {};
+	Public State getBehaviorState();
+	Slot func active();
 };
 
+class VIGeneralBehaviorHost :public QObject {
+	
+};

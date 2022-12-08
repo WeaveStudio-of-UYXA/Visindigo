@@ -4,6 +4,7 @@
 或者选择使用QPropertyAnimation的子类QVariantAnimation
 此文档的意义在于针对Visindigo本身的需求提供一个在动画上相对通用的队列处理系统
 */
+//此文档被标记为不会继续开发。当VIGeneralBehavior准备好之后向其迁移。
 #pragma once
 #include<QtCore>
 #include<QtWidgets>

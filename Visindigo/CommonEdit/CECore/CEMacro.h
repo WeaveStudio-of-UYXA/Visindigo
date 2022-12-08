@@ -1,4 +1,7 @@
-#pragma once
+﻿#pragma once
+#ifdef QT_VERSION_MAJOR
+#include "CE_QtMacro.h"
+#endif
 //This file contains the core macro definitions of the CE library
 #ifndef CEL
 	#define CEL
