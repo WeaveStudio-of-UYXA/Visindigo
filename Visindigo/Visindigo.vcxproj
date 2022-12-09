@@ -129,11 +129,12 @@
     <ClInclude Include="VIJSAPI\JsVIBase.h" />
     <QtMoc Include="VIJSAPI\JsVIChara.h" />
     <QtMoc Include="VIJSAPI\JsVIContainer.h" />
+    <ClInclude Include="VIJSAPI\macro\VIJSGlobal_m.h" />
     <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
     <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />
     <QtMoc Include="Visindigo\VICore\VIGeneralBehavior.h" />
-    <ClInclude Include="Visindigo\VICore\private\VIGeneralBehavior_p.h" />
+    <ClInclude Include="Visindigo\VICore\macro\VIGeneralBehavior_m.h" />
     <ClInclude Include="Visindigo\VICore\VIMath.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h" />
     <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h" />

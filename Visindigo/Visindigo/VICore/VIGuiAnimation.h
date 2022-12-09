@@ -10,11 +10,7 @@
 #include<QtWidgets>
 #include <chrono>
 #include "VIMath.h"
-#define INIT (QWidget* parent = Q_NULLPTR) :VIAnimationEvent(parent) {} void init()
-#define BIND(objP1,signal,objP2,slot) connect(objP1,signal,objP2,slot,Qt::BlockingQueuedConnection)
-#define PROTECT ProcessMutex.lock();
-#define RELEASE ProcessMutex.unlock();
-#define EVENT void event()
+#include "macro/VIGeneralBehavior_m.h"
 class VIAnimationEventProcess;
 
 class VIAnimationEvent : public QObject

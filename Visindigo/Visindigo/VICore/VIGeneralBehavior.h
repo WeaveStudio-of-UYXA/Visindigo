@@ -10,9 +10,9 @@
 #include <chrono>
 #include "VIMath.h"
 #include "../../CommonEdit/CECore/CEMacro.h"
-typedef unsigned long long VIMilliSecond;
-typedef unsigned long long VINanoSecond;
-typedef unsigned long long VISecond;
+#include "macro/VIGeneralBehavior_m.h"
+
+
 class VIDuration :public QObject
 {
 	Q_OBJECT;

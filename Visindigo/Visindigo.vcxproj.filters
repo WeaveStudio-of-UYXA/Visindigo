@@ -73,13 +73,16 @@
     <ClInclude Include="VIJSAPI\JsVIBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\private\VIGeneralBehavior_p.h">
+    <ClInclude Include="Visindigo\VICore\macro\VIGeneralBehavior_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CommonEdit\CECore\CE_QtMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CommonEdit\CECore\CEMacro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIJSAPI\macro\VIJSGlobal_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <QtCore>
+#include "macro/VIJSGlobal_m.h"
+
 class VIJSGlobal {
 public:
 	static QMutex VIJSMutex;
@@ -14,6 +16,3 @@ public:
 		}
 	}
 };
-
-#define VIJSHostWait VIJSGlobal::VIJSWait.wait(&VIJSGlobal::VIJSMutex)
-#define VIJSHostWake VIJSGlobal::VIJSWait.wakeAll()
