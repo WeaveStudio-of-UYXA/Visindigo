@@ -141,6 +141,9 @@
     <QtMoc Include="CommonEdit\CEFunction\CELanguage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Visindigo\VIObjects\VIObject\VIObject.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="Visindigo\VI3D\NewFile.qml">

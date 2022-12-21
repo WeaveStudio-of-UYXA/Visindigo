@@ -1,5 +1,6 @@
 ﻿export function main() {
     VISystem.print(VISystem.argv())
+    VISystem.print(VISystem.getSystemProductName());
     VIGUI.resize(1366, 768);
     VIGUI.enableGUIFrame();
     SPOL.init();

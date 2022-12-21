@@ -17,7 +17,6 @@
 		#define l_tick unsigned long long
 		#define CE_NULLPTR nullptr
 		#define operators 
-		#define None
 		#define DoNothing
 		#define ENUM enum class
 		#define Public public:
@@ -27,7 +26,6 @@
 		
 
 	#define CEL_PYTHON_TO_CPP
-		#define self this
 		#define elif else if
 		#define True true
 		#define False false

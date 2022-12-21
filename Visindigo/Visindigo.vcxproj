@@ -138,6 +138,7 @@
     <ClInclude Include="Visindigo\VICore\VIMath.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h" />
     <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h" />
+    <QtMoc Include="Visindigo\VIObjects\VIObject\VIObject.h" />
     <ClInclude Include="VIUI\PW\VisindigoProject.h" />
     <ClInclude Include="VIUI\RW\VisindigoRepos.h" />
     <QtMoc Include="VIUI\MRW\VIGUI2D.h" />

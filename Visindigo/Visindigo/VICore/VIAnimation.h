@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "VIGuiAnimation.h"
 #include "VIMath.h"
-
+#include "Visindigo/VIObjects/VIObject/VIObject.h"
 class VITextAnimation : public VIAnimationEvent
 {
 	Q_OBJECT

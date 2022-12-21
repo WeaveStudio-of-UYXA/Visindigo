@@ -76,7 +76,7 @@ void VIGeneralBehavior::setHost(VIGeneralBehaviorHost* host) {
 	this->HOST = host;
 	connect(this, SIGNAL(addBehaviorLater(VIGeneralBehavior*)), HOST, SLOT(addBehavior(VIGeneralBehavior*)));
 }
-func VIGeneralBehavior::active() {
+void VIGeneralBehavior::active() {
 	if (STATE == State::Idle) {
 		this->DURATION->init();
 		this->onActive();

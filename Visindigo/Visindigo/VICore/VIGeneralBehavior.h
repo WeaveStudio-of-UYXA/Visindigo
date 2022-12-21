@@ -25,7 +25,7 @@ class VIDuration :public QObject
 		Linear, 
 		Nonlinear,
 	};
-	Signal func timeout();
+	Signal void timeout();
 	Private VIMilliSecond MSEC = 0;
 	Private VIMilliSecond CURRENT;
 	Private float PERCENT;
@@ -39,7 +39,7 @@ class VIDuration :public QObject
 	Public float getPercent(PercentType);
 	Public void setBesselCoeff(VIMath::VI2DMatrix);
 	Public bool isTimeout();
-	Slot func addTime(unsigned long long, Unit);
+	Slot void addTime(unsigned long long, Unit);
 };
 
 
@@ -57,8 +57,8 @@ class VIGeneralBehavior :public QObject
 	Protected VIGeneralBehaviorHost* HOST = nullptr;
 	Protected VIDuration* DURATION = nullptr;
 	Protected State STATE = State::Idle;
-	Signal func addBehaviorLater(VIGeneralBehavior*);
-	Signal func done();
+	Signal void addBehaviorLater(VIGeneralBehavior*);
+	Signal void done();
 	Private void preFrame(VINanoSecond);
 	Protected void setHost(VIGeneralBehaviorHost*);
 	Protected void setDuration(VIMilliSecond);
@@ -73,7 +73,7 @@ class VIGeneralBehavior :public QObject
 	Public virtual void onSkip() {};
 	Public virtual void onDone() {};
 	Public State getBehaviorState();
-	Slot func active();
+	Slot void active();
 };
 
 class VIGeneralBehaviorHost :public QObject {

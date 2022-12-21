@@ -24,7 +24,6 @@
 	#define CE_QT_KEYWORDS
 		#define Slot public Q_SLOTS:
 		#define Signal Q_SIGNALS:
-		#define func void
 #endif
 #ifdef QT_VERSION_MAJOR
 	#define connectPushButton(QPushButton_Object,Target_Object,Slot) connect(QPushButton_Object,SIGNAL(clicked()),Target_Object,SLOT(Slot))
