@@ -113,6 +113,7 @@
     <ClCompile Include="VIJSAPI\VIJSGlobal.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
+    <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp" />
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +139,10 @@
     <ClInclude Include="Visindigo\VICore\VIMath.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h" />
     <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h" />
-    <QtMoc Include="Visindigo\VIObjects\VIObject\VIObject.h" />
+    <QtMoc Include="Visindigo\VIObjects\VIObject\VIGlassObject.h" />
+    <QtMoc Include="Visindigo\VISystem\VISystemBase.h" />
+    <QtMoc Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h" />
+    <QtMoc Include="VIUI\MRW\GUI2D\VIGUILabel.h" />
     <ClInclude Include="VIUI\PW\VisindigoProject.h" />
     <ClInclude Include="VIUI\RW\VisindigoRepos.h" />
     <QtMoc Include="VIUI\MRW\VIGUI2D.h" />

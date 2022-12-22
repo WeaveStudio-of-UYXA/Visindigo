@@ -1,5 +1,5 @@
 ﻿/*
-此文件用于实现Visindigo2D的总动画效果
+此文件用于实现Visindigo2D的总动画效果和内部事件队列
 实际上对于Qt的2D动画，只需要使用QPropertyAnimation即可
 或者选择使用QPropertyAnimation的子类QVariantAnimation
 此文档的意义在于针对Visindigo本身的需求提供一个在动画上相对通用的队列处理系统
@@ -42,8 +42,6 @@ class VIDuration :public QObject
 	Slot void addTime(unsigned long long, Unit);
 };
 
-
-
 class VIGeneralBehavior :public QObject
 {
 	Q_OBJECT;
@@ -77,5 +75,5 @@ class VIGeneralBehavior :public QObject
 };
 
 class VIGeneralBehaviorHost :public QObject {
-	
+	Q_OBJECT;
 };

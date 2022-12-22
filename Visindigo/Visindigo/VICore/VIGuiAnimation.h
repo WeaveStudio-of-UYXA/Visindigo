@@ -117,6 +117,7 @@ public:
 public slots:
 	void active();
 };
+
 class VIAnimationEventProcess : public QThread
 {
 	Q_OBJECT

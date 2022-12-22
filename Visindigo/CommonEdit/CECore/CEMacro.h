@@ -23,7 +23,9 @@
 		#define Private private:
 		#define Protected protected:
 		#define def auto
-		
+		#define def_init
+		#define def_del
+		#define def_copy
 
 	#define CEL_PYTHON_TO_CPP
 		#define elif else if
