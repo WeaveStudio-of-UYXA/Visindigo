@@ -12,17 +12,16 @@
 #include "../../CommonEdit/CECore/CEMacro.h"
 #include "macro/VIGeneralBehavior_m.h"
 
-
 class VIDuration :public QObject
 {
 	Q_OBJECT;
-	Public ENUM Unit {
+	Public ENUM Unit{
 		NanoSecond,
 		MilliSecond,
 		Second,
 	};
-	Public ENUM PercentType {
-		Linear, 
+	Public ENUM PercentType{
+		Linear,
 		Nonlinear,
 	};
 	Signal void timeout();
@@ -46,7 +45,7 @@ class VIGeneralBehavior :public QObject
 {
 	Q_OBJECT;
 	friend class VIGeneralBehaviorHost;
-	Public ENUM State {
+	Public ENUM State{
 		Idle,
 		Active,
 		Skip,

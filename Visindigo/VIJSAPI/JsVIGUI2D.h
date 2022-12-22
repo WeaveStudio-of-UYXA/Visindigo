@@ -22,7 +22,7 @@ namespace JsVI {
 				qDebug() << method.typeName() << method.methodSignature();
 			}*/
 			const QMetaObject* self = this->metaObject();
-			qDebug()<<self->superClass()->className();
+			qDebug() << self->superClass()->className();
 		}
 	public slots:
 		SSDEF(continueTextAni, QString str, int mspt = 100, int msw = 1500, bool wait = true) {

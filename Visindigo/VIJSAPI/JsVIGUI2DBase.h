@@ -26,9 +26,9 @@ namespace JsVI {
 			JsVI_BIND_SAME(setAlignment, GUIBaseLabel, Qt::AlignmentFlag);
 			BIND(this, SIGNAL(SsetGeometry(float, float, float, float)), GUIBaseLabel, SLOT(setGeometryPercent(float, float, float, float)));
 			JsVI_BIND_SAME(setOpacity, GUIBaseLabel, float);
-			JsVI_BIND_SAME(setOpacityAni, GUIBaseLabel, float, float, int, bool);			
-			JsVI_BIND_SAME(setStyleSheet, GUIBaseLabel, QString);		
-			JsVI_CONNECT_SAME_VOID(show, GUIBaseLabel);	
+			JsVI_BIND_SAME(setOpacityAni, GUIBaseLabel, float, float, int, bool);
+			JsVI_BIND_SAME(setStyleSheet, GUIBaseLabel, QString);
+			JsVI_CONNECT_SAME_VOID(show, GUIBaseLabel);
 		}
 		Q_INVOKABLE ~GUI2DLabel() {
 			emit Sdel();
@@ -73,11 +73,10 @@ namespace JsVI {
 		}
 		SSDEF(setOpacity, float op) {
 			emit SsetOpacity(op);
-		}	
+		}
 		SSDEF(setStyleSheet, QString style) {
 			emit SsetStyleSheet(style);
-		}	
+		}
 		SSDEF_SA_VOID(show);
-		
 	};
 }

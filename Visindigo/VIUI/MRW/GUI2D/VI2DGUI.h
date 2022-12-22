@@ -87,7 +87,7 @@ public slots:
 	void releaseMemory() {
 		Image = QImage();
 		this->clear();
-	}	
+	}
 	void skipOrJumpAni() {
 		if (SKIP && !FINISH) {
 			Process->finishEvent(OpacityAnimation);

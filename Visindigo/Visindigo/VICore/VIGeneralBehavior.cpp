@@ -55,8 +55,6 @@ bool VIDuration::isTimeout() {
 	return this->TIMEOUTFLAG;
 }
 
-
-
 void VIGeneralBehavior::setDuration(VIMilliSecond msec) {
 	this->DURATION->setDuration(msec);
 }
@@ -83,7 +81,7 @@ void VIGeneralBehavior::active() {
 		STATE = State::Active;
 		emit addBehaviorLater(this);
 	}
-} 
+}
 void VIGeneralBehavior::preFrame(VINanoSecond duration) {
 	this->DURATION->addTime(duration, VIDuration::Unit::NanoSecond);
 	if (DURATION->isTimeout()) {

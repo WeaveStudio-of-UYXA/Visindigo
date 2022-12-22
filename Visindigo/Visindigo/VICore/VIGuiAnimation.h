@@ -30,7 +30,7 @@ public:
 	QList<float> MidwaySignal;
 	int MidwaySignalIndex = 0;
 	VIAnimationEventProcess* Process = Q_NULLPTR;
-	
+
 	VIMath::VI2DMatrix COEFF;
 protected:
 	bool ALIVE = false;

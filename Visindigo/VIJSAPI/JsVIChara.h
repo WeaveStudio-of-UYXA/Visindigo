@@ -33,11 +33,11 @@ namespace JsVI
 		QStringList loadPicture() {
 			QString Path = this->ResourcePath + "/Picture";
 			QDir dir(Path);
-			dir.setNameFilters({"*.png"});
+			dir.setNameFilters({ "*.png" });
 			QFileInfoList list = dir.entryInfoList();
-			for ( auto i = list.begin(); i != list.end(); i++) {
-				QString fileName = (* i).fileName();
-				QString filePath = (* i).filePath();
+			for (auto i = list.begin(); i != list.end(); i++) {
+				QString fileName = (*i).fileName();
+				QString filePath = (*i).filePath();
 				QImage image(filePath);
 				this->ImageList.insert(fileName, image);
 			}
