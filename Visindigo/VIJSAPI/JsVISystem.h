@@ -7,6 +7,6 @@ namespace JsVI
 	class VISystem :public VIBase::VISystem_Glass
 	{
 		Q_OBJECT;
-		Public def_init VISystem(QObject* parent = Q_NULLPTR) :VIBase::VISystem_Glass(parent) {}
+		pPublic def_init VISystem(QObject* parent = Q_NULLPTR) :VIBase::VISystem_Glass(parent) {}
 	};
 }

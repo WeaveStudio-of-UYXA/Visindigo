@@ -19,9 +19,9 @@
 		#define operators 
 		#define DoNothing
 		#define ENUM enum class
-		#define Public public:
-		#define Private private:
-		#define Protected protected:
+		#define pPublic public:
+		#define pPrivate private:
+		#define pProtected protected:
 		#define def auto
 		#define def_init
 		#define def_del
@@ -31,7 +31,6 @@
 		#define elif else if
 		#define True true
 		#define False false
-		#define match switch
 		
 #endif
 

@@ -15,6 +15,7 @@ namespace JsVI {
 			JsVI_INIT;
 			JsVI_BIND_SAME(continueTextAni, JsVIGUI, QString, int, int, bool);
 			JsVI_BIND_SAME(setTextAni, JsVIGUI, QString, int, int, bool);
+			JsVI_BIND_SAME(setTextAni_b, JsVIGUI, QString, int, int, bool);
 			JsVI_BIND_SAME(setText, JsVIGUI, QString);
 			BIND(this, SIGNAL(StextNonlinerProgress(VIMath::VI2DMatrix)), JsVIGUI, SLOT(textNonlinerProgress(VIMath::VI2DMatrix)));
 			/*for (int i = this->metaObject()->methodCount(); i > 0; i--) {
@@ -31,6 +32,10 @@ namespace JsVI {
 		}
 		SSDEF(setTextAni, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
 			emit SsetTextAni(str, mspt, msw, wait);
+			JsVI_WAIT(wait);
+		}
+		SSDEF(setTextAni_b, QString str, int mspt = 100, int msw = 1500, bool wait = true) {
+			emit SsetTextAni_b(str, mspt, msw, wait);
 			JsVI_WAIT(wait);
 		}
 		SSDEF(setText, QString str) {

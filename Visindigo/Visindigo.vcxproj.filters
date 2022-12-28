@@ -88,6 +88,18 @@
     <ClInclude Include="VIJSAPI\macro\VIJSGlobal_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Visindigo\VIObjects\macro\VIGlassConvention.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIJSAPI\VIGUI\VIGUILabel\JsVIGUILabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h">
@@ -144,16 +156,7 @@
     <QtMoc Include="CommonEdit\CEFunction\CELanguage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VIObjects\VIObject\VIGlassObject.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Visindigo\VISystem\VISystemBase.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIUI\MRW\GUI2D\VIGUILabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

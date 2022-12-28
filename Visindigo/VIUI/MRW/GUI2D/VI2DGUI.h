@@ -6,15 +6,22 @@ class VITextLabel : public VI2DGUILabel
 	Q_OBJECT
 public:
 	VITextAnimation* Animation;
+	VITextAniBehavior* Behavior;
+	bool wait;
 public:
 	VITextLabel();
 	VITextLabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) :VI2DGUILabel(WidgetParent, AniParent) {
 		this->setWordWrap(true);
 		//this->setObjectName("VIText");
 		Animation = new VITextAnimation(this);
+		Behavior = new VITextAniBehavior(this);
 		BIND(Animation, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
+		BIND(Behavior, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
 		BIND_DONE(Animation);
+		BIND(Behavior, SIGNAL(done()), this, SLOT(ifHostWait()));
 		Animation->setAnimationProcess(Process);
+		Behavior->setHost(gBEHAVIOR);
+		qDebug() << gBEHAVIOR;
 		this->setAlignment(Qt::AlignLeft);
 		this->setGeometry(QRect(0, 0, 500, 60));
 	}
@@ -33,6 +40,12 @@ public slots:
 		Animation->setDoneSignal(wait);
 		Animation->active();
 	}
+	void setTextAni_b(QString text, int mspt, int msw, bool wait) {
+		Behavior->setTextAni(text, mspt, msw, false);
+		SKIP = FINISH = false;
+		this->wait = wait;
+		Behavior->active();
+	}
 	void continueTextAni(QString text, int mspt, int msw, bool wait) {
 		Animation->setSpeed(mspt);
 		Animation->setWait(msw);
@@ -40,6 +53,12 @@ public slots:
 		SKIP = FINISH = false;
 		Animation->setDoneSignal(wait);
 		Animation->active();
+	}
+	void continueTextAni_b(QString text, int mspt, int msw, bool wait) {
+		Behavior->setTextAni(text, mspt, msw, true);
+		SKIP = FINISH = false;
+		this->wait = wait;
+		Behavior->active();
 	}
 	void getText(QString text) {
 		QLabel::setText(text);
@@ -52,6 +71,21 @@ public slots:
 		else if (!SKIP && !FINISH) {
 			Process->skipEvent(Animation);
 			SKIP = true;
+		}
+	}
+	void skipOrJumpAni_b() {
+		if (SKIP && !FINISH) {
+			Behavior->setBehaviorState(VIGeneralBehavior::State::Done);
+			FINISH = true;
+		}
+		else if (!SKIP && !FINISH) {
+			Behavior->setBehaviorState(VIGeneralBehavior::State::Skip);
+			SKIP = true;
+		}
+	}
+	void ifHostWait() {
+		if (wait) {
+			VIJSHostWake;
 		}
 	}
 };

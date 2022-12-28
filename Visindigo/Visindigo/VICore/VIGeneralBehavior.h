@@ -15,64 +15,91 @@
 class VIDuration :public QObject
 {
 	Q_OBJECT;
-	Public ENUM Unit{
+	pPublic ENUM Unit{
 		NanoSecond,
 		MilliSecond,
 		Second,
 	};
-	Public ENUM PercentType{
+	pPublic ENUM PercentType{
 		Linear,
 		Nonlinear,
 	};
-	Signal void timeout();
-	Private VIMilliSecond MSEC = 0;
-	Private VIMilliSecond CURRENT;
-	Private float PERCENT;
-	Private float PERCENT_NL;
-	Private VIMath::VI2DMatrix COEFF;
-	Private bool TIMEOUTFLAG = false;
-	Public VIDuration(QObject* parent = Q_NULLPTR) : QObject(parent) {};
-	Public void init();
-	Public void setDuration(VIMilliSecond);
-	Public double getDuration(Unit);
-	Public float getPercent(PercentType);
-	Public void setBesselCoeff(VIMath::VI2DMatrix);
-	Public bool isTimeout();
-	Slot void addTime(unsigned long long, Unit);
+	pSignal void timeout();
+	pPrivate VIMilliSecond MSEC = 0;
+	pPrivate double CURRENT;
+	pPrivate float PERCENT;
+	pPrivate float PERCENT_NL;
+	pPrivate VIMath::VI2DMatrix COEFF;
+	pPrivate bool TIMEOUTFLAG = false;
+	pPublic VIDuration(QObject* parent = Q_NULLPTR) : QObject(parent) {};
+	pPublic void init();
+	pPublic void setDuration(VIMilliSecond);
+	pPublic double getDuration(Unit);
+	pPublic float getPercent(PercentType);
+	pPublic double getCurrent();
+	pPublic void setBesselCoeff(VIMath::VI2DMatrix);
+	pPublic bool isTimeout();
+	pSlot void addTime(unsigned long long, Unit);
 };
 
 class VIGeneralBehavior :public QObject
 {
 	Q_OBJECT;
 	friend class VIGeneralBehaviorHost;
-	Public ENUM State{
+	pPublic ENUM State{
 		Idle,
 		Active,
 		Skip,
 		Done,
 	};
-	Protected VIGeneralBehaviorHost* HOST = nullptr;
-	Protected VIDuration* DURATION = nullptr;
-	Protected State STATE = State::Idle;
-	Signal void addBehaviorLater(VIGeneralBehavior*);
-	Signal void done();
-	Private void preFrame(VINanoSecond);
-	Protected void setHost(VIGeneralBehaviorHost*);
-	Protected void setDuration(VIMilliSecond);
-	Protected VIMilliSecond getDuration();
-	Protected float getPercent(VIDuration::PercentType);
-	Protected void setBesselCoeff(VIMath::VI2DMatrix);
-	Public VIGeneralBehavior(QObject* parent = Q_NULLPTR) :QObject(parent) {
+	pProtected VIGeneralBehaviorHost* HOST = nullptr;
+	pProtected VIDuration* DURATION = nullptr;
+	pProtected QMutex RESMUTEX;
+	pPrivate State STATE = State::Idle;
+	pSignal void addBehaviorLater(VIGeneralBehavior*);
+	pSignal void done();
+	pProtected void preFrame(VINanoSecond);
+	pPublic void setHost(VIGeneralBehaviorHost*);
+	pProtected void setDuration(VIMilliSecond);
+	pProtected VIMilliSecond getDuration();
+	pProtected float getPercent(VIDuration::PercentType);
+	pProtected double getCurrent();
+	pProtected void setBesselCoeff(VIMath::VI2DMatrix);
+	pPublic VIGeneralBehavior(QObject* parent = Q_NULLPTR) :QObject(parent) {
 		this->DURATION = new VIDuration(this);
 	}
-	Public virtual void onActive() = 0;
-	Public virtual void onFrame() = 0;
-	Public virtual void onSkip() {};
-	Public virtual void onDone() {};
-	Public State getBehaviorState();
-	Slot void active();
+	pProtected virtual void onActive() = 0;
+	pProtected virtual void onFrame() = 0;
+	pProtected virtual void onSkip() {};
+	pProtected virtual void onDone() {};
+	pPublic void setBehaviorState(State);
+	pPublic State getBehaviorState();
+	pSlot void active();
 };
 
-class VIGeneralBehaviorHost :public QObject {
+
+class VIGeneralBehaviorHost :public QThread {
 	Q_OBJECT;
+	friend class VIGeneralBehavior;
+	pPublic static VIGeneralBehaviorHost* VIGeneralBehaviorHostInstance;
+	pPrivate QVector<VIGeneralBehavior*> BEHAVIORLIST;
+	pPrivate QVector<VIGeneralBehavior*> BEHAVIORLIST_ADD;
+	pProtected static QMutex HOSTMUTEX;
+	pProtected static QMutex SLEEPMUTEX;
+	pProtected static QWaitCondition SLEEPWAIT;
+	pPrivate bool HOSTFLAG = false;
+	pPrivate bool SLEEPFLAG = false;
+	pPrivate VINanoSecond LASTTIME = 10;
+	pPublic def_init VIGeneralBehaviorHost(QObject* parent = Q_NULLPTR) :QThread(parent) { SLEEPMUTEX.lock(); }
+	pPrivate void setHostFlag(bool);
+	pPrivate bool getHostFlag();
+	pPrivate void setSleep(bool);
+	pPublic bool isSleep();
+	pPublic void run();
+	pPublic void stop();
+	pSlot void addBehavior(VIGeneralBehavior*);
+	pPrivate void mergeEvent();
+	pPrivate void ergodicEvent();
+	pPrivate void eraseEvent();
 };
+

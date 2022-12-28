@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "VIGuiAnimation.h"
+#include "VIGeneralBehavior.h"
 #include "VIMath.h"
 
 class VITextAnimation : public VIAnimationEvent
@@ -60,6 +61,49 @@ public:
 	}
 };
 
+class VITextAniBehavior :public VIGeneralBehavior
+{
+	Q_OBJECT;
+	pPublic def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
+	pSignal void getText(QString);
+	pPrivate QString BEFORE;
+	pPrivate QString TEXT;
+	pPrivate QString CURRENT;
+	pPrivate QString::iterator CHAR;
+	pPrivate VIMilliSecond LMS;
+	pPrivate VIMilliSecond MSPT;
+	pPrivate VIMilliSecond MSW;
+	pPrivate int INDEX;
+	pSlot void setTextAni(QString text, int MsPT, int MsW, bool continueAni) {
+		BEFORE = TEXT;
+		TEXT = text;
+		if (!continueAni) { CURRENT = ""; }
+		else { CURRENT = BEFORE; }
+		MSPT = MsPT;
+		MSW = MsW;
+		this->setDuration(text.length() * MsPT + MsW);
+	}
+	pProtected void onActive() {
+		LMS = 0;
+		INDEX = 0;
+		CHAR = TEXT.begin();
+	}
+	pProtected void onFrame() {
+		if (getCurrent() >= LMS && CHAR != TEXT.end() && getBehaviorState()!=State::Skip) {
+			CURRENT += *CHAR;
+			CHAR++;
+			INDEX++;
+			LMS = INDEX * MSPT;
+			emit getText(CURRENT);
+		}
+		//qDebug() << "Percent" << this->getPercent(VIDuration::PercentType::Linear) << "Duration" << this->getDuration();
+	}
+	pProtected void onSkip() {
+		CHAR = TEXT.end();
+		//this->setDuration(TEXT.length() * MSPT);
+		emit getText(BEFORE + TEXT);
+	}
+};
 class VIOpacityAnimation :public VIAnimationEvent
 {
 	Q_OBJECT

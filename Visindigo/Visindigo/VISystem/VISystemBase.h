@@ -1,15 +1,15 @@
 ﻿#pragma once
-#include "../../Visindigo/VIObjects/VIObject/VIGlassObject.h"
+#include "../../Visindigo/VIObjects/macro/VIGlassConvention.h"
 
 namespace VIBase {
-	class VISystem_Glass :public VIGlassObject
+	class VISystem_Glass :public QObject
 	{
 		Q_OBJECT;
-		Public def_init VISystem_Glass(QObject* parent = Q_NULLPTR) :VIGlassObject(parent) {}
-		Slot virtual void exit(int code = 0);
-		Slot virtual QString getSystemProductName();
-		Slot void print(QString str);
-		Slot void wait(int ms);
-		Slot QStringList argv();
+		pPublic def_init VISystem_Glass(QObject* parent = Q_NULLPTR) :QObject(parent) {}
+		pSlot virtual void exit(int code = 0);
+		pSlot virtual QString getSystemProductName();
+		pSlot void print(QString str);
+		pSlot void wait(int ms);
+		pSlot QStringList argv();
 	};
 }

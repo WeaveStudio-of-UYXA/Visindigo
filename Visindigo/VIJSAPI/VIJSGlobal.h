@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <QtCore>
 #include "macro/VIJSGlobal_m.h"
-
+#include "../Visindigo/VIObjects/macro/VIGlassConvention.h"
 class VIJSGlobal {
 public:
 	static QMutex VIJSMutex;

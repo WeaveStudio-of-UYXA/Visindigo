@@ -131,6 +131,7 @@
     <QtMoc Include="VIJSAPI\JsVIChara.h" />
     <QtMoc Include="VIJSAPI\JsVIContainer.h" />
     <ClInclude Include="VIJSAPI\macro\VIJSGlobal_m.h" />
+    <ClInclude Include="VIJSAPI\VIGUI\VIGUILabel\JsVIGUILabel.h" />
     <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
     <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />
@@ -139,10 +140,10 @@
     <ClInclude Include="Visindigo\VICore\VIMath.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h" />
     <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h" />
-    <QtMoc Include="Visindigo\VIObjects\VIObject\VIGlassObject.h" />
+    <ClInclude Include="Visindigo\VIObjects\macro\VIGlassConvention.h" />
     <QtMoc Include="Visindigo\VISystem\VISystemBase.h" />
-    <QtMoc Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h" />
-    <QtMoc Include="VIUI\MRW\GUI2D\VIGUILabel.h" />
+    <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h" />
+    <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h" />
     <ClInclude Include="VIUI\PW\VisindigoProject.h" />
     <ClInclude Include="VIUI\RW\VisindigoRepos.h" />
     <QtMoc Include="VIUI\MRW\VIGUI2D.h" />

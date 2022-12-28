@@ -47,7 +47,7 @@ public:
 		QPalette PAL;
 		PAL.setColor(QPalette::Background, Qt::black);
 		this->setPalette(PAL);
-
+		gBEHAVIOR = new VIGeneralBehaviorHost(this);
 		Process = new VIAnimationEventProcess(this);
 		CentralWidget = new VICentralWidget(this, Process);
 		this->setCentralWidget(CentralWidget);
@@ -64,6 +64,7 @@ public:
 		BIND(JSHost->VIGUI2D, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()));
 		BIND(JSHost->VIGUI2D, SIGNAL(SenableGUIFrame()), this, SLOT(enableGUIFrame()));
 		Process->start();
+		gBEHAVIOR->start();
 		this->loadJS();
 	}
 	void loadJS() {

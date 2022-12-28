@@ -22,12 +22,8 @@
 
 #ifdef QT_VERSION_MAJOR
 	#define CE_QT_KEYWORDS
-		#define Slot public Q_SLOTS:
-		#define Signal Q_SIGNALS:
-#endif
-#ifdef QT_VERSION_MAJOR
-	#define connectPushButton(QPushButton_Object,Target_Object,Slot) connect(QPushButton_Object,SIGNAL(clicked()),Target_Object,SLOT(Slot))
-	#define connectAction(QAction_Object,Target_Object,Slot) connect(QAction_Object,SIGNAL(triggered()),Target_Object,SLOT(Slot))
+		#define pSlot public Q_SLOTS:
+		#define pSignal Q_SIGNALS:
 #endif
 
 #ifndef Q_NULLPTR
