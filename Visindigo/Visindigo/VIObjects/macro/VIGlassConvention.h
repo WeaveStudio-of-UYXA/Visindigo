@@ -7,7 +7,7 @@
 #define emit_REF(methodName, ...) emit p_VI_REF_SIGNAL(methodName)(__VA_ARGS__);
 #define def_REF_SS(methodName) def_REF(methodName){emit_REF(methodName)}
 #define p_VI_REF_TARGET_NAME p_VI_REF_TARGET
-#define GLASS_TYPE(typeName) pPublic typeName* p_VI_REF_TARGET_NAME;
+#define GLASS_TYPE(typeName) publicD typeName* p_VI_REF_TARGET_NAME;
 #define set_REF(target) p_VI_REF_TARGET_NAME = target
 #define build_REF(methodName, connectType, ...) connect(this, SIGNAL(p_VI_REF_SIGNAL(methodName)(__VA_ARGS__)), p_VI_REF_TARGET_NAME, SLOT(methodName(__VA_ARGS__)), connectType)
 #define build_REF_D(methodName, ...) build_REF(methodName, Qt::DirectConnection, __VA_ARGS__)

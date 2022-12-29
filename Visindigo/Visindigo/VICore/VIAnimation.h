@@ -64,17 +64,17 @@ public:
 class VITextAniBehavior :public VIGeneralBehavior
 {
 	Q_OBJECT;
-	pPublic def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
-	pSignal void getText(QString);
-	pPrivate QString BEFORE;
-	pPrivate QString TEXT;
-	pPrivate QString CURRENT;
-	pPrivate QString::iterator CHAR;
-	pPrivate VIMilliSecond LMS;
-	pPrivate VIMilliSecond MSPT;
-	pPrivate VIMilliSecond MSW;
-	pPrivate int INDEX;
-	pSlot void setTextAni(QString text, int MsPT, int MsW, bool continueAni) {
+	publicD def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
+	signalD void getText(QString);
+	privateD QString BEFORE;
+	privateD QString TEXT;
+	privateD QString CURRENT;
+	privateD QString::iterator CHAR;
+	privateD VIMilliSecond LMS;
+	privateD VIMilliSecond MSPT;
+	privateD VIMilliSecond MSW;
+	privateD int INDEX;
+	slotD void setTextAni(QString text, int MsPT, int MsW, bool continueAni) {
 		BEFORE = TEXT;
 		TEXT = text;
 		if (!continueAni) { CURRENT = ""; }
@@ -83,12 +83,12 @@ class VITextAniBehavior :public VIGeneralBehavior
 		MSW = MsW;
 		this->setDuration(text.length() * MsPT + MsW);
 	}
-	pProtected void onActive() {
+	protectedD void onActive() {
 		LMS = 0;
 		INDEX = 0;
 		CHAR = TEXT.begin();
 	}
-	pProtected void onFrame() {
+	protectedD void onFrame() {
 		if (getCurrent() >= LMS && CHAR != TEXT.end() && getBehaviorState()!=State::Skip) {
 			CURRENT += *CHAR;
 			CHAR++;
@@ -98,7 +98,7 @@ class VITextAniBehavior :public VIGeneralBehavior
 		}
 		//qDebug() << "Percent" << this->getPercent(VIDuration::PercentType::Linear) << "Duration" << this->getDuration();
 	}
-	pProtected void onSkip() {
+	protectedD void onSkip() {
 		CHAR = TEXT.end();
 		//this->setDuration(TEXT.length() * MSPT);
 		emit getText(BEFORE + TEXT);
