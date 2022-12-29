@@ -22,8 +22,8 @@
 
 #ifdef QT_VERSION_MAJOR
 	#define CE_QT_KEYWORDS
-		#define slotD public Q_SLOTS:
-		#define signalD Q_SIGNALS:
+		#define Slot_ public Q_SLOTS:
+		#define Signal_ Q_SIGNALS:
 #endif
 
 #ifndef Q_NULLPTR

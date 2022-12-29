@@ -19,9 +19,9 @@
 		#define operators 
 		#define DoNothing
 		#define ENUM enum class
-		#define publicD public:
-		#define privateD private:
-		#define protectedD protected:
+		#define Public_ public:
+		#define Private_ private:
+		#define Protected_ protected:
 		#define def auto
 		#define def_init
 		#define def_del
