@@ -27,12 +27,14 @@ function test(){
     t.continueTextAni("\n他们不会因为天灾而退缩，而是会用自己的力量去拯救这片大地。");
     t.setOpacityAni(1, 0, 1000, true);
     t.setOpacityAni(0, 1, 1000);
+    p.del();
     t.setTextAni("我的足迹遍布大地，但却也不是整个泰拉");
     t.setOpacityAni(1, 0, 1000, true);
     t.setOpacityAni(0, 1, 1);
     t.setTextAni("你好，世界。");
     t.setTextAni("你好，世界。");
     t.setTextAni("你好，世界。");
+    t.del();
     VISystem.print("Hello world");
 }
 

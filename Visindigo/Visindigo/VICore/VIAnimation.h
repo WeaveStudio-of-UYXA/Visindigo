@@ -62,10 +62,22 @@ public:
 	}
 };
 
-class VITextAniBehavior :public VIGeneralBehavior
+class VIGuiAnimation :public VIGeneralBehavior
 {
 	Q_OBJECT;
-	Public_ def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
+	Private_ bool WAITFLAG;
+	Public_ def_init VIGuiAnimation(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
+	Public_ bool ifWait() {
+		return this->WAITFLAG;
+	};
+	Public_ void setWait(bool w) {
+		this->WAITFLAG = w;
+	}
+};
+class VITextAniBehavior :public VIGuiAnimation
+{
+	Q_OBJECT;
+	Public_ def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIGuiAnimation(parent) {}
 	Signal_ void getText(QString);
 	Private_ QString BEFORE = "";
 	Private_ QString TEXT = "";
@@ -83,8 +95,6 @@ class VITextAniBehavior :public VIGeneralBehavior
 		MSPT = MsPT;
 		MSW = MsW;
 		this->setDuration(text.length() * MsPT + MsW);
-		qDebug() << BEFORE;
-		qDebug() << TEXT;
 	}
 	Protected_ void onActive() {
 		LMS = 0;
@@ -94,7 +104,6 @@ class VITextAniBehavior :public VIGeneralBehavior
 	Protected_ void onFrame() {
 		if (getCurrent() >= LMS && CHAR != TEXT.end() && getBehaviorState()!=State::Skip) {
 			CURRENT += *CHAR;
-			qDebug() << CURRENT;
 			CHAR++;
 			INDEX++;
 			LMS = INDEX * MSPT;
@@ -149,14 +158,14 @@ public:
 	}
 };
 
-class VIOpacityAniBehavior :public VIGeneralBehavior
+class VIOpacityAniBehavior :public VIGuiAnimation
 {
 	Q_OBJECT;
 	Signal_ void getOpacity(float);
 	Public_ float OPBegin;
 	Public_  float OPEnd;
 	Public_ float OPDelta;
-	Public_ def_init VIOpacityAniBehavior(QObject* parent = Q_NULLPTR):VIGeneralBehavior(parent) {}
+	Public_ def_init VIOpacityAniBehavior(QObject* parent = Q_NULLPTR):VIGuiAnimation(parent) {}
 	Public_ void setOpacity(float begin, float end, int ms) {
 		OPBegin = begin;
 		OPEnd = end;

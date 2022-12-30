@@ -94,8 +94,6 @@ class VIGeneralBehaviorHost :public QThread {
 	Public_ def_init VIGeneralBehaviorHost(QObject* parent = Q_NULLPTR) :QThread(parent) { SLEEPMUTEX.lock(); }
 	Private_ void setHostFlag(bool);
 	Private_ bool getHostFlag();
-	Private_ void setSleep(bool);
-	Public_ bool isSleep();
 	Public_ void run();
 	Public_ void stop();
 	Slot_ void addBehavior(VIGeneralBehavior*);

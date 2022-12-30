@@ -148,21 +148,10 @@ bool VIGeneralBehaviorHost::getHostFlag() {
 	HOSTMUTEX.unlock();
 	return flag;
 }
-void VIGeneralBehaviorHost::setSleep(bool s) {
-	HOSTMUTEX.lock();
-	this->SLEEPFLAG = s;
-	HOSTMUTEX.unlock();
-}
-bool VIGeneralBehaviorHost::isSleep() {
-	HOSTMUTEX.lock();
-	bool s = SLEEPFLAG;
-	HOSTMUTEX.unlock();
-	return s;
-}
 void VIGeneralBehaviorHost::run() {
 	this->setHostFlag(true);
 	while (true) {
-		if (BEHAVIORLIST.isEmpty()) { setSleep(true); SLEEPWAIT.wait(&SLEEPMUTEX); }
+		//if (BEHAVIORLIST.isEmpty()) { setSleep(true); SLEEPWAIT.wait(&SLEEPMUTEX); }
 		STD_TimePoint TPB = STD_clock_now();
 		mergeEvent();
 		ergodicEvent();
@@ -202,6 +191,8 @@ void VIGeneralBehaviorHost::eraseEvent() {
 			VIGeneralBehavior* j = (* i);
 			i = BEHAVIORLIST.erase(i);
 			emit j->done();
+			qDebug() << "Behavior done" << j;
+			qDebug() << "Behavior left" << BEHAVIORLIST.length();
 		}
 		else {
 			i++;
@@ -213,7 +204,7 @@ void VIGeneralBehaviorHost::addBehavior(VIGeneralBehavior* gb) {
 	qDebug() << "Add Behavior" << gb;
 	HOSTMUTEX.lock();
 	BEHAVIORLIST_ADD.append(gb);
-	if (SLEEPFLAG) { SLEEPWAIT.wakeAll(); }
+	//if (SLEEPFLAG) { SLEEPWAIT.wakeAll(); }
 	HOSTMUTEX.unlock();
-	//qDebug() << "Add Finish";
+	qDebug() << "Add Finish";
 }

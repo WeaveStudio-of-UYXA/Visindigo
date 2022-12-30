@@ -19,7 +19,6 @@ public:
 	bool FINISH = false;
 	QGraphicsOpacityEffect* Opacity;
 	VIOpacityAniBehavior* OpacityAniBehavior;
-	bool OpacityAniWait = false;
 	float px, py, pw, ph;
 	float pCx, pCy;
 	bool wToh = false;
@@ -50,11 +49,12 @@ public slots:
 	}
 	virtual void skipOrJumpAni() {}
 	void getDone() {
-		if (OpacityAniWait) { VIJSHostWake; }
+		VIGuiAnimation* Sender = dynamic_cast<VIGuiAnimation*>(this->sender());
+		if (Sender->ifWait()) { VIJSHostWake; }
 	}
 	void setOpacityAni(float start, float end, int ms, bool wait) {
 		OpacityAniBehavior->setOpacity(start, end, ms);
-		this->OpacityAniWait = wait;
+		OpacityAniBehavior->setWait(wait);
 		OpacityAniBehavior->active();
 	}
 	void setOpacity(float op) {

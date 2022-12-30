@@ -31,11 +31,12 @@ namespace JsVI {
 			JsVI_CONNECT_SAME_VOID(show, GUIBaseLabel);
 		}
 		Q_INVOKABLE ~GUI2DLabel() {
-			emit Sdel();
-			qDebug() << "JsVI Deleted";
-			this->disconnect();
 		}
-		SSDEF_SA_VOID(del);
+		SSDEF(del) {
+			emit Sdel();
+			this->disconnect();
+			this->deleteLater();
+		}
 		SSDEF_SA_VOID(hide);
 		SSDEF(move, float px, float py) {
 			emit Smove(px, py);

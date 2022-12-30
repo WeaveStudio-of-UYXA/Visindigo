@@ -6,7 +6,6 @@ class VITextLabel : public VI2DGUILabel
 	Q_OBJECT
 public:
 	VITextAniBehavior* Behavior;
-	bool wait;
 public:
 	VITextLabel();
 	VITextLabel(QWidget* WidgetParent) :VI2DGUILabel(WidgetParent) {
@@ -30,13 +29,13 @@ public slots:
 	void setTextAni(QString text, int mspt, int msw, bool wait) {
 		Behavior->setTextAni(text, mspt, msw, false);
 		SKIP = FINISH = false;
-		this->wait = wait;
+		Behavior->setWait(wait);
 		Behavior->active();
 	}
 	void continueTextAni(QString text, int mspt, int msw, bool wait) {
 		Behavior->setTextAni(text, mspt, msw, true);
 		SKIP = FINISH = false;
-		this->wait = wait;
+		Behavior->setWait(wait);
 		Behavior->active();
 	}
 	void getText(QString text) {
@@ -53,7 +52,8 @@ public slots:
 		}
 	}
 	void ifHostWait() {
-		if (wait) {
+		VIGuiAnimation* Sender = dynamic_cast<VIGuiAnimation*>(this->sender());
+		if (Sender->ifWait()) {
 			VIJSHostWake;
 		}
 	}
