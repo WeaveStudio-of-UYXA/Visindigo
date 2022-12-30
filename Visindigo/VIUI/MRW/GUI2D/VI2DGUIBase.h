@@ -14,29 +14,28 @@ signals:
 	void removeThis(VI2DGUILabel*);
 public:
 	QWidget* Parent;
-	VIAnimationEventProcess* Process;
 	bool Wait = false;
 	bool SKIP = false;
 	bool FINISH = false;
 	QGraphicsOpacityEffect* Opacity;
-	VIOpacityAnimation* OpacityAnimation;
+	VIOpacityAniBehavior* OpacityAniBehavior;
+	bool OpacityAniWait = false;
 	float px, py, pw, ph;
 	float pCx, pCy;
 	bool wToh = false;
 	bool mC = false;
 	QString StyleSheets;
-	VI2DGUILabel(QWidget* WidgetParent, VIAnimationEventProcess* AniParent) {
+	VI2DGUILabel(QWidget* WidgetParent) {
 		Parent = WidgetParent;
-		Process = AniParent;
 		this->setParent(Parent);
 		connect(this, SIGNAL(removeThis(VI2DGUILabel*)), Parent, SLOT(removeVI2DGUILabel(VI2DGUILabel*)));
 		Opacity = new QGraphicsOpacityEffect(this);
-		OpacityAnimation = new VIOpacityAnimation(this);
 		this->setGraphicsEffect(Opacity);
 		Opacity->setOpacity(1);
-		BIND(OpacityAnimation, SIGNAL(getOpacity(float)), this, SLOT(setOpacity(float)));
-		BIND_DONE(OpacityAnimation);
-		OpacityAnimation->setAnimationProcess(Process);
+		OpacityAniBehavior = new VIOpacityAniBehavior(this);
+		BIND(OpacityAniBehavior, SIGNAL(getOpacity(float)), this, SLOT(setOpacity(float)));
+		BIND(OpacityAniBehavior, SIGNAL(done()), this, SLOT(getDone()));
+		OpacityAniBehavior->setHost(gBEHAVIOR);
 		connect(Parent, SIGNAL(mousePressed()), this, SLOT(skipOrJumpAni()));
 		px = 0.1; py = 0.2; pw = 0.8; ph = 0.6;
 	}
@@ -50,14 +49,13 @@ public slots:
 		this->deleteLater();
 	}
 	virtual void skipOrJumpAni() {}
-	void ifWait(bool Wait) {
-		if (Wait) {
-			VIJSHostWake;
-		}
+	void getDone() {
+		if (OpacityAniWait) { VIJSHostWake; }
 	}
 	void setOpacityAni(float start, float end, int ms, bool wait) {
-		OpacityAnimation->setOpacity(start, end, ms, wait);
-		OpacityAnimation->active();
+		OpacityAniBehavior->setOpacity(start, end, ms);
+		this->OpacityAniWait = wait;
+		OpacityAniBehavior->active();
 	}
 	void setOpacity(float op) {
 		this->Opacity->setOpacity(op);

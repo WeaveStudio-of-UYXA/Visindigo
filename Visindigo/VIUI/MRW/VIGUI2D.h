@@ -15,21 +15,19 @@ public:
 	VI3DWidget* Widget3D;
 	QList<VI2DGUILabel*> LabelList;
 
-	VIAnimationEventProcess* Process;
-	VIGUI2DWidget(QWidget* parent, VIAnimationEventProcess* process) :QWidget(parent) {
+	VIGUI2DWidget(QWidget* parent) :QWidget(parent) {
 		Widget3D = new VI3DWidget(this);
-		Process = process;
 	}
 	void mousePressEvent(QMouseEvent* event) {
 		emit mousePressed();
 	}
 public slots:
 	void newVITextLabel(VITextLabel** p) {
-		*p = new VITextLabel(this, Process);
+		*p = new VITextLabel(this);
 		LabelList.append(*p);
 	}
 	void newVIPictureLabel(VIPictureLabel** p) {
-		*p = new VIPictureLabel(this, Process);
+		*p = new VIPictureLabel(this);
 		LabelList.append(*p);
 	}
 	void removeVI2DGUILabel(VI2DGUILabel* p) {

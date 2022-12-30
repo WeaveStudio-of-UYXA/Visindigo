@@ -26,10 +26,11 @@ class VIDuration :public QObject
 	};
 	Signal_ void timeout();
 	Private_ VIMilliSecond MSEC = 0;
+	Protected_ bool FOREVER = false;
 	Private_ double CURRENT;
 	Private_ float PERCENT;
 	Private_ float PERCENT_NL;
-	Private_ VIMath::VI2DMatrix COEFF;
+	Private_ VIMath::VI2DMatrix COEFF = { {0, 0}, {1, 1} };
 	Private_ bool TIMEOUTFLAG = false;
 	Public_ VIDuration(QObject* parent = Q_NULLPTR) : QObject(parent) {};
 	Public_ void init();
@@ -64,7 +65,7 @@ class VIGeneralBehavior :public QObject
 	Protected_ VIMilliSecond getDuration();
 	Protected_ float getPercent(VIDuration::PercentType);
 	Protected_ double getCurrent();
-	Protected_ void setBesselCoeff(VIMath::VI2DMatrix);
+	Public_ void setBesselCoeff(VIMath::VI2DMatrix);
 	Public_ VIGeneralBehavior(QObject* parent = Q_NULLPTR) :QObject(parent) {
 		this->DURATION = new VIDuration(this);
 	}

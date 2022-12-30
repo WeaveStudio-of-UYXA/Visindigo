@@ -3,9 +3,9 @@
 #include<QtWidgets>
 #include <chrono>
 
-typedef unsigned long long VIMilliSecond;
-typedef unsigned long long VINanoSecond;
-typedef unsigned long long VISecond;
+typedef long long VIMilliSecond;
+typedef long long VINanoSecond;
+typedef long long VISecond;
 typedef std::chrono::system_clock::time_point STD_TimePoint;
 
 #define STD_clock_now std::chrono::system_clock::now

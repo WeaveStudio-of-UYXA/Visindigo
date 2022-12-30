@@ -12,13 +12,11 @@ class VICentralWidget :public QWidget
 public:
 	VI3DWidget* Widget3D;
 	VIGUI2DWidget* GUI2D;
-	VIAnimationEventProcess* Process;
 	QLabel* DebugInfoLabel;
 public:
-	VICentralWidget(QWidget* parent, VIAnimationEventProcess* process) :QWidget(parent) {
-		Process = process;
+	VICentralWidget(QWidget* parent) :QWidget(parent) {
 		//Widget3D = new VI3DWidget(this);
-		GUI2D = new VIGUI2DWidget(this, Process);
+		GUI2D = new VIGUI2DWidget(this);
 		DebugInfoLabel = new QLabel(this);
 		DebugInfoLabel->setObjectName("DebugInfo");
 		DebugInfoLabel->setStyleSheet("QLabel#DebugInfo{font-size:30px;color:#0CDB23;font-family:'Microsoft YaHei'}");
@@ -42,14 +40,12 @@ public:
 	VICentralWidget* CentralWidget;
 	QThread* JSHostThread;
 	VIJSHost* JSHost;
-	VIAnimationEventProcess* Process;
 	VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
 		QPalette PAL;
 		PAL.setColor(QPalette::Background, Qt::black);
 		this->setPalette(PAL);
 		gBEHAVIOR = new VIGeneralBehaviorHost(this);
-		Process = new VIAnimationEventProcess(this);
-		CentralWidget = new VICentralWidget(this, Process);
+		CentralWidget = new VICentralWidget(this);
 		this->setCentralWidget(CentralWidget);
 		JSHost = new VIJSHost(CentralWidget->GUI2D);
 		JSHostThread = new QThread(this);
@@ -63,7 +59,6 @@ public:
 		BIND(JSHost->VIGUI2D, SIGNAL(Sresize(int, int)), this, SLOT(setSize(int, int)));
 		BIND(JSHost->VIGUI2D, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()));
 		BIND(JSHost->VIGUI2D, SIGNAL(SenableGUIFrame()), this, SLOT(enableGUIFrame()));
-		Process->start();
 		gBEHAVIOR->start();
 		this->loadJS();
 	}
@@ -87,6 +82,6 @@ public slots:
 		qDebug() << output;
 	}
 	void enableGUIFrame() {
-		connect(Process, SIGNAL(currentFrame(float)), CentralWidget, SLOT(setFrame(float)), Qt::UniqueConnection);
+		//connect(Process, SIGNAL(currentFrame(float)), CentralWidget, SLOT(setFrame(float)), Qt::UniqueConnection);
 	}
 };

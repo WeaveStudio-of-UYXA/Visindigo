@@ -3,6 +3,7 @@
 #include "VIGeneralBehavior.h"
 #include "VIMath.h"
 
+//此类暂停支持，改用VIGeneralBehavior类型的VITextAniBehavior
 class VITextAnimation : public VIAnimationEvent
 {
 	Q_OBJECT
@@ -66,9 +67,9 @@ class VITextAniBehavior :public VIGeneralBehavior
 	Q_OBJECT;
 	Public_ def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
 	Signal_ void getText(QString);
-	Private_ QString BEFORE;
-	Private_ QString TEXT;
-	Private_ QString CURRENT;
+	Private_ QString BEFORE = "";
+	Private_ QString TEXT = "";
+	Private_ QString CURRENT = "";
 	Private_ QString::iterator CHAR;
 	Private_ VIMilliSecond LMS;
 	Private_ VIMilliSecond MSPT;
@@ -82,6 +83,8 @@ class VITextAniBehavior :public VIGeneralBehavior
 		MSPT = MsPT;
 		MSW = MsW;
 		this->setDuration(text.length() * MsPT + MsW);
+		qDebug() << BEFORE;
+		qDebug() << TEXT;
 	}
 	Protected_ void onActive() {
 		LMS = 0;
@@ -91,6 +94,7 @@ class VITextAniBehavior :public VIGeneralBehavior
 	Protected_ void onFrame() {
 		if (getCurrent() >= LMS && CHAR != TEXT.end() && getBehaviorState()!=State::Skip) {
 			CURRENT += *CHAR;
+			qDebug() << CURRENT;
 			CHAR++;
 			INDEX++;
 			LMS = INDEX * MSPT;
@@ -104,6 +108,8 @@ class VITextAniBehavior :public VIGeneralBehavior
 		emit getText(BEFORE + TEXT);
 	}
 };
+
+//此类暂停支持，改用VIGeneralBehavior类型的VIOpacityAniBehavior
 class VIOpacityAnimation :public VIAnimationEvent
 {
 	Q_OBJECT
@@ -143,6 +149,40 @@ public:
 	}
 };
 
+class VIOpacityAniBehavior :public VIGeneralBehavior
+{
+	Q_OBJECT;
+	Signal_ void getOpacity(float);
+	Public_ float OPBegin;
+	Public_  float OPEnd;
+	Public_ float OPDelta;
+	Public_ def_init VIOpacityAniBehavior(QObject* parent = Q_NULLPTR):VIGeneralBehavior(parent) {}
+	Public_ void setOpacity(float begin, float end, int ms) {
+		OPBegin = begin;
+		OPEnd = end;
+		OPDelta = qAbs(end - begin);
+		this->setDuration(ms);
+	}
+	Slot_ void onActive() {
+		
+	}
+	Slot_ void onFrame() {
+		if (OPEnd > OPBegin) {
+			float OP = OPBegin + this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
+			emit getOpacity(OP);
+		}
+		else {
+			float OP = OPBegin - this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
+			emit getOpacity(OP);
+		}
+	}
+	Slot_ void onDone() {
+		emit getOpacity(OPEnd);
+	}
+	Slot_ void onSkip() {
+		emit getOpacity(OPEnd);
+	}
+};
 class VIResizeAnimation :public VIAnimationEvent
 {
 	Q_OBJECT

@@ -11,9 +11,15 @@ void VIDuration::init() {
 	PERCENT = 0;
 	PERCENT_NL = 0;
 	TIMEOUTFLAG = false;
-	COEFF = VIBessel::getBesselCoefficient({ {0, 0}, {1, 1} });
 }
 void VIDuration::setDuration(VIMilliSecond msec) {
+	if (msec < 0) {
+		this->FOREVER = true;
+	}
+	else {
+		this->FOREVER = false;
+		
+	}
 	this->MSEC = msec;
 }
 double VIDuration::getDuration(Unit unit = Unit::MilliSecond) {
@@ -42,24 +48,26 @@ void VIDuration::setBesselCoeff(VIMath::VI2DMatrix matrix) {
 }
 void VIDuration::addTime(unsigned long long time, Unit unit = Unit::MilliSecond) {
 	if (!TIMEOUTFLAG) {
-		//qDebug() << this->CURRENT<<time;
-		switch (unit) {
-		case Unit::NanoSecond:
-			this->CURRENT += (float)time / 1000000;
-			break;
-		case Unit::MilliSecond:
-			this->CURRENT += time;
-			break;
-		case Unit::Second:
-			this->CURRENT += time * 1000;
-			break;
+		if (!FOREVER) {
+			switch (unit) {
+			case Unit::NanoSecond:
+				this->CURRENT += (float)time / 1000000;
+				break;
+			case Unit::MilliSecond:
+				this->CURRENT += time;
+				break;
+			case Unit::Second:
+				this->CURRENT += time * 1000;
+				break;
+			}
 		}
 		PERCENT = (float)CURRENT / MSEC;
-		PERCENT_NL = VIBessel::getBesselValue(COEFF, PERCENT).y;
 		if (PERCENT >= 1) {
+			PERCENT = 1;
 			emit timeout();
 			TIMEOUTFLAG = true;
 		}
+		PERCENT_NL = VIBessel::getBesselValue(COEFF, PERCENT).y;
 	}
 }
 bool VIDuration::isTimeout() {
@@ -99,9 +107,9 @@ void VIGeneralBehavior::active() {
 void VIGeneralBehavior::preFrame(VINanoSecond duration) {
 	this->DURATION->addTime(duration, VIDuration::Unit::NanoSecond);
 	if (DURATION->isTimeout()) {
-		this->onDone();
 		this->setBehaviorState(State::Done);
-		emit done();
+		this->onDone();
+		
 	}
 	else {
 		State s = this->getBehaviorState();
@@ -114,7 +122,6 @@ void VIGeneralBehavior::preFrame(VINanoSecond duration) {
 			break;
 		case State::Done:
 			this->onDone();
-			emit done();
 			break;
 		}
 	}
@@ -155,7 +162,6 @@ bool VIGeneralBehaviorHost::isSleep() {
 void VIGeneralBehaviorHost::run() {
 	this->setHostFlag(true);
 	while (true) {
-		//qDebug() << BEHAVIORLIST.length();
 		if (BEHAVIORLIST.isEmpty()) { setSleep(true); SLEEPWAIT.wait(&SLEEPMUTEX); }
 		STD_TimePoint TPB = STD_clock_now();
 		mergeEvent();
@@ -192,7 +198,10 @@ void VIGeneralBehaviorHost::eraseEvent() {
 	//qDebug() << "Erase start";
 	for (auto i = BEHAVIORLIST.begin(); i != BEHAVIORLIST.end();) {
 		if ((*i)->getBehaviorState() == VIGeneralBehavior::State::Done) {
+			(*i)->setBehaviorState(VIGeneralBehavior::State::Idle);
+			VIGeneralBehavior* j = (* i);
 			i = BEHAVIORLIST.erase(i);
+			emit j->done();
 		}
 		else {
 			i++;
@@ -206,5 +215,5 @@ void VIGeneralBehaviorHost::addBehavior(VIGeneralBehavior* gb) {
 	BEHAVIORLIST_ADD.append(gb);
 	if (SLEEPFLAG) { SLEEPWAIT.wakeAll(); }
 	HOSTMUTEX.unlock();
-	qDebug() << "Add Finish";
+	//qDebug() << "Add Finish";
 }
