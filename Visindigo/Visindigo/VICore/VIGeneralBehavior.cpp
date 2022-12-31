@@ -177,18 +177,11 @@ void VIGeneralBehaviorHost::mergeEvent() {
 
 void VIGeneralBehaviorHost::ergodicEvent() {
 	//qDebug() << "Ergodic start";
-	for (auto i = BEHAVIORLIST.begin(); i != BEHAVIORLIST.end(); i++) {
+	for (auto i = BEHAVIORLIST.begin(); i != BEHAVIORLIST.end(); ) {
 		(*i)->preFrame(LASTTIME);
-	}
-	//qDebug() << "Ergodic end";
-}
-
-void VIGeneralBehaviorHost::eraseEvent() {
-	//qDebug() << "Erase start";
-	for (auto i = BEHAVIORLIST.begin(); i != BEHAVIORLIST.end();) {
 		if ((*i)->getBehaviorState() == VIGeneralBehavior::State::Done) {
 			(*i)->setBehaviorState(VIGeneralBehavior::State::Idle);
-			VIGeneralBehavior* j = (* i);
+			VIGeneralBehavior* j = (*i);
 			i = BEHAVIORLIST.erase(i);
 			emit j->done();
 			qDebug() << "Behavior done" << j;
@@ -198,7 +191,11 @@ void VIGeneralBehaviorHost::eraseEvent() {
 			i++;
 		}
 	}
-	//qDebug() << "Erase end";
+	//qDebug() << "Ergodic end";
+}
+
+void VIGeneralBehaviorHost::eraseEvent() {
+	
 }
 void VIGeneralBehaviorHost::addBehavior(VIGeneralBehavior* gb) {
 	qDebug() << "Add Behavior" << gb;

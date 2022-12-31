@@ -142,6 +142,7 @@
     <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h" />
     <ClInclude Include="Visindigo\VIObjects\macro\VIGlassConvention.h" />
     <QtMoc Include="Visindigo\VISystem\VISystemBase.h" />
+    <ClInclude Include="Visindigo\VIObjects\VIImage.h" />
     <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h" />
     <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h" />
     <ClInclude Include="VIUI\PW\VisindigoProject.h" />

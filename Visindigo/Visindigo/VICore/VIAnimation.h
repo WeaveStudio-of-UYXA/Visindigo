@@ -74,6 +74,7 @@ class VIGuiAnimation :public VIGeneralBehavior
 		this->WAITFLAG = w;
 	}
 };
+
 class VITextAniBehavior :public VIGuiAnimation
 {
 	Q_OBJECT;
@@ -192,6 +193,7 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 		emit getOpacity(OPEnd);
 	}
 };
+
 class VIResizeAnimation :public VIAnimationEvent
 {
 	Q_OBJECT

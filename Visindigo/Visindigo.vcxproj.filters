@@ -100,6 +100,9 @@
     <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Visindigo\VIObjects\VIImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h">

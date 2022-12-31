@@ -75,6 +75,11 @@ public slots:
 		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 		this->setPixmap(QPixmap::fromImage(s));
 	}
+	void setImage(QImage img) {
+		Image = img;
+		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		this->setPixmap(QPixmap::fromImage(s));
+	}
 	void fillColor(int r, int g, int b, int a) {
 		Image = QImage(this->width(), this->height(), QImage::Format_ARGB32);
 		Image.fill(QColor(r, g, b, a));
