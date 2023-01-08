@@ -65,12 +65,12 @@ public:
 class VIGuiAnimation :public VIGeneralBehavior
 {
 	Q_OBJECT;
-	Private_ bool WAITFLAG;
-	Public_ def_init VIGuiAnimation(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
-	Public_ bool ifWait() {
+	_Private bool WAITFLAG;
+	_Public def_init VIGuiAnimation(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
+	_Public bool ifWait() {
 		return this->WAITFLAG;
 	};
-	Public_ void setWait(bool w) {
+	_Public void setWait(bool w) {
 		this->WAITFLAG = w;
 	}
 };
@@ -78,17 +78,17 @@ class VIGuiAnimation :public VIGeneralBehavior
 class VITextAniBehavior :public VIGuiAnimation
 {
 	Q_OBJECT;
-	Public_ def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIGuiAnimation(parent) {}
-	Signal_ void getText(QString);
-	Private_ QString BEFORE = "";
-	Private_ QString TEXT = "";
-	Private_ QString CURRENT = "";
-	Private_ QString::iterator CHAR;
-	Private_ VIMilliSecond LMS;
-	Private_ VIMilliSecond MSPT;
-	Private_ VIMilliSecond MSW;
-	Private_ int INDEX;
-	Slot_ void setTextAni(QString text, int MsPT, int MsW, bool continueAni) {
+	_Public def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIGuiAnimation(parent) {}
+	_Signal void getText(QString);
+	_Private QString BEFORE = "";
+	_Private QString TEXT = "";
+	_Private QString CURRENT = "";
+	_Private QString::iterator CHAR;
+	_Private VIMilliSecond LMS;
+	_Private VIMilliSecond MSPT;
+	_Private VIMilliSecond MSW;
+	_Private int INDEX;
+	_Slot void setTextAni(QString text, int MsPT, int MsW, bool continueAni) {
 		BEFORE = TEXT;
 		TEXT = text;
 		if (!continueAni) { CURRENT = ""; }
@@ -97,12 +97,12 @@ class VITextAniBehavior :public VIGuiAnimation
 		MSW = MsW;
 		this->setDuration(text.length() * MsPT + MsW);
 	}
-	Protected_ void onActive() {
+	_Protected void onActive() {
 		LMS = 0;
 		INDEX = 0;
 		CHAR = TEXT.begin();
 	}
-	Protected_ void onFrame() {
+	_Protected void onFrame() {
 		if (getCurrent() >= LMS && CHAR != TEXT.end() && getBehaviorState()!=State::Skip) {
 			CURRENT += *CHAR;
 			CHAR++;
@@ -112,7 +112,7 @@ class VITextAniBehavior :public VIGuiAnimation
 		}
 		//qDebug() << "Percent" << this->getPercent(VIDuration::PercentType::Linear) << "Duration" << this->getDuration();
 	}
-	Protected_ void onSkip() {
+	_Protected void onSkip() {
 		CHAR = TEXT.end();
 		//this->setDuration(TEXT.length() * MSPT);
 		emit getText(BEFORE + TEXT);
@@ -162,21 +162,21 @@ public:
 class VIOpacityAniBehavior :public VIGuiAnimation
 {
 	Q_OBJECT;
-	Signal_ void getOpacity(float);
-	Public_ float OPBegin;
-	Public_  float OPEnd;
-	Public_ float OPDelta;
-	Public_ def_init VIOpacityAniBehavior(QObject* parent = Q_NULLPTR):VIGuiAnimation(parent) {}
-	Public_ void setOpacity(float begin, float end, int ms) {
+	_Signal void getOpacity(float);
+	_Public float OPBegin;
+	_Public  float OPEnd;
+	_Public float OPDelta;
+	_Public def_init VIOpacityAniBehavior(QObject* parent = Q_NULLPTR):VIGuiAnimation(parent) {}
+	_Public void setOpacity(float begin, float end, int ms) {
 		OPBegin = begin;
 		OPEnd = end;
 		OPDelta = qAbs(end - begin);
 		this->setDuration(ms);
 	}
-	Slot_ void onActive() {
+	_Slot void onActive() {
 		
 	}
-	Slot_ void onFrame() {
+	_Slot void onFrame() {
 		if (OPEnd > OPBegin) {
 			float OP = OPBegin + this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
 			emit getOpacity(OP);
@@ -186,10 +186,10 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 			emit getOpacity(OP);
 		}
 	}
-	Slot_ void onDone() {
+	_Slot void onDone() {
 		emit getOpacity(OPEnd);
 	}
-	Slot_ void onSkip() {
+	_Slot void onSkip() {
 		emit getOpacity(OPEnd);
 	}
 };

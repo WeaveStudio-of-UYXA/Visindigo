@@ -17,14 +17,14 @@ class YSPTitlePage{
         this.Logo.setAlignment("M");
         this.Head.setGeometry(0, 0.33, 1, 0.06);
         this.Head.setAlignment("M");
-        this.Head.setStyleSheet("VITextLabel{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
+        this.Head.setStyleSheet("VITextLabel{background-color:#00FFFFFF;color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
         this.Head.setText("Visindigo SPOL"); 
         this.Title.setGeometry(0, 0.4, 1, 0.137);
         this.Title.setAlignment("M");
-        this.Title.setStyleSheet("VITextLabel{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
+        this.Title.setStyleSheet("VITextLabel{background-color:#00FFFFFF;color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
         this.SubTitle.setGeometry(0, 0.5, 1, 0.09);
         this.SubTitle.setAlignment("M");
-        this.SubTitle.setStyleSheet("VITextLabel{color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
+        this.SubTitle.setStyleSheet("VITextLabel{background-color:#00FFFFFF;color:#FFFFFF;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
     }
     raise(){
         this.BG.raise();
@@ -131,10 +131,10 @@ class YSPStoryPage{
         this.BG1.setGeometry(0, 0, 1, 1);
         this.BG2.setGeometry(0, 0, 1, 1);
         this.TextLabel.setGeometry(0.3,0.87,0.55,0.105);
-        this.TextLabel.setStyleSheet("VITextLabel{color:#F5F5F5;font-family:'Microsoft YaHei';font-size:AUTO_30_PR;}");
+        this.TextLabel.setStyleSheet("VITextLabel{background-color:#00FFFFFF;color:#F5F5F5;font-family:'Microsoft YaHei';font-size:AUTO_30_PR;}");
         this.TextLabel.setAlignment("L");
         this.NameLabel.setGeometry(0.052,0.86685,0.1897,0.07);
-        this.NameLabel.setStyleSheet("VITextLabel{color:#AAAAAA;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
+        this.NameLabel.setStyleSheet("VITextLabel{background-color:#00FFFFFF;color:#AAAAAA;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
         this.NameLabel.setAlignment("R");
         this.Cover.setGeometry(0, 0, 1, 1);
         this.Cover.setPicture("./YSP/image/frame.png");
@@ -151,6 +151,22 @@ class YSPStoryPage{
         }
         else{
             this.BG1.setPicture(path);
+            if (fadeintime > 0){
+                this.BG2.setOpacityAni(1, 0, fadeintime, true);
+            }
+            this.BGFLAG = 1;
+        }
+    }
+    setBGEmpty(fadeintime = 500){
+        if(this.BGFLAG == 1){
+            this.BG2.fillColor(0, 0, 0);
+            if (fadeintime > 0){
+                this.BG2.setOpacityAni(0, 1, fadeintime, true);
+            }
+            this.BGFLAG = 2;
+        }
+        else{
+            this.BG1.fillColor(0, 0, 0);
             if (fadeintime > 0){
                 this.BG2.setOpacityAni(1, 0, fadeintime, true);
             }
@@ -201,8 +217,12 @@ export function title(title, subtitle, logo, bg){
     Story.init();
 }
 
-export function backdrop(path, fadeintime = 500){
-    Story.setBG(path, fadeintime);
+export function backdrop(path = null, fadeintime = 500){
+    if(path == null || path == ""){
+        Story.setBGEmpty(fadeintime);
+    }else{
+        Story.setBG(path, fadeintime);
+    }
 }
 
 export function chara(pathlist){

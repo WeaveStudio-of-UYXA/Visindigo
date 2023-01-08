@@ -56,6 +56,7 @@ Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭�
 * 虽然从传统上而言，C、C++程序应该严格按照声明-实现的方式建构（h-cpp，include-source），但是在任何其他现代语言（尤其是面向对象的）推荐的建构都不再建议这种方式。此项目也是一样，如无编译问题导致必须用cpp文件的，一律使用h文件。
 * 不要使用“从Qt4继承，仍然提供支持但不再继续开发”的旧版Qt组件如Qt Script。
 * 不要使用C++17及之后版本中的新内容，不要使用MSVC支持不了的特性。
+* 详情请参阅文件“C++代码格式标准.md”
 
 # 源码编译
 **请注意，如果您需要获得发行版本的源码，您应该去StudioIndigo的另外一个仓库，叫做[VisindigoRelease](https://github.com/StudioIndigo-of-CYXIO/VisindigoRelease)，本仓库内的源码是代表最新开发内容的源码，可能含有不稳定因素。**

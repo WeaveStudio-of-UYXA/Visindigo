@@ -71,7 +71,7 @@ public:
 	}
 public slots:
 	void setImage(QString path) {
-		Image.load(path);
+		qDebug()<<Image.load(path);
 		QImage s = Image.scaled(width(), height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 		this->setPixmap(QPixmap::fromImage(s));
 	}

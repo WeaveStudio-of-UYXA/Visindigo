@@ -12,14 +12,15 @@ public:
 	VisindigoCentralWidget(QWidget* parent = Q_NULLPTR) :QWidget(parent) {
 		BG = new QWidget(this);
 		BG->setObjectName("Background");
+		CurrentLayout = new QGridLayout(this);
+		
 		TitleLabel = new QLabel(this);
 		TitleLabel->setText("Visindigo Installer");
-		TitleLabel->setStyleSheet("QLabel{font-size:40px}");
+		TitleLabel->setStyleSheet("QLabel{font-size:40px;border-radius:0px;border-bottom:1px solid black}");
 		this->setStyleSheet("QWidget{background-color:#FFFFFF;font-family:'Microsoft YaHei';border-radius:5px;} \
 			QWidget#Background{border:1px solid black}");
-		CurrentLayout = new QGridLayout(this);
-
-		CurrentLayout->addWidget(TitleLabel);
+		CurrentLayout->addWidget(TitleLabel, 0, 0, 1, 2);
+		
 	}
 	void resizeEvent(QResizeEvent* event = Q_NULLPTR) {
 		BG->resize(size());

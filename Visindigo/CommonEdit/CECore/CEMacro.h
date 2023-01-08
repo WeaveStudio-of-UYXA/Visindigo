@@ -18,14 +18,16 @@
 		#define CE_NULLPTR nullptr
 		#define operators 
 		#define DoNothing
+		#define PASS
 		#define ENUM enum class
-		#define Public_ public:
-		#define Private_ private:
-		#define Protected_ protected:
+		#define _Public public:
+		#define _Private private:
+		#define _Protected protected:
 		#define def auto
 		#define def_init
 		#define def_del
 		#define def_copy
+		#define __Deprecated__(reason) [[deprecated(reason)]]
 
 	#define CEL_PYTHON_TO_CPP
 		#define elif else if

@@ -8,13 +8,11 @@
 
 class VICentralWidget :public QWidget
 {
-	Q_OBJECT
-public:
-	VI3DWidget* Widget3D;
-	VIGUI2DWidget* GUI2D;
-	QLabel* DebugInfoLabel;
-public:
-	VICentralWidget(QWidget* parent) :QWidget(parent) {
+	Q_OBJECT;
+	_Public VI3DWidget* Widget3D;
+	_Public VIGUI2DWidget* GUI2D;
+	_Public QLabel* DebugInfoLabel;
+	_Public def_init VICentralWidget(QWidget* parent) :QWidget(parent) {
 		//Widget3D = new VI3DWidget(this);
 		GUI2D = new VIGUI2DWidget(this);
 		DebugInfoLabel = new QLabel(this);
@@ -23,24 +21,22 @@ public:
 		DebugInfoLabel->resize(300, 30);
 		DebugInfoLabel->setText("MAX EPPS");
 	}
-	void resizeEvent(QResizeEvent* event) {
+	_Public void resizeEvent(QResizeEvent* event) {
 		//Widget3D->resize(this->size());
 		GUI2D->resize(this->size());
 	}
-public slots:
-	void setFrame(float frame) {
+	_Slot void setFrame(float frame) {
 		DebugInfoLabel->setText(QString::number(frame, 'g', 9) + " EPPS");
 	}
 };
 
 class VIRuntimeWindow :public QMainWindow
 {
-	Q_OBJECT
-public:
-	VICentralWidget* CentralWidget;
-	QThread* JSHostThread;
-	VIJSHost* JSHost;
-	VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
+	Q_OBJECT;
+	_Public VICentralWidget* CentralWidget;
+	_Public QThread* JSHostThread;
+	_Public VIJSHost* JSHost;
+	_Public def_init VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
 		QPalette PAL;
 		PAL.setColor(QPalette::Background, Qt::black);
 		this->setPalette(PAL);
@@ -62,26 +58,34 @@ public:
 		gBEHAVIOR->start();
 		this->loadJS();
 	}
-	void loadJS() {
+	_Public void loadJS() {
+#if DEPLOY == WINDOWS_DEPLOY
 		JSHost->boot("../../Visindigo/Dev/test.js");
+#elif DEPLOY == ANDROID_DEPLOY
+		JSHost->boot("/sdcard/Visindigo/repos/Dev/test.js");
+#endif
 	}
-public slots:
-	void setSize(int w, int h) {
+	_Slot void setSize(int w, int h) {
+#if VI_WINDOW == VI_WINDOW_SYS
 		this->resize(w, h);
 		move((QApplication::desktop()->screen()->width() - width()) / 2, (QApplication::desktop()->screen()->height() - height()) / 2);
+#endif
 	}
-	void setGeo(int x, int y, int z, int w) {
+	_Slot void setGeo(int x, int y, int z, int w) {
+#if VI_WINDOW == VI_WINDOW_SYS
 		this->setGeometry(x, y, z, w);
+#endif
 	}
-	void initJSEngine(QJSEngine* Engine) {
+	_Slot void initJSEngine(QJSEngine* Engine) {
+		PASS;
 	}
-	VIRuntimeWindow* getWin() {
+	_Slot VIRuntimeWindow* getWin() {
 		return this;
 	}
-	void output(QString output) {
+	_Slot __Deprecated__("Use VISystem.print") void output(QString output) {
 		qDebug() << output;
 	}
-	void enableGUIFrame() {
+	_Slot void enableGUIFrame() {
 		//connect(Process, SIGNAL(currentFrame(float)), CentralWidget, SLOT(setFrame(float)), Qt::UniqueConnection);
 	}
 };

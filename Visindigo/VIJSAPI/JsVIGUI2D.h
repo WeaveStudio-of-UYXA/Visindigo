@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "JsVIGUI2DBase.h"
 #include "VIUI/MRW/VIGUI2D.h"
-
+#include <QtQml>
 namespace JsVI {
 	class TextLabel :public GUI2DLabel
 	{
@@ -47,25 +47,22 @@ namespace JsVI {
 
 	class PictureLabel :public GUI2DLabel
 	{
-		Q_OBJECT
-			JsVI_INVOKE(VIPictureLabel)
-	signals:
-		void SsetImage(QString);
-		void SfillColor(int, int, int, int);
-	public:
-		PictureLabel(JsVIGUI_PARA) {
+		Q_OBJECT;
+		JsVI_INVOKE(VIPictureLabel);
+		_Signal void SsetImage(QString);
+		_Signal void SfillColor(int, int, int, int);
+		_Public def_init PictureLabel(JsVIGUI_PARA) {
 			JsVI_NewFrom(VIPictureLabel);
 			JsVI_INIT;
 			JsVI_BIND_SAME_VOID(releaseMemory, JsVIGUI);
 			BIND(this, SIGNAL(SsetImage(QString)), JsVIGUI, SLOT(setImage(QString)));
 			BIND(this, SIGNAL(SfillColor(int, int, int, int)), JsVIGUI, SLOT(fillColor(int, int, int, int)));
 		}
-	public slots:
-		SSDEF_SA_VOID(releaseMemory);
-		void setPicture(QString path) {
+		_Slot SSDEF_SA_VOID(releaseMemory);
+		_Slot void setPicture(QString path) {
 			emit SsetImage(VIJSGlobal::getAbsolutePathOf(path));
 		}
-		void fillColor(int r, int g, int b, int a = 255) {
+		_Slot void fillColor(int r, int g, int b, int a = 255) {
 			emit SfillColor(r, g, b, a);
 		}
 	};

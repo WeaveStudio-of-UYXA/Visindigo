@@ -104,12 +104,12 @@ void VIGeneralBehavior::active() {
 		emit addBehaviorLater(this);
 	}
 }
-void VIGeneralBehavior::preFrame(VINanoSecond duration) {
+VIGeneralBehavior::State VIGeneralBehavior::preFrame(VINanoSecond duration) {
 	this->DURATION->addTime(duration, VIDuration::Unit::NanoSecond);
 	if (DURATION->isTimeout()) {
 		this->setBehaviorState(State::Done);
 		this->onDone();
-		
+		return State::Done;
 	}
 	else {
 		State s = this->getBehaviorState();
@@ -124,6 +124,7 @@ void VIGeneralBehavior::preFrame(VINanoSecond duration) {
 			this->onDone();
 			break;
 		}
+		return s;
 	}
 }
 void VIGeneralBehavior::setBehaviorState(State s) {
@@ -178,8 +179,8 @@ void VIGeneralBehaviorHost::mergeEvent() {
 void VIGeneralBehaviorHost::ergodicEvent() {
 	//qDebug() << "Ergodic start";
 	for (auto i = BEHAVIORLIST.begin(); i != BEHAVIORLIST.end(); ) {
-		(*i)->preFrame(LASTTIME);
-		if ((*i)->getBehaviorState() == VIGeneralBehavior::State::Done) {
+		VIGeneralBehavior::State s = (*i)->preFrame(LASTTIME);
+		if (s == VIGeneralBehavior::State::Done) {
 			(*i)->setBehaviorState(VIGeneralBehavior::State::Idle);
 			VIGeneralBehavior* j = (*i);
 			i = BEHAVIORLIST.erase(i);

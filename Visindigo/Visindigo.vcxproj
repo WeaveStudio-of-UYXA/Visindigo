@@ -107,7 +107,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CommonEdit\CEFunction\CELanguage.cpp" />
     <ClCompile Include="init.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="VIJSAPI\VIJSGlobal.cpp" />
@@ -151,7 +150,7 @@
     <QtMoc Include="VIJSAPI\VIJSHost.h" />
     <ClInclude Include="VIUI\MRW\MRWGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h" />
-    <ClInclude Include="VIUI\VIPlayerWidget.h" />
+    <QtMoc Include="VIUI\VIPlayerWidget.h" />
     <QtMoc Include="VIUI\MRW\VisindigoRuntime.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h" />
   </ItemGroup>
