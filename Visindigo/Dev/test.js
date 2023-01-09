@@ -1,6 +1,6 @@
 ﻿export function main() {
     //VIGUI.resize(1366, 768);
-    //VIGUI.enableGUIFrame();
+    VIGUI.enableGUIFrame();
     VIGUI.showFullScreen();
     SPOL.init();
     SPOL.title("VI-T1","Visindigo 测试", "./Resource/Logo.png", "./Resource/BG.png");

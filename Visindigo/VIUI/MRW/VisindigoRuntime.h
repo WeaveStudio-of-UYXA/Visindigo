@@ -17,15 +17,16 @@ class VICentralWidget :public QWidget
 		GUI2D = new VIGUI2DWidget(this);
 		DebugInfoLabel = new QLabel(this);
 		DebugInfoLabel->setObjectName("DebugInfo");
-		DebugInfoLabel->setStyleSheet("QLabel#DebugInfo{font-size:30px;color:#0CDB23;font-family:'Microsoft YaHei'}");
+		DebugInfoLabel->setStyleSheet("QLabel#DebugInfo{background-color:#00FFFFFF;font-size:30px;color:#0CDB23;font-family:'Microsoft YaHei'}");
 		DebugInfoLabel->resize(300, 30);
 		DebugInfoLabel->setText("MAX EPPS");
+		DebugInfoLabel->hide();
 	}
 	_Public void resizeEvent(QResizeEvent* event) {
 		//Widget3D->resize(this->size());
 		GUI2D->resize(this->size());
 	}
-	_Slot void setFrame(float frame) {
+	_Slot void setFrame(unsigned int frame) {
 		DebugInfoLabel->setText(QString::number(frame, 'g', 9) + " EPPS");
 	}
 };
@@ -36,12 +37,15 @@ class VIRuntimeWindow :public QMainWindow
 	_Public VICentralWidget* CentralWidget;
 	_Public QThread* JSHostThread;
 	_Public VIJSHost* JSHost;
+	_Public VIGeneralBehaviorHostDebug* DebugBehavior;
 	_Public def_init VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
 		QPalette PAL;
 		PAL.setColor(QPalette::Background, Qt::black);
 		this->setPalette(PAL);
 		gBEHAVIOR = new VIGeneralBehaviorHost(this);
 		CentralWidget = new VICentralWidget(this);
+		DebugBehavior = new VIGeneralBehaviorHostDebug(this);
+		DebugBehavior->setHost(gBEHAVIOR);
 		this->setCentralWidget(CentralWidget);
 		JSHost = new VIJSHost(CentralWidget->GUI2D);
 		JSHostThread = new QThread(this);
@@ -56,6 +60,7 @@ class VIRuntimeWindow :public QMainWindow
 		BIND(JSHost->VIGUI2D, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()));
 		BIND(JSHost->VIGUI2D, SIGNAL(SenableGUIFrame()), this, SLOT(enableGUIFrame()));
 		gBEHAVIOR->start();
+		DebugBehavior->active();
 		this->loadJS();
 	}
 	_Public void loadJS() {
@@ -86,6 +91,11 @@ class VIRuntimeWindow :public QMainWindow
 		qDebug() << output;
 	}
 	_Slot void enableGUIFrame() {
-		//connect(Process, SIGNAL(currentFrame(float)), CentralWidget, SLOT(setFrame(float)), Qt::UniqueConnection);
+		CentralWidget->DebugInfoLabel->show();
+		connect(DebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)), Qt::UniqueConnection);
+	}
+	_Slot void disableGUIFrame() {
+		CentralWidget->DebugInfoLabel->hide();
+		disconnect(DebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)));
 	}
 };

@@ -14,9 +14,9 @@ signals:
 	void removeThis(VI2DGUILabel*);
 public:
 	QWidget* Parent;
-	bool Wait = false;
-	bool SKIP = false;
-	bool FINISH = false;
+	//bool Wait = false;
+	//bool SKIP = false;
+	//bool FINISH = false;
 	QGraphicsOpacityEffect* Opacity;
 	VIOpacityAniBehavior* OpacityAniBehavior;
 	float px, py, pw, ph;
@@ -35,7 +35,7 @@ public:
 		BIND(OpacityAniBehavior, SIGNAL(getOpacity(float)), this, SLOT(setOpacity(float)));
 		BIND(OpacityAniBehavior, SIGNAL(done()), this, SLOT(getDone()));
 		OpacityAniBehavior->setHost(gBEHAVIOR);
-		connect(Parent, SIGNAL(mousePressed()), this, SLOT(skipOrJumpAni()));
+		
 		px = 0.1; py = 0.2; pw = 0.8; ph = 0.6;
 	}
 	~VI2DGUILabel() {
@@ -46,6 +46,9 @@ public:
 public slots:
 	void del() {
 		this->deleteLater();
+	}
+	void enableMousePressed() {
+		connect(Parent, SIGNAL(mousePressed()), this, SLOT(skipOrJumpAni()));
 	}
 	virtual void skipOrJumpAni() {}
 	void getDone() {

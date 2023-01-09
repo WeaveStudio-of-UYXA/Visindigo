@@ -91,7 +91,7 @@ class VITextAniBehavior :public VIGuiAnimation
 	_Slot void setTextAni(QString text, int MsPT, int MsW, bool continueAni) {
 		BEFORE = TEXT;
 		TEXT = text;
-		if (!continueAni) { CURRENT = ""; }
+		if (!continueAni) { CURRENT = ""; BEFORE = ""; }
 		else { CURRENT = BEFORE; }
 		MSPT = MsPT;
 		MSW = MsW;
@@ -115,6 +115,9 @@ class VITextAniBehavior :public VIGuiAnimation
 	_Protected void onSkip() {
 		CHAR = TEXT.end();
 		//this->setDuration(TEXT.length() * MSPT);
+		emit getText(BEFORE + TEXT);
+	}
+	_Protected void onDone() {
 		emit getText(BEFORE + TEXT);
 	}
 };

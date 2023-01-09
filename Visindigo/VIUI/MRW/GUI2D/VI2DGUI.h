@@ -28,13 +28,13 @@ public slots:
 	}
 	void setTextAni(QString text, int mspt, int msw, bool wait) {
 		Behavior->setTextAni(text, mspt, msw, false);
-		SKIP = FINISH = false;
+		//SKIP = FINISH = false;
 		Behavior->setWait(wait);
 		Behavior->active();
 	}
 	void continueTextAni(QString text, int mspt, int msw, bool wait) {
 		Behavior->setTextAni(text, mspt, msw, true);
-		SKIP = FINISH = false;
+		//SKIP = FINISH = false;
 		Behavior->setWait(wait);
 		Behavior->active();
 	}
@@ -42,6 +42,7 @@ public slots:
 		QLabel::setText(text);
 	}
 	void skipOrJumpAni() {
+		/*
 		if (SKIP && !FINISH) {
 			Behavior->setBehaviorState(VIGeneralBehavior::State::Done);
 			FINISH = true;
@@ -49,6 +50,13 @@ public slots:
 		else if (!SKIP && !FINISH) {
 			Behavior->setBehaviorState(VIGeneralBehavior::State::Skip);
 			SKIP = true;
+		}
+		*/
+		if (Behavior->getBehaviorState() == VIGeneralBehavior::State::Active) {
+			Behavior->setBehaviorState(VIGeneralBehavior::State::Skip);
+		}
+		else if (Behavior->getBehaviorState() == VIGeneralBehavior::State::Skip) {
+			Behavior->setBehaviorState(VIGeneralBehavior::State::Done);
 		}
 	}
 	void ifHostWait() {
@@ -97,6 +105,13 @@ public slots:
 		this->clear();
 	}
 	void skipOrJumpAni() {
+		if (OpacityAniBehavior->getBehaviorState() == VIGeneralBehavior::State::Active) {
+			OpacityAniBehavior->setBehaviorState(VIGeneralBehavior::State::Skip);
+		}
+		else if (OpacityAniBehavior->getBehaviorState() == VIGeneralBehavior::State::Skip) {
+			OpacityAniBehavior->setBehaviorState(VIGeneralBehavior::State::Done);
+		}
+		/*
 		if (SKIP && !FINISH) {
 			OpacityAniBehavior->setBehaviorState(VIGeneralBehavior::State::Done);
 			FINISH = true;
@@ -105,6 +120,7 @@ public slots:
 			OpacityAniBehavior->setBehaviorState(VIGeneralBehavior::State::Skip);
 			SKIP = true;
 		}
+		*/
 	}
 	void setAlign(Qt::AlignmentFlag flag) {
 		this->setAlignment(flag);

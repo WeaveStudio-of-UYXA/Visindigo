@@ -11,6 +11,7 @@ void VIDuration::init() {
 	PERCENT = 0;
 	PERCENT_NL = 0;
 	TIMEOUTFLAG = false;
+	LASTTIME = 0;
 }
 void VIDuration::setDuration(VIMilliSecond msec) {
 	if (msec < 0) {
@@ -43,6 +44,9 @@ float VIDuration::getPercent(PercentType type = PercentType::Linear) {
 double VIDuration::getCurrent() {
 	return CURRENT;
 }
+VINanoSecond VIDuration::getLastTime() {
+	return LASTTIME;
+}
 void VIDuration::setBesselCoeff(VIMath::VI2DMatrix matrix) {
 	this->COEFF = matrix;
 }
@@ -58,6 +62,19 @@ void VIDuration::addTime(unsigned long long time, Unit unit = Unit::MilliSecond)
 				break;
 			case Unit::Second:
 				this->CURRENT += time * 1000;
+				break;
+			}
+		}
+		else {
+			switch (unit) {
+			case Unit::NanoSecond:
+				this->LASTTIME = time;
+				break;
+			case Unit::MilliSecond:
+				this->LASTTIME = time * 1000000;
+				break;
+			case Unit::Second:
+				this->LASTTIME = time * 1000000000;
 				break;
 			}
 		}
@@ -205,4 +222,23 @@ void VIGeneralBehaviorHost::addBehavior(VIGeneralBehavior* gb) {
 	//if (SLEEPFLAG) { SLEEPWAIT.wakeAll(); }
 	HOSTMUTEX.unlock();
 	qDebug() << "Add Finish";
+}
+
+void VIGeneralBehaviorHostDebug::onActive() {
+	this->setDuration(-1);
+}
+void VIGeneralBehaviorHostDebug::onFrame() {
+	this->TIME += this->DURATION->getLastTime();
+	this->LASTTIME = (this->LASTTIME + this->DURATION->getLastTime()) / 2;
+	if (this->TIME > 100000000) {	
+		this->FRAME = 1000000000 / this->LASTTIME;
+		emit getHostSpeed(this->FRAME);
+		this->TIME = 0;
+	}
+}
+void VIGeneralBehaviorHostDebug::onSkip() {
+	this->setBehaviorState(VIGeneralBehavior::State::Done);
+}
+void VIGeneralBehaviorHostDebug::onDone() {
+	DoNothing;
 }

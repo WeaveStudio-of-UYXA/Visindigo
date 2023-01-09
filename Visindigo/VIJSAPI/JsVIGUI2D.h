@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "JsVIGUI2DBase.h"
 #include "VIUI/MRW/VIGUI2D.h"
-#include <QtQml>
+
 namespace JsVI {
 	class TextLabel :public GUI2DLabel
 	{

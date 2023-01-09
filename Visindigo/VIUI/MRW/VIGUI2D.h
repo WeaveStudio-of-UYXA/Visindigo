@@ -8,32 +8,28 @@
 
 class VIGUI2DWidget :public QWidget
 {
-	Q_OBJECT
-signals:
-	void mousePressed();
-public:
-	VI3DWidget* Widget3D;
-	QList<VI2DGUILabel*> LabelList;
-
-	VIGUI2DWidget(QWidget* parent) :QWidget(parent) {
+	Q_OBJECT;
+	_Signal void mousePressed();
+	_Public VI3DWidget* Widget3D;
+	_Public QList<VI2DGUILabel*> LabelList;
+	_Public def_init VIGUI2DWidget(QWidget* parent) :QWidget(parent) {
 		Widget3D = new VI3DWidget(this);
 	}
-	void mousePressEvent(QMouseEvent* event) {
+	_Public void mousePressEvent(QMouseEvent* event) {
 		emit mousePressed();
 	}
-public slots:
-	void newVITextLabel(VITextLabel** p) {
+	_Slot void newVITextLabel(VITextLabel** p) {
 		*p = new VITextLabel(this);
 		LabelList.append(*p);
 	}
-	void newVIPictureLabel(VIPictureLabel** p) {
+	_Slot void newVIPictureLabel(VIPictureLabel** p) {
 		*p = new VIPictureLabel(this);
 		LabelList.append(*p);
 	}
-	void removeVI2DGUILabel(VI2DGUILabel* p) {
+	_Slot void removeVI2DGUILabel(VI2DGUILabel* p) {
 		LabelList.removeOne(p);
 	}
-	void resizeEvent(QResizeEvent* event) {
+	_Slot void resizeEvent(QResizeEvent* event) {
 		for (auto i = LabelList.begin(); i != LabelList.end(); i++) {
 			(*i)->resizeEvent();
 		}

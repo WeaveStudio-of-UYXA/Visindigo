@@ -30,6 +30,7 @@ class VIDuration :public QObject
 	_Private double CURRENT;
 	_Private float PERCENT;
 	_Private float PERCENT_NL;
+	_Private VINanoSecond LASTTIME;
 	_Private VIMath::VI2DMatrix COEFF = { {0, 0}, {1, 1} };
 	_Private bool TIMEOUTFLAG = false;
 	_Public VIDuration(QObject* parent = Q_NULLPTR) : QObject(parent) {};
@@ -38,6 +39,7 @@ class VIDuration :public QObject
 	_Public double getDuration(Unit);
 	_Public float getPercent(PercentType);
 	_Public double getCurrent();
+	_Public VINanoSecond getLastTime();
 	_Public void setBesselCoeff(VIMath::VI2DMatrix);
 	_Public bool isTimeout();
 	_Slot void addTime(unsigned long long, Unit);
@@ -103,3 +105,16 @@ class VIGeneralBehaviorHost :public QThread {
 	_Private void eraseEvent();
 };
 
+class VIGeneralBehaviorHostDebug final :public VIGeneralBehavior
+{
+	Q_OBJECT;
+	_Public VINanoSecond LASTTIME = 10;
+	_Public unsigned int FRAME = 0;
+	_Public VINanoSecond TIME = 0;
+	_Public def_init VIGeneralBehaviorHostDebug(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
+	_Signal void getHostSpeed(unsigned int);
+	_Public void onActive();
+	_Public void onFrame();
+	_Public void onSkip();
+	_Public void onDone();
+};

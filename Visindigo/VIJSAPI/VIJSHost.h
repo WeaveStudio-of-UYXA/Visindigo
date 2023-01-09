@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include <QtQml>
-#include <QtCore>
 #include "VIJSGlobal.h"
 #include "JsVIGUI2D.h"
 #include "JsVISystem.h"

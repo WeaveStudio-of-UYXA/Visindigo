@@ -76,6 +76,14 @@ Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭�
   * 从Qt Creator选择复制进来的pro文件以打开项目
   * 将pri文件内的SOURCE和HEAD信息覆盖pro文件内的SOURCE和HEAD信息
   * 将您的安卓设备接入计算机，并启用ADB
+  * 打开`Global.h`，将
+    ```C++
+    #define DEPLOY WINDOWS_DEPLOY
+    ```
+    更改为
+    ```C++
+    #define DEPLOY ANDROID_DEPLOY
+    ```
   * 直接运行项目
   * 不要用此方法尝试编译Android或任何其他平台（包括Windows_arm）的Visindigo Installer，因为服务器只提供Windows_x86版本的文件，Installer只检查Windows_x86的文件，即使程序能在目标平台上运行，也无法接收对应平台的文件。
 

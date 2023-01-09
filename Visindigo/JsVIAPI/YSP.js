@@ -136,6 +136,7 @@ class YSPStoryPage{
         this.NameLabel.setGeometry(0.052,0.86685,0.1897,0.07);
         this.NameLabel.setStyleSheet("VITextLabel{background-color:#00FFFFFF;color:#AAAAAA;font-family:'Microsoft YaHei';font-size:AUTO_60_PR;}");
         this.NameLabel.setAlignment("R");
+        this.TextLabel.enableMousePressed();
         this.Cover.setGeometry(0, 0, 1, 1);
         this.Cover.setPicture("./YSP/image/frame.png");
         this.Cover.setOpacity(0);

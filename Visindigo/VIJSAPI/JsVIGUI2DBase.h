@@ -3,6 +3,7 @@
 #include "VIJSGlobal.h"
 #include "JsVIBase.h"
 #include "macro/VIJSGlobal_m.h"
+#include <QtQml>
 
 namespace JsVI {
 	class GUI2DLabel :public QObject
@@ -16,6 +17,7 @@ namespace JsVI {
 		void __init__(QObject* parent, VI2DGUILabel* GUIBase) {
 			this->setParent(parent);
 			GUIBaseLabel = GUIBase;
+			JsVI_CONNECT_SAME_VOID(enableMousePressed, GUIBaseLabel);
 			JsVI_CONNECT_SAME_VOID(del, GUIBaseLabel);
 			JsVI_CONNECT_SAME_VOID(hide, GUIBaseLabel);
 			BIND(this, SIGNAL(Smove(float, float)), GUIBaseLabel, SLOT(movePercent(float, float)));
@@ -32,6 +34,7 @@ namespace JsVI {
 		}
 		Q_INVOKABLE ~GUI2DLabel() {
 		}
+		SSDEF_SA_VOID(enableMousePressed)
 		SSDEF(del) {
 			emit Sdel();
 			this->disconnect();
