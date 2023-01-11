@@ -103,6 +103,7 @@ class VITextAniBehavior :public VIGuiAnimation
 		CHAR = TEXT.begin();
 	}
 	_Protected void onFrame() {
+		getLastTime();
 		if (getCurrent() >= LMS && CHAR != TEXT.end() && getBehaviorState()!=State::Skip) {
 			CURRENT += *CHAR;
 			CHAR++;
@@ -167,8 +168,9 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 	Q_OBJECT;
 	_Signal void getOpacity(float);
 	_Public float OPBegin;
-	_Public  float OPEnd;
+	_Public float OPEnd;
 	_Public float OPDelta;
+	_Public VIMilliSecond JUMPTIME;
 	_Public def_init VIOpacityAniBehavior(QObject* parent = Q_NULLPTR):VIGuiAnimation(parent) {}
 	_Public void setOpacity(float begin, float end, int ms) {
 		OPBegin = begin;
@@ -177,16 +179,20 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 		this->setDuration(ms);
 	}
 	_Slot void onActive() {
-		
+		JUMPTIME = 0;
 	}
 	_Slot void onFrame() {
-		if (OPEnd > OPBegin) {
-			float OP = OPBegin + this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
-			emit getOpacity(OP);
-		}
-		else {
-			float OP = OPBegin - this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
-			emit getOpacity(OP);
+		JUMPTIME += getLastTime();
+		if (JUMPTIME > 16) {
+			if (OPEnd > OPBegin) {
+				float OP = OPBegin + this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
+				emit getOpacity(OP);
+			}
+			else {
+				float OP = OPBegin - this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
+				emit getOpacity(OP);
+			}
+			JUMPTIME = 0;
 		}
 	}
 	_Slot void onDone() {

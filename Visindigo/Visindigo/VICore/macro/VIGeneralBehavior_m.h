@@ -2,10 +2,10 @@
 #include<QtCore>
 #include<QtWidgets>
 #include <chrono>
-
-typedef long long VIMilliSecond;
+#include "../../../CommonEdit/CECore/CEMacro.h"
+typedef double VIMilliSecond;
 typedef long long VINanoSecond;
-typedef long long VISecond;
+typedef double VISecond;
 typedef std::chrono::system_clock::time_point STD_TimePoint;
 
 #define STD_clock_now std::chrono::system_clock::now

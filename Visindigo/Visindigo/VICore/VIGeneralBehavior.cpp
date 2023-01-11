@@ -41,11 +41,12 @@ float VIDuration::getPercent(PercentType type = PercentType::Linear) {
 		return PERCENT_NL;
 	}
 }
-double VIDuration::getCurrent() {
+VIMilliSecond VIDuration::getCurrent() {
 	return CURRENT;
 }
 VINanoSecond VIDuration::getLastTime() {
 	return LASTTIME;
+	
 }
 void VIDuration::setBesselCoeff(VIMath::VI2DMatrix matrix) {
 	this->COEFF = matrix;
@@ -65,19 +66,18 @@ void VIDuration::addTime(unsigned long long time, Unit unit = Unit::MilliSecond)
 				break;
 			}
 		}
-		else {
-			switch (unit) {
-			case Unit::NanoSecond:
-				this->LASTTIME = time;
-				break;
-			case Unit::MilliSecond:
-				this->LASTTIME = time * 1000000;
-				break;
-			case Unit::Second:
-				this->LASTTIME = time * 1000000000;
-				break;
-			}
+		switch (unit) {
+		case Unit::NanoSecond:
+			this->LASTTIME = time;
+			break;
+		case Unit::MilliSecond:
+			this->LASTTIME = time * 1000000;
+			break;
+		case Unit::Second:
+			this->LASTTIME = time * 1000000000;
+			break;
 		}
+		
 		PERCENT = (float)CURRENT / MSEC;
 		if (PERCENT >= 1) {
 			PERCENT = 1;
@@ -100,8 +100,11 @@ VIMilliSecond VIGeneralBehavior::getDuration() {
 float VIGeneralBehavior::getPercent(VIDuration::PercentType type) {
 	return this->DURATION->getPercent(type);
 }
-double VIGeneralBehavior::getCurrent() {
+VIMilliSecond VIGeneralBehavior::getCurrent() {
 	return this->DURATION->getCurrent();
+}
+VIMilliSecond VIGeneralBehavior::getLastTime() {
+	return (double)(this->DURATION->getLastTime()) / 1000000;
 }
 void VIGeneralBehavior::setBesselCoeff(VIMath::VI2DMatrix matrix) {
 	return this->DURATION->setBesselCoeff(matrix);
@@ -121,8 +124,8 @@ void VIGeneralBehavior::active() {
 		emit addBehaviorLater(this);
 	}
 }
-VIGeneralBehavior::State VIGeneralBehavior::preFrame(VINanoSecond duration) {
-	this->DURATION->addTime(duration, VIDuration::Unit::NanoSecond);
+VIGeneralBehavior::State VIGeneralBehavior::preFrame() {
+	this->DURATION->addTime(this->HOST->LASTTIME, VIDuration::Unit::NanoSecond);
 	if (DURATION->isTimeout()) {
 		this->setBehaviorState(State::Done);
 		this->onDone();
@@ -196,7 +199,7 @@ void VIGeneralBehaviorHost::mergeEvent() {
 void VIGeneralBehaviorHost::ergodicEvent() {
 	//qDebug() << "Ergodic start";
 	for (auto i = BEHAVIORLIST.begin(); i != BEHAVIORLIST.end(); ) {
-		VIGeneralBehavior::State s = (*i)->preFrame(LASTTIME);
+		VIGeneralBehavior::State s = (*i)->preFrame();
 		if (s == VIGeneralBehavior::State::Done) {
 			(*i)->setBehaviorState(VIGeneralBehavior::State::Idle);
 			VIGeneralBehavior* j = (*i);
@@ -240,5 +243,5 @@ void VIGeneralBehaviorHostDebug::onSkip() {
 	this->setBehaviorState(VIGeneralBehavior::State::Done);
 }
 void VIGeneralBehaviorHostDebug::onDone() {
-	DoNothing;
+	PASS;
 }

@@ -17,7 +17,6 @@
 		#define l_tick unsigned long long
 		#define CE_NULLPTR nullptr
 		#define operators 
-		#define DoNothing
 		#define PASS
 		#define ENUM enum class
 		#define _Public public:

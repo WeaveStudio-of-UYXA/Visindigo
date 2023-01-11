@@ -38,7 +38,7 @@ class VIDuration :public QObject
 	_Public void setDuration(VIMilliSecond);
 	_Public double getDuration(Unit);
 	_Public float getPercent(PercentType);
-	_Public double getCurrent();
+	_Public VIMilliSecond getCurrent();
 	_Public VINanoSecond getLastTime();
 	_Public void setBesselCoeff(VIMath::VI2DMatrix);
 	_Public bool isTimeout();
@@ -62,12 +62,13 @@ class VIGeneralBehavior :public QObject
 	_Private State STATE = State::Idle;
 	_Signal void addBehaviorLater(VIGeneralBehavior*);
 	_Signal void done();
-	_Protected State preFrame(VINanoSecond);
+	_Protected State preFrame();
 	_Public void setHost(VIGeneralBehaviorHost*);
 	_Protected void setDuration(VIMilliSecond);
 	_Protected VIMilliSecond getDuration();
 	_Protected float getPercent(VIDuration::PercentType);
-	_Protected double getCurrent();
+	_Protected VIMilliSecond getCurrent();
+	_Protected VIMilliSecond getLastTime();
 	_Public void setBesselCoeff(VIMath::VI2DMatrix);
 	_Public def_init VIGeneralBehavior(QObject* parent = Q_NULLPTR) :QObject(parent) {
 		this->DURATION = new VIDuration(this);
