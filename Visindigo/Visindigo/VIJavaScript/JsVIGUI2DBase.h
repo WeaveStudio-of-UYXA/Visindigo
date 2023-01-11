@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "VIUI/MRW/GUI2D/VI2DGUIBase.h"
+#include "../../VIUI/MRW/GUI2D/VI2DGUIBase.h"
 #include "VIJSGlobal.h"
 #include "JsVIBase.h"
 #include "macro/VIJSGlobal_m.h"

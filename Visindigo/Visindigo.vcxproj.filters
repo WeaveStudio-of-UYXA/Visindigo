@@ -50,7 +50,7 @@
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VIJSAPI\VIJSGlobal.cpp">
+    <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="init.cpp">
@@ -73,7 +73,7 @@
     <ClInclude Include="VIUI\RW\VisindigoRepos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIJSAPI\VIJSGlobal.h">
+    <ClInclude Include="Visindigo\VIJavaScript\VIJSGlobal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Global.h">
@@ -85,7 +85,7 @@
     <ClInclude Include="init.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIJSAPI\JsVIBase.h">
+    <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VICore\macro\VIGeneralBehavior_m.h">
@@ -97,13 +97,10 @@
     <ClInclude Include="CommonEdit\CECore\CEMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIJSAPI\macro\VIJSGlobal_m.h">
+    <ClInclude Include="Visindigo\VIJavaScript\macro\VIJSGlobal_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VIObjects\macro\VIGlassConvention.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIJSAPI\VIGUI\VIGUILabel\JsVIGUILabel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h">
@@ -126,22 +123,22 @@
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\VIJSHost.h">
+    <QtMoc Include="Visindigo\VIJavaScript\VIJSHost.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIUI\MRW\VIGUI2D.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\JsVIGUI2D.h">
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2D.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\JsVISystem.h">
+    <QtMoc Include="Visindigo\VIJavaScript\JsVISystem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIAnimation.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\JsVIYSP.h">
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIYSP.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h">
@@ -150,19 +147,19 @@
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\HostExceptionUI.h">
+    <QtMoc Include="Visindigo\VIJavaScript\HostExceptionUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\JsVIGUI2DBase.h">
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2DBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\JsVIChara.h">
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIChara.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIJSAPI\JsVIContainer.h">
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIContainer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIGeneralBehavior.h">

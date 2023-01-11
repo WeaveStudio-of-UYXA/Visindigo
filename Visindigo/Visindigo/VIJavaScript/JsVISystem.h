@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QtCore>
-#include "Visindigo/VISystem/VISystemBase.h"
+#include "../VISystem/VISystemBase.h"
 
 namespace JsVI
 {

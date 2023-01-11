@@ -2,7 +2,7 @@
 #include "VIJSGlobal.h"
 #include "JsVIGUI2D.h"
 #include "JsVISystem.h"
-#include "VIUI/MRW/VIGUI2D.h"
+#include "../../VIUI/MRW/VIGUI2D.h"
 #undef VIJSHostWait
 //这个VIJSHostWait啊，谁在VIJSHost会执行的代码里面调用我跟谁过不去。
 class VIJSHost : public QObject

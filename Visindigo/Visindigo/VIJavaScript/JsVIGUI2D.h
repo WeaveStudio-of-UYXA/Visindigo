@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "JsVIGUI2DBase.h"
-#include "VIUI/MRW/VIGUI2D.h"
+#include "../../VIUI/MRW/VIGUI2D.h"
 
 namespace JsVI {
 	class TextLabel :public GUI2DLabel

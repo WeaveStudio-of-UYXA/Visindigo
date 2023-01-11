@@ -5,7 +5,7 @@
 #include "Visindigo/VICore/VIAnimation.h"
 #include "Visindigo/VICore/VIGeneralBehavior.h"
 #include "Visindigo/VICore/VIQtExtensionMethod.h"
-#include "VIJSAPI/VIJSGlobal.h"
+#include "Visindigo/VIJavaScript/VIJSGlobal.h"
 #define BIND_DONE(VIAniEvent) BIND(VIAniEvent, SIGNAL(done(bool)), this, SLOT(ifWait(bool)));
 class VI2DGUILabel :public QLabel
 {

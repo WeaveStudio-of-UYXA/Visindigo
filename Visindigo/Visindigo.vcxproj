@@ -109,29 +109,28 @@
   <ItemGroup>
     <ClCompile Include="init.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="VIJSAPI\VIJSGlobal.cpp" />
+    <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
     <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp" />
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="VIJSAPI\JsVIGUI2D.h" />
-    <QtMoc Include="VIJSAPI\JsVISystem.h" />
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2D.h" />
+    <QtMoc Include="Visindigo\VIJavaScript\JsVISystem.h" />
     <QtMoc Include="CommonEdit\CEFunction\CELanguage.h" />
     <ClInclude Include="CommonEdit\CECore\CEMacro.h" />
     <ClInclude Include="CommonEdit\CECore\CE_QtMacro.h" />
     <ClInclude Include="Global.h" />
-    <QtMoc Include="VIJSAPI\JsVIYSP.h" />
-    <QtMoc Include="VIJSAPI\HostExceptionUI.h" />
-    <QtMoc Include="VIJSAPI\JsVIGUI2DBase.h" />
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIYSP.h" />
+    <QtMoc Include="Visindigo\VIJavaScript\HostExceptionUI.h" />
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2DBase.h" />
     <ClInclude Include="init.h" />
-    <ClInclude Include="VIJSAPI\JsVIBase.h" />
-    <QtMoc Include="VIJSAPI\JsVIChara.h" />
-    <QtMoc Include="VIJSAPI\JsVIContainer.h" />
-    <ClInclude Include="VIJSAPI\macro\VIJSGlobal_m.h" />
-    <ClInclude Include="VIJSAPI\VIGUI\VIGUILabel\JsVIGUILabel.h" />
-    <ClInclude Include="VIJSAPI\VIJSGlobal.h" />
+    <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h" />
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIChara.h" />
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIContainer.h" />
+    <ClInclude Include="Visindigo\VIJavaScript\macro\VIJSGlobal_m.h" />
+    <ClInclude Include="Visindigo\VIJavaScript\VIJSGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
     <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />
     <QtMoc Include="Visindigo\VICore\VIGeneralBehavior.h" />
@@ -147,7 +146,7 @@
     <ClInclude Include="VIUI\PW\VisindigoProject.h" />
     <ClInclude Include="VIUI\RW\VisindigoRepos.h" />
     <QtMoc Include="VIUI\MRW\VIGUI2D.h" />
-    <QtMoc Include="VIJSAPI\VIJSHost.h" />
+    <QtMoc Include="Visindigo\VIJavaScript\VIJSHost.h" />
     <ClInclude Include="VIUI\MRW\MRWGlobal.h" />
     <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h" />
     <QtMoc Include="VIUI\VIPlayerWidget.h" />

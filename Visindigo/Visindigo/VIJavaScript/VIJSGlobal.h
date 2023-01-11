@@ -2,8 +2,8 @@
 #include <QtCore>
 #include <QtQml>
 #include "macro/VIJSGlobal_m.h"
-#include "../Visindigo/VIObjects/macro/VIGlassConvention.h"
-#include "../CommonEdit/CECore/CEMacro.h"
+#include "../VIObjects/macro/VIGlassConvention.h"
+#include "../../CommonEdit/CECore/CEMacro.h"
 class VIJSGlobal {
 public:
 	static QMutex VIJSMutex;
