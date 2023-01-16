@@ -176,7 +176,6 @@ void VIGeneralBehaviorHost::run() {
 		STD_TimePoint TPB = STD_clock_now();
 		mergeEvent();
 		ergodicEvent();
-		eraseEvent();
 		if (!getHostFlag()) { break; }
 		STD_TimePoint TPE = STD_clock_now();
 		LASTTIME = STD_Nano_duration(TPE, TPB);
@@ -186,18 +185,14 @@ void VIGeneralBehaviorHost::stop() {
 	this->setHostFlag(false);
 }
 void VIGeneralBehaviorHost::mergeEvent() {
-	//qDebug() << "Merge start";
 	HOSTMUTEX.lock();
 	if (!BEHAVIORLIST_ADD.isEmpty()) {
 		BEHAVIORLIST.append(BEHAVIORLIST_ADD);
 		BEHAVIORLIST_ADD.clear();
 	}
 	HOSTMUTEX.unlock();
-	//qDebug() << "Merge end";
 }
-
 void VIGeneralBehaviorHost::ergodicEvent() {
-	//qDebug() << "Ergodic start";
 	for (auto i = BEHAVIORLIST.begin(); i != BEHAVIORLIST.end(); ) {
 		VIGeneralBehavior::State s = (*i)->preFrame();
 		if (s == VIGeneralBehavior::State::Done) {
@@ -205,18 +200,11 @@ void VIGeneralBehaviorHost::ergodicEvent() {
 			VIGeneralBehavior* j = (*i);
 			i = BEHAVIORLIST.erase(i);
 			emit j->done();
-			qDebug() << "Behavior done" << j;
-			qDebug() << "Behavior left" << BEHAVIORLIST.length();
 		}
 		else {
 			i++;
 		}
 	}
-	//qDebug() << "Ergodic end";
-}
-
-void VIGeneralBehaviorHost::eraseEvent() {
-	
 }
 void VIGeneralBehaviorHost::addBehavior(VIGeneralBehavior* gb) {
 	qDebug() << "Add Behavior" << gb;

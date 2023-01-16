@@ -109,6 +109,9 @@
   <ItemGroup>
     <ClCompile Include="init.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Visindigo\SPOL\SPOLObject.cpp" />
+    <ClCompile Include="Visindigo\SPOL\SPOLObjectPool.cpp" />
+    <ClCompile Include="Visindigo\SPOL\SPOLSyntax.cpp" />
     <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
@@ -126,6 +129,11 @@
     <QtMoc Include="Visindigo\VIJavaScript\HostExceptionUI.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2DBase.h" />
     <ClInclude Include="init.h" />
+    <QtMoc Include="Visindigo\SPOL\SPOL.h" />
+    <QtMoc Include="Visindigo\SPOL\SPOLObject.h" />
+    <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h" />
+    <QtMoc Include="Visindigo\SPOL\SPOLSyntax.h" />
+    <QtMoc Include="Visindigo\SPOL\SPOLObjectPool.h" />
     <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIChara.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIContainer.h" />
@@ -138,6 +146,7 @@
     <ClInclude Include="Visindigo\VICore\VIMath.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h" />
     <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h" />
+    <QtMoc Include="Visindigo\VIModules\VIHitbox\VIHitbox.h" />
     <ClInclude Include="Visindigo\VIObjects\macro\VIGlassConvention.h" />
     <QtMoc Include="Visindigo\VISystem\VISystemBase.h" />
     <ClInclude Include="Visindigo\VIObjects\VIImage.h" />

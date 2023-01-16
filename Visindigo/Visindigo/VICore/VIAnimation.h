@@ -4,7 +4,7 @@
 #include "VIMath.h"
 
 //此类暂停支持，改用VIGeneralBehavior类型的VITextAniBehavior
-class VITextAnimation : public VIAnimationEvent
+class __Deprecated__("此类暂停支持，改用VIGeneralBehavior类型的VITextAniBehavior") VITextAnimation : public VIAnimationEvent
 {
 	Q_OBJECT
 signals:

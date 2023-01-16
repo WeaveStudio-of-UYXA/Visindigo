@@ -7,8 +7,24 @@ namespace VIMath {
 		float x;
 		float y;
 	};
+	struct VIVector3
+	{
+		float x;
+		float y;
+		float z;
+	};
+	struct VIVector4
+	{
+		float x;
+		float y;
+		float z;
+		float w;
+	};
+	typedef float VIVector;
+	typedef QList<VIVector> VIMatrix;
 	typedef QList<VIVector2> VI2DMatrix;
-	typedef QList<float> VIMatrix;
+	typedef QList<VIVector3> VI3DMatrix;
+	typedef QList<VIVector4> VI4DMatrix;
 }
 class VIBessel :public QObject
 {

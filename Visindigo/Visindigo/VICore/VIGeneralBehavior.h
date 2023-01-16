@@ -103,7 +103,6 @@ class VIGeneralBehaviorHost :public QThread {
 	_Slot void addBehavior(VIGeneralBehavior*);
 	_Private void mergeEvent();
 	_Private void ergodicEvent();
-	_Private void eraseEvent();
 };
 
 class VIGeneralBehaviorHostDebug final :public VIGeneralBehavior
