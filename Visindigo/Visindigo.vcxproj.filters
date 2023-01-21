@@ -71,6 +71,15 @@
     <ClCompile Include="Visindigo\SPOL\SPOLObjectPool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Visindigo\SPOL\SPOLVARObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\SPOL\SPOLSyntaxObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\SPOL\SPOLFUNCObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VIUI\MRW\MRWGlobal.h">
@@ -122,6 +131,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLVARObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLObjectPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLSyntax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLSyntaxObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLFUNCObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -190,15 +217,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\SPOL\SPOL.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\SPOL\SPOLObject.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\SPOL\SPOLSyntax.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\SPOL\SPOLObjectPool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

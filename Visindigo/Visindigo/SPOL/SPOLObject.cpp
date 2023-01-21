@@ -1,6 +1,6 @@
 ﻿#include "SPOLObject.h"
 void SPOLExecObject::setParent(SPOLExecObject* parent) {
-	if (parent != Q_NULLPTR) {
+	if (parent != NULLOBJECT) {
 		this->Parent = parent;
 		parent->addChild(this);
 	}
@@ -11,17 +11,32 @@ void SPOLExecObject::addChild(SPOLExecObject* child) {
 void SPOLExecObject::removeChild(SPOLExecObject* child) {
 	this->Child.removeOne(child);
 }
-SPOLExecObject::~SPOLExecObject() {
-	if (Parent != Q_NULLPTR) {
+void SPOLExecObject::setName(QString name) {
+	this->Name = name;
+}
+QString SPOLExecObject::getName() {
+	return this->Name;
+}
+def_init SPOLExecObject::SPOLExecObject(ExecType type, SPOLExecObject* parent) { 
+	setParent(parent); Type = type; 
+}
+def_del SPOLExecObject::~SPOLExecObject() {
+	if (Parent != NULLOBJECT) {
 		this->Parent->removeChild(this);
 	}
 	while (Child.size() != 0) {
 		auto i = Child.begin();
-		if (*i != Q_NULLPTR) { delete (*i); }
+		if (*i != NULLOBJECT) { delete (*i); }
 	}
 }
+def_copy SPOLExecObject::SPOLExecObject(const SPOLExecObject& obj) {
+	this->Name = obj.Name;
+	this->Parent = obj.Parent;
+	this->Child = obj.Child;
+	this->Type = obj.Type;
+}
 SPOLExecObject* SPOLExecObject::getParent() {
-	return (SPOLExecObject*)this->parent();
+	return Parent;
 }
 QList<SPOLExecObject*> SPOLExecObject::getChildren() {
 	return this->Child;
@@ -60,108 +75,6 @@ bool SPOLExecObject::hasChild(QStringList* nameList, QStringList::Iterator* name
 	}
 	return false;
 }
-void SPOLExec_VAR::setValue(double value, int index) {
-	if (index != 0) { IsList = true; }
-	Value[index] = QString::number(value);
-	ValueType[index] = VARType::Number;
-}
-void SPOLExec_VAR::setValue(QString value, int index) {
-	if (index != 0) { IsList = true; } 
-	Value[index] = value;
-	ValueType[index] = VARType::String;
-}
-void SPOLExec_VAR::setValue(QStringList value, SPOLVarTypeList type) {
-	if (value.size() != type.size()) {
-		return;
-	}
-	else {
-		Value = value;
-		ValueType = type;
-	}
-}
-double SPOLExec_VAR::getNumber(int index) {
-	return Value[index].toDouble();
-}
-QString SPOLExec_VAR::getString(int index) {
-	return Value[index];
-}
-QStringList SPOLExec_VAR::getOther() {
-	return Value;
-}
-SPOLExec_VAR::VARType SPOLExec_VAR::getType(int index) {
-	return ValueType[index];
-}
-SPOLVarTypeList SPOLExec_VAR::getTypeList() {
-	return ValueType;
-}
-bool SPOLExec_VAR::is(SPOLExec_VAR* var) {
-	if (var == this) { return true; }
-	else {
-		if (IsList) {
-			if (Value.size() == var->Value.size()) {
-				for (int i = 0; i < Value.length(); i++) {
-					if (Value[i] == var->Value[i] && ValueType[i] == var->ValueType[i]) { continue; }
-					else { return false; }
-				}
-				return true;
-			}
-			else { return false; }
-		}
-		else {
-			return Value[0] == var->Value[0] && ValueType[0] == var->ValueType[0];
-		}
-	}
-}
-bool SPOLExec_VAR::moreThan(SPOLExec_VAR* var) {
-	if (this->is(var)) { return false; }
-	else {
-		if (IsList) {
-			return var->Value.size() > Value.size();
-		}
-		else {
-			switch (ValueType[0])
-			{
-			case VARType::Number:
-				return Value[0].toDouble() > var->Value[0].toDouble();
-			case VARType::String:
-				return Value[0].size() > var->Value[0].size();
-			case VARType::Other:
-				return Value[0].size() > var->Value[0].size();
-			default:
-				return false;
-			}
-		}
-	}
-}
-bool SPOLExec_VAR::lessThan(SPOLExec_VAR* var) {
-	if (this->is(var)) { return false; }
-	else {
-		if (IsList) {
-			return var->Value.size() < Value.size();
-		}
-		else {
-			switch (ValueType[0])
-			{
-			case VARType::Number:
-				return Value[0].toDouble() < var->Value[0].toDouble();
-			case VARType::String:
-				return Value[0].size() < var->Value[0].size();
-			case VARType::Other:
-				return Value[0].size() < var->Value[0].size();
-			default:
-				return false;
-			}
-		}
-	}
-}
-bool SPOLExec_VAR::notLessThan(SPOLExec_VAR* var) {
-	return this->is(var) || this->moreThan(var);
-}
-bool SPOLExec_VAR::notMoreThan(SPOLExec_VAR* var) {
-	return this->is(var) || this->lessThan(var);
-}
-bool SPOLExec_VAR::copyFrom(SPOLExec_VAR* var) {
-	Value = var->Value;
-	ValueType = var->ValueType;
-	IsList = var->IsList;
+SPOLExecObject* SPOLExecObject::exec(SPOLExecObject* para) {
+	return new SPOLExecObject(ExecType::Var);
 }

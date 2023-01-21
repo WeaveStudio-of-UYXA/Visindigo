@@ -15,6 +15,15 @@ bool SPOLObjectPool::hasDefObject(QString name, SPOLExecObject** returnObj){
 	}
 	return false;
 }
+void SPOLObjectPool::addDefObject(SPOLExecObject* defObj) {
+	SPOLExecObject* test = NULLOBJECT;
+	if (!this->hasDefObject(defObj->Name, &test)) {
+		DefPool.push_back(defObj);
+	}
+	else {
+		PASS;
+	}
+}
 void SPOLObjectPool::addDefObjectTo(SPOLExecObject* defObj, SPOLExecObject* parent) {
 	defObj->setParent(parent);
 }
