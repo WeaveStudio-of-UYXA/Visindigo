@@ -1,56 +1,66 @@
 ﻿#include "SPOLFUNCObject.h"
 
 SPOLExecObject* SPOLExec_FUNC::exec(SPOLExecObject* para) {
-	if (ParaList->getChildren().length() != para->getChildren().length()) {
-		return NULLOBJECT;
+	if (ParaList.length() != para->getChildren().length()) {
+		return new SPOLExec_ERROR(this, SPOLExec_ERROR::ErrorType::ParameterMismatch);
 	}
 	else {
-		QList<SPOLExecObject*> paraList = para->getChildren();
-		QList<SPOLExecObject*> defParaList = ParaList->getChildren();
+		QVector<SPOLExecObject*> paraList = para->getChildren();
 		for (int i = 0; i <paraList.length(); i++) {
-			paraList[i]->setParent(ParaList);
-			paraList[i]->setName(defParaList[i]->getName());
+			paraList[i]->setParent(this);
+			paraList[i]->setName(ParaList[i]->getName());
 		}
-		for (auto i = NodeList.begin(); i != NodeList.end(); ) {
+		SPOLExecObject* rtn = NULLOBJECT;
+		for (auto i = NodeList.begin(); i != NodeList.end(); i++) {
 			SPOLSyntaxType type = i->Type;
 			switch (type) {
 			case SPOLSyntaxType::RETURN:
-				return i->exec(this);
+				rtn = i->exec(this);
 				break;
 			case SPOLSyntaxType::BREAK:
-				return NULLOBJECT;
+				rtn =  new SPOLExec_ERROR(this, SPOLExec_ERROR::ErrorType::SyntaxParsingFailed);
 				break;
 			case SPOLSyntaxType::CONTINUE:
-				i = NodeList.begin();
-				continue;
+				rtn =  new SPOLExec_ERROR(this, SPOLExec_ERROR::ErrorType::SyntaxParsingFailed);
 				break;
 			default:
 				i->exec(this);
 				break;
 			}
-			i++;
 		}
-		return NULLOBJECT;
+		delete para;
+		for (auto i = Child.begin(); i != Child.end();) {
+			if (*i != NULLOBJECT) {
+				delete (*i);
+				i = Child.erase(i);
+			}
+			else {
+				i++;
+			}
+		}
+		return rtn;
 	}
 }
 
 SPOLExecObject* SPOLExec_FUNC_Print::exec(SPOLExecObject* para) {
-	QList<SPOLExecObject*> paraList = para->getChildren();
+	QVector<SPOLExecObject*> paraList = para->getChildren();
 	for (auto i = paraList.begin(); i != paraList.end(); i++) {
 		SPOLExec_VAR* var = static_cast<SPOLExec_VAR*>(*i);
-		if (var->IsList) { qDebug() << var->getOther(); }
-		else { 
-			switch (var->getType()) {
-			case SPOLExec_VAR::VARType::Number:
-				qDebug() << var->getNumber();
-				break;
-			case SPOLExec_VAR::VARType::String:
-				qDebug() << var->getString();
-				break;
-			case SPOLExec_VAR::VARType::Other:
-				qDebug() << var->getOther();
-				break;
-			} 
+		switch(var->ValueType) {
+		case VARType::Int:
+			qDebug() << getInt();
+			break;
+		case VARType::Float:
+			qDebug() << getFloat();
+			break;
+		case VARType::String:
+			qDebug() << getString();
+			break;
+		case VARType::Bool:
+			qDebug() << getBool();
+			break;
+		default:
+			break;
 		}
 	}
 	return NULLOBJECT;

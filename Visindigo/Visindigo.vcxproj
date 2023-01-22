@@ -113,6 +113,7 @@
     <ClCompile Include="Visindigo\SPOL\SPOLObject.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLObjectPool.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLSyntax.cpp" />
+    <ClCompile Include="Visindigo\SPOL\SPOLErrorObject.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLSyntaxObject.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLVARObject.cpp" />
     <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLSyntax.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLObjectPool.h" />
+    <ClInclude Include="Visindigo\SPOL\SPOLErrorObject.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLSyntaxObject.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLVARObject.h" />
     <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h" />

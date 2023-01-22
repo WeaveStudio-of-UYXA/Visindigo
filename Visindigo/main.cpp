@@ -18,6 +18,12 @@ int main(int argc, char* argv[]) {
 	qDebug() << code;
 	SPOLSyntax::escapeCharacterRestore(&code);
 	qDebug()<< SPOLSyntax::wordSplitter(code);
+	QString fileCode = SPOLSyntax::load("../../Visindigo/Dev/test");
+	QStringList list;
+	SPOLSyntax::codeLineSpilter(&list, fileCode);
+	for (auto i = list.begin(); i != list.end(); i++) {
+		qDebug() << SPOLSyntax::wordSplitterCompleted(*i);
+	}
 	//launchVisindigoRuntime();
 	return app.exec();
 }

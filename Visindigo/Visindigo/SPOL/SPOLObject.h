@@ -12,7 +12,7 @@ class SPOLExecObject {
 	};
 	_Public QString Name;
 	_Public SPOLExecObject* Parent;
-	_Public QList<SPOLExecObject*> Child;
+	_Public QVector<SPOLExecObject*> Child;
 	_Public ExecType Type;
 	_Public def_init SPOLExecObject(ExecType type, SPOLExecObject* parent = NULLOBJECT);
 	_Public def_del ~SPOLExecObject();
@@ -22,8 +22,9 @@ class SPOLExecObject {
 	_Protected void removeChild(SPOLExecObject*);
 	_Public void setName(QString name);
 	_Public QString getName();
+	_Public QString getFullName();
 	_Public SPOLExecObject* getParent();
-	_Public QList<SPOLExecObject*> getChildren();
+	_Public QVector<SPOLExecObject*> getChildren();
 	_Public bool hasChild(QString fullName, SPOLExecObject** returnObj);
 	_Public bool hasChild(QStringList* nameList, QStringList::Iterator* name, SPOLExecObject** returnObj);
 	//_Public void copyFrom(SPOLExecObject* obj);

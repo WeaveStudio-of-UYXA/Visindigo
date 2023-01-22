@@ -17,6 +17,14 @@ void SPOLExecObject::setName(QString name) {
 QString SPOLExecObject::getName() {
 	return this->Name;
 }
+QString SPOLExecObject::getFullName() {
+	if (this->Parent != NULLOBJECT) {
+		return Name;
+	}
+	else {
+		return Parent->getFullName() + "." + Name;
+	}
+}
 def_init SPOLExecObject::SPOLExecObject(ExecType type, SPOLExecObject* parent) { 
 	setParent(parent); Type = type; 
 }
@@ -38,7 +46,7 @@ def_copy SPOLExecObject::SPOLExecObject(const SPOLExecObject& obj) {
 SPOLExecObject* SPOLExecObject::getParent() {
 	return Parent;
 }
-QList<SPOLExecObject*> SPOLExecObject::getChildren() {
+QVector<SPOLExecObject*> SPOLExecObject::getChildren() {
 	return this->Child;
 }
 bool SPOLExecObject::hasChild(QString fullName, SPOLExecObject** returnObj) {
@@ -64,7 +72,7 @@ bool SPOLExecObject::hasChild(QStringList* nameList, QStringList::Iterator* name
 	for (auto i = Child.begin(); i != Child.end(); i++) {
 		if ((*i)->Name == **name) {
 			if (*name != nameList->end()) {
-				*name++;
+				(*name)++;
 				return (*i)->hasChild(nameList, name, returnObj);
 			}
 			else {

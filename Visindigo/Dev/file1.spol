@@ -1,0 +1,3 @@
+import storyPart1.scene1
+def test1():
+    None
