@@ -1,4 +1,5 @@
 ﻿#include "SPOLObjectPool.h"
+SPOLMemoryPool* SPOLMemoryPool::Instance = NULLOBJECT;
 
 void SPOLObjectPool::setExecMain(SPOLExecObject* main) {
 	ExecMain = main;
@@ -18,7 +19,7 @@ bool SPOLObjectPool::hasDefObject(QString name, SPOLExecObject** returnObj){
 void SPOLObjectPool::addDefObject(SPOLExecObject* defObj) {
 	SPOLExecObject* test = NULLOBJECT;
 	if (!this->hasDefObject(defObj->Name, &test)) {
-		DefPool.push_back(defObj);
+		DefPool.append(defObj);
 	}
 	else {
 		PASS;

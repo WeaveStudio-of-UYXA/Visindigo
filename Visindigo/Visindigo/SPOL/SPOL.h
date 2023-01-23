@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "SPOLObject.h"
+#include "SPOLSyntax.h"
 
 class SPOLInterpreter :public QObject {
 	Q_OBJECT;

@@ -10,7 +10,7 @@ QString SPOLSyntax::load(QString path) {
 		file.setFileName(path);
 	}
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		return "\n";
+		return { "\n" };
 	}
 	QTextStream in(&file);
 	QStringList Code = in.readAll().replace(";","\n").split("\n");
@@ -28,30 +28,54 @@ QString SPOLSyntax::load(QString path) {
 	}
 	return Code.join("\n");
 }
-void SPOLSyntax::codeLineSpilter(QStringList* list, QString code) {
-	QStringList codeList = code.replace(";", "\n").split("\n");
+QStringList SPOLSyntax::loadCompleted(QString path) {
+	QStringList codeList = SPOLSyntax::load(path).split("\n");
+	//下面这个部分是将一切行末换行符合并到上一行并且扬了空白行
 	for (auto i = codeList.begin(); i != codeList.end();) {
 		if ((*i).isEmpty()) {
 			i = codeList.erase(i);
 			continue;
 		}
+		if ((*i).endsWith("\\")) {
+			auto j = i;
+			*i = (*i).section("\\", 0, -2) + (*++j);
+			codeList.erase(j);
+			continue;
+		}
 		i++;
 	}
-	*list = codeList;
+	return codeList;
 }
+
 void SPOLSyntax::codeAnalyzer(QStringList* code, SPOLObjectPool* defPool) {
 	for (auto i = code->begin(); i != code->end();) {
 		QStringList lineInfo = SPOLSyntax::wordSplitterCompleted(*i);
 		if (lineInfo[0] == "def") {
 			i++;
-			SPOLExec_FUNC
-			SPOLSyntax::partAnalyzer(SPOLSyntax::getIndentValue(&(*i)), code, &i, defPool);
+			SPOLExec_FUNC* funcDef = new SPOLExec_FUNC(lineInfo[1]);
+			SPOLSyntax::partAnalyzer(SPOLSyntax::getIndentValue(&(*i)), code, &i, funcDef);
+			defPool->addDefObject(funcDef);
+			continue;//注意，由partAnalyzer嵌套调用的那个codeAnalyzer完成最后一个++
 		}
-		
 	}
 }
-SPOLExecObject* SPOLSyntax::partAnalyzer(int IndentValue, QStringList* code, QStringList::iterator* i, SPOLObjectPool* defPool) {
-	
+void SPOLSyntax::partAnalyzer(int IndentValue, QStringList* code, QStringList::iterator* i, SPOLExecObject* parentDef) {
+	for (*i; *i != code->end();(*i)++) {
+		if (SPOLSyntax::getIndentValue(&(**i)) != IndentValue) { return; }
+		else {
+			QStringList lineInfo = SPOLSyntax::wordSplitterCompleted(**i);
+			if (lineInfo[0] == "def") {
+				i++;
+				SPOLExec_FUNC* funcDef = new SPOLExec_FUNC(lineInfo[1]);
+				SPOLSyntax::partAnalyzer(SPOLSyntax::getIndentValue(&(**i)), code, i, funcDef);
+				funcDef->setParent(parentDef);
+				continue;//注意，由partAnalyzer嵌套调用的那个codeAnalyzer完成最后一个++
+			}
+			else {
+				static_cast<SPOLExec_FUNC*>(parentDef)->addSyntaxNode(SPOLSyntax::lineAnalyzer(&lineInfo));
+			}
+		}
+	}
 }
 int SPOLSyntax::getIndentValue(QString* code) {
 	int indent = 0;
@@ -67,42 +91,12 @@ int SPOLSyntax::getIndentValue(QString* code) {
 		}
 	}
 	return indent;
-
 }
-SPOLLineType SPOLSyntax::lineAnalyzer(QString Code, SPOLSyntax_Node* node) {
-	QStringList wordList = SPOLSyntax::wordSplitterCompleted(Code);
-	SPOLSyntax_Node* firstNode = SPOLSyntax::wordAnalyzer(wordList, node);
-	switch (firstNode->Type)
-	{
-	case SPOLSyntaxType::DEF:
-		return SPOLLineType::DEF;
-	case SPOLSyntaxType::CLASS:
-		return SPOLLineType::CLASS;
-	case SPOLSyntaxType::RETURN:
-		return SPOLLineType::RETURN;
-	case SPOLSyntaxType::BREAK:
-		return SPOLLineType::RETURN;
-	case SPOLSyntaxType::CONTINUE:
-		return SPOLLineType::CONTINUE;
-	case SPOLSyntaxType::MARK_FREE:
-		return SPOLLineType::FREE;
-	case SPOLSyntaxType::IF:
-		return SPOLLineType::IF;
-	case SPOLSyntaxType::ELIF:
-		return SPOLLineType::ELIF;
-	case SPOLSyntaxType::ELSE:
-		return SPOLLineType::ELSE;
-	case SPOLSyntaxType::WHILE:
-		return SPOLLineType::WHILE;
-	default:
-		return SPOLLineType::NORMAL;
-	}
-	if (firstNode->Type == SPOLSyntaxType::VAR) {
-		return SPOLLineType::NORMAL;
-	}
+SPOLSyntax_Node* SPOLSyntax::lineAnalyzer(QStringList* Code) {
+	return NULLOBJECT;
 }
 SPOLSyntax_Node* SPOLSyntax::wordAnalyzer(QStringList codeList, SPOLSyntax_Node* node) {
-
+	return NULLOBJECT;
 }
 SPOLSyntaxType SPOLSyntax::wordAnalyzer(QString code, SPOLSyntaxType frontType, SPOLExecObject* parentEnv, SPOLExecObject** returnObj) {
 	if (frontType == SPOLSyntaxType::VAR) {
@@ -210,6 +204,12 @@ QStringList SPOLSyntax::wordSplitter(QString code) {
 	QList<QChar> BracketEnd = { ')', '}', ']' };
 	QChar BracketStartNow = '(';
 	QChar BracketEndNow = ')';
+	QString FREETest = code.simplified();
+	if (FREETest.startsWith("|")) {
+		wordList.append("|");
+		wordList.append(FREETest.remove(0, 1));
+		return wordList;
+	}
 	for (auto i = code.begin(); i != code.end(); b = i++) {
 		if ((*i == '"' && *b != '\\') || (*i == '\'' && *b != '\\')) {
 			if (!inString) {
@@ -253,7 +253,6 @@ QStringList SPOLSyntax::wordSplitter(QString code) {
 				}
 			}
 			if (BracketDepth == 0) {
-		
 				if ((*i == ' ' || *i == '\t' || *i == '\r' || *i == '\t')) {
 					if (word != "") { wordList.append(word); }
 					word = "";

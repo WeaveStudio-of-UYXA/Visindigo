@@ -83,6 +83,5 @@ bool SPOLExecObject::hasChild(QStringList* nameList, QStringList::Iterator* name
 	}
 	return false;
 }
-SPOLExecObject* SPOLExecObject::exec(SPOLExecObject* para) {
-	return new SPOLExecObject(ExecType::Var);
-}
+
+//以下为重构后内容

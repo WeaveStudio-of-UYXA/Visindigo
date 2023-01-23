@@ -109,7 +109,9 @@
   <ItemGroup>
     <ClCompile Include="init.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Visindigo\SPOL\SPOLBaseVar.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLFUNCObject.cpp" />
+    <ClCompile Include="Visindigo\SPOL\SPOLMemoryPool.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLObject.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLObjectPool.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLSyntax.cpp" />
@@ -134,7 +136,11 @@
     <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2DBase.h" />
     <ClInclude Include="init.h" />
     <QtMoc Include="Visindigo\SPOL\SPOL.h" />
+    <ClInclude Include="Visindigo\SPOL\SPOLVar.h" />
+    <ClInclude Include="Visindigo\SPOL\SPOLBaseObject.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLFUNCObject.h" />
+    <ClInclude Include="Visindigo\SPOL\SPOLBaseVar.h" />
+    <ClInclude Include="Visindigo\SPOL\SPOLMemoryPool.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLObject.h" />
     <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLSyntax.h" />

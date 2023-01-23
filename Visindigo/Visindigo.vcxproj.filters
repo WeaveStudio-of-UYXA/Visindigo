@@ -83,6 +83,12 @@
     <ClCompile Include="Visindigo\SPOL\SPOLErrorObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Visindigo\SPOL\SPOLMemoryPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\SPOL\SPOLBaseVar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VIUI\MRW\MRWGlobal.h">
@@ -155,6 +161,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\SPOL\SPOLErrorObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLMemoryPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLBaseVar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLBaseObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLVar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
