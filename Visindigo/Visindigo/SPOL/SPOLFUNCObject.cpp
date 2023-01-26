@@ -15,7 +15,7 @@ SPOLExecObject* SPOLExec_FUNC::call(SPOLExecObject* parentEnv, SPOLExecObject* p
 			SPOLSyntaxType type = i->getSyntaxType();
 			switch (type) {
 			case SPOLSyntaxType::RETURN:
-				rtn = i->exec(parentEnv, para, this);
+				//rtn = i->exec(parentEnv, para);
 				break;
 			case SPOLSyntaxType::BREAK:
 				rtn =  new SPOLExec_ERROR(this, SPOLExec_ERROR::ErrorType::SyntaxParsingFailed);
@@ -24,7 +24,7 @@ SPOLExecObject* SPOLExec_FUNC::call(SPOLExecObject* parentEnv, SPOLExecObject* p
 				rtn =  new SPOLExec_ERROR(this, SPOLExec_ERROR::ErrorType::SyntaxParsingFailed);
 				break;
 			default:
-				i->exec(this);
+				//i->exec(this);
 				break;
 			}
 		}

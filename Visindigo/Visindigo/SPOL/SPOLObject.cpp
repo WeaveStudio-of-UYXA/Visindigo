@@ -84,4 +84,3 @@ bool SPOLExecObject::hasChild(QStringList* nameList, QStringList::Iterator* name
 	return false;
 }
 
-//以下为重构后内容

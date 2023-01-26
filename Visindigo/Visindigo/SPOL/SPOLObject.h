@@ -28,24 +28,10 @@ class SPOLExecObject {
 	_Public bool hasChild(QString fullName, SPOLExecObject** returnObj);
 	_Public bool hasChild(QStringList* nameList, QStringList::Iterator* name, SPOLExecObject** returnObj);
 	//_Public void copyFrom(SPOLExecObject* obj);
-	_Public virtual SPOLExecObject* call(SPOLExecObject* parentEnv, SPOLExecObject* parList);
+	_Public SPOLExecObject* call(SPOLExecObject* parentEnv, SPOLExecObject* parList);
 	_Public SPOLExecObject* deepCopy();
 };
 
 
 
-//以下为重构后内容
-enum class SPOLObjectType {
-	Var,
-	Func,
-	Class,
-	Unknown
-};
-class SPOLObject {
-	_Private SPOLMemoryPointer THIS;
-	_Private bool isQuote = false;
-	_Private SPOLObjectType ObjectType = SPOLObjectType::Unknown;
-	_Public def_init SPOLObject(SPOLObjectType type, SPOLMemoryPointer THIS);
-	_Public def_copy SPOLObject(const SPOLObject& obj);
-	_Public def_del ~SPOLObject();
-};
+

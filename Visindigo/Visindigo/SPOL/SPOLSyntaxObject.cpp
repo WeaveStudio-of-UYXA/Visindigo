@@ -1,11 +1,16 @@
 ﻿#include "SPOLSyntaxObject.h"
-
+def_init SPOLSyntax_Node::SPOLSyntax_Node(SPOLSyntax_Node* parent = NULLOBJECT) {
+	this->Top = parent;
+}
 def_del SPOLSyntax_Node::~SPOLSyntax_Node() {
 	if (this->Left != NULLOBJECT) { delete this->Left; }
 	if (this->Right != NULLOBJECT) { delete this->Right; }
 }
 bool SPOLSyntax_Node::isTopNode() {
 	return this->Top == NULLOBJECT;
+}
+void SPOLSyntax_Node::setNodeType(SPOLSyntaxType type) {
+	this->NodeType = type;
 }
 SPOLSyntaxType SPOLSyntax_Node::getSyntaxType() {
 	return this->NodeType;
@@ -24,8 +29,8 @@ def_init SPOLSyntax_CALL::SPOLSyntax_CALL(SPOLSyntax_Node* parent):SPOLSyntax_No
 SPOLExecObject* SPOLSyntax_CALL::exec(SPOLExecObject* parentEnv, SPOLExecObject* paraList, SPOLObjectPool* defPool) {
 	SPOLExecObject* result = NULLOBJECT;
 	defPool->hasDefObject(callName, &result);
-	SPOLExecObject* newobj = result->exec(NULLOBJECT, paraList);
-	return newobj;
+	//SPOLExecObject* newobj = result->exec(NULLOBJECT, paraList);
+	return NULLOBJECT;
 }
 
 

@@ -107,7 +107,7 @@ SPOLSyntaxType SPOLSyntax::wordAnalyzer(QString code, SPOLSyntaxType frontType, 
 			SPOLExecObject* obj = new SPOLExec_VAR();
 			obj->setName(code);
 			*returnObj = obj;
-			return SPOLSyntaxType::DEFNAME;
+			//return SPOLSyntaxType::DEFNAME;
 		}
 	}
 	else if (frontType == SPOLSyntaxType::DEF) {
@@ -129,7 +129,7 @@ SPOLSyntaxType SPOLSyntax::wordAnalyzer(QString code, SPOLSyntaxType frontType, 
 			SPOLExecObject* obj = new SPOLExec_VAR();
 			obj->setName(code);
 			*returnObj = obj;
-			return SPOLSyntaxType::DEFNAME;
+			//return SPOLSyntaxType::DEFNAME;
 		}
 	}
 	
@@ -172,7 +172,7 @@ SPOLSyntaxType SPOLSyntax::wordAnalyzer(QString code, SPOLSyntaxType frontType, 
 	}
 	else if (code.split(".")[0] == "this") {
 		if (parentEnv->Parent->hasChild(code.section(".", 1, -1), returnObj)) {
-			return SPOLSyntaxType::DEFNAME;
+			//return SPOLSyntaxType::DEFNAME;
 		}
 		else {
 			return SPOLSyntaxType::SYNERROR;
@@ -182,7 +182,7 @@ SPOLSyntaxType SPOLSyntax::wordAnalyzer(QString code, SPOLSyntaxType frontType, 
 		//return SPOLSyntaxType::DEFNAME;
 	//}
 	else if (parentEnv->hasChild(code, returnObj)) {
-		return SPOLSyntaxType::DEFNAME;
+		//return SPOLSyntaxType::DEFNAME;
 	}
 	else {
 		return SPOLSyntaxType::SYNERROR;

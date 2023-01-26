@@ -18,3 +18,11 @@ class SPOLExec_ERROR :public SPOLExec_VAR {
 	_Public void setValue(ErrorType type);
 	_Public void markPass(SPOLExec_VAR* passObj);
 };
+
+//以下为重构后内容
+class SPOLException {
+	QString what();
+};
+class SPOLRuntimeException{
+
+};

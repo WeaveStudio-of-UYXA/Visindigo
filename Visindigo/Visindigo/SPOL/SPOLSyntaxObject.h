@@ -9,10 +9,7 @@ enum class SPOLSyntaxType {
 	IF, ELSE, ELIF,
 	WHILE, FOR,
 	NUMBER, STRING,
-	CALL, DEFNAME, AVAR, //DEFNAME指新定义名，AVAR指现有变量
-	OP_ADD, OP_SUBTRACT, OP_MULTIPLY, OP_DIVIDE,
-	OP_EQUAL, OP_NOT_EQUAL, OP_GREATER, OP_LESS, OP_GREATER_EQUAL, OP_LESS_EQUAL,
-	OP_AND, OP_OR, OP_NOT,
+	CALL, VARNAME,
 	MARK_FREE,
 	OP_ASSIGN,
 	SYNERROR
@@ -32,7 +29,7 @@ class SPOLSyntax_Node
 	_Public void setLeft(SPOLSyntax_Node* left);
 	_Public void setRight(SPOLSyntax_Node* right);
 	_Public SPOLSyntaxType getSyntaxType();
-	_Public virtual SPOLExecObject* exec(SPOLExecObject* parentEnv, SPOLExecObject* paraList, SPOLObjectPool* defPool) {};
+	_Public virtual SPOLExecObject* exec(SPOLExecObject* parentEnv, SPOLExecObject* paraList, SPOLObjectPool* defPool) { return NULLOBJECT; };
 };
 class SPOLSyntax_CALL :public SPOLSyntax_Node {
 	_Public def_init SPOLSyntax_CALL(SPOLSyntax_Node* parent);

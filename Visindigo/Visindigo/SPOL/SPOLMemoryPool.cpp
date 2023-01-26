@@ -1,12 +1,16 @@
 ﻿#include "SPOLMemoryPool.h"
-
+def_init SPOLMemoryPool::SPOLMemoryPool() {
+	for (int i = - 63; i < 256; i++) {
+		IntArea.append(SPOLInt{ i, 2 });
+	}
+}
 SPOLMemoryPointer SPOLMemoryPool::malloc(SPOLMemoryBaseType type) {
 	SPOLMemoryPointer pointer = 0;
 	switch (type) {
 	case SPOLMemoryBaseType::Int:
 		for (auto i = 0; i < IntArea.length(); i++) {
 			if (IntArea.at(i).counter == 0) {
-				return (i + 1) * 11;
+				return MemPool_IntPointer(i);
 			}
 		}
 		IntArea.append(SPOLInt{ 0, 1 });
@@ -15,7 +19,7 @@ SPOLMemoryPointer SPOLMemoryPool::malloc(SPOLMemoryBaseType type) {
 	case SPOLMemoryBaseType::Float:
 		for (auto i = 0; i < DoubleArea.length(); i++) {
 			if (DoubleArea.at(i).counter == 0) {
-				return (i + 1) * 13;
+				return MemPool_FloatPointer(i);
 			}
 		}
 		DoubleArea.append(SPOLFloat{ 0, 1 });
@@ -24,62 +28,45 @@ SPOLMemoryPointer SPOLMemoryPool::malloc(SPOLMemoryBaseType type) {
 	case SPOLMemoryBaseType::String:
 		for (auto i = 0; i < StringArea.length(); i++) {
 			if (StringArea.at(i).counter == 0) {
-				return (i + 1) * 17;
+				return MemPool_StringPointer(i);
 			}
 		}
-		StringArea.append(SPOLString{ '\0', 1});
+		StringArea.append(SPOLString{ "", 1});
 		pointer = StringArea.length() * 17;
 		break;
-	case SPOLMemoryBaseType::Object:
-		for (auto i = 0; i < ObjectArea.length(); i++) {
-			if (ObjectArea.at(i).counter == 0) {
-				delete ObjectArea[i].Value;
-				return (i + 1) * 19;
-			}
-		}
 	default:
 		break;
 	}
 	return pointer;
 }
 void SPOLMemoryPool::counterAdd(SPOLMemoryPointer p) {
-	if (p % 11 == 0) {
-		IntArea[p / 11 - 1].counter++;
+	if (MemPool_IsIntPoiner(p)) {
+		IntArea[MemPool_IntIndex(p)].counter++;
 	}
-	else if (p % 13 == 0) {
-		DoubleArea[p / 13 - 1].counter++;
+	else if (MemPool_IsFloatPoiner(p)) {
+		DoubleArea[MemPool_FloatIndex(p)].counter++;
 	}
-	else if (p % 17 == 0) {
-		StringArea[p / 17 - 1].counter++;
-	}
-	else if (p % 19 == 0) {
-		ObjectArea[p / 19 - 1].counter++;
+	else if (MemPool_IsStringPoiner(p)) {
+		StringArea[MemPool_StringIndex(p)].counter++;
 	}
 	else {
 		PASS;
 	}
 }
 void SPOLMemoryPool::counterSub(SPOLMemoryPointer p) {
-	if (p % 11 == 0) {
-		IntArea[p / 11 - 1].counter--;
-		emptyArea++;
+	if (MemPool_IsIntPoiner(p)) {
+		IntArea[MemPool_IntIndex(p)].counter--;
 	}
-	else if (p % 13 == 0) {
-		DoubleArea[p / 13 - 1].counter--;
-		emptyArea++;
+	else if (MemPool_IsFloatPoiner(p)) {
+		DoubleArea[MemPool_FloatIndex(p)].counter--;
 	}
-	else if (p % 17 == 0) {
-		StringArea[p / 17 - 1].counter--;
-		emptyArea++;
-	}
-	else if (p % 19 == 0) {
-		ObjectArea[p / 19 - 1].counter--;
-		emptyArea++;
+	else if (MemPool_IsStringPoiner(p)) {
+		StringArea[MemPool_StringIndex(p)].counter--;
 	}
 	else {
 		PASS;
 	}
-	if ((float)emptyArea / (IntArea.length() + DoubleArea.length() + StringArea.length() + ObjectArea.length()) > gcPercent) {
+	if ((float)emptyArea / (IntArea.length() + DoubleArea.length() + StringArea.length() ) > gcPercent) {
 		for (auto i = IntArea.begin(); i != IntArea.end();) {
 			if (i->counter == 0) {
 				i = IntArea.erase(i);
@@ -104,20 +91,11 @@ void SPOLMemoryPool::counterSub(SPOLMemoryPointer p) {
 				i++;
 			}
 		}
-		for (auto i = ObjectArea.begin(); i != ObjectArea.end();) {
-			if (i->counter == 0) {
-				delete i->Value;
-				i = ObjectArea.erase(i);
-			}
-			else {
-				i++;
-			}
-		}
 	}
 }
 bool SPOLMemoryPool::getInt(SPOLMemoryPointer p, long long* value) {
-	if (p % 11 == 0) {
-		*value = IntArea.at(p / 11 - 1).Value;
+	if (MemPool_IsIntPoiner(p)) {
+		*value = IntArea.at(MemPool_IntIndex(p)).Value;
 		return true;
 	}
 	else {
@@ -125,8 +103,8 @@ bool SPOLMemoryPool::getInt(SPOLMemoryPointer p, long long* value) {
 	}
 }
 bool SPOLMemoryPool::getFloat(SPOLMemoryPointer p, double* value) {
-	if (p % 13 == 0) {
-		*value = DoubleArea.at(p / 13 - 1).Value;
+	if (MemPool_IsFloatPoiner(p)) {
+		*value = DoubleArea.at(MemPool_FloatIndex(p)).Value;
 		return true;
 	}
 	else {
@@ -135,17 +113,8 @@ bool SPOLMemoryPool::getFloat(SPOLMemoryPointer p, double* value) {
 }
 
 bool SPOLMemoryPool::getString(SPOLMemoryPointer p, QString* value) {
-	if (p % 17 == 0) {
-		*value = StringArea.at(p / 17 - 1).Value;
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-bool SPOLMemoryPool::getSPOLObject(SPOLMemoryPointer p, SPOLBaseObject** value) {
-	if (p % 19 == 0) {
-		*value = ObjectArea.at(p / 19 - 1).Value;
+	if (MemPool_IsStringPoiner(p)) {
+		*value = StringArea.at(MemPool_StringIndex(p)).Value;
 		return true;
 	}
 	else {
@@ -153,46 +122,40 @@ bool SPOLMemoryPool::getSPOLObject(SPOLMemoryPointer p, SPOLBaseObject** value) 
 	}
 }
 void SPOLMemoryPool::saveInt(SPOLMemoryPointer p, long long value) {
-	if (p % 11 == 0) {
-		IntArea[p / 11 - 1].Value = value;
+	if (MemPool_IsIntPoiner(p)) {
+		IntArea[MemPool_IntIndex(p)].Value = value;
 	}
 	else {
 		PASS;
 	}
 }
 void SPOLMemoryPool::saveFloat(SPOLMemoryPointer p, double value) {
-	if (p % 13 == 0) {
-		DoubleArea[p / 13 - 1].Value = value;
+	if (MemPool_IsFloatPoiner(p)) {
+		DoubleArea[MemPool_FloatIndex(p)].Value = value;
 	}
 	else {
 		PASS;
 	}
 }
 void SPOLMemoryPool::saveString(SPOLMemoryPointer p, QString value) {
-	if (p % 17 == 0) {
-		StringArea[p / 17 - 1].Value = value.toStdString().c_str();
+	if (MemPool_IsStringPoiner(p)) {
+		StringArea[MemPool_StringIndex(p)].Value = value;
 	}
 	else {
 		PASS;
 	}
 }
 SPOLMemoryBaseType getPointerType(SPOLMemoryPointer p) {
-	if (p == 0) {
-		return SPOLMemoryBaseType::None;
-	}
-	if (p % 11 == 0) {
+	if (MemPool_IsIntPoiner(p)) {
 		return SPOLMemoryBaseType::Int;
 	}
-	else if (p % 13 == 0) {
+	else if (MemPool_IsFloatPoiner(p)) {
 		return SPOLMemoryBaseType::Float;
 	}
-	else if (p % 17 == 0) {
+	else if (MemPool_IsStringPoiner(p)) {
 		return SPOLMemoryBaseType::String;
 	}
-	else if (p % 19 == 0) {
-		return SPOLMemoryBaseType::Object;
-	}
 	else {
-		return SPOLMemoryBaseType::Error;
+		return SPOLMemoryBaseType::None;
 	}
 }
