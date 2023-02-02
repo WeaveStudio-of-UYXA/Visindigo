@@ -154,6 +154,7 @@
     <ClInclude Include="Visindigo\SPOL\SPOLSyntaxObject.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLVARObject.h" />
     <QtMoc Include="Visindigo\VICore\VISoundService.h" />
+    <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h" />
     <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIChara.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIContainer.h" />

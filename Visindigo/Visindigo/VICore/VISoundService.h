@@ -4,6 +4,7 @@
 #include <QtMultiMedia>
 #include "../../../CommonEdit/CECore/CEMacro.h"
 #include "VIGeneralBehavior.h"
+#include "macro/VISoundService_m.h"
 class private_VIMusicFadeBehavior :public VIGeneralBehavior
 {
 	Q_OBJECT;
@@ -48,7 +49,7 @@ class private_VIMusicFadeBehavior :public VIGeneralBehavior
 	}
 };
 class VISoundService; //QtCreator用于识别friend class
-typedef int VISoundServiceKey;
+
 class private_VIMediaPlayer :public QObject
 {
 	Q_OBJECT;
@@ -59,20 +60,23 @@ class private_VIMediaPlayer :public QObject
 	_Private private_VIMusicFadeBehavior* FadeBehavior;
 	_Private VIMilliSecond FadeInDuration = 0;
 	_Private VIMilliSecond FadeOutDuration = 0;
+	_Private VISoundServiceKey Key;
 	_Private bool IsDeleteWhenStop = false;
 	_Private bool IsLoop = false;
-	_Private VISoundServiceKey ServiceKey;
-	_Private def_init private_VIMediaPlayer(QObject* parent = Q_NULLPTR) {
-		MediaPlayer = new QMediaPlayer(parent);
-		MediaPlayerList = new QMediaPlaylist(parent);
+	_Private bool PlayOnLoaded = false;
+	_Private bool PrepareStop = true;
+	_Private int maxVolume = 0;
+	_Private def_init private_VIMediaPlayer(QObject* parent = Q_NULLPTR):QObject(this) {
+		MediaPlayer = new QMediaPlayer(this);
+		MediaPlayerList = new QMediaPlaylist(this);
 		MediaPlayer->setPlaylist(MediaPlayerList);
-		FadeBehavior = new private_VIMusicFadeBehavior(parent);
+		FadeBehavior = new private_VIMusicFadeBehavior(this);
 		BIND(FadeBehavior, SIGNAL(getValue(int)), this->MediaPlayer, SLOT(controlVolume(int)));
 		connect(MediaPlayer, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(onPlayerStateChanged(QMediaPlayer::State)));
 	}
 	_Private void setVolume(int volume) {
 		MediaPlayer->setVolume(volume);
-		FadeBehavior->setMaxVolume(volume);
+		maxVolume = volume;
 	}
 	_Private void loadFrom(QString Path) {
 		MediaPlayerList->clear();
@@ -90,23 +94,43 @@ class private_VIMediaPlayer :public QObject
 	_Private void setAsDeleteWhenStop() {
 		IsDeleteWhenStop = true;
 	}
+	_Public void playOnLoaded(bool set) {
+		PlayOnLoaded = set;
+	}
 	_Private void play() {
 		MediaPlayerList->setPlaybackMode(IsLoop ? QMediaPlaylist::PlaybackMode::Loop : QMediaPlaylist::PlaybackMode::CurrentItemInLoop);
 		MediaPlayer->play();
-		FadeBehavior->setFadeDuration(FadeInDuration, true);
-		FadeBehavior->active();
+		if (FadeInDuration != 0) {
+			FadeBehavior->setMaxVolume(maxVolume);
+			FadeBehavior->setFadeDuration(FadeInDuration, true);
+			FadeBehavior->active();
+		}
 	}
 	_Private void stop() {
-		FadeBehavior->setFadeDuration(FadeOutDuration, false);
-		FadeBehavior->active();
-	}
-	_Slot void controlVolume(int volume) {
-		MediaPlayer->setVolume(volume);
-		if (volume == 0) {
+		if (FadeOutDuration != 0) {
+			PrepareStop = true;
+			FadeBehavior->setMaxVolume(maxVolume);
+			FadeBehavior->setFadeDuration(FadeOutDuration, false);
+			FadeBehavior->active();
+		}
+		else {
 			MediaPlayer->stop();
 		}
 	}
+	_Slot void controlVolume(int volume) {
+		MediaPlayer->setVolume(volume);
+		if (PrepareStop&& volume == 0) {
+			MediaPlayer->stop();
+			PrepareStop = false;
+		}
+	}
+	_Slot void onMediaStatusChanged(QMediaPlayer::MediaStatus status) {
+		if (status == QMediaPlayer::MediaStatus::LoadedMedia && PlayOnLoaded) {
+			play();
+		}
+	}
 	_Slot void onPlayerStateChanged(QMediaPlayer::State state) {
+		MediaPlayerList->clear();
 		emit playerIsIdle();
 		if (state == QMediaPlayer::State::StoppedState && IsDeleteWhenStop) {
 			this->disconnect();
@@ -116,67 +140,90 @@ class private_VIMediaPlayer :public QObject
 	_Private bool isIdle() {
 		return MediaPlayer->state() == QMediaPlayer::State::StoppedState;
 	}
-	_Private void setServiceKey(VISoundServiceKey key) {
-		ServiceKey = key;
-	}
-	_Private VISoundServiceKey getServiceKey() {
-		return ServiceKey;
-	}
 };
 class VISoundService :public QObject
 {
 	Q_OBJECT;
-	_Public QVector<private_VIMediaPlayer*> PlayerPool;
-	_Public int IdlePlayer = 0;
-	_Public def_init VISoundService(QObject* parent = Q_NULLPTR) :QObject(parent) { qsrand((unsigned)time(NULL)); }
-	_Public VISoundServiceKey addSound(QString PathName, bool isLoop, VIMilliSecond fadeIn, VIMilliSecond fadeOut) {
-		for (auto i = 0; i < PlayerPool.length(); i++) {
-			if (PlayerPool[i]->isIdle()) {
-				private_VIMediaPlayer* p = PlayerPool[i];
-				p->loadFrom(PathName);
-				p->setFadeInDuration(fadeIn);
-				p->setFadeOutDuration(fadeOut);
-				p->setLoop(isLoop);
-				p->setServiceKey(qrand() % 65535);
-				return p->getServiceKey() * (i);
-			}
+	_Public QMap<VISoundServiceKey, private_VIMediaPlayer*> PlayerPool;
+	_Public QQueue<private_VIMediaPlayer*> IdlePool;
+	_Public VISoundServiceKey KeyCounter = 0;
+	_Private bool doNotGC = false;
+	_Public def_init VISoundService(QObject* parent = Q_NULLPTR) :QObject(parent) { 
+		private_VIMediaPlayer* Player = new private_VIMediaPlayer(this);
+		IdlePool.append(Player);
+		connect(Player, SIGNAL(playerIsIdle()), this, SLOT(onSomeoneIdle()));
+	}
+	_Public VISoundServiceKey addSound(QString PathName, int volume, 
+		bool isLoop = false, VIMilliSecond fadeIn = 0, 
+		VIMilliSecond fadeOut = 0, bool playOnLoaded = true) {
+		private_VIMediaPlayer* p;
+		if (!IdlePool.isEmpty()) {
+			p = IdlePool.dequeue();		
 		}
-		private_VIMediaPlayer* newPlayer = new private_VIMediaPlayer(this);
-		PlayerPool.append(newPlayer);
-		newPlayer->loadFrom(PathName);
-		newPlayer->setFadeInDuration(fadeIn);
-		newPlayer->setFadeOutDuration(fadeOut);
-		newPlayer->setLoop(isLoop);
-		newPlayer->setServiceKey(qrand() % 65535);
-		connect(newPlayer, SIGNAL(playerIsIdle()), this, SLOT(onSomeoneIdle()));
-		return newPlayer->getServiceKey() * (PlayerPool.length() - 1);
+		else {
+			p = new private_VIMediaPlayer(this);
+		}
+		VISoundServiceKey key = this->setMediaPlayer(p, PathName, volume, isLoop, fadeIn, fadeOut, playOnLoaded);
+		PlayerPool.insert(key, p);
+		return key;
+	}
+	_Public VISoundServiceKey setSound(VISoundServiceKey key, QString PathName, int volume,
+		bool isLoop = false, VIMilliSecond fadeIn = 0,
+		VIMilliSecond fadeOut = 0, bool playOnLoaded = true) {
+		doNotGC = true;
+		private_VIMediaPlayer* p = PlayerPool.value(key);
+		if (p != nullptr) {
+			p->stop();
+			PlayerPool.remove(key);
+			VISoundServiceKey key = this->setMediaPlayer(p, PathName, volume, isLoop, fadeIn, fadeOut, playOnLoaded);
+			PlayerPool.insert(key, p);
+		}
+		doNotGC = false;
+		return key;
 	}
 	_Public void playSound(VISoundServiceKey key) {
-		for (int i = 0; i < PlayerPool.length(); i++) {
-			if (PlayerPool.at(i)->getServiceKey() == key / (i)) {
-				PlayerPool[i]->play();
-			}
+		private_VIMediaPlayer* p = PlayerPool.value(key);
+		if (p != nullptr) {
+			p->play();
 		}
 	}
 	_Public void stopSound(VISoundServiceKey key) {
-		for (int i = 0; i < PlayerPool.length(); i++) {
-			if (PlayerPool.at(i)->getServiceKey() == key / (i)) {
-				PlayerPool[i]->stop();
-			}
+		private_VIMediaPlayer* p = PlayerPool.value(key);
+		if (p != nullptr) {
+			p->stop();
 		}
 	}
-	_Slot void onSomeoneIdle() {
-		IdlePlayer++;
-		if (IdlePlayer * 2 > PlayerPool.length()) {
-			for (auto i = PlayerPool.begin(); i != PlayerPool.end();) {
-				if ((*i)->isIdle()) {
-					delete (*i);
-					i = PlayerPool.erase(i);
-					continue;
-				}
-				else {
-					i++;
-				}
+	_Public void setVolume(VISoundServiceKey key, int volume) {
+		private_VIMediaPlayer* p = PlayerPool.value(key);
+		if (p != nullptr) {
+			p->setVolume(volume);
+		}
+	}
+	_Private VISoundServiceKey setMediaPlayer(private_VIMediaPlayer* p, QString PathName, int volume,
+		bool isLoop = false, VIMilliSecond fadeIn = 0,
+		VIMilliSecond fadeOut = 0, bool playOnLoaded = true) {
+		p->setVolume(volume);
+		p->setFadeInDuration(fadeIn);
+		p->setFadeOutDuration(fadeOut);
+		p->setLoop(isLoop);
+		p->playOnLoaded(playOnLoaded);
+		p->loadFrom(PathName);
+		if (KeyCounter < 65535) { KeyCounter++; }
+		else { KeyCounter = 0; }
+		p->Key = KeyCounter;
+		return KeyCounter;
+	}
+	private slots: void onSomeoneIdle() {
+		private_VIMediaPlayer* player = static_cast<private_VIMediaPlayer*>(this->sender());
+		VISoundServiceKey key = player->Key;
+		PlayerPool.remove(key);
+		if (IdlePool.length() >= PlayerPool.keys().length() * 4) { garbageCollect(); }
+	}
+	_Slot void garbageCollect() {
+		if (!doNotGC) {
+			while (IdlePool.length() > 2) {
+				private_VIMediaPlayer* p = IdlePool.dequeue();
+				p->deleteLater();
 			}
 		}
 	}
