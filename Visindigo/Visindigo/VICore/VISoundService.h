@@ -217,6 +217,7 @@ class VISoundService :public QObject
 		private_VIMediaPlayer* player = static_cast<private_VIMediaPlayer*>(this->sender());
 		VISoundServiceKey key = player->Key;
 		PlayerPool.remove(key);
+		IdlePool.enqueue(player);
 		if (IdlePool.length() >= PlayerPool.keys().length() * 4) { garbageCollect(); }
 	}
 	_Slot void garbageCollect() {

@@ -120,6 +120,7 @@
     <ClCompile Include="Visindigo\SPOL\SPOLSyntaxObject.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLVar.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLVARObject.cpp" />
+    <ClCompile Include="Visindigo\VICore\VIVersion.cpp" />
     <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
@@ -154,7 +155,12 @@
     <ClInclude Include="Visindigo\SPOL\SPOLSyntaxObject.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLVARObject.h" />
     <QtMoc Include="Visindigo\VICore\VISoundService.h" />
+    <ClInclude Include="Visindigo\VI2DScene\macro\VI2DScene_m.h" />
+    <QtMoc Include="Visindigo\VI2DScene\VI2DScene.h" />
+    <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.h" />
     <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h" />
+    <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h" />
+    <QtMoc Include="Visindigo\VICore\VIVersion.h" />
     <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIChara.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIContainer.h" />
@@ -172,6 +178,7 @@
     <QtMoc Include="Visindigo\VISystem\VISystemBase.h" />
     <ClInclude Include="Visindigo\VIObjects\VIImage.h" />
     <QtMoc Include="Visindigo\VIScene\TestBaseScene.h" />
+    <QtMoc Include="Visindigo\VICore\VIProject.h" />
     <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h" />
     <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h" />
     <ClInclude Include="VIUI\PW\VisindigoProject.h" />
