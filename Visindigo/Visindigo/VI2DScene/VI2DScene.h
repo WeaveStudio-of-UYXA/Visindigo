@@ -19,14 +19,24 @@ class VI2DWidget :public QGraphicsView
 		this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		this->setScene(Scene);
-		QGraphicsTextItem* t = new QGraphicsTextItem();
-		t->setHtml("<p align='right'>Hello World Helllllllllll wwwwww</p>");
-		t->setFont(QFont("Microsoft YaHei", 20));
-		t->adjustSize();
-		this->Scene->addItem(t);
+		VI2DTextUnit* t = new VI2DTextUnit(this);
+		t->setTextWidth(300);
+		t->setTextAni("Hello World----------", 300, 1000);
+		t->setAlignment(Qt::AlignCenter);
+		Scene->addItem(t->getGraphicsItem());
 	}
 	_Public void resizeEvent(QResizeEvent* event) {
-		this->setSceneRect(- event->size().width()/2, -event->size().height()/2, event->size().width(), event->size().height());
+		//从QGraphicsItem的坐标系来看，实际上此处更应该将视口中心置于0，0点
+		//但为了和传统顶级QWidget坐标兼容，对于QGraphicsScene仍然只采用其第一象限。
+		this->setSceneRect(0, 0, event->size().width(), event->size().height());
+		QSize size = event->size();
+		QList<QObject*> list = this->children();
+		for (auto i = list.begin(); i != list.end(); i++) {
+			VI2DUnit* unit = dynamic_cast<VI2DUnit*>(*i);
+			if (unit != Q_NULLPTR) {
+				unit->__onSceneResize(size);
+			}
+		}
 	}
 	_Public void addVI2DUnit(VI2DUnit* unit) {
 		this->Scene->addItem(unit->GraphicsItem);

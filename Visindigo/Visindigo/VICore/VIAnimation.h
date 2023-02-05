@@ -2,65 +2,6 @@
 #include "VIGuiAnimation.h"
 #include "VIGeneralBehavior.h"
 
-//此类暂停支持，改用VIGeneralBehavior类型的VITextAniBehavior
-class __Deprecated__("此类暂停支持，改用VIGeneralBehavior类型的VITextAniBehavior") VITextAnimation : public VIAnimationEvent
-{
-	Q_OBJECT
-signals:
-	void getText(QString);
-public:
-	QString Text;
-	QString Output;
-	QString LastText;
-	int MSPT = 100;
-	int MSW = 1500;
-	int INDEX;
-	float TEXTPERCENT;
-	float LMS;
-	bool SKIPED;
-	QString::iterator Char;
-	VITextAnimation INIT{
-		INDEX = 0;
-		LMS = 0;
-		SKIPED = false;
-	}
-		void setText(QString text) {
-		this->Text = text;
-		this->setMaxMsec(Text.length() * MSPT + MSW);
-		Char = Text.begin();
-		Output = "";
-		LastText = "";
-	}
-	void continueText(QString text) {
-		this->Output = this->Text;
-		this->Text = text;
-		this->setMaxMsec(Text.length() * MSPT + MSW);
-		Char = Text.begin();
-		LastText = Output;
-	}
-	void setSpeed(int MsPT) {
-		this->MSPT = MsPT;
-	}
-	void setWait(int MsW) {
-		this->MSW = MsW;
-	}
-	void event() {
-		if (getCurrentMsec() >= LMS && Char != Text.end() && !SKIPED) {
-			Output += *Char;
-			Char++;
-			INDEX++;
-			LMS = INDEX * MSPT;
-			emit getText(Output);
-		}
-	}
-	void skip() {
-		Char = Text.end();
-		CurrentMsec = Text.length() * MSPT;
-		emit getText(LastText + Text);
-		SKIPED = true;
-	}
-};
-
 class VIGuiAnimation :public VIGeneralBehavior
 {
 	Q_OBJECT;
@@ -122,46 +63,6 @@ class VITextAniBehavior :public VIGuiAnimation
 	}
 };
 
-//此类暂停支持，改用VIGeneralBehavior类型的VIOpacityAniBehavior
-class VIOpacityAnimation :public VIAnimationEvent
-{
-	Q_OBJECT
-signals:
-	void getOpacity(float);
-public:
-	float OPBegin;
-	float OPEnd;
-	float OPDelta;
-	VIOpacityAnimation INIT{
-	}
-	void setOpacity(float begin, float end, int ms, bool wait) {
-		OPBegin = begin;
-		OPEnd = end;
-		OPDelta = qAbs(end - begin);
-		this->setMaxMsec(ms);
-		this->setDoneSignal(wait);
-	}
-	void event() {
-		if (OPEnd > OPBegin) {
-			float OP = OPBegin + Percentage * OPDelta;
-			emit getOpacity(OP);
-		}
-		else {
-			float OP = OPBegin - Percentage * OPDelta;
-			emit getOpacity(OP);
-		}
-	}
-	void onFinish() {
-		emit getOpacity(OPEnd);
-	}
-	void skip() {
-		emit getOpacity(OPEnd);
-	}
-	void finish() {
-		emit getOpacity(OPEnd);
-	}
-};
-
 class VIOpacityAniBehavior :public VIGuiAnimation
 {
 	Q_OBJECT;
@@ -174,7 +75,7 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 	_Public void setOpacity(float begin, float end, int ms) {
 		OPBegin = begin;
 		OPEnd = end;
-		OPDelta = qAbs(end - begin);
+		OPDelta = end - begin;
 		this->setDuration(ms);
 	}
 	_Slot void onActive() {
@@ -183,14 +84,8 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 	_Slot void onFrame() {
 		JUMPTIME += getLastTime();
 		if (JUMPTIME > 16) {
-			if (OPEnd > OPBegin) {
-				float OP = OPBegin + this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
-				emit getOpacity(OP);
-			}
-			else {
-				float OP = OPBegin - this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
-				emit getOpacity(OP);
-			}
+			float OP = OPBegin + this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
+			emit getOpacity(OP);
 			JUMPTIME = 0;
 		}
 	}
@@ -199,6 +94,40 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 	}
 	_Slot void onSkip() {
 		emit getOpacity(OPEnd);
+	}
+};
+
+class VIResizeAniBehavior :public VIGuiAnimation
+{
+	Q_OBJECT;
+	_Signal void getSize(QSize);
+	_Public QSize SizeBegin;
+	_Public QSize SizeEnd;
+	_Public QSize SizeDelta;
+	_Public VIMilliSecond JUMPTIME;
+	_Public def_init VIResizeAniBehavior(QObject* parent = Q_NULLPTR) :VIGuiAnimation(parent) {}
+	_Public void setSize(QSize& SizeBegin, QSize& SizeEnd, VIMilliSecond duration) {
+		this->SizeBegin = SizeBegin;
+		this->SizeEnd = SizeEnd;
+		this->SizeDelta = SizeEnd - SizeBegin;
+		this->setDuration(duration);
+	}
+	_Slot void onActive() {
+		JUMPTIME = 0;
+	}
+	_Slot void onFrame() {
+		JUMPTIME += getLastTime();
+		if (JUMPTIME > 16) {
+			QSize Size = SizeBegin + this->getPercent(VIDuration::PercentType::Linear) * SizeDelta;
+			emit getSize(Size);
+			JUMPTIME = 0;
+		}
+	}
+	_Slot void onDone() {
+		emit getSize(SizeEnd);
+	}
+	_Slot void onSkip() {
+		emit getSize(SizeEnd);
 	}
 };
 

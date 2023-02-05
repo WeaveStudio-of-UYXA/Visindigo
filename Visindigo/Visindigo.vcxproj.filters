@@ -98,6 +98,9 @@
     <ClCompile Include="Visindigo\VICore\VIVersion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VIUI\MRW\MRWGlobal.h">
@@ -286,6 +289,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DSkeleton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

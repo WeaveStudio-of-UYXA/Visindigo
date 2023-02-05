@@ -120,6 +120,12 @@
     <ClCompile Include="Visindigo\SPOL\SPOLSyntaxObject.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLVar.cpp" />
     <ClCompile Include="Visindigo\SPOL\SPOLVARObject.cpp" />
+    <ClCompile Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="Visindigo\VICore\VIVersion.cpp" />
     <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp" />
@@ -158,6 +164,7 @@
     <ClInclude Include="Visindigo\VI2DScene\macro\VI2DScene_m.h" />
     <QtMoc Include="Visindigo\VI2DScene\VI2DScene.h" />
     <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.h" />
+    <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DSkeleton.h" />
     <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h" />
     <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h" />
     <QtMoc Include="Visindigo\VICore\VIVersion.h" />

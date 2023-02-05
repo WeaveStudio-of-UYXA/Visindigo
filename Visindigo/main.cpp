@@ -41,8 +41,8 @@ void launchVisindigoSPOLItp() {
 }
 int main(int argc, char* argv[]) {
 	QApplication app(argc, argv);
-	gBEHAVIOR->start();
 	doQRegisterMetaType();
+	gBEHAVIOR->start();
 	//launchVisindigoSPOLItp();
 	launchVisindigo2DTest();
 	//launchVisindigoRuntime();

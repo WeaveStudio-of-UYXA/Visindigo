@@ -2,32 +2,27 @@
 #include "../macro/VI2DScene_m.h"
 #include "../../VICore/VIAnimation.h"
 
+class VI2DWidget;
 class VI2DUnit :public QObject
 {
 	Q_OBJECT;
+	friend class VI2DWidget;
 	_Public VIOpacityAniBehavior* OpacityAni = new VIOpacityAniBehavior(this);
+	_Public VIResizeAniBehavior* ResizeAni = new VIResizeAniBehavior(this);
 	_Public QGraphicsItem* GraphicsItem = Q_NULLPTR;
-	_Public def_init VI2DUnit(QObject* parent = Q_NULLPTR) :QObject(parent) {}
-	_Public void setParentUnit(VI2DUnit* parent) {
-		GraphicsItem->setParentItem(parent->GraphicsItem);
-		OpacityAni->setHost(gBEHAVIOR);
-	}
-	_Public QGraphicsItem* getGraphicsItem() {
-		return GraphicsItem;
-	}
-	_Public ~VI2DUnit() {
-		if (GraphicsItem != Q_NULLPTR) {
-			delete GraphicsItem;
-		}
-	}
-	_Public void setOpacity(float op) {
-		this->GraphicsItem->setOpacity(op);
-	}
-	_Public void setOpacityAni(float opStart, float opEnd, VIMilliSecond duration) {
-		OpacityAni->setOpacity(opStart, opEnd, duration);
-		OpacityAni->active();
-	}
+	_Public def_init VI2DUnit(QObject* parent = Q_NULLPTR);
+	_Public QRect RectangleInfo;
+	_Public void setParentUnit(VI2DUnit* parent);
+	_Public QGraphicsItem* getGraphicsItem();
+	_Public ~VI2DUnit();
+	_Public void setOpacity(float op);
+	_Public void setOpacityAni(float opStart, float opEnd, VIMilliSecond duration);
+	_Public void move(float px, float py);
+	_Protected void __onSceneResize(QSize& size);
+	_Public virtual void sceneResizeEvent(QSize& size) {};
+	_Public QRect getGeometry();
 };
+
 
 class VI2DTextUnit :public VI2DUnit 
 {
@@ -36,40 +31,32 @@ class VI2DTextUnit :public VI2DUnit
 	_Public QString AlignHTMLTagE = "</p>";
 	_Public VITextAniBehavior* TextAni;
 	_Private QGraphicsTextItem* Item = new QGraphicsTextItem();
-	_Public def_init VI2DTextUnit(QObject* parent):VI2DUnit(parent) {
-		GraphicsItem = Item;
-		TextAni = new VITextAniBehavior(this);
-		connect(TextAni, SIGNAL(getText(QString)), this, SLOT(setText(QString)));
-	}
-	_Public def_init VI2DTextUnit(VI2DUnit* parent) : VI2DUnit(parent) {
-		GraphicsItem = Item;
-		Item->setParent(parent);
-	}
-	_Slot void setText(QString html) {
-		Item->setHtml(AlignHTMLTagS + html + AlignHTMLTagE);
-	}
-	_Public void setTextAni(QString plainText, VIMilliSecond msPerChar, VIMilliSecond msWait) {
-		TextAni->setTextAni(plainText, msPerChar, msWait, false);
-		TextAni->active();
-	}
-	_Public void setTextAniContinue(QString plainText, VIMilliSecond msPerChar, VIMilliSecond msWait) {
-		TextAni->setTextAni(plainText, msPerChar, msWait, true);
-		TextAni->active();
-	}
-	_Public void setAlignment(Qt::AlignmentFlag align) {
-		switch (align)
-		{
-		case Qt::AlignLeft:
-			AlignHTMLTagS = "<p align='left'>";
-			break;
-		case Qt::AlignRight:
-			AlignHTMLTagS = "<p align='right'>";
-			break;
-		case Qt::AlignHCenter:
-			AlignHTMLTagS = "<p align='center'>";
-			break;
-		default:
-			break;
-		}
-	}
+	_Public QFont TextFont;
+	_Public bool TextSizeUsePercentage = false;
+	_Public float TextSizePercentage;
+	_Public def_init VI2DTextUnit(QObject* parent);
+	_Public def_init VI2DTextUnit(VI2DUnit* parent);
+	_Private void __init__();
+	_Slot void setText(QString html);
+	_Public void setTextAni(QString plainText, VIMilliSecond msPerChar, VIMilliSecond msWait);
+	_Public void setTextAniContinue(QString plainText, VIMilliSecond msPerChar, VIMilliSecond msWait);
+	_Public void setAlignment(Qt::AlignmentFlag align);
+	_Public void setTextWidth(float width);
+	_Public void setTextFont(QFont& font);
+	_Public void setTextColor(QColor& color);
+	_Public void setTextPixelSize(int px);
+	_Public void setTextPixelPercentage(float percentage);
+	_Public void setFontFamily(QString family);
+	_Public void onResize(QSize& size);
+};
+
+class VI2DPixmapUnit :public VI2DUnit
+{
+	Q_OBJECT;
+	_Public QGraphicsPixmapItem* Item = new QGraphicsPixmapItem();
+	_Public QSize PixmapSize;
+	_Public def_init VI2DPixmapUnit(QObject* parent);
+	_Public def_init VI2DPixmapUnit(VI2DUnit* parent);
+	_Private void __init__();
+	_Private void setPixmap(QPixmap& pixmap);
 };
