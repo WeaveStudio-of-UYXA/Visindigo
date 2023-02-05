@@ -6,9 +6,6 @@
 */
 //此文档被标记为不会继续开发。当VIGeneralBehavior准备好之后向其迁移。
 #pragma once
-#include<QtCore>
-#include<QtWidgets>
-#include <chrono>
 #include "VIMath.h"
 #include "macro/VIGeneralBehavior_m.h"
 class VIAnimationEventProcess;

@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "VIGuiAnimation.h"
 #include "VIGeneralBehavior.h"
-#include "VIMath.h"
 
 //此类暂停支持，改用VIGeneralBehavior类型的VITextAniBehavior
 class __Deprecated__("此类暂停支持，改用VIGeneralBehavior类型的VITextAniBehavior") VITextAnimation : public VIAnimationEvent

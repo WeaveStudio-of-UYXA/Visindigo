@@ -1,11 +1,8 @@
 ﻿#include "VIGeneralBehavior.h"
-
-//VIGeneralBehaviorHost* VIGeneralBehaviorHostInstance = nullptr;
-
 QMutex VIGeneralBehaviorHost::HOSTMUTEX;
 QMutex VIGeneralBehaviorHost::SLEEPMUTEX;
 QWaitCondition VIGeneralBehaviorHost::SLEEPWAIT;
-VIGeneralBehaviorHost* VIGeneralBehaviorHost::VIGeneralBehaviorHostInstance = nullptr;
+VIGeneralBehaviorHost* VIGeneralBehaviorHost::VIGeneralBehaviorHostInstance = new VIGeneralBehaviorHost(qApp);
 void VIDuration::init() {
 	CURRENT = 0;
 	PERCENT = 0;

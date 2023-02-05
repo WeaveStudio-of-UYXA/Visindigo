@@ -28,7 +28,7 @@ bool VIVersion::operator<(VIVersion& ver) {
 	int Length = this->getVersionLength();
 	if (ver.getVersionLength() != Length) { return false; }
 	else {
-		for (int i = 0; i < Length; i + +) {
+		for (int i = 0; i < Length; i ++) {
 			if (Version[i] > ver.Version[i]) {
 				return false;
 			}

@@ -59,7 +59,7 @@ class VIRuntimeWindow :public QMainWindow
 		BIND(JSHost->VIGUI2D, SIGNAL(Sresize(int, int)), this, SLOT(setSize(int, int)));
 		BIND(JSHost->VIGUI2D, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()));
 		BIND(JSHost->VIGUI2D, SIGNAL(SenableGUIFrame()), this, SLOT(enableGUIFrame()));
-		gBEHAVIOR->start();
+		
 		DebugBehavior->active();
 		this->loadJS();
 	}

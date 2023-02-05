@@ -5,11 +5,7 @@
 此文档的意义在于针对Visindigo本身的需求提供一个在动画上相对通用的队列处理系统
 */
 #pragma once
-#include<QtCore>
-#include<QtWidgets>
-#include <chrono>
 #include "VIMath.h"
-#include "../../CommonEdit/CECore/CEMacro.h"
 #include "macro/VIGeneralBehavior_m.h"
 
 class VIDuration :public QObject
