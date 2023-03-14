@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QtCore>
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "../../VICore/macro/VIMarco.h"
 
 #define p_VI_REF_SIGNAL(methodName) p_VI_REF_##methodName
 #define def_REF(methodName, ...) Q_SIGNAL void p_VI_REF_SIGNAL(methodName)(__VA_ARGS__); void methodName(__VA_ARGS__)

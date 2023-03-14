@@ -2,7 +2,6 @@
 #include <QtQml>
 #include "VIJSGlobal.h"
 #include "../../VIUI/MRW/GUI2D/VI2DGUI.h"
-#include "..//VICore/VIGuiAnimation.h"
 #include "../../VIUI/MRW/VIGUI2D.h"
 #include "../../Global.h"
 

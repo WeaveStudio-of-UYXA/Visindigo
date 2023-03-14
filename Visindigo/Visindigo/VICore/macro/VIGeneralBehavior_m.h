@@ -2,7 +2,7 @@
 #include<QtCore>
 #include<QtWidgets>
 #include <chrono>
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "VIMarco.h"
 typedef double VIMilliSecond;
 typedef long long VINanoSecond;
 typedef double VISecond;

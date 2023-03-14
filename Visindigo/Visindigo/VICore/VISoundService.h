@@ -2,7 +2,7 @@
 #include <QtCore>
 #include <QTest>
 #include <QtMultiMedia>
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "macro/VIMarco.h"
 #include "VIGeneralBehavior.h"
 #include "macro/VISoundService_m.h"
 class private_VIMusicFadeBehavior :public VIGeneralBehavior

@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <QtCore>
 #include <QtQml>
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "../../VICore/macro/VIMarco.h"
 typedef QJSValue VIJSPlugin;
 
 class VIJSEngine_Framework :public QObject

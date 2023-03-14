@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QtCore>
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "macro/VIMarco.h"
 namespace VIMath {
 	struct VIVector2
 	{

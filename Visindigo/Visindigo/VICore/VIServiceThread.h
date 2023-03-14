@@ -1,4 +1,4 @@
 ﻿#pragma once
 #include <QtCore>
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "macro/VIMarco.h"
 

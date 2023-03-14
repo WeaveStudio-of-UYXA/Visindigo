@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "../VICore/macro/VIMarco.h"
 #ifdef VI_USE_3D
 #include <Qt3DCore>
 #include <Qt3DRender>

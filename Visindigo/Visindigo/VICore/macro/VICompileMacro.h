@@ -10,3 +10,6 @@
 
 //此项目控制顶层QWidget是否应该被QOpenGLWidget取代
 #define VI_USE_OPENGLWIDGET
+
+//以下内容建立Visindigo缩写
+) 

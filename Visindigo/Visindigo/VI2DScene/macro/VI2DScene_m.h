@@ -2,4 +2,4 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtWidgets>
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "../../VICore/macro/VIMarco.h"

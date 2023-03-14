@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "../../VICore/VIGeneralBehavior.h"
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "../../VICore/macro/VIMarco.h"
 
 class VIHitGeometry :public QObject {
 	Q_OBJECT;

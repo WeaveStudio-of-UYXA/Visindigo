@@ -3,7 +3,7 @@
 #include <QtQml>
 #include "macro/VIJSGlobal_m.h"
 #include "../VIObjects/macro/VIGlassConvention.h"
-#include "../../CommonEdit/CECore/CEMacro.h"
+#include "../VICore/macro/VIMarco.h"
 class VIJSGlobal {
 public:
 	static QMutex VIJSMutex;

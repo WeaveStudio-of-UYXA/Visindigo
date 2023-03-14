@@ -44,16 +44,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="init.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp">
@@ -77,6 +71,12 @@
     <ClCompile Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIFramework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\macro\VIMarco.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VIUI\MRW\MRWGlobal.h">
@@ -94,19 +94,10 @@
     <ClInclude Include="Global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="init.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VICore\macro\VIGeneralBehavior_m.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CommonEdit\CECore\CE_QtMacro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CommonEdit\CECore\CEMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VIJavaScript\macro\VIJSGlobal_m.h">
@@ -151,11 +142,11 @@
     <ClInclude Include="Visindigo\VICore\macro\VICompileMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VICore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="VIUI\MRW\VisindigoRuntime.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -247,6 +238,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIFramework.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

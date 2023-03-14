@@ -1,16 +1,10 @@
 ﻿#pragma execution_character_set("utf-8")
-#include "init.h"
+
 //#include "Visindigo/SPOL/SPOLSyntax.h"
 #include "Visindigo/VIScene/TestBaseScene.h"
 #include "Visindigo/VI2DScene/VI2DScene.h"
-void launchVisindigoRuntime() {
-	VIRuntimeWindow* w = new VIRuntimeWindow();
-#if VI_WINDOW == VI_WINDOW_SYS
-	w->showFullScreen();
-#elif VI_WINDOW == VI_NO_WINDOW
-	w->show();
-#endif
-}
+#include "Visindigo/VICore/VICore.h"
+#include "UserCode/YSPMainPack/YSPMainPack.h"
 void launchVisindigo2DTest() {
 	VI2DWidget* w = new VI2DWidget();
 #if VI_WINDOW == VI_WINDOW_SYS
@@ -41,12 +35,13 @@ void launchVisindigoSPOLItp() {
 	}
 }*/
 int main(int argc, char* argv[]) {
-	QApplication app(argc, argv);
-	doQRegisterMetaType();
-	gBEHAVIOR->start();
-	//launchVisindigoSPOLItp();
-	//launchVisindigo2DTest();
-	launchVisindigoRuntime();
-	return app.exec();
+	VIFramework VIFrame(argc, argv);
+	LOAD_PACKAGE(YSPMainPack);
+	VIFrame.start();
+	return VIFrame.getReturnCode();
 }
 
+//gBEHAVIOR->start();
+	//launchVisindigoSPOLItp();
+	//launchVisindigo2DTest();
+	//launchVisindigoRuntime();

@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "macro/VIMarco.h"
 #include "macro/VIVersion_m.h"
 //此文件定义VI版本号类和自由信息类
 

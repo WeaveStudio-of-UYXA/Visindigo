@@ -108,7 +108,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="init.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -116,12 +115,13 @@
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
+    <ClCompile Include="Visindigo\VICore\macro\VIMarco.h" />
+    <ClCompile Include="Visindigo\VICore\VIFramework.cpp" />
     <ClCompile Include="Visindigo\VICore\VIMainBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\VIMath.cpp" />
     <ClCompile Include="Visindigo\VICore\VIVersion.cpp" />
     <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp" />
     <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp" />
-    <ClCompile Include="Visindigo\VICore\VIGuiAnimation.cpp" />
     <ClCompile Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.cpp" />
     <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp" />
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
@@ -130,13 +130,11 @@
     <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2D.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVISystem.h" />
     <QtMoc Include="CommonEdit\CEFunction\CELanguage.h" />
-    <ClInclude Include="CommonEdit\CECore\CEMacro.h" />
-    <ClInclude Include="CommonEdit\CECore\CE_QtMacro.h" />
     <ClInclude Include="Global.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIYSP.h" />
     <QtMoc Include="Visindigo\VIJavaScript\HostExceptionUI.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2DBase.h" />
-    <ClInclude Include="init.h" />
+    <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h" />
     <ClInclude Include="Visindigo\SPOLFunc.h" />
     <QtMoc Include="Visindigo\SPOL\oldVersion\SPOL9X.h" />
     <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h" />
@@ -151,6 +149,7 @@
     <QtMoc Include="Visindigo\VICore\VIVersion.h" />
     <QtMoc Include="Visindigo\VICore\VIMainBehavior.h" />
     <QtMoc Include="Visindigo\VICore\VIFramework.h" />
+    <ClInclude Include="Visindigo\VICore\VICore.h" />
     <ClInclude Include="Visindigo\VICore\VIPackage.h" />
     <ClInclude Include="Visindigo\VICore\VIServiceThread.h" />
     <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h" />
@@ -179,7 +178,6 @@
     <QtMoc Include="VIUI\MRW\VIGUI2D.h" />
     <QtMoc Include="Visindigo\VIJavaScript\VIJSHost.h" />
     <ClInclude Include="VIUI\MRW\MRWGlobal.h" />
-    <QtMoc Include="Visindigo\VICore\VIGuiAnimation.h" />
     <QtMoc Include="VIUI\VIPlayerWidget.h" />
     <QtMoc Include="VIUI\MRW\VisindigoRuntime.h" />
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h" />

@@ -5,8 +5,10 @@
 此文档的意义在于针对Visindigo本身的需求提供一个在动画上相对通用的队列处理系统
 */
 #pragma once
+#include "macro/VIMarco.h"
 #include "VIMath.h"
 #include "macro/VIGeneralBehavior_m.h"
+#include <QtCore>
 
 class VIDuration :public QObject
 {

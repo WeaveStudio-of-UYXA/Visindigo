@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QtCore>
-#include "../../../CommonEdit/CECore/CEMacro.h"
+#include "../../VICore/macro/VIMarco.h"
 
 //此文档提供简化的旧版SPOL解释器源码
 //此解释器不能扩展，不支持任何逻辑，小分支和大分支解释器已经被移除，标题控制器亦被移除，但仍保留版本控制器。
