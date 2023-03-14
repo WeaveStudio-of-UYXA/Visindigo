@@ -4,6 +4,7 @@
 #include<QtWidgets>
 #include "Visindigo/VICore/VIAnimation.h"
 #include "Visindigo/VICore/VIGeneralBehavior.h"
+#include "Visindigo/VICore/VIMainBehavior.h"
 #include "Visindigo/VICore/VIQtExtensionMethod.h"
 #include "Visindigo/VIJavaScript/VIJSGlobal.h"
 #define BIND_DONE(VIAniEvent) BIND(VIAniEvent, SIGNAL(done(bool)), this, SLOT(ifWait(bool)));
@@ -32,10 +33,10 @@ public:
 		this->setGraphicsEffect(Opacity);
 		Opacity->setOpacity(1);
 		OpacityAniBehavior = new VIOpacityAniBehavior(this);
-		BIND(OpacityAniBehavior, SIGNAL(getOpacity(float)), this, SLOT(setOpacity(float)));
-		BIND(OpacityAniBehavior, SIGNAL(done()), this, SLOT(getDone()));
-		OpacityAniBehavior->setHost(gBEHAVIOR);
-		
+		OpacityAniBehavior->OPEffect = Opacity;
+		connect(OpacityAniBehavior, SIGNAL(done()), this, SLOT(getDone()));
+		OpacityAniBehavior->setHost(mBEHAVIOR);
+
 		px = 0.1; py = 0.2; pw = 0.8; ph = 0.6;
 	}
 	~VI2DGUILabel() {

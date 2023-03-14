@@ -20,7 +20,7 @@ void VIDuration::setDuration(VIMilliSecond msec) {
 	}
 	this->MSEC = msec;
 }
-double VIDuration::getDuration(Unit unit = Unit::MilliSecond) {
+double VIDuration::getDuration(Unit unit) {
 	switch (unit) {
 	case Unit::NanoSecond:
 		return MSEC * 1000000.0;

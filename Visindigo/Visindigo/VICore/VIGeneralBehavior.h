@@ -32,7 +32,7 @@ class VIDuration :public QObject
 	_Public VIDuration(QObject* parent = Q_NULLPTR) : QObject(parent) {};
 	_Public void init();
 	_Public void setDuration(VIMilliSecond);
-	_Public double getDuration(Unit);
+	_Public double getDuration(Unit unit = Unit::MilliSecond);
 	_Public float getPercent(PercentType);
 	_Public VIMilliSecond getCurrent();
 	_Public VINanoSecond getLastTime();

@@ -8,12 +8,12 @@
 def_init VI2DUnit::VI2DUnit(QObject* parent) :QObject(parent) {}
 void VI2DUnit::setParentUnit(VI2DUnit* parent) {
 	GraphicsItem->setParentItem(parent->GraphicsItem);
-	OpacityAni->setHost(gBEHAVIOR);
+	OpacityAni->setHost(mBEHAVIOR);
 }
 QGraphicsItem* VI2DUnit::getGraphicsItem() {
 	return GraphicsItem;
 }
-VI2DUnit::~VI2DUnit() {
+def_del VI2DUnit::~VI2DUnit() {
 	if (GraphicsItem != Q_NULLPTR) {
 		delete GraphicsItem;
 	}
@@ -62,7 +62,7 @@ void VI2DTextUnit::__init__() {
 	TextFont.setPixelSize(20);
 	Item->setFont(TextFont);
 	TextAni = new VITextAniBehavior(this);
-	TextAni->setHost(gBEHAVIOR);
+	TextAni->setHost(mBEHAVIOR);
 	connect(TextAni, SIGNAL(getText(QString)), this, SLOT(setText(QString)));
 }
 void VI2DTextUnit::setText(QString html) {
@@ -118,7 +118,7 @@ void VI2DTextUnit::setFontFamily(QString family) {
 	this->TextFont.setFamily(family);
 	this->Item->setFont(TextFont);
 }
-void VI2DTextUnit::onResize(QSize& size) {
+void VI2DTextUnit::sceneResizeEvent(QSize& size) {
 	if (TextSizeUsePercentage) {
 		this->TextFont.setPixelSize(size.height() * TextSizePercentage);
 		this->Item->setFont(TextFont);

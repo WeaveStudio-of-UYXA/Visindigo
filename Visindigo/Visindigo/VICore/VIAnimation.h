@@ -1,12 +1,14 @@
 ﻿#pragma once
 #include "VIGuiAnimation.h"
 #include "VIGeneralBehavior.h"
+#include "VIMainBehavior.h"
 
-class VIGuiAnimation :public VIGeneralBehavior
+class VIGuiAnimation :public VIMainBehavior
 {
 	Q_OBJECT;
 	_Private bool WAITFLAG;
-	_Public def_init VIGuiAnimation(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
+	_Private QLabel* LABEL;
+	_Public def_init VIGuiAnimation(QObject* parent = Q_NULLPTR) :VIMainBehavior(parent) {}
 	_Public bool ifWait() {
 		return this->WAITFLAG;
 	};
@@ -66,11 +68,11 @@ class VITextAniBehavior :public VIGuiAnimation
 class VIOpacityAniBehavior :public VIGuiAnimation
 {
 	Q_OBJECT;
-	_Signal void getOpacity(float);
 	_Public float OPBegin;
 	_Public float OPEnd;
 	_Public float OPDelta;
 	_Public VIMilliSecond JUMPTIME;
+	_Public QGraphicsOpacityEffect* OPEffect;
 	_Public def_init VIOpacityAniBehavior(QObject* parent = Q_NULLPTR):VIGuiAnimation(parent) {}
 	_Public void setOpacity(float begin, float end, int ms) {
 		OPBegin = begin;
@@ -82,18 +84,14 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 		JUMPTIME = 0;
 	}
 	_Slot void onFrame() {
-		JUMPTIME += getLastTime();
-		if (JUMPTIME > 16) {
-			float OP = OPBegin + this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
-			emit getOpacity(OP);
-			JUMPTIME = 0;
-		}
+		float OP = OPBegin + this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
+		OPEffect->setOpacity(OP);
 	}
 	_Slot void onDone() {
-		emit getOpacity(OPEnd);
+		OPEffect->setOpacity(OPEnd);
 	}
 	_Slot void onSkip() {
-		emit getOpacity(OPEnd);
+		OPEffect->setOpacity(OPEnd);
 	}
 };
 

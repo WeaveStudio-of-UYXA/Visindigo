@@ -23,7 +23,6 @@ class VI2DUnit :public QObject
 	_Public QRect getGeometry();
 };
 
-
 class VI2DTextUnit :public VI2DUnit 
 {
 	Q_OBJECT;
@@ -47,7 +46,7 @@ class VI2DTextUnit :public VI2DUnit
 	_Public void setTextPixelSize(int px);
 	_Public void setTextPixelPercentage(float percentage);
 	_Public void setFontFamily(QString family);
-	_Public void onResize(QSize& size);
+	_Public void sceneResizeEvent(QSize& size);
 };
 
 class VI2DPixmapUnit :public VI2DUnit
@@ -58,5 +57,7 @@ class VI2DPixmapUnit :public VI2DUnit
 	_Public def_init VI2DPixmapUnit(QObject* parent);
 	_Public def_init VI2DPixmapUnit(VI2DUnit* parent);
 	_Private void __init__();
-	_Private void setPixmap(QPixmap& pixmap);
+	_Private void setPixmap(QPixmap& pixmap) {};
+	_Public void sceneResizeEvent(QSize& size) {};
+	_Public void setOffset(QSize& size) {};
 };

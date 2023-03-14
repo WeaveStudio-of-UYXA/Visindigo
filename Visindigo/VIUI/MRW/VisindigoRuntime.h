@@ -38,14 +38,17 @@ class VIRuntimeWindow :public QMainWindow
 	_Public QThread* JSHostThread;
 	_Public VIJSHost* JSHost;
 	_Public VIGeneralBehaviorHostDebug* DebugBehavior;
+	_Public VIMainBehaviorHostDebug* MainDebugBehavior;
 	_Public def_init VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
 		QPalette PAL;
 		PAL.setColor(QPalette::Background, Qt::black);
 		this->setPalette(PAL);
-		gBEHAVIOR = new VIGeneralBehaviorHost(this);
 		CentralWidget = new VICentralWidget(this);
 		DebugBehavior = new VIGeneralBehaviorHostDebug(this);
 		DebugBehavior->setHost(gBEHAVIOR);
+		mBEHAVIOR->start();
+		MainDebugBehavior = new VIMainBehaviorHostDebug(this);
+		MainDebugBehavior->setHost(mBEHAVIOR);
 		this->setCentralWidget(CentralWidget);
 		JSHost = new VIJSHost(CentralWidget->GUI2D);
 		JSHostThread = new QThread(this);
@@ -61,6 +64,7 @@ class VIRuntimeWindow :public QMainWindow
 		BIND(JSHost->VIGUI2D, SIGNAL(SenableGUIFrame()), this, SLOT(enableGUIFrame()));
 		
 		DebugBehavior->active();
+		MainDebugBehavior->active();
 		this->loadJS();
 	}
 	_Public void loadJS() {
@@ -92,10 +96,10 @@ class VIRuntimeWindow :public QMainWindow
 	}
 	_Slot void enableGUIFrame() {
 		CentralWidget->DebugInfoLabel->show();
-		connect(DebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)), Qt::UniqueConnection);
+		connect(MainDebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)), Qt::UniqueConnection);
 	}
 	_Slot void disableGUIFrame() {
 		CentralWidget->DebugInfoLabel->hide();
-		disconnect(DebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)));
+		disconnect(MainDebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)));
 	}
 };

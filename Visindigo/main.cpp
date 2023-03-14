@@ -1,6 +1,6 @@
 ﻿#pragma execution_character_set("utf-8")
 #include "init.h"
-#include "Visindigo/SPOL/SPOLSyntax.h"
+//#include "Visindigo/SPOL/SPOLSyntax.h"
 #include "Visindigo/VIScene/TestBaseScene.h"
 #include "Visindigo/VI2DScene/VI2DScene.h"
 void launchVisindigoRuntime() {
@@ -29,6 +29,7 @@ void launchVisindigoSceneTest() {
 #endif
 #endif
 }
+/*
 void launchVisindigoSPOLItp() {
 	QString code = "var name=1\"3\"";
 	qDebug() << code;
@@ -38,14 +39,14 @@ void launchVisindigoSPOLItp() {
 	for (auto i = fileCode.begin(); i != fileCode.end(); i++) {
 		qDebug() << SPOLSyntax::wordSplitterCompleted(*i);
 	}
-}
+}*/
 int main(int argc, char* argv[]) {
 	QApplication app(argc, argv);
 	doQRegisterMetaType();
 	gBEHAVIOR->start();
 	//launchVisindigoSPOLItp();
-	launchVisindigo2DTest();
-	//launchVisindigoRuntime();
+	//launchVisindigo2DTest();
+	launchVisindigoRuntime();
 	return app.exec();
 }
 

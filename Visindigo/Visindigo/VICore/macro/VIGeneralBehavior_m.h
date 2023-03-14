@@ -13,7 +13,7 @@ typedef std::chrono::system_clock::time_point STD_TimePoint;
 #define STD_Milli_duration(current, before) (float)(std::chrono::duration_cast<std::chrono::milliseconds>(current.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::milliseconds>(before.time_since_epoch()).count())
 
 #define gBEHAVIOR VIGeneralBehaviorHost::VIGeneralBehaviorHostInstance
-
+#define mBEHAVIOR VIMainBehaviorHost::VIMainBehaviorHostInstance
 //说实话，BIND，包括延伸到VIJS的反射的那一套玩意在内，其设计上算是非常失败
 //但是我也不知道怎么改了
 //下面这部分是VIGuiAnimation的宏，等有时间再说改的事情。

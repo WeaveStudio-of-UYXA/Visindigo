@@ -12,9 +12,9 @@ public:
 		this->setWordWrap(true);
 		//this->setObjectName("VIText");
 		Behavior = new VITextAniBehavior(this);
-		BIND(Behavior, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
-		BIND(Behavior, SIGNAL(done()), this, SLOT(ifHostWait()));
-		Behavior->setHost(gBEHAVIOR);
+		connect(Behavior, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
+		connect(Behavior, SIGNAL(done()), this, SLOT(ifHostWait()));
+		Behavior->setHost(mBEHAVIOR);
 		this->setAlignment(Qt::AlignLeft);
 		this->setGeometry(QRect(0, 0, 500, 60));
 	}
@@ -44,19 +44,19 @@ public slots:
 	void skipOrJumpAni() {
 		/*
 		if (SKIP && !FINISH) {
-			Behavior->setBehaviorState(VIGeneralBehavior::State::Done);
+			Behavior->setBehaviorState(VIMainBehavior::State::Done);
 			FINISH = true;
 		}
 		else if (!SKIP && !FINISH) {
-			Behavior->setBehaviorState(VIGeneralBehavior::State::Skip);
+			Behavior->setBehaviorState(VIMainBehavior::State::Skip);
 			SKIP = true;
 		}
 		*/
-		if (Behavior->getBehaviorState() == VIGeneralBehavior::State::Active) {
-			Behavior->setBehaviorState(VIGeneralBehavior::State::Skip);
+		if (Behavior->getBehaviorState() == VIMainBehavior::State::Active) {
+			Behavior->setBehaviorState(VIMainBehavior::State::Skip);
 		}
-		else if (Behavior->getBehaviorState() == VIGeneralBehavior::State::Skip) {
-			Behavior->setBehaviorState(VIGeneralBehavior::State::Done);
+		else if (Behavior->getBehaviorState() == VIMainBehavior::State::Skip) {
+			Behavior->setBehaviorState(VIMainBehavior::State::Done);
 		}
 	}
 	void ifHostWait() {
@@ -105,19 +105,19 @@ public slots:
 		this->clear();
 	}
 	void skipOrJumpAni() {
-		if (OpacityAniBehavior->getBehaviorState() == VIGeneralBehavior::State::Active) {
-			OpacityAniBehavior->setBehaviorState(VIGeneralBehavior::State::Skip);
+		if (OpacityAniBehavior->getBehaviorState() == VIMainBehavior::State::Active) {
+			OpacityAniBehavior->setBehaviorState(VIMainBehavior::State::Skip);
 		}
-		else if (OpacityAniBehavior->getBehaviorState() == VIGeneralBehavior::State::Skip) {
-			OpacityAniBehavior->setBehaviorState(VIGeneralBehavior::State::Done);
+		else if (OpacityAniBehavior->getBehaviorState() == VIMainBehavior::State::Skip) {
+			OpacityAniBehavior->setBehaviorState(VIMainBehavior::State::Done);
 		}
 		/*
 		if (SKIP && !FINISH) {
-			OpacityAniBehavior->setBehaviorState(VIGeneralBehavior::State::Done);
+			OpacityAniBehavior->setBehaviorState(VIMainBehavior::State::Done);
 			FINISH = true;
 		}
 		else if (!SKIP && !FINISH) {
-			OpacityAniBehavior->setBehaviorState(VIGeneralBehavior::State::Skip);
+			OpacityAniBehavior->setBehaviorState(VIMainBehavior::State::Skip);
 			SKIP = true;
 		}
 		*/

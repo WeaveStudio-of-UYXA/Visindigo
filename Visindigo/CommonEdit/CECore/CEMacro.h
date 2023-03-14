@@ -26,6 +26,7 @@
 		#define def_init
 		#define def_del
 		#define def_copy
+		#define def_move
 		#define __Deprecated__(reason) [[deprecated(reason)]]
 
 	#define CEL_PYTHON_TO_CPP

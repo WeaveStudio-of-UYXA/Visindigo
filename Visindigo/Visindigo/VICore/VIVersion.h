@@ -16,14 +16,7 @@ class VIVersion :public QObject {
 
 class VICustomVersion :public VIVersion {
 	Q_OBJECT;
-	_Public ENUM StringPush{
-		Front, Middle, Back,
-	};
-	_Public struct CustomInfo {
-		QStringList Info;
-		StringPush Push;
-		int VersionIndex;
-	};
-	_Public QList<CustomInfo> InfoList;
-	_Public def_init VICustomVersion(VersionList InitVersion, QList<CustomInfo> CustomInfo);
+	_Public QStringList InfoList;
+	_Public def_init VICustomVersion(VersionList InitVersion, QStringList CustomInfo);
+	_Public operator QString();
 };

@@ -61,3 +61,15 @@ VIVersion::operator QString() {
 	}
 	return result;
 }
+
+def_init VICustomVersion::VICustomVersion(QList<int> InitVersion, QStringList CustomInfo) :VIVersion(InitVersion) {
+	InfoList = CustomInfo;
+}
+
+VICustomVersion::operator QString() {
+	QString result = "";
+	for (auto i = 0; i <= InfoList.length(); i++) {
+		result.append(InfoList[i].arg(Version[i]));
+	}
+	return result;
+}

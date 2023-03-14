@@ -62,43 +62,19 @@
     <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLSyntax.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLObjectPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLVARObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLSyntaxObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLFUNCObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLErrorObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLMemoryPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLBaseVar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLBaseObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\SPOL\SPOLVar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Visindigo\VICore\VIVersion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIMainBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,9 +92,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Global.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="init.h">
@@ -154,42 +127,6 @@
     <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLVARObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLObjectPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLSyntax.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLSyntaxObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLFUNCObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLErrorObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLMemoryPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLBaseVar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLBaseObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLVar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Visindigo\SPOLFunc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -200,6 +137,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VI2DScene\macro\VI2DScene_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIServiceThread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIPackage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\macro\VICompileMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -267,9 +216,6 @@
     <QtMoc Include="Visindigo\VIModules\VIHitbox\VIHitbox.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\SPOL\SPOL.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Visindigo\VIScene\TestBaseScene.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -292,6 +238,15 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DSkeleton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIMainBehavior.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIFramework.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
