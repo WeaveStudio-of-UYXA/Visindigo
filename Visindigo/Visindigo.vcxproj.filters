@@ -59,7 +59,7 @@
     <ClCompile Include="Visindigo\VICore\VIVersion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.cpp">
+    <ClCompile Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visindigo\VICore\VIMath.cpp">
@@ -118,7 +118,7 @@
     <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\SPOLFunc.h">
+    <ClInclude Include="Visindigo\SPOL\SPOLFunc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h">
@@ -127,7 +127,7 @@
     <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VI2DScene\macro\VI2DScene_m.h">
+    <ClInclude Include="Visindigo\VI2DView\macro\VI2DScene_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VICore\VIServiceThread.h">
@@ -195,9 +195,6 @@
     <QtMoc Include="Visindigo\VICore\VIGeneralBehavior.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="CommonEdit\CEFunction\CELanguage.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Visindigo\VISystem\VISystemBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -205,9 +202,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VIModules\VIHitbox\VIHitbox.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIScene\TestBaseScene.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\SPOL\oldVersion\SPOL9X.h">
@@ -222,13 +216,13 @@
     <QtMoc Include="Visindigo\VICore\VIProject.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VI2DScene\VI2DScene.h">
+    <QtMoc Include="Visindigo\VI2DView\VI2DView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.h">
+    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DSkeleton.h">
+    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DSkeleton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIMainBehavior.h">
@@ -241,6 +235,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\TestScenePack\TestScenePack.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

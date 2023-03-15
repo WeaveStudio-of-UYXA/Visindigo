@@ -9,7 +9,7 @@ class VIPackage :public VIMainBehavior
 {
 	_Public QString PackageName;
 	_Public VIFramework* Framework;
-	_Public def_init VIPackage() {};
+	_Public def_init VIPackage() { this->setDuration(-1); this->setHost(mBEHAVIOR); };
 	_Public virtual void onActive() {};
 	_Public virtual void onExit() {};
 	_Public virtual void onFrame() {};

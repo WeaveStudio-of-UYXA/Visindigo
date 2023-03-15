@@ -19,7 +19,11 @@ class VIFramework :public QApplication
 		Data = new private_VIFramework();
 		VIFramework::Instance = this;
 	};
-	_Public void start() { Data->ReturnCode = this->exec(); };
+	_Public void start() { gBEHAVIOR->start(); mBEHAVIOR->start(); Data->ReturnCode = this->exec(); };
 	_Public int getReturnCode() { return Data->ReturnCode; };
-	_Public bool loadPackage(VIPackage* package) { Data->PackageList.append(package); return true; };
+	_Public bool loadPackage(VIPackage* package) { 
+		Data->PackageList.append(package); 
+		package->active();
+		return true; 
+	};
 };

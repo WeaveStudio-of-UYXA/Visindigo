@@ -96,11 +96,11 @@ void VI2DTextUnit::setAlignment(Qt::AlignmentFlag align) {
 void VI2DTextUnit::setTextWidth(float width) {
 	this->Item->setTextWidth(width);
 }
-void VI2DTextUnit::setTextFont(QFont& font) {
+void VI2DTextUnit::setTextFont(QFont font) {
 	this->TextFont = font;
 	this->Item->setFont(font);
 }
-void VI2DTextUnit::setTextColor(QColor& color) {
+void VI2DTextUnit::setTextColor(QColor color) {
 	this->Item->setDefaultTextColor(color);
 }
 void VI2DTextUnit::setTextPixelSize(int px) {
@@ -118,13 +118,29 @@ void VI2DTextUnit::setFontFamily(QString family) {
 	this->TextFont.setFamily(family);
 	this->Item->setFont(TextFont);
 }
-void VI2DTextUnit::sceneResizeEvent(QSize& size) {
+void VI2DTextUnit::sceneResizeEvent(QSize size) {
 	if (TextSizeUsePercentage) {
 		this->TextFont.setPixelSize(size.height() * TextSizePercentage);
 		this->Item->setFont(TextFont);
 	}
 }
-
+def_init VI2DFrameUnit::VI2DFrameUnit(QObject* parent) :VI2DTextUnit(parent) {
+	this->__init__();
+}
+def_init VI2DFrameUnit::VI2DFrameUnit(VI2DUnit* parent) : VI2DTextUnit(parent) {
+	this->__init__();
+	Item->setParentItem(parent->GraphicsItem);
+}
+void VI2DFrameUnit::__init__() {
+	GraphicsItem = Item;
+	TextFont.setFamily("Microsoft YaHei");
+	TextFont.setPixelSize(20);
+	Item->setFont(TextFont);
+	DebugHost = new VIMainBehaviorHostDebug();
+	DebugHost->setHost(mBEHAVIOR);
+	DebugHost->active();
+	connect(DebugHost, &VIMainBehaviorHostDebug::getHostSpeed, [this](unsigned int s) {this->setText(QString::number(s)); });
+}
 /*
 * =====================================
 * VI2DPixmapUnit :public VI2DUnit

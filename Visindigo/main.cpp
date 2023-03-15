@@ -1,18 +1,9 @@
 ﻿#pragma execution_character_set("utf-8")
 
 //#include "Visindigo/SPOL/SPOLSyntax.h"
-#include "Visindigo/VIScene/TestBaseScene.h"
-#include "Visindigo/VI2DScene/VI2DScene.h"
 #include "Visindigo/VICore/VICore.h"
 #include "UserCode/YSPMainPack/YSPMainPack.h"
-void launchVisindigo2DTest() {
-	VI2DWidget* w = new VI2DWidget();
-#if VI_WINDOW == VI_WINDOW_SYS
-	w->show();
-#elif VI_WINDOW == VI_NO_WINDOW
-	w->show();
-#endif
-}
+#include "UserCode/TestScenePack/TestScenePack.h"
 void launchVisindigoSceneTest() {
 #ifdef VI_USE_3D
 	TestSceneView* w = new TestSceneView();
@@ -36,12 +27,8 @@ void launchVisindigoSPOLItp() {
 }*/
 int main(int argc, char* argv[]) {
 	VIFramework VIFrame(argc, argv);
-	LOAD_PACKAGE(YSPMainPack);
+	//LOAD_PACKAGE(YSPMainPack);
+	LOAD_PACKAGE(TestScenePack);
 	VIFrame.start();
 	return VIFrame.getReturnCode();
 }
-
-//gBEHAVIOR->start();
-	//launchVisindigoSPOLItp();
-	//launchVisindigo2DTest();
-	//launchVisindigoRuntime();

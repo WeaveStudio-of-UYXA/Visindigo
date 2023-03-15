@@ -9,21 +9,29 @@ class VI2DScene :public QGraphicsScene
 	}
 };
 
-class VI2DWidget :public QGraphicsView
+class VI2DView :public QGraphicsView
 {
 	Q_OBJECT;
 	_Public VI2DScene* Scene;
-	_Public def_init VI2DWidget(QWidget* parent = Q_NULLPTR) :QGraphicsView(parent) {
+	_Public VI2DTextUnit* t;
+	_Public VI2DFrameUnit* debug;
+	_Public def_init VI2DView(QWidget* parent = Q_NULLPTR) :QGraphicsView(parent) {
 		this->Scene = new VI2DScene(this);
-		this->setMinimumSize(800, 600);
+		this->setMinimumSize(1366, 768);
 		this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		this->setBackgroundBrush(QBrush(QColor(0, 0, 0, 255)));
 		this->setScene(Scene);
-		VI2DTextUnit* t = new VI2DTextUnit(this);
+		t = new VI2DTextUnit(this);
 		t->setTextWidth(300);
-		t->setTextAni("Hello World----------", 300, 1000);
 		t->setAlignment(Qt::AlignCenter);
+		//t->setTextColor(QColor(255, 255, 255, 255));
 		Scene->addItem(t->getGraphicsItem());
+		debug = new VI2DFrameUnit(this);
+		debug->setTextWidth(300);
+		debug->setAlignment(Qt::AlignLeft);
+		debug->setTextColor(QColor(255, 255, 255, 255));
+		Scene->addItem(debug->getGraphicsItem());
 	}
 	_Public void resizeEvent(QResizeEvent* event) {
 		//从QGraphicsItem的坐标系来看，实际上此处更应该将视口中心置于0，0点

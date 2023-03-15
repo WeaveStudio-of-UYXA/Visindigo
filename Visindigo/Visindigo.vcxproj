@@ -109,7 +109,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.cpp">
+    <ClCompile Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
@@ -129,20 +129,20 @@
   <ItemGroup>
     <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2D.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVISystem.h" />
-    <QtMoc Include="CommonEdit\CEFunction\CELanguage.h" />
     <ClInclude Include="Global.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIYSP.h" />
     <QtMoc Include="Visindigo\VIJavaScript\HostExceptionUI.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2DBase.h" />
     <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h" />
-    <ClInclude Include="Visindigo\SPOLFunc.h" />
+    <QtMoc Include="UserCode\TestScenePack\TestScenePack.h" />
+    <ClInclude Include="Visindigo\SPOL\SPOLFunc.h" />
     <QtMoc Include="Visindigo\SPOL\oldVersion\SPOL9X.h" />
     <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h" />
     <QtMoc Include="Visindigo\VICore\VISoundService.h" />
-    <ClInclude Include="Visindigo\VI2DScene\macro\VI2DScene_m.h" />
-    <QtMoc Include="Visindigo\VI2DScene\VI2DScene.h" />
-    <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DUnit.h" />
-    <QtMoc Include="Visindigo\VI2DScene\SceneUnit\VI2DSkeleton.h" />
+    <ClInclude Include="Visindigo\VI2DView\macro\VI2DScene_m.h" />
+    <QtMoc Include="Visindigo\VI2DView\VI2DView.h" />
+    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.h" />
+    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DSkeleton.h" />
     <ClInclude Include="Visindigo\VICore\macro\VICompileMacro.h" />
     <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h" />
     <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h" />
@@ -169,7 +169,6 @@
     <ClInclude Include="Visindigo\VIObjects\macro\VIGlassConvention.h" />
     <QtMoc Include="Visindigo\VISystem\VISystemBase.h" />
     <ClInclude Include="Visindigo\VIObjects\VIImage.h" />
-    <QtMoc Include="Visindigo\VIScene\TestBaseScene.h" />
     <QtMoc Include="Visindigo\VICore\VIProject.h" />
     <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h" />
     <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h" />

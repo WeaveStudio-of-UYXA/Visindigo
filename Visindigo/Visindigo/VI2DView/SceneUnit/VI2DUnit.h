@@ -2,11 +2,11 @@
 #include "../macro/VI2DScene_m.h"
 #include "../../VICore/VIAnimation.h"
 
-class VI2DWidget;
+class VI2DView;
 class VI2DUnit :public QObject
 {
 	Q_OBJECT;
-	friend class VI2DWidget;
+	friend class VI2DView;
 	_Public VIOpacityAniBehavior* OpacityAni = new VIOpacityAniBehavior(this);
 	_Public VIResizeAniBehavior* ResizeAni = new VIResizeAniBehavior(this);
 	_Public QGraphicsItem* GraphicsItem = Q_NULLPTR;
@@ -29,7 +29,7 @@ class VI2DTextUnit :public VI2DUnit
 	_Public QString AlignHTMLTagS = "<p align='left'>";
 	_Public QString AlignHTMLTagE = "</p>";
 	_Public VITextAniBehavior* TextAni;
-	_Private QGraphicsTextItem* Item = new QGraphicsTextItem();
+	_Public QGraphicsTextItem* Item = new QGraphicsTextItem();
 	_Public QFont TextFont;
 	_Public bool TextSizeUsePercentage = false;
 	_Public float TextSizePercentage;
@@ -41,14 +41,21 @@ class VI2DTextUnit :public VI2DUnit
 	_Public void setTextAniContinue(QString plainText, VIMilliSecond msPerChar, VIMilliSecond msWait);
 	_Public void setAlignment(Qt::AlignmentFlag align);
 	_Public void setTextWidth(float width);
-	_Public void setTextFont(QFont& font);
-	_Public void setTextColor(QColor& color);
+	_Public void setTextFont(QFont font);
+	_Public void setTextColor(QColor color);
 	_Public void setTextPixelSize(int px);
 	_Public void setTextPixelPercentage(float percentage);
 	_Public void setFontFamily(QString family);
-	_Public void sceneResizeEvent(QSize& size);
+	_Public void sceneResizeEvent(QSize size);
 };
 
+class VI2DFrameUnit :public VI2DTextUnit
+{
+	_Private VIMainBehaviorHostDebug* DebugHost;
+	_Public def_init VI2DFrameUnit(QObject* parent);
+	_Public def_init VI2DFrameUnit(VI2DUnit* parent);
+	_Private void __init__();
+};
 class VI2DPixmapUnit :public VI2DUnit
 {
 	Q_OBJECT;

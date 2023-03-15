@@ -46,7 +46,7 @@ class VIRuntimeWindow :public QMainWindow
 		CentralWidget = new VICentralWidget(this);
 		DebugBehavior = new VIGeneralBehaviorHostDebug(this);
 		DebugBehavior->setHost(gBEHAVIOR);
-		mBEHAVIOR->start();
+		
 		MainDebugBehavior = new VIMainBehaviorHostDebug(this);
 		MainDebugBehavior->setHost(mBEHAVIOR);
 		this->setCentralWidget(CentralWidget);
