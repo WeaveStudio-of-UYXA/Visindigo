@@ -1,10 +1,14 @@
 # 前言和授权
 
-Visindigo是Yayin Story Player的下一代程序，旨在提供纯文本（纯代码）描述的简单平面呈现与交互框架。
+在**Yayin Story Player**开发到0.9版本后，TsingYayin认识到YSP程序的核心UI组件QtWordGame和核心解释器组件AASPCMD并不能满足YSP程序日益增长的需求。于是TsingYayin决定先抛开YSP，开发一个基于Qt的简单二维场景框架，即本项目Visindigo。在Visindigo基本框架基本搭起来后，YSP会基于Visindigo继续开发，并且作为Visindigo开发的范例程序包含在本项目的UserCode/YSPMainPack中。
 
-**Yayin Story Player**是Ayano Aishi提出构想，Tsing Yayin独立开发的应用程序。
+**QtWordGame**是TsingYayin基于初代YSP需求独立开发的专用于极简横版对话的UI框架。
 
-**Visindigo**是Tsing Yayin主要开发的应用程序。Tsing Yayin代码水平极差，因此Visindigo的定位是简单、可扩展的平面呈现和交互框架，不会提供任何专业功能。但Visindigo会一直保证高度的可移植和可扩展性，确保确有需求的用户能够以自己的方式扩展Visindigo。
+**AASPCMD**是Ayano Aishi提出构想，由TsingYayin独立开发的SPOL脚本解释器。
+
+**SPOL** 即`Story Player Official Language`，专用于YSP的顺序结构剧情场景描述脚本，因为可扩展性太差现已弃用，仅作为新版YSP的SPDF on ES5（`Scene Performance Description Framework`）的一部分提供。
+
+**Visindigo**是Tsing Yayin主要开发的场景框架。TsingYayin代码水平欠佳，因此Visindigo的定位是简单、可扩展的平面呈现和交互框架，基本提供任何专业功能。但Visindigo会一直保证高度的可移植和可扩展性，确保确有需求的用户能够以自己的方式扩展Visindigo。
 
 此项目完全开源且使用GPLv3授权，一切基于本程序的二次开发（包括扩展程序本体和编写VIJS程序）必须亦完全开源并使用GPLv3授权。本项目使用的授权许可证随时有可能变更，请用户自行关注当前许可证情况。
 
@@ -16,6 +20,7 @@ Visindigo是Yayin Story Player的下一代程序，旨在提供纯文本（纯�
 
 # 问题反馈和国际化 Feedback & i18n
 
+## 问题反馈
 此项目维护时采用中文进行交流（无论是简体中文或者繁体中文），如果您的母语不是中文，您应该采用双语进行沟通。
 
 我们希望您首先用您的母语进行表达，之后再附上对应的中文翻译。如果您不能自己将其译为中文，您可以考虑采用翻译引擎，例如Bing，Baidu，Google等。
@@ -28,6 +33,7 @@ We hope you will first express in your native language, and then attach the corr
 
 Our reply will follow a similar order. We will reply in your native language first. This reply is translated from Chinese by the translation engine. After that, we will attach the original Chinese text.
 
+## 国际化
 關於此軟體內的多語言翻譯問題，我們希望有各個語種的用戶能做出貢獻，如果後續確有此需要，我們會指出需要被翻譯的內容。
 
 With regard to multilingual translation in this software, we hope that users of all languages can contribute. If this is really necessary in the future, we will point out what needs to be translated.
@@ -38,13 +44,13 @@ With regard to multilingual translation in this software, we hope that users of 
 
 # 致谢
 
-Visindigo是框架型应用程序，为了向用户讲解如何使用这样的框架，我们使用了现成的例子进行讲解——鉴于Visindigo的特殊性，我们在例子中大量参考了《明日方舟》中的设计，感谢《明日方舟》的好故事为所有在看此文的各位带来了创作的热情与欲望。
+Visindigo是框架型应用程序，为了向用户讲解如何使用这样的框架，我们决定重构现在在明日方舟二创社区同人剧情中经常使用的软件YSP，感谢《明日方舟》的好故事为所有在看此文的各位带来了创作的热情与欲望。
 
-Visindigo认为Qt是当今C++中最出色的库，Visindigo大量特性，尤其是JSVI主机依赖于Qt实现，如果没有Qt，Visindigo还有很多很多弯路要走。
+Visindigo认为Qt是当今C++中最出色的库，Visindigo大量特性，尤其是Visindigo.JS和SPDF主机依赖于Qt实现，如果没有Qt，Visindigo还有很多很多弯路要走。
 
 Visindigo感谢万维工作室（Weave Studio）的各位同学协助了软件的开发，青雅音本人水平不高，如果没有这些同学的帮助与引导，无法进行Visindigo的开发。
 
-Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭策，如果没有这些同学细致广泛的运用YSP，发现其中的问题，就不会有Visindigo软件的提出与实现。由于我们最初希望的仍然是类似于视觉小说框架之类的东西，所以我们最初的名字是Yayin Visual Story，考虑到Indigo可以作为靛青解释，与本人的姓氏一致，故而使软件得名为Visindigo，译为“流清”。
+Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭策，如果没有这些同学细致广泛的运用YSP，发现其中的问题，就不会有Visindigo框架的提出与实现。由于我们最初希望的仍然是限于视觉小说框架而非通用二维场景框架之类的东西，所以我们最初的名字是Yayin Visual Story，考虑紫靛工作室名称中的Indigo可以作为靛青解释，与TsingYayin的姓氏一致，故而使框架最后得名为Visindigo，译为“流清”（或者`清流`？）
 
 # 源代码贡献
 如果您希望增加或修改Visindigo程序中的功能，请Fork本仓库，在修改完毕后提交Pull请求。
@@ -52,11 +58,9 @@ Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭�
 请注意：
 * Visindigo主要C++内容只接受含有Qt、STL的源代码，请勿引入任何其他库，例如OpenCV、Windows API，boost等，如果必须引入，请将该库中未能跨平台的部分重新用Qt实现。（例如您如果希望引入Spine之类的东西，您应该取得Spine的全部C++源代码，并将部分内容改为Qt实现）
 * Visindigo Installer主要C++内容允许引入其他第三方库。
-* JsVI API指的是由Visindigo程序提供的JavaScript API，VIJs API指的是直接由JavaScript实现的API，您可以自由扩展VIJs API，只要您写的这些扩展能够在JSVI主机上面运行。
-* 虽然从传统上而言，C、C++程序应该严格按照声明-实现的方式建构（h-cpp，include-source），但是在任何其他现代语言（尤其是面向对象的）推荐的建构都不再建议这种方式。此项目也是一样，如无编译问题导致必须用cpp文件的，一律使用h文件。
+* VIJS API指的是由Visindigo程序提供的JavaScript API，JSVI API指的是在Visindigo.JS框架下直接由JavaScript编写实现的API，您可以自由扩展JSVI API，只要您写的这些扩展能够在Visindigo.JS框架上面运行。
 * 不要使用“从Qt4继承，仍然提供支持但不再继续开发”的旧版Qt组件如Qt Script。
 * 不要使用C++17及之后版本中的新内容，不要使用MSVC支持不了的特性。
-* 详情请参阅`Document\C++代码格式标准.md`
 
 # 源码编译
 **请注意，如果您需要获得发行版本的源码，您应该去StudioIndigo的另外一个仓库，叫做[VisindigoRelease](https://github.com/StudioIndigo-of-CYXIO/VisindigoRelease)，本仓库内的源码是代表最新开发内容的源码，可能含有不稳定因素。**
