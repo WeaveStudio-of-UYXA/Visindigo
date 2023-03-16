@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include "VIGeneralBehavior.h"
 #include "VIMainBehavior.h"
-
+#include "VIBehavior.h"
+/*
 class VIGuiAnimation :public VIMainBehavior
 {
 	Q_OBJECT;
@@ -15,7 +16,38 @@ class VIGuiAnimation :public VIMainBehavior
 		this->WAITFLAG = w;
 	}
 };
-
+*/
+class VIGuiAnimation :public VITimedBehavior
+{
+	Q_OBJECT;
+	_Private bool WAITFLAG;
+	_Public bool StateSkip = false;
+	_Private QLabel* LABEL;
+	_Public def_init VIGuiAnimation(QObject* parent = Q_NULLPTR) :VITimedBehavior(parent) {}
+	_Public bool ifWait() {
+		return this->WAITFLAG;
+	};
+	_Public void setWait(bool w) {
+		this->WAITFLAG = w;
+	}
+	_Public VIMilliSecond getLastTime() { return VITimedBehavior::getTickDuration(); }
+	_Public VIMilliSecond getCurrent() { return (double)(this->Duration->getElapse()) / 1000000.0; }
+	_Public float getPercent() { return this->Duration->getPercent(); }
+	_Public void onTick() {
+		if (this->StateSkip) {
+			this->onSkip();
+		}
+		else {
+			this->onFrame();
+		}
+	}
+	_Public void onPassive() {
+		this->onDone();
+	}
+	_Public virtual void onFrame() {};
+	_Public virtual void onSkip() {};
+	_Public virtual void onDone() {};
+};
 class VITextAniBehavior :public VIGuiAnimation
 {
 	Q_OBJECT;
@@ -37,6 +69,12 @@ class VITextAniBehavior :public VIGuiAnimation
 		MSPT = MsPT;
 		MSW = MsW;
 		this->setDuration(text.length() * MsPT + MsW);
+		qDebug() << this->getDuration()->getDuration();
+		qDebug() << this->BEFORE;
+		qDebug() << this->TEXT;
+		qDebug() << this->MSPT;
+		qDebug() << this->MSW;
+
 	}
 	_Protected void onActive() {
 		LMS = 0;
@@ -44,22 +82,26 @@ class VITextAniBehavior :public VIGuiAnimation
 		CHAR = TEXT.begin();
 	}
 	_Protected void onFrame() {
-		getLastTime();
-		if (getCurrent() >= LMS && CHAR != TEXT.end() && getBehaviorState()!=State::Skip) {
+		//qDebug() << getCurrent();
+		//getLastTime();
+		if (getCurrent() >= LMS && CHAR != TEXT.end() ) {
 			CURRENT += *CHAR;
 			CHAR++;
 			INDEX++;
 			LMS = INDEX * MSPT;
+			
 			emit getText(CURRENT);
 		}
 		//qDebug() << "Percent" << this->getPercent(VIDuration::PercentType::Linear) << "Duration" << this->getDuration();
 	}
 	_Protected void onSkip() {
+		qDebug() << "Skip";
 		CHAR = TEXT.end();
 		//this->setDuration(TEXT.length() * MSPT);
 		emit getText(BEFORE + TEXT);
 	}
 	_Protected void onDone() {
+		qDebug() << "Done";
 		emit getText(BEFORE + TEXT);
 	}
 };
@@ -83,7 +125,7 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 		JUMPTIME = 0;
 	}
 	_Slot void onFrame() {
-		float OP = OPBegin + this->getPercent(VIDuration::PercentType::Linear) * OPDelta;
+		float OP = OPBegin + this->getPercent() * OPDelta;
 		OPEffect->setOpacity(OP);
 	}
 	_Slot void onDone() {
@@ -115,7 +157,7 @@ class VIResizeAniBehavior :public VIGuiAnimation
 	_Slot void onFrame() {
 		JUMPTIME += getLastTime();
 		if (JUMPTIME > 16) {
-			QSize Size = SizeBegin + this->getPercent(VIDuration::PercentType::Linear) * SizeDelta;
+			QSize Size = SizeBegin + this->getPercent() * SizeDelta;
 			emit getSize(Size);
 			JUMPTIME = 0;
 		}

@@ -35,7 +35,7 @@ public:
 		OpacityAniBehavior = new VIOpacityAniBehavior(this);
 		OpacityAniBehavior->OPEffect = Opacity;
 		connect(OpacityAniBehavior, SIGNAL(done()), this, SLOT(getDone()));
-		OpacityAniBehavior->setHost(mBEHAVIOR);
+		//OpacityAniBehavior->setHost(mBEHAVIOR);
 
 		px = 0.1; py = 0.2; pw = 0.8; ph = 0.6;
 	}

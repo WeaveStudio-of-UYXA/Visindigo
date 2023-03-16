@@ -8,7 +8,7 @@
 def_init VI2DUnit::VI2DUnit(QObject* parent) :QObject(parent) {}
 void VI2DUnit::setParentUnit(VI2DUnit* parent) {
 	GraphicsItem->setParentItem(parent->GraphicsItem);
-	OpacityAni->setHost(mBEHAVIOR);
+	//OpacityAni->setHost(mBEHAVIOR);
 }
 QGraphicsItem* VI2DUnit::getGraphicsItem() {
 	return GraphicsItem;
@@ -62,15 +62,18 @@ void VI2DTextUnit::__init__() {
 	TextFont.setPixelSize(20);
 	Item->setFont(TextFont);
 	TextAni = new VITextAniBehavior(this);
-	TextAni->setHost(mBEHAVIOR);
+	//TextAni->setHost(mBEHAVIOR);
 	connect(TextAni, SIGNAL(getText(QString)), this, SLOT(setText(QString)));
 }
 void VI2DTextUnit::setText(QString html) {
 	Item->setHtml(AlignHTMLTagS + html + AlignHTMLTagE);
+	Item->update();
 	//Item->adjustSize();
 }
 void VI2DTextUnit::setTextAni(QString plainText, VIMilliSecond msPerChar, VIMilliSecond msWait) {
+	qDebug() << "SetTextAni";
 	TextAni->setTextAni(plainText, msPerChar, msWait, false);
+	TextAni->setWait(true);
 	TextAni->active();
 }
 void VI2DTextUnit::setTextAniContinue(QString plainText, VIMilliSecond msPerChar, VIMilliSecond msWait) {

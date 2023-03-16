@@ -7,9 +7,12 @@ class VI2DScene :public QGraphicsScene
 	_Public QVector<VI2DUnit*> UnitList; //我们真的需要这玩意吗
 	_Public def_init VI2DScene(QObject* parent = Q_NULLPTR) :QGraphicsScene(parent) {	
 	}
+	_Public void addVI2DUnit(VI2DUnit* unit) {
+		this->addItem(unit->GraphicsItem);
+	}
 };
 
-class VI2DView :public QGraphicsView
+class VI2DView final :public QGraphicsView
 {
 	Q_OBJECT;
 	_Public VI2DScene* Scene;
@@ -22,16 +25,18 @@ class VI2DView :public QGraphicsView
 		this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		this->setBackgroundBrush(QBrush(QColor(0, 0, 0, 255)));
 		this->setScene(Scene);
-		t = new VI2DTextUnit(this);
-		t->setTextWidth(300);
-		t->setAlignment(Qt::AlignCenter);
-		//t->setTextColor(QColor(255, 255, 255, 255));
-		Scene->addItem(t->getGraphicsItem());
+		
 		debug = new VI2DFrameUnit(this);
 		debug->setTextWidth(300);
 		debug->setAlignment(Qt::AlignLeft);
 		debug->setTextColor(QColor(255, 255, 255, 255));
 		Scene->addItem(debug->getGraphicsItem());
+		t = new VI2DTextUnit(this);
+		t->setTextWidth(300);
+		t->setAlignment(Qt::AlignCenter);
+		t->setTextColor(QColor(255, 255, 255, 255));
+		t->move(100, 100);
+		Scene->addItem(t->getGraphicsItem());
 	}
 	_Public void resizeEvent(QResizeEvent* event) {
 		//从QGraphicsItem的坐标系来看，实际上此处更应该将视口中心置于0，0点
@@ -46,7 +51,5 @@ class VI2DView :public QGraphicsView
 			}
 		}
 	}
-	_Public void addVI2DUnit(VI2DUnit* unit) {
-		this->Scene->addItem(unit->GraphicsItem);
-	}
+	
 };

@@ -31,7 +31,9 @@ void VIMainBehavior::active() {
 }
 VIMainBehavior::State VIMainBehavior::preFrame() {
 	this->DURATION->addTime(this->HOST->LASTTIME, VIDuration::Unit::NanoSecond);
+	//qDebug() << this->HOST->LASTTIME;
 	if (DURATION->isTimeout()) {
+		qDebug() << "Behavior Time out";
 		this->setBehaviorState(State::Done);
 		this->onDone();
 		return State::Done;
@@ -84,6 +86,7 @@ void VIMainBehaviorHost::ergodicEvent() {
 	for (auto i = BEHAVIORLIST.begin(); i != BEHAVIORLIST.end(); ) {
 		VIMainBehavior::State s = (*i)->preFrame();
 		if (s == VIMainBehavior::State::Done) {
+			qDebug() << "Remove Behavior" << *i;
 			(*i)->setBehaviorState(VIMainBehavior::State::Idle);
 			VIMainBehavior* j = (*i);
 			i = BEHAVIORLIST.erase(i);

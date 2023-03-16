@@ -77,6 +77,12 @@
     <ClCompile Include="Visindigo\VICore\macro\VIMarco.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIAbstractBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VIUI\MRW\MRWGlobal.h">
@@ -143,6 +149,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VICore\VICore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\macro\VITime_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -238,6 +250,18 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="UserCode\TestScenePack\TestScenePack.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VITime.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIDuration.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIBehavior.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

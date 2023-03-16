@@ -116,6 +116,8 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
     <ClCompile Include="Visindigo\VICore\macro\VIMarco.h" />
+    <ClCompile Include="Visindigo\VICore\VIAbstractBehavior.cpp" />
+    <ClCompile Include="Visindigo\VICore\VIBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\VIFramework.cpp" />
     <ClCompile Include="Visindigo\VICore\VIMainBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\VIMath.cpp" />
@@ -145,13 +147,19 @@
     <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DSkeleton.h" />
     <ClInclude Include="Visindigo\VICore\macro\VICompileMacro.h" />
     <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h" />
+    <ClInclude Include="Visindigo\VICore\macro\VITime_m.h" />
     <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h" />
     <QtMoc Include="Visindigo\VICore\VIVersion.h" />
     <QtMoc Include="Visindigo\VICore\VIMainBehavior.h" />
     <QtMoc Include="Visindigo\VICore\VIFramework.h" />
+    <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h" />
+    <QtMoc Include="Visindigo\VICore\VITime.h" />
+    <QtMoc Include="Visindigo\VICore\VIDuration.h" />
+    <QtMoc Include="Visindigo\VICore\VIBehavior.h" />
     <ClInclude Include="Visindigo\VICore\VICore.h" />
     <ClInclude Include="Visindigo\VICore\VIPackage.h" />
     <ClInclude Include="Visindigo\VICore\VIServiceThread.h" />
+    <ClInclude Include="Visindigo\VICore\VIUnit.h" />
     <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIChara.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIContainer.h" />

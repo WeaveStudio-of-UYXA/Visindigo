@@ -14,13 +14,13 @@ public:
 		Behavior = new VITextAniBehavior(this);
 		connect(Behavior, SIGNAL(getText(QString)), this, SLOT(getText(QString)));
 		connect(Behavior, SIGNAL(done()), this, SLOT(ifHostWait()));
-		Behavior->setHost(mBEHAVIOR);
+		//Behavior->setHost(mBEHAVIOR);
 		this->setAlignment(Qt::AlignLeft);
 		this->setGeometry(QRect(0, 0, 500, 60));
 	}
 public slots:
 	void setBesselPoints(VIMath::VI2DMatrix Pmat) {
-		Behavior->setBesselCoeff(VIBessel::getBesselCoefficient(Pmat));
+		//Behavior->setBesselCoeff(VIBessel::getBesselCoefficient(Pmat));
 		qDebug() << "setB";
 	}
 	void setText(QString text) {
@@ -52,11 +52,21 @@ public slots:
 			SKIP = true;
 		}
 		*/
+		/*
 		if (Behavior->getBehaviorState() == VIMainBehavior::State::Active) {
 			Behavior->setBehaviorState(VIMainBehavior::State::Skip);
 		}
 		else if (Behavior->getBehaviorState() == VIMainBehavior::State::Skip) {
 			Behavior->setBehaviorState(VIMainBehavior::State::Done);
+		}
+		*/
+		if (Behavior->getBehaviorState() == VIAbstractBehavior::State::Active) {
+			if (!Behavior->StateSkip) {
+				Behavior->StateSkip = true;
+			}
+			else {
+				Behavior->setBehaviorState(VIAbstractBehavior::State::Passive);
+			}
 		}
 	}
 	void ifHostWait() {
@@ -105,12 +115,21 @@ public slots:
 		this->clear();
 	}
 	void skipOrJumpAni() {
+		if (OpacityAniBehavior->getBehaviorState() == VIAbstractBehavior::State::Active) {
+			if (!OpacityAniBehavior->StateSkip) {
+				OpacityAniBehavior->StateSkip = true;
+			}
+			else {
+				OpacityAniBehavior->setBehaviorState(VIAbstractBehavior::State::Passive);
+			}
+		}
+		/*
 		if (OpacityAniBehavior->getBehaviorState() == VIMainBehavior::State::Active) {
 			OpacityAniBehavior->setBehaviorState(VIMainBehavior::State::Skip);
 		}
 		else if (OpacityAniBehavior->getBehaviorState() == VIMainBehavior::State::Skip) {
 			OpacityAniBehavior->setBehaviorState(VIMainBehavior::State::Done);
-		}
+		}*/
 		/*
 		if (SKIP && !FINISH) {
 			OpacityAniBehavior->setBehaviorState(VIMainBehavior::State::Done);

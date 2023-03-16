@@ -1,6 +1,6 @@
 #pragma once
-
 #include <QtCore>
+#include "VICompileMacro.h"
 
 //This file contains the core macro definitions of the CE library
 #define tick unsigned int
@@ -24,6 +24,11 @@
 #define False false
 #define _Slot public Q_SLOTS:
 #define _Signal Q_SIGNALS:
+#define VI_NO_PARENT
+#define PureVirtual = 0
+#define InitAsNull = nullptr
+#define InitAsZero = 0
+#define InitAsNone = {}
 
 //We provide macros that are supported by Visual Studio(strictly speaking,by WindowsAPI) by default, 
 // but are not actually part of standard C++.

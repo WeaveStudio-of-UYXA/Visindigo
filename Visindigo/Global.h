@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "CommonEdit/CEFunction/CELanguage.h"
 #include "Visindigo/VICore/macro/VIMarco.h"
 #define WINDOWS_DEPLOY 1
 #define ANDROID_DEPLOY 2
