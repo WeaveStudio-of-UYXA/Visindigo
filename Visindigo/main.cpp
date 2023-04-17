@@ -4,6 +4,8 @@
 #include "Visindigo/VICore/VICore.h"
 #include "UserCode/YSPMainPack/YSPMainPack.h"
 #include "UserCode/TestScenePack/TestScenePack.h"
+#include "UserCode/VISTestPack/VISTestPack.h"
+
 void launchVisindigoSceneTest() {
 #ifdef VI_USE_3D
 	TestSceneView* w = new TestSceneView();
@@ -28,7 +30,8 @@ void launchVisindigoSPOLItp() {
 int main(int argc, char* argv[]) {
 	VIFramework VIFrame(argc, argv);
 	//LOAD_PACKAGE(YSPMainPack);
-	LOAD_PACKAGE(TestScenePack);
+	//LOAD_PACKAGE(TestScenePack);
+	LOAD_PACKAGE(VISTestPack);
 	VIFrame.start();
 	return VIFrame.getReturnCode();
 }

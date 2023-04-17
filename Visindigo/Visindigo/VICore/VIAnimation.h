@@ -17,6 +17,10 @@ class VIGuiAnimation :public VIMainBehavior
 	}
 };
 */
+class VIAnimationBehavior :public VITimedBehavior
+{
+
+};
 class VIGuiAnimation :public VITimedBehavior
 {
 	Q_OBJECT;

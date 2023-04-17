@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Visindigo", "Visindigo\Visi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VisindigoInstaller", "VisindigoInstaller\VisindigoInstaller.vcxproj", "{96448DF4-729D-474E-BAE6-F52A774796B4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SEM", "SEM\SEM.vcxproj", "{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{96448DF4-729D-474E-BAE6-F52A774796B4}.Debug|x64.Build.0 = Debug|x64
 		{96448DF4-729D-474E-BAE6-F52A774796B4}.Release|x64.ActiveCfg = Release|x64
 		{96448DF4-729D-474E-BAE6-F52A774796B4}.Release|x64.Build.0 = Release|x64
+		{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}.Debug|x64.ActiveCfg = Debug|x64
+		{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}.Debug|x64.Build.0 = Debug|x64
+		{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}.Release|x64.ActiveCfg = Release|x64
+		{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

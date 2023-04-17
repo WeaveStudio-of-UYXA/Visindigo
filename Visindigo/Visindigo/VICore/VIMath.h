@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include <QtCore>
 #include "macro/VIMarco.h"
+#define PARA_DIM_1 <1>
+#define PARA_DIM_2 <2>
+#define PARA_DIM_3 <3>
 namespace VIMath {
 	struct VIVector2
 	{
@@ -20,12 +23,21 @@ namespace VIMath {
 		float z;
 		float w;
 	};
+	struct VIVector5
+	{
+		float x;
+		float y;
+		float z;
+		float w;
+		float u;
+	};
 	typedef float VIVector;
 	typedef QList<VIVector> VIMatrix;
 	typedef QList<VIVector2> VI2DMatrix;
 	typedef QList<VIVector3> VI3DMatrix;
 	typedef QList<VIVector4> VI4DMatrix;
 }
+
 class VIBessel :public QObject
 {
 public:

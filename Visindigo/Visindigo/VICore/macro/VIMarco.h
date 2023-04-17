@@ -3,32 +3,38 @@
 #include "VICompileMacro.h"
 
 //This file contains the core macro definitions of the CE library
-#define tick unsigned int
-#define l_tick unsigned long long
-#define CE_NULLPTR nullptr
-#define operators 
-#define PASS
-#define ENUM enum class
+#define VI_NULLPTR Q_NULLPTR
+
 #define _Public public:
 #define _Private private:
 #define _Protected protected:
-#define def auto
+#define _Slot public Q_SLOTS:
+#define _Signal Q_SIGNALS:
+#define PureVirtual = 0
+#define HalfVirtual {}
+#define InitAsNull = Q_NULLPTR
+#define InitAsZero = 0
+#define InitAsNone = {}
+
+#define ENUM enum class
+#define VI_Property(Type, name) public:Type name;void set##name(Type value){this->name = value;}Type get##name(){return name;}
+#define VI_PrivateProperty(Type, name) private:Type name;private: void set##name(Type value){this->name = value;}public:Type get##name(){return name;}
+#define VI_Flag(name) public:bool name;void set##name(bool value){this->name = value;}bool is##name(){return name;}
+#define VI_PrivateFlag(name) private:bool name;private: void set##name(bool value){this->name = value;}public:bool is##name(){return name;}
+
 #define def_init
 #define def_del
 #define def_copy
 #define def_move
-#define __Deprecated__(reason) [[deprecated(reason)]]
+#define PASS
+#define VI_NO_PARENT
 
+#define def auto
 #define elif else if
 #define True true
 #define False false
-#define _Slot public Q_SLOTS:
-#define _Signal Q_SIGNALS:
-#define VI_NO_PARENT
-#define PureVirtual = 0
-#define InitAsNull = nullptr
-#define InitAsZero = 0
-#define InitAsNone = {}
+
+
 
 //We provide macros that are supported by Visual Studio(strictly speaking,by WindowsAPI) by default, 
 // but are not actually part of standard C++.

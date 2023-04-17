@@ -21,70 +21,196 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
-    <Filter Include="Source Files\c:%255cusers%255cadministrator%255cdesktop%255ccommonedit%255ccefunction">
-      <UniqueIdentifier>{120e7b7b-5e46-4002-9c7e-49415cf0d0bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\c:%255cusers%255cadministrator%255cdesktop">
-      <UniqueIdentifier>{d6880d06-0361-4f41-a41d-ee0f4c9079a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\c:%255cusers%255cadministrator%255cdesktop\vijsapi">
-      <UniqueIdentifier>{41b49595-1962-4898-9c2f-b8c41fd4b3c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\c:%255cusers%255cadministrator%255cdesktop\visindigo%255cvicore">
-      <UniqueIdentifier>{95daa81f-2e9f-4583-a9bb-07c5a1a7ab86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\c:%255cusers%255cadministrator%255cdesktop\visindigo%255cvisystem">
-      <UniqueIdentifier>{b384236f-dc8e-4236-9d1e-d8607381cb30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\c:%255cusers%255cadministrator%255cdesktop\viui%255cmrw">
-      <UniqueIdentifier>{97c4ba94-3a89-412f-b51a-27e5f6af6a81}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VIUI\MRW\MRWGlobal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIVersion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIMath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIMainBehavior.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIFramework.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\macro\VIMarco.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIAbstractBehavior.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIBehavior.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <QtMoc Include="UserCode\TestScenePack\TestScenePack.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\VISTestPack\VISTestPack.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\SPOL\oldVersion\SPOL9X.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DSkeleton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VI2DView\VI2DView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIAnimation.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIBehavior.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIDuration.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIFramework.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIGeneralBehavior.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIMainBehavior.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIProject.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VISoundService.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VITime.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIVersion.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIJavaScript\HostExceptionUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIChara.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIContainer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2D.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2DBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIJavaScript\JsVISystem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIJavaScript\JsVIYSP.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIJavaScript\VIJSHost.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIModules\VIHitbox\VIHitbox.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIScene\TestBaseScene.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIScripts\VISCompiler\VISCCompiler.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIScripts\VISCompiler\VISCContentAnalyzer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIScripts\VISCompiler\VISCFileReader.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VISystem\VISystemBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIUI\MRW\VIGUI2D.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIUI\MRW\VisindigoRuntime.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIUI\VIPlayerWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\SPOL\SPOLFunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VI2DView\macro\VI2DScene_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\macro\VICompileMacro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\macro\VIGeneralBehavior_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\macro\VIMarco.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\macro\VITime_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VICore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIMathTool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIPackage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIServiceThread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VIJavaScript\macro\VIJSGlobal_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VIJavaScript\VIJSGlobal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VIObjects\macro\VIGlassConvention.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VIObjects\VIImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="VIUI\MRW\MRWGlobal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -94,189 +220,57 @@
     <ClInclude Include="VIUI\RW\VisindigoRepos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VIJavaScript\VIJSGlobal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\macro\VIGeneralBehavior_m.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VIJavaScript\macro\VIJSGlobal_m.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VIObjects\macro\VIGlassConvention.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VIObjects\VIImage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\SPOL\SPOLFunc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VI2DView\macro\VI2DScene_m.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIServiceThread.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIMath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIPackage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\macro\VICompileMacro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VICore.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\macro\VITime_m.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIUnit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="VIUI\MRW\VisindigoRuntime.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIJavaScript\VIJSHost.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIUI\MRW\VIGUI2D.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2D.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIJavaScript\JsVISystem.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIAnimation.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIYSP.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIJavaScript\HostExceptionUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2DBase.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIChara.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIContainer.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIGeneralBehavior.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VISystem\VISystemBase.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIUI\VIPlayerWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIModules\VIHitbox\VIHitbox.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\SPOL\oldVersion\SPOL9X.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VISoundService.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIVersion.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIProject.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VI2DView\VI2DView.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DSkeleton.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIMainBehavior.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIFramework.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\TestScenePack\TestScenePack.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VITime.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIDuration.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIBehavior.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Visindigo\VI3D\NewFile.qml">
+    <ClCompile Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.cpp">
       <Filter>Source Files</Filter>
-    </None>
-    <None Include="Resource\Language\zh_CN.celang" />
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIAbstractBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIFramework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIMainBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VICore\VIVersion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VIScripts\VISCompiler\VISCCompiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIUI\MRW\MRWGlobal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resource\QSS\YSPStyleSheet.css" />
   </ItemGroup>
 </Project>

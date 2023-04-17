@@ -91,7 +91,7 @@ class VIRuntimeWindow :public QMainWindow
 	_Slot VIRuntimeWindow* getWin() {
 		return this;
 	}
-	_Slot __Deprecated__("Use VISystem.print") void output(QString output) {
+	_Slot void output(QString output) {
 		qDebug() << output;
 	}
 	_Slot void enableGUIFrame() {
