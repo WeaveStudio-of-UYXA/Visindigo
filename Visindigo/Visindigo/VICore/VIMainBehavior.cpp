@@ -1,4 +1,9 @@
-﻿#include "VIMainBehavior.h"
+﻿/*
+* 此文件已经被宣布弃用
+* 不要使用此文件中的任何代码
+*/
+
+#include "VIMainBehavior.h"
 VIMainBehaviorHost* VIMainBehaviorHost::VIMainBehaviorHostInstance = new VIMainBehaviorHost(qApp);
 void VIMainBehavior::setDuration(VIMilliSecond msec) {
 	this->DURATION->setDuration(msec);

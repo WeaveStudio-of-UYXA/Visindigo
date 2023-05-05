@@ -1,4 +1,9 @@
-﻿#pragma once
+﻿/*
+* 此文件已经被宣布弃用
+* 不要使用此文件中的任何代码
+*/
+
+#pragma once
 #include "VIGeneralBehavior.h"
 
 //此文件旨在提供一个与Qt事件机制绑定的VI事件队列。

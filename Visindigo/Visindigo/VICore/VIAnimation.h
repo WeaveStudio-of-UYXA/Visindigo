@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "VIGeneralBehavior.h"
-#include "VIMainBehavior.h"
+//#include "VIGeneralBehavior.h"
+//#include "VIMainBehavior.h"
 #include "VIBehavior.h"
 /*
 class VIGuiAnimation :public VIMainBehavior
@@ -19,15 +19,11 @@ class VIGuiAnimation :public VIMainBehavior
 */
 class VIAnimationBehavior :public VITimedBehavior
 {
-
-};
-class VIGuiAnimation :public VITimedBehavior
-{
 	Q_OBJECT;
 	_Private bool WAITFLAG;
 	_Public bool StateSkip = false;
 	_Private QLabel* LABEL;
-	_Public def_init VIGuiAnimation(QObject* parent = Q_NULLPTR) :VITimedBehavior(parent) {}
+	_Public def_init VIAnimationBehavior(QObject* parent = Q_NULLPTR) :VITimedBehavior(parent) {}
 	_Public bool ifWait() {
 		return this->WAITFLAG;
 	};
@@ -52,10 +48,10 @@ class VIGuiAnimation :public VITimedBehavior
 	_Public virtual void onSkip() {};
 	_Public virtual void onDone() {};
 };
-class VITextAniBehavior :public VIGuiAnimation
+class VITextAniBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
-	_Public def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIGuiAnimation(parent) {}
+	_Public def_init VITextAniBehavior(QObject* parent = Q_NULLPTR) :VIAnimationBehavior(parent) {}
 	_Signal void getText(QString);
 	_Private QString BEFORE = "";
 	_Private QString TEXT = "";
@@ -110,7 +106,7 @@ class VITextAniBehavior :public VIGuiAnimation
 	}
 };
 
-class VIOpacityAniBehavior :public VIGuiAnimation
+class VIOpacityAniBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	_Public float OPBegin;
@@ -118,7 +114,7 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 	_Public float OPDelta;
 	_Public VIMilliSecond JUMPTIME;
 	_Public QGraphicsOpacityEffect* OPEffect;
-	_Public def_init VIOpacityAniBehavior(QObject* parent = Q_NULLPTR):VIGuiAnimation(parent) {}
+	_Public def_init VIOpacityAniBehavior(QObject* parent = Q_NULLPTR):VIAnimationBehavior(parent) {}
 	_Public void setOpacity(float begin, float end, int ms) {
 		OPBegin = begin;
 		OPEnd = end;
@@ -140,7 +136,7 @@ class VIOpacityAniBehavior :public VIGuiAnimation
 	}
 };
 
-class VIResizeAniBehavior :public VIGuiAnimation
+class VIResizeAniBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	_Signal void getSize(QSize);
@@ -148,7 +144,7 @@ class VIResizeAniBehavior :public VIGuiAnimation
 	_Public QSize SizeEnd;
 	_Public QSize SizeDelta;
 	_Public VIMilliSecond JUMPTIME;
-	_Public def_init VIResizeAniBehavior(QObject* parent = Q_NULLPTR) :VIGuiAnimation(parent) {}
+	_Public def_init VIResizeAniBehavior(QObject* parent = Q_NULLPTR) :VIAnimationBehavior(parent) {}
 	_Public void setSize(QSize& SizeBegin, QSize& SizeEnd, VIMilliSecond duration) {
 		this->SizeBegin = SizeBegin;
 		this->SizeEnd = SizeEnd;

@@ -139,10 +139,10 @@ void VI2DFrameUnit::__init__() {
 	TextFont.setFamily("Microsoft YaHei");
 	TextFont.setPixelSize(20);
 	Item->setFont(TextFont);
-	DebugHost = new VIMainBehaviorHostDebug();
-	DebugHost->setHost(mBEHAVIOR);
-	DebugHost->active();
-	connect(DebugHost, &VIMainBehaviorHostDebug::getHostSpeed, [this](unsigned int s) {this->setText(QString::number(s)); });
+	//DebugHost = new VIAbstructBehaviorHostDebug();
+	//DebugHost->setHost(mBEHAVIOR);
+	//DebugHost->active();
+	//connect(DebugHost, &VIMainBehaviorHostDebug::getHostSpeed, [this](unsigned int s) {this->setText(QString::number(s)); });
 }
 /*
 * =====================================

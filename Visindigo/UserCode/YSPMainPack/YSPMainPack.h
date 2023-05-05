@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../../Visindigo/VICore/VIPackage.h"
 #include "../../VIUI/MRW/VisindigoRuntime.h"
 

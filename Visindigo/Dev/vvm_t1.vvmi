@@ -1,0 +1,20 @@
+#Visindigo Virtual Machine Instruction V1.0
+#This is a sample code for Visindigo Virtual Machine
+C_USE sys
+LOAD_CONST_STR c_str_1 "Hello, World!"
+
+C_CLASS USERMAIN
+C_PERMISSON PUBLIC
+C_DEFSTART
+
+C_FUNC main
+C_PERMISSON PUBLIC
+C_DEFSTART
+
+PUSH_CONST c_str_1
+CALL sys print
+
+C_DEFEND
+
+C_DEFEND
+

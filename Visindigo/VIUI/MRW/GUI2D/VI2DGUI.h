@@ -70,7 +70,7 @@ public slots:
 		}
 	}
 	void ifHostWait() {
-		VIGuiAnimation* Sender = dynamic_cast<VIGuiAnimation*>(this->sender());
+		VIAnimationBehavior* Sender = dynamic_cast<VIAnimationBehavior*>(this->sender());
 		if (Sender->ifWait()) {
 			VIJSHostWake;
 		}

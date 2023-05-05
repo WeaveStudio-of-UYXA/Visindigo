@@ -1,4 +1,8 @@
-﻿#include "VIGeneralBehavior.h"
+﻿/*
+* 此文件已经被宣布弃用
+* 不要使用此文件中的任何代码
+*/
+#include "VIGeneralBehavior.h"
 QMutex VIGeneralBehaviorHost::HOSTMUTEX;
 QMutex VIGeneralBehaviorHost::SLEEPMUTEX;
 QWaitCondition VIGeneralBehaviorHost::SLEEPWAIT;

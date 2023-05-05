@@ -59,12 +59,6 @@
     <QtMoc Include="Visindigo\VICore\VIFramework.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIGeneralBehavior.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIMainBehavior.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIProject.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -113,15 +107,6 @@
     <QtMoc Include="Visindigo\VIScene\TestBaseScene.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VIScripts\VISCompiler\VISCCompiler.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIScripts\VISCompiler\VISCContentAnalyzer.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIScripts\VISCompiler\VISCFileReader.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Visindigo\VISystem\VISystemBase.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -143,6 +128,9 @@
     <QtMoc Include="VIUI\VIPlayerWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Visindigo\VICore\macro\VIMarco.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h">
@@ -160,9 +148,6 @@
     <ClInclude Include="Visindigo\VICore\macro\VIGeneralBehavior_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\macro\VIMarco.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -176,9 +161,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VICore\VIMath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIMathTool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VICore\VIPackage.h">
@@ -199,12 +181,6 @@
     <ClInclude Include="Visindigo\VIJavaScript\VIJSGlobal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VIObjects\macro\VIGlassConvention.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Visindigo\VIObjects\VIImage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -223,6 +199,9 @@
     <ClInclude Include="Global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.cpp">
@@ -237,15 +216,6 @@
     <ClCompile Include="Visindigo\VICore\VIFramework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIGeneralBehavior.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIMainBehavior.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VICore\VIMath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Visindigo\VICore\VIVersion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -253,9 +223,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VIScripts\VISCompiler\VISCCompiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp">

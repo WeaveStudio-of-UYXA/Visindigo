@@ -3,9 +3,9 @@
 #include <QTest>
 #include <QtMultiMedia>
 #include "macro/VIMarco.h"
-#include "VIGeneralBehavior.h"
 #include "macro/VISoundService_m.h"
-class private_VIMusicFadeBehavior :public VIGeneralBehavior
+#include "VIAnimation.h"
+class private_VIMusicFadeBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	_Signal void getValue(int);
@@ -13,7 +13,7 @@ class private_VIMusicFadeBehavior :public VIGeneralBehavior
 	_Private int CurrentVolume = 0;
 	_Private bool IsFadeIn = false;
 	_Public VIMilliSecond JUMPTIME;
-	_Public def_init private_VIMusicFadeBehavior(QObject* parent = Q_NULLPTR) :VIGeneralBehavior(parent) {}
+	_Public def_init private_VIMusicFadeBehavior(QObject* parent = Q_NULLPTR) :VIAnimationBehavior(parent) {}
 	_Public void setMaxVolume(int volume) {
 		Volume = volume;
 	}
@@ -29,15 +29,15 @@ class private_VIMusicFadeBehavior :public VIGeneralBehavior
 		JUMPTIME += getLastTime();
 		if (JUMPTIME > 20) {
 			if (IsFadeIn) {
-				emit(getValue(this->getPercent(VIDuration::PercentType::Linear) * Volume));
+				emit(getValue(this->getPercent() * Volume));
 			}
 			else {
-				emit(getValue(Volume - this->getPercent(VIDuration::PercentType::Linear) * Volume));
+				emit(getValue(Volume - this->getPercent() * Volume));
 			}
 		}
 	}
 	_Protected void onSkip() {
-		this->setBehaviorState(VIGeneralBehavior::State::Done);
+		this->setBehaviorState(VIAbstractBehavior::State::Passive);
 	}
 	_Protected void onDone() {
 		if (IsFadeIn) {

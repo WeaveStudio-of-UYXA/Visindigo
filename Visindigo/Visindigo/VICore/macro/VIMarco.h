@@ -1,9 +1,10 @@
-#pragma once
+﻿#pragma once
 #include <QtCore>
 #include "VICompileMacro.h"
 
 //This file contains the core macro definitions of the CE library
 #define VI_NULLPTR Q_NULLPTR
+#define VI_OBJECT p_VI_OBJECT_CONTENT; Q_OBJECT
 
 #define _Public public:
 #define _Private private:
@@ -16,7 +17,9 @@
 #define InitAsZero = 0
 #define InitAsNone = {}
 
+#define VI_interface class
 #define ENUM enum class
+
 #define VI_Property(Type, name) public:Type name;void set##name(Type value){this->name = value;}Type get##name(){return name;}
 #define VI_PrivateProperty(Type, name) private:Type name;private: void set##name(Type value){this->name = value;}public:Type get##name(){return name;}
 #define VI_Flag(name) public:bool name;void set##name(bool value){this->name = value;}bool is##name(){return name;}

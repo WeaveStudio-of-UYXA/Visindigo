@@ -37,18 +37,18 @@ class VIRuntimeWindow :public QMainWindow
 	_Public VICentralWidget* CentralWidget;
 	_Public QThread* JSHostThread;
 	_Public VIJSHost* JSHost;
-	_Public VIGeneralBehaviorHostDebug* DebugBehavior;
-	_Public VIMainBehaviorHostDebug* MainDebugBehavior;
+	//_Public VIGeneralBehaviorHostDebug* DebugBehavior;
+	//_Public VIMainBehaviorHostDebug* MainDebugBehavior;
 	_Public def_init VIRuntimeWindow(QWidget* parent = Q_NULLPTR) : QMainWindow(parent) {
 		QPalette PAL;
 		PAL.setColor(QPalette::Background, Qt::black);
 		this->setPalette(PAL);
 		CentralWidget = new VICentralWidget(this);
-		DebugBehavior = new VIGeneralBehaviorHostDebug(this);
-		DebugBehavior->setHost(gBEHAVIOR);
+		//DebugBehavior = new VIGeneralBehaviorHostDebug(this);
+		//DebugBehavior->setHost(gBEHAVIOR);
 		
-		MainDebugBehavior = new VIMainBehaviorHostDebug(this);
-		MainDebugBehavior->setHost(mBEHAVIOR);
+		//MainDebugBehavior = new VIMainBehaviorHostDebug(this);
+		//MainDebugBehavior->setHost(mBEHAVIOR);
 		this->setCentralWidget(CentralWidget);
 		JSHost = new VIJSHost(CentralWidget->GUI2D);
 		JSHostThread = new QThread(this);
@@ -63,8 +63,8 @@ class VIRuntimeWindow :public QMainWindow
 		BIND(JSHost->VIGUI2D, SIGNAL(SshowFullScreen()), this, SLOT(showFullScreen()));
 		BIND(JSHost->VIGUI2D, SIGNAL(SenableGUIFrame()), this, SLOT(enableGUIFrame()));
 		
-		DebugBehavior->active();
-		MainDebugBehavior->active();
+		//DebugBehavior->active();
+		//MainDebugBehavior->active();
 		this->loadJS();
 	}
 	_Public void loadJS() {
@@ -95,11 +95,11 @@ class VIRuntimeWindow :public QMainWindow
 		qDebug() << output;
 	}
 	_Slot void enableGUIFrame() {
-		CentralWidget->DebugInfoLabel->show();
-		connect(MainDebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)), Qt::UniqueConnection);
+		//CentralWidget->DebugInfoLabel->show();
+		//connect(MainDebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)), Qt::UniqueConnection);
 	}
 	_Slot void disableGUIFrame() {
-		CentralWidget->DebugInfoLabel->hide();
-		disconnect(MainDebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)));
+		//CentralWidget->DebugInfoLabel->hide();
+		//disconnect(MainDebugBehavior, SIGNAL(getHostSpeed(unsigned int)), CentralWidget, SLOT(setFrame(unsigned int)));
 	}
 };

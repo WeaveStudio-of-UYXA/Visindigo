@@ -1,12 +1,11 @@
-#pragma once
-#include <QtCore>
-#include "macro/VIMarco.h"
-
+﻿#pragma once
+#include "VIObject.h"
+#include "macro/VIGeneralBehavior_m.h"
 class VIAbstractBehaviorHost;
 class VIBehaviorHost;
-class VIAbstractBehavior :public QObject
+class VIAbstractBehavior :public QObject, VIObject
 {
-	Q_OBJECT;
+	VI_OBJECT;
 	friend class VIAbstractBehaviorHost;
 	friend class VIBehaviorHost;
 	_Public ENUM State{

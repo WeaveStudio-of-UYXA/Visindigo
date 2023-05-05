@@ -53,7 +53,7 @@ public slots:
 	}
 	virtual void skipOrJumpAni() {}
 	void getDone() {
-		VIGuiAnimation* Sender = dynamic_cast<VIGuiAnimation*>(this->sender());
+		VIAnimationBehavior* Sender = dynamic_cast<VIAnimationBehavior*>(this->sender());
 		if (Sender->ifWait()) { VIJSHostWake; }
 	}
 	void setOpacityAni(float start, float end, int ms, bool wait) {

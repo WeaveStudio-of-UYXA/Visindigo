@@ -51,7 +51,7 @@ class VI2DTextUnit :public VI2DUnit
 
 class VI2DFrameUnit :public VI2DTextUnit
 {
-	_Private VIMainBehaviorHostDebug* DebugHost;
+	//_Private VIMainBehaviorHostDebug* DebugHost;
 	_Public def_init VI2DFrameUnit(QObject* parent);
 	_Public def_init VI2DFrameUnit(VI2DUnit* parent);
 	_Private void __init__();
