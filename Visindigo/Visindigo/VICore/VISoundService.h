@@ -49,14 +49,14 @@ class private_VIMusicFadeBehavior :public VIAnimationBehavior
 	}
 };
 class VISoundService; //QtCreator用于识别friend class
-
+/*
 class private_VIMediaPlayer :public QObject
 {
 	Q_OBJECT;
 	friend class VISoundService;
 	_Signal void playerIsIdle();
 	_Public QMediaPlayer* MediaPlayer;
-	_Public QMediaPlaylist* MediaPlayerList;
+	_Public QMediaPlayist* MediaPlayerList;
 	_Private private_VIMusicFadeBehavior* FadeBehavior;
 	_Private VIMilliSecond FadeInDuration = 0;
 	_Private VIMilliSecond FadeOutDuration = 0;
@@ -229,3 +229,4 @@ class VISoundService :public QObject
 		}
 	}
 };
+*/

@@ -68,9 +68,6 @@
     <QtMoc Include="Visindigo\VICore\VISoundService.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VITime.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIVersion.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -93,15 +90,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VIJavaScript\JsVIYSP.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIJavaScript\VIJSHost.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIModules\VIHitbox\VIHitbox.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VIScene\TestBaseScene.h">
@@ -128,7 +116,31 @@
     <QtMoc Include="VIUI\VIPlayerWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Visindigo\VIJavaScript\VIJSHost.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="Visindigo\VICore\macro\VIMarco.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\VIESTest\VIESTest.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIModules\VIES\VIECMAScripts.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIModules\VIES\VIECMAClass.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIObject.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VISystem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIModules\VIES\VIES_System.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIModules\VIES\VIES_Behavior.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -145,13 +157,13 @@
     <ClInclude Include="Visindigo\VICore\macro\VICompileMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\macro\VIGeneralBehavior_m.h">
+    <ClInclude Include="Visindigo\VICore\macro\VIAbstractBehavior_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\macro\VITime_m.h">
+    <ClInclude Include="Visindigo\VICore\macro\VIDuration_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h">
@@ -199,7 +211,7 @@
     <ClInclude Include="Global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIObject.h">
+    <ClInclude Include="Visindigo\VIModules\VIES\VIECMAModules.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -220,9 +232,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp">

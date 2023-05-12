@@ -3,8 +3,10 @@
 #include "VICompileMacro.h"
 
 //This file contains the core macro definitions of the CE library
+#define defAs :public
+
 #define VI_NULLPTR Q_NULLPTR
-#define VI_OBJECT p_VI_OBJECT_CONTENT; Q_OBJECT
+#define VI_OBJECT p_VI_OBJECT_CONTENT
 
 #define _Public public:
 #define _Private private:

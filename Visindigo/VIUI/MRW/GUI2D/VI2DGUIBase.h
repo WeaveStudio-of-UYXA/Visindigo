@@ -3,8 +3,6 @@
 #include<QtGui>
 #include<QtWidgets>
 #include "Visindigo/VICore/VIAnimation.h"
-#include "Visindigo/VICore/VIGeneralBehavior.h"
-#include "Visindigo/VICore/VIMainBehavior.h"
 #include "Visindigo/VICore/VIQtExtensionMethod.h"
 #include "Visindigo/VIJavaScript/VIJSGlobal.h"
 #define BIND_DONE(VIAniEvent) BIND(VIAniEvent, SIGNAL(done(bool)), this, SLOT(ifWait(bool)));

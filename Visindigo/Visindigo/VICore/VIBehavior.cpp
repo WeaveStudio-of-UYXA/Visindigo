@@ -1,10 +1,10 @@
-#include "VIBehavior.h"
-
+﻿#include "VIBehavior.h"
+#include "VIFramework.h"
 /*
 VIBasicBehavior
 */
 def_init VIBasicBehavior::VIBasicBehavior(QObject* parent) :VIAbstractBehavior(parent) {
-	this->setHost(VIBehaviorHost::HostInstance);
+	this->setHost(FrameBehaviorHost);
 }
 
 VIAbstractBehavior::State VIBasicBehavior::hostCall() {
@@ -58,14 +58,12 @@ VIMilliSecond VITimedBehavior::getTickDuration() {
 /*
 VIBehaviorHost
 */
-VIAbstractBehaviorHost* VIBehaviorHost::HostInstance = new VIBehaviorHost(qApp);
 def_init VIBehaviorHost::VIBehaviorHost(QObject* parent) :VIAbstractBehaviorHost(parent) {
-	HostInstance = this;
 	TickDuration = 10000000;//10ms
-	HostTime = new VITime();
+	HostDuration = new VIDuration();
 }
 void VIBehaviorHost::start() {
-	TickDuration = HostTime->getNanoDuration();
+	TickDuration = HostDuration->getNanoDuration();
 	qApp->postEvent(this, new QEvent(QEvent::None));
 }
 bool VIBehaviorHost::event(QEvent* event) {
@@ -75,7 +73,7 @@ bool VIBehaviorHost::event(QEvent* event) {
 void VIBehaviorHost::tickLoop() {
 	mergeEvent();
 	ergodicEvent();
-	TickDuration = HostTime->getNanoDuration();
+	TickDuration = HostDuration->getNanoDuration();
 	//qDebug() << TickDuration;
 	if (!STOPFLAG) {
 		qApp->postEvent(this, new QEvent(QEvent::None));

@@ -3,11 +3,13 @@
 #include "JsVIGUI2D.h"
 #include "JsVISystem.h"
 #include "../../VIUI/MRW/VIGUI2D.h"
+#include "../VICore/VIObject.h"
 #undef VIJSHostWait
 //这个VIJSHostWait啊，谁在VIJSHost会执行的代码里面调用我跟谁过不去。
-class VIJSHost : public QObject
+class VIJSHost : public VIObject 
 {
-	Q_OBJECT
+	Q_OBJECT;
+	VI_OBJECT;
 signals:
 	void initJSEngine(QJSEngine*);
 	void boot(QString);
@@ -27,19 +29,21 @@ public slots:
 		initEngine();
 		VIJSGlobal::VIJSMutex.lock();
 		int RTN = 0;
-		qDebug() << filename;
+		consoleLog(filename);
 		QFileInfo fileInfo(filename);
 		VIJSGlobal::Path = fileInfo.absolutePath();
-		qDebug() << VIJSGlobal::Path;
+		consoleLog(VIJSGlobal::Path);
 		QJSValue Main = Engine->importModule(filename);
 		QJSValue YSPModule = Engine->importModule(":/Visindigo/JsVIAPI/YSP.js");
 		Engine->globalObject().setProperty("SPOL", YSPModule);
 		Engine->installExtensions(QJSEngine::GarbageCollectionExtension);
 		QJSValue MainFuncation = Main.property("main");
 		QJSValue result = MainFuncation.call();
+		consoleLog(result.toString());
 		if (result.isError()) {
 			qDebug() << "Uncaught exception at line" << result.property("lineNumber").toNumber() << ":" << result.toString();
 			RTN = 1;
+
 		}
 		Engine->collectGarbage();
 		VIJSGlobal::VIJSMutex.unlock();

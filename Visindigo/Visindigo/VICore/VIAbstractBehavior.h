@@ -1,10 +1,11 @@
 ﻿#pragma once
 #include "VIObject.h"
-#include "macro/VIGeneralBehavior_m.h"
+#include "macro/VIAbstractBehavior_m.h"
 class VIAbstractBehaviorHost;
 class VIBehaviorHost;
-class VIAbstractBehavior :public QObject, VIObject
+class VIAbstractBehavior :public VIObject
 {
+	Q_OBJECT;
 	VI_OBJECT;
 	friend class VIAbstractBehaviorHost;
 	friend class VIBehaviorHost;
@@ -13,7 +14,7 @@ class VIAbstractBehavior :public QObject, VIObject
 		Active,
 		Passive,
 	};
-	_Public def_init VIAbstractBehavior(QObject* parent = Q_NULLPTR) :QObject(parent) { 
+	_Public def_init VIAbstractBehavior(VISuper* parent = Q_NULLPTR) :VIObject(parent) { 
 		Host = Q_NULLPTR; BehaviorState = State::Idle;
 	};
 	VI_Property(VIAbstractBehaviorHost*, Host);
@@ -26,15 +27,15 @@ class VIAbstractBehavior :public QObject, VIObject
 	_Public virtual void passive() PureVirtual;
 };
 
-class VIAbstractBehaviorHost :public QObject
+class VIAbstractBehaviorHost :public VIObject
 {
 	Q_OBJECT;
+	VI_OBJECT;
 	friend class VIAbstractBehavior;
-	_Public static VIAbstractBehaviorHost* HostInstance;
 	_Protected QVector<VIAbstractBehavior*> BehaviorList;
 	_Protected QVector<VIAbstractBehavior*> BehaviorListAdd;
 	_Protected bool STOPFLAG = false;
-	_Public def_init VIAbstractBehaviorHost(QObject* parent = Q_NULLPTR) :QObject(parent) {}
+	_Public def_init VIAbstractBehaviorHost(VISuper* parent = VI_NULLPTR) :VIObject(parent) {}
 	_Public virtual void start() PureVirtual;
 	_Private virtual void tickLoop() PureVirtual;
 	_Public virtual void stop() PureVirtual;

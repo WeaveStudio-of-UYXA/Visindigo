@@ -1,11 +1,11 @@
-#pragma once
+﻿#pragma once
 #include "VIAbstractBehavior.h"
 #include "VIDuration.h"
-#define BehaviorHost VIBehaviorHost::HostInstance
 class VIBehaviorHost;
 class VIBasicBehavior :public VIAbstractBehavior
 {
 	Q_OBJECT;
+	VI_OBJECT;
 	friend class VIBehaviorHost;
 	_Public def_init VIBasicBehavior(QObject* parent = nullptr);
 	_Public State hostCall();
@@ -30,7 +30,7 @@ class VIBehaviorHost :public VIAbstractBehaviorHost
 	Q_OBJECT;
 	friend class VIBasicBehavior;
 	friend class VITimedBehavior;
-	_Public VITime* HostTime;
+	_Public VIDuration* HostDuration;
 	VI_Property(VINanoSecond, TickDuration);
 	_Public def_init VIBehaviorHost(QObject* parent = nullptr);
 	_Public void start() override;

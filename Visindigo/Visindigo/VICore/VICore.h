@@ -1,5 +1,4 @@
-#include <QtCore>
-#include "VIMainBehavior.h"
+﻿#include <QtCore>
 #include "VIFramework.h"
 #include "VIMath.h"
 #include "VIPackage.h"

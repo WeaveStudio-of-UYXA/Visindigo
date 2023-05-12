@@ -5,7 +5,7 @@
 
 #define DEPLOY WINDOWS_DEPLOY
 
-//#define VI_USE_3D
+
 
 #define VI_WINDOW_SYS 1
 #define VI_NO_WINDOW 2

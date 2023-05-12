@@ -98,23 +98,30 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
+    <QtMoc Include="UserCode\VIESTest\VIESTest.h" />
     <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h" />
     <ClInclude Include="Visindigo\SPOL\SPOLFunc.h" />
     <ClInclude Include="Visindigo\VI2DView\macro\VI2DScene_m.h" />
     <ClInclude Include="Visindigo\VICore\macro\VICompileMacro.h" />
-    <ClInclude Include="Visindigo\VICore\macro\VIGeneralBehavior_m.h" />
+    <ClInclude Include="Visindigo\VICore\macro\VIAbstractBehavior_m.h" />
     <QtMoc Include="Visindigo\VICore\macro\VIMarco.h" />
     <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h" />
-    <ClInclude Include="Visindigo\VICore\macro\VITime_m.h" />
+    <ClInclude Include="Visindigo\VICore\macro\VIDuration_m.h" />
     <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h" />
     <ClInclude Include="Visindigo\VICore\VICore.h" />
     <ClInclude Include="Visindigo\VICore\VIMath.h" />
-    <ClInclude Include="Visindigo\VICore\VIObject.h" />
+    <QtMoc Include="Visindigo\VICore\VIObject.h" />
     <ClInclude Include="Visindigo\VICore\VIPackage.h" />
     <ClInclude Include="Visindigo\VICore\VIServiceThread.h" />
+    <QtMoc Include="Visindigo\VICore\VISystem.h" />
     <ClInclude Include="Visindigo\VICore\VIUnit.h" />
     <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h" />
     <ClInclude Include="Visindigo\VIJavaScript\VIJSGlobal.h" />
+    <QtMoc Include="Visindigo\VIModules\VIES\VIECMAScripts.h" />
+    <QtMoc Include="Visindigo\VIModules\VIES\VIECMAClass.h" />
+    <ClInclude Include="Visindigo\VIModules\VIES\VIECMAModules.h" />
+    <QtMoc Include="Visindigo\VIModules\VIES\VIES_System.h" />
+    <QtMoc Include="Visindigo\VIModules\VIES\VIES_Behavior.h" />
     <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h" />
     <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h" />
     <ClInclude Include="VIUI\MRW\MRWGlobal.h" />
@@ -128,8 +135,6 @@
     <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h" />
     <QtMoc Include="Visindigo\VISystem\VISystemBase.h" />
     <QtMoc Include="Visindigo\VIScene\TestBaseScene.h" />
-    <QtMoc Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.h" />
-    <QtMoc Include="Visindigo\VIModules\VIHitbox\VIHitbox.h" />
     <QtMoc Include="Visindigo\VIJavaScript\VIJSHost.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVIYSP.h" />
     <QtMoc Include="Visindigo\VIJavaScript\JsVISystem.h" />
@@ -140,7 +145,6 @@
     <QtMoc Include="Visindigo\VIJavaScript\HostExceptionUI.h" />
     <ClInclude Include="Visindigo\VIJavaScript\macro\VIJSGlobal_m.h" />
     <QtMoc Include="Visindigo\VICore\VIVersion.h" />
-    <QtMoc Include="Visindigo\VICore\VITime.h" />
     <QtMoc Include="Visindigo\VICore\VISoundService.h" />
     <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />
     <QtMoc Include="Visindigo\VICore\VIProject.h" />
@@ -162,7 +166,6 @@
     <ClCompile Include="Visindigo\VICore\VIFramework.cpp" />
     <ClCompile Include="Visindigo\VICore\VIVersion.cpp" />
     <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp" />
-    <ClCompile Include="Visindigo\VIModules\VIJSEngine\VIJSEngine.cpp" />
     <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp" />
     <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
   </ItemGroup>

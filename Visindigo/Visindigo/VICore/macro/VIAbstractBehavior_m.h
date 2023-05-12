@@ -3,7 +3,7 @@
 #include<QtWidgets>
 #include <chrono>
 #include "VIMarco.h"
-#include "VITime_m.h"
+#include "VIDuration_m.h"
 
 //#define gBEHAVIOR VIGeneralBehaviorHost::VIGeneralBehaviorHostInstance
 //#define mBEHAVIOR VIMainBehaviorHost::VIMainBehaviorHostInstance

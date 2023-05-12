@@ -8,6 +8,7 @@ class YSPMainPack :public VIPackage
 	_Public def_init YSPMainPack(QObject* parent = nullptr) {
 		doQRegisterMetaType();
 		VIRuntimeWindow* w = new VIRuntimeWindow();
+		consoleLog("YSPMainPack init");
 #if VI_WINDOW == VI_WINDOW_SYS
 		w->showFullScreen();
 #elif VI_WINDOW == VI_NO_WINDOW

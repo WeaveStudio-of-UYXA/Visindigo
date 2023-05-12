@@ -3,5 +3,6 @@
         <file>Resource/Visindigo.png</file>
         <file>Resource/QSS/YSPStyleSheet.css</file>
         <file>JsVIAPI/YSP.js</file>
+        <file>JsVIAPI/VIESObject.js</file>
     </qresource>
 </RCC>

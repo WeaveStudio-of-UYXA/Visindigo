@@ -69,7 +69,7 @@ class VIRuntimeWindow :public QMainWindow
 	}
 	_Public void loadJS() {
 #if DEPLOY == WINDOWS_DEPLOY
-		JSHost->boot("../../Visindigo/Dev/test.js");
+		JSHost->boot("../Visindigo/Dev/test.js");
 #elif DEPLOY == ANDROID_DEPLOY
 		JSHost->boot("/sdcard/Visindigo/repos/Dev/test.js");
 #endif
