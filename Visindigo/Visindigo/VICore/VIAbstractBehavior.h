@@ -3,12 +3,14 @@
 #include "macro/VIAbstractBehavior_m.h"
 class VIAbstractBehaviorHost;
 class VIBehaviorHost;
+class VIQuantifyTickBehaviorHost;
 class VIAbstractBehavior :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
 	friend class VIAbstractBehaviorHost;
 	friend class VIBehaviorHost;
+	friend class VIQuantifyTickBehaviorHost;
 	_Public ENUM State{
 		Idle,
 		Active,
@@ -24,7 +26,7 @@ class VIAbstractBehavior :public VIObject
 	_Public virtual void onPassive()  PureVirtual;
 	_Protected virtual State hostCall()  PureVirtual;
 	_Public virtual void active() PureVirtual;
-	_Public virtual void passive() PureVirtual;
+	_Public void passive();
 };
 
 class VIAbstractBehaviorHost :public VIObject
@@ -40,6 +42,6 @@ class VIAbstractBehaviorHost :public VIObject
 	_Private virtual void tickLoop() PureVirtual;
 	_Public virtual void stop() PureVirtual;
 	_Slot virtual void addBehavior(VIAbstractBehavior*) PureVirtual;
-	_Private virtual void mergeEvent() PureVirtual;
-	_Private virtual void ergodicEvent() PureVirtual;
+	_Private virtual void mergeBehavior() PureVirtual;
+	_Private virtual void ergodicBehavior() PureVirtual;
 };

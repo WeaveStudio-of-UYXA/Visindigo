@@ -26,11 +26,7 @@ void VIBasicBehavior::active() {
 		this->Host->addBehavior(this);
 	}
 }
-void VIBasicBehavior::passive(){
-	if (BehaviorState == State::Active) {
-		BehaviorState = State::Passive;
-	}
-}
+
 
 /*
 VITimedBehavior
@@ -49,8 +45,12 @@ VIAbstractBehavior::State VITimedBehavior::hostCall() {
 	return VIBasicBehavior::hostCall();
 }
 void VITimedBehavior::active() {
-	Duration->initDuration();
-	VIBasicBehavior::active();
+	if (BehaviorState == State::Idle) {
+		BehaviorState = State::Active;
+		Duration->initDuration();
+		onActive();
+		this->Host->addBehavior(this);
+	}
 }
 VIMilliSecond VITimedBehavior::getTickDuration() {
 	return (float)(dynamic_cast<VIBehaviorHost*>(getHost())->getTickDuration())/1000000.0;
@@ -71,8 +71,8 @@ bool VIBehaviorHost::event(QEvent* event) {
 	return true;
 }
 void VIBehaviorHost::tickLoop() {
-	mergeEvent();
-	ergodicEvent();
+	mergeBehavior();
+	ergodicBehavior();
 	TickDuration = HostDuration->getNanoDuration();
 	//qDebug() << TickDuration;
 	if (!STOPFLAG) {
@@ -85,13 +85,13 @@ void VIBehaviorHost::stop() {
 void VIBehaviorHost::addBehavior(VIAbstractBehavior* behavior) {
 	BehaviorListAdd.append(behavior);
 }
-void VIBehaviorHost::mergeEvent() {
+void VIBehaviorHost::mergeBehavior() {
 	if (!BehaviorListAdd.isEmpty()) {
 		BehaviorList.append(BehaviorListAdd);
 		BehaviorListAdd.clear();
 	}
 }
-void VIBehaviorHost::ergodicEvent() {
+void VIBehaviorHost::ergodicBehavior() {
 	for (auto i = BehaviorList.begin(); i != BehaviorList.end();) {
 		VIAbstractBehavior::State s = (*i)->hostCall();
 		if (s == VIAbstractBehavior::State::Idle) {
