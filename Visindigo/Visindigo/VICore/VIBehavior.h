@@ -53,7 +53,7 @@ class VIBehaviorHost :public VIAbstractBehaviorHost
 	_Public ENUM QuantifyTickType{
 		T20, T64
 	};
-	_Public VIDuration* HostDuration;
+	_Public VIDuration* HostDuration = nullptr;
 	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_64;
 	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_20;
 	_Public def_init VIBehaviorHost(QObject* parent = nullptr);

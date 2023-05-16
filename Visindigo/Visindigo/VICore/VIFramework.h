@@ -8,18 +8,21 @@
 class VIFramework;
 class private_VIFramework :public QObject
 {
+	Q_OBJECT;
 	friend class VIFramework;
 	_Public QList<VIPackage*> PackageList = {};
 	_Public int ReturnCode = 0;
 };
-class VIFramework :public QApplication
+class VIFramework :public QObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Private private_VIFramework* Data;
 	_Private static VIFramework* Instance;
 	_Private static VIBehaviorHost* BehaviorHost;
-	_Public def_init VIFramework(int& argc, char** argv) :QApplication(argc, argv) {
+	_Private QApplication* App;
+	_Public def_init VIFramework(int& argc, char** argv){
+		App = new QApplication(argc, argv);
 		Data = new private_VIFramework();
 		VIFramework::Instance = this;
 		BehaviorHost = new VIBehaviorHost(this);
@@ -35,8 +38,9 @@ Before loading your package, you must first create a new VIFramework instance.\n
 	_Public void start() {
 		//gBEHAVIOR->start(); 
 		//mBEHAVIOR->start();
+		
 		BehaviorHost->start();
-		Data->ReturnCode = this->exec();
+		Data->ReturnCode = App->exec();
 	};
 	_Public static VIFramework* getInstance() {
 		if (VIFramework::Instance == nullptr) {

@@ -6,7 +6,7 @@
 class VIAbstractBehaviorHost;
 class VIBehaviorHost;
 class VIQuantifyTickBehaviorHost;
-class VIAbstractBehavior :public VIObject
+class VIAbstractBehavior :public QObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -18,7 +18,7 @@ class VIAbstractBehavior :public VIObject
 		Active,
 		Passive,
 	};
-	_Public def_init VIAbstractBehavior(VISuper* parent = Q_NULLPTR) :VIObject(parent) {
+	_Public def_init VIAbstractBehavior(QObject* parent = Q_NULLPTR) :QObject(parent) {
 		Host = Q_NULLPTR; BehaviorState = State::Idle;
 	};
 	VI_Property(VIAbstractBehaviorHost*, Host);
@@ -31,7 +31,7 @@ class VIAbstractBehavior :public VIObject
 	_Public void passive();
 };
 
-class VIAbstractBehaviorHost :public VIObject
+class VIAbstractBehaviorHost :public QObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -40,11 +40,17 @@ class VIAbstractBehaviorHost :public VIObject
 	_Protected QVector<VIAbstractBehavior*> BehaviorListAdd;
 	_Protected bool STOPFLAG = false;
 	VI_Property(VINanoSecond, TickDuration);
-	_Public def_init VIAbstractBehaviorHost(VISuper* parent = VI_NULLPTR) :VIObject(parent) {}
+	_Public def_init VIAbstractBehaviorHost(QObject* parent = VI_NULLPTR) :QObject(parent) {}
 	_Public virtual void start() PureVirtual;
 	_Private virtual void tickLoop() PureVirtual;
 	_Public virtual void stop() PureVirtual;
 	_Slot virtual void addBehavior(VIAbstractBehavior*) PureVirtual;
 	_Private virtual void mergeBehavior() PureVirtual;
 	_Private virtual void ergodicBehavior() PureVirtual;
+};
+
+class VIBehaviorLoopEvent :public QEvent
+{
+	_Public static QEvent::Type BehaviorLoopEvent;
+	_Public def_init VIBehaviorLoopEvent() :QEvent(QEvent::Type(QEvent::User + 1)) {};
 };

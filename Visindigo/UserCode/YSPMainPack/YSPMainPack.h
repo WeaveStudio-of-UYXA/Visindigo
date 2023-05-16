@@ -5,8 +5,9 @@
 
 class YSPMainPack :public VIPackage
 {
+	Q_OBJECT;
 	QWidget* testWin;
-	_Public def_init YSPMainPack(VISuper* parent = VI_NULLPTR) :VIPackage(parent) {
+	_Public def_init YSPMainPack(QObject* parent = VI_NULLPTR) :VIPackage(parent) {
 		PackageName = "YSPMainPack";
 		testWin = new QWidget();
 		testWin->setWindowTitle("YSPMainPack");

@@ -63,6 +63,11 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Link>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -97,13 +102,13 @@
     <ClCompile Include="Visindigo\VICore\cpp\VIFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UserCode\YSPMainPack\YSPMainPack.h" />
+    <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h" />
     <ClInclude Include="Visindigo\VICore\private\VIAbstractBehavior_m.h" />
     <ClInclude Include="Visindigo\VICore\private\VICompileMacro.h" />
     <ClInclude Include="Visindigo\VICore\private\VIDuration_m.h" />
     <ClInclude Include="Visindigo\VICore\private\VIMacro.h" />
     <ClInclude Include="Visindigo\VICore\VICore.h" />
-    <ClInclude Include="Visindigo\VICore\VIPackage.h" />
+    <QtMoc Include="Visindigo\VICore\VIPackage.h" />
     <QtMoc Include="Visindigo\VICore\VIFramework.h" />
     <QtMoc Include="Visindigo\VICore\VIBehavior.h" />
     <QtMoc Include="Visindigo\VICore\VIDuration.h" />

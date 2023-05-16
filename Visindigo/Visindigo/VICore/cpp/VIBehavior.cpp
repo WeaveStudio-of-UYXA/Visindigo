@@ -129,17 +129,23 @@ VIBehaviorHost
 */
 def_init VIBehaviorHost::VIBehaviorHost(QObject* parent) :VIAbstractBehaviorHost(parent) {
 	consoleLog("VIBehaviorHost init");
+	qDebug() << this;
 	TickDuration = 10000000;//10ms
 	HostDuration = new VIDuration(this);
+	qDebug() << "HostDuration Inited";
+	qDebug() << HostDuration;
 	STOPFLAG = false;
 	QuantifyTickBehaviorHost_64 = new VIQuantifyTickBehaviorHost(this, 15625000, this);
 	QuantifyTickBehaviorHost_20 = new VIQuantifyTickBehaviorHost(this, 50000000, this);
 }
 void VIBehaviorHost::start() {
 	TickDuration = 10000000;
-	qApp->postEvent(this, new QEvent(QEvent::None));
+	qApp->postEvent(this, new QEvent(VIBehaviorLoopEvent::BehaviorLoopEvent));
 }
 bool VIBehaviorHost::event(QEvent* event) {
+	if (event->type() != VIBehaviorLoopEvent::BehaviorLoopEvent) {
+		return QObject::event(event);
+	}
 	tickLoop();
 	return true;
 }
@@ -152,7 +158,7 @@ void VIBehaviorHost::tickLoop() {
 	TickDuration = HostDuration->getNanoDuration();
 	//qDebug() << TickDuration;
 	if (!STOPFLAG) {
-		qApp->postEvent(this, new QEvent(QEvent::None));
+		qApp->postEvent(this, new QEvent(VIBehaviorLoopEvent::BehaviorLoopEvent));
 	}
 }
 void VIBehaviorHost::stop() {

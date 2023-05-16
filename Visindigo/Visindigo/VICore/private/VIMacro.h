@@ -5,7 +5,7 @@
 #define defAs :public
 
 #define VI_NULLPTR Q_NULLPTR
-#define VI_OBJECT p_VI_OBJECT_CONTENT
+
 
 #define _Public public:
 #define _Private private:

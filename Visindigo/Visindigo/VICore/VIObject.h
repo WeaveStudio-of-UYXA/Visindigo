@@ -2,15 +2,13 @@
 #include "private/VIMacro.h"
 
 /*
-* VIObject
+* QObject
 * 此类扩展QMetaObject提供的部分功能
 * 如果一个Visindigo类不是VIBasicBehavior的派生类
-* 则此类必须在派生QObject之后再派生VIObject
+* 则此类必须在派生QObject之后再派生QObject
 * 并且使用宏VI_OBJECT初始化
 */
-
-typedef QObject VISuper;
-typedef QObject VIObject;
+#define VI_OBJECT p_VI_OBJECT_CONTENT
 
 #define p_VI_OBJECT_CONTENT \
 _Slot const QString getClassName() {return metaObject()->className();} \

@@ -7,9 +7,10 @@
 class VIFramework;
 class VIPackage :public VIBasicBehavior
 {
+	Q_OBJECT;
 	_Public QString PackageName;
 	_Public VIFramework* Framework;
-	_Public def_init VIPackage(VISuper* parent = VI_NULLPTR) :VIBasicBehavior(parent) {};
+	_Public def_init VIPackage(QObject* parent = VI_NULLPTR) :VIBasicBehavior(parent) {};
 	_Public virtual void onActive() {};
 	_Public virtual void onPassive() {};
 	_Public virtual void onTick() {};
