@@ -1,9 +1,9 @@
-﻿#include "VIAbstractBehavior.h"
+﻿#include "../VIAbstractBehavior.h"
 
 /*
 VIAbstractBehavior
 */
-void VIAbstractBehavior::passive(){
+void VIAbstractBehavior::passive() {
 	if (BehaviorState == State::Active) {
 		BehaviorState = State::Passive;
 	}

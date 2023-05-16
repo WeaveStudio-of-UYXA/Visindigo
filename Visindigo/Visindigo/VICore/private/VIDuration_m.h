@@ -1,5 +1,5 @@
-#pragma once
-#include <QtCore>
+﻿#pragma once
+#include "VIMacro.h"
 #include <chrono>
 
 typedef double VISecond;

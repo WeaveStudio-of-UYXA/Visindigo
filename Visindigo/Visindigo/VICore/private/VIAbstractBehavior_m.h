@@ -1,9 +1,5 @@
 ﻿#pragma once
-#include<QtCore>
-#include<QtWidgets>
-#include <chrono>
-#include "VIMarco.h"
-#include "VIDuration_m.h"
+#include "VIMacro.h"
 
 //#define gBEHAVIOR VIGeneralBehaviorHost::VIGeneralBehaviorHostInstance
 //#define mBEHAVIOR VIMainBehaviorHost::VIMainBehaviorHostInstance

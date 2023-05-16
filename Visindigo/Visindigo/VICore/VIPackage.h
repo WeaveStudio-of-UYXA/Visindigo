@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QtCore>
-#include "macro/VIMarco.h"
+#include "VIObject.h"
 #include "VIBehavior.h"
 
 #define LOAD_PACKAGE(pack_name) VIFramework::getInstance()->loadPackage(new pack_name());
@@ -9,7 +9,7 @@ class VIPackage :public VIBasicBehavior
 {
 	_Public QString PackageName;
 	_Public VIFramework* Framework;
-	_Public def_init VIPackage(VISuper* parent = VI_NULLPTR):VIBasicBehavior(parent) {};
+	_Public def_init VIPackage(VISuper* parent = VI_NULLPTR) :VIBasicBehavior(parent) {};
 	_Public virtual void onActive() {};
 	_Public virtual void onPassive() {};
 	_Public virtual void onTick() {};

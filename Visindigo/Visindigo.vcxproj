@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FFB90353-0E58-4ACF-997F-0DF8B8D821EC}</ProjectGuid>
+    <ProjectGuid>{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
@@ -32,12 +32,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;gui;testlib;multimedia;widgets;qml;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;gui;testlib;multimedia;widgets;qml;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -88,89 +88,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtMoc Include="UserCode\TestScenePack\TestScenePack.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="UserCode\VISTestPack\VISTestPack.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Global.h" />
-    <QtMoc Include="UserCode\VIESTest\VIESTest.h" />
-    <ClInclude Include="Visindigo\SPOL\macro\SPOL_m.h" />
-    <ClInclude Include="Visindigo\SPOL\SPOLFunc.h" />
-    <ClInclude Include="Visindigo\VI2DView\macro\VI2DScene_m.h" />
-    <ClInclude Include="Visindigo\VICore\macro\VICompileMacro.h" />
-    <ClInclude Include="Visindigo\VICore\macro\VIAbstractBehavior_m.h" />
-    <QtMoc Include="Visindigo\VICore\macro\VIMarco.h" />
-    <ClInclude Include="Visindigo\VICore\macro\VISoundService_m.h" />
-    <ClInclude Include="Visindigo\VICore\macro\VIDuration_m.h" />
-    <ClInclude Include="Visindigo\VICore\macro\VIVersion_m.h" />
-    <ClInclude Include="Visindigo\VICore\VICore.h" />
-    <ClInclude Include="Visindigo\VICore\VIMath.h" />
-    <QtMoc Include="Visindigo\VICore\VIObject.h" />
-    <ClInclude Include="Visindigo\VICore\VIPackage.h" />
-    <ClInclude Include="Visindigo\VICore\VIServiceThread.h" />
-    <QtMoc Include="Visindigo\VICore\VISystem.h" />
-    <ClInclude Include="Visindigo\VICore\VIUnit.h" />
-    <ClInclude Include="Visindigo\VIJavaScript\JsVIBase.h" />
-    <ClInclude Include="Visindigo\VIJavaScript\VIJSGlobal.h" />
-    <QtMoc Include="Visindigo\VIModules\VIES\VIECMAScripts.h" />
-    <QtMoc Include="Visindigo\VIModules\VIES\VIECMAClass.h" />
-    <ClInclude Include="Visindigo\VIModules\VIES\VIECMAModules.h" />
-    <QtMoc Include="Visindigo\VIModules\VIES\VIES_System.h" />
-    <QtMoc Include="Visindigo\VIModules\VIES\VIES_Behavior.h" />
-    <ClInclude Include="Visindigo\VIWidgets\VIGUILabel\VIGUILabelBase.h" />
-    <ClInclude Include="VIUI\MRW\GUI2D\VIGUILabel.h" />
-    <ClInclude Include="VIUI\MRW\MRWGlobal.h" />
-    <ClInclude Include="VIUI\PW\VisindigoProject.h" />
-    <ClInclude Include="VIUI\RW\VisindigoRepos.h" />
-    <QtMoc Include="VIUI\VIPlayerWidget.h" />
-    <QtMoc Include="VIUI\MRW\VisindigoRuntime.h" />
-    <QtMoc Include="VIUI\MRW\VIGUI2D.h" />
-    <QtMoc Include="VIUI\MRW\Scene3D\VIScene3DBase.h" />
-    <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUIBase.h" />
-    <QtMoc Include="VIUI\MRW\GUI2D\VI2DGUI.h" />
-    <QtMoc Include="Visindigo\VISystem\VISystemBase.h" />
-    <QtMoc Include="Visindigo\VIScene\TestBaseScene.h" />
-    <QtMoc Include="Visindigo\VIJavaScript\VIJSHost.h" />
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIYSP.h" />
-    <QtMoc Include="Visindigo\VIJavaScript\JsVISystem.h" />
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2DBase.h" />
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIGUI2D.h" />
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIContainer.h" />
-    <QtMoc Include="Visindigo\VIJavaScript\JsVIChara.h" />
-    <QtMoc Include="Visindigo\VIJavaScript\HostExceptionUI.h" />
-    <ClInclude Include="Visindigo\VIJavaScript\macro\VIJSGlobal_m.h" />
-    <QtMoc Include="Visindigo\VICore\VIVersion.h" />
-    <QtMoc Include="Visindigo\VICore\VISoundService.h" />
-    <QtMoc Include="Visindigo\VICore\VIQtExtensionMethod.h" />
-    <QtMoc Include="Visindigo\VICore\VIProject.h" />
-    <QtMoc Include="Visindigo\VICore\VIFramework.h" />
-    <QtMoc Include="Visindigo\VICore\VIDuration.h" />
-    <QtMoc Include="Visindigo\VICore\VIBehavior.h" />
-    <QtMoc Include="Visindigo\VICore\VIAnimation.h" />
-    <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h" />
-    <QtMoc Include="Visindigo\VI2DView\VI2DView.h" />
-    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.h" />
-    <QtMoc Include="Visindigo\VI2DView\SceneUnit\VI2DSkeleton.h" />
-    <QtMoc Include="Visindigo\SPOL\oldVersion\SPOL9X.h" />
+    <QtRcc Include="Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Visindigo\VI2DView\SceneUnit\VI2DUnit.cpp" />
-    <ClCompile Include="Visindigo\VICore\VIAbstractBehavior.cpp" />
-    <ClCompile Include="Visindigo\VICore\VIBehavior.cpp" />
-    <ClCompile Include="Visindigo\VICore\VIFramework.cpp" />
-    <ClCompile Include="Visindigo\VICore\VIVersion.cpp" />
-    <ClCompile Include="Visindigo\VIJavaScript\VIJSGlobal.cpp" />
-    <ClCompile Include="Visindigo\VISystem\VISystemBase.cpp" />
-    <ClCompile Include="VIUI\MRW\MRWGlobal.cpp" />
+    <ClCompile Include="Visindigo\VICore\cpp\VIAbstractBehavior.cpp" />
+    <ClCompile Include="Visindigo\VICore\cpp\VIBehavior.cpp" />
+    <ClCompile Include="Visindigo\VICore\cpp\VIFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="Resource.qrc" />
+    <ClInclude Include="UserCode\YSPMainPack\YSPMainPack.h" />
+    <ClInclude Include="Visindigo\VICore\private\VIAbstractBehavior_m.h" />
+    <ClInclude Include="Visindigo\VICore\private\VICompileMacro.h" />
+    <ClInclude Include="Visindigo\VICore\private\VIDuration_m.h" />
+    <ClInclude Include="Visindigo\VICore\private\VIMacro.h" />
+    <ClInclude Include="Visindigo\VICore\VICore.h" />
+    <ClInclude Include="Visindigo\VICore\VIPackage.h" />
+    <QtMoc Include="Visindigo\VICore\VIFramework.h" />
+    <QtMoc Include="Visindigo\VICore\VIBehavior.h" />
+    <QtMoc Include="Visindigo\VICore\VIDuration.h" />
+    <ClInclude Include="Visindigo\VICore\VIObject.h" />
+    <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

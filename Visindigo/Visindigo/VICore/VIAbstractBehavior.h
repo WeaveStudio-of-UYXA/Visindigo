@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "VIObject.h"
-#include "macro/VIAbstractBehavior_m.h"
+#include "private/VIAbstractBehavior_m.h"
+#include "VIDuration.h"
+
 class VIAbstractBehaviorHost;
 class VIBehaviorHost;
 class VIQuantifyTickBehaviorHost;
@@ -16,7 +18,7 @@ class VIAbstractBehavior :public VIObject
 		Active,
 		Passive,
 	};
-	_Public def_init VIAbstractBehavior(VISuper* parent = Q_NULLPTR) :VIObject(parent) { 
+	_Public def_init VIAbstractBehavior(VISuper* parent = Q_NULLPTR) :VIObject(parent) {
 		Host = Q_NULLPTR; BehaviorState = State::Idle;
 	};
 	VI_Property(VIAbstractBehaviorHost*, Host);
@@ -37,6 +39,7 @@ class VIAbstractBehaviorHost :public VIObject
 	_Protected QVector<VIAbstractBehavior*> BehaviorList;
 	_Protected QVector<VIAbstractBehavior*> BehaviorListAdd;
 	_Protected bool STOPFLAG = false;
+	VI_Property(VINanoSecond, TickDuration);
 	_Public def_init VIAbstractBehaviorHost(VISuper* parent = VI_NULLPTR) :VIObject(parent) {}
 	_Public virtual void start() PureVirtual;
 	_Private virtual void tickLoop() PureVirtual;

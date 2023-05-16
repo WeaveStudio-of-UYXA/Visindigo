@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include <QtCore>
 #include <QtWidgets>
-#include "macro/VIMarco.h"
+#include "private/VIMacro.h"
 #include "VIPackage.h"
-#include "stdlib.h"
+
 #define FrameBehaviorHost VIFramework::getBehaviorHostInstance()
 class VIFramework;
 class private_VIFramework :public QObject
@@ -12,7 +12,7 @@ class private_VIFramework :public QObject
 	_Public QList<VIPackage*> PackageList = {};
 	_Public int ReturnCode = 0;
 };
-class VIFramework :public QApplication, VIBaseObject
+class VIFramework :public QApplication
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -24,33 +24,33 @@ class VIFramework :public QApplication, VIBaseObject
 		VIFramework::Instance = this;
 		BehaviorHost = new VIBehaviorHost(this);
 	};
-	_Public static VIBehaviorHost* getBehaviorHostInstance() { 
+	_Public static VIBehaviorHost* getBehaviorHostInstance() {
 		if (BehaviorHost == nullptr) {
 			qDebug().noquote() << "Visindigo requires a VIFramework instance to initialize various program components. \
 Before loading your package, you must first create a new VIFramework instance.\nThe program will exit.\n";
 			std::exit(-1);
 		}
-		return BehaviorHost; 
+		return BehaviorHost;
 	};
-	_Public void start() { 
+	_Public void start() {
 		//gBEHAVIOR->start(); 
 		//mBEHAVIOR->start();
 		BehaviorHost->start();
-		Data->ReturnCode = this->exec(); 
+		Data->ReturnCode = this->exec();
 	};
-	_Public static VIFramework* getInstance() { 
+	_Public static VIFramework* getInstance() {
 		if (VIFramework::Instance == nullptr) {
-			qDebug().noquote()<<"Visindigo requires a VIFramework instance to initialize various program components. \
+			qDebug().noquote() << "Visindigo requires a VIFramework instance to initialize various program components. \
 Before loading your package, you must first create a new VIFramework instance.\nThe program will exit.\n";
 			std::exit(-1);
 		}
-		return VIFramework::Instance; 
+		return VIFramework::Instance;
 	};
 	_Public int getReturnCode() { return Data->ReturnCode; };
-	_Public bool loadPackage(VIPackage* package) { 
+	_Public bool loadPackage(VIPackage* package) {
 		package->Framework = this;
-		Data->PackageList.append(package); 
+		Data->PackageList.append(package);
 		package->active();
-		return true; 
+		return true;
 	};
 };

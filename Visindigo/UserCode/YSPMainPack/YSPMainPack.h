@@ -1,24 +1,27 @@
 ﻿#pragma once
-#include "../../Visindigo/VICore/VIPackage.h"
-#include "../../VIUI/MRW/VisindigoRuntime.h"
+#include <QtCore>
+#include <QtWidgets>
+#include "../../Visindigo/VICore/VICore.h"
 
 class YSPMainPack :public VIPackage
 {
-	Q_OBJECT;
-	_Public def_init YSPMainPack(QObject* parent = nullptr) {
-		doQRegisterMetaType();
-		VIRuntimeWindow* w = new VIRuntimeWindow();
-		consoleLog("YSPMainPack init");
-#if VI_WINDOW == VI_WINDOW_SYS
-		w->showFullScreen();
-#elif VI_WINDOW == VI_NO_WINDOW
-		w->show();
-#endif
+	QWidget* testWin;
+	_Public def_init YSPMainPack(VISuper* parent = VI_NULLPTR) :VIPackage(parent) {
+		PackageName = "YSPMainPack";
+		testWin = new QWidget();
+		testWin->setWindowTitle("YSPMainPack");
+		testWin->show();
 	};
-	_Private void doQRegisterMetaType() {
-		qRegisterMetaType<VIMath::VI2DMatrix>("VIMath::VI2DMatrix");
-		qRegisterMetaType<VIMath::VIVector2>("VIMath::VIVector2");
-		qRegisterMetaType<VIMath::VIMatrix>("VIMath::VIMatrix");
-		qRegisterMetaType<QList<QList<int>>>("QList<QList<int>>");
+	_Public virtual void onActive() {
+		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is active!");
+	};
+	_Public virtual void onPassive() {
+		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is passive!");
+	};
+	_Public virtual void onTick() {
+		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is ticking!");
+	};
+	_Public virtual void onEvent(QEvent* e) {
+		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is eventing!");
 	};
 };

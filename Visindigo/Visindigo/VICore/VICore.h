@@ -1,7 +1,7 @@
-﻿#include <QtCore>
+﻿#pragma once
+#include "VIAbstractBehavior.h"
+#include "VIBehavior.h"
+#include "VIDuration.h"
 #include "VIFramework.h"
-#include "VIMath.h"
+#include "VIObject.h"
 #include "VIPackage.h"
-#include "VIQtExtensionMethod.h"
-#include "VIVersion.h"
-#include "VISoundService.h"

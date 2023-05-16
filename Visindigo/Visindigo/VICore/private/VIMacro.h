@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <QtCore>
-#include "VICompileMacro.h"
 
 //This file contains the core macro definitions of the CE library
 #define defAs :public
