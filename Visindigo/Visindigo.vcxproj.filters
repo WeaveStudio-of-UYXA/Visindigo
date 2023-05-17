@@ -57,13 +57,16 @@
     <ClInclude Include="Visindigo\VICore\VIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIPackage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UserCode\YSPMainPack\YSPMainPack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Visindigo\VICore\VICore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VI2DScene\private\VI2DScene_m.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VI2DScene\VI2DUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIMultiPlatform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -78,6 +81,15 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIFramework.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VI2DScene\VI2DSceneWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIPackage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

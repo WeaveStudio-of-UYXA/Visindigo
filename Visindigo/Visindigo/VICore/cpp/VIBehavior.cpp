@@ -19,14 +19,13 @@ VIAbstractBehavior::State VIBasicBehavior::hostCall() {
 	}
 	return BehaviorState;
 }
-void VIBasicBehavior::active() {
+void VIBasicBehavior::active(VIAbstractBehavior::QuantifyTickType type) {
 	if (BehaviorState == State::Idle) {
 		BehaviorState = State::Active;
 		onActive();
-		this->Host->addBehavior(this);
+		this->Host->addBehavior(this, type);
 	}
 }
-
 
 /*
 VITimedBehavior
@@ -44,12 +43,12 @@ VIAbstractBehavior::State VITimedBehavior::hostCall() {
 	if (Duration->isTimeout()) { BehaviorState = State::Passive; }
 	return VIBasicBehavior::hostCall();
 }
-void VITimedBehavior::active() {
+void VITimedBehavior::active(VIAbstractBehavior::QuantifyTickType type) {
 	if (BehaviorState == State::Idle) {
 		BehaviorState = State::Active;
 		Duration->initDuration();
 		onActive();
-		this->Host->addBehavior(this);
+		this->Host->addBehavior(this, type);
 	}
 }
 VIMilliSecond VITimedBehavior::getTickDuration() {
@@ -59,8 +58,9 @@ VIMilliSecond VITimedBehavior::getTickDuration() {
 VIQuantifyTickBehaviorHost
 */
 def_init VIQuantifyTickBehaviorHost::VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent) :VIAbstractBehaviorHost(parent) {
-	DurationLimit = durationLimit;
-	TickDuration = durationLimit;
+	DurationLimit = durationLimit - 1000;
+	DurationLimitNow = DurationLimit;
+	TickDuration = DurationLimit;
 	CurrentIndexLeft = 0;
 	CurrentIndexRight = 0;
 	NSPT = 0;
@@ -79,7 +79,7 @@ void VIQuantifyTickBehaviorHost::tickLoop() {
 	bool LoopFinish = false;
 	VINanoSecond t = Host->getTickDuration();
 	DurationNow += t;
-	CurrentIndexRight = BehaviorList.size() * (DurationNow / DurationLimit);
+	CurrentIndexRight = BehaviorList.size() * (DurationNow / DurationLimitNow);
 	if (CurrentIndexRight >= BehaviorList.size()) {
 		CurrentIndexRight = BehaviorList.size();
 		LoopFinish = true;
@@ -92,6 +92,13 @@ void VIQuantifyTickBehaviorHost::tickLoop() {
 		CurrentIndexLeft = 0;
 		CurrentIndexRight = 0;
 		TickDuration = DurationNow;
+		if (TickDuration > DurationLimit) {
+			DurationLimitNow = 2 * DurationLimit - TickDuration;
+			if (DurationLimitNow < 0) { DurationLimitNow = DurationLimit; }
+		}
+		else {
+			DurationLimitNow = DurationLimit;
+		}
 		DurationNow = 0;
 		NSPT = NSPTNow;
 		NSPTNow = 0;
@@ -121,7 +128,7 @@ void VIQuantifyTickBehaviorHost::ergodicBehavior() {
 		BehaviorList[i]->hostCall();
 	}
 }
-void VIQuantifyTickBehaviorHost::addBehavior(VIAbstractBehavior* behavior) {
+void VIQuantifyTickBehaviorHost::addBehavior(VIAbstractBehavior* behavior, VIAbstractBehavior::QuantifyTickType type) {
 	BehaviorListAdd.append(behavior);
 }
 /*
@@ -135,6 +142,7 @@ def_init VIBehaviorHost::VIBehaviorHost(QObject* parent) :VIAbstractBehaviorHost
 	qDebug() << "HostDuration Inited";
 	qDebug() << HostDuration;
 	STOPFLAG = false;
+	QuantifyTickBehaviorHost_128 = new VIQuantifyTickBehaviorHost(this, 7812500, this);
 	QuantifyTickBehaviorHost_64 = new VIQuantifyTickBehaviorHost(this, 15625000, this);
 	QuantifyTickBehaviorHost_20 = new VIQuantifyTickBehaviorHost(this, 50000000, this);
 }
@@ -150,8 +158,9 @@ bool VIBehaviorHost::event(QEvent* event) {
 	return true;
 }
 void VIBehaviorHost::tickLoop() {
-	consoleLog("VIBehaviorHost tickLoop");
+	//consoleLog("VIBehaviorHost tickLoop");
 	mergeBehavior();
+	QuantifyTickBehaviorHost_128->tickLoop();
 	QuantifyTickBehaviorHost_20->tickLoop();
 	QuantifyTickBehaviorHost_64->tickLoop();
 	ergodicBehavior();
@@ -164,20 +173,24 @@ void VIBehaviorHost::tickLoop() {
 void VIBehaviorHost::stop() {
 	STOPFLAG = true;
 }
-void VIBehaviorHost::addBehavior(VIAbstractBehavior* behavior) {
-	BehaviorListAdd.append(behavior);
-}
-void VIBehaviorHost::addQuantifyTickBehavior(VIAbstractBehavior* behavior, QuantifyTickType type) {
+void VIBehaviorHost::addBehavior(VIAbstractBehavior* behavior, VIAbstractBehavior::QuantifyTickType type) {
 	switch (type)
 	{
-	case VIBehaviorHost::QuantifyTickType::T20:
-		QuantifyTickBehaviorHost_20->addBehavior(behavior);
+	case VIAbstractBehavior::QuantifyTickType::T0:
+		BehaviorListAdd.append(behavior);
 		break;
-	case VIBehaviorHost::QuantifyTickType::T64:
-		QuantifyTickBehaviorHost_64->addBehavior(behavior);
+	case VIAbstractBehavior::QuantifyTickType::T20:
+		QuantifyTickBehaviorHost_20->addBehavior(behavior, type);
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T64:
+		QuantifyTickBehaviorHost_64->addBehavior(behavior, type);
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T128:
+		QuantifyTickBehaviorHost_128->addBehavior(behavior, type);
 		break;
 	}
 }
+
 void VIBehaviorHost::mergeBehavior() {
 	if (!BehaviorListAdd.isEmpty()) {
 		BehaviorList.append(BehaviorListAdd);
@@ -192,4 +205,32 @@ void VIBehaviorHost::ergodicBehavior() {
 		}
 		else { i++; }
 	}
+}
+
+/*
+VIDebugBehavior
+*/
+def_init VIDebugBehavior::VIDebugBehavior(QObject* parent) :VIBasicBehavior(parent) {
+	MSPT = 0;
+	TMSPT = 0;
+	Index = 0;
+	consoleLog("VIDebugBehavior init");
+}
+void VIDebugBehavior::onActive() {
+	consoleLog("VIDebugBehavior onActive");
+}
+void VIDebugBehavior::onPassive() {
+	consoleLog("VIDebugBehavior onPassive");
+}
+void VIDebugBehavior::onTick() {
+	MSPT += Host->getTickDuration() / 1000000.0;
+	TMSPT += ((VIQuantifyTickBehaviorHost*)Host)->getNSPT() / 1000000.0;
+	Index++;
+	if (Index == 10) {
+		qDebug() << "MSPT: " << MSPT / 10.0 << "\tTrue MSPT" << TMSPT / 10.0 << "\tTPS: " << 10000.0 / MSPT << "\tP: " << 100 * TMSPT / MSPT << "%";
+		Index = 0;
+		MSPT = 0;
+		TMSPT = 0;
+	}
+	//qDebug() << Host->getTickDuration()<<((VIQuantifyTickBehaviorHost*)Host)->getNSPT()/1000000.0<<1000000000.0/Host->getTickDuration();
 }

@@ -6,7 +6,6 @@
 
 #define VI_NULLPTR Q_NULLPTR
 
-
 #define _Public public:
 #define _Private private:
 #define _Protected protected:
@@ -38,9 +37,7 @@
 #define True true
 #define False false
 
-
-
-//We provide macros that are supported by Visual Studio(strictly speaking,by WindowsAPI) by default, 
+//We provide macros that are supported by Visual Studio(strictly speaking,by WindowsAPI) by default,
 // but are not actually part of standard C++.
 //When the code leaves the environment, we don't want these macros to report errors.
 

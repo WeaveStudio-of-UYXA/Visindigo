@@ -21,7 +21,7 @@ class VIFramework :public QObject
 	_Private static VIFramework* Instance;
 	_Private static VIBehaviorHost* BehaviorHost;
 	_Private QApplication* App;
-	_Public def_init VIFramework(int& argc, char** argv){
+	_Public def_init VIFramework(int& argc, char** argv) {
 		App = new QApplication(argc, argv);
 		Data = new private_VIFramework();
 		VIFramework::Instance = this;
@@ -36,9 +36,9 @@ Before loading your package, you must first create a new VIFramework instance.\n
 		return BehaviorHost;
 	};
 	_Public void start() {
-		//gBEHAVIOR->start(); 
+		//gBEHAVIOR->start();
 		//mBEHAVIOR->start();
-		
+
 		BehaviorHost->start();
 		Data->ReturnCode = App->exec();
 	};

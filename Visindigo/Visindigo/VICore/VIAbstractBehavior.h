@@ -18,6 +18,9 @@ class VIAbstractBehavior :public QObject
 		Active,
 		Passive,
 	};
+	_Public ENUM QuantifyTickType{
+		T0, T20, T64, T128,
+	};
 	_Public def_init VIAbstractBehavior(QObject* parent = Q_NULLPTR) :QObject(parent) {
 		Host = Q_NULLPTR; BehaviorState = State::Idle;
 	};
@@ -27,7 +30,7 @@ class VIAbstractBehavior :public QObject
 	_Public virtual void onTick()  PureVirtual;
 	_Public virtual void onPassive()  PureVirtual;
 	_Protected virtual State hostCall()  PureVirtual;
-	_Public virtual void active() PureVirtual;
+	_Public virtual void active(QuantifyTickType type = QuantifyTickType::T0) PureVirtual;
 	_Public void passive();
 };
 
@@ -44,7 +47,7 @@ class VIAbstractBehaviorHost :public QObject
 	_Public virtual void start() PureVirtual;
 	_Private virtual void tickLoop() PureVirtual;
 	_Public virtual void stop() PureVirtual;
-	_Slot virtual void addBehavior(VIAbstractBehavior*) PureVirtual;
+	_Slot virtual void addBehavior(VIAbstractBehavior*, VIAbstractBehavior::QuantifyTickType) PureVirtual;
 	_Private virtual void mergeBehavior() PureVirtual;
 	_Private virtual void ergodicBehavior() PureVirtual;
 };

@@ -103,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h" />
+    <ClInclude Include="Visindigo\VI2DScene\private\VI2DScene_m.h" />
+    <QtMoc Include="Visindigo\VI2DScene\VI2DSceneWidget.h" />
+    <ClInclude Include="Visindigo\VI2DScene\VI2DUnit.h" />
     <ClInclude Include="Visindigo\VICore\private\VIAbstractBehavior_m.h" />
     <ClInclude Include="Visindigo\VICore\private\VICompileMacro.h" />
     <ClInclude Include="Visindigo\VICore\private\VIDuration_m.h" />
@@ -112,6 +115,7 @@
     <QtMoc Include="Visindigo\VICore\VIFramework.h" />
     <QtMoc Include="Visindigo\VICore\VIBehavior.h" />
     <QtMoc Include="Visindigo\VICore\VIDuration.h" />
+    <ClInclude Include="Visindigo\VICore\VIMultiPlatform.h" />
     <ClInclude Include="Visindigo\VICore\VIObject.h" />
     <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h" />
   </ItemGroup>

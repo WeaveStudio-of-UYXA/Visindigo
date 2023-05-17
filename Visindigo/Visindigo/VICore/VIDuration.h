@@ -23,9 +23,9 @@ class VIBehaviorDuration :public QObject
 	VI_PrivateProperty(VINanoSecond, Elapse);
 	VI_PrivateProperty(float, Percent);
 	VI_PrivateFlag(Timeout);
-	_Public def_init VIBehaviorDuration(QObject* parent = Q_NULLPTR) : QObject(parent) { 
+	_Public def_init VIBehaviorDuration(QObject* parent = Q_NULLPTR) : QObject(parent) {
 		consoleLog("VIBehaviorDuration init");
-		Duration = 1; 
+		Duration = 1;
 	}
 	_Public void initDuration() {
 		Timeout = false;
@@ -49,9 +49,9 @@ class VIDuration :public QObject
 	VI_OBJECT;
 	_Public VITimePoint Last;
 	_Private bool isInit = true;
-	_Public def_init VIDuration(QObject* parent = VI_NULLPTR) :QObject(parent) { 
+	_Public def_init VIDuration(QObject* parent = VI_NULLPTR) :QObject(parent) {
 		consoleLog("VIDuration init");
-		Last = STD_clock_now(); 
+		Last = STD_clock_now();
 	};
 	_Public static VITimePoint getTimePointNow() { return STD_clock_now(); };
 	_Public static VINanoSecond getNanoSecondNow() { return STD_clock_now().time_since_epoch().count(); };

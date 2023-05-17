@@ -9,7 +9,7 @@ class VIBasicBehavior :public VIAbstractBehavior
 	friend class VIBehaviorHost;
 	_Public def_init VIBasicBehavior(QObject* parent = nullptr);
 	_Public State hostCall();
-	_Public void active() override;
+	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
 };
 
 class VITimedBehavior :public VIBasicBehavior
@@ -20,7 +20,7 @@ class VITimedBehavior :public VIBasicBehavior
 	_Public def_init VITimedBehavior(QObject* parent = nullptr);
 	_Public void setDuration(VIMilliSecond duration);
 	_Public State hostCall();
-	_Public void active() override;
+	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
 	_Public VIMilliSecond getTickDuration();
 };
 
@@ -34,6 +34,7 @@ class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
 	VI_Property(VINanoSecond, NSPT);
 	VI_PrivateProperty(VINanoSecond, NSPTNow);
 	VI_PrivateProperty(VINanoSecond, DurationLimit);
+	VI_PrivateProperty(VINanoSecond, DurationLimitNow);
 	VI_PrivateProperty(unsigned long long, CurrentIndexLeft);
 	VI_PrivateProperty(unsigned long long, CurrentIndexRight);
 	_Public def_init VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent = nullptr);
@@ -42,7 +43,7 @@ class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
 	_Private void ergodicBehavior() override;
 	_Public void start() override;
 	_Public void stop() override;
-	_Slot void addBehavior(VIAbstractBehavior*) override;
+	_Slot void addBehavior(VIAbstractBehavior*, VIAbstractBehavior::QuantifyTickType) override;
 };
 
 class VIBehaviorHost :public VIAbstractBehaviorHost
@@ -50,10 +51,9 @@ class VIBehaviorHost :public VIAbstractBehaviorHost
 	Q_OBJECT;
 	friend class VIBasicBehavior;
 	friend class VITimedBehavior;
-	_Public ENUM QuantifyTickType{
-		T20, T64
-	};
+
 	_Public VIDuration* HostDuration = nullptr;
+	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_128;
 	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_64;
 	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_20;
 	_Public def_init VIBehaviorHost(QObject* parent = nullptr);
@@ -61,8 +61,20 @@ class VIBehaviorHost :public VIAbstractBehaviorHost
 	_Public bool event(QEvent* event) override;
 	_Private void tickLoop() override;
 	_Public void stop() override;
-	_Slot void addBehavior(VIAbstractBehavior*) override;
-	_Slot void addQuantifyTickBehavior(VIAbstractBehavior*, QuantifyTickType);
+	_Slot void addBehavior(VIAbstractBehavior*, VIAbstractBehavior::QuantifyTickType) override;
 	_Private void mergeBehavior() override;
 	_Private void ergodicBehavior() override;
+};
+
+class VIDebugBehavior :public VIBasicBehavior
+{
+	Q_OBJECT;
+	VI_OBJECT;
+	VI_Property(float, MSPT);
+	VI_Property(float, TMSPT);
+	VI_Property(int, Index);
+	_Public def_init VIDebugBehavior(QObject* parent = nullptr);
+	_Public void onActive() override;
+	_Public void onTick() override;
+	_Public void onPassive() override;
 };
