@@ -1,7 +1,7 @@
 ﻿#pragma once
-#include "macro/VIDuration_m.h"
-#include "macro/VIMarco.h"
-#include "VIMath.h"
+#include "private/VIDuration_m.h"
+#include "private/VIMacro.h"
+#include "VIObject.h"
 /*
 统一术语：
 Duration: 持续时间
@@ -10,9 +10,10 @@ Remain: 剩余时间
 VIBehaviorDuration使用纳秒管理时间
 */
 
-class VIBehaviorDuration :public QObject
+class VIBehaviorDuration :public VIObject
 {
 	Q_OBJECT;
+	VI_OBJECT;
 	_Public ENUM PercentType{
 		Linear,
 		Nonlinear,
@@ -22,7 +23,10 @@ class VIBehaviorDuration :public QObject
 	VI_PrivateProperty(VINanoSecond, Elapse);
 	VI_PrivateProperty(float, Percent);
 	VI_PrivateFlag(Timeout);
-	_Public def_init VIBehaviorDuration(QObject* parent = Q_NULLPTR) : QObject(parent) { Duration = 1; }
+	_Public def_init VIBehaviorDuration(VISuper* parent = Q_NULLPTR) : VIObject(parent) {
+		consoleLog("VIBehaviorDuration init");
+		Duration = 1;
+	}
 	_Public void initDuration() {
 		Timeout = false;
 		Elapse = 0;
@@ -39,12 +43,17 @@ class VIBehaviorDuration :public QObject
 	}
 };
 
-class VIDuration :public QObject
+class VIDuration :public VIObject
 {
 	Q_OBJECT;
+	VI_OBJECT;
 	_Public VITimePoint Last;
 	_Private bool isInit = true;
-	_Public def_init VIDuration() { Last = STD_clock_now(); };
+	_Public def_init VIDuration(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
+		setObjectName("VIBehaviorHostDuration");
+		Last = STD_clock_now();
+		consoleLog("Initialized");
+	};
 	_Public static VITimePoint getTimePointNow() { return STD_clock_now(); };
 	_Public static VINanoSecond getNanoSecondNow() { return STD_clock_now().time_since_epoch().count(); };
 	_Public static VIMilliSecond getMilliSecondNow() { return STD_clock_now().time_since_epoch().count() / 1000000.0; };
