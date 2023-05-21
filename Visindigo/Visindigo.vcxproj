@@ -62,11 +62,17 @@
     <Link>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <PreBuildEvent>
+      <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <PreBuildEvent>
+      <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -109,6 +115,7 @@
     <QtMoc Include="Visindigo\VI2DScene\VI2DSceneWidget.h" />
     <ClInclude Include="Visindigo\VI2DScene\VI2DUnit.h" />
     <ClInclude Include="Visindigo\VICore\private\VIAbstractBehavior_m.h" />
+    <ClInclude Include="Visindigo\VICore\private\VIAutoVersion.h" />
     <ClInclude Include="Visindigo\VICore\private\VICompileMacro.h" />
     <ClInclude Include="Visindigo\VICore\private\VIDuration_m.h" />
     <ClInclude Include="Visindigo\VICore\private\VIMacro.h" />
