@@ -6,7 +6,7 @@
 class VIAbstractBehaviorHost;
 class VIBehaviorHost;
 class VIQuantifyTickBehaviorHost;
-class VIAbstractBehavior :public QObject
+class VIAbstractBehavior :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -21,7 +21,7 @@ class VIAbstractBehavior :public QObject
 	_Public ENUM QuantifyTickType{
 		T0, T20, T64, T128,
 	};
-	_Public def_init VIAbstractBehavior(QObject* parent = Q_NULLPTR) :QObject(parent) {
+	_Public def_init VIAbstractBehavior(VISuper* parent = Q_NULLPTR) :VIObject(parent) {
 		Host = Q_NULLPTR; BehaviorState = State::Idle;
 	};
 	VI_Property(VIAbstractBehaviorHost*, Host);
@@ -34,7 +34,7 @@ class VIAbstractBehavior :public QObject
 	_Public void passive();
 };
 
-class VIAbstractBehaviorHost :public QObject
+class VIAbstractBehaviorHost :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -43,7 +43,7 @@ class VIAbstractBehaviorHost :public QObject
 	_Protected QVector<VIAbstractBehavior*> BehaviorListAdd;
 	_Protected bool STOPFLAG = false;
 	VI_Property(VINanoSecond, TickDuration);
-	_Public def_init VIAbstractBehaviorHost(QObject* parent = VI_NULLPTR) :QObject(parent) {}
+	_Public def_init VIAbstractBehaviorHost(VISuper* parent = VI_NULLPTR) :VIObject(parent) {}
 	_Public virtual void start() PureVirtual;
 	_Private virtual void tickLoop() PureVirtual;
 	_Public virtual void stop() PureVirtual;

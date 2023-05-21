@@ -1,5 +1,6 @@
 ﻿#include "../VIBehavior.h"
 #include "../VIFramework.h"
+#include "../VIConsole.h"
 /*
 VIBasicBehavior
 */
@@ -58,7 +59,8 @@ VIMilliSecond VITimedBehavior::getTickDuration() {
 VIQuantifyTickBehaviorHost
 */
 def_init VIQuantifyTickBehaviorHost::VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent) :VIAbstractBehaviorHost(parent) {
-	DurationLimit = durationLimit - 1000;
+	this->setObjectName("QTickBehaviorHost_" + QString::number((int)1000000000.0 / durationLimit));
+	DurationLimit = durationLimit - 50000;
 	DurationLimitNow = DurationLimit;
 	TickDuration = DurationLimit;
 	CurrentIndexLeft = 0;
@@ -67,7 +69,7 @@ def_init VIQuantifyTickBehaviorHost::VIQuantifyTickBehaviorHost(VIBehaviorHost* 
 	NSPTNow = 0;
 	DurationNow = 0;
 	Host = host;
-	consoleLog("VIQuantifyTickBehaviorHost init :" + QString::number(DurationLimit));
+	consoleLog("Initialized");
 }
 void VIQuantifyTickBehaviorHost::start() {
 	throw "VIQuantifyTickBehaviorHost cannot be manually started";
@@ -135,16 +137,14 @@ void VIQuantifyTickBehaviorHost::addBehavior(VIAbstractBehavior* behavior, VIAbs
 VIBehaviorHost
 */
 def_init VIBehaviorHost::VIBehaviorHost(QObject* parent) :VIAbstractBehaviorHost(parent) {
-	consoleLog("VIBehaviorHost init");
-	qDebug() << this;
+	setObjectName("VIBehaviorHost");
 	TickDuration = 10000000;//10ms
 	HostDuration = new VIDuration(this);
-	qDebug() << "HostDuration Inited";
-	qDebug() << HostDuration;
 	STOPFLAG = false;
 	QuantifyTickBehaviorHost_128 = new VIQuantifyTickBehaviorHost(this, 7812500, this);
 	QuantifyTickBehaviorHost_64 = new VIQuantifyTickBehaviorHost(this, 15625000, this);
 	QuantifyTickBehaviorHost_20 = new VIQuantifyTickBehaviorHost(this, 50000000, this);
+	consoleLog("Initialized");
 }
 void VIBehaviorHost::start() {
 	TickDuration = 10000000;
@@ -222,12 +222,30 @@ void VIDebugBehavior::onActive() {
 void VIDebugBehavior::onPassive() {
 	consoleLog("VIDebugBehavior onPassive");
 }
+#include <iostream>
 void VIDebugBehavior::onTick() {
 	MSPT += Host->getTickDuration() / 1000000.0;
 	TMSPT += ((VIQuantifyTickBehaviorHost*)Host)->getNSPT() / 1000000.0;
+	
 	Index++;
 	if (Index == 10) {
-		qDebug() << "MSPT: " << MSPT / 10.0 << "\tTrue MSPT" << TMSPT / 10.0 << "\tTPS: " << 10000.0 / MSPT << "\tP: " << 100 * TMSPT / MSPT << "%";
+		std::cout << "                                                                                                   \r" << std::ends;
+		std::cout << "  QMSPT: " << QString::number(MSPT / 10.0, 'f', 2).toStdString() << "ms\t  TMSPT:";
+		if (TMSPT > 500) {
+			std::cout << VIConsole::inErrorStyle(QString::number(TMSPT / 10.0, 'f', 2) + "ms").toStdString();
+		}
+		else if (TMSPT > 350)
+		{
+			std::cout << VIConsole::inWarningStyle(QString::number(TMSPT / 10.0, 'f', 2) + "ms").toStdString();
+		}
+		else if (TMSPT > 250)
+		{
+			std::cout << VIConsole::inNoticeStyle(QString::number(TMSPT / 10.0, 'f', 2) + "ms").toStdString();
+		}
+		else {
+			std::cout << VIConsole::inSuccessStyle(QString::number(TMSPT / 10.0, 'f', 2) + "ms").toStdString();
+		}
+		std::cout<< "\t  TPS: " << QString::number(10000.0 / MSPT, 'f', 2).toStdString() << "\t  CPUTP: " << QString::number(100 * TMSPT / MSPT, 'f', 2).toStdString() << "%\r" << std::ends;
 		Index = 0;
 		MSPT = 0;
 		TMSPT = 0;

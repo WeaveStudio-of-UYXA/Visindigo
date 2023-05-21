@@ -40,6 +40,9 @@
     <ClCompile Include="Visindigo\VICore\cpp\VIFramework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Visindigo\VICore\cpp\VIConsole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visindigo\VICore\private\VIMacro.h">
@@ -54,9 +57,6 @@
     <ClInclude Include="Visindigo\VICore\private\VIAbstractBehavior_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Visindigo\VICore\VICore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -66,7 +66,7 @@
     <ClInclude Include="Visindigo\VI2DScene\VI2DUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIMultiPlatform.h">
+    <ClInclude Include="Visindigo\VICore\private\VIObject_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -90,6 +90,18 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIPackage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIMultiPlatform.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIConsole.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIVersion.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIObject.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -5,6 +5,8 @@
 
 int main(int argc, char* argv[]) {
 	VIFramework VIFrame(argc, argv);
+	VIFrame.useDebugModeRuntime();
+	VIFrame.init();
 	LOAD_PACKAGE(YSPMainPack);
 	VIFrame.start();
 	return VIFrame.getReturnCode();

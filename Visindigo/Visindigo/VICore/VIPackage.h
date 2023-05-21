@@ -11,8 +11,8 @@ class VIPackage :public VIBasicBehavior
 	_Public QString PackageName;
 	_Public VIFramework* Framework;
 	_Public def_init VIPackage(QObject* parent = VI_NULLPTR) :VIBasicBehavior(parent) {};
-	_Public virtual void onActive() {};
-	_Public virtual void onPassive() {};
-	_Public virtual void onTick() {};
-	_Public virtual void onEvent(QEvent* e) {};
+	_Public virtual void onActive() HalfVirtual;
+	_Public virtual void onPassive() HalfVirtual;
+	_Public virtual void onTick() HalfVirtual;
+	_Public virtual void onEvent(QEvent* e) HalfVirtual;
 };

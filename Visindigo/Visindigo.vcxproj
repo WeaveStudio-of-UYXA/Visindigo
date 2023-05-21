@@ -32,12 +32,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -88,7 +88,7 @@
       <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -99,9 +99,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIAbstractBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIBehavior.cpp" />
+    <ClCompile Include="Visindigo\VICore\cpp\VIConsole.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Visindigo\VICore\VIVersion.h" />
     <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h" />
     <ClInclude Include="Visindigo\VI2DScene\private\VI2DScene_m.h" />
     <QtMoc Include="Visindigo\VI2DScene\VI2DSceneWidget.h" />
@@ -110,13 +112,15 @@
     <ClInclude Include="Visindigo\VICore\private\VICompileMacro.h" />
     <ClInclude Include="Visindigo\VICore\private\VIDuration_m.h" />
     <ClInclude Include="Visindigo\VICore\private\VIMacro.h" />
+    <QtMoc Include="Visindigo\VICore\VIConsole.h" />
+    <ClInclude Include="Visindigo\VICore\private\VIObject_m.h" />
     <ClInclude Include="Visindigo\VICore\VICore.h" />
     <QtMoc Include="Visindigo\VICore\VIPackage.h" />
     <QtMoc Include="Visindigo\VICore\VIFramework.h" />
     <QtMoc Include="Visindigo\VICore\VIBehavior.h" />
     <QtMoc Include="Visindigo\VICore\VIDuration.h" />
-    <ClInclude Include="Visindigo\VICore\VIMultiPlatform.h" />
-    <ClInclude Include="Visindigo\VICore\VIObject.h" />
+    <QtMoc Include="Visindigo\VICore\VIMultiPlatform.h" />
+    <QtMoc Include="Visindigo\VICore\VIObject.h" />
     <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
