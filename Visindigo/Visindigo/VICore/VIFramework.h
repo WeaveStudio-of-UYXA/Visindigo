@@ -32,7 +32,7 @@ class VIFramework :public VIObject
 	_Public static VIFramework* getInstance();
 	_Public int getReturnCode();
 	_Public bool loadPackage(VIPackage* package);
-	_Public inline bool isDebugModeCompilation();
-	_Public inline bool isDebugModeRuntime();
-	_Public inline bool useDebugModeRuntime();
+	_Public bool isDebugModeCompilation();
+	_Public bool isDebugModeRuntime();
+	_Public bool useDebugModeRuntime();
 };
