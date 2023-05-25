@@ -113,6 +113,7 @@ void VIQuantifyTickBehaviorHost::tickLoop() {
 void VIQuantifyTickBehaviorHost::mergeBehavior() {
 	for (auto i = BehaviorList.begin(); i != BehaviorList.end();) {
 		if ((*i)->getBehaviorState() == VIAbstractBehavior::State::Idle) {
+			(*i)->setHost(Host);
 			i = BehaviorList.erase(i);
 		}
 		else { i++; }

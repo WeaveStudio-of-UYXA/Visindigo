@@ -72,6 +72,12 @@
     <ClInclude Include="Visindigo\VICore\private\VIAutoVersion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\bings\Desktop\Visindigo\Visindigo\VICore\VIMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visindigo\VICore\VIMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h">
@@ -105,6 +111,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VICore\VIObject.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIBasicType.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

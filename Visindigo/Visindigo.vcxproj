@@ -109,8 +109,10 @@
     <ClCompile Include="Visindigo\VICore\cpp\VIFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Visindigo\VICore\VIMath.h" />
     <QtMoc Include="Visindigo\VICore\VIVersion.h" />
     <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h" />
+    <ClInclude Include="C:\Users\bings\Desktop\Visindigo\Visindigo\VICore\VIMath.h" />
     <ClInclude Include="Visindigo\VI2DScene\private\VI2DScene_m.h" />
     <QtMoc Include="Visindigo\VI2DScene\VI2DSceneWidget.h" />
     <ClInclude Include="Visindigo\VI2DScene\VI2DUnit.h" />
@@ -121,6 +123,7 @@
     <ClInclude Include="Visindigo\VICore\private\VIMacro.h" />
     <QtMoc Include="Visindigo\VICore\VIConsole.h" />
     <ClInclude Include="Visindigo\VICore\private\VIObject_m.h" />
+    <QtMoc Include="Visindigo\VICore\VIBasicType.h" />
     <ClInclude Include="Visindigo\VICore\VICore.h" />
     <QtMoc Include="Visindigo\VICore\VIPackage.h" />
     <QtMoc Include="Visindigo\VICore\VIFramework.h" />

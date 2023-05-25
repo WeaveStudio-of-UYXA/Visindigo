@@ -28,6 +28,8 @@ class VIBehaviorHost;
 class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
 {
 	Q_OBJECT;
+	friend class VIBasicBehavior;
+	friend class VITimedBehavior;
 	friend class VIBehaviorHost;
 	_Private VIBehaviorHost* Host;
 	VI_Property(VINanoSecond, DurationNow);
