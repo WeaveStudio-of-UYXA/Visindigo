@@ -3,7 +3,7 @@
 #include <QtWidgets>
 #include "../../Visindigo/VICore/VICore.h"
 #include "../../Visindigo/VI2DScene/VI2DSceneWidget.h"
-
+#include "SPOL/SPSReader.h"
 class RotationBehavior :public VIBasicBehavior {
 	Q_OBJECT;
 	VI_Property(VI2DSceneWidget*, Scene);
@@ -23,6 +23,8 @@ class YSPMainPack :public VIPackage
 	VI2DSceneWidget* scene;
 	RotationBehavior* rotationBehavior;
 	_Public def_init YSPMainPack(QObject* parent = VI_NULLPTR) :VIPackage(parent) {
+		qDebug() << QDir::currentPath();
+		SPSReader::spawnStoryFile("./Dev/t10.js");
 		PackageName = "YSPMainPack";
 		testWin = new QWidget();
 		testWin->setWindowTitle("YSPMainPack");

@@ -144,3 +144,7 @@ QString VIConsole::inSuccessStyle(QString rawText) {
 QString VIConsole::inNoticeStyle(QString rawText) {
 	return getColorString(rawText, Color::Blue, Style::Bold);
 }
+
+void VIConsole::printLine(QString msg) {
+	qDebug().noquote() << msg;
+}

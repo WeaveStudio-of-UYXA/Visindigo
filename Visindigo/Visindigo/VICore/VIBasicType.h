@@ -1,71 +1,81 @@
 ﻿#pragma once
 #include "VIObject.h"
+#include "VIConsole.h"
+#include "VIException.h"
+#include "VIMath.h"
 /*
 * Notice: All the code in this file is not tested.
 * Please do not use it directly.
 */
 class VICoordinate
-{ 
+{
 	friend class VICoordinate;
-	_Private long long X;
-	_Private long long Y;
-	_Private long long Z;
-	_Private long long W;
-	_Public def_init VICoordinate(double x, double y, double z = 0, double w = 0) {
-		X = x* VI_COORDINATE_RATE; Y = y* VI_COORDINATE_RATE; Z = z* VI_COORDINATE_RATE; W = w* VI_COORDINATE_RATE;
+	_Public enum class Dimension{
+		D1 = 1, 
+		D2 = 2,
+		D3 = 3, 
+		D4 = 4
+	};
+	VI_Property(double, X);
+	VI_Property(double, Y);
+	VI_Property(double, Z);
+	VI_Property(double, W);
+	VI_Property(Dimension, Dim);
+	_Public def_init VICoordinate(Dimension d, double x, double y = 0, double z = 0, double w = 0) {
+		Dim = d;
+		X = x; Y = y; Z = z; W = w;
 	};
 	_Public def_init VICoordinate() {
+		Dim = Dimension::D1;
 		X = 0; Y = 0; Z = 0; W = 0;
 	};
 	_Public def_copy VICoordinate(const VICoordinate& c) {
+		Dim = c.Dim;
 		X = c.X; Y = c.Y; Z = c.Z; W = c.W;
 	};
 	_Public VICoordinate operator=(const VICoordinate& c) {
+		Dim = c.Dim;
 		X = c.X; Y = c.Y; Z = c.Z; W = c.W;
 		return *this;
 	};
-	_Public double x(){
-		return (double)X / VI_COORDINATE_RATE;
-	}
-	_Public double y() {
-		return (double)Y / VI_COORDINATE_RATE;
-	}
-	_Public double z() {
-		return (double)Z / VI_COORDINATE_RATE;
-	}
-	_Public double w() {
-		return (double)W / VI_COORDINATE_RATE;
-	}
-	_Public void setX(double x) {
-		X = x* VI_COORDINATE_RATE;
-	}
-	_Public void setY(double y) {
-		Y = y* VI_COORDINATE_RATE;
-	}
-	_Public void setZ(double z) {
-		Z = z* VI_COORDINATE_RATE;
-	}
-	_Public void setW(double w) {
-		W = w* VI_COORDINATE_RATE;
-	}
 	_Public double getDistanceTo(const VICoordinate& c) {
-		return qSqrt(qPow(X - c.X, 2) + qPow(Y - c.Y, 2) + qPow(Z - c.Z, 2) + qPow(W - c.W, 2));
+		if (Dim != c.Dim) {
+			throw VIDimensionError("VICoordinates::getDistanceTo() only allows coordinates of the same dimension");
+		}
+		switch (Dim)
+		{
+		case VICoordinate::Dimension::D1:
+			return qAbs(X - c.X);
+		case VICoordinate::Dimension::D2:
+			return qSqrt(qPow(X - c.X, 2) + qPow(Y - c.Y, 2));
+		case VICoordinate::Dimension::D3:
+			return qSqrt(qPow(X - c.X, 2) + qPow(Y - c.Y, 2) + qPow(Z - c.Z, 2));
+		case VICoordinate::Dimension::D4:
+			return qSqrt(qPow(X - c.X, 2) + qPow(Y - c.Y, 2) + qPow(Z - c.Z, 2) + qPow(W - c.W, 2));
+		}
+	}
+	_Public bool inSameDim(const VICoordinate& c) {
+		return Dim == c.Dim;
 	}
 	_Public bool isSameVector(const VICoordinate& c) {
+		if (Dim != c.Dim) return false;
 		double rate = c.X / X;
-		if (c.Y / Y - rate > VI_COORDINATE_RATE) return false;
-		if (c.Z / Z - rate > VI_COORDINATE_RATE) return false;
-		if (c.W / W - rate > VI_COORDINATE_RATE) return false;
+		if (c.Y / Y - rate > VI_COORDINATE_CONFIDENCE) return false;
+		if (c.Z / Z - rate > VI_COORDINATE_CONFIDENCE) return false;
+		if (c.W / W - rate > VI_COORDINATE_CONFIDENCE) return false;
 		return true;
 	}
 	_Public bool operator== (const VICoordinate& c) {
-		return X == c.X && Y == c.Y && Z == c.Z && W == c.W;
+		return Dim == c.Dim && X == c.X && Y == c.Y && Z == c.Z && W == c.W;
 	}
 	_Public bool operator!= (const VICoordinate& c) {
-		return X != c.X || Y != c.Y || Z != c.Z || W != c.W;
+		return Dim != c.Dim || X != c.X || Y != c.Y || Z != c.Z || W != c.W;
 	}
 	_Public VICoordinate operator+ (const VICoordinate& c) {
-		VICoordinate rtn(0, 0, 0, 0);
+		if (Dim != c.Dim) {
+			throw VIDimensionError("VICoordinates::operator+() only allows coordinates of the same dimension");
+		}
+		VICoordinate rtn(Dim, 0, 0, 0, 0);
 		rtn.X = X + c.X;
 		rtn.Y = Y + c.Y;
 		rtn.Z = Z + c.Z;
@@ -73,7 +83,10 @@ class VICoordinate
 		return rtn;
 	}
 	_Public VICoordinate operator- (const VICoordinate& c) {
-		VICoordinate rtn(0, 0, 0, 0);
+		if (Dim != c.Dim) {
+			throw VIDimensionError("VICoordinates::operator-() only allows coordinates of the same dimension");
+		}
+		VICoordinate rtn(Dim, 0, 0, 0, 0);
 		rtn.X = X - c.X;
 		rtn.Y = Y - c.Y;
 		rtn.Z = Z - c.Z;
@@ -81,7 +94,7 @@ class VICoordinate
 		return rtn;
 	}
 	_Public VICoordinate operator* (const double d) {
-		VICoordinate rtn(0, 0, 0, 0);
+		VICoordinate rtn(Dim, 0, 0, 0, 0);
 		rtn.X = X * d;
 		rtn.Y = Y * d;
 		rtn.Z = Z * d;
@@ -89,7 +102,7 @@ class VICoordinate
 		return rtn;
 	}
 	_Public VICoordinate operator/ (const double d) {
-		VICoordinate rtn(0, 0, 0, 0);
+		VICoordinate rtn(Dim, 0, 0, 0, 0);
 		rtn.X = X / d;
 		rtn.Y = Y / d;
 		rtn.Z = Z / d;
@@ -97,15 +110,30 @@ class VICoordinate
 		return rtn;
 	}
 };
+typedef VICoordinate VI1DCoordinate;
+typedef VICoordinate VI2DCoordinate;
+typedef VICoordinate VI3DCoordinate;
+typedef VICoordinate VI4DCoordinate;
+#define VI1DCoor(x) VI1DCoordinate(VICoordinate::Dimension::D1, x, 0, 0, 0)
+#define VI2DCoor(x, y) VI2DCoordinate(VICoordinate::Dimension::D2, x, y, 0, 0)
+#define VI3DCoor(x, y, z) VI3DCoordinate(VICoordinate::Dimension::D3, x, y, z, 0)
+#define VI4DCoor(x, y, z, w) VI4DCoordinate(VICoordinate::Dimension::D4, x, y, z, w)
 
-class VIStraightLine {
-	VI_Property(VICoordinate, Start);
-	VI_Property(VICoordinate, End);
+typedef QList<VICoordinate> VICoordinateList;
+class VIStraightLine :public VIObject{
+	Q_OBJECT;
+	VI_OBJECT;
+	VI_PrivateProperty(VICoordinate, Start);
+	VI_PrivateProperty(VICoordinate, End);
 	_Public def_init VIStraightLine(VICoordinate start, VICoordinate end) {
+		if (Start.Dim != End.Dim) {
+			throw VIDimensionError("VIStraightLine::VIStraightLine() only allows coordinates of the same dimension");
+		}
 		Start = start; End = end;
+
 	};
 	_Public def_init VIStraightLine() {
-		Start = VICoordinate(0, 0, 0, 0); End = VICoordinate(0, 0, 0, 0);
+		Start = VICoordinate(VICoordinate::Dimension::D2, 0, 0, 0, 0); End = VICoordinate(VICoordinate::Dimension::D2, 0, 0, 0, 0);
 	};
 	_Public bool isPointOnLine(VICoordinate& c) {
 		if (Start == End) {
@@ -136,11 +164,64 @@ class VIStraightLine {
 		VICoordinate v = getVector();
 		return Start + v * percent;
 	}
-	_Public double getDistance() {
+	_Public double getLineLength() {
 		return Start.getDistanceTo(End);
 	}
 };
-
+class VIBesselLine :public VIObject
+{
+	Q_OBJECT;
+	VI_OBJECT;
+	VI_PrivateProperty(VICoordinateList, BesselCoefficientPoints);
+	VI_PrivateProperty(VICoordinateList, BasselRawPoints);
+	_Public def_init VIBesselLine(VICoordinateList basselRawPoints) {
+		BasselRawPoints = basselRawPoints;
+		BesselCoefficientPoints = getBesselCoefficient(basselRawPoints);
+	};
+	_Public void setRawCoordinates(VICoordinateList basselRawPoints) {
+		BasselRawPoints = basselRawPoints;
+		BesselCoefficientPoints = getBesselCoefficient(basselRawPoints);
+	};
+	_Public static VICoordinateList getBesselCoefficient(VICoordinateList PointMat) {
+		VICoordinate::Dimension dim = PointMat[0].Dim;
+		VICoordinateList ret;
+		int n = PointMat.length() - 1;
+		int m = 0;
+		VICoordinate vec(dim, 0, 0, 0, 0);
+		for (auto i = PointMat.begin(); i != PointMat.end(); i++) {
+			if (i->Dim != dim) {
+				throw VIDimensionError("VIBesselLine::getBesselCoefficient() only allows coordinates of the same dimension");
+			}
+			vec.X = i->X * VIMath::combination(n, m);
+			vec.Y = i->Y * VIMath::combination(n, m);
+			vec.Z = i->Z * VIMath::combination(n, m);
+			vec.W = i->W * VIMath::combination(n, m);
+			ret.append(vec);
+			m++;
+		}
+		return ret;
+	}
+	_Public VICoordinate interpolation(double percent) {
+		return getBesselValue(BesselCoefficientPoints, percent);
+	}
+	_Public static VICoordinate getBesselValue(VICoordinateList BesselCoefficient, float p) {
+		VICoordinate::Dimension dim = BesselCoefficient[0].Dim;
+		VICoordinate ret(dim, 0, 0, 0, 0);
+		int n = BesselCoefficient.length() - 1;
+		int m = 0;
+		for (auto i = BesselCoefficient.begin(); i != BesselCoefficient.end(); i++) {
+			if (i->Dim != dim) {
+				throw VIDimensionError("VIBesselLine::getBesselValue() only allows coordinates of the same dimension");
+			}
+			ret.X += i->X * qPow(p, m) * qPow(1 - p, n - m);
+			ret.Y += i->Y * qPow(p, m) * qPow(1 - p, n - m);
+			ret.Z += i->Z * qPow(p, m) * qPow(1 - p, n - m);
+			ret.W += i->W * qPow(p, m) * qPow(1 - p, n - m);
+			m++;
+		}
+		return ret;
+	}
+};
 class VIStepper :public VIObject
 {
 	Q_OBJECT;

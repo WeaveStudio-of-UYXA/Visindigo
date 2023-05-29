@@ -109,7 +109,9 @@
     <ClCompile Include="Visindigo\VICore\cpp\VIFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSReader.h" />
     <ClInclude Include="Visindigo\VICore\VIMath.h" />
+    <ClInclude Include="Visindigo\VICore\VIException.h" />
     <QtMoc Include="Visindigo\VICore\VIVersion.h" />
     <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h" />
     <ClInclude Include="C:\Users\bings\Desktop\Visindigo\Visindigo\VICore\VIMath.h" />

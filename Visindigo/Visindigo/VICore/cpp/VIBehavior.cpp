@@ -144,6 +144,7 @@ def_init VIBehaviorHost::VIBehaviorHost(QObject* parent) :VIAbstractBehaviorHost
 	STOPFLAG = false;
 	QuantifyTickBehaviorHost_128 = new VIQuantifyTickBehaviorHost(this, 7812500, this);
 	QuantifyTickBehaviorHost_64 = new VIQuantifyTickBehaviorHost(this, 15625000, this);
+	QuantifyTickBehaviorHost_32 = new VIQuantifyTickBehaviorHost(this, 31250000, this);
 	QuantifyTickBehaviorHost_20 = new VIQuantifyTickBehaviorHost(this, 50000000, this);
 	consoleLog("Initialized");
 }
@@ -161,9 +162,10 @@ bool VIBehaviorHost::event(QEvent* event) {
 void VIBehaviorHost::tickLoop() {
 	//consoleLog("VIBehaviorHost tickLoop");
 	mergeBehavior();
-	QuantifyTickBehaviorHost_128->tickLoop();
 	QuantifyTickBehaviorHost_20->tickLoop();
+	QuantifyTickBehaviorHost_32->tickLoop();
 	QuantifyTickBehaviorHost_64->tickLoop();
+	QuantifyTickBehaviorHost_128->tickLoop();
 	ergodicBehavior();
 	TickDuration = HostDuration->getNanoDuration();
 	//qDebug() << TickDuration;
@@ -182,6 +184,9 @@ void VIBehaviorHost::addBehavior(VIAbstractBehavior* behavior, VIAbstractBehavio
 		break;
 	case VIAbstractBehavior::QuantifyTickType::T20:
 		QuantifyTickBehaviorHost_20->addBehavior(behavior, type);
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T32:
+		QuantifyTickBehaviorHost_32->addBehavior(behavior, type);
 		break;
 	case VIAbstractBehavior::QuantifyTickType::T64:
 		QuantifyTickBehaviorHost_64->addBehavior(behavior, type);

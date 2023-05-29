@@ -57,6 +57,7 @@ class VIBehaviorHost :public VIAbstractBehaviorHost
 	_Public VIDuration* HostDuration = nullptr;
 	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_128;
 	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_64;
+	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_32;
 	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_20;
 	_Public def_init VIBehaviorHost(QObject* parent = nullptr);
 	_Public void start() override;

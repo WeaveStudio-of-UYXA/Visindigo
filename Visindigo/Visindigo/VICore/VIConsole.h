@@ -22,4 +22,5 @@ class VIConsole : public VIObject {
 	_Public static QString inErrorStyle(QString rawText);
 	_Public static QString inSuccessStyle(QString rawText);
 	_Public static QString inNoticeStyle(QString rawText);
+	_Public static void printLine(QString msg);
 };
