@@ -24,8 +24,10 @@
 #define VI_Property(Type, name) public:Type name;void set##name(Type value){this->name = value;}Type get##name(){return name;}
 #define VI_PrivateProperty(Type, name) private:Type name;private: void set##name(Type value){this->name = value;}public:Type get##name(){return name;}
 #define VI_ProtectedProperty(Type, name) protected:Type name;protected: void set##name(Type value){this->name = value;}public:Type get##name(){return name;}
+
 #define VI_Flag(name) public:bool name;void set##name(bool value){this->name = value;}bool is##name(){return name;}
 #define VI_PrivateFlag(name) private:bool name;private: void set##name(bool value){this->name = value;}public:bool is##name(){return name;}
+#define VI_ProtectedFlag(name) protected:bool name;protected: void set##name(bool value){this->name = value;}public:bool is##name(){return name;}
 
 #define def_init
 #define def_del

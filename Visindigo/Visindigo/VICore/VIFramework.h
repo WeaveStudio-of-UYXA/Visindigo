@@ -2,8 +2,10 @@
 #include <QtCore>
 #include <QtWidgets>
 #include "VIPackage.h"
+#include "VIException.h"
 #include "VIObject.h"
 #include "VIConsole.h"
+#include "VICommand.h"
 #include "VIMultiPlatform.h"
 #include "VIVersion.h"
 #define FrameBehaviorHost VIFramework::getBehaviorHostInstance()
@@ -16,6 +18,20 @@ class private_VIFramework :public VIObject
 	_Public int ReturnCode = 0;
 	VI_Property(bool, DebugModeCompilation);
 	VI_Property(bool, DebugModeRuntime);
+};
+class VIApplication :public QApplication
+{
+	Q_OBJECT;
+	_Public def_init VIApplication(int& argc, char** argv) :QApplication(argc, argv) {};
+	_Public virtual bool notify(QObject* receiver, QEvent* e) {
+		try {
+			return QApplication::notify(receiver, e);
+		}
+		catch (VIException& e) {
+			e.print();
+			VIMultiPlatform::exit();
+		}
+	}
 };
 class VIFramework :public VIObject
 {
@@ -35,4 +51,5 @@ class VIFramework :public VIObject
 	_Public bool isDebugModeCompilation();
 	_Public bool isDebugModeRuntime();
 	_Public bool useDebugModeRuntime();
+	_Public static bool execCommand(QString);
 };

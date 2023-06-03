@@ -43,6 +43,9 @@
     <ClCompile Include="Visindigo\VICore\cpp\VIConsole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Visindigo\VICore\cpp\VICommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visindigo\VICore\private\VIMacro.h">
@@ -120,6 +123,15 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSReader.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VICommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\VIECMAScripts.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VICore\private\VIECMABuiltInModules.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

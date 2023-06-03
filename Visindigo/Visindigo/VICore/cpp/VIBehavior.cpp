@@ -232,7 +232,7 @@ void VIDebugBehavior::onPassive() {
 void VIDebugBehavior::onTick() {
 	MSPT += Host->getTickDuration() / 1000000.0;
 	TMSPT += ((VIQuantifyTickBehaviorHost*)Host)->getNSPT() / 1000000.0;
-	
+
 	Index++;
 	if (Index == 10) {
 		std::cout << "                                                                                                   \r" << std::ends;
@@ -251,7 +251,7 @@ void VIDebugBehavior::onTick() {
 		else {
 			std::cout << VIConsole::inSuccessStyle(QString::number(TMSPT / 10.0, 'f', 2) + "ms").toStdString();
 		}
-		std::cout<< "\t  TPS: " << QString::number(10000.0 / MSPT, 'f', 2).toStdString() << "\t  CPUTP: " << QString::number(100 * TMSPT / MSPT, 'f', 2).toStdString() << "%\r" << std::ends;
+		std::cout << "\t  TPS: " << QString::number(10000.0 / MSPT, 'f', 2).toStdString() << "\t  CPUTP: " << QString::number(100 * TMSPT / MSPT, 'f', 2).toStdString() << "%\r" << std::ends;
 		Index = 0;
 		MSPT = 0;
 		TMSPT = 0;

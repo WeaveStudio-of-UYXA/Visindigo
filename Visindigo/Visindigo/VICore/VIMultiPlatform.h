@@ -14,9 +14,10 @@ class VIMultiPlatform : public VIObject {
 	_Public static QString getCPUCurrentType() { return QSysInfo::currentCpuArchitecture(); }
 	_Public static QString getSystemKernelType() { return QSysInfo::kernelType(); }
 	_Public static QString getSystemKernelVersion() { return QSysInfo::kernelVersion(); }
-	_Public static QString getWorkPath() { return QDir::currentPath(); }
+	_Public static QString getWorkingPath() { return QDir::currentPath(); }
 	_Public static QString getProgramPath() { return QCoreApplication::applicationDirPath(); }
 	_Public static QString getHomePath() { return QDir::homePath(); }
+	_Public static QString getUserName() { return QDir::home().dirName(); }
 	_Public static QString getTempPath() { return QDir::tempPath(); }
 	_Public static QString getRootPath() { return QDir::rootPath(); }
 	_Public static QString getDesktopPath() { return QStandardPaths::writableLocation(QStandardPaths::DesktopLocation); }

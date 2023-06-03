@@ -11,6 +11,7 @@ class VIException
 		BehaviorError,
 		IndexOutOfRange,
 		NullPointer,
+		FrameworkNotInit,
 		Others
 	};
 	VI_ProtectedProperty(QString, Reason);

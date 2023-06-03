@@ -15,9 +15,9 @@ class VIConsole : public VIObject {
 		Normal, Bold, Italic, Underline, Splash, Inverse, Strikethrough
 	};
 	_Public static QString getColorString(QString rawText, VIConsole::Color color, QList<VIConsole::Style> styleList = { VIConsole::Style::Normal });
-	_Public static QString getColorString(QString rawText, VIConsole::Color color, VIConsole::Style style = VIConsole::Style::Normal );
+	_Public static QString getColorString(QString rawText, VIConsole::Color color, VIConsole::Style style = VIConsole::Style::Normal);
 	_Public static QString getColorString(QString rawText, QColor rgb, QList<VIConsole::Style> styleList = { VIConsole::Style::Normal });
-	_Public static QString getColorString(QString rawText, QColor rgb, VIConsole::Style style =  VIConsole::Style::Normal );
+	_Public static QString getColorString(QString rawText, QColor rgb, VIConsole::Style style = VIConsole::Style::Normal);
 	_Public static QString inWarningStyle(QString rawText);
 	_Public static QString inErrorStyle(QString rawText);
 	_Public static QString inSuccessStyle(QString rawText);

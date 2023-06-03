@@ -22,5 +22,5 @@ class VIObject :public VISuper, VIBaseObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Public def_init VIObject(VISuper* parent = VI_NULLPTR):VISuper(parent) {};
+	_Public def_init VIObject(VISuper* parent = VI_NULLPTR) :VISuper(parent) {};
 };

@@ -3,7 +3,7 @@
 /*
 VIConsole
 */
-QString VIConsole::getColorString(QString rawText, VIConsole::Color color, QList<VIConsole::Style> styleList ) {
+QString VIConsole::getColorString(QString rawText, VIConsole::Color color, QList<VIConsole::Style> styleList) {
 	QString styleString = "";
 	switch (color) {
 	case Color::None:
@@ -130,7 +130,7 @@ QString VIConsole::getColorString(QString rawText, QColor rgb, VIConsole::Style 
 }
 
 QString VIConsole::inWarningStyle(QString rawText) {
-	return getColorString(rawText, QColor(255,253,85), Style::Bold);
+	return getColorString(rawText, QColor(255, 253, 85), Style::Bold);
 }
 
 QString VIConsole::inErrorStyle(QString rawText) {

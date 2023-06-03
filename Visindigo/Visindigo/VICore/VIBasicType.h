@@ -10,10 +10,10 @@
 class VICoordinate
 {
 	friend class VICoordinate;
-	_Public enum class Dimension{
-		D1 = 1, 
+	_Public enum class Dimension {
+		D1 = 1,
 		D2 = 2,
-		D3 = 3, 
+		D3 = 3,
 		D4 = 4
 	};
 	VI_Property(double, X);
@@ -120,7 +120,7 @@ typedef VICoordinate VI4DCoordinate;
 #define VI4DCoor(x, y, z, w) VI4DCoordinate(VICoordinate::Dimension::D4, x, y, z, w)
 
 typedef QList<VICoordinate> VICoordinateList;
-class VIStraightLine :public VIObject{
+class VIStraightLine :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
 	VI_PrivateProperty(VICoordinate, Start);
@@ -130,7 +130,6 @@ class VIStraightLine :public VIObject{
 			throw VIDimensionError("VIStraightLine::VIStraightLine() only allows coordinates of the same dimension");
 		}
 		Start = start; End = end;
-
 	};
 	_Public def_init VIStraightLine() {
 		Start = VICoordinate(VICoordinate::Dimension::D2, 0, 0, 0, 0); End = VICoordinate(VICoordinate::Dimension::D2, 0, 0, 0, 0);

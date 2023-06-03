@@ -105,11 +105,15 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIAbstractBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIBehavior.cpp" />
+    <ClCompile Include="Visindigo\VICore\cpp\VICommand.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIConsole.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSReader.h" />
+    <QtMoc Include="Visindigo\VICore\VICommand.h" />
+    <QtMoc Include="Visindigo\VICore\VIECMAScripts.h" />
+    <QtMoc Include="Visindigo\VICore\private\VIECMABuiltInModules.h" />
     <ClInclude Include="Visindigo\VICore\VIMath.h" />
     <ClInclude Include="Visindigo\VICore\VIException.h" />
     <QtMoc Include="Visindigo\VICore\VIVersion.h" />
