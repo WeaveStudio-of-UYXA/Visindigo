@@ -34,8 +34,7 @@ class VIBehaviorDuration :public VIObject
 	}
 	_Slot void addTime(VINanoSecond time) {
 		Elapse += time;
-		qDebug() << Elapse;
-		Percent = Elapse / Duration;
+		Percent = (float)Elapse / Duration;
 		if (Elapse >= Duration) {
 			Timeout = true;
 			emit timeout();

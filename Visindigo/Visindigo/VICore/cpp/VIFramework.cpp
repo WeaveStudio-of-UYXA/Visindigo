@@ -2,6 +2,7 @@
 #pragma execution_character_set("utf-8")
 VIFramework* VIFramework::Instance = Q_NULLPTR;
 VIBehaviorHost* VIFramework::BehaviorHost = Q_NULLPTR;
+VILanguageHost* VIFramework::LanguageHost = Q_NULLPTR;
 
 def_init VIFramework::VIFramework(int& argc, char** argv) {
 	App = new VIApplication(argc, argv);
@@ -29,12 +30,20 @@ void VIFramework::init() {
 	VIConsole::printLine("\033[38;2;234;54;128mVisindigo \033[0m" + VIVersion::getVisindigoVersion() + " \"" + VIVersion::getVisindigoNickname() + "\"" + " \033[38;2;255;253;85m[RELEASE compilation mode]\033[0m");
 #endif
 	VIConsole::printLine("\033[38;2;234;63;247mVersion Compilation Time \033[0m: \033[38;2;255;253;85m" + VIVersion::getVisindigoCompileTime() + " [" + VIMultiPlatform::getCPUBuildType() + "]\033[0m");
-	VIConsole::printLine(VIConsole::inWarningStyle("Working Path: ") + VIConsole::inNoticeStyle(VIMultiPlatform::getWorkingPath()));
-	VIConsole::printLine("Hello, " + VIMultiPlatform::getUserName() + "! Welcome to Visindigo!");
+	VIConsole::printLine(VIConsole::inWarningStyle("Working Path: ") + VIConsole::inNoticeStyle(VIDocument::getWorkingPath()));
+	VIConsole::printLine("Hello, " + VIDocument::getUserName() + "! Welcome to Visindigo!");
 	VIFramework::Instance = this;
+	LanguageHost = new VILanguageHost(VILanguageHost::LangType::zh_SC, VILanguageHost::LangType::zh_SC, "./Language", this);
+	if (LanguageHost->loadLanguage()) {
+		VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + VITR("Core_LanguageHost_LoadLanguage_Success")));
+	}
+	else {
+		VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix() + "LanguageHost cannot initiallize."));
+	}
 	BehaviorHost = new VIBehaviorHost(this);
 	new VICommandHost(this);
-	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Visindigo framework initialized."));
+	VICommand_Reg(VIECMAScripts::Command);
+	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + VITR("Core_Any_Initialized_Success").arg("Visindigo framework")));
 }
 VIBehaviorHost* VIFramework::getBehaviorHostInstance() {
 	if (BehaviorHost == nullptr) {
@@ -46,6 +55,9 @@ VIBehaviorHost* VIFramework::getBehaviorHostInstance() {
 	return BehaviorHost;
 }
 
+VILanguageHost* VIFramework::getLanguageHostInstance() {
+	return LanguageHost;
+}
 void VIFramework::start() {
 	BehaviorHost->start();
 	Data->ReturnCode = App->exec();
@@ -65,7 +77,6 @@ int VIFramework::getReturnCode() {
 }
 
 bool VIFramework::loadPackage(VIPackage* package) {
-	package->Framework = this;
 	Data->PackageList.append(package);
 	package->active(VIAbstractBehavior::QuantifyTickType::T20);
 	return true;

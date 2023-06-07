@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include <QtCore>
-#include <QtWidgets>
 #include "../../Visindigo/VICore/VICore.h"
 #include "../../Visindigo/VI2DScene/VI2DSceneWidget.h"
 #include "SPOL/SPSReader.h"
+#include "SPOL/SPSEditor.h"
+
 class RotationBehavior :public VIBasicBehavior {
 	Q_OBJECT;
 	VI_Property(VI2DSceneWidget*, Scene);
@@ -15,29 +15,57 @@ class RotationBehavior :public VIBasicBehavior {
 	};
 	_Public virtual void onPassive() HalfVirtual;
 };
+class YSPPlayerWidget :public VIWidget
+{
+	Q_OBJECT;
+	VI_OBJECT;
+	_Public VI2DSceneWidget* Scene;
+	_Public QGridLayout* CurrentLayout;
+	_Public RotationBehavior* rotationBehavior;
+	_Public def_init YSPPlayerWidget(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
+		//把背景色调成黑的
+		this->setStyleSheet("YSPPlayerWidget{background-color:black;}");
+		this->setWindowTitle("YSPPlayerWidget");
+		Scene = new VI2DSceneWidget(this);
+		CurrentLayout = new QGridLayout(this);
+		CurrentLayout->setSpacing(0);
+		CurrentLayout->setMargin(0);
+		CurrentLayout->addWidget(Scene);
+		rotationBehavior = new RotationBehavior(this);
+		rotationBehavior->setScene(Scene);
+		rotationBehavior->active(VIAbstractBehavior::QuantifyTickType::T128);
+	};
+};
 class YSPMainPack :public VIPackage
 {
 	Q_OBJECT;
 	QWidget* testWin;
 	VIDebugBehavior* debugBehavior;
-	VI2DSceneWidget* scene;
-	RotationBehavior* rotationBehavior;
+	YSPPlayerWidget* playerWidget;
+	VIMultiButtonGroup* testGroup;
+	SPSEditor* spsEditor;
 	_Public def_init YSPMainPack(QObject* parent = VI_NULLPTR) :VIPackage(parent) {
 		SPSReader::spawnStoryFile("./Dev/t10.js");
 		PackageName = "YSPMainPack";
-		testWin = new QWidget();
-		testWin->setWindowTitle("YSPMainPack");
-		testWin->show();
 		debugBehavior = new VIDebugBehavior(this);
-		debugBehavior->active(VIAbstractBehavior::QuantifyTickType::T20);
-		scene = new VI2DSceneWidget(testWin);
-		scene->setGeometry(0, 0, 800, 600);
-		scene->show();
-		rotationBehavior = new RotationBehavior(this);
-		rotationBehavior->setScene(scene);
-		rotationBehavior->active(VIAbstractBehavior::QuantifyTickType::T128);
+		playerWidget = new YSPPlayerWidget();
+		//playerWidget->showFullScreen();
 		consoleLog("new YSPCommand");
-		new YSPCommand();
+		VICommand_Reg(YSPCommand);
+		VIFramework::execCommand("ecma");
+		spsEditor = new SPSEditor();
+		spsEditor->show();
+		testGroup = new VIMultiButtonGroup(Qt::Vertical);
+		testGroup->resize(200, 500);
+		testGroup->spawnButton("TEST1", "", "test1");
+		testGroup->spawnButton("TEST2", "", "test2");
+		testGroup->spawnButton("TEST3", "", "test3");
+		testGroup->spawnButton("TEST4", "", "test4");
+		testGroup->setNormalStyleSheet("VIMultiButton{background-color:rgb(255,255,255);border:1px solid rgb(200,200,200);border-radius:3px;}");
+		testGroup->setHoverStyleSheet("VIMultiButton{background-color:rgb(230,230,255);border:1px solid rgb(230,230,255);border-radius:3px;}");
+		testGroup->setPressStyleSheet("VIMultiButton{background-color:rgb(200,200,200);border:1px solid rgb(200,200,200);border-radius:3px;}");
+		testGroup->selectFirst();
+		testGroup->show();
 	};
 	_Public virtual void onActive() {
 		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is active!");

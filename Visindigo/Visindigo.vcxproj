@@ -108,8 +108,21 @@
     <ClCompile Include="Visindigo\VICore\cpp\VICommand.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIConsole.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIFramework.cpp" />
+    <ClCompile Include="Visindigo\VICore\cpp\VILanguage.cpp" />
+    <ClCompile Include="Visindigo\VICore\cpp\VIMath.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="UserCode\YSPMainPack\ProjectUI\ProjectWidget.h" />
+    <ClInclude Include="Visindigo\VI2DScene\VI2DSceneItemAnimationBehavior.h" />
+    <QtMoc Include="Visindigo\VIWidgets\VIMultiButton.h" />
+    <ClInclude Include="Visindigo\VIWidgets\VIWidgets.h" />
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSEditor.h" />
+    <QtMoc Include="Visindigo\VICore\VIDocument.h" />
+    <QtMoc Include="Visindigo\VICore\VILanguage.h" />
+    <QtMoc Include="Visindigo\VICore\VISettings.h" />
+    <QtMoc Include="Visindigo\VIWidgets\VICodeEdit.h" />
+    <QtMoc Include="Visindigo\VIWidgets\VIPackagePanel.h" />
+    <QtMoc Include="Visindigo\VIWidgets\VIWidget.h" />
     <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSReader.h" />
     <QtMoc Include="Visindigo\VICore\VICommand.h" />
     <QtMoc Include="Visindigo\VICore\VIECMAScripts.h" />

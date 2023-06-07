@@ -81,3 +81,14 @@ class VIDebugBehavior :public VIBasicBehavior
 	_Public void onTick() override;
 	_Public void onPassive() override;
 };
+
+class VIAnimationBehavior :public VITimedBehavior
+{
+	Q_OBJECT;
+	VI_OBJECT;
+	VI_Property(VIMilliSecond, AnimationDuration);
+	_Public def_init VIAnimationBehavior(QObject* parent = nullptr):VITimedBehavior(parent) {}
+	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T64) override {
+		VITimedBehavior::active(QuantifyTickType::T64);
+	}
+};

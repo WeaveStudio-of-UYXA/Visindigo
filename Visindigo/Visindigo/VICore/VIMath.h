@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include <QtCore>
-#include "VIBasicType.h"
 #include "private/VIMacro.h"
 class VIMath {
 public:
+	static float PI;
 	static int combination(int n, int m) {
 		int ret = 1;
 		for (int i = 0; i < m; i++) {
@@ -20,5 +20,11 @@ public:
 			ret *= (n - i);
 		}
 		return ret;
+	}
+	static float sin_0_1(float percent) {
+		return (qSin(-PI/2 + PI*percent)+1.0)/2.0;
+	}
+	static float sin_0_1_0(float percent) {
+		return qSin(percent * PI);
 	}
 };

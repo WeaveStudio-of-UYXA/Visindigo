@@ -38,9 +38,8 @@ void VITimedBehavior::setDuration(VIMilliSecond duration) {
 	Duration->setDuration(duration * 1000000);
 }
 VIAbstractBehavior::State VITimedBehavior::hostCall() {
-	VINanoSecond t = dynamic_cast<VIBehaviorHost*>(getHost())->getTickDuration();
+	VINanoSecond t = getHost()->getTickDuration();
 	this->Duration->addTime(t);
-	//qDebug() << t;
 	if (Duration->isTimeout()) { BehaviorState = State::Passive; }
 	return VIBasicBehavior::hostCall();
 }

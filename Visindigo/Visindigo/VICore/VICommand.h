@@ -19,7 +19,7 @@ class VICommandHandler {
 	_Public def_init VICommandHandler();
 	_Public def_del ~VICommandHandler();
 };
-
+#define VICommand_Reg(Name) new Name()
 #define VICommand_Handler(Name) class Name :public VICommandHandler { _Public def_init Name(): VICommandHandler()
 #define VICommand_Name(Name) CommandName = Name; VICommandHost::getInstance()->addCommandHandler(this);}\
 	bool handleCommand() override

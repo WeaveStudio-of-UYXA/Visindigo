@@ -1,0 +1,5 @@
+#内核部分，不建议删除
+Core_LanguageHost_LoadLanguage_Success:Visindigo翻译主机已经完成目标语言加载
+Core_Any_Initializing_Info:%1正在初始化
+Core_Any_Initialized_Success:%1已经初始化
+Core_Any_Initialized_Failed:%1初始化失败

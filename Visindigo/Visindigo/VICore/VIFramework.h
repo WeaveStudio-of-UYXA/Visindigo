@@ -6,8 +6,11 @@
 #include "VIObject.h"
 #include "VIConsole.h"
 #include "VICommand.h"
+#include "VIDocument.h"
 #include "VIMultiPlatform.h"
+#include "VILanguage.h"
 #include "VIVersion.h"
+#include "VIECMAScripts.h"
 #define FrameBehaviorHost VIFramework::getBehaviorHostInstance()
 class VIFramework;
 class private_VIFramework :public VIObject
@@ -40,10 +43,12 @@ class VIFramework :public VIObject
 	_Private private_VIFramework* Data;
 	_Private static VIFramework* Instance;
 	_Private static VIBehaviorHost* BehaviorHost;
+	_Private static VILanguageHost* LanguageHost;
 	_Private QApplication* App;
 	_Public def_init VIFramework(int& argc, char** argv);
 	_Public void init();
 	_Public static VIBehaviorHost* getBehaviorHostInstance();
+	_Public static VILanguageHost* getLanguageHostInstance();
 	_Public void start();
 	_Public static VIFramework* getInstance();
 	_Public int getReturnCode();

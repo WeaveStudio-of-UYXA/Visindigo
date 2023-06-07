@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "private/VIECMABuiltInModules.h"
-
+#include "VICommand.h"
 typedef QMap<QString, QString> ModuleMap;
 class VIECMAScripts;
 enum class VIECMABuiltInModule {
@@ -135,21 +135,27 @@ class VIECMAScripts :public VIObject {
 		}
 		return QJSValue();
 	}
-private slots: void onExit() {
-	OnRunning = false;
-	ThreadWaitCondition->wakeAll();
-	Thread->wait();
-	Thread->quit();
-}
-			 _Public def_del ~VIECMAScripts() {
-				 if (OnRunning) {
-					 onExit();
-				 }
-				 delete Thread;
-				 delete ThreadWaitCondition;
-				 delete ThreadMutex;
-				 if (VIECMAS != VI_NULLPTR) {
-					 delete VIECMAS;
-				 }
-			 }
+	private slots: void onExit() {
+		OnRunning = false;
+		ThreadWaitCondition->wakeAll();
+		Thread->wait();
+		Thread->quit();
+	}
+	_Public def_del ~VIECMAScripts() {
+		if (OnRunning) {
+			onExit();
+		}
+		delete Thread;
+		delete ThreadWaitCondition;
+		delete ThreadMutex;
+		if (VIECMAS != VI_NULLPTR) {
+			delete VIECMAS;
+		}
+	}
+	_Public VICommand_Handler(Command) {
+		VICommand_Name("ecma") {
+			VIConsole::printLine("VIECMA Scripts Engine");
+			return true;
+		}
+	};
 };
