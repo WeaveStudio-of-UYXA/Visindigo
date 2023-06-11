@@ -212,10 +212,10 @@ class VIBesselLine :public VIObject
 			if (i->Dim != dim) {
 				throw VIDimensionError("VIBesselLine::getBesselValue() only allows coordinates of the same dimension");
 			}
-			ret.X += i->X * qPow(p, m) * qPow(1 - p, n - m);
-			ret.Y += i->Y * qPow(p, m) * qPow(1 - p, n - m);
-			ret.Z += i->Z * qPow(p, m) * qPow(1 - p, n - m);
-			ret.W += i->W * qPow(p, m) * qPow(1 - p, n - m);
+			ret.X += i->X * qPow(p, m) * qPow(1.0 - p, n - m);
+			ret.Y += i->Y * qPow(p, m) * qPow(1.0 - p, n - m);
+			ret.Z += i->Z * qPow(p, m) * qPow(1.0 - p, n - m);
+			ret.W += i->W * qPow(p, m) * qPow(1.0 - p, n - m);
 			m++;
 		}
 		return ret;

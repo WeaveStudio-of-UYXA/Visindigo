@@ -105,3 +105,7 @@ bool VIFramework::useDebugModeRuntime() {
 bool VIFramework::execCommand(QString command) {
 	return VICommandHost::getInstance()->handleCommand(command);
 }
+
+QApplication* VIFramework::getAppInstance() {
+	return Instance->App;
+}

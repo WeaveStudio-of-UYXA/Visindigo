@@ -3,7 +3,7 @@
 #include "../../Visindigo/VI2DScene/VI2DSceneWidget.h"
 #include "SPOL/SPSReader.h"
 #include "SPOL/SPSEditor.h"
-
+#include "BuiltinEffects/ImageFilter.h"
 class RotationBehavior :public VIBasicBehavior {
 	Q_OBJECT;
 	VI_Property(VI2DSceneWidget*, Scene);
@@ -36,26 +36,20 @@ class YSPPlayerWidget :public VIWidget
 		rotationBehavior->active(VIAbstractBehavior::QuantifyTickType::T128);
 	};
 };
-class YSPMainPack :public VIPackage
+class YSPMainWindow :public VIMainWindow
 {
 	Q_OBJECT;
-	QWidget* testWin;
-	VIDebugBehavior* debugBehavior;
-	YSPPlayerWidget* playerWidget;
-	VIMultiButtonGroup* testGroup;
-	SPSEditor* spsEditor;
-	_Public def_init YSPMainPack(QObject* parent = VI_NULLPTR) :VIPackage(parent) {
-		SPSReader::spawnStoryFile("./Dev/t10.js");
-		PackageName = "YSPMainPack";
-		debugBehavior = new VIDebugBehavior(this);
-		playerWidget = new YSPPlayerWidget();
-		//playerWidget->showFullScreen();
-		consoleLog("new YSPCommand");
-		VICommand_Reg(YSPCommand);
-		VIFramework::execCommand("ecma");
-		spsEditor = new SPSEditor();
-		spsEditor->show();
-		testGroup = new VIMultiButtonGroup(Qt::Vertical);
+	VI_OBJECT;
+	_Private VIMultiButtonGroup* testGroup;
+	_Private QGridLayout* CurrentLayout;
+	_Public def_init YSPMainWindow(QWidget* parent = VI_NULLPTR) :VIMainWindow(parent) {
+		this->setWindowTitle("YSPMainWindow");
+		this->setStyleSheet("YSPMainWindow{background-color:white;}");
+		testGroup = new VIMultiButtonGroup(Qt::Vertical, this);
+		qDebug() << this->WindowPalette;
+		testGroup->setStyleSheetPalette(this->WindowPalette);
+		testGroup->setSpacing(20);
+		WindowPalette->PaletteChanged();
 		testGroup->resize(200, 500);
 		testGroup->spawnButton("TEST1", "", "test1");
 		testGroup->spawnButton("TEST2", "", "test2");
@@ -65,11 +59,48 @@ class YSPMainPack :public VIPackage
 		testGroup->setHoverStyleSheet("VIMultiButton{background-color:rgb(230,230,255);border:1px solid rgb(230,230,255);border-radius:3px;}");
 		testGroup->setPressStyleSheet("VIMultiButton{background-color:rgb(200,200,200);border:1px solid rgb(200,200,200);border-radius:3px;}");
 		testGroup->selectFirst();
-		testGroup->show();
+		CurrentLayout = new QGridLayout(this);
+		CurrentLayout->setSpacing(0);
+		CurrentLayout->setMargin(0);
+		CurrentLayout->addWidget(testGroup);
+		WindowPalette->changeColorWithNameIn("SystemThemeColor", QColor(234, 64, 128), "default");
+	};
+};
+class YSPMainPack :public VIPackage
+{
+	Q_OBJECT;
+	QWidget* testWin;
+	VIDebugBehavior* debugBehavior;
+	YSPPlayerWidget* playerWidget;
+	YSPMainWindow* mainWindow;
+	SPSEditor* spsEditor;
+	_Public def_init YSPMainPack(QObject* parent = VI_NULLPTR) :VIPackage(parent) {
+		SPSReader::spawnStoryFile("./Dev/t10.js");
+		PackageName = "YSPMainPack";
+		debugBehavior = new VIDebugBehavior(this);
+		//playerWidget = new YSPPlayerWidget();
+		//playerWidget->showFullScreen();
+		consoleLog("new YSPCommand");
+		VICommand_Reg(YSPCommand);
+		VIFramework::execCommand("ecma");
+		//spsEditor = new SPSEditor();
+		//spsEditor->show();
+		mainWindow = new YSPMainWindow();
+		mainWindow->setMinimumSize(800, 600);
+		mainWindow->show();
+	};
+	_Slot void onSystemThemeColorChanged() {
+
 	};
 	_Public virtual void onActive() {
 		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is active!");
 		VIFramework::execCommand("YSP ua1 ua2 -t n1 -s n2 -n \"n3ss ss\" | YSP uua1 uua2");
+		QImage img = QImage("./Dev/Resource/BG.png");
+		YSPImageFilter::gaussianBlur(&img,7);
+		QLabel* label = new QLabel();
+		label->setPixmap(QPixmap::fromImage(img));
+		label->show();
+		img.save("./Dev/Resource/BG2.png");
 	};
 	_Public virtual void onPassive() {
 		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is passive!");

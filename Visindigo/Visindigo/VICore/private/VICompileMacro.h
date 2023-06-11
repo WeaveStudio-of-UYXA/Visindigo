@@ -1,4 +1,11 @@
 ﻿#pragma once
+//此项目控制部署目标平台
+//#define LINUX_DEPLOY //暂时不支持
+//#define ANDROID_DEPLOY //arm64-v8a
+//#define ANDROID_DEPLOY_OLD //armeabi-v7a
+//#define WINDOWS_DEPLOY_32 //x86_32
+#define WINDOWS_DEPLOY //x86_64
+
 //此项目控制是否使用3D
 //#define VI_USE_3D
 

@@ -79,6 +79,8 @@ class VIECMAScripts :public VIObject {
 		ThreadWaitCondition = new QWaitCondition();
 		ThreadMutex = new QMutex();
 		VIECMAS = VI_NULLPTR;
+		OnRunning = false;
+		SideLoaded = false;
 	}
 	_Public void boot(QString fileName, QString entry = "main") {
 		boot(fileName, false, entry);

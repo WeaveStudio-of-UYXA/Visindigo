@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include "VIObject.h"
+#include <QtGui>
+#include <QtWidgets>
 class VIMultiPlatform : public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -14,4 +16,5 @@ class VIMultiPlatform : public VIObject {
 	_Public static QString getCPUCurrentType() { return QSysInfo::currentCpuArchitecture(); }
 	_Public static QString getSystemKernelType() { return QSysInfo::kernelType(); }
 	_Public static QString getSystemKernelVersion() { return QSysInfo::kernelVersion(); }
+	_Public static QColor getSystemThemeColor() { return static_cast<QApplication*>(QApplication::instance())->palette().color(QPalette::Window); }
 };

@@ -43,7 +43,7 @@ class VIAbstractBehaviorHost :public VIObject
 	_Protected QVector<VIAbstractBehavior*> BehaviorListAdd;
 	_Protected bool STOPFLAG = false;
 	VI_Property(VINanoSecond, TickDuration);
-	_Public def_init VIAbstractBehaviorHost(VISuper* parent = VI_NULLPTR) :VIObject(parent) {}
+	_Public def_init VIAbstractBehaviorHost(VISuper* parent = VI_NULLPTR) :VIObject(parent) { TickDuration = 0; }
 	_Public virtual void start() PureVirtual;
 	_Private virtual void tickLoop() PureVirtual;
 	_Public virtual void stop() PureVirtual;

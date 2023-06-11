@@ -19,6 +19,7 @@ class VITimedBehavior :public VIBasicBehavior
 	VI_Property(VIBehaviorDuration*, Duration);
 	_Public def_init VITimedBehavior(QObject* parent = nullptr);
 	_Public void setDuration(VIMilliSecond duration);
+	_Public void setForeverDuration();
 	_Public State hostCall();
 	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
 	_Public VIMilliSecond getTickDuration();
@@ -86,7 +87,6 @@ class VIAnimationBehavior :public VITimedBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	VI_Property(VIMilliSecond, AnimationDuration);
 	_Public def_init VIAnimationBehavior(QObject* parent = nullptr):VITimedBehavior(parent) {}
 	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T64) override {
 		VITimedBehavior::active(QuantifyTickType::T64);

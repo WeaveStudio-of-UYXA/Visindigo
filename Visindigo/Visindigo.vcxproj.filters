@@ -52,6 +52,9 @@
     <ClCompile Include="Visindigo\VICore\cpp\VIMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UserCode\YSPMainPack\Data\cpp\YSPGlobalValue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visindigo\VICore\private\VIMacro.h">
@@ -81,9 +84,6 @@
     <ClInclude Include="Visindigo\VICore\private\VIAutoVersion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\bings\Desktop\Visindigo\Visindigo\VICore\VIMath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Visindigo\VICore\VIMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -93,7 +93,7 @@
     <ClInclude Include="Visindigo\VIWidgets\VIWidgets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VI2DScene\VI2DSceneItemAnimationBehavior.h">
+    <ClInclude Include="UserCode\YSPMainPack\PlayerScene\CharaItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -171,6 +171,27 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VIWidgets\VIMultiButton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIWidgets\VIStyleSheet.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIWidgets\VIWindowsTheme.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\YSPChara.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\BuiltinEffects\ImageFilter.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VI2DScene\VI2DSceneItemAnimationBehavior.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\Data\YSPProjectInfo.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\Data\YSPGlobalValue.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -4,6 +4,7 @@
 #include "VIBehavior.h"
 #include "VICommand.h"
 #include "VIConsole.h"
+#include "VIDocument.h"
 #include "VIDuration.h"
 #include "VIException.h"
 #include "VIFramework.h"
@@ -11,6 +12,7 @@
 #include "VIMultiPlatform.h"
 #include "VIObject.h"
 #include "VIPackage.h"
+#include "VISettings.h"
 #include "VIVersion.h"
 
 #define visindigo int

@@ -33,7 +33,9 @@ class VIApplication :public QApplication
 		catch (VIException& e) {
 			e.print();
 			VIMultiPlatform::exit();
+			return false;
 		}
+		return true;
 	}
 };
 class VIFramework :public VIObject
@@ -57,4 +59,5 @@ class VIFramework :public VIObject
 	_Public bool isDebugModeRuntime();
 	_Public bool useDebugModeRuntime();
 	_Public static bool execCommand(QString);
+	_Public static QApplication* getAppInstance();
 };

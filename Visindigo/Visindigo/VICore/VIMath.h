@@ -21,10 +21,10 @@ public:
 		}
 		return ret;
 	}
-	static float sin_0_1(float percent) {
+	static double sin_0_1(double percent) {
 		return (qSin(-PI/2 + PI*percent)+1.0)/2.0;
 	}
-	static float sin_0_1_0(float percent) {
+	static double sin_0_1_0(double percent) {
 		return qSin(percent * PI);
 	}
 };

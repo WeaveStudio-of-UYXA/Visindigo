@@ -19,15 +19,13 @@ class VIMultiButton :public VIWidget
 	VI_PrivateFlag(Shrinked);
 	VI_Property(int, ShrinkWidth);
 	VI_Property(int, Spacing);
-	VI_Property(QString, NormalStyleSheet);
-	VI_Property(QString, HoverStyleSheet);
-	VI_Property(QString, PressStyleSheet);
 	VI_ProtectedFlag(InButtonGroup);
 	VI_ProtectedFlag(Selected);
 	VI_ProtectedProperty(int, ButtonGroupIndex);
 	_Public def_init VIMultiButton(QWidget* parent = VI_NULLPTR, QString text = "", bool enableSubText = true) :VIWidget(parent) {
 		TextLabel = new QLabel(text, this);
 		TextLabel->setObjectName("TextLabel");
+		SubTextLabel = VI_NULLPTR;
 		if (enableSubText) { SubTextLabel = new QLabel("", this); SubTextLabel->setObjectName("SubTextLabel"); }
 		EnableSubText = enableSubText;
 		IconLabel = new QLabel(this);
@@ -75,9 +73,18 @@ class VIMultiButton :public VIWidget
 		if (EnableSubText) { SubTextLabel->show();}
 		TextLabel->show();
 	}
+	_Public void setNormalStyleSheet(QString ss) {
+		StyleSheetManager->addStyleSheet("Normal", ss);
+	}
+	_Public void setHoverStyleSheet(QString ss) {
+		StyleSheetManager->addStyleSheet("Hover", ss);
+	}
+	_Public void setPressStyleSheet(QString ss) {
+		StyleSheetManager->addStyleSheet("Press", ss);
+	}
 	_Public void select() {
 		Selected = true;
-		setStyleSheet(PressStyleSheet);
+		StyleSheetManager->applyStyleSheet("Press");
 	}
 	_Public void setIcon(QString icon) {
 		IconLabel->setPixmap(QPixmap(icon));
@@ -90,22 +97,20 @@ class VIMultiButton :public VIWidget
 		SubTextLabel->setText(text);
 	}
 	_Public void enterEvent(QEvent* event) {
-		if (!Selected) { setStyleSheet(HoverStyleSheet); }
-		consoleLog("enter");
+		if (!Selected) { StyleSheetManager->applyStyleSheet("Hover"); }
 	}
 	_Public void leaveEvent(QEvent* event) {
-		if (!Selected) { setStyleSheet(NormalStyleSheet); }
-		consoleLog("leave");
+		if (!Selected) { StyleSheetManager->applyStyleSheet("Normal"); }
 	}
 	_Public void mousePressEvent(QMouseEvent* event) {
 		if (event->button() == Qt::LeftButton) {
-			setStyleSheet(PressStyleSheet);
+			StyleSheetManager->applyStyleSheet("Press");
 			emit pressed();
 		}
 	}
 	_Public void mouseReleaseEvent(QMouseEvent* event) {
 		if (event->button() == Qt::LeftButton) {
-			setStyleSheet(PressStyleSheet);
+			StyleSheetManager->applyStyleSheet("Press");
 			Selected = true;
 			emit clicked();
 			emit selected(ButtonGroupIndex);
@@ -113,22 +118,22 @@ class VIMultiButton :public VIWidget
 	}
 	_Protected void unSelect() {
 		Selected = false;
-		setStyleSheet(NormalStyleSheet);
+		StyleSheetManager->applyStyleSheet("Normal");
 	}
 };
 class private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Private QLabel* Target;
+	_Private QWidget* Target;
 	_Private int targetX, targetY;
 	_Private int rawH, rawW;
 	_Private int rawX, rawY;
 	_Private float maxExpandPercent = 0.5;
 	_Private bool PositiveDirection;
 	_Public Qt::Orientation Direction;
-	_Public def_init private_VIMultiButtonAnimationBehavior(QLabel* target, QWidget* parent = VI_NULLPTR) :VIAnimationBehavior(parent) {
-		Target = target;
+	_Public def_init private_VIMultiButtonAnimationBehavior(QWidget* parent = VI_NULLPTR) :VIAnimationBehavior(parent) {
+		Target = parent;
 	}
 	_Public void setMoveTo(int X, int Y, Qt::Orientation orientation) {
 		targetX = X;
@@ -159,15 +164,24 @@ class private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
 		Target->setGeometry(targetX, targetY, rawW, rawH);
 	}
 };
-class private_VIMultiButtonAnimationLabel :public QLabel, VIBaseObject
+class private_VIMultiButtonAnimationLabel :public VIWidget
 {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Public private_VIMultiButtonAnimationBehavior* Behavior;
-	_Public def_init private_VIMultiButtonAnimationLabel(QWidget* parent = VI_NULLPTR) :QLabel(parent) {
+	_Public def_init private_VIMultiButtonAnimationLabel(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
 		this->setObjectName("VIMultiButtonAnimationLabel");
-		Behavior = new private_VIMultiButtonAnimationBehavior(this, this);
-		this->setStyleSheet("private_VIMultiButtonAnimationLabel{background-color:rgb(30, 30, 255);border:0px solid white;border-radius:2px;}");
+		Behavior = new private_VIMultiButtonAnimationBehavior(this);
+		this->StyleSheetManager->addStyleSheet("default",
+			"private_VIMultiButtonAnimationLabel{background-color:CLR__SystemThemeColor__CLR;border:0px solid white;border-radius:2px;}");
+		this->StyleSheetManager->applyStyleSheet("default");
+	
+	}
+	_Public void setStyleSheetPalette(VIStyleSheetPalette* palette) override{
+		consoleLog("Palette setted");
+		VIWidget::setStyleSheetPalette(palette);
+		connect(StyleSheetManager->Palette, &VIStyleSheetPalette::PaletteChanged, this->StyleSheetManager, &VIStyleSheetManager::refreshStyleSheet);
+		this->StyleSheetManager->applyStyleSheet("default");
 	}
 };
 class VIMultiButtonGroup :public VIWidget
@@ -211,12 +225,12 @@ class VIMultiButtonGroup :public VIWidget
 	_Public void removeButton(VIMultiButton* button) {
 		removeButton(button->ButtonGroupIndex);
 	}
-	_Public int setShrinkWidth(int width) {
+	_Public void setShrinkWidth(int width) {
 		for (int i = 0; i < Buttons.size(); i++) {
 			Buttons[i]->ShrinkWidth = width;
 		}
 	}
-	_Public int setSpacing(int spacing) {
+	_Public void setSpacing(int spacing) {
 		Spacing = spacing;
 		for (int i = 0; i < Buttons.size(); i++) {
 			Buttons[i]->Spacing = spacing;
@@ -229,6 +243,7 @@ class VIMultiButtonGroup :public VIWidget
 		SelectedIndex = 0;
 		AnimationLabel->move(Buttons[SelectedIndex]->x()+(Spacing - AnimationLabelWidth) / 2, Buttons[SelectedIndex]->y() + Spacing);
 		AnimationLabel->resize(AnimationLabelWidth, Buttons[SelectedIndex]->height() - Spacing * 2);
+		return 0;
 	}
 	_Public void setNormalStyleSheet(const QString &styleSheet) {
 		for (int i = 0; i < Buttons.size(); i++) {
@@ -267,7 +282,7 @@ class VIMultiButtonGroup :public VIWidget
 				Buttons[i]->unSelect();
 			}
 		}
-		AnimationLabel->Behavior->setDuration(500);
+		AnimationLabel->Behavior->setDuration(300);
 		AnimationLabel->Behavior->setMoveTo(AnimationLabel->x(), Buttons[index]->y()+ Spacing, Direction);
 		AnimationLabel->Behavior->active();
 		emit selected(index);

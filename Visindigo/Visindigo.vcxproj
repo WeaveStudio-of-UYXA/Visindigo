@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UserCode\YSPMainPack\Data\cpp\YSPGlobalValue.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIAbstractBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VICommand.cpp" />
@@ -112,9 +113,16 @@
     <ClCompile Include="Visindigo\VICore\cpp\VIMath.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Visindigo\VIWidgets\VIWindowsTheme.h" />
     <QtMoc Include="UserCode\YSPMainPack\ProjectUI\ProjectWidget.h" />
-    <ClInclude Include="Visindigo\VI2DScene\VI2DSceneItemAnimationBehavior.h" />
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\YSPChara.h" />
+    <QtMoc Include="UserCode\YSPMainPack\BuiltinEffects\ImageFilter.h" />
+    <QtMoc Include="UserCode\YSPMainPack\Data\YSPProjectInfo.h" />
+    <QtMoc Include="UserCode\YSPMainPack\Data\YSPGlobalValue.h" />
+    <ClInclude Include="UserCode\YSPMainPack\PlayerScene\CharaItem.h" />
+    <QtMoc Include="Visindigo\VI2DScene\VI2DSceneItemAnimationBehavior.h" />
     <QtMoc Include="Visindigo\VIWidgets\VIMultiButton.h" />
+    <QtMoc Include="Visindigo\VIWidgets\VIStyleSheet.h" />
     <ClInclude Include="Visindigo\VIWidgets\VIWidgets.h" />
     <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSEditor.h" />
     <QtMoc Include="Visindigo\VICore\VIDocument.h" />
@@ -131,7 +139,6 @@
     <ClInclude Include="Visindigo\VICore\VIException.h" />
     <QtMoc Include="Visindigo\VICore\VIVersion.h" />
     <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h" />
-    <ClInclude Include="C:\Users\bings\Desktop\Visindigo\Visindigo\VICore\VIMath.h" />
     <ClInclude Include="Visindigo\VI2DScene\private\VI2DScene_m.h" />
     <QtMoc Include="Visindigo\VI2DScene\VI2DSceneWidget.h" />
     <ClInclude Include="Visindigo\VI2DScene\VI2DUnit.h" />

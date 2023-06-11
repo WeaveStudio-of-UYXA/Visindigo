@@ -30,7 +30,7 @@ class VIException
 		ExceptionType = other.ExceptionType;
 		ExceptionName = other.ExceptionName;
 	};
-	_Public def_move VIException(VIException&& other) {
+	_Public def_move VIException(VIException&& other) noexcept {
 		Reason = other.Reason;
 		Help = other.Help;
 		ExceptionType = other.ExceptionType;
