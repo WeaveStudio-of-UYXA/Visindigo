@@ -76,4 +76,5 @@ export function " + StoryFileName + "_SPOL() {}\n";
 		targetJSFile.close();
 		return StoryFilePath;
 	}
+
 };

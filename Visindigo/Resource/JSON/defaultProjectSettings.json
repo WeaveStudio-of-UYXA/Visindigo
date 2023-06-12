@@ -1,0 +1,9 @@
+{
+    "projectVersion": "0.10.0",
+    "projectNickname": "My Project",
+    "codeEntry": "main.js",
+    "spolVersion": "0.10.0",
+    "jsFileIgnore":[
+        "./ignore.js"
+    ]
+}

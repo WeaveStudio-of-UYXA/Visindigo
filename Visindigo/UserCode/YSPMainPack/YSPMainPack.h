@@ -96,7 +96,9 @@ class YSPMainPack :public VIPackage
 		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is active!");
 		VIFramework::execCommand("YSP ua1 ua2 -t n1 -s n2 -n \"n3ss ss\" | YSP uua1 uua2");
 		QImage img = QImage("./Dev/Resource/BG.png");
-		YSPImageFilter::gaussianBlur(&img,7);
+		VITimePoint b = VIDuration::getTimePointNow();
+		YSPImageFilter::gaussianBlurQt(&img,17);
+		consoleLog("gaussianBlur "+ QString::number(VIDuration::getMilliDuration(b))+" ms.");
 		QLabel* label = new QLabel();
 		label->setPixmap(QPixmap::fromImage(img));
 		label->show();

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "VIObject.h"
-
+#include "VIConsole.h"
 class VISettings :public VIObject
 {
 	Q_OBJECT;
@@ -40,6 +40,7 @@ class VISettings :public VIObject
 	_Public QVariant getValueOf(QString objName) {
 		QStringList objNameList = objName.split('.');
 		QJsonObject obj = this->Settings.object();
+		bool failToFind = false;
 		for (auto i = objNameList.begin(); i != objNameList.end(); i++) {
 			if (obj.contains(*i)) {
 				if (i == objNameList.end() - 1) {
@@ -50,9 +51,27 @@ class VISettings :public VIObject
 				}
 			}
 			else {
-				return QVariant();
+				failToFind = true;
 			}
 		}
+		if (failToFind) {
+			for (auto i = objNameList.begin(); i != objNameList.end(); i++) {
+				if (this->DefaultSettings.contains(*i)) {
+					if (i == objNameList.end() - 1) {
+						VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix() + "Can't find settings: " + objName+", use default value."));
+						return this->DefaultSettings.value(*i).toVariant();
+					}
+					else {
+						obj = this->DefaultSettings.value(*i).toObject();
+					}
+				}
+				else {
+					VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "No such settings:" + objName));
+					return QVariant();
+				}
+			}
+		}
+		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "No such settings:" + objName));
 		return QVariant();
 	}
 };

@@ -12,6 +12,7 @@ class private_VIECMAScripts :public VIObject {
 	friend class VIECMAScripts;
 	VI_ProtectedProperty(QJSEngine*, engine);
 	VI_ProtectedProperty(QList<VIECMABuiltInModule>, BuiltInModules);
+	VI_ProtectedProperty(QList<VIObject*>, VIObjectModules);
 	VI_ProtectedProperty(ModuleMap, Modules);
 	VI_ProtectedFlag(DelLater);
 	_Signal void boot(QString fileName, QString entry = "main");
@@ -24,15 +25,19 @@ class private_VIECMAScripts :public VIObject {
 			engine->globalObject().setProperty("System", engine->newQObject(new VIObject()));
 			break;
 		case VIECMABuiltInModule::Console:
-			engine->globalObject().setProperty("Console", engine->newQObject(new VIConsole()));
+			engine->globalObject().setProperty("Console", engine->newQObject(new private_VIECMA_Console()));
 			break;
 		default:
 			break;
 		}
 	}
+	_Protected void importVIObject(VIObject* obj) {
+		VIObjectModules.append(obj);
+	}
 	_Slot void sideLoad(QString fileName) {
 		QFileInfo fileInfo(fileName);
 		QString path = fileInfo.absolutePath();
+		QJSValue MainObject = engine->importModule(fileName);
 		for (auto i = Modules.begin(); i != Modules.end(); i++) {
 			QJSValue ModuleObject = engine->importModule(i.value());
 			engine->globalObject().setProperty(i.key(), ModuleObject);
@@ -51,6 +56,9 @@ class private_VIECMAScripts :public VIObject {
 		}
 		for (auto i = BuiltInModules.begin(); i != BuiltInModules.end(); i++) {
 			registerBuiltInModule(engine, *i);
+		}
+		for (auto i = VIObjectModules.begin(); i != VIObjectModules.end(); i++) {
+			engine->globalObject().setProperty((*i)->getClassName(), engine->newQObject(*i));
 		}
 		QJSValue MainFunction = MainObject.property(entry);
 		QJSValue result = MainFunction.call();
@@ -112,6 +120,9 @@ class VIECMAScripts :public VIObject {
 	}
 	_Public void importModule(QString name, QString path) {
 		Modules.insert(name, path);
+	}
+	_Public void importVIObject(VIObject* obj) {
+		
 	}
 	_Public void sideLoad(QString fileName) {
 		if (SideLoaded) {
