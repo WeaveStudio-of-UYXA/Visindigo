@@ -97,9 +97,9 @@ class YSPMainPack :public VIPackage
 		VIFramework::execCommand("YSP ua1 ua2 -t n1 -s n2 -n \"n3ss ss\" | YSP uua1 uua2");
 		QImage img = QImage("./Dev/Resource/BG.png");
 		VITimePoint b = VIDuration::getTimePointNow();
-		YSPImageFilter::gaussianBlurQt(&img,17);
+		YSPImageFilter::gaussianBlur(&img,17);
 		consoleLog("gaussianBlur "+ QString::number(VIDuration::getMilliDuration(b))+" ms.");
-		QLabel* label = new QLabel();
+		VILabel* label = new VILabel();
 		label->setPixmap(QPixmap::fromImage(img));
 		label->show();
 		img.save("./Dev/Resource/BG2.png");

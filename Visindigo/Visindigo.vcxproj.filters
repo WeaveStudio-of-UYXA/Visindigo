@@ -55,6 +55,9 @@
     <ClCompile Include="UserCode\YSPMainPack\Data\cpp\YSPGlobalValue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UserCode\YSPMainPack\SPOL\cpp\SPOLScripts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visindigo\VICore\private\VIMacro.h">
@@ -94,6 +97,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UserCode\YSPMainPack\PlayerScene\CharaItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCode\YSPMainPack\SPOL\SPOLClassicTester.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCode\YSPMainPack\SPOL\SPOLTerminal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -179,7 +188,7 @@
     <QtMoc Include="Visindigo\VIWidgets\VIWindowsTheme.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\YSPChara.h">
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLChara.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="UserCode\YSPMainPack\BuiltinEffects\ImageFilter.h">
@@ -192,6 +201,24 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="UserCode\YSPMainPack\Data\YSPProjectInfo.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIWidgets\VILoadingWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLParser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOL.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLScripts.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLWorkingEnv.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLInterpreter.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

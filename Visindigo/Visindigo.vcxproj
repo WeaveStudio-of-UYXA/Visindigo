@@ -73,6 +73,15 @@
     <PreBuildEvent>
       <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
     </PreBuildEvent>
+    <ClCompile>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <ClCompile>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+    </ClCompile>
+    <ClCompile>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -104,6 +113,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UserCode\YSPMainPack\Data\cpp\YSPGlobalValue.cpp" />
+    <ClCompile Include="UserCode\YSPMainPack\SPOL\cpp\SPOLScripts.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIAbstractBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VICommand.cpp" />
@@ -115,7 +125,7 @@
   <ItemGroup>
     <QtMoc Include="Visindigo\VIWidgets\VIWindowsTheme.h" />
     <QtMoc Include="UserCode\YSPMainPack\ProjectUI\ProjectWidget.h" />
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\YSPChara.h" />
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLChara.h" />
     <QtMoc Include="UserCode\YSPMainPack\BuiltinEffects\ImageFilter.h" />
     <QtMoc Include="UserCode\YSPMainPack\Data\YSPProjectInfo.h" />
     <QtMoc Include="UserCode\YSPMainPack\Data\YSPGlobalValue.h" />
@@ -123,6 +133,14 @@
     <QtMoc Include="Visindigo\VI2DScene\VI2DSceneItemAnimationBehavior.h" />
     <QtMoc Include="Visindigo\VIWidgets\VIMultiButton.h" />
     <QtMoc Include="Visindigo\VIWidgets\VIStyleSheet.h" />
+    <QtMoc Include="Visindigo\VIWidgets\VILoadingWidget.h" />
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLParser.h" />
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOL.h" />
+    <ClInclude Include="UserCode\YSPMainPack\SPOL\SPOLClassicTester.h" />
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLScripts.h" />
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLWorkingEnv.h" />
+    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLInterpreter.h" />
+    <ClInclude Include="UserCode\YSPMainPack\SPOL\SPOLTerminal.h" />
     <ClInclude Include="Visindigo\VIWidgets\VIWidgets.h" />
     <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSEditor.h" />
     <QtMoc Include="Visindigo\VICore\VIDocument.h" />

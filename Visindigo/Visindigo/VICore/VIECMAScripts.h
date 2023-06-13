@@ -10,6 +10,7 @@ class private_VIECMAScripts :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
 	friend class VIECMAScripts;
+	_Signal void finished();
 	VI_ProtectedProperty(QJSEngine*, engine);
 	VI_ProtectedProperty(QList<VIECMABuiltInModule>, BuiltInModules);
 	VI_ProtectedProperty(QList<VIObject*>, VIObjectModules);
@@ -58,13 +59,14 @@ class private_VIECMAScripts :public VIObject {
 			registerBuiltInModule(engine, *i);
 		}
 		for (auto i = VIObjectModules.begin(); i != VIObjectModules.end(); i++) {
-			engine->globalObject().setProperty((*i)->getClassName(), engine->newQObject(*i));
+			engine->globalObject().setProperty((*i)->getObjectName(), engine->newQObject(*i));
 		}
 		QJSValue MainFunction = MainObject.property(entry);
 		QJSValue result = MainFunction.call();
 		if (result.isError()) {
 			VIConsole::printLine(getLogPrefix() + VIConsole::inErrorStyle(result.toString()));
 		}
+		emit finished();
 		if (DelLater) {
 			deleteLater();
 		}
@@ -74,12 +76,14 @@ class private_VIECMAScripts :public VIObject {
 class VIECMAScripts :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
+	_Signal void finished();
 	VI_Property(QThread*, Thread);
 	VI_PrivateProperty(QWaitCondition*, ThreadWaitCondition);
 	VI_PrivateProperty(QMutex*, ThreadMutex);
 	VI_PrivateProperty(QList<VIECMABuiltInModule>, BuiltInModules);
 	VI_PrivateProperty(ModuleMap, Modules);
 	VI_PrivateProperty(private_VIECMAScripts*, VIECMAS);
+	VI_PrivateProperty(QList<VIObject*>, VIObjectModules);
 	VI_Flag(OnRunning);
 	VI_Flag(SideLoaded);
 	_Public def_init VIECMAScripts() {
@@ -99,6 +103,7 @@ class VIECMAScripts :public VIObject {
 	_Private void boot(QString fileName, bool inThread = false, QString entry = "main") {
 		private_VIECMAScripts* VIECMA = new private_VIECMAScripts();
 		connect(VIECMA, &private_VIECMAScripts::boot, VIECMA, &private_VIECMAScripts::onBoot);
+		connect(VIECMA, &private_VIECMAScripts::finished, this, &VIECMAScripts::finished);
 		VIECMA->setBuiltInModules(BuiltInModules);
 		VIECMA->setModules(Modules);
 		if (inThread) {
@@ -122,7 +127,7 @@ class VIECMAScripts :public VIObject {
 		Modules.insert(name, path);
 	}
 	_Public void importVIObject(VIObject* obj) {
-		
+		VIObjectModules.append(obj);
 	}
 	_Public void sideLoad(QString fileName) {
 		if (SideLoaded) {

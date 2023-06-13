@@ -5,24 +5,50 @@
 #include <QtWidgets>
 #include <QtGui>
 
-class VIWidget :public QFrame, public VIBaseObject {
-	Q_OBJECT;
-	VI_OBJECT;
+class VIAbstractWidget :public VIAbstractObject {
 	_Public VIStyleSheetManager* StyleSheetManager;
+	_Public virtual void setStyleSheetPalette(VIStyleSheetPalette* palette) PureVirtual;
+};
+typedef VIAbstractWidget VIBaseWidget;
+#define VI_WIDGET_INIT \
+	StyleSheetManager = new VIStyleSheetManager(this);
+
+#define VI_WIDGET VI_OBJECT;\
+_Public virtual void setStyleSheetPalette(VIStyleSheetPalette* palette) {\
+	StyleSheetManager->setPalette(palette);\
+	for (auto& child : this->findChildren<VIWidget*>()) {\
+		consoleLog("Find Child" + child->getClassName());\
+		child->setStyleSheetPalette(palette);\
+	}\
+}
+class VIWidget :public QFrame, public VIBaseWidget {
+	Q_OBJECT;
+	VI_WIDGET;
 	_Public def_init VIWidget(QWidget* parent = VI_NULLPTR) :QFrame(parent) {
 		if (parent == VI_NULLPTR) {
 			this->setWindowTitle("Visindigo Widget");
 		}
-		StyleSheetManager = new VIStyleSheetManager(this);
-	}
-	_Public virtual void setStyleSheetPalette(VIStyleSheetPalette* palette) {
-		StyleSheetManager->setPalette(palette);
-		for (auto& child : this->findChildren<VIWidget*>()) {
-			consoleLog("Find Child" + child->getClassName());
-			child->setStyleSheetPalette(palette);
-		}
+		VI_WIDGET_INIT;
 	}
 };
+#define VI_WIDGET_TRANS_QT(name) class VI##name :public Q##name, public VIBaseWidget {\
+	Q_OBJECT;\
+	VI_WIDGET;\
+	_Public def_init VI##name(QWidget* parent = VI_NULLPTR) :Q##name(parent) {\
+		VI_WIDGET_INIT;\
+	}\
+};
+
+#define VI_WIDGET_TRANS_QTRAW(name) class VIQ##name :public Q##name, public VIBaseWidget {\
+	Q_OBJECT;\
+	VI_WIDGET;\
+	_Public def_init VIQ##name(QWidget* parent = VI_NULLPTR) :Q##name(parent) {\
+		VI_WIDGET_INIT;\
+	}\
+};
+
+VI_WIDGET_TRANS_QT(Label);
+VI_WIDGET_TRANS_QTRAW(Widget);
 
 class VIMainWindow : public VIWidget {
 	Q_OBJECT;

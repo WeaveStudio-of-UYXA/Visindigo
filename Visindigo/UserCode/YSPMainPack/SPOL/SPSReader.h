@@ -8,6 +8,22 @@ class SPSReader : public VIObject
 	Q_OBJECT;
 	VI_OBJECT;
 	_Public def_init SPSReader() {};
+	_Public static QStringList spawnAllStoryFile(QString mainFilePath) {
+		//find all js file in the folder that contains the main file, and the subfolder of the folder
+		QString FileFolder = mainFilePath.section('/', 0, -2);
+		QStringList allJSFilePath;
+		QDirIterator it(FileFolder, QStringList() << "*.js"<<".sps", QDir::Files, QDirIterator::Subdirectories);
+		while (it.hasNext()) {
+			QString filePath = it.next();
+			allJSFilePath.append(filePath);
+		}
+		QStringList allStoryFilePath;
+		for (auto i = allJSFilePath.begin(); i != allJSFilePath.end(); i++) {
+			QString filePath = *i;
+			allStoryFilePath.append(spawnStoryFile(filePath));
+		}
+		return allStoryFilePath;
+	}
 	_Public static QString spawnStoryFile(QString rawJSFilePath) {
 		QString FileFolder = rawJSFilePath.section('/', 0, -2);
 		QString StoryFileFolder = FileFolder + "/Story";
