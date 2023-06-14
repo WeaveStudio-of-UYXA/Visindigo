@@ -15,6 +15,9 @@ class private_VIECMAScripts :public VIObject {
 	VI_ProtectedProperty(QList<VIECMABuiltInModule>, BuiltInModules);
 	VI_ProtectedProperty(QList<VIObject*>, VIObjectModules);
 	VI_ProtectedProperty(ModuleMap, Modules);
+	VI_ProtectedProperty(QMutex*, ThreadMutex);
+	VI_ProtectedProperty(QWaitCondition*, ThreadWaitCondition);
+	VI_ProtectedFlag(InThread);
 	VI_ProtectedFlag(DelLater);
 	_Signal void boot(QString fileName, QString entry = "main");
 	_Protected def_init private_VIECMAScripts() {
@@ -48,9 +51,14 @@ class private_VIECMAScripts :public VIObject {
 		}
 	}
 	_Slot void onBoot(QString fileName, QString entry = "main") {
+		if (InThread) {
+			ThreadMutex->lock();
+		}
 		QFileInfo fileInfo(fileName);
 		QString path = fileInfo.absolutePath();
+		qDebug()<<path;
 		QJSValue MainObject = engine->importModule(fileName);
+		qDebug()<<MainObject.toString();
 		for (auto i = Modules.begin(); i != Modules.end(); i++) {
 			QJSValue ModuleObject = engine->importModule(i.value());
 			engine->globalObject().setProperty(i.key(), ModuleObject);
@@ -65,6 +73,11 @@ class private_VIECMAScripts :public VIObject {
 		QJSValue result = MainFunction.call();
 		if (result.isError()) {
 			VIConsole::printLine(getLogPrefix() + VIConsole::inErrorStyle(result.toString()));
+		}
+		qDebug()<<result.toString();
+		consoleLog("VIECMA processing " + fileName + " finished.");
+		if (InThread) {
+			ThreadMutex->unlock();
 		}
 		emit finished();
 		if (DelLater) {
@@ -106,6 +119,10 @@ class VIECMAScripts :public VIObject {
 		connect(VIECMA, &private_VIECMAScripts::finished, this, &VIECMAScripts::finished);
 		VIECMA->setBuiltInModules(BuiltInModules);
 		VIECMA->setModules(Modules);
+		VIECMA->setVIObjectModules(VIObjectModules);
+		VIECMA->setThreadMutex(ThreadMutex);
+		VIECMA->setThreadWaitCondition(ThreadWaitCondition);
+		VIECMA->setInThread(inThread);
 		if (inThread) {
 			OnRunning = true;
 			VIECMA->setDelLater(true);
@@ -115,6 +132,7 @@ class VIECMAScripts :public VIObject {
 		else {
 			VIECMA->setDelLater(false);
 		}
+		consoleLog("VIECMA processing " + fileName + " ...");
 		emit VIECMA->boot(fileName, entry);
 		if (!inThread) {
 			delete VIECMA;

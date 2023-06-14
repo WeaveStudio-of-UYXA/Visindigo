@@ -4,14 +4,10 @@
 //您的任何更改都不会保存。
 export function t10_SPOL() {}
 
-t10_SPOL.__head__ = "/SPOL0.10.0\n \
-";
+t10_SPOL.__head__ = ["/SPOL0.10.0", 
+""];
 
-t10_SPOL.PartA = ">>>:\n \
-...\n \
-";
+t10_SPOL.PartA = [">>>:\"Hello, world!\" says the computer.", 
+"...", 
+""];
 
-t10_SPOL.PartB = [
-    ">>>:",
-    "..."
-]

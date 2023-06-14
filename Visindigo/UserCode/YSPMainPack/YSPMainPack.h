@@ -1,9 +1,11 @@
 ﻿#pragma once
 #include "../../Visindigo/VICore/VICore.h"
 #include "../../Visindigo/VI2DScene/VI2DSceneWidget.h"
-#include "SPOL/SPSReader.h"
-#include "SPOL/SPSEditor.h"
+#include "../SPDF/SPSReader.h"
+#include "../SPDF/SPSEditor.h"
+#include "../SPDF/SPDF.h"
 #include "BuiltinEffects/ImageFilter.h"
+#include "SPDFYSP/SPOL_10X.h"
 class RotationBehavior :public VIBasicBehavior {
 	Q_OBJECT;
 	VI_Property(VI2DSceneWidget*, Scene);
@@ -95,14 +97,12 @@ class YSPMainPack :public VIPackage
 	_Public virtual void onActive() {
 		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is active!");
 		VIFramework::execCommand("YSP ua1 ua2 -t n1 -s n2 -n \"n3ss ss\" | YSP uua1 uua2");
-		QImage img = QImage("./Dev/Resource/BG.png");
-		VITimePoint b = VIDuration::getTimePointNow();
-		YSPImageFilter::gaussianBlur(&img,17);
-		consoleLog("gaussianBlur "+ QString::number(VIDuration::getMilliDuration(b))+" ms.");
-		VILabel* label = new VILabel();
-		label->setPixmap(QPixmap::fromImage(img));
-		label->show();
-		img.save("./Dev/Resource/BG2.png");
+		//SPSReader::spawnStoryFile("./Dev/t10.js");
+		SPDFClassicTester* tester = new SPDFClassicTester(this);
+		SPDFHost* host = new SPDFHost(tester, this);
+		SPOL_10X::SpeakingController *sc = new SPOL_10X::SpeakingController();
+		host->installParser(sc);
+		host->exec("./Dev/t10.js");
 	};
 	_Public virtual void onPassive() {
 		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is passive!");

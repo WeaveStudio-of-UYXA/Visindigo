@@ -1,6 +1,7 @@
 ﻿#pragma once
-#include "../../../Visindigo/VICore/VICore.h"
-//SPOL 0.10.0
+#include "SPDFScripts.h"
+#include "SPOLClassicTester.h"
+//SPDF 0.10.0
 /*
 SPOL 曾经是Story Player Official Language的缩写，现在是单词“spoil”的谐音。
 SPOL是上下文无关的演出场景描述语言，用于像写剧本一样描述演出场景。
@@ -23,8 +24,23 @@ SPOL没有固定的语法，因为SPOL中的每一个单行的解析都是独立
 5.动画控制器
 虽然SPOL决心上下文无关，但为了使某些快捷语法能够实现，我们在内部引入了一些可以保存上下文状态的机制。
 */
-class SPOL :public VIObject
+class SPDFHost :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
+	_Public SPDFScripts* Scripts;
+	_Public SPDFWorkingEnv* WorkingEnv;
+	_Public SPDFAbstractTerminal* Terminal;
+	_Public def_init SPDFHost(SPDFAbstractTerminal* ter, VISuper* parent = VI_NULLPTR) :VIObject(parent){
+		Terminal = ter;
+		WorkingEnv = new SPDFWorkingEnv(this);
+		WorkingEnv->Terminal = Terminal;
+		Scripts = new SPDFScripts(WorkingEnv, this);
+	}
+	_Public void installParser(SPDFAbstractControllerParser* p) {
+		Scripts->addParser(p);
+	}
+	_Public void exec(QString filePath) {
+		Scripts->exec(filePath);
+	}
 };

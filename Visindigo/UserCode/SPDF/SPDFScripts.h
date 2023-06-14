@@ -1,18 +1,9 @@
 ﻿#pragma once
-#include "../../../Visindigo/VICore/VICore.h"
+#include "../../Visindigo/VICore/VICore.h"
 #include "SPOLInterpreter.h"
 #include "SPSReader.h"
-class VIECMA_SPOL :public VIObject
-{
-	Q_OBJECT;
-	VI_OBJECT;
-	_Public SPOLScripts* Scripts;
-	_Public def_init VIECMA_SPOL() {
-		setObjectName("SPOL");
-	}
-	_Slot void loadStory(QStringList spolLines);
-};
-class SPOLScripts :public VIObject
+
+class SPDFScripts :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -23,27 +14,29 @@ class SPOLScripts :public VIObject
 	friend class VIECMA_SPOL;
 	_Protected VIECMAScripts* ScriptsEngine;
 	_Protected SPOLInterpreter* Interpreter = VI_NULLPTR;
-	_Private SPOLWorkingEnv* Env;
+	_Private SPDFWorkingEnv* Env;
 	_Private QMutex* Mutex;
 	_Private QWaitCondition* WaitCondition;
-	_Private QList<SPOLAbstractControllerParser*> Parsers;
-	_Private VIECMA_SPOL* SPOL;
-	_Public def_init SPOLScripts(SPOLWorkingEnv* env, VISuper* parent = VI_NULLPTR):VIObject(parent){
+	_Private QList<SPDFAbstractControllerParser*> Parsers;
+	_Private VIECMA_SPOL* ESSPOL;
+	_Public def_init SPDFScripts(SPDFWorkingEnv* env, VISuper* parent = VI_NULLPTR):VIObject(parent){
 		Env = env;
 		ScriptsEngine = new VIECMAScripts();
 		Mutex = ScriptsEngine->getThreadMutex();
 		WaitCondition = ScriptsEngine->getThreadWaitCondition();
-		connect(ScriptsEngine, &VIECMAScripts::finished, this, &SPOLScripts::onThreadFinished);
-		SPOL = new VIECMA_SPOL();
-		SPOL->Scripts = this;
-		ScriptsEngine->importVIObject(SPOL);
+		connect(ScriptsEngine, &VIECMAScripts::finished, this, &SPDFScripts::onThreadFinished);
+		connect(env->Terminal, &SPDFAbstractTerminal::controllerHandled, this, &SPDFScripts::awake);
+		ESSPOL = new VIECMA_SPOL();
+		ESSPOL->Scripts = this;
+		ScriptsEngine->importVIObject(ESSPOL);
 	}
-	_Public void addParser(SPOLAbstractControllerParser* parser) {
+	_Public void addParser(SPDFAbstractControllerParser* parser) {
 		Parsers.append(parser);
 	}
 	_Public void exec(QString path, QString entry = "main") {
 		emit starting();
 		SPSReader::spawnAllStoryFile(path);
+		qDebug() << "storyFilePrepared";
 		emit storyFilePrepared();
 		if (Interpreter != VI_NULLPTR) {
 			Interpreter->deleteLater();
@@ -53,6 +46,7 @@ class SPOLScripts :public VIObject
 			Interpreter->addParser(parser);
 		}
 		Interpreter->moveToThread(ScriptsEngine->getThread());
+		qDebug() << "interpreterPrepared";
 		emit interpreterPrepared();
 		ScriptsEngine->threadBoot(path, entry);
 	}

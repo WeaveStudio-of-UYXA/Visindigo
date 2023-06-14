@@ -1,4 +1,4 @@
-﻿import t10_SPOL from Story.t10_SPOL
+﻿import {t10_SPOL} from "__story__/t10_SPOL.js"
 
 export function main(){
 	SPOL.loadStory(t10_SPOL.PartA);
@@ -12,6 +12,6 @@ export function main(){
 /*SPOL
 /SPOL0.10.0
 -->PartA
->>>:
+>>>:"Hello, world!" says the computer.
 ...
 SPOL*/

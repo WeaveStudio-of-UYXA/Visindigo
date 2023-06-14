@@ -55,7 +55,7 @@
     <ClCompile Include="UserCode\YSPMainPack\Data\cpp\YSPGlobalValue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UserCode\YSPMainPack\SPOL\cpp\SPOLScripts.cpp">
+    <ClCompile Include="UserCode\SPDF\cpp\SPOLScripts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -99,12 +99,6 @@
     <ClInclude Include="UserCode\YSPMainPack\PlayerScene\CharaItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UserCode\YSPMainPack\SPOL\SPOLClassicTester.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UserCode\YSPMainPack\SPOL\SPOLTerminal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h">
@@ -143,7 +137,7 @@
     <QtMoc Include="Visindigo\VICore\VIBasicType.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSReader.h">
+    <QtMoc Include="UserCode\SPDF\SPSReader.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VICore\VICommand.h">
@@ -158,7 +152,7 @@
     <QtMoc Include="Visindigo\VIWidgets\VIWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSEditor.h">
+    <QtMoc Include="UserCode\SPDF\SPSEditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VIWidgets\VIPackagePanel.h">
@@ -188,7 +182,7 @@
     <QtMoc Include="Visindigo\VIWidgets\VIWindowsTheme.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLChara.h">
+    <QtMoc Include="UserCode\SPDF\SPDFChara.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="UserCode\YSPMainPack\BuiltinEffects\ImageFilter.h">
@@ -206,19 +200,28 @@
     <QtMoc Include="Visindigo\VIWidgets\VILoadingWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLParser.h">
+    <QtMoc Include="UserCode\SPDF\SPDFParser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOL.h">
+    <QtMoc Include="UserCode\SPDF\SPDF.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLScripts.h">
+    <QtMoc Include="UserCode\SPDF\SPDFScripts.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLWorkingEnv.h">
+    <QtMoc Include="UserCode\SPDF\SPDFWorkingEnv.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLInterpreter.h">
+    <QtMoc Include="UserCode\SPDF\SPOLInterpreter.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\SPDF\SPDFTerminal.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\SPDF\SPOLClassicTester.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\SPDFYSP\SPOL_10X.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

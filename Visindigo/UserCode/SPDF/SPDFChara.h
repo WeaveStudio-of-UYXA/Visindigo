@@ -1,33 +1,33 @@
 ﻿#pragma once
-#include "../../../Visindigo/VICore/VICore.h"
+#include "../../Visindigo/VICore/VICore.h"
 
-class SPOLCharaState :public VIObject
+class SPDFCharaState :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Public QString StateName;
 	_Public QString StateDisplayName;
 	_Public QImage CharaImage;
-	_Public def_init SPOLCharaState(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
+	_Public def_init SPDFCharaState(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
 
 	}
 };
-class SPOLChara : public VIObject
+class SPDFChara : public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
 	VI_PrivateProperty(QString, CharaName);
 	VI_PrivateProperty(QString, CharaDisplayName);
-	_Public QMap<QString, SPOLCharaState*> CharaStateMap;
+	_Public QMap<QString, SPDFCharaState*> CharaStateMap;
 	_Private QString CurrentStateName;
-	_Private SPOLCharaState* CurrentState = VI_NULLPTR;
-	_Public def_init SPOLChara(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
+	_Private SPDFCharaState* CurrentState = VI_NULLPTR;
+	_Public def_init SPDFChara(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
 
 	}
 	_Public void setState(QString stateName, QString stateDisplayName, QImage charaImage) {
-		SPOLCharaState* state;
+		SPDFCharaState* state;
 		if (CharaStateMap.contains(stateName)) { state = CharaStateMap.value(stateName); }
-		else { state = new SPOLCharaState(this); }
+		else { state = new SPDFCharaState(this); }
 		state->StateName = stateName;
 		state->StateDisplayName = stateDisplayName;
 		state->CharaImage = charaImage;

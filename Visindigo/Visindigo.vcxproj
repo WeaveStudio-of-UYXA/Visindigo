@@ -113,7 +113,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UserCode\YSPMainPack\Data\cpp\YSPGlobalValue.cpp" />
-    <ClCompile Include="UserCode\YSPMainPack\SPOL\cpp\SPOLScripts.cpp" />
+    <ClCompile Include="UserCode\SPDF\cpp\SPOLScripts.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIAbstractBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VIBehavior.cpp" />
     <ClCompile Include="Visindigo\VICore\cpp\VICommand.cpp" />
@@ -125,7 +125,7 @@
   <ItemGroup>
     <QtMoc Include="Visindigo\VIWidgets\VIWindowsTheme.h" />
     <QtMoc Include="UserCode\YSPMainPack\ProjectUI\ProjectWidget.h" />
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLChara.h" />
+    <QtMoc Include="UserCode\SPDF\SPDFChara.h" />
     <QtMoc Include="UserCode\YSPMainPack\BuiltinEffects\ImageFilter.h" />
     <QtMoc Include="UserCode\YSPMainPack\Data\YSPProjectInfo.h" />
     <QtMoc Include="UserCode\YSPMainPack\Data\YSPGlobalValue.h" />
@@ -134,22 +134,23 @@
     <QtMoc Include="Visindigo\VIWidgets\VIMultiButton.h" />
     <QtMoc Include="Visindigo\VIWidgets\VIStyleSheet.h" />
     <QtMoc Include="Visindigo\VIWidgets\VILoadingWidget.h" />
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLParser.h" />
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOL.h" />
-    <ClInclude Include="UserCode\YSPMainPack\SPOL\SPOLClassicTester.h" />
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLScripts.h" />
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLWorkingEnv.h" />
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPOLInterpreter.h" />
-    <ClInclude Include="UserCode\YSPMainPack\SPOL\SPOLTerminal.h" />
+    <QtMoc Include="UserCode\SPDF\SPDFParser.h" />
+    <QtMoc Include="UserCode\SPDF\SPDF.h" />
+    <QtMoc Include="UserCode\SPDF\SPOLClassicTester.h" />
+    <QtMoc Include="UserCode\SPDF\SPDFScripts.h" />
+    <QtMoc Include="UserCode\SPDF\SPDFWorkingEnv.h" />
+    <QtMoc Include="UserCode\SPDF\SPOLInterpreter.h" />
+    <QtMoc Include="UserCode\SPDF\SPDFTerminal.h" />
+    <QtMoc Include="UserCode\YSPMainPack\SPDFYSP\SPOL_10X.h" />
     <ClInclude Include="Visindigo\VIWidgets\VIWidgets.h" />
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSEditor.h" />
+    <QtMoc Include="UserCode\SPDF\SPSEditor.h" />
     <QtMoc Include="Visindigo\VICore\VIDocument.h" />
     <QtMoc Include="Visindigo\VICore\VILanguage.h" />
     <QtMoc Include="Visindigo\VICore\VISettings.h" />
     <QtMoc Include="Visindigo\VIWidgets\VICodeEdit.h" />
     <QtMoc Include="Visindigo\VIWidgets\VIPackagePanel.h" />
     <QtMoc Include="Visindigo\VIWidgets\VIWidget.h" />
-    <QtMoc Include="UserCode\YSPMainPack\SPOL\SPSReader.h" />
+    <QtMoc Include="UserCode\SPDF\SPSReader.h" />
     <QtMoc Include="Visindigo\VICore\VICommand.h" />
     <QtMoc Include="Visindigo\VICore\VIECMAScripts.h" />
     <QtMoc Include="Visindigo\VICore\private\VIECMABuiltInModules.h" />

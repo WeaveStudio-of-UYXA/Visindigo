@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "../../../Visindigo/VICore/VICore.h"
-#include "../../../Visindigo/VIWidgets/VIWidgets.h"
+#include "../../Visindigo/VICore/VICore.h"
+#include "../../Visindigo/VIWidgets/VIWidgets.h"
 #include <QtGui>
 
 class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
