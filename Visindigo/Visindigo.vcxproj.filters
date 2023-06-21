@@ -31,230 +31,146 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VICore\cpp\VIAbstractBehavior.cpp">
+    <ClCompile Include="VICore\cpp\VIAbstractBehavior.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VICore\cpp\VIBehavior.cpp">
+    <ClCompile Include="VICore\cpp\VIBehavior.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VICore\cpp\VIFramework.cpp">
+    <ClCompile Include="VICore\cpp\VIFramework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VICore\cpp\VIConsole.cpp">
+    <ClCompile Include="VICore\cpp\VIConsole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VICore\cpp\VICommand.cpp">
+    <ClCompile Include="VICore\cpp\VICommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VICore\cpp\VILanguage.cpp">
+    <ClCompile Include="VICore\cpp\VILanguage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visindigo\VICore\cpp\VIMath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UserCode\YSPMainPack\Data\cpp\YSPGlobalValue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UserCode\SPDF\cpp\SPOLScripts.cpp">
+    <ClCompile Include="VICore\cpp\VIMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Visindigo\VICore\private\VIMacro.h">
+    <ClInclude Include="VICore\private\VIMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\private\VICompileMacro.h">
+    <ClInclude Include="VICore\private\VICompileMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\private\VIDuration_m.h">
+    <ClInclude Include="VICore\private\VIDuration_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\private\VIAbstractBehavior_m.h">
+    <ClInclude Include="VICore\private\VIAbstractBehavior_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VICore.h">
+    <ClInclude Include="VICore\VICore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VI2DScene\private\VI2DScene_m.h">
+    <ClInclude Include="VI2DScene\private\VI2DScene_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VI2DScene\VI2DUnit.h">
+    <ClInclude Include="VI2DScene\VI2DUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\private\VIObject_m.h">
+    <ClInclude Include="VICore\private\VIObject_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\private\VIAutoVersion.h">
+    <ClInclude Include="VICore\private\VIAutoVersion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIMath.h">
+    <ClInclude Include="VICore\VIMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VICore\VIException.h">
+    <ClInclude Include="VICore\VIException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visindigo\VIWidgets\VIWidgets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UserCode\YSPMainPack\PlayerScene\CharaItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UserCode\YSPMainPack\SPOLYSP\10X_Define.h">
+    <ClInclude Include="VIWidgets\VIWidgets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h">
+    <QtMoc Include="VICore\VIAbstractBehavior.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIDuration.h">
+    <QtMoc Include="VICore\VIDuration.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIBehavior.h">
+    <QtMoc Include="VICore\VIBehavior.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIFramework.h">
+    <QtMoc Include="VICore\VIFramework.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\YSPMainPack.h">
+    <QtMoc Include="VI2DScene\VI2DSceneWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VI2DScene\VI2DSceneWidget.h">
+    <QtMoc Include="VICore\VIPackage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIPackage.h">
+    <QtMoc Include="VICore\VIMultiPlatform.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIMultiPlatform.h">
+    <QtMoc Include="VICore\VIConsole.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIConsole.h">
+    <QtMoc Include="VICore\VIVersion.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIVersion.h">
+    <QtMoc Include="VICore\VIObject.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIObject.h">
+    <QtMoc Include="VICore\VIBasicType.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIBasicType.h">
+    <QtMoc Include="VICore\VICommand.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPSReader.h">
+    <QtMoc Include="VICore\VIECMAScripts.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VICommand.h">
+    <QtMoc Include="VICore\private\VIECMABuiltInModules.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIECMAScripts.h">
+    <QtMoc Include="VIWidgets\VIWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\private\VIECMABuiltInModules.h">
+    <QtMoc Include="VIWidgets\VIPackagePanel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VIWidget.h">
+    <QtMoc Include="VICore\VISettings.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPSEditor.h">
+    <QtMoc Include="VICore\VIDocument.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VIPackagePanel.h">
+    <QtMoc Include="VIWidgets\VICodeEdit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VISettings.h">
+    <QtMoc Include="VICore\VILanguage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VIDocument.h">
+    <QtMoc Include="VIWidgets\VIMultiButton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VICodeEdit.h">
+    <QtMoc Include="VIWidgets\VIStyleSheet.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VICore\VILanguage.h">
+    <QtMoc Include="VIWidgets\VIWindowsTheme.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\ProjectUI\ProjectWidget.h">
+    <QtMoc Include="VI2DScene\VI2DSceneItemAnimationBehavior.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VIMultiButton.h">
+    <QtMoc Include="VIWidgets\VILoadingWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VIStyleSheet.h">
+    <QtMoc Include="VIWidgets\VIWidgetsTransQt.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VIWindowsTheme.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPCore\YSPImageFilter.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VI2DScene\VI2DSceneItemAnimationBehavior.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\Data\YSPGlobalValue.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\Data\YSPProjectInfo.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VILoadingWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPDFParser.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPDF.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPDFScripts.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPDFWorkingEnv.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPOLInterpreter.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPDFTerminal.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPOLClassicTester.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOLYSP\10X.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPOLYSP\10XAbstract.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPDFScriptsHighlighter.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPDFTopInterface.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPOLInterface.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPScene\YSPScene.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPScene\YSPSceneGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VIWidgetsTransQt.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Visindigo\VIWidgets\VIMainWindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPScene\YSPLogGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPScene\YSPTitleGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\YSPPackageInfo.h">
+    <QtMoc Include="VIWidgets\VIMainWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

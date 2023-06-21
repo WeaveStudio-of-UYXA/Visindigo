@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VisindigoInstaller", "VisindigoInstaller\VisindigoInstaller.vcxproj", "{96448DF4-729D-474E-BAE6-F52A774796B4}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SEM", "SEM\SEM.vcxproj", "{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Visindigo", "Visindigo\Visindigo.vcxproj", "{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}"
 EndProject
 Global
@@ -15,14 +11,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{96448DF4-729D-474E-BAE6-F52A774796B4}.Debug|x64.ActiveCfg = Debug|x64
-		{96448DF4-729D-474E-BAE6-F52A774796B4}.Debug|x64.Build.0 = Debug|x64
-		{96448DF4-729D-474E-BAE6-F52A774796B4}.Release|x64.ActiveCfg = Release|x64
-		{96448DF4-729D-474E-BAE6-F52A774796B4}.Release|x64.Build.0 = Release|x64
-		{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}.Debug|x64.ActiveCfg = Debug|x64
-		{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}.Debug|x64.Build.0 = Debug|x64
-		{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}.Release|x64.ActiveCfg = Release|x64
-		{7CE8D2A6-8501-42C7-B28A-6CD956A8A30D}.Release|x64.Build.0 = Release|x64
 		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.Debug|x64.ActiveCfg = Debug|x64
 		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.Debug|x64.Build.0 = Debug|x64
 		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.Release|x64.ActiveCfg = Release|x64
