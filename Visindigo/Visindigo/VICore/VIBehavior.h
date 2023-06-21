@@ -35,6 +35,7 @@ class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
 	_Private VIBehaviorHost* Host;
 	VI_Property(VINanoSecond, DurationNow);
 	VI_Property(VINanoSecond, NSPT);
+	VI_ProtectedProperty(double, Magnification);
 	VI_PrivateProperty(VINanoSecond, NSPTNow);
 	VI_PrivateProperty(VINanoSecond, DurationLimit);
 	VI_PrivateProperty(VINanoSecond, DurationLimitNow);
@@ -68,6 +69,8 @@ class VIBehaviorHost :public VIAbstractBehaviorHost
 	_Slot void addBehavior(VIAbstractBehavior*, VIAbstractBehavior::QuantifyTickType) override;
 	_Private void mergeBehavior() override;
 	_Private void ergodicBehavior() override;
+	_Public double getMagnification();
+	_Public void setMagnification(double m);
 };
 
 class VIDebugBehavior :public VIBasicBehavior
@@ -87,7 +90,7 @@ class VIAnimationBehavior :public VITimedBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Public def_init VIAnimationBehavior(QObject* parent = nullptr):VITimedBehavior(parent) {}
+	_Public def_init VIAnimationBehavior(QObject* parent = nullptr) :VITimedBehavior(parent) {}
 	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T64) override {
 		VITimedBehavior::active(QuantifyTickType::T64);
 	}

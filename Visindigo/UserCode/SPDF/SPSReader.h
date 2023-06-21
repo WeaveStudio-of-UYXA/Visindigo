@@ -12,7 +12,7 @@ class SPSReader : public VIObject
 		//find all js file in the folder that contains the main file, and the subfolder of the folder, but ignore any folder with name "Story"
 		QString FileFolder = mainFilePath.section('/', 0, -2);
 		QStringList allJSFilePath;
-		QDirIterator it(FileFolder, QStringList() << "*.js"<<".sps", QDir::Files, QDirIterator::Subdirectories);
+		QDirIterator it(FileFolder, QStringList() << "*.js" << ".sps", QDir::Files, QDirIterator::Subdirectories);
 		while (it.hasNext()) {
 			QString filePath = it.next();
 			if (filePath.contains("__story__")) {
@@ -80,7 +80,7 @@ export function " + StoryFileName + "_SPOL() {}\n";
 				targetJSCode += "\n" + StoryFileName + "_SPOL." + StoryPartName + " = [";
 				continue;
 			}
-			targetJSCode += "\"" + (*i).replace("\\","\\\\").replace("\"", "\\\"") + "\", \n";
+			targetJSCode += "\"" + (*i).replace("\\", "\\\\").replace("\"", "\\\"") + "\", \n";
 		}
 		if (StoryPartName != "") {
 			targetJSCode += StoryPartContent + "\"\"];\n";
@@ -98,5 +98,4 @@ export function " + StoryFileName + "_SPOL() {}\n";
 		targetJSFile.close();
 		return StoryFilePath;
 	}
-
 };

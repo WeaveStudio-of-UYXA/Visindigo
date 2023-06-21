@@ -7,7 +7,9 @@ export function t10_SPOL() {}
 t10_SPOL.__head__ = ["/SPOL0.10.0", 
 ""];
 
-t10_SPOL.PartA = [">>>:\"Hello, world!\" says the computer.", 
+t10_SPOL.PartA = ["背景 走廊", 
+">>>:\"Hello, world!\" says the computer.", 
+">>>:\"Just a test.\"(0.4, 2)", 
 "...", 
 ""];
 

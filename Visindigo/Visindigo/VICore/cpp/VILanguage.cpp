@@ -1,5 +1,5 @@
 ﻿#include "../VILanguage.h"
-def_init VILanguageHost::VILanguageHost(LangType currentType, LangType defaultType, QString langPath, VISuper* parent ) 
+def_init VILanguageHost::VILanguageHost(LangType currentType, LangType defaultType, QString langPath, VISuper* parent)
 	:VIObject(parent) {
 	setObjectName(getLanguageName(CurrentLanguageType));
 	DefaultLanguageType = defaultType;

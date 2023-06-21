@@ -118,7 +118,7 @@ typedef VICoordinate VI4DCoordinate;
 #define VI2DCoor(x, y) VI2DCoordinate(VICoordinate::Dimension::D2, x, y, 0, 0)
 #define VI3DCoor(x, y, z) VI3DCoordinate(VICoordinate::Dimension::D3, x, y, z, 0)
 #define VI4DCoor(x, y, z, w) VI4DCoordinate(VICoordinate::Dimension::D4, x, y, z, w)
-
+/*
 typedef QList<VICoordinate> VICoordinateList;
 class VIStraightLine :public VIObject {
 	Q_OBJECT;
@@ -221,6 +221,7 @@ class VIBesselLine :public VIObject
 		return ret;
 	}
 };
+*/
 class VIStepper :public VIObject
 {
 	Q_OBJECT;
@@ -253,3 +254,4 @@ class VIStepper :public VIObject
 		}
 	}
 };
+

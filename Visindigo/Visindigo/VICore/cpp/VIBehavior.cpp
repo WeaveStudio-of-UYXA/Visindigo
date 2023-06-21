@@ -55,7 +55,7 @@ void VITimedBehavior::active(VIAbstractBehavior::QuantifyTickType type) {
 	}
 }
 VIMilliSecond VITimedBehavior::getTickDuration() {
-	return (float)(dynamic_cast<VIBehaviorHost*>(getHost())->getTickDuration()) / 1000000.0;
+	return (float)(dynamic_cast<VIAbstractBehaviorHost*>(getHost())->getTickDuration()) / 1000000.0;
 }
 /*
 VIQuantifyTickBehaviorHost
@@ -71,6 +71,7 @@ def_init VIQuantifyTickBehaviorHost::VIQuantifyTickBehaviorHost(VIBehaviorHost* 
 	NSPTNow = 0;
 	DurationNow = 0;
 	Host = host;
+	Magnification = 1.0;
 	consoleLog("Initialized");
 }
 void VIQuantifyTickBehaviorHost::start() {
@@ -82,7 +83,7 @@ void VIQuantifyTickBehaviorHost::stop() {
 void VIQuantifyTickBehaviorHost::tickLoop() {
 	bool LoopFinish = false;
 	VINanoSecond t = Host->getTickDuration();
-	DurationNow += t;
+	DurationNow += t * Magnification;
 	CurrentIndexRight = BehaviorList.size() * (DurationNow / DurationLimitNow);
 	if (CurrentIndexRight >= BehaviorList.size()) {
 		CurrentIndexRight = BehaviorList.size();
@@ -215,6 +216,15 @@ void VIBehaviorHost::ergodicBehavior() {
 	}
 }
 
+void VIBehaviorHost::setMagnification(double m) {
+	QuantifyTickBehaviorHost_20->setMagnification(m);
+	QuantifyTickBehaviorHost_32->setMagnification(m);
+	QuantifyTickBehaviorHost_64->setMagnification(m);
+	QuantifyTickBehaviorHost_128->setMagnification(m);
+}
+double VIBehaviorHost::getMagnification() {
+	return QuantifyTickBehaviorHost_20->getMagnification();
+}
 /*
 VIDebugBehavior
 */

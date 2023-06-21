@@ -99,6 +99,9 @@
     <ClInclude Include="UserCode\YSPMainPack\PlayerScene\CharaItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UserCode\YSPMainPack\SPOLYSP\10X_Define.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Visindigo\VICore\VIAbstractBehavior.h">
@@ -182,10 +185,7 @@
     <QtMoc Include="Visindigo\VIWidgets\VIWindowsTheme.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\SPDF\SPDFChara.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\BuiltinEffects\ImageFilter.h">
+    <QtMoc Include="UserCode\YSPCore\YSPImageFilter.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Visindigo\VI2DScene\VI2DSceneItemAnimationBehavior.h">
@@ -221,7 +221,40 @@
     <QtMoc Include="UserCode\SPDF\SPOLClassicTester.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UserCode\YSPMainPack\SPDFYSP\SPOL_10X.h">
+    <QtMoc Include="UserCode\YSPMainPack\SPOLYSP\10X.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\SPOLYSP\10XAbstract.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\SPDF\SPDFScriptsHighlighter.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\SPDF\SPDFTopInterface.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\SPDF\SPOLInterface.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPScene\YSPScene.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPScene\YSPSceneGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIWidgets\VIWidgetsTransQt.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Visindigo\VIWidgets\VIMainWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPScene\YSPLogGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPScene\YSPTitleGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserCode\YSPMainPack\YSPPackageInfo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

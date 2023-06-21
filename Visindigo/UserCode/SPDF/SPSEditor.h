@@ -2,7 +2,10 @@
 #include "../../Visindigo/VICore/VICore.h"
 #include "../../Visindigo/VIWidgets/VIWidgets.h"
 #include <QtGui>
-
+/*
+这玩意不作为SPDF的一部分提供，回头扔到YSPMainPack去
+算了不扔了，这玩意已经乱成一摊浆糊了
+*/
 class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 {
 	Q_OBJECT;
@@ -14,7 +17,7 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 	_Public def_init SPSHighlighter(QTextDocument* doc) :QSyntaxHighlighter(doc) {}
 	_Public void highlightBlock(const QString& text) override {
 		qDebug() << "Highlighting:" << text;
-		setFormat(0, text.length(), Qt::black);
+		setFormat(0, text.length(), Qt::white);
 		setCurrentBlockState(0);
 		userName(text);
 		spsKeyword(text);
@@ -24,7 +27,7 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 	}
 	_Public void spsKeyword(const QString& text) {
 		QTextCharFormat stringFormat;
-		stringFormat.setForeground(Qt::GlobalColor::darkYellow);
+		stringFormat.setForeground(QColor("#F5AA5A"));
 		QRegExp string("\"[^\"]*\"");
 		int index = text.indexOf(string);
 		while (index >= 0) {
@@ -34,7 +37,7 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 		}
 
 		QTextCharFormat numberFormat;
-		numberFormat.setForeground(Qt::green);
+		numberFormat.setForeground(QColor("#C2FBBA"));
 		QRegExp number("\\b[0-9]+\\b");
 		index = text.indexOf(number);
 		while (index >= 0) {
@@ -44,7 +47,7 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 		}
 
 		QTextCharFormat keywordFormat;
-		keywordFormat.setForeground(Qt::blue);
+		keywordFormat.setForeground(QColor("#2F91FC"));
 		QRegExp keyword("\\b(var|let|const|if|else|for|while|do|break|continue|return|function|class|new|this|super|switch|case|default|try|catch|finally|throw|import|export|from|as|in|of|instanceof|typeof|void|delete|true|false|null|undefined)\\b");
 		index = text.indexOf(keyword);
 		while (index >= 0) {
@@ -52,11 +55,10 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 			setFormat(index, length, keywordFormat);
 			index = text.indexOf(keyword, index + length);
 		}
-
 	}
 	_Public void singleLineComment(const QString& text) {
 		QTextCharFormat commentFormat;
-		commentFormat.setForeground(Qt::red);
+		commentFormat.setForeground(QColor("#5ED63A"));
 		//提取//之后的所有内容
 		QRegExp comment("//[^\n]*");
 		//保存到UserFunctionNames
@@ -89,7 +91,7 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 			if (!UserFunctionNames.contains(className)) UserClassNames.append(className);
 			index = text.indexOf(className, index + length);
 		}
-		//提取左括号之前 
+		//提取左括号之前
 		//且 不是new或class之后的名称
 		QRegExp name("\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(");
 		//保存到UserFunctionNames
@@ -138,11 +140,11 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 		}
 		//为三个列表中的单词着色
 		QTextCharFormat userFunctionFormat;
-		userFunctionFormat.setForeground(Qt::darkMagenta);
+		userFunctionFormat.setForeground(QColor("#FF2FF1"));
 		QTextCharFormat userClassFormat;
-		userClassFormat.setForeground(Qt::darkGreen);
+		userClassFormat.setForeground(QColor("#1CF7D4"));
 		QTextCharFormat userVariableFormat;
-		userVariableFormat.setForeground(Qt::darkRed);
+		userVariableFormat.setForeground(QColor("#FAF350"));
 		for (int i = 0; i < UserFunctionNames.size(); i++) {
 			QString pattern = "\\b" + UserFunctionNames.at(i) + "\\b";
 			QRegExp userFunction(pattern);
@@ -176,9 +178,9 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 	}
 	_Public void multiLineComment(const QString& text) {
 		QTextCharFormat multiLineCommentFormat;
-		multiLineCommentFormat.setForeground(Qt::red);
+		multiLineCommentFormat.setForeground(QColor("#5ED63A"));
 		QTextCharFormat spolCommentFormat;
-		spolCommentFormat.setForeground(Qt::darkGreen);
+		spolCommentFormat.setForeground(QColor("#6EEDFF"));
 		//初始条件为/*但不能是/*SPOL
 		QRegularExpression startExpression("/\\*(?!SPOL)");
 		//结束条件为*/
@@ -200,13 +202,13 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 			int endIndex = text.indexOf(endExpression, startIndex, &endMatch);
 			int commentLength;
 			if (endIndex == -1) {
-				if (currentBlockState() == 0&& previousBlockState() != 1) {
+				if (currentBlockState() == 0 && previousBlockState() != 1) {
 					setCurrentBlockState(previousBlockState());
 				}
 				commentLength = text.length() - startIndex;
 			}
 			else {
-				if (currentBlockState() == 0) { setCurrentBlockState(1);}
+				setCurrentBlockState(1);
 				commentLength = endIndex - startIndex + endMatch.capturedLength();
 			}
 			if (currentBlockState() == 2 || currentBlockState() == 1 && previousBlockState() == 2) {
@@ -240,7 +242,6 @@ class SPSHighlighter :public QSyntaxHighlighter, public VIBaseObject
 				spolSpeakLine.setForeground(Qt::darkBlue);
 				setFormat(0, text.length(), spolSpeakLine);
 			}
-			
 		}
 	}
 };
@@ -248,7 +249,7 @@ class SPSEditor :public VIWidget {
 	Q_OBJECT;
 	VI_OBJECT;
 	VI_Property(QTextEdit*, TextEdit);
-	VI_Property(VICodeEdit*, CodeEdit)
+	VI_Property(VICodeEdit*, CodeEdit);
 	VI_Property(SPSHighlighter*, Highlighter);
 	VI_Property(QGridLayout*, CurrentLayout);
 	_Public def_init SPSEditor(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
@@ -270,6 +271,6 @@ class SPSEditor :public VIWidget {
 		this->setMinimumSize(800, 600);
 	}
 	_Slot void debugLineNum(int num) {
-		qDebug()<< num;
+		qDebug() << num;
 	}
 };

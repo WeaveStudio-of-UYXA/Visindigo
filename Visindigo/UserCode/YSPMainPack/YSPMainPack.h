@@ -4,8 +4,8 @@
 #include "../SPDF/SPSReader.h"
 #include "../SPDF/SPSEditor.h"
 #include "../SPDF/SPDF.h"
-#include "BuiltinEffects/ImageFilter.h"
-#include "SPDFYSP/SPOL_10X.h"
+#include "../YSPCore/YSPImageFilter.h"
+#include "SPOLYSP/10X.h"
 class RotationBehavior :public VIBasicBehavior {
 	Q_OBJECT;
 	VI_Property(VI2DSceneWidget*, Scene);
@@ -48,7 +48,7 @@ class YSPMainWindow :public VIMainWindow
 		this->setWindowTitle("YSPMainWindow");
 		this->setStyleSheet("YSPMainWindow{background-color:white;}");
 		testGroup = new VIMultiButtonGroup(Qt::Vertical, this);
-		qDebug() << this->WindowPalette;
+		//qDebug() << this->WindowPalette;
 		testGroup->setStyleSheetPalette(this->WindowPalette);
 		testGroup->setSpacing(20);
 		WindowPalette->PaletteChanged();
@@ -84,23 +84,21 @@ class YSPMainPack :public VIPackage
 		//playerWidget->showFullScreen();
 		consoleLog("new YSPCommand");
 		VICommand_Reg(YSPCommand);
-		VIFramework::execCommand("ecma");
-		//spsEditor = new SPSEditor();
-		//spsEditor->show();
+		spsEditor = new SPSEditor();
+		spsEditor->show();
 		mainWindow = new YSPMainWindow();
 		mainWindow->setMinimumSize(800, 600);
 		mainWindow->show();
 	};
 	_Slot void onSystemThemeColorChanged() {
-
 	};
 	_Public virtual void onActive() {
 		//QMessageBox::information(VI_NULLPTR, "YSPMainPack", "YSPMainPack is active!");
-		VIFramework::execCommand("YSP ua1 ua2 -t n1 -s n2 -n \"n3ss ss\" | YSP uua1 uua2");
+		//VIFramework::execCommand("YSP ua1 ua2 -t n1 -s n2 -n \"n3ss ss\" | YSP uua1 uua2");
 		//SPSReader::spawnStoryFile("./Dev/t10.js");
 		SPDFClassicTester* tester = new SPDFClassicTester(this);
 		SPDFHost* host = new SPDFHost(tester, this);
-		SPOL_10X::SpeakingController *sc = new SPOL_10X::SpeakingController();
+		YSP_10X::SpeakingController* sc = new YSP_10X::SpeakingController();
 		host->installParser(sc);
 		host->exec("./Dev/t10.js");
 	};

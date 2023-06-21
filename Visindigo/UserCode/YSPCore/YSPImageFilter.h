@@ -34,7 +34,7 @@ class YSPConvolutionBlurThread :public QThread
 	_Private QARGB32_32* PixelPointer;
 	_Private QARGB32_32* TargetPixelPointer;
 	_Private int r, g, b, a;
-	_Protected def_init YSPConvolutionBlurThread(QImage* raw, QImage* target, int d, int start, int step, int* kernal1DInt, bool considerAlpha):QThread() {
+	_Protected def_init YSPConvolutionBlurThread(QImage* raw, QImage* target, int d, int start, int step, int* kernal1DInt, bool considerAlpha) :QThread() {
 		Raw = raw;
 		Target = target;
 		D = d;
@@ -88,7 +88,7 @@ class YSPConvolutionBlurThread :public QThread
 				PixelPointer += Raw->width();
 			}
 			r = r >> 16; g = g >> 16; b = b >> 16; a = a >> 16;
-			rgbaBound(&r); 
+			rgbaBound(&r);
 			rgbaBound(&g);
 			rgbaBound(&b);
 			rgbaBound(&a);
@@ -226,26 +226,26 @@ class YSPConvolutionBlurThread :public QThread
 		delete[] Buffer;
 	}
 };
-class YSPConvolutionBlur:public VIObject {
+class YSPConvolutionBlur :public VIObject {
 	_Public static void blur(QImage* raw, QImage* target, int d, bool considerAlpha = false) {
 		if (d % 2 == 0) { d++; }
 		int CPUCount = QThread::idealThreadCount();
 		QList<QThread*> handlers;
 		double* Kernal1D = new double[d];
 		double sum = 0;
-		double sigma = 0.3*((d - 1)*0.5 - 1) + 0.8; // reference OpenCV
+		double sigma = 0.3 * ((d - 1) * 0.5 - 1) + 0.8; // reference OpenCV
 		double sigma2 = sigma * sigma;
 		for (int i = 0; i < d; i++) {
 			double x = i - (d - 1) / 2;
-			Kernal1D[i] = qExp(-(x * x ) / (2*sigma2)) / (qSqrt(2 * M_PI) * sigma);
+			Kernal1D[i] = qExp(-(x * x) / (2 * sigma2)) / (qSqrt(2 * M_PI) * sigma);
 			sum += Kernal1D[i];
 		}
 		for (int i = 0; i < d; i++) {
 			Kernal1D[i] /= sum;
 		}
-		int *Kernal1DInt = new int[d];
+		int* Kernal1DInt = new int[d];
 		for (int i = 0; i < d; i++) {
-			Kernal1DInt[i] = (int)(65536*Kernal1D[i]) ; // reference Qt
+			Kernal1DInt[i] = (int)(65536 * Kernal1D[i]); // reference Qt
 		}
 		for (int i = 0; i < CPUCount; i++) {
 			YSPConvolutionBlurThread* thread = new YSPConvolutionBlurThread(raw, target, d, i, CPUCount, Kernal1DInt, considerAlpha);
@@ -266,7 +266,7 @@ class YSPImageFilter : public VIObject
 	Q_OBJECT;
 	VI_OBJECT;
 	_Public enum class FilterName {
-		grayScale, changeSaturation, changeLightness, 
+		grayScale, changeSaturation, changeLightness,
 		topFadeCover, gaussianBlur,
 		edgeExtension, reverse
 	};
@@ -301,7 +301,7 @@ class YSPImageFilter : public VIObject
 		for (int i = 0; i < image->width(); i++) {
 			for (int j = 0; j < image->height(); j++) {
 				QColor color = image->pixel(i, j);
-				int gray = (color.red()*11 + color.green()*16 + color.blue()*5) / 32;
+				int gray = (color.red() * 11 + color.green() * 16 + color.blue() * 5) / 32;
 				image->setPixel(i, j, qRgba(gray, gray, gray, color.alpha()));
 			}
 		}
@@ -315,7 +315,7 @@ class YSPImageFilter : public VIObject
 				QColor color = image->pixel(i, j);
 				int saturation = color.hsvSaturation() * delta;
 				if (saturation > 255) { saturation = 255; }
-				image->setPixel(i, j, QColor::fromHsv(color.hsvHue(), saturation, color.value(), color.alpha()).rgba() );
+				image->setPixel(i, j, QColor::fromHsv(color.hsvHue(), saturation, color.value(), color.alpha()).rgba());
 			}
 		}
 	}
@@ -340,7 +340,7 @@ class YSPImageFilter : public VIObject
 			float delta = ((float)i + 1) / end;
 			for (int j = 0; j < image->width(); j++) {
 				QColor color = image->pixel(j, i);
-				image->setPixel(j, i, QColor::fromHsv(color.hsvHue(), color.hsvSaturation(), color.hslSaturation()*delta, color.alpha()).rgba());
+				image->setPixel(j, i, QColor::fromHsv(color.hsvHue(), color.hsvSaturation(), color.hslSaturation() * delta, color.alpha()).rgba());
 			}
 		}
 	}
@@ -385,7 +385,7 @@ class YSPImageFilter : public VIObject
 		blue = color.blue();
 		alpha = color.alpha();
 		color32 = (alpha << 24) + (red << 16) + (green << 8) + blue;
-		for (int j = image->height() + r; j < temp->height(); j++){
+		for (int j = image->height() + r; j < temp->height(); j++) {
 			pixels = (QARGB32_32*)temp->scanLine(j);
 			for (int i = 0; i < r; i++) {
 				*pixels = color32;
@@ -425,7 +425,7 @@ class YSPImageFilter : public VIObject
 		for (int i = 0; i < r; i++) {
 			pixelRaw = (QARGB32_32*)image->scanLine(0);
 			pixels = (QARGB32_32*)temp->scanLine(i) + r;
-			memcpy(pixels, pixelRaw, image->width()*sizeof(QARGB32_32));
+			memcpy(pixels, pixelRaw, image->width() * sizeof(QARGB32_32));
 			/*for (int j = r; j < image->width() + r; j++) {
 				*pixels = *pixelRaw;
 				pixels++;
@@ -445,7 +445,7 @@ class YSPImageFilter : public VIObject
 		}
 		//Left
 		for (int i = r; i < image->height() + r; i++) {
-			pixelRaw = (QARGB32_32*)image->scanLine(i-r);
+			pixelRaw = (QARGB32_32*)image->scanLine(i - r);
 			pixels = (QARGB32_32*)temp->scanLine(i);
 			for (int j = 0; j < r; j++) {
 				*pixels = *pixelRaw;
@@ -454,8 +454,8 @@ class YSPImageFilter : public VIObject
 		}
 		//Right
 		for (int i = r; i < image->height() + r; i++) {
-			pixelRaw = (QARGB32_32*)image->scanLine(i-r) + (image->width() - 1);
-			pixels = (QARGB32_32*)temp->scanLine(i)+r+(image->width()-1);
+			pixelRaw = (QARGB32_32*)image->scanLine(i - r) + (image->width() - 1);
+			pixels = (QARGB32_32*)temp->scanLine(i) + r + (image->width() - 1);
 			for (int j = 0; j < r; j++) {
 				*pixels = *pixelRaw;
 				pixels++;
@@ -463,18 +463,20 @@ class YSPImageFilter : public VIObject
 		}
 		return temp;
 	}
-	//需要优化（按QARGB32_32处理）
+
 	_Public static void reverse(QImage* image) {
 		unsigned int length = image->width() * image->height();
 		if (image->format() != QImage::Format_ARGB32) { *image = image->convertToFormat(QImage::Format_ARGB32); }
-		QARGB32_8* pixels = image->bits();
-		unsigned int c = 0;
+		QARGB32_32* pixel = (QARGB32_32*)image->bits();
 		for (int i = 0; i < length; i++) {
-			pixels[c + QARGB32_ALPHA] = 255 - pixels[c + QARGB32_ALPHA];
-			pixels[c + QARGB32_RED] = 255 - pixels[c + QARGB32_RED];
-			pixels[c + QARGB32_GREEN] = 255 - pixels[c + QARGB32_GREEN];
-			pixels[c + QARGB32_BLUE] = 255 - pixels[c + QARGB32_BLUE];
-			c += QARGB32_Length;
+			int a = 0, r = 0, g = 0, b = 0;
+			a = 255 - ((*pixel & 0xff000000) >> 24);
+			r = 255 - ((*pixel & 0x00ff0000) >> 16);
+			g = 255 - ((*pixel & 0x0000ff00) >> 8);
+			b = 255 - (*pixel & 0x000000ff);
+			QARGB32_32 color = (a << 24) + (r << 16) + (g << 8) + b;
+			*pixel = color;
+			pixel++;
 		}
 	}
 };

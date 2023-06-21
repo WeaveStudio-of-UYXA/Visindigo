@@ -31,7 +31,7 @@ class SPDFHost :public VIObject
 	_Public SPDFScripts* Scripts;
 	_Public SPDFWorkingEnv* WorkingEnv;
 	_Public SPDFAbstractTerminal* Terminal;
-	_Public def_init SPDFHost(SPDFAbstractTerminal* ter, VISuper* parent = VI_NULLPTR) :VIObject(parent){
+	_Public def_init SPDFHost(SPDFAbstractTerminal* ter, VISuper* parent = VI_NULLPTR) :VIObject(parent) {
 		Terminal = ter;
 		WorkingEnv = new SPDFWorkingEnv(this);
 		WorkingEnv->Terminal = Terminal;

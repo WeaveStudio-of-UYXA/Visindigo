@@ -28,5 +28,4 @@ class SPDFWorkingEnv :public VIObject
 		if (cached) { return CacheRootPath + "/" + CharacterSourceFolderPath + "/" + name; }
 		else { return CharacterSourceFolderPath + "/" + CharacterSourceFolderPath + "/" + name; }
 	}
-
 };

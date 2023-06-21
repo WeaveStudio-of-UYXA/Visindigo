@@ -7,18 +7,32 @@
 
 class VIAbstractWidget :public VIAbstractObject {
 	_Public VIStyleSheetManager* StyleSheetManager;
-	_Public virtual void setStyleSheetPalette(VIStyleSheetPalette* palette) PureVirtual;
+	_Public virtual void setStyleSheetPalette(VIColorPalette* palette) PureVirtual;
+	_Public virtual void renewVTR() { onVTR(); }
+	_Public virtual void VTR() HalfVirtual;
+	_Public virtual void onVTR() PureVirtual;
 };
 typedef VIAbstractWidget VIBaseWidget;
 #define VI_WIDGET_INIT \
 	StyleSheetManager = new VIStyleSheetManager(this);
 
 #define VI_WIDGET VI_OBJECT;\
-_Public virtual void setStyleSheetPalette(VIStyleSheetPalette* palette) {\
+_Public virtual void setStyleSheetPalette(VIColorPalette* palette) {\
 	StyleSheetManager->setPalette(palette);\
-	for (auto& child : this->findChildren<VIWidget*>()) {\
-		consoleLog("Find Child" + child->getClassName());\
-		child->setStyleSheetPalette(palette);\
+	for (auto i = this->children().begin(); i != this->children().end(); i++) {\
+		VIAbstractWidget* w = dynamic_cast<VIAbstractWidget*>(*i);\
+		if (w != VI_NULLPTR) {\
+			w->setStyleSheetPalette(palette);\
+		}\
+	}\
+}\
+_Public virtual void onVTR(){\
+	VTR();\
+	for (auto i = this->children().begin(); i != this->children().end(); i++) {\
+		VIAbstractWidget* w = dynamic_cast<VIAbstractWidget*>(*i);\
+		if (w != VI_NULLPTR) {\
+			w->onVTR();\
+		}\
 	}\
 }
 class VIWidget :public QFrame, public VIBaseWidget {
@@ -31,61 +45,4 @@ class VIWidget :public QFrame, public VIBaseWidget {
 		VI_WIDGET_INIT;
 	}
 };
-#define VI_WIDGET_TRANS_QT(name) class VI##name :public Q##name, public VIBaseWidget {\
-	Q_OBJECT;\
-	VI_WIDGET;\
-	_Public def_init VI##name(QWidget* parent = VI_NULLPTR) :Q##name(parent) {\
-		VI_WIDGET_INIT;\
-	}\
-};
 
-#define VI_WIDGET_TRANS_QTRAW(name) class VIQ##name :public Q##name, public VIBaseWidget {\
-	Q_OBJECT;\
-	VI_WIDGET;\
-	_Public def_init VIQ##name(QWidget* parent = VI_NULLPTR) :Q##name(parent) {\
-		VI_WIDGET_INIT;\
-	}\
-};
-
-VI_WIDGET_TRANS_QT(Label);
-VI_WIDGET_TRANS_QTRAW(Widget);
-
-class VIMainWindow : public VIWidget {
-	Q_OBJECT;
-	VI_OBJECT;
-	_Signal void windowColorChanged(QColor color);
-	_Public VIStyleSheetPalette* WindowPalette;
-	_Private private_VIColorChangeAnimationBehavior* colorChangeAnimationBehavior;
-	_Public def_init VIMainWindow(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
-		this->setWindowTitle("Visindigo Main Window");
-		WindowPalette = new VIStyleSheetPalette(this);
-		WindowPalette->createPalette("default");
-		WindowPalette->addColorWithNameTo("SystemThemeColor", VIWindowsTheme::getWindowsThemeColor(), "default");
-		qDebug()<< VIWindowsTheme::getWindowsThemeColor();
-		colorChangeAnimationBehavior = new private_VIColorChangeAnimationBehavior(this);
-		colorChangeAnimationBehavior->setPalette(WindowPalette);
-		colorChangeAnimationBehavior->setColorName("SystemThemeColor");
-		colorChangeAnimationBehavior->setPaletteName("default");
-	}
-	_Public VIStyleSheetPalette* getWindowPalette() {
-		return WindowPalette;
-	}
-	_Protected bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
-#ifdef WINDOWS_DEPLOY
-		MSG* msg = (MSG*)message;
-		switch (msg->message)
-		{
-		case WM_DWMCOLORIZATIONCOLORCHANGED:
-			colorChangeAnimationBehavior->setTargetColor(VIWindowsTheme::getWindowsThemeColor());
-			colorChangeAnimationBehavior->setDuration(1000);
-			colorChangeAnimationBehavior->active();
-			emit windowColorChanged(VIWindowsTheme::getWindowsThemeColor());
-			return true;
-		case WM_SYSCOLORCHANGE:
-			qDebug() << "WM_SYSCOLORCHANGE";
-			return true;
-		}
-#endif
-		return false;
-	}
-};

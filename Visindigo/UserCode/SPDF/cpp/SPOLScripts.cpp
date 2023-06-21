@@ -5,3 +5,8 @@ void VIECMA_SPOL::loadStory(QJSValue spolLinesRaw) {
 	QStringList spolLines = spolLinesRaw.toVariant().toStringList();
 	Scripts->Interpreter->executeSPOL(spolLines);
 }
+
+void VIECMA_SPOL::installParser(QJSValue parser) {
+	SPDFVIESParserContainer* parserContainer = new SPDFVIESParserContainer(parser);
+	Scripts->Interpreter->addParser(parserContainer);
+}

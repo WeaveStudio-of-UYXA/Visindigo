@@ -1,5 +1,10 @@
 ﻿#pragma once
 #include "VICodeEdit.h"
+#include "VILoadingWidget.h"
+#include "VIMainWindow.h"
 #include "VIMultiButton.h"
 #include "VIPackagePanel.h"
+#include "VIStyleSheet.h"
 #include "VIWidget.h"
+#include "VIWidgetsTransQt.h"
+#include "VIWindowsTheme.h"

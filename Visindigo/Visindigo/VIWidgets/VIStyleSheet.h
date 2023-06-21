@@ -1,31 +1,33 @@
 ﻿#pragma once
 #include "../VICore/VICore.h"
 
-typedef QMap<QString, QColor> VIStyleSheetColorMap;
-class VIStyleSheetPalette : public VIObject
+
+typedef QMap<QString, QColor> VIColorMap;
+
+class VIColorPalette : public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Signal void PaletteChanged();
-	_Private VIStyleSheetColorMap* CurrentPalette;
+	_Private VIColorMap* CurrentPalette;
 	_Private QString CurrentPaletteName;
-	_Private QMap<QString, VIStyleSheetColorMap> PaletteMap;
-	_Public def_init VIStyleSheetPalette(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
+	_Private QMap<QString, VIColorMap> PaletteMap;
+	_Public def_init VIColorPalette(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
 		CurrentPalette = VI_NULLPTR;
 	}
 	_Public void createPalette(const QString& name) {
 		if (!PaletteMap.contains(name)) {
-			PaletteMap.insert(name, VIStyleSheetColorMap());
+			PaletteMap.insert(name, VIColorMap());
 		}
 	}
-	_Public void addPalette(const QString& name, const VIStyleSheetColorMap& palette) {
+	_Public void addPalette(const QString& name, const VIColorMap& palette) {
 		if (!PaletteMap.contains(name)) {
 			PaletteMap.insert(name, palette);
 		}
 	}
 	_Public void addColorWithNameTo(const QString& name, const QColor& color, const QString& palette) {
 		if (!PaletteMap.contains(palette)) {
-			PaletteMap.insert(palette, VIStyleSheetColorMap());
+			PaletteMap.insert(palette, VIColorMap());
 		}
 		if (!PaletteMap[palette].contains(name)) {
 			PaletteMap[palette].insert(name, color);
@@ -46,7 +48,7 @@ class VIStyleSheetPalette : public VIObject
 			emit PaletteChanged();
 		}
 	}
-	_Public QColor getColorWithName(const QString& name,  const QString& paletteName = "") {
+	_Public QColor getColorWithName(const QString& name, const QString& paletteName = "") {
 		if (paletteName != "") {
 			if (PaletteMap.contains(paletteName)) {
 				if (PaletteMap[paletteName].contains(name)) {
@@ -55,7 +57,7 @@ class VIStyleSheetPalette : public VIObject
 			}
 			return QColor();
 		}
-		if (CurrentPalette==VI_NULLPTR) {
+		if (CurrentPalette == VI_NULLPTR) {
 			if (PaletteMap.contains("default")) {
 				if (PaletteMap["default"].contains(name)) {
 					return PaletteMap["default"].value(name);
@@ -80,7 +82,7 @@ class VIStyleSheetPalette : public VIObject
 	_Public static bool isColorLight(const QColor& color) {
 		//Microsoft recommendation
 		//see https://learn.microsoft.com/zh-cn/windows/apps/desktop/modernize/apply-windows-themes
-		return (((5 * color.green()) + (2 * color.red()) + color.blue()) > (8 * 128)); 
+		return (((5 * color.green()) + (2 * color.red()) + color.blue()) > (8 * 128));
 	}
 };
 
@@ -91,22 +93,22 @@ class VIStyleSheetManager :public VIObject
 	_Private QWidget* Master;
 	_Private QMap<QString, QString> StyleSheeMap;
 	_Private QString CurrentStyleSheetName;
-	_Public VIStyleSheetPalette* Palette;
-	_Public def_init VIStyleSheetManager(QWidget* master, VIStyleSheetPalette* palette = VI_NULLPTR):VIObject(master) {
+	_Public VIColorPalette* Palette;
+	_Public def_init VIStyleSheetManager(QWidget* master, VIColorPalette* palette = VI_NULLPTR) :VIObject(master) {
 		Master = master;
 		Palette = palette;
 		if (Palette != VI_NULLPTR) {
-			connect(Palette, &VIStyleSheetPalette::PaletteChanged, this, &VIStyleSheetManager::refreshStyleSheet);
+			connect(Palette, &VIColorPalette::PaletteChanged, this, &VIStyleSheetManager::refreshStyleSheet);
 		}
 	}
-	_Public void setPalette(VIStyleSheetPalette* palette) {
+	_Public void setPalette(VIColorPalette* palette) {
 		Palette = palette;
 		if (Palette != VI_NULLPTR) {
-			connect(Palette, &VIStyleSheetPalette::PaletteChanged, this, &VIStyleSheetManager::refreshStyleSheet);
+			connect(Palette, &VIColorPalette::PaletteChanged, this, &VIStyleSheetManager::refreshStyleSheet);
 		}
 	}
 	_Public void addStyleSheet(const QString& name, const QString& styleSheet) {
-		StyleSheeMap[name]= styleSheet;
+		StyleSheeMap[name] = styleSheet;
 	}
 	_Public void applyStyleSheet(const QString& name) {
 		if (StyleSheeMap.contains(name)) {
@@ -147,13 +149,13 @@ class VIStyleSheetManager :public VIObject
 		raw.replace(":WORKPATH", VIDocument::getWorkingPath());
 		return raw;
 	}
-	_Public static QString VISSExp_COLOR(QString raw, VIStyleSheetPalette* palette) {
+	_Public static QString VISSExp_COLOR(QString raw, VIColorPalette* palette) {
 		while (true) {
 			if (raw.contains("CLR__") && raw.contains("__CLR")) {
 				int Index_b = raw.indexOf("CLR__");
 				int Index_e = raw.indexOf("__CLR");
 				QString colorName = raw.mid(Index_b + 5, Index_e - Index_b - 5);
-				raw.replace("CLR__" + colorName + "__CLR", VIStyleSheetPalette::toRGBAStr(palette->getColorWithName(colorName)));
+				raw.replace("CLR__" + colorName + "__CLR", VIColorPalette::toRGBAStr(palette->getColorWithName(colorName)));
 			}
 			else {
 				break;
@@ -161,13 +163,13 @@ class VIStyleSheetManager :public VIObject
 		}
 		return raw;
 	}
-	_Public static QString VISSExp_COLOR(QString raw, VIStyleSheetColorMap& map) {
+	_Public static QString VISSExp_COLOR(QString raw, VIColorMap& map) {
 		while (true) {
 			if (raw.contains("CLR__") && raw.contains("__CLR")) {
 				int Index_b = raw.indexOf("CLR__");
 				int Index_e = raw.indexOf("__CLR");
 				QString colorName = raw.mid(Index_b + 5, Index_e - Index_b - 5);
-				raw.replace("CLR__" + colorName + "__CLR", VIStyleSheetPalette::toRGBAStr(map[colorName]));
+				raw.replace("CLR__" + colorName + "__CLR", VIColorPalette::toRGBAStr(map[colorName]));
 			}
 			else {
 				break;
@@ -186,16 +188,15 @@ class private_VIColorChangeAnimationBehavior :public VIAnimationBehavior
 	_Private QColor TargetColor;
 	_Private QColor RawColor;
 	_Private QColor CurrentColor;
-	_Private VIStyleSheetPalette* Palette;
+	_Private VIColorPalette* Palette;
 	_Private QString PaletteName;
 	_Private QString ColorName;
-	_Public def_init private_VIColorChangeAnimationBehavior(QWidget* parent):VIAnimationBehavior(parent) {
-		
+	_Public def_init private_VIColorChangeAnimationBehavior(QWidget* parent) :VIAnimationBehavior(parent) {
 	}
 	_Public void setTargetColor(QColor color) {
 		TargetColor = color;
 	}
-	_Public void setPalette(VIStyleSheetPalette* palette) {
+	_Public void setPalette(VIColorPalette* palette) {
 		Palette = palette;
 	}
 	_Public void setColorName(QString name) {

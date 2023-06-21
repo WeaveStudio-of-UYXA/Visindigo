@@ -19,7 +19,7 @@ class SPDFScripts :public VIObject
 	_Private QWaitCondition* WaitCondition;
 	_Private QList<SPDFAbstractControllerParser*> Parsers;
 	_Private VIECMA_SPOL* ESSPOL;
-	_Public def_init SPDFScripts(SPDFWorkingEnv* env, VISuper* parent = VI_NULLPTR):VIObject(parent){
+	_Public def_init SPDFScripts(SPDFWorkingEnv* env, VISuper* parent = VI_NULLPTR) :VIObject(parent) {
 		Env = env;
 		ScriptsEngine = new VIECMAScripts();
 		Mutex = ScriptsEngine->getThreadMutex();

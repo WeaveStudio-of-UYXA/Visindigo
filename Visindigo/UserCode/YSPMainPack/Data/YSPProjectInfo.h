@@ -5,7 +5,7 @@ class YSPProjectInfo :public VISettings
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Public def_init YSPProjectInfo(QString projectFolder, VISuper* parent = VI_NULLPTR):VISettings(parent)
+	_Public def_init YSPProjectInfo(QString projectFolder, VISuper* parent = VI_NULLPTR) :VISettings(parent)
 	{
 		QFile defaultSettingsFile;
 		defaultSettingsFile.setFileName(":/Visindigo/Resource/JSON/defaultProjectSettings.json");

@@ -56,9 +56,9 @@ class private_VIECMAScripts :public VIObject {
 		}
 		QFileInfo fileInfo(fileName);
 		QString path = fileInfo.absolutePath();
-		qDebug()<<path;
+		qDebug() << path;
 		QJSValue MainObject = engine->importModule(fileName);
-		qDebug()<<MainObject.toString();
+		qDebug() << MainObject.toString();
 		for (auto i = Modules.begin(); i != Modules.end(); i++) {
 			QJSValue ModuleObject = engine->importModule(i.value());
 			engine->globalObject().setProperty(i.key(), ModuleObject);
@@ -74,7 +74,7 @@ class private_VIECMAScripts :public VIObject {
 		if (result.isError()) {
 			VIConsole::printLine(getLogPrefix() + VIConsole::inErrorStyle(result.toString()));
 		}
-		qDebug()<<result.toString();
+		qDebug() << result.toString();
 		consoleLog("VIECMA processing " + fileName + " finished.");
 		if (InThread) {
 			ThreadMutex->unlock();
@@ -171,27 +171,27 @@ class VIECMAScripts :public VIObject {
 		}
 		return QJSValue();
 	}
-	private slots: void onExit() {
-		OnRunning = false;
-		ThreadWaitCondition->wakeAll();
-		Thread->wait();
-		Thread->quit();
-	}
-	_Public def_del ~VIECMAScripts() {
-		if (OnRunning) {
-			onExit();
-		}
-		delete Thread;
-		delete ThreadWaitCondition;
-		delete ThreadMutex;
-		if (VIECMAS != VI_NULLPTR) {
-			delete VIECMAS;
-		}
-	}
-	_Public VICommand_Handler(Command) {
-		VICommand_Name("ecma") {
-			VIConsole::printLine("VIECMA Scripts Engine");
-			return true;
-		}
-	};
+private slots: void onExit() {
+	OnRunning = false;
+	ThreadWaitCondition->wakeAll();
+	Thread->wait();
+	Thread->quit();
+}
+			 _Public def_del ~VIECMAScripts() {
+				 if (OnRunning) {
+					 onExit();
+				 }
+				 delete Thread;
+				 delete ThreadWaitCondition;
+				 delete ThreadMutex;
+				 if (VIECMAS != VI_NULLPTR) {
+					 delete VIECMAS;
+				 }
+			 }
+			 _Public VICommand_Handler(Command) {
+				 VICommand_Name("ecma") {
+					 VIConsole::printLine("VIECMA Scripts Engine");
+					 return true;
+				 }
+			 };
 };

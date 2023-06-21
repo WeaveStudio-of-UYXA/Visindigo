@@ -18,8 +18,8 @@ class VIWindowsTheme :public VIObject {
 		BOOL fOpaqueBlend;
 		DWORD theme_color{};
 		HRESULT result = DwmGetColorizationColor(&crColorization, &fOpaqueBlend);
-		
-		BYTE r=0, g=0, b=0;
+
+		BYTE r = 0, g = 0, b = 0;
 		if (result == S_OK)
 		{
 			r = (crColorization >> 16) % 256;
@@ -27,7 +27,7 @@ class VIWindowsTheme :public VIObject {
 			b = crColorization % 256;
 			theme_color = RGB(r, g, b);
 		}
-		qDebug()<<r<<g<<b;
+		//qDebug()<<r<<g<<b;
 		QColor color(r, g, b);
 		return color;
 	}

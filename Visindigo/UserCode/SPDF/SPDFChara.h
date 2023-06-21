@@ -9,7 +9,6 @@ class SPDFCharaState :public VIObject
 	_Public QString StateDisplayName;
 	_Public QImage CharaImage;
 	_Public def_init SPDFCharaState(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
-
 	}
 };
 class SPDFChara : public VIObject
@@ -22,7 +21,6 @@ class SPDFChara : public VIObject
 	_Private QString CurrentStateName;
 	_Private SPDFCharaState* CurrentState = VI_NULLPTR;
 	_Public def_init SPDFChara(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
-
 	}
 	_Public void setState(QString stateName, QString stateDisplayName, QImage charaImage) {
 		SPDFCharaState* state;

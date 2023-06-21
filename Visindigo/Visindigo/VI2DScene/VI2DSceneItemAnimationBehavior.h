@@ -15,12 +15,9 @@ class VI2DSceneRotateAnimationBehavior :public VI2DSceneAnimationBehavior
 	VI_OBJECT;
 	_Public def_init VI2DSceneRotateAnimationBehavior(VISuper* parent = VI_NULLPTR) :VI2DSceneAnimationBehavior(parent) {}
 	_Public void onActive() {
-
 	}
 	_Public void onTick() {
-
 	}
 	_Public void onPassive() {
-		
 	}
 };

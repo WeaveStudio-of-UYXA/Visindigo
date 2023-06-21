@@ -9,7 +9,7 @@ class VILanguageHost :public VIObject
 	VI_OBJECT;
 	_Signal void languageChanged();
 	_Public enum class LangType {
-		zh_SC, zh_TC, ja_JP, en_US, 
+		zh_SC, zh_TC, ja_JP, en_US,
 		ko_KR, fr_FR, de_DE, ru_RU,
 	};
 	_Private VILanguageDoc* DefaultLanguage = VI_NULLPTR;

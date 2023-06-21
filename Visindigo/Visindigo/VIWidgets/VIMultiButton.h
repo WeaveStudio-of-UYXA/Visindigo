@@ -45,13 +45,13 @@ class VIMultiButton :public VIWidget
 			onExpand();
 		}
 		if (Shrinked) {
-			IconLabel->setGeometry(Spacing, (width()-height()+Spacing*2)/2, height() - Spacing*2, height() - Spacing*2);
+			IconLabel->setGeometry(Spacing, (width() - height() + Spacing * 2) / 2, height() - Spacing * 2, height() - Spacing * 2);
 		}
 		else {
-			IconLabel->setGeometry(Spacing, Spacing, height() - Spacing*2, height() - Spacing*2);
-			if (EnableSubText) { 
+			IconLabel->setGeometry(Spacing, Spacing, height() - Spacing * 2, height() - Spacing * 2);
+			if (EnableSubText) {
 				TextLabel->setGeometry(height(), Spacing, width() - height() - Spacing * 2, (height() - Spacing * 2) * 3 / 5);
-				SubTextLabel->setGeometry(height(), (height()-Spacing*2) * 3 / 5 + Spacing, width() - height() - Spacing*2, (height()-Spacing*2) * 2 / 5); 
+				SubTextLabel->setGeometry(height(), (height() - Spacing * 2) * 3 / 5 + Spacing, width() - height() - Spacing * 2, (height() - Spacing * 2) * 2 / 5);
 			}
 			else {
 				TextLabel->setGeometry(height(), Spacing, width() - height() - Spacing * 2, height() - Spacing * 2);
@@ -64,13 +64,13 @@ class VIMultiButton :public VIWidget
 	_Private void onShrink() {
 		if (Shrinked) return;
 		Shrinked = true;
-		if (EnableSubText) { SubTextLabel->hide();}
+		if (EnableSubText) { SubTextLabel->hide(); }
 		TextLabel->hide();
 	}
 	_Private void onExpand() {
 		if (!Shrinked) return;
 		Shrinked = false;
-		if (EnableSubText) { SubTextLabel->show();}
+		if (EnableSubText) { SubTextLabel->show(); }
 		TextLabel->show();
 	}
 	_Public void setNormalStyleSheet(QString ss) {
@@ -156,8 +156,8 @@ class private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
 		}
 	}
 	_Public void onTick() override {
-		Target->move((float)rawX+(float)(targetX-rawX)*VIMath::sin_0_1(Duration->getPercent()), 
-			(float)rawY+(float)(targetY-rawY)*VIMath::sin_0_1(Duration->getPercent()));
+		Target->move((float)rawX + (float)(targetX - rawX) * VIMath::sin_0_1(Duration->getPercent()),
+			(float)rawY + (float)(targetY - rawY) * VIMath::sin_0_1(Duration->getPercent()));
 		Target->resize(rawW, rawH + rawH * maxExpandPercent * VIMath::sin_0_1_0(Duration->getPercent()));
 	}
 	_Public void onPassive() override {
@@ -175,12 +175,11 @@ class private_VIMultiButtonAnimationLabel :public VIWidget
 		this->StyleSheetManager->addStyleSheet("default",
 			"private_VIMultiButtonAnimationLabel{background-color:CLR__SystemThemeColor__CLR;border:0px solid white;border-radius:2px;}");
 		this->StyleSheetManager->applyStyleSheet("default");
-	
 	}
-	_Public void setStyleSheetPalette(VIStyleSheetPalette* palette) override{
+	_Public void setStyleSheetPalette(VIColorPalette* palette) override {
 		consoleLog("Palette setted");
 		VIWidget::setStyleSheetPalette(palette);
-		connect(StyleSheetManager->Palette, &VIStyleSheetPalette::PaletteChanged, this->StyleSheetManager, &VIStyleSheetManager::refreshStyleSheet);
+		connect(StyleSheetManager->Palette, &VIColorPalette::PaletteChanged, this->StyleSheetManager, &VIStyleSheetManager::refreshStyleSheet);
 		this->StyleSheetManager->applyStyleSheet("default");
 	}
 };
@@ -241,22 +240,22 @@ class VIMultiButtonGroup :public VIWidget
 		if (Buttons.size() == 0) { return -1; }
 		Buttons[0]->select();
 		SelectedIndex = 0;
-		AnimationLabel->move(Buttons[SelectedIndex]->x()+(Spacing - AnimationLabelWidth) / 2, Buttons[SelectedIndex]->y() + Spacing);
+		AnimationLabel->move(Buttons[SelectedIndex]->x() + (Spacing - AnimationLabelWidth) / 2, Buttons[SelectedIndex]->y() + Spacing);
 		AnimationLabel->resize(AnimationLabelWidth, Buttons[SelectedIndex]->height() - Spacing * 2);
 		return 0;
 	}
-	_Public void setNormalStyleSheet(const QString &styleSheet) {
+	_Public void setNormalStyleSheet(const QString& styleSheet) {
 		for (int i = 0; i < Buttons.size(); i++) {
 			Buttons[i]->setNormalStyleSheet(styleSheet);
 			Buttons[i]->setStyleSheet(styleSheet);
 		}
 	}
-	_Public void setPressStyleSheet(const QString &styleSheet) {
+	_Public void setPressStyleSheet(const QString& styleSheet) {
 		for (int i = 0; i < Buttons.size(); i++) {
 			Buttons[i]->setPressStyleSheet(styleSheet);
 		}
 	}
-	_Public void setHoverStyleSheet(const QString &styleSheet) {
+	_Public void setHoverStyleSheet(const QString& styleSheet) {
 		for (int i = 0; i < Buttons.size(); i++) {
 			Buttons[i]->setHoverStyleSheet(styleSheet);
 		}
@@ -265,26 +264,26 @@ class VIMultiButtonGroup :public VIWidget
 		if (SelectedIndex == -1) { return; }
 		AnimationLabel->move(Buttons[SelectedIndex]->x() + (Spacing - AnimationLabelWidth) / 2, Buttons[SelectedIndex]->y() + Spacing);
 		AnimationLabel->resize(AnimationLabelWidth, Buttons[SelectedIndex]->height() - Spacing * 2);
-		qDebug()<<AnimationLabel->width()<<AnimationLabel->height();
+		qDebug() << AnimationLabel->width() << AnimationLabel->height();
 	}
 	_Public VIMultiButton* spawnButton(QString text, QString icon = "", QString subText = "") {
-		VIMultiButton* button = new VIMultiButton(this, text, subText!="");
+		VIMultiButton* button = new VIMultiButton(this, text, subText != "");
 		if (icon != "") { button->setIcon(icon); }
 		if (subText != "") { button->setSubText(subText); }
 		addButton(button);
 		AnimationLabel->raise();
 		return button;
 	}
-	private slots: void onSelected(int index) {
-		SelectedIndex = index;
-		for (int i = 0; i < Buttons.size(); i++) {
-			if (i != index) {
-				Buttons[i]->unSelect();
-			}
+private slots: void onSelected(int index) {
+	SelectedIndex = index;
+	for (int i = 0; i < Buttons.size(); i++) {
+		if (i != index) {
+			Buttons[i]->unSelect();
 		}
-		AnimationLabel->Behavior->setDuration(300);
-		AnimationLabel->Behavior->setMoveTo(AnimationLabel->x(), Buttons[index]->y()+ Spacing, Direction);
-		AnimationLabel->Behavior->active();
-		emit selected(index);
 	}
+	AnimationLabel->Behavior->setDuration(300);
+	AnimationLabel->Behavior->setMoveTo(AnimationLabel->x(), Buttons[index]->y() + Spacing, Direction);
+	AnimationLabel->Behavior->active();
+	emit selected(index);
+}
 };

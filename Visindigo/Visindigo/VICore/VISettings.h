@@ -58,7 +58,7 @@ class VISettings :public VIObject
 			for (auto i = objNameList.begin(); i != objNameList.end(); i++) {
 				if (this->DefaultSettings.contains(*i)) {
 					if (i == objNameList.end() - 1) {
-						VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix() + "Can't find settings: " + objName+", use default value."));
+						VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix() + "Can't find settings: " + objName + ", use default value."));
 						return this->DefaultSettings.value(*i).toVariant();
 					}
 					else {
