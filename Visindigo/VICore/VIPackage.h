@@ -13,6 +13,7 @@ class VIPackageInfo :public VIObject
 	VI_OBJECT;
 	friend class VIFramework;
 	friend class VIPackage;
+	_Private static VIPackageInfo* Instance;
 	VI_ProtectedProperty(QString, PackageName);
 	VI_ProtectedProperty(unsigned int, PackageVersionMajor);
 	VI_ProtectedProperty(unsigned int, PackageVersionMinor);
@@ -34,10 +35,12 @@ class VIPackageInfo :public VIObject
 		this->setURL("");
 		this->setOrganization("");
 		this->setOrganizationDomain("");
+		Instance = this;
 	}
 	_Public QString getPackageVersion() {
 		return QString("%1.%2.%3").arg(PackageVersionMajor).arg(PackageVersionMinor).arg(PackageVersionPatch);
 	}
+	_Public static VIPackageInfo* getInstance(){return Instance;}
 };
 
 class VIPackage :public VIBasicBehavior

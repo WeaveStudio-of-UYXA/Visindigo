@@ -108,7 +108,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="Resource.qrc" />
+    <QtRcc Include="VIResource.qrc" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -119,6 +119,7 @@
     <ClCompile Include="VICore\cpp\VIFramework.cpp" />
     <ClCompile Include="VICore\cpp\VILanguage.cpp" />
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
+    <ClCompile Include="VICore\cpp\VIPackage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VIWidgets\VIWidgetsTransQt.h" />

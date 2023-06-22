@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/Visindigo">
         <file>Resource/Visindigo.png</file>
+        <file>Resource/QSS/YSPStyleSheet.css</file>
+        <file>JsVIAPI/YSP.js</file>
         <file>JsVIAPI/VIESObject.js</file>
         <file>Resource/JSON/defaultProjectSettings.json</file>
     </qresource>
