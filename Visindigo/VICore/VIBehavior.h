@@ -24,7 +24,8 @@ class VITimedBehavior :public VIBasicBehavior
 	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
 	_Public VIMilliSecond getTickDuration();
 };
-
+//被动行为
+class 
 class VIBehaviorHost;
 class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
 {
@@ -50,7 +51,7 @@ class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
 	_Slot void addBehavior(VIAbstractBehavior*, VIAbstractBehavior::QuantifyTickType) override;
 };
 
-class VIBehaviorHost :public VIAbstractBehaviorHost
+class VIBehaviorHost final :public VIAbstractBehaviorHost
 {
 	Q_OBJECT;
 	friend class VIBasicBehavior;
@@ -73,7 +74,7 @@ class VIBehaviorHost :public VIAbstractBehaviorHost
 	_Public void setMagnification(double m);
 };
 
-class VIDebugBehavior :public VIBasicBehavior
+class VIDebugBehavior final :public VIBasicBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -83,7 +84,7 @@ class VIDebugBehavior :public VIBasicBehavior
 	_Public def_init VIDebugBehavior(QObject* parent = nullptr);
 	_Public void onActive() override;
 	_Public void onTick() override;
-	_Public void onPassive() override;
+	_Public void onSubSide() override;
 };
 
 class VIAnimationBehavior :public VITimedBehavior

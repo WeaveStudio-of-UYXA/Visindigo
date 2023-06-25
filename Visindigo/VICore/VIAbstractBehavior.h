@@ -28,10 +28,10 @@ class VIAbstractBehavior :public VIObject
 	VI_Property(State, BehaviorState);
 	_Public virtual void onActive()  PureVirtual;
 	_Public virtual void onTick()  PureVirtual;
-	_Public virtual void onPassive()  PureVirtual;
+	_Public virtual void onSubSide()  PureVirtual;
 	_Protected virtual State hostCall()  PureVirtual;
 	_Public virtual void active(QuantifyTickType type = QuantifyTickType::T0) PureVirtual;
-	_Public void passive();
+	_Public void subside();
 };
 
 class VIAbstractBehaviorHost :public VIObject

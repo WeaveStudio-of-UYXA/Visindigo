@@ -1,11 +1,11 @@
-export class VIESBehavior{
+﻿export class VIESBehavior{
     constructor(){
         this.objectName = "VIESBehavior"
         this.consoleLog("INITED")
     }
     onActive(){}
     onTick(){}
-    onPassive(){}
+    onSubSide(){}
     consoleLog(msg){
         System.log("["+this.objectName+"]"+msg);
     }

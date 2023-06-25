@@ -215,7 +215,7 @@ class private_VIColorChangeAnimationBehavior :public VIAnimationBehavior
 		CurrentColor.setAlpha(RawColor.alpha() + (TargetColor.alpha() - RawColor.alpha()) * Duration->getPercent());
 		Palette->changeColorWithNameIn(ColorName, CurrentColor, PaletteName);
 	}
-	_Public void onPassive()override {
+	_Public void onSubSide()override {
 		Palette->changeColorWithNameIn(ColorName, TargetColor, PaletteName);
 	}
 };

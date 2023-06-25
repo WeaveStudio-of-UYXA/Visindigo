@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VIMath" Collapsed="true">
+    <Position X="85.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAEAAAAgCAAAI=</HashCode>
+      <FileName>VICore\VIMath.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIException" Collapsed="true">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAgAAACA=</HashCode>
+      <FileName>VICore\VIException.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIDimensionError" Collapsed="true">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIException.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIWindowsTheme" Collapsed="true">
+    <Position X="19.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VIWidgets\VIWindowsTheme.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VI2DSceneAnimationBehavior" Collapsed="true">
+    <Position X="49.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>VI2DScene\VI2DSceneItemAnimationBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VI2DSceneRotateAnimationBehavior" Collapsed="true">
+    <Position X="49.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAECAAAAAAAAAAIAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>VI2DScene\VI2DSceneItemAnimationBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIMultiButton" Collapsed="true">
+    <Position X="37.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iCwgBAAQgAAAAAAAAAEAAJDAAAAQIAJABQCgIgEIAAA=</HashCode>
+      <FileName>VIWidgets\VIMultiButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="private_VIMultiButtonAnimationBehavior" Collapsed="true">
+    <Position X="54.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIEAkMAAgAACAAACIgAAAAAAQAAAgAACAwAAA=</HashCode>
+      <FileName>VIWidgets\VIMultiButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="private_VIMultiButtonAnimationLabel" Collapsed="true">
+    <Position X="42.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>VIWidgets\VIMultiButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIMultiButtonGroup" Collapsed="true">
+    <Position X="44.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACQAAAhAAgAAAQAAEAAIEAQAAAIAYIhAAAAgAAAAA=</HashCode>
+      <FileName>VIWidgets\VIMultiButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIColorPalette" Collapsed="true">
+    <Position X="76.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAQgAACCCAQQAAAAEAACAAABIAACABAAAAA=</HashCode>
+      <FileName>VIWidgets\VIStyleSheet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIStyleSheetManager" Collapsed="true">
+    <Position X="22" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYAAAAAAJAAACACAAAADACAAAAgAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VIWidgets\VIStyleSheet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="private_VIColorChangeAnimationBehavior" Collapsed="true">
+    <Position X="52" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAEAAABAAIACgCIAAIAAAIABAggCAAAAAAQ=</HashCode>
+      <FileName>VIWidgets\VIStyleSheet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VILoadingWidget" Collapsed="true">
+    <Position X="35.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAEAAAAAAgAAAAA=</HashCode>
+      <FileName>VIWidgets\VILoadingWidget.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIMainWindow" Collapsed="true">
+    <Position X="40" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAABAAAIEAAQAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>VIWidgets\VIMainWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIDocument" Collapsed="true">
+    <Position X="31" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIgABADAAAAgQAAAAAAIAFAAACIAAAACAQAAAAAAAA=</HashCode>
+      <FileName>VICore\VIDocument.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VILanguageDoc" Collapsed="true">
+    <Position X="49" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAIUAAAACAAAACAAAAAAgAAAAgABACAAABAA=</HashCode>
+      <FileName>VICore\VIDocument.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VILanguageHost" Collapsed="true">
+    <Position X="51.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAAAAAAQAAAAAAEAAABAAAEABAAAAAIAAAAQCAABBBA=</HashCode>
+      <FileName>VICore\VILanguage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VISettings" Collapsed="true">
+    <Position X="70" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAQAAAAAAAQgAgAAgAAAAAAgAAA=</HashCode>
+      <FileName>VICore\VISettings.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VICodeEdit" Collapsed="true">
+    <Position X="46.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgABAAAAgBAAIQAAAAAAAAAAQoAAAAIAAAEAAAAA=</HashCode>
+      <FileName>VIWidgets\VICodeEdit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIPackagePanel" Collapsed="true">
+    <Position X="33.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAQAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>VIWidgets\VIPackagePanel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIAbstractWidget" Collapsed="true">
+    <Position X="40" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>VIWidgets\VIWidget.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIWidget" Collapsed="true">
+    <Position X="40" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VIWidgets\VIWidget.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VICommandHandler" Collapsed="true">
+    <Position X="83.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAgAAAEAAgAAAAA=</HashCode>
+      <FileName>VICore\VICommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VICommandHost" Collapsed="true">
+    <Position X="61" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAACAAAAIAAAAAAAAAAAAIAAAAQAQAAABAIAAAA=</HashCode>
+      <FileName>VICore\VICommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommandHandlerTestClass" Collapsed="true">
+    <Position X="72.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>VICore\VICommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="private_VIECMAScripts" Collapsed="true">
+    <Position X="24.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEAAAAADAEAAAAAAABgAAAAgAIAAA=</HashCode>
+      <FileName>VICore\VIECMAScripts.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIECMAScripts" Collapsed="true">
+    <Position X="26.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAQAAEAAAAAAEAAACACAECAAAAAIEAAAFAAAIgAA=</HashCode>
+      <FileName>VICore\VIECMAScripts.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="private_VIECMA_Console" Collapsed="true">
+    <Position X="63.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAAgAAAACAAAAAAIAAAAAAAAAAAAAAAAEIAAAAA=</HashCode>
+      <FileName>VICore\private\VIECMABuiltInModules.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIVersion" Collapsed="true">
+    <Position X="33.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAQAAABABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIVersion.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VI2DSceneWidget" Collapsed="true">
+    <Position X="83.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAQAAAAAAgAiAAAAAAAAAIAAAACAAAAAABAA=</HashCode>
+      <FileName>VI2DScene\VI2DSceneWidget.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIConsole" Collapsed="true">
+    <Position X="63.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAgAAAACAAAAAAIAAAAAAAAAAAABAAAkIAAAAA=</HashCode>
+      <FileName>VICore\VIConsole.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VICoordinate" Collapsed="true">
+    <Position X="4.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgQAAAAAAEAIAEAAiAAAAAAA=</HashCode>
+      <FileName>VICore\VIBasicType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIStepper" Collapsed="true">
+    <Position X="28.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAABAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>VICore\VIBasicType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIPackageInfo" Collapsed="true">
+    <Position X="35.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAABAAAAAAQAQAAAAgAAAAA=</HashCode>
+      <FileName>VICore\VIPackage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIPackage" Collapsed="true">
+    <Position X="58.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIPackage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="private_VIFramework" Collapsed="true">
+    <Position X="65.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAIAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIFramework.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIApplication" Collapsed="true">
+    <Position X="85.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>VICore\VIFramework.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIFramework" Collapsed="true">
+    <Position X="79" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEIgAAAAAAAggAiACAAAAAAAABYCQAIIAAAiAAA=</HashCode>
+      <FileName>VICore\VIFramework.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIBasicBehavior" Collapsed="true">
+    <Position X="54.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAIAAAAAIAAAAAA=</HashCode>
+      <FileName>VICore\VIBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VITimedBehavior" Collapsed="true">
+    <Position X="52" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABQAAAAAAAAAAIAAAAAAICAAAAKAAAAAA=</HashCode>
+      <FileName>VICore\VIBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIQuantifyTickBehaviorHost" Collapsed="true">
+    <Position X="57.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAhAAAAAAAAAEAgCQIBAAAAAiAAAAA=</HashCode>
+      <FileName>VICore\VIBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIBehaviorHost" Collapsed="true">
+    <Position X="59.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAIAAAAAChAAAAAAAAAFAgAQJAEAAAACAAAEA=</HashCode>
+      <FileName>VICore\VIBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIDebugBehavior" Collapsed="true">
+    <Position X="56.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAUAAAAAAAAAAAIAAAAAAAIAAAgAAAAAAAA=</HashCode>
+      <FileName>VICore\VIBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIAnimationBehavior" Collapsed="true">
+    <Position X="52" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>VICore\VIBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIBehaviorDuration" Collapsed="true">
+    <Position X="67.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAAAAAAAAAEAAAAAAAQAAAAAAAAAABIAAAACAAgAAAA=</HashCode>
+      <FileName>VICore\VIDuration.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIDuration" Collapsed="true">
+    <Position X="74.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAIAAAABAAAAAAAAgAAAKAACCAAA=</HashCode>
+      <FileName>VICore\VIDuration.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIMultiPlatform" Collapsed="true">
+    <Position X="81.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIAEBAAAAAAAAAAABACAAAAAAAAAICAAAAQAiCAAAAA=</HashCode>
+      <FileName>VICore\VIMultiPlatform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIAbstractObject" Collapsed="true">
+    <Position X="41.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIObject" Collapsed="true">
+    <Position X="49" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIAbstractBehavior" Collapsed="true">
+    <Position X="54.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAARAAAAIAAAAABAAAAAA=</HashCode>
+      <FileName>VICore\VIAbstractBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIAbstractBehaviorHost" Collapsed="true">
+    <Position X="58.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAABAAoAAAAAAAACAAA=</HashCode>
+      <FileName>VICore\VIAbstractBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VIBehaviorLoopEvent" Collapsed="true">
+    <Position X="87.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIAbstractBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="VISecond" Collapsed="true">
+    <Position X="83.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\private\VIDuration_m.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VIMilliSecond" Collapsed="true">
+    <Position X="85.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\private\VIDuration_m.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VIMicroSecond" Collapsed="true">
+    <Position X="83.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\private\VIDuration_m.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VINanoSecond" Collapsed="true">
+    <Position X="87.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\private\VIDuration_m.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="STD_TimePoint" Collapsed="true">
+    <Position X="1.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\private\VIDuration_m.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VITimePoint" Collapsed="true">
+    <Position X="1.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\private\VIDuration_m.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VIColorMap" Collapsed="true">
+    <Position X="87.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VIWidgets\VIStyleSheet.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VIBaseWidget" Collapsed="true">
+    <Position X="40" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VIWidgets\VIWidget.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QStringMap" Collapsed="true">
+    <Position X="85.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VICommand.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ModuleMap" Collapsed="true">
+    <Position X="83.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIECMAScripts.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VI1DCoordinate" Collapsed="true">
+    <Position X="1.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIBasicType.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VI2DCoordinate" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIBasicType.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VI3DCoordinate" Collapsed="true">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIBasicType.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VI4DCoordinate" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIBasicType.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VIBaseObject" Collapsed="true">
+    <Position X="49" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIObject.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="VISuper" Collapsed="true">
+    <Position X="52" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIObject.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="VIECMABuiltInModule" Collapsed="true">
+    <Position X="83.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VICore\VIECMAScripts.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

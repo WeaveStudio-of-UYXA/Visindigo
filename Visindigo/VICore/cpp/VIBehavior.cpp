@@ -14,7 +14,7 @@ VIAbstractBehavior::State VIBasicBehavior::hostCall() {
 		onTick();
 		break;
 	case State::Passive:
-		onPassive();
+		onSubSide();
 		BehaviorState = State::Idle;
 		break;
 	}
@@ -237,8 +237,8 @@ def_init VIDebugBehavior::VIDebugBehavior(QObject* parent) :VIBasicBehavior(pare
 void VIDebugBehavior::onActive() {
 	consoleLog("VIDebugBehavior onActive");
 }
-void VIDebugBehavior::onPassive() {
-	consoleLog("VIDebugBehavior onPassive");
+void VIDebugBehavior::onSubSide() {
+	consoleLog("VIDebugBehavior onSubSide");
 }
 #include <iostream>
 void VIDebugBehavior::onTick() {

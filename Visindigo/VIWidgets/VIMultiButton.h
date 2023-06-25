@@ -160,7 +160,7 @@ class private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
 			(float)rawY + (float)(targetY - rawY) * VIMath::sin_0_1(Duration->getPercent()));
 		Target->resize(rawW, rawH + rawH * maxExpandPercent * VIMath::sin_0_1_0(Duration->getPercent()));
 	}
-	_Public void onPassive() override {
+	_Public void onSubSide() override {
 		Target->setGeometry(targetX, targetY, rawW, rawH);
 	}
 };

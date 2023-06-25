@@ -53,7 +53,7 @@ class VIPackage :public VIBasicBehavior
 		this->setObjectName("UnnamedVIPackage");
 	};
 	_Public virtual void onActive() HalfVirtual;
-	_Public virtual void onPassive() HalfVirtual;
+	_Public virtual void onSubside() HalfVirtual;
 	_Public virtual void onTick() HalfVirtual;
 	_Public virtual void onEvent(QEvent* e) HalfVirtual;
 	

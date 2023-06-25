@@ -18,6 +18,6 @@ class VI2DSceneRotateAnimationBehavior :public VI2DSceneAnimationBehavior
 	}
 	_Public void onTick() {
 	}
-	_Public void onPassive() {
+	_Public void onSubSide() {
 	}
 };
