@@ -5,7 +5,7 @@
     }
     onActive(){}
     onTick(){}
-    onSubSide(){}
+    onSubside(){}
     consoleLog(msg){
         System.log("["+this.objectName+"]"+msg);
     }
