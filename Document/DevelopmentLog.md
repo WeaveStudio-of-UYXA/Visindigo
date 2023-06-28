@@ -1,3 +1,0 @@
-# 2023年1月11日
-现在认为VIJS主机不应该被放在如此高的位置（指使一切Visindigo开发使用JS进行），Visindigo开发仍然应该是C++开发，JS的意义在于快速引入一些逻辑。
-与此同时，VIJS主机提供的VisindigoJS不是事件驱动，这就导致使用JS开发Visindigo实际上更加困难。而VIJS主机本身在Visindigo中可以是事件驱动的，因此VIJS主机的地位应当从唯一API退化到Visindigo基本组件。

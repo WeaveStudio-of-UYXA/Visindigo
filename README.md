@@ -1,18 +1,7 @@
 # 前言和授权
+**Visindigo**是基于Qt的应用程序开发拓展，在Qt的基础上提供一些适用于游戏开发的基本对象，以及适用于桌面程序开发的小组件。
 
-在**Yayin Story Player**开发到0.9版本后，TsingYayin认识到YSP程序的核心UI组件QtWordGame和核心解释器组件AASPCMD并不能满足YSP程序日益增长的需求。于是TsingYayin决定先抛开YSP，开发一个基于Qt的简单二维场景框架，即本项目Visindigo。在Visindigo基本框架基本搭起来后，YSP会基于Visindigo继续开发，并且作为Visindigo开发的范例程序包含在本项目的UserCode/YSPMainPack中。
-
-**QtWordGame**是TsingYayin基于初代YSP需求独立开发的专用于极简横版对话的UI框架。
-
-**AASPCMD**是Ayano Aishi提出构想，由TsingYayin独立开发的SPOL脚本解释器。
-
-**SPOL** 即`Story Player Official Language`，专用于YSP的顺序结构剧情场景描述脚本，因为可扩展性太差现已弃用，仅作为新版YSP的SPDF on ES5（`Scene Performance Description Framework`）的一部分提供。
-
-**Visindigo**是Tsing Yayin主要开发的场景框架。TsingYayin代码水平欠佳，因此Visindigo的定位是简单、可扩展的平面呈现和交互框架，基本提供任何专业功能。但Visindigo会一直保证高度的可移植和可扩展性，确保确有需求的用户能够以自己的方式扩展Visindigo。
-
-此项目完全开源且使用GPLv3授权，一切基于本程序的二次开发（包括扩展程序本体和编写VIJS程序）必须亦完全开源并使用GPLv3授权。本项目使用的授权许可证随时有可能变更，请用户自行关注当前许可证情况。
-
-此项目中有部分来自于StudioIndigo（紫靛工作室）的原创图像素材，版权所有，禁止挪用。
+**Visindigo**最开始只是YSP的重构，但在重构过程中，我们认为某些内容对于应用程序开发来说实际上具有一定的可复用性，于是我们决定将其拆分出来，作为一个独立的框架存在。有关YSP程序的开发，已经转移到了其他仓库，此处不再赘述。
 
 # 参考文档
 
@@ -44,7 +33,7 @@ With regard to multilingual translation in this software, we hope that users of 
 
 # 致谢
 
-Visindigo是框架型应用程序，为了向用户讲解如何使用这样的框架，我们决定重构现在在明日方舟二创社区同人剧情中经常使用的软件YSP，感谢《明日方舟》的好故事为所有在看此文的各位带来了创作的热情与欲望。
+Visindigo是框架型应用程序，为了向用户讲解如何使用这样的框架，我们使用此框架了重构现在在明日方舟二创社区同人剧情中经常使用的软件YSP，感谢《明日方舟》的好故事为所有在看此文的各位带来了创作的热情与欲望。
 
 Visindigo认为Qt是当今C++中最出色的库，Visindigo大量特性，尤其是Visindigo.JS和SPDF主机依赖于Qt实现，如果没有Qt，Visindigo还有很多很多弯路要走。
 
@@ -62,48 +51,43 @@ Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭�
 * 不要使用“从Qt4继承，仍然提供支持但不再继续开发”的旧版Qt组件如Qt Script。
 * 不要使用C++17及之后版本中的新内容，不要使用MSVC支持不了的特性。
 
-# 源码编译
-**请注意，如果您需要获得发行版本的源码，您应该去StudioIndigo的另外一个仓库，叫做[VisindigoRelease](https://github.com/StudioIndigo-of-CYXIO/VisindigoRelease)，本仓库内的源码是代表最新开发内容的源码，可能含有不稳定因素。**
-## 编译Windows版本（Windows_x86_64）
-  * 安装Visual Studio 2022，勾选有关C++的内容和有关桌面开发的内容
-    * 不需要勾选和移动设备开发有关的内容
-  * 安装Qt5.15，该项目目前用的是Qt5.15.2，由于项目中**含有**新版Qt的特性，因此请不要使用旧版Qt。
-    * 安装Qt时，应当安装MSVC2019_x64、android等平台的组件
-  * 在Visual Studio 2022的扩展中搜索并安装Qt VS Tools，将Qt5.15配置到Visual Studio。
-  * 在Visual Studio 2022中克隆此远程仓库，直接运行项目即可
-    * 请注意您到底是在运行Visindigo还是VisindigoInstaller，右键项目可以切换启动项
-  
-## 编译Android版本（arm_v7）
-  * 首先完成以上Windows版本操作
-  * 启动Visual Studio并打开本项目，在项目资源管理器中右键“Visindigo”打开右键菜单，在Qt扩展中选择导出pri文件到任意位置
-  * 将`AndroidConfig`内全部文件直接复制到含有Visual Studio项目文件（vcxproj）的目录
-  * 从Qt Creator选择复制进来的pro文件以打开项目
-  * 将pri文件内的SOURCE和HEAD信息覆盖pro文件内的SOURCE和HEAD信息
-  * 将您的安卓设备接入计算机，并启用ADB
-  * 打开`Global.h`，将
-    ```C++
-    #define DEPLOY WINDOWS_DEPLOY
-    ```
-    更改为
-    ```C++
-    #define DEPLOY ANDROID_DEPLOY
-    ```
-  * 直接运行项目
-  * 不要用此方法尝试编译Android或任何其他平台（包括Windows_arm）的Visindigo Installer，因为服务器只提供Windows_x86版本的文件，Installer只检查Windows_x86的文件，即使程序能在目标平台上运行，也无法接收对应平台的文件。
+# 使用Visindigo
 
-# 部署Visindigo
-您在默认情况下直接运行此项目，得到的程序是在main函数中加载的VIPackage对应的程序（大部分时间他会是YSP，其他时间会是某些测试程序），毕竟您不可能编译一个空框架出来跑。在这种默认情况下，参与最终可执行程序的代码只有被加载的各VIPackage所调用的Visindigo模块，其他模块不会参与到最终可执行程序。
-如果您需要将全部Visindigo模块编译到一个程序中以自行创建适用于Visindigo.JS开发的环境，请在Global.h中定义：
-```C++
-  #define DEPLOY_AS_VIJS
-```
-* 注意，如果您通过C++直接使用Visindigo框架进行开发，请勿增加这一宏，这会使您的程序拥有自由的JavaScript开发接口，从而造成您的程序可以被轻易改写（相当于提供了一个Mod接口）
-* 并且，如果您已经手动在您的C++程序中引入了`VIJSEngine`模块并自行建立了一个JS引擎实例，并且编写了部分开放给此实例的C++函数，使用上述宏则会使您的程序额外含有一个JS引擎实例，从而造成很大的麻烦（比如JS文件读取冲突，调试时无法确定C++函数开放给哪个实例等）。
-## Windows_x86_64
-* 在完成编译工作后，使用qt的MSVC 2019工具对生成文件运行`windeployqt`命令，如果仍未能运行程序，可以从Qt安装目录的`bin`文件夹下找到相关文件
-  
-## Android
-* 项目编译完后即在您的安装设备自动部署。但您可能需要手动在设置中开启各项程序权限。  
+1. 新建一个Qt Empty项目
+2. 添加Qt模块`Core`, `Gui`, `Widgets`, `Qml`, `Multimedia`
+3. 将本仓库直接放在您的项目文件夹下，或如果您使用了Git，您可以将本仓库作为子模块添加到您的项目中
+4. 在您的`main.cpp`代码中添加以下内容：
+   ```cpp
+   #pragma execution_character_set("utf-8")
+   #include "Visindigo/VICore"
+    /*
+    * Visindigo Main
+    * Every Visindigo program must start with "visindigo program" and end with "programEnd"
+    */
+    visindigo program {
+      VIFramework VIFrame(sysArgv);
+      // You can put your framework initialization code here
+      // ##########################################VVVVVVVVVVVVVVVVVVVV
+      VIFrame.useDebugModeRuntime();
+
+
+      // ##########################################AAAAAAAAAAAAAAAAAAA
+      // Here we initialize the framework
+      VIFrame.init();
+
+      // You can put your own code here
+      // ##########################################VVVVVVVVVVVVVVVVVVVV
+      VIConsole::printLine("Hello World!");
+
+      // ##########################################AAAAAAAAAAAAAAAAAAA
+      // Here we start the framework
+      VIFrame.start();
+      // Any code after this line will not be executed
+    } programEnd;
+      
+   ```
+5. 完事，你可以开始编写你的Visindigo程序了
+6. 如果你在Visual Studio上新建了Qt Empty项目，并且程序提示找不到winMain等，请在Debug调试属性->链接器->系统->子系统中选择“控制台”，并在调试属性->链接器->高级->入口点中填写`mainCRTStartup`。Release同理，不过可以把子系统改为“窗口”。
 
 # 运行Visindigo项目开发工具（仅限Windows）
 * 确保您的计算机上拥有`Python3.8`（或与之兼容的更高版本）
