@@ -16,10 +16,10 @@ class VIAbstractBehavior :public VIObject
 	_Public ENUM State{
 		Idle,
 		Active,
-		Passive,
+		Subside,
 	};
 	_Public ENUM QuantifyTickType{
-		T0, T20, T32, T64, T128,
+		T0, T20, T32, T64, T128, 
 	};
 	_Public def_init VIAbstractBehavior(VISuper* parent = Q_NULLPTR) :VIObject(parent) {
 		Host = Q_NULLPTR; BehaviorState = State::Idle;

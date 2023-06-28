@@ -13,7 +13,7 @@ VIAbstractBehavior::State VIBasicBehavior::hostCall() {
 	case State::Active:
 		onTick();
 		break;
-	case State::Passive:
+	case State::Subside:
 		onSubside();
 		BehaviorState = State::Idle;
 		break;
@@ -43,7 +43,7 @@ void VITimedBehavior::setForeverDuration() {
 VIAbstractBehavior::State VITimedBehavior::hostCall() {
 	VINanoSecond t = getHost()->getTickDuration();
 	this->Duration->addTime(t);
-	if (Duration->isTimeout()) { BehaviorState = State::Passive; }
+	if (Duration->isTimeout()) { BehaviorState = State::Subside; }
 	return VIBasicBehavior::hostCall();
 }
 void VITimedBehavior::active(VIAbstractBehavior::QuantifyTickType type) {

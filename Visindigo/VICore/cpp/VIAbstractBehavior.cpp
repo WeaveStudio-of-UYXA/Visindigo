@@ -3,9 +3,9 @@
 /*
 VIAbstractBehavior
 */
-void VIAbstractBehavior::passive() {
+void VIAbstractBehavior::subside() {
 	if (BehaviorState == State::Active) {
-		BehaviorState = State::Passive;
+		BehaviorState = State::Subside;
 	}
 }
 
