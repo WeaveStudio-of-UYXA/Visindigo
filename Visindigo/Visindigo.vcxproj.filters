@@ -93,6 +93,21 @@
     <ClInclude Include="VIWidgets\VIWidgets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VICore\VIPointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VICore\yc\YcAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VICore\yc\YcAllocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VICore\yc\YcPair.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VICore\yc\YcSmartPointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VICore\VIAbstractBehavior.h">

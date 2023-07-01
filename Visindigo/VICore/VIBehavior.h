@@ -47,11 +47,14 @@ class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
 	VI_PrivateProperty(VINanoSecond, DurationLimitNow);
 	VI_PrivateProperty(unsigned long long, CurrentIndexLeft);
 	VI_PrivateProperty(unsigned long long, CurrentIndexRight);
+	VI_PrivateFlag(Pause)
 	_Public def_init VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent = nullptr);
 	_Public void tickLoop() override;
 	_Private void mergeBehavior() override;
 	_Private void ergodicBehavior() override;
 	_Public void start() override;
+	_Public void pause();
+	_Public void resume();
 	_Public void stop() override;
 	_Slot void addBehavior(VIAbstractBehavior*, VIAbstractBehavior::QuantifyTickType) override;
 };
@@ -61,7 +64,6 @@ class VIBehaviorHost final :public VIAbstractBehaviorHost
 	Q_OBJECT;
 	friend class VIBasicBehavior;
 	friend class VITimedBehavior;
-
 	_Public VIDuration* HostDuration = nullptr;
 	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_128;
 	_Private VIQuantifyTickBehaviorHost* QuantifyTickBehaviorHost_64;
@@ -77,6 +79,8 @@ class VIBehaviorHost final :public VIAbstractBehaviorHost
 	_Private void ergodicBehavior() override;
 	_Public double getMagnification();
 	_Public void setMagnification(double m);
+	_Public void pauseQuantifyTickBehaviorHost(VIAbstractBehavior::QuantifyTickType type = VIAbstractBehavior::QuantifyTickType::T0);
+	_Public void resumeQuantifyTickBehaviorHost(VIAbstractBehavior::QuantifyTickType type = VIAbstractBehavior::QuantifyTickType::T0);
 };
 
 class VIDebugBehavior final :public VIBasicBehavior

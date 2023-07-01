@@ -177,21 +177,21 @@ private slots: void onExit() {
 	Thread->wait();
 	Thread->quit();
 }
-			 _Public def_del ~VIECMAScripts() {
-				 if (OnRunning) {
-					 onExit();
-				 }
-				 delete Thread;
-				 delete ThreadWaitCondition;
-				 delete ThreadMutex;
-				 if (VIECMAS != VI_NULLPTR) {
-					 delete VIECMAS;
-				 }
-			 }
-			 _Public VICommand_Handler(Command) {
-				 VICommand_Name("ecma") {
-					 VIConsole::printLine("VIECMA Scripts Engine");
-					 return true;
-				 }
-			 };
+	_Public def_del ~VIECMAScripts() {
+		if (OnRunning) {
+			onExit();
+		}
+		delete Thread;
+		delete ThreadWaitCondition;
+		delete ThreadMutex;
+		if (VIECMAS != VI_NULLPTR) {
+			delete VIECMAS;
+		}
+	}
+	_Public VICommand_Handler(Command) {
+		VICommand_Name("ecma") {
+			VIConsole::printLine("VIECMA Scripts Engine");
+			return true;
+		}
+	};
 };

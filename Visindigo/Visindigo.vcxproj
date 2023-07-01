@@ -65,6 +65,9 @@
     <PreBuildEvent>
       <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
     </PreBuildEvent>
+    <ClCompile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
@@ -129,6 +132,11 @@
     <QtMoc Include="VIWidgets\VIStyleSheet.h" />
     <QtMoc Include="VIWidgets\VILoadingWidget.h" />
     <QtMoc Include="VIWidgets\VIMainWindow.h" />
+    <ClInclude Include="VICore\VIPointer.h" />
+    <ClInclude Include="VICore\yc\YcAlgorithm.h" />
+    <ClInclude Include="VICore\yc\YcAllocator.h" />
+    <ClInclude Include="VICore\yc\YcPair.h" />
+    <ClInclude Include="VICore\yc\YcSmartPointer.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <QtMoc Include="VICore\VIDocument.h" />
     <QtMoc Include="VICore\VILanguage.h" />
