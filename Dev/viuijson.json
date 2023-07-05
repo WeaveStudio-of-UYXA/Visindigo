@@ -1,0 +1,35 @@
+{
+    "Type": "VIWidget",
+    "Title": "Hey, this widget is implemented in VUS!",
+    "Size": [600, 400],
+    "Layout": "V",
+    "StyleSheet": "VIWidget{border:1px solid black;}",
+    "Children": [
+        {
+            "Type": "VILabel",
+            "Text": "Hello, World!"
+        },
+        {
+            "Type": "VILabel",
+            "Text": "This is a label"
+        },
+        {
+            "Type": "VIWidget",
+            "Layout": "H",
+            "Children": [
+                {
+                    "Type": "VILabel",
+                    "Text": "This is a label"
+                },
+                {
+                    "Type": "VILabel",
+                    "Text": "This is a second label"
+                }
+            ]
+        },
+        {
+            "Type": "VILabel",
+            "Text": "This is a third label"
+        }
+    ]
+}

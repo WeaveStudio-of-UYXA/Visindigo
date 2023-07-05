@@ -1,6 +1,6 @@
 ﻿#pragma execution_character_set("utf-8")
 #include "VICore/VICore.h"
-
+#include "VIWidgets/VIWidgets.h"
 /*
 * Visindigo Main
 * Every Visindigo program must start with "visindigo program" and end with "programEnd"
@@ -18,8 +18,16 @@ visindigo program {
 
 	// You can put your own code here
 	// ##########################################VVVVVVVVVVVVVVVVVVVV
-
-
+	VIUIJsonParserHost* host = new VIUIJsonParserHost();
+	host->addUIJsonParser(new VIUIJson_Widget(host));
+	host->addUIJsonParser(new VIUIJson_Label(host));
+	QWidget* w = host->parse("../Dev/viuijson.json");
+	if (w == nullptr) {
+		qDebug() << "Error";
+	}
+	else {
+		w->show();
+	}
 	// ##########################################AAAAAAAAAAAAAAAAAAA
 	// Here we start the framework
 	VIFrame.start();

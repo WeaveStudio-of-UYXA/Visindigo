@@ -123,6 +123,7 @@
     <ClCompile Include="VICore\cpp\VILanguage.cpp" />
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
     <ClCompile Include="VICore\cpp\VIPackage.cpp" />
+    <ClCompile Include="VIWidgets\cpp\VIAbstractUIJson.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VIWidgets\VIWidgetsTransQt.h" />
@@ -137,6 +138,8 @@
     <ClInclude Include="VICore\yc\YcAllocator.h" />
     <ClInclude Include="VICore\yc\YcPair.h" />
     <ClInclude Include="VICore\yc\YcSmartPointer.h" />
+    <QtMoc Include="VIWidgets\VIAbstractUIJson.h" />
+    <ClInclude Include="VIWidgets\VIUIJson.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <QtMoc Include="VICore\VIDocument.h" />
     <QtMoc Include="VICore\VILanguage.h" />
