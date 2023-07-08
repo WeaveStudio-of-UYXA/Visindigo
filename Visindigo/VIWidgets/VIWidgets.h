@@ -1,5 +1,6 @@
 ﻿#pragma once
-#include "VIAbstractUIJson.h"
+#include "VIUJ.h"
+#include "VIUJWidgetBinder.h"
 #include "VICodeEdit.h"
 #include "VILoadingWidget.h"
 #include "VIMainWindow.h"

@@ -1,18 +1,18 @@
 ﻿#pragma once
-#include "VIAbstractUIJson.h"
+#include "VIUJ.h"
 #include "VIWidget.h"
 #include "VIWidgetsTransQt.h"
 
-class VIUIJson_Widget : public VIAbstractUIJsonParser
+class VIUIJson_Widget : public VIAbstractUJParser
 {
-	_Public def_init VIUIJson_Widget(VIUIJsonParserHost* host) :VIAbstractUIJsonParser(host) {
+	_Public def_init VIUIJson_Widget(VIUIJsonParserHost* host) :VIAbstractUJParser(host) {
 		setTypeName("VIWidget");
 	}
 	_Public void onGeneralParameters(const QJsonObject& json, QWidget* widget) {
 		if(json.contains("Title")) {
 			widget->setWindowTitle(json["Title"].toString());
 		}
-		if (json.contains("Size")) {
+		if (json.contains("Size")) {  
 			QJsonArray size = json["Size"].toArray();
 			widget->resize(size[0].toInt(), size[1].toInt());
 		}

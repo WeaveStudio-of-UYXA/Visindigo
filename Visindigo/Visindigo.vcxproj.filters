@@ -28,9 +28,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VICore\cpp\VIAbstractBehavior.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -53,6 +50,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VICore\cpp\VIPackage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIWidgets\cpp\VIAbstractUIJson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -106,6 +109,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VICore\yc\YcSmartPointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIWidgets\VIUIJson.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -189,6 +195,15 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIWidgets\VIMainWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWidgets\VIUJ.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWidgets\VIUJWidgetBinder.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="testCode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

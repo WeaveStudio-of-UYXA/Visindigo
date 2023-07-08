@@ -1,4 +1,5 @@
 {
+    "Name": "Root",
     "Type": "VIWidget",
     "Title": "Hey, this widget is implemented in VUS!",
     "Size": [600, 400],
@@ -6,28 +7,34 @@
     "StyleSheet": "VIWidget{border:1px solid black;}",
     "Children": [
         {
+            "Name": "Label_1",
             "Type": "VILabel",
             "Text": "Hello, World!"
         },
         {
+            "Name": "Label_2",
             "Type": "VILabel",
             "Text": "This is a label"
         },
         {
+            "Name": "Subwidget",
             "Type": "VIWidget",
             "Layout": "H",
             "Children": [
                 {
+                    "Name": "Label_1",
                     "Type": "VILabel",
                     "Text": "This is a label"
                 },
                 {
+                    "Name": "Label_2",
                     "Type": "VILabel",
                     "Text": "This is a second label"
                 }
             ]
         },
         {
+            "Name": "Label_3",
             "Type": "VILabel",
             "Text": "This is a third label"
         }
