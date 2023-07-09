@@ -4,7 +4,7 @@
 
 //This file contains the core macro definitions of the CE library
 #define VI_NULLPTR Q_NULLPTR
-
+#define VI_NULL Q_NULLPTR
 #define _Public public:
 #define _Private private:
 #define _Protected protected:
