@@ -1,10 +1,13 @@
 ﻿#pragma once
+#include "VIUJ.h"
+#include "VIUJWidgetBinder.h"
 #include "VICodeEdit.h"
 #include "VILoadingWidget.h"
 #include "VIMainWindow.h"
 #include "VIMultiButton.h"
 #include "VIPackagePanel.h"
 #include "VIStyleSheet.h"
+#include "VIUIJson.h"
 #include "VIWidget.h"
 #include "VIWidgetsTransQt.h"
 #include "VIWindowsTheme.h"

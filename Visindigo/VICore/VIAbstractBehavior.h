@@ -13,12 +13,12 @@ class VIAbstractBehavior :public VIObject
 	friend class VIAbstractBehaviorHost;
 	friend class VIBehaviorHost;
 	friend class VIQuantifyTickBehaviorHost;
-	_Public ENUM State{
+	_Public enum class State{
 		Idle,
 		Active,
 		Subside,
 	};
-	_Public ENUM QuantifyTickType{
+	_Public enum class QuantifyTickType{
 		T0, T20, T32, T64, T128, 
 	};
 	_Public def_init VIAbstractBehavior(VISuper* parent = Q_NULLPTR) :VIObject(parent) {

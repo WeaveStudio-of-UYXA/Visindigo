@@ -65,6 +65,9 @@
     <PreBuildEvent>
       <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
     </PreBuildEvent>
+    <ClCompile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
@@ -111,7 +114,12 @@
     <QtRcc Include="VIResource.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="VICore\cpp\VIAbstractBehavior.cpp" />
     <ClCompile Include="VICore\cpp\VIBehavior.cpp" />
     <ClCompile Include="VICore\cpp\VICommand.cpp" />
@@ -120,8 +128,12 @@
     <ClCompile Include="VICore\cpp\VILanguage.cpp" />
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
     <ClCompile Include="VICore\cpp\VIPackage.cpp" />
+    <ClCompile Include="VICore\cpp\VISettings.cpp" />
+    <ClCompile Include="VIWidgets\cpp\VIAbstractUIJson.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="testCode.h" />
+    <QtMoc Include="VIWidgets\VIUJWidgetBinder.h" />
     <QtMoc Include="VIWidgets\VIWidgetsTransQt.h" />
     <QtMoc Include="VIWidgets\VIWindowsTheme.h" />
     <QtMoc Include="VI2DScene\VI2DSceneItemAnimationBehavior.h" />
@@ -129,6 +141,13 @@
     <QtMoc Include="VIWidgets\VIStyleSheet.h" />
     <QtMoc Include="VIWidgets\VILoadingWidget.h" />
     <QtMoc Include="VIWidgets\VIMainWindow.h" />
+    <ClInclude Include="VICore\VIPointer.h" />
+    <ClInclude Include="VICore\yc\YcAlgorithm.h" />
+    <ClInclude Include="VICore\yc\YcAllocator.h" />
+    <ClInclude Include="VICore\yc\YcPair.h" />
+    <ClInclude Include="VICore\yc\YcSmartPointer.h" />
+    <QtMoc Include="VIWidgets\VIUJ.h" />
+    <ClInclude Include="VIWidgets\VIUIJson.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <QtMoc Include="VICore\VIDocument.h" />
     <QtMoc Include="VICore\VILanguage.h" />

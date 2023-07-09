@@ -4,9 +4,11 @@
 #include "VIStyleSheet.h"
 #include <QtWidgets>
 #include <QtGui>
+class VIUJWidgetBinder;
 
 class VIAbstractWidget :public VIAbstractObject {
 	_Public VIStyleSheetManager* StyleSheetManager;
+	_Public VIUJWidgetBinder* UJWidgetBinder;
 	_Public virtual void setStyleSheetPalette(VIColorPalette* palette) PureVirtual;
 	_Public virtual void renewVTR() { onVTR(); }
 	_Public virtual void VTR() HalfVirtual;
@@ -14,7 +16,8 @@ class VIAbstractWidget :public VIAbstractObject {
 };
 typedef VIAbstractWidget VIBaseWidget;
 #define VI_WIDGET_INIT \
-	StyleSheetManager = new VIStyleSheetManager(this);
+	StyleSheetManager = new VIStyleSheetManager(this);\
+	UJWidgetBinder = VI_NULLPTR;\
 
 #define VI_WIDGET VI_OBJECT;\
 _Public virtual void setStyleSheetPalette(VIColorPalette* palette) {\

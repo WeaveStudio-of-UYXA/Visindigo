@@ -4,7 +4,7 @@
 #include <exception>
 class VIException
 {
-	_Public ENUM Type{
+	_Public enum class Type{
 		None,
 		DivideByZero,
 		DimensionError,

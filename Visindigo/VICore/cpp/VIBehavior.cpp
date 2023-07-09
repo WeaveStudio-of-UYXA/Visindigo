@@ -73,14 +73,22 @@ def_init VIQuantifyTickBehaviorHost::VIQuantifyTickBehaviorHost(VIBehaviorHost* 
 	Host = host;
 	Magnification = 1.0;
 	consoleLog("Initialized");
+	Pause = false;
 }
 void VIQuantifyTickBehaviorHost::start() {
 	throw "VIQuantifyTickBehaviorHost cannot be manually started";
+}
+void VIQuantifyTickBehaviorHost::pause() {
+	Pause = true;
+}
+void VIQuantifyTickBehaviorHost::resume() {
+	Pause = false;
 }
 void VIQuantifyTickBehaviorHost::stop() {
 	throw "VIQuantifyTickBehaviorHost cannot be manually stopped";
 }
 void VIQuantifyTickBehaviorHost::tickLoop() {
+	if (Pause) { return; }
 	bool LoopFinish = false;
 	VINanoSecond t = Host->getTickDuration();
 	DurationNow += t * Magnification;
@@ -224,6 +232,57 @@ void VIBehaviorHost::setMagnification(double m) {
 }
 double VIBehaviorHost::getMagnification() {
 	return QuantifyTickBehaviorHost_20->getMagnification();
+}
+
+void VIBehaviorHost::pauseQuantifyTickBehaviorHost(VIAbstractBehavior::QuantifyTickType Type) {
+	switch (Type)
+	{
+	case VIAbstractBehavior::QuantifyTickType::T0:
+		QuantifyTickBehaviorHost_128->pause();
+		QuantifyTickBehaviorHost_64->pause();
+		QuantifyTickBehaviorHost_32->pause();
+		QuantifyTickBehaviorHost_20->pause();
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T20:
+		QuantifyTickBehaviorHost_20->pause();
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T32:
+		QuantifyTickBehaviorHost_32->pause();
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T64:
+		QuantifyTickBehaviorHost_64->pause();
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T128:
+		QuantifyTickBehaviorHost_128->pause();
+		break;
+	default:
+		break;
+	}
+}
+void VIBehaviorHost::resumeQuantifyTickBehaviorHost(VIAbstractBehavior::QuantifyTickType Type) {
+	switch (Type)
+	{
+	case VIAbstractBehavior::QuantifyTickType::T0:
+		QuantifyTickBehaviorHost_128->resume();
+		QuantifyTickBehaviorHost_64->resume();
+		QuantifyTickBehaviorHost_32->resume();
+		QuantifyTickBehaviorHost_20->resume();
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T20:
+		QuantifyTickBehaviorHost_20->resume();
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T32:
+		QuantifyTickBehaviorHost_32->resume();
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T64:
+		QuantifyTickBehaviorHost_64->resume();
+		break;
+	case VIAbstractBehavior::QuantifyTickType::T128:
+		QuantifyTickBehaviorHost_128->resume();
+		break;
+	default:
+		break;
+	}
 }
 /*
 VIDebugBehavior

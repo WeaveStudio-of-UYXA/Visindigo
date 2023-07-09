@@ -1,0 +1,39 @@
+{
+    "Type": "VISettingsRoot",
+    "Name": "Settings",
+    "Title": "设置",
+    "Comment": "设置您的首选项",
+    "Child": [
+        {
+            "Type": "VISettingsPage",
+            "Name": "UI_Preferences",
+            "Text": "界面首选项",
+            "Comment": "设置您的界面首选项",
+            "Child":[
+                {
+                    "Type": "Splitter",
+                    "Name": "Splitter_Head_Language",
+                    "Text": "区域和语言",
+                    "Comment": ""
+                },
+                {
+                    "Type": "VIComboBox",
+                    "Name": "Language",
+                    "Text": "显示语言",
+                    "Comment": "设置您的语言",
+                    "DefaultValue": "English",
+                    "ComboItems":[
+                        {
+                            "Value": "English",
+                            "Text": "English"
+                        },
+                        {
+                            "Value": "Chinese",
+                            "Text": "中文"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
