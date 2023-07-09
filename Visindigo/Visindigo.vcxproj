@@ -128,6 +128,7 @@
     <ClCompile Include="VICore\cpp\VILanguage.cpp" />
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
     <ClCompile Include="VICore\cpp\VIPackage.cpp" />
+    <ClCompile Include="VICore\cpp\VISettings.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIAbstractUIJson.cpp" />
   </ItemGroup>
   <ItemGroup>

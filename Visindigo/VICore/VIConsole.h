@@ -5,13 +5,13 @@
 class VIConsole : public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Public ENUM Color{
+	_Public enum class Color{
 		None, Black, Gray, Red, LightRed,
 		Green, LightGreen, Yellow, LightYellow,
 		Blue, LightBlue, Purple, LightPurple,
 		Cyan, LightCyan, LightGray, White
 	};
-	_Public ENUM Style{
+	_Public enum class Style{
 		Normal, Bold, Italic, Underline, Splash, Inverse, Strikethrough
 	};
 	_Public static QString getColorString(QString rawText, VIConsole::Color color, QList<VIConsole::Style> styleList = { VIConsole::Style::Normal });
