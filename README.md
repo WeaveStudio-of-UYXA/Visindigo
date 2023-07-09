@@ -55,7 +55,7 @@ Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭�
 
 1. 新建一个Qt Empty项目
 2. 添加Qt模块`Core`, `Gui`, `Widgets`, `Qml`, `Multimedia`
-3. 将本仓库直接放在您的项目文件夹下，或如果您使用了Git，您可以将本仓库作为子模块添加到您的项目中
+3. 将本仓库直接放在您的项目文件夹下，或如果您使用了Git，您可以将本仓库作为子模块添加到您的项目中，并在Visual Studio中右键Visindigo的文件夹，将其“包括到项目中”（注意，如果您在编译过程中遇到了来自Visindigo的错误文件，直接将其排除即可，这些文件很显然还没有准备好被编译）
 4. 在您的`main.cpp`代码中添加以下内容：
    ```cpp
    #pragma execution_character_set("utf-8")
