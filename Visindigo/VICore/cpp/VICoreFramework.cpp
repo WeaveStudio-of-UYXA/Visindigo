@@ -1,23 +1,20 @@
-﻿#include "../VIFramework.h"
+﻿#include "../VICoreFramework.h"
 #pragma execution_character_set("utf-8")
-VIFramework* VIFramework::Instance = Q_NULLPTR;
-VIBehaviorHost* VIFramework::BehaviorHost = Q_NULLPTR;
-VILanguageHost* VIFramework::LanguageHost = Q_NULLPTR;
+VICoreFramework* VICoreFramework::Instance = Q_NULLPTR;
+VIBehaviorHost* VICoreFramework::BehaviorHost = Q_NULLPTR;
+VILanguageHost* VICoreFramework::LanguageHost = Q_NULLPTR;
 
-def_init VIFramework::VIFramework(int& argc, char** argv) {
-	App = new VIApplication(argc, argv);
-	Data = new private_VIFramework();
-	Data->DebugModeRuntime = true;
+def_init VICoreFramework::VICoreFramework(int& argc, char** argv) {
+	AppInstance = new private_VICoreFramework(argc, argv);
+	AppInstance->DebugModeRuntime = true;
 #ifdef QT_DEBUG
-	Data->DebugModeCompilation = true;
+	AppInstance->DebugModeCompilation = true;
 #else
-	Data->DebugModeCompilation = false;
+	AppInstance->DebugModeCompilation = false;
 #endif
 }
 
-void VIFramework::init() {
-	setObjectName(VIVersion::getVisindigoVersion());
-	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Visindigo framework is initializing..."));
+void printWelcome() {
 	VIConsole::printLine("\033[38;2;237;28;36m===================================================================\033[0m");
 	VIConsole::printLine("\033[38;2;234;54;128m╮ ╭\t─┬─\t╭──\t─┬─\t╭╮╭\t┌─╮\t─┬─\t╭─╮\t╭─╮\033[0m");
 	VIConsole::printLine("\033[38;2;234;63;247m╰╮│\t │ \t╰─╮\t │ \t│││\t│ │\t │ \t│ ┐\t│ │\033[0m");
@@ -32,7 +29,13 @@ void VIFramework::init() {
 	VIConsole::printLine("\033[38;2;234;63;247mVersion Compilation Time \033[0m: \033[38;2;255;253;85m" + VIVersion::getVisindigoCompileTime() + " [" + VIMultiPlatform::getCPUBuildType() + "]\033[0m");
 	VIConsole::printLine(VIConsole::inWarningStyle("Working Path: ") + VIConsole::inNoticeStyle(VIDocument::getWorkingPath()));
 	VIConsole::printLine("Hello, " + VIDocument::getUserName() + "! Welcome to Visindigo!");
-	VIFramework::Instance = this;
+}
+
+void VICoreFramework::init() {
+	setObjectName(VIVersion::getVisindigoVersion());
+	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Visindigo framework is initializing..."));
+	printWelcome();
+	Instance = this;
 	LanguageHost = new VILanguageHost(VILanguageHost::LangType::zh_SC, VILanguageHost::LangType::zh_SC, "./Language", this);
 	if (LanguageHost->loadLanguage()) {
 		VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + VITR("Core_LanguageHost_LoadLanguage_Success")));
@@ -45,67 +48,68 @@ void VIFramework::init() {
 	VICommand_Reg(VIECMAScripts::Command);
 	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + VITR("Core_Any_Initialized_Success").arg("Visindigo framework")));
 }
-VIBehaviorHost* VIFramework::getBehaviorHostInstance() {
+VIBehaviorHost* VICoreFramework::getBehaviorHostInstance() {
 	if (BehaviorHost == nullptr) {
-		VIConsole::printLine(VIConsole::inWarningStyle("Visindigo requires a VIFramework instance to initialize various program components. "));
-		VIConsole::printLine(VIConsole::inErrorStyle("Before loading your package, you must first create a new VIFramework instance and call init()"));
+		VIConsole::printLine(VIConsole::inWarningStyle("Visindigo requires a VICoreFramework instance to initialize various program components. "));
+		VIConsole::printLine(VIConsole::inErrorStyle("Before loading your package, you must first create a new VICoreFramework instance and call init()"));
 		VIConsole::printLine(VIConsole::inErrorStyle("The program will exit."));
 		std::exit(-1);
 	}
 	return BehaviorHost;
 }
 
-VILanguageHost* VIFramework::getLanguageHostInstance() {
+VILanguageHost* VICoreFramework::getLanguageHostInstance() {
 	return LanguageHost;
 }
-void VIFramework::start() {
+void VICoreFramework::start() {
 	BehaviorHost->start();
-	Data->ReturnCode = App->exec();
+	AppInstance->ReturnCode = App->exec();
 }
 
-VIFramework* VIFramework::getInstance() {
-	if (VIFramework::Instance == nullptr) {
-		VIConsole::printLine("Visindigo requires a VIFramework instance to initialize various program components. \
-Before loading your package, you must first create a new VIFramework instance.\nThe program will exit.\n");
+VICoreFramework* VICoreFramework::getInstance() {
+	if (getInstance() == nullptr) {
+		VIConsole::printLine("Visindigo requires a VICoreFramework instance to initialize various program components. \
+Before loading your package, you must first create a new VICoreFramework instance.\nThe program will exit.\n");
 		std::exit(-1);
 	}
-	return VIFramework::Instance;
+	return VICoreFramework::Instance;
 }
 
-int VIFramework::getReturnCode() {
-	return Data->ReturnCode;
+int VICoreFramework::getReturnCode() {
+	return AppInstance->ReturnCode;
 }
 
-bool VIFramework::loadPackage(VIPackage* package) {
-	Data->PackageList.append(package);
+bool VICoreFramework::loadPackage(VIPackage* package) {
+	AppInstance->PackageList.append(package);
 	package->active(VIAbstractBehavior::QuantifyTickType::T20);
 	return true;
 }
 
-bool VIFramework::isDebugModeCompilation() {
-	return Data->DebugModeCompilation;
+bool VICoreFramework::isDebugModeCompilation() {
+	return AppInstance->DebugModeCompilation;
 }
 
-bool VIFramework::isDebugModeRuntime() {
-	return Data->DebugModeRuntime;
+bool VICoreFramework::isDebugModeRuntime() {
+	return AppInstance->DebugModeRuntime;
 }
 
-bool VIFramework::useDebugModeRuntime() {
-	if (Data->DebugModeRuntime) {
+bool VICoreFramework::useDebugModeRuntime() {
+	if (AppInstance->DebugModeRuntime) {
 		consoleLogPure(VIConsole::inWarningStyle("The program is already running in debug mode."));
 		return false;
 	}
 	else {
-		Data->DebugModeRuntime = true;
+		AppInstance->DebugModeRuntime = true;
 		consoleLogPure(VIConsole::inSuccessStyle("The program is now running in debug mode."));
 		return true;
 	}
 }
 
-bool VIFramework::execCommand(QString command) {
+bool VICoreFramework::execCommand(QString command) {
 	return VICommandHost::getInstance()->handleCommand(command);
 }
 
-QApplication* VIFramework::getAppInstance() {
+QApplication* VICoreFramework::getAppInstance() {
 	return Instance->App;
 }
+

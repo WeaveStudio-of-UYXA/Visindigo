@@ -11,21 +11,17 @@
 #include "VILanguage.h"
 #include "VIVersion.h"
 #include "VIECMAScripts.h"
-#define FrameBehaviorHost VIFramework::getBehaviorHostInstance()
-class VIFramework;
-class private_VIFramework :public VIObject
+#define FrameBehaviorHost VICoreFramework::getBehaviorHostInstance()
+class VICoreFramework;
+class private_VICoreFramework :public QApplication
 {
 	Q_OBJECT;
-	friend class VIFramework;
+	friend class VICoreFramework;
 	_Public QList<VIPackage*> PackageList = {};
 	_Public int ReturnCode = 0;
 	VI_Property(bool, DebugModeCompilation);
 	VI_Property(bool, DebugModeRuntime);
-};
-class VIApplication :public QApplication
-{
-	Q_OBJECT;
-	_Public def_init VIApplication(int& argc, char** argv) :QApplication(argc, argv) {};
+	_Protected def_init private_VICoreFramework(int& argc, char** argv) :QApplication(argc, argv) {};
 	_Public virtual bool notify(QObject* receiver, QEvent* e) {
 		try {
 			return QApplication::notify(receiver, e);
@@ -38,21 +34,21 @@ class VIApplication :public QApplication
 		return true;
 	}
 };
-class VIFramework :public VIObject
+
+class VICoreFramework :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Private private_VIFramework* Data;
-	_Private static VIFramework* Instance;
+	_Private static VICoreFramework* Instance;
+	_Private private_VICoreFramework* AppInstance;
 	_Private static VIBehaviorHost* BehaviorHost;
 	_Private static VILanguageHost* LanguageHost;
 	_Private QApplication* App;
-	_Public def_init VIFramework(int& argc, char** argv);
+	_Public def_init VICoreFramework(int& argc, char** argv);
 	_Public void init();
 	_Public static VIBehaviorHost* getBehaviorHostInstance();
 	_Public static VILanguageHost* getLanguageHostInstance();
 	_Public void start();
-	_Public static VIFramework* getInstance();
 	_Public int getReturnCode();
 	_Public bool loadPackage(VIPackage* package);
 	_Public bool isDebugModeCompilation();
@@ -60,4 +56,5 @@ class VIFramework :public VIObject
 	_Public bool useDebugModeRuntime();
 	_Public static bool execCommand(QString);
 	_Public static QApplication* getAppInstance();
+	_Public static VICoreFramework* getInstance();
 };

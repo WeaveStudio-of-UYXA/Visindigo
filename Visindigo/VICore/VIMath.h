@@ -1,7 +1,9 @@
 ﻿#pragma once
 #include <QtCore>
 #include "private/VIMacro.h"
+
 class VIMath {
+	VI_STATIC_CLASS(VIMath);
 public:
 	static float PI;
 	static int combination(int n, int m) {
@@ -21,10 +23,17 @@ public:
 		}
 		return ret;
 	}
+	
+};
+
+class VICommonMapping
+{
+	VI_STATIC_CLASS(VICommonMapping);
+public:
 	static double sin_0_1(double percent) {
-		return (qSin(-PI / 2 + PI * percent) + 1.0) / 2.0;
+		return (qSin(-VIMath::PI / 2 + VIMath::PI * percent) + 1.0) / 2.0;
 	}
 	static double sin_0_1_0(double percent) {
-		return qSin(percent * PI);
+		return qSin(percent * VIMath::PI);
 	}
 };

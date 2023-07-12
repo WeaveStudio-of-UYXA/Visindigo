@@ -1,5 +1,5 @@
 ﻿#include "../VIBehavior.h"
-#include "../VIFramework.h"
+#include "../VICoreFramework.h"
 #include "../VIConsole.h"
 /*
 VIBasicBehavior
@@ -88,7 +88,7 @@ void VIQuantifyTickBehaviorHost::stop() {
 	throw "VIQuantifyTickBehaviorHost cannot be manually stopped";
 }
 void VIQuantifyTickBehaviorHost::tickLoop() {
-	if (Pause) { return; }
+	if (Pause) { return; } //请勿将Pause“优化”为 Magnification == 0.0
 	bool LoopFinish = false;
 	VINanoSecond t = Host->getTickDuration();
 	DurationNow += t * Magnification;

@@ -29,7 +29,9 @@ class VIPassiveBehavior :public VIBasicBehavior
 {
 	Q_OBJECT;
 	friend class VIBehaviorHost;
-	_Public def_init VIPassiveBehavior(QObject* parent = nullptr);
+	_Public def_init VIPassiveBehavior(VIAbstractBehavior* parent = nullptr);
+	_Public State hostCall() override;
+	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
 };
 class VIBehaviorHost;
 class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost

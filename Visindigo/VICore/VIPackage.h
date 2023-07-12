@@ -3,17 +3,18 @@
 #include "VIObject.h"
 #include "VIBehavior.h"
 
-#define LOAD_PACKAGE(pack_name) VIFramework::getInstance()->loadPackage(new pack_name());
+#define LOAD_PACKAGE(pack_name) VICoreFramework::getInstance()->loadPackage(new pack_name());
 class VIPackage;
-class VIFramework;
+class VICoreFramework;
 
 class VIPackageInfo :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	friend class VIFramework;
+	VI_MUST_INHERIT(VIPackageInfo);
+	friend class VICoreFramework;
 	friend class VIPackage;
-	_Private static VIPackageInfo* Instance;
+	VI_Singleton(VIPackageInfo);
 	VI_ProtectedProperty(QString, PackageName);
 	VI_ProtectedProperty(unsigned int, PackageVersionMajor);
 	VI_ProtectedProperty(unsigned int, PackageVersionMinor);
@@ -24,7 +25,7 @@ class VIPackageInfo :public VIObject
 	VI_ProtectedProperty(QString, URL);
 	VI_ProtectedProperty(QString, Organization);
 	VI_ProtectedProperty(QString, OrganizationDomain);
-	_Public def_init VIPackageInfo(VIObject* parent = VI_NULLPTR) :VIObject(parent) {
+	_Public def_init VIPackageInfo(){
 		this->setPackageName("UnnamedVIPackage");
 		this->setPackageVersionMajor(0);
 		this->setPackageVersionMinor(0);
@@ -35,12 +36,11 @@ class VIPackageInfo :public VIObject
 		this->setURL("");
 		this->setOrganization("");
 		this->setOrganizationDomain("");
-		Instance = this;
+		_instance = this;
 	}
 	_Public QString getPackageVersion() {
 		return QString("%1.%2.%3").arg(PackageVersionMajor).arg(PackageVersionMinor).arg(PackageVersionPatch);
 	}
-	_Public static VIPackageInfo* getInstance(){return Instance;}
 };
 
 class VIPackage :public VIBasicBehavior
@@ -49,7 +49,7 @@ class VIPackage :public VIBasicBehavior
 	VI_OBJECT;
 	friend class VIFramework;
 	VI_Property(VIPackageInfo*, PackageInfo);
-	_Public def_init VIPackage(QObject* parent = VI_NULLPTR) :VIBasicBehavior(parent) {
+	_Public def_init VIPackage(){
 		this->setObjectName("UnnamedVIPackage");
 	};
 	_Public virtual void onActive() HalfVirtual;

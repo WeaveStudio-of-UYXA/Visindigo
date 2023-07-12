@@ -17,7 +17,7 @@
 #define InitAsNone = {}
 
 #define VI_interface class
- 
+#define VI_STATIC_CLASS(name) private: name(){} 
 #define VI_Property(Type, name) public:Type name;void set##name(Type value){this->name = value;}Type get##name(){return name;}
 #define VI_PrivateProperty(Type, name) private:Type name;private: void set##name(Type value){this->name = value;}public:Type get##name(){return name;}
 #define VI_ProtectedProperty(Type, name) protected:Type name;protected: void set##name(Type value){this->name = value;}public:Type get##name(){return name;}
@@ -32,3 +32,9 @@
 #define def_move
 #define PASS
 #define VI_NO_PARENT
+
+#define VI_MUST_INHERIT(name) public: virtual void __INHERIT_FLAG_##name__() PureVirtual;
+#define VI_HAS_INHERIT(name) public: virtual void __INHERIT_FLAG_##name__() HalfVirtual;
+
+#define VI_Singleton(name) protected: static name* _instance; public: static name* getInstance(){return _instance;} protected: void setInstance(name* value){_instance = value;}
+#define VI_Singleton_Init(name) name* name::_instance = VI_NULLPTR;

@@ -124,7 +124,7 @@
     <ClCompile Include="VICore\cpp\VIBehavior.cpp" />
     <ClCompile Include="VICore\cpp\VICommand.cpp" />
     <ClCompile Include="VICore\cpp\VIConsole.cpp" />
-    <ClCompile Include="VICore\cpp\VIFramework.cpp" />
+    <ClCompile Include="VICore\cpp\VICoreFramework.cpp" />
     <ClCompile Include="VICore\cpp\VILanguage.cpp" />
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
     <ClCompile Include="VICore\cpp\VIPackage.cpp" />
@@ -141,12 +141,15 @@
     <QtMoc Include="VIWidgets\VIStyleSheet.h" />
     <QtMoc Include="VIWidgets\VILoadingWidget.h" />
     <QtMoc Include="VIWidgets\VIMainWindow.h" />
+    <QtMoc Include="VICore\private\VisindigoCorePack.h" />
+    <QtMoc Include="VICore\VILang\VILangDoc.h" />
     <ClInclude Include="VICore\VIPointer.h" />
     <ClInclude Include="VICore\yc\YcAlgorithm.h" />
     <ClInclude Include="VICore\yc\YcAllocator.h" />
     <ClInclude Include="VICore\yc\YcPair.h" />
     <ClInclude Include="VICore\yc\YcSmartPointer.h" />
     <QtMoc Include="VIWidgets\VIUJ.h" />
+    <ClInclude Include="VIWidgets\VIFramework.h" />
     <ClInclude Include="VIWidgets\VIUIJson.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <QtMoc Include="VICore\VIDocument.h" />
@@ -174,7 +177,7 @@
     <QtMoc Include="VICore\VIBasicType.h" />
     <ClInclude Include="VICore\VICore.h" />
     <QtMoc Include="VICore\VIPackage.h" />
-    <QtMoc Include="VICore\VIFramework.h" />
+    <QtMoc Include="VICore\VICoreFramework.h" />
     <QtMoc Include="VICore\VIBehavior.h" />
     <QtMoc Include="VICore\VIDuration.h" />
     <QtMoc Include="VICore\VIMultiPlatform.h" />

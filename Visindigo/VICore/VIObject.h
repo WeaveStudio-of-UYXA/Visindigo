@@ -24,3 +24,7 @@ class VIObject :public VISuper, VIBaseObject
 	VI_OBJECT;
 	_Public def_init VIObject(VISuper* parent = VI_NULLPTR) :VISuper(parent) {};
 };
+
+namespace Visindigo {
+	
+}

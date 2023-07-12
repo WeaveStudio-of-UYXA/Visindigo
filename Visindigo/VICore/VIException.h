@@ -12,6 +12,7 @@ class VIException
 		IndexOutOfRange,
 		NullPointer,
 		FrameworkNotInit,
+		MethodIsInvalid, //Method is not implemented
 		Others
 	};
 	VI_ProtectedProperty(QString, Reason);

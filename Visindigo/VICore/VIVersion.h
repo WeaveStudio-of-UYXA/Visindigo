@@ -2,7 +2,7 @@
 #include "VIObject.h"
 #include "private/VIAutoVersion.h"
 #define VI_VERSION_MAJOR 0
-#define VI_VERSION_MINOR 10
+#define VI_VERSION_MINOR 11
 #define VI_VERSION_PATCH 0
 
 class VIVersion :public VIObject {

@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "VIObject.h"
 #include "VIDocument.h"
+#include "VILang/VILangDoc.h"
 
-#define VITR(key) VILanguageHost::translate(VIFramework::getLanguageHostInstance(), key)
 class VILanguageHost :public VIObject
 {
 	Q_OBJECT;
@@ -47,3 +47,5 @@ class VILanguageHost :public VIObject
 		return tr;
 	}
 };
+
+#define VITR(key) VILanguageHost::translate(VICoreFramework::getLanguageHostInstance(), key)

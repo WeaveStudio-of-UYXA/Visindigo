@@ -156,9 +156,9 @@ class private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
 		}
 	}
 	_Public void onTick() override {
-		Target->move((float)rawX + (float)(targetX - rawX) * VIMath::sin_0_1(Duration->getPercent()),
-			(float)rawY + (float)(targetY - rawY) * VIMath::sin_0_1(Duration->getPercent()));
-		Target->resize(rawW, rawH + rawH * maxExpandPercent * VIMath::sin_0_1_0(Duration->getPercent()));
+		Target->move((float)rawX + (float)(targetX - rawX) * VICommonMapping::sin_0_1(Duration->getPercent()),
+			(float)rawY + (float)(targetY - rawY) * VICommonMapping::sin_0_1(Duration->getPercent()));
+		Target->resize(rawW, rawH + rawH * maxExpandPercent * VICommonMapping::sin_0_1_0(Duration->getPercent()));
 	}
 	_Public void onSubside() override {
 		Target->setGeometry(targetX, targetY, rawW, rawH);

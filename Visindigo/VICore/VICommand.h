@@ -19,6 +19,7 @@ class VICommandHandler {
 	_Public def_init VICommandHandler();
 	_Public def_del ~VICommandHandler();
 };
+
 #define VICommand_Reg(Name) new Name()
 #define VICommand_Handler(Name) class Name :public VICommandHandler { _Public def_init Name(): VICommandHandler()
 #define VICommand_Name(Name) CommandName = Name; VICommandHost::getInstance()->addCommandHandler(this);}\
@@ -27,18 +28,15 @@ class VICommandHandler {
 class VICommandHost :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
-	friend class VIFramework;
+	friend class VICoreFramework;
+	VI_Singleton(VICommandHost);
 	_Private QMap<QString, VICommandHandler*> CommandHandlers;
-	_Private static VICommandHost* Instance;
 	VI_PrivateProperty(QString, CommandOutput);
 	_Protected def_init VICommandHost(QObject* parent = VI_NULLPTR);
 	_Public bool addCommandHandler(VICommandHandler* handler);
 	_Public void removeCommandHandler(VICommandHandler* handler);
 	_Public bool handleCommand(QString command);
 	_Public static QStringList blankSplitter(QString str);
-	_Public static VICommandHost* getInstance() {
-		return Instance;
-	}
 };
 
 class CommandHandlerTestClass :public VIObject {

@@ -6,7 +6,7 @@
 * Every Visindigo program must start with "visindigo program" and end with "programEnd"
 */
 visindigo program {
-	VIFramework VIFrame(sysArgv);
+	VICoreFramework VIFrame(sysArgv);
 	// You can put your framework initialization code here
 	// ##########################################VVVVVVVVVVVVVVVVVVVV
 	VIFrame.useDebugModeRuntime();

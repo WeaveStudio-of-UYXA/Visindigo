@@ -7,7 +7,7 @@
 #include "VIDocument.h"
 #include "VIDuration.h"
 #include "VIException.h"
-#include "VIFramework.h"
+#include "VICoreFramework.h"
 #include "VIMath.h"
 #include "VIMultiPlatform.h"
 #include "VIObject.h"
@@ -17,5 +17,5 @@
 
 #define visindigo int
 #define program main(int argc, char* argv[]){try
-#define programEnd catch(std::exception& e){VIConsole::printLine(VIConsole::inErrorStyle(e.what()));}catch(VIException& e){e.print();}return VIFramework::getInstance()->getReturnCode();}
+#define programEnd catch(std::exception& e){VIConsole::printLine(VIConsole::inErrorStyle(e.what()));}catch(VIException& e){e.print();}return VICoreFramework::getInstance()->getReturnCode();}
 #define sysArgv argc, argv
