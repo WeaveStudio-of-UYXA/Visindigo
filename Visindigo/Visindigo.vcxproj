@@ -125,15 +125,18 @@
     <ClCompile Include="VICore\cpp\VICommand.cpp" />
     <ClCompile Include="VICore\cpp\VIConsole.cpp" />
     <ClCompile Include="VICore\cpp\VICoreFramework.cpp" />
+    <ClCompile Include="VICore\cpp\VIException.cpp" />
     <ClCompile Include="VICore\cpp\VILanguage.cpp" />
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
     <ClCompile Include="VICore\cpp\VIPackage.cpp" />
     <ClCompile Include="VICore\cpp\VISettings.cpp" />
-    <ClCompile Include="VIWidgets\cpp\VIAbstractUIJson.cpp" />
+    <ClCompile Include="VIWidgets\cpp\VIFramework.cpp" />
+    <ClCompile Include="VIUJ\cpp\VIUJAbstractParser.cpp" />
+    <ClCompile Include="VIWidgets\cpp\VIPalette.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="testCode.h" />
-    <QtMoc Include="VIWidgets\VIUJWidgetBinder.h" />
+    <QtMoc Include="VIUJ\VIUJWidgetBinder.h" />
     <QtMoc Include="VIWidgets\VIWidgetsTransQt.h" />
     <QtMoc Include="VIWidgets\VIWindowsTheme.h" />
     <QtMoc Include="VI2DScene\VI2DSceneItemAnimationBehavior.h" />
@@ -143,14 +146,18 @@
     <QtMoc Include="VIWidgets\VIMainWindow.h" />
     <QtMoc Include="VICore\private\VisindigoCorePack.h" />
     <QtMoc Include="VICore\VILang\VILangDoc.h" />
+    <QtMoc Include="VICore\VIColorTools.h" />
     <ClInclude Include="VICore\VIPointer.h" />
     <ClInclude Include="VICore\yc\YcAlgorithm.h" />
     <ClInclude Include="VICore\yc\YcAllocator.h" />
     <ClInclude Include="VICore\yc\YcPair.h" />
     <ClInclude Include="VICore\yc\YcSmartPointer.h" />
-    <QtMoc Include="VIWidgets\VIUJ.h" />
-    <ClInclude Include="VIWidgets\VIFramework.h" />
-    <ClInclude Include="VIWidgets\VIUIJson.h" />
+    <QtMoc Include="VIUJ\VIUJAbstractParser.h" />
+    <ClInclude Include="VIUJ\VIUJ.h" />
+    <QtMoc Include="VIWidgets\VIFramework.h" />
+    <ClInclude Include="VIUJ\VIUJWidgetParser.h" />
+    <QtMoc Include="VIWidgets\VIPalette.h" />
+    <QtMoc Include="VIWidgets\private\VisindigoWidgetsPack.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <QtMoc Include="VICore\VIDocument.h" />
     <QtMoc Include="VICore\VILanguage.h" />
@@ -183,9 +190,6 @@
     <QtMoc Include="VICore\VIMultiPlatform.h" />
     <QtMoc Include="VICore\VIObject.h" />
     <QtMoc Include="VICore\VIAbstractBehavior.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

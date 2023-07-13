@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "private/VIObject_m.h"
+#include "VIException.h"
 /*
 * QObject
 * 此类扩展QMetaObject提供的部分功能
@@ -15,6 +16,7 @@ class VIAbstractObject
 	_Public virtual const QString getObjectName() PureVirtual;
 	_Public virtual const void consoleLog(QString log) PureVirtual;
 	_Public virtual const void consoleLogPure(QString log) PureVirtual;
+	_Public virtual void throwThis() PureVirtual;
 };
 typedef VIAbstractObject VIBaseObject;
 typedef QObject VISuper;

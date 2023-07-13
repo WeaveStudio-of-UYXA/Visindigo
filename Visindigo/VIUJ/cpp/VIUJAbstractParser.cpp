@@ -1,23 +1,23 @@
 ﻿#pragma once
-#include "../VIUJ.h"
+#include "../VIUJAbstractParser.h"
 #include "../VIUJWidgetBinder.h"
 /*
-VIAbstractUJParser
+VIUJAbstractParser
 */
-QWidget* VIAbstractUJParser::preOnJson(const QJsonObject & jsonObj)
+QWidget* VIUJAbstractParser::preOnJson(const QJsonObject & jsonObj)
 {
 	QWidget* cuWidget = onJson(jsonObj);
 	if (cuWidget == nullptr) {
-		qDebug() << "VIAbstractUJParser::preOnJson: widget is null";
+		qDebug() << "VIUJAbstractParser::preOnJson: widget is null";
 		return nullptr;
 	}
 	else {
 		if (jsonObj.contains("Name")) {
 			cuWidget->setObjectName(jsonObj["Name"].toString());
-			qDebug() << "VIAbstractUJParser::preOnJson: set name to " << jsonObj["Name"].toString();
+			qDebug() << "VIUJAbstractParser::preOnJson: set name to " << jsonObj["Name"].toString();
 		}
 		else {
-			qDebug() << "VIAbstractUJParser::preOnJson: no name";
+			qDebug() << "VIUJAbstractParser::preOnJson: no name";
 			if (CurrentWidgetStack.isEmpty()) {
 				cuWidget->setObjectName("Root");
 			}
@@ -40,7 +40,7 @@ QWidget* VIAbstractUJParser::preOnJson(const QJsonObject & jsonObj)
 					}
 				}
 				else {
-					qDebug() << "VIAbstractUJParser::preOnJson: child has no type, can not parse";
+					qDebug() << "VIUJAbstractParser::preOnJson: child has no type, can not parse";
 				}
 			}
 			CurrentWidgetStack.pop();
@@ -50,63 +50,63 @@ QWidget* VIAbstractUJParser::preOnJson(const QJsonObject & jsonObj)
 }
 
 /*
-VIUIJsonParserHost
+VIUJParserHost
 */
 
-void VIUIJsonParserHost::addUIJsonParser(VIAbstractUJParser* uiJson) {
+void VIUJParserHost::addUIJsonParser(VIUJAbstractParser* uiJson) {
 	if (uiJson == nullptr) {
-		qDebug() << "VIUIJsonParserHost::addUIJsonParser: uiJson is null";
+		qDebug() << "VIUJParserHost::addUIJsonParser: uiJson is null";
 		return;
 	}
 	if (UIJsonMap.contains(uiJson->getTypeName())) {
-		qDebug() << "VIUIJsonParserHost::addUIJsonParser: uiJson type name is already in map";
+		qDebug() << "VIUJParserHost::addUIJsonParser: uiJson type name is already in map";
 		return;
 	}
 	UIJsonMap.insert(uiJson->getTypeName(), uiJson);
 }
 
-VIAbstractUJParser* VIUIJsonParserHost::getUIJsonParser(const QString& typeName) {
+VIUJAbstractParser* VIUJParserHost::getUIJsonParser(const QString& typeName) {
 	if (UIJsonMap.contains(typeName)) {
 		VIConsole::inSuccessStyle(getLogPrefix() + "getUIJsonParser: " + typeName + " success");
 		return UIJsonMap[typeName];
 	}
 	else {
-		qDebug() << "VIUIJsonParserHost::getUIJsonParser: uiJson type name is not in map";
+		qDebug() << "VIUJParserHost::getUIJsonParser: uiJson type name is not in map";
 		return nullptr;
 	}
 }
 
-void VIUIJsonParserHost::addUJWidgetBinder(VIUJWidgetBinder* ujWidgetBinder) {
+void VIUJParserHost::addUJWidgetBinder(VIUJWidgetBinder* ujWidgetBinder) {
 	if (ujWidgetBinder == nullptr) {
-		qDebug() << "VIUIJsonParserHost::addUJWidgetBinder: ujWidgetBinder is null";
+		qDebug() << "VIUJParserHost::addUJWidgetBinder: ujWidgetBinder is null";
 		return;
 	}
 	if (UJWidgetBinderMap.contains(ujWidgetBinder->getTargetInstanceName())) {
-		qDebug() << "VIUIJsonParserHost::addUJWidgetBinder: ujWidgetBinder type name is already in map";
+		qDebug() << "VIUJParserHost::addUJWidgetBinder: ujWidgetBinder type name is already in map";
 		return;
 	}
 	UJWidgetBinderMap.insert(ujWidgetBinder->getTargetInstanceName(), ujWidgetBinder);
 }
 
-VIUJWidgetBinder* VIUIJsonParserHost::getUJWidgetBinder(const QString& targetInstanceName) {
+VIUJWidgetBinder* VIUJParserHost::getUJWidgetBinder(const QString& targetInstanceName) {
 	if (UJWidgetBinderMap.contains(targetInstanceName)) {
 		VIConsole::inSuccessStyle(getLogPrefix() + "getUJWidgetBinder: " + targetInstanceName + " success");
 		return UJWidgetBinderMap[targetInstanceName];
 	}
 	else {
-		qDebug() << "VIUIJsonParserHost::getUJWidgetBinder: ujWidgetBinder type name is not in map";
+		qDebug() << "VIUJParserHost::getUJWidgetBinder: ujWidgetBinder type name is not in map";
 		return nullptr;
 	}
 }
 
-QWidget* VIUIJsonParserHost::parse(const QString& fileName) {
+QWidget* VIUJParserHost::parse(const QString& fileName) {
 	if (!QFile::exists(fileName)) {
-		qDebug() << "VIUIJsonParserHost::parse: file not exist";
+		qDebug() << "VIUJParserHost::parse: file not exist";
 		return nullptr;
 	}
 	QFile file(fileName);
 	if (!file.open(QIODevice::ReadOnly)) {
-		qDebug() << "VIUIJsonParserHost::parse: file open failed";
+		qDebug() << "VIUJParserHost::parse: file open failed";
 		return nullptr;
 	}
 	QTextStream in(&file);
@@ -116,19 +116,19 @@ QWidget* VIUIJsonParserHost::parse(const QString& fileName) {
 	QJsonParseError jsonError;
 	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonStr.toUtf8(), &jsonError);
 	if (jsonError.error != QJsonParseError::NoError) {
-		qDebug() << "VIUIJsonParserHost::parse: json parse error";
+		qDebug() << "VIUJParserHost::parse: json parse error";
 		return nullptr;
 	}
 	if (!jsonDoc.isObject()) {
-		qDebug() << "VIUIJsonParserHost::parse: json is not object";
+		qDebug() << "VIUJParserHost::parse: json is not object";
 		return nullptr;
 	}
 	QJsonObject json = jsonDoc.object();
 	return parse(json);
 }
-QWidget* VIUIJsonParserHost::parse(const QJsonObject& json) {
+QWidget* VIUJParserHost::parse(const QJsonObject& json) {
 	if (!json.contains("Type")) {
-		qDebug() << "VIUIJsonParserHost::parse: no type, can not parse";
+		qDebug() << "VIUJParserHost::parse: no type, can not parse";
 		return nullptr;
 	}
 	QString type = json["Type"].toString();
@@ -139,22 +139,25 @@ QWidget* VIUIJsonParserHost::parse(const QJsonObject& json) {
 			QWidget* Instance = findInstance(cuWidget, i.key());
 			i.value()->setMaster(Instance);
 		}
+		for(auto i = UJWidgetBinderMap.begin(); i != UJWidgetBinderMap.end(); i++) {
+			i.value()->onBindFinish();
+		}
 		return cuWidget;
 	}
 	else {
-		qDebug() << "VIUIJsonParserHost::parse: uiJson type name is not in map";
+		qDebug() << "VIUJParserHost::parse: uiJson type name is not in map";
 		return nullptr;
 	}
 }
 
-QWidget* VIUIJsonParserHost::findInstance(QWidget* root, const QString& instanceName) {
+QWidget* VIUJParserHost::findInstance(QWidget* root, const QString& instanceName) {
 	QStringList instanceNameList = instanceName.split(".");
 	if (instanceNameList.length() == 0) {
-		qDebug() << "VIUIJsonParserHost::findInstance: instanceName is empty";
+		qDebug() << "VIUJParserHost::findInstance: instanceName is empty";
 		return nullptr;
 	}
 	if (instanceNameList[0] != root->objectName()) {
-		qDebug() << "VIUIJsonParserHost::findInstance: instanceName is not in root";
+		qDebug() << "VIUJParserHost::findInstance: instanceName is not in root";
 		return nullptr;
 	}
 	instanceNameList.removeFirst();
@@ -170,7 +173,7 @@ QWidget* VIUIJsonParserHost::findInstance(QWidget* root, const QString& instance
 			}
 		}
 		if (!isFind) {
-			qDebug() << "VIUIJsonParserHost::findInstance: instanceName is not in root";
+			qDebug() << "VIUJParserHost::findInstance: instanceName is not in root";
 			return nullptr;
 		}
 	}

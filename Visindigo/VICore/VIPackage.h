@@ -3,7 +3,7 @@
 #include "VIObject.h"
 #include "VIBehavior.h"
 
-#define LOAD_PACKAGE(pack_name) VICoreFramework::getInstance()->loadPackage(new pack_name());
+#define LOAD_PACKAGE(pack_name) VICoreFramework::getCoreInstance()->loadPackage(new pack_name());
 class VIPackage;
 class VICoreFramework;
 

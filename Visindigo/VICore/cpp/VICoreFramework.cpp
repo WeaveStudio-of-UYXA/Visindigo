@@ -1,12 +1,16 @@
 ﻿#include "../VICoreFramework.h"
+#include "../private/VisindigoCorePack.h"
+
 #pragma execution_character_set("utf-8")
-VICoreFramework* VICoreFramework::Instance = Q_NULLPTR;
+VICoreFramework* VICoreFramework::_instance = Q_NULLPTR;
 VIBehaviorHost* VICoreFramework::BehaviorHost = Q_NULLPTR;
 VILanguageHost* VICoreFramework::LanguageHost = Q_NULLPTR;
 
 def_init VICoreFramework::VICoreFramework(int& argc, char** argv) {
+	VI_SingletonCheck(VICoreFramework);
 	AppInstance = new private_VICoreFramework(argc, argv);
 	AppInstance->DebugModeRuntime = true;
+	_instance = this;
 #ifdef QT_DEBUG
 	AppInstance->DebugModeCompilation = true;
 #else
@@ -35,7 +39,6 @@ void VICoreFramework::init() {
 	setObjectName(VIVersion::getVisindigoVersion());
 	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Visindigo framework is initializing..."));
 	printWelcome();
-	Instance = this;
 	LanguageHost = new VILanguageHost(VILanguageHost::LangType::zh_SC, VILanguageHost::LangType::zh_SC, "./Language", this);
 	if (LanguageHost->loadLanguage()) {
 		VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + VITR("Core_LanguageHost_LoadLanguage_Success")));
@@ -46,6 +49,7 @@ void VICoreFramework::init() {
 	BehaviorHost = new VIBehaviorHost(this);
 	new VICommandHost(this);
 	VICommand_Reg(VIECMAScripts::Command);
+	LOAD_PACKAGE(VisindigoCore::Package);
 	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + VITR("Core_Any_Initialized_Success").arg("Visindigo framework")));
 }
 VIBehaviorHost* VICoreFramework::getBehaviorHostInstance() {
@@ -62,17 +66,21 @@ VILanguageHost* VICoreFramework::getLanguageHostInstance() {
 	return LanguageHost;
 }
 void VICoreFramework::start() {
+	for(auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++) {
+		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + (*i)->PackageInfo->getPackageName()));
+	}
 	BehaviorHost->start();
 	AppInstance->ReturnCode = App->exec();
 }
 
-VICoreFramework* VICoreFramework::getInstance() {
-	if (getInstance() == nullptr) {
-		VIConsole::printLine("Visindigo requires a VICoreFramework instance to initialize various program components. \
-Before loading your package, you must first create a new VICoreFramework instance.\nThe program will exit.\n");
+VICoreFramework* VICoreFramework::getCoreInstance() {
+	if (_instance == nullptr) {
+		VIConsole::printLine(VIConsole::inWarningStyle("Visindigo requires a VICoreFramework instance to initialize various program components. "));
+		VIConsole::printLine(VIConsole::inErrorStyle("Before loading your package, you must first create a new VICoreFramework instance and call init()"));
+		VIConsole::printLine(VIConsole::inErrorStyle("The program will exit."));
 		std::exit(-1);
 	}
-	return VICoreFramework::Instance;
+	return VICoreFramework::_instance;
 }
 
 int VICoreFramework::getReturnCode() {
@@ -110,6 +118,6 @@ bool VICoreFramework::execCommand(QString command) {
 }
 
 QApplication* VICoreFramework::getAppInstance() {
-	return Instance->App;
+	return _instance->App;
 }
 

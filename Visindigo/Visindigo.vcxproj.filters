@@ -52,13 +52,22 @@
     <ClCompile Include="VICore\cpp\VIPackage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VIWidgets\cpp\VIAbstractUIJson.cpp">
+    <ClCompile Include="VIUJ\cpp\VIUJAbstractParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VICore\cpp\VISettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIWidgets\cpp\VIPalette.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VICore\cpp\VIException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIWidgets\cpp\VIFramework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -114,10 +123,10 @@
     <ClInclude Include="VICore\yc\YcSmartPointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIWidgets\VIUIJson.h">
+    <ClInclude Include="VIUJ\VIUJWidgetParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIWidgets\VIFramework.h">
+    <ClInclude Include="VIUJ\VIUJ.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -203,10 +212,10 @@
     <QtMoc Include="VIWidgets\VIMainWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIWidgets\VIUJ.h">
+    <QtMoc Include="VIUJ\VIUJAbstractParser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIWidgets\VIUJWidgetBinder.h">
+    <QtMoc Include="VIUJ\VIUJWidgetBinder.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="testCode.h">
@@ -218,8 +227,17 @@
     <QtMoc Include="VICore\VILang\VILangDoc.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <QtMoc Include="VIWidgets\VIPalette.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VICore\VIColorTools.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWidgets\VIFramework.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWidgets\private\VisindigoWidgetsPack.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

@@ -1,11 +1,10 @@
 ﻿#pragma once
-#include "VIUJ.h"
-#include "VIWidget.h"
-#include "VIWidgetsTransQt.h"
+#include "VIUJAbstractParser.h"
+#include "../VIWidgets/VIWidgets.h"
 
-class VIUIJson_Widget : public VIAbstractUJParser
+class VIUJParser_VIWidget : public VIUJAbstractParser
 {
-	_Public def_init VIUIJson_Widget(VIUIJsonParserHost* host) :VIAbstractUJParser(host) {
+	_Public def_init VIUJParser_VIWidget(VIUJParserHost* host) :VIUJAbstractParser(host) {
 		setTypeName("VIWidget");
 	}
 	_Public void onGeneralParameters(const QJsonObject& json, QWidget* widget) {
@@ -46,9 +45,9 @@ class VIUIJson_Widget : public VIAbstractUJParser
 	}
 };
 
-class VIUIJson_Label :public VIUIJson_Widget
+class VIUJParser_VILabel :public VIUJParser_VIWidget
 {
-	_Public def_init VIUIJson_Label(VIUIJsonParserHost* host) :VIUIJson_Widget(host) {
+	_Public def_init VIUJParser_VILabel(VIUJParserHost* host) :VIUJParser_VIWidget(host) {
 		setTypeName("VILabel");
 	}
 	_Public virtual QWidget* onJson(const QJsonObject& json) override {

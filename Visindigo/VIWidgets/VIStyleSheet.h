@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include "../VICore/VICore.h"
+#include "VIPalette.h"
 
-
-typedef QMap<QString, QColor> VIColorMap;
-
+//Decrepated
+//PLEASE use VIPaletteGroup instead
 class VIColorPalette : public VIObject
 {
 	Q_OBJECT;

@@ -1,7 +1,6 @@
 ﻿#pragma once
-#include "VIObject.h"
-#include "VIConsole.h"
-#include <exception>
+#include <QtCore>
+#include "private/VIMacro.h"
 class VIException
 {
 	_Public enum class Type{
@@ -13,6 +12,7 @@ class VIException
 		NullPointer,
 		FrameworkNotInit,
 		MethodIsInvalid, //Method is not implemented
+		SingletonError,
 		Others
 	};
 	VI_ProtectedProperty(QString, Reason);
@@ -37,16 +37,19 @@ class VIException
 		ExceptionType = other.ExceptionType;
 		ExceptionName = other.ExceptionName;
 	};
-	void print() {
-		VIConsole::printLine(VIConsole::inErrorStyle("Visindigo encountered an unhandled exception: " + ExceptionName));
-		VIConsole::printLine(VIConsole::inWarningStyle("Reason: " + Reason));
-		VIConsole::printLine(VIConsole::inWarningStyle("Help: " + Help));
-	}
+	void print();
 };
 
 class VIDimensionError : public VIException {
 	_Public def_init VIDimensionError(const QString& rsn, const QString& help = "") : VIException(rsn, help) {
 		ExceptionType = Type::DimensionError;
 		ExceptionName = "DimensionError";
+	};
+};
+
+class VISingletonError : public VIException {
+	_Public def_init VISingletonError(const QString& rsn, const QString& help = "") : VIException(rsn, help) {
+		ExceptionType = Type::SingletonError;
+		ExceptionName = "SingletonError";
 	};
 };

@@ -39,7 +39,7 @@ class VICoreFramework :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Private static VICoreFramework* Instance;
+	_Private static VICoreFramework* _instance;
 	_Private private_VICoreFramework* AppInstance;
 	_Private static VIBehaviorHost* BehaviorHost;
 	_Private static VILanguageHost* LanguageHost;
@@ -56,5 +56,6 @@ class VICoreFramework :public VIObject
 	_Public bool useDebugModeRuntime();
 	_Public static bool execCommand(QString);
 	_Public static QApplication* getAppInstance();
-	_Public static VICoreFramework* getInstance();
+	_Public static VICoreFramework* getCoreInstance();
 };
+#define VICoreFrame VICoreFramework::getInstance()

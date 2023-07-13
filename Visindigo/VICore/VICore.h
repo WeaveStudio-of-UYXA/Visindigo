@@ -17,5 +17,5 @@
 
 #define visindigo int
 #define program main(int argc, char* argv[]){try
-#define programEnd catch(std::exception& e){VIConsole::printLine(VIConsole::inErrorStyle(e.what()));}catch(VIException& e){e.print();}return VICoreFramework::getInstance()->getReturnCode();}
+#define programEnd catch(std::exception& e){VIConsole::printLine(VIConsole::inErrorStyle(e.what()));}catch(VIException& e){e.print();}return VICoreFramework::getCoreInstance()->getReturnCode();}
 #define sysArgv argc, argv

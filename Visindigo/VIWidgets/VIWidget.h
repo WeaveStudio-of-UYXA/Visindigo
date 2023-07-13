@@ -9,6 +9,7 @@ class VIUJWidgetBinder;
 class VIAbstractWidget :public VIAbstractObject {
 	_Public VIStyleSheetManager* StyleSheetManager;
 	_Public VIUJWidgetBinder* UJWidgetBinder;
+	_Public QWidget* Self;
 	_Public virtual void setStyleSheetPalette(VIColorPalette* palette) PureVirtual;
 	_Public virtual void renewVTR() { onVTR(); }
 	_Public virtual void VTR() HalfVirtual;
@@ -18,6 +19,7 @@ typedef VIAbstractWidget VIBaseWidget;
 #define VI_WIDGET_INIT \
 	StyleSheetManager = new VIStyleSheetManager(this);\
 	UJWidgetBinder = VI_NULLPTR;\
+	Self = this;
 
 #define VI_WIDGET VI_OBJECT;\
 _Public virtual void setStyleSheetPalette(VIColorPalette* palette) {\

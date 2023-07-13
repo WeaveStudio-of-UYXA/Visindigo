@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "VIWidget.h"
+#include "../VIWidgets/VIWidgets.h"
 
 class VIUJWidgetBinder :public VIObject
 {
@@ -11,18 +11,12 @@ class VIUJWidgetBinder :public VIObject
 		self = VI_NULLPTR;
 		TargetInstanceName = "";
 	}
+	//This function will be called after all binders have been save the master widget.
+	//If users want to connect the signal & slot , they should do it in this function.
+	_Public virtual void onBindFinish() PureVirtual; 
 	_Public void setMaster(QWidget* master) {
-		if (master == VI_NULLPTR) { 
-			qDebug()<<"VIUJWidgetBinder::setMaster: master is null";
-			return; 
-		}
 		self = master;
-		master->installEventFilter(this);
-		VIWidget* widget = dynamic_cast<VIWidget*>(master);
-		if (widget != VI_NULLPTR) {
-			widget->UJWidgetBinder = this;
-		}
-		qDebug() << "VIUJWidgetBinder::setMaster: master is set";
+		self->installEventFilter(this);
 	}
 	_Public virtual bool resizeEvent(QResizeEvent* event) { return false; }
 	_Public virtual bool mousePressEvent(QMouseEvent* event) { return false; }
@@ -83,5 +77,6 @@ class VIUJWidgetBinder :public VIObject
 				return false;
 			}
 		}
+		return false;
 	}
 };
