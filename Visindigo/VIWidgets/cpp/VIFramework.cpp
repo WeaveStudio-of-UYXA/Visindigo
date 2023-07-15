@@ -4,12 +4,13 @@
 VIFramework* VIFramework::Instance = VI_NULLPTR;
 
 def_init VIFramework::VIFramework(int& argc, char** argv):VICoreFramework(argc, argv) {
-	PaletteGroup = new VIPaletteGroup();
+	PaletteGroup = VI_NULLPTR;
 	Instance = this;
 }
 
 void VIFramework::init() {
 	VICoreFramework::init();
+	PaletteGroup = new VIPaletteGroup();
 	LOAD_PACKAGE(VisindigoWidgets::Package);
 }
 

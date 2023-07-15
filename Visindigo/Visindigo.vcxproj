@@ -133,6 +133,7 @@
     <ClCompile Include="VIWidgets\cpp\VIFramework.cpp" />
     <ClCompile Include="VIUJ\cpp\VIUJAbstractParser.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIPalette.cpp" />
+    <ClCompile Include="VIWidgets\cpp\VIStyleSheetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="testCode.h" />
@@ -147,6 +148,7 @@
     <QtMoc Include="VICore\private\VisindigoCorePack.h" />
     <QtMoc Include="VICore\VILang\VILangDoc.h" />
     <QtMoc Include="VICore\VIColorTools.h" />
+    <QtMoc Include="VICore\VILang\VILanguageHost.h" />
     <ClInclude Include="VICore\VIPointer.h" />
     <ClInclude Include="VICore\yc\YcAlgorithm.h" />
     <ClInclude Include="VICore\yc\YcAllocator.h" />
@@ -158,8 +160,13 @@
     <ClInclude Include="VIUJ\VIUJWidgetParser.h" />
     <QtMoc Include="VIWidgets\VIPalette.h" />
     <QtMoc Include="VIWidgets\private\VisindigoWidgetsPack.h" />
+    <QtMoc Include="VIWidgets\VISwitchButton.h" />
+    <QtMoc Include="VIWidgets\private\VISwitchButton_p.h" />
+    <QtMoc Include="VIWidgets\VIPSOD.h" />
+    <QtMoc Include="VIWidgets\VIStyleSheetManager.h" />
+    <ClInclude Include="VIWidgets\private\VIPalette_p.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
-    <QtMoc Include="VICore\VIDocument.h" />
+    <ClInclude Include="VICore\VIPathInfo.h" />
     <QtMoc Include="VICore\VILanguage.h" />
     <QtMoc Include="VICore\VISettings.h" />
     <QtMoc Include="VIWidgets\VICodeEdit.h" />
@@ -179,7 +186,7 @@
     <ClInclude Include="VICore\private\VICompileMacro.h" />
     <ClInclude Include="VICore\private\VIDuration_m.h" />
     <ClInclude Include="VICore\private\VIMacro.h" />
-    <QtMoc Include="VICore\VIConsole.h" />
+    <ClInclude Include="VICore\VIConsole.h" />
     <ClInclude Include="VICore\private\VIObject_m.h" />
     <QtMoc Include="VICore\VIBasicType.h" />
     <ClInclude Include="VICore\VICore.h" />
@@ -187,7 +194,7 @@
     <QtMoc Include="VICore\VICoreFramework.h" />
     <QtMoc Include="VICore\VIBehavior.h" />
     <QtMoc Include="VICore\VIDuration.h" />
-    <QtMoc Include="VICore\VIMultiPlatform.h" />
+    <ClInclude Include="VICore\VIMultiPlatform.h" />
     <QtMoc Include="VICore\VIObject.h" />
     <QtMoc Include="VICore\VIAbstractBehavior.h" />
   </ItemGroup>

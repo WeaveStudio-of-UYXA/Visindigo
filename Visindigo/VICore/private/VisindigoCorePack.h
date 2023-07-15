@@ -29,6 +29,7 @@ namespace VisindigoCore {
 		VI_OBJECT;
 		_Public def_init Package() {
 			PackageInfo = new VisindigoCore::PackageInfo();
+			qDebug() << PackageInfo->getPackageRootPath();
 		}
 	};
 }

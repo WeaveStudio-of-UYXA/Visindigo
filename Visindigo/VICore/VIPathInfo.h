@@ -1,12 +1,8 @@
 ﻿#pragma once
 #include "VIObject.h"
-#include "VIConsole.h"
 
-class VIDocument :public VIObject {
-	Q_OBJECT;
-	VI_OBJECT;
-	_Public def_init VIDocument() {
-	}
+class VIPathInfo {
+	VI_STATIC_CLASS(VIPathInfo);
 	_Public static QString getWorkingPath() { return QDir::currentPath(); }
 	_Public static QString getProgramPath() { return QCoreApplication::applicationDirPath(); }
 	_Public static QString getHomePath() { return QDir::homePath(); }

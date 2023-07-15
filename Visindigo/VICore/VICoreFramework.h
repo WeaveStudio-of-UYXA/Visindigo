@@ -6,7 +6,7 @@
 #include "VIObject.h"
 #include "VIConsole.h"
 #include "VICommand.h"
-#include "VIDocument.h"
+#include "VIPathInfo.h"
 #include "VIMultiPlatform.h"
 #include "VILanguage.h"
 #include "VIVersion.h"

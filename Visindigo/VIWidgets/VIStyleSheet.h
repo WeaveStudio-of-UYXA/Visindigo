@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../VICore/VICore.h"
+#include "VIStyleSheetManager.h"
 #include "VIPalette.h"
 
 //Decrepated
@@ -13,6 +14,8 @@ class VIColorPalette : public VIObject
 	_Private QString CurrentPaletteName;
 	_Private QMap<QString, VIColorMap> PaletteMap;
 	_Public def_init VIColorPalette(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
+		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + 
+			"This class has been deprecated, please migrate to VIPalette and VIPaletteGroup"));
 		CurrentPalette = VI_NULLPTR;
 	}
 	_Public void createPalette(const QString& name) {
@@ -144,9 +147,9 @@ class VIStyleSheetManager :public VIObject
 		return raw;
 	}
 	_Public static QString VISSExp_PATH(QString raw) {
-		raw.replace(":EXEPATH", VIDocument::getApplicationsPath());
-		//raw.replace(":PROJECTPATH", VIDocument::getProjectPath());
-		raw.replace(":WORKPATH", VIDocument::getWorkingPath());
+		raw.replace(":EXEPATH", VIPathInfo::getApplicationsPath());
+		//raw.replace(":PROJECTPATH", VIPathInfo::getProjectPath());
+		raw.replace(":WORKPATH", VIPathInfo::getWorkingPath());
 		return raw;
 	}
 	_Public static QString VISSExp_COLOR(QString raw, VIColorPalette* palette) {

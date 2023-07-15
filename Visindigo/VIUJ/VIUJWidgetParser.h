@@ -59,3 +59,15 @@ class VIUJParser_VILabel :public VIUJParser_VIWidget
 		return label;
 	}
 };
+
+class VIUJParser_VISwitchButton :public VIUJParser_VIWidget
+{
+	_Public def_init VIUJParser_VISwitchButton(VIUJParserHost* host) :VIUJParser_VIWidget(host) {
+		setTypeName("VISwitchButton");
+	}
+	_Public virtual QWidget* onJson(const QJsonObject& json) override {
+		VISwitchButton* label = new VISwitchButton();
+		onGeneralParameters(json, label);
+		return label;
+	}
+};

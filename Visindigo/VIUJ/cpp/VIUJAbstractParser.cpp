@@ -137,6 +137,10 @@ QWidget* VIUJParserHost::parse(const QJsonObject& json) {
 		for (auto i = UJWidgetBinderMap.begin(); i != UJWidgetBinderMap.end(); i++) {
 			qDebug()<<i.key();
 			QWidget* Instance = findInstance(cuWidget, i.key());
+			if (Instance == nullptr) {
+				qDebug() << "VIUJParserHost::parse: can not find instance";
+				continue;
+			}
 			i.value()->setMaster(Instance);
 		}
 		for(auto i = UJWidgetBinderMap.begin(); i != UJWidgetBinderMap.end(); i++) {

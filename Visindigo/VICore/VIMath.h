@@ -26,14 +26,12 @@ public:
 	
 };
 
-class VICommonMapping
-{
+class VICommonMapping {
 	VI_STATIC_CLASS(VICommonMapping);
-public:
-	static double sin_0_1(double percent) {
+	_Public static double sin_0_1(double percent) {
 		return (qSin(-VIMath::PI / 2 + VIMath::PI * percent) + 1.0) / 2.0;
 	}
-	static double sin_0_1_0(double percent) {
+	_Public static double sin_0_1_0(double percent) {
 		return qSin(percent * VIMath::PI);
 	}
 };

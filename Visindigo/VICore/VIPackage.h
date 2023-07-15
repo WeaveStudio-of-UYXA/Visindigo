@@ -2,6 +2,7 @@
 #include <QtCore>
 #include "VIObject.h"
 #include "VIBehavior.h"
+#include "VIPathInfo.h"
 
 #define LOAD_PACKAGE(pack_name) VICoreFramework::getCoreInstance()->loadPackage(new pack_name());
 class VIPackage;
@@ -40,6 +41,9 @@ class VIPackageInfo :public VIObject
 	}
 	_Public QString getPackageVersion() {
 		return QString("%1.%2.%3").arg(PackageVersionMajor).arg(PackageVersionMinor).arg(PackageVersionPatch);
+	}
+	_Public QString getPackageRootPath() {
+		return VIPathInfo::getProgramPath() + "/package/" + PackageName;
 	}
 };
 

@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <execution>
 #include <QtCore>
 #include "private/VIMacro.h"
 class VIException
@@ -9,7 +10,7 @@ class VIException
 		DimensionError,
 		BehaviorError,
 		IndexOutOfRange,
-		NullPointer,
+		NullPointerError,
 		FrameworkNotInit,
 		MethodIsInvalid, //Method is not implemented
 		SingletonError,
@@ -43,13 +44,20 @@ class VIException
 class VIDimensionError : public VIException {
 	_Public def_init VIDimensionError(const QString& rsn, const QString& help = "") : VIException(rsn, help) {
 		ExceptionType = Type::DimensionError;
-		ExceptionName = "DimensionError";
+		ExceptionName = "Dimension Error";
 	};
 };
 
 class VISingletonError : public VIException {
 	_Public def_init VISingletonError(const QString& rsn, const QString& help = "") : VIException(rsn, help) {
 		ExceptionType = Type::SingletonError;
-		ExceptionName = "SingletonError";
+		ExceptionName = "Singleton Error";
 	};
+};
+
+class VINullPointerError :public VIException {
+	_Public def_init VINullPointerError(const QString& rsn, const QString& help = "") :VIException(rsn, help) {
+		ExceptionType = Type::NullPointerError;
+		ExceptionName = "Null Pointer Error";
+	}
 };

@@ -1,5 +1,7 @@
 ﻿#include "../VIPalette.h"
 
+VI_Singleton_Init(VIPaletteGroup);
+
 /*
 VIPalette
 */
@@ -47,13 +49,21 @@ QString VIPalette::getDefaultColorName(DefaultColorName colorName)
 VIPaletteGroup
 */
 def_init VIPaletteGroup::VIPaletteGroup():VIObject(){
+	VI_CHECK_SingletonError(this);
 	CurrentPalette = VI_NULLPTR;
+	ChangePaletteUseAnimation = true;
+	ChangeAnimationBehavior = new private_VIPaletteChangeAnimationBehavior(this);
+	ChangeAnimationBehavior->setGroup(this);
+	ChangeAnimationBehavior->setDuration(1000);
 }
 
 void VIPaletteGroup::addPalette(const QString& name, VIColorMap cmap) {
+	if (name == CurrentPaletteName) {
+		return;
+	}
 	VIPalette* palette = new VIPalette(cmap);
 	if (PaletteMap.contains(name)) {
-		PaletteMap.remove(name);
+		removePalette(name);
 	}
 	if (PaletteMap.isEmpty()) {
 		CurrentPalette = palette;
@@ -65,8 +75,11 @@ void VIPaletteGroup::addPalette(const QString& name, VIColorMap cmap) {
 }
 
 void VIPaletteGroup::addPalette(const QString&name, VIPalette* palette) {
+	if (name == CurrentPaletteName) {
+		return;
+	}
 	if (PaletteMap.contains(name)) {
-		PaletteMap.remove(name);
+		removePalette(name);
 	}
 	if (PaletteMap.isEmpty()) {
 		CurrentPalette = palette;
@@ -78,21 +91,13 @@ void VIPaletteGroup::addPalette(const QString&name, VIPalette* palette) {
 }
 
 void VIPaletteGroup::removePalette(const QString& name) {
+	if (name == CurrentPaletteName) {
+		return;
+	}
 	if (PaletteMap.contains(name)) {
 		VIPalette* palette = PaletteMap.value(name);
 		PaletteMap.remove(name);
-		if (palette == CurrentPalette) {
-			if (PaletteMap.isEmpty()) {
-				CurrentPalette = VI_NULLPTR;
-				CurrentPaletteName = "";
-			}
-			else {
-				CurrentPaletteName = PaletteMap.keys().first();
-				CurrentPalette = PaletteMap[CurrentPaletteName];
-			}
-		}	
 		delete palette;
-		emit paletteChanged(name);
 	}
 }
 
@@ -102,10 +107,11 @@ QStringList VIPaletteGroup::getPaletteNames() {
 
 void VIPaletteGroup::changeCurrentPalette(const QString& name) {
 	if (PaletteMap.contains(name)) {
+		QString oldName = CurrentPaletteName;
 		CurrentPalette = PaletteMap.value(name);
 		CurrentPaletteName = name;
 		ColorNames = CurrentPalette->getColorNames();
-		emit paletteChanged(name);
+		onPaletteChanged(oldName, CurrentPaletteName);
 	}
 }
 
@@ -147,5 +153,18 @@ void VIPaletteGroup::setColor(VIPalette::DefaultColorName colorName, const QColo
 void VIPaletteGroup::setColorToPalette(const QString& paletteName, const QString& colorName, const QColor& color) {
 	if (PaletteMap.contains(paletteName)) {
 		PaletteMap.value(paletteName)->setColor(colorName, color);
+	}
+}
+
+void VIPaletteGroup::onPaletteChanged(const QString& raw, const QString& cur) {
+	if (ChangePaletteUseAnimation) {
+		if (PaletteMap.contains(raw) && PaletteMap.contains(cur)) {
+			ChangeAnimationBehavior->setColorMap(PaletteMap.value(raw)->getColorMap(), PaletteMap.value(cur)->getColorMap());
+			ChangeAnimationBehavior->setTargetPaletteName(cur);
+			ChangeAnimationBehavior->active();
+		}
+	}
+	else {
+		emit paletteChanged(cur);
 	}
 }

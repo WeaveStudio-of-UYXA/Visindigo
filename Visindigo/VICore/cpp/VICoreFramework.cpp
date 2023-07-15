@@ -7,7 +7,7 @@ VIBehaviorHost* VICoreFramework::BehaviorHost = Q_NULLPTR;
 VILanguageHost* VICoreFramework::LanguageHost = Q_NULLPTR;
 
 def_init VICoreFramework::VICoreFramework(int& argc, char** argv) {
-	VI_SingletonCheck(VICoreFramework);
+	VI_CHECK_SingletonError(this);
 	AppInstance = new private_VICoreFramework(argc, argv);
 	AppInstance->DebugModeRuntime = true;
 	_instance = this;
@@ -31,8 +31,8 @@ void printWelcome() {
 	VIConsole::printLine("\033[38;2;234;54;128mVisindigo \033[0m" + VIVersion::getVisindigoVersion() + " \"" + VIVersion::getVisindigoNickname() + "\"" + " \033[38;2;255;253;85m[RELEASE compilation mode]\033[0m");
 #endif
 	VIConsole::printLine("\033[38;2;234;63;247mVersion Compilation Time \033[0m: \033[38;2;255;253;85m" + VIVersion::getVisindigoCompileTime() + " [" + VIMultiPlatform::getCPUBuildType() + "]\033[0m");
-	VIConsole::printLine(VIConsole::inWarningStyle("Working Path: ") + VIConsole::inNoticeStyle(VIDocument::getWorkingPath()));
-	VIConsole::printLine("Hello, " + VIDocument::getUserName() + "! Welcome to Visindigo!");
+	VIConsole::printLine(VIConsole::inWarningStyle("Working Path: ") + VIConsole::inNoticeStyle(VIPathInfo::getWorkingPath()));
+	VIConsole::printLine("Hello, " + VIPathInfo::getUserName() + "! Welcome to Visindigo!");
 }
 
 void VICoreFramework::init() {

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "VIObject.h"
-#include "VIDocument.h"
+#include "VIPathInfo.h"
 #include "VILang/VILangDoc.h"
 
 class VILanguageHost :public VIObject

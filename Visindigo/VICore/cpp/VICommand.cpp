@@ -20,6 +20,7 @@ bool VICommandHost::addCommandHandler(VICommandHandler* handler) {
 }
 
 def_init VICommandHost::VICommandHost(QObject* parent) :VIObject(parent) {
+	VI_CHECK_SingletonError(this);
 	setObjectName("VICommandHost");
 	setInstance(this);
 	consoleLog("Initialized");

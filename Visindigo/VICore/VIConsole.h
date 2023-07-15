@@ -2,9 +2,8 @@
 #include "VIObject.h"
 #include <QtGui>
 
-class VIConsole : public VIObject {
-	Q_OBJECT;
-	VI_OBJECT;
+class VIConsole {
+	VI_STATIC_CLASS(VIConsole);
 	_Public enum class Color{
 		None, Black, Gray, Red, LightRed,
 		Green, LightGreen, Yellow, LightYellow,

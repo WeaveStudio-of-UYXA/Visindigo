@@ -1,11 +1,9 @@
 ﻿#pragma once
 #include "VIObject.h"
-#include <QtGui>
 #include <QtWidgets>
-class VIMultiPlatform : public VIObject {
-	Q_OBJECT;
-	VI_OBJECT;
-	_Public def_init VIMultiPlatform(QObject* parent = VI_NULLPTR) :VIObject(parent) {};
+
+class VIMultiPlatform {
+	VI_STATIC_CLASS(VIMultiPlatform)
 	_Public static void exit() { QCoreApplication::exit(); }
 	_Public static QString getSystemName() { return QSysInfo::prettyProductName(); }
 	_Public static QString getSystemType() { return QSysInfo::productType(); }
