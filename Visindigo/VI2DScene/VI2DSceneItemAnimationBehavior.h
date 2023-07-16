@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "../VICore/VICore.h"
 #include <QtWidgets>
-class VI2DSceneAnimationBehavior :public VIAnimationBehavior
+class VIPublicAPI VI2DSceneAnimationBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -9,7 +9,7 @@ class VI2DSceneAnimationBehavior :public VIAnimationBehavior
 	_Public def_init VI2DSceneAnimationBehavior(VISuper* parent = VI_NULLPTR) :VIAnimationBehavior(parent) {}
 };
 
-class VI2DSceneRotateAnimationBehavior :public VI2DSceneAnimationBehavior
+class VIPublicAPI VI2DSceneRotateAnimationBehavior :public VI2DSceneAnimationBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;

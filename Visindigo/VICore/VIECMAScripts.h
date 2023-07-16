@@ -2,11 +2,11 @@
 #include "private/VIECMABuiltInModules.h"
 #include "VICommand.h"
 typedef QMap<QString, QString> ModuleMap;
-class VIECMAScripts;
+class VIPublicAPI VIECMAScripts;
 enum class VIECMABuiltInModule {
 	System, Console
 };
-class private_VIECMAScripts :public VIObject {
+class VIPublicAPI private_VIECMAScripts :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
 	friend class VIECMAScripts;
@@ -86,7 +86,7 @@ class private_VIECMAScripts :public VIObject {
 	}
 };
 
-class VIECMAScripts :public VIObject {
+class VIPublicAPI VIECMAScripts :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Signal void finished();

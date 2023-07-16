@@ -3,7 +3,7 @@
 #include "VIWidgetsTransQt.h"
 #include "private/VISwitchButton_p.h"
 
-class VISwitchButton :public VIWidget
+class VIPublicAPI VISwitchButton :public VIWidget
 {
 	Q_OBJECT;
 	VI_WIDGET;

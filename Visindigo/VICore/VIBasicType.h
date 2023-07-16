@@ -7,7 +7,7 @@
 * Notice: All the code in this file is not tested.
 * Please do not use it directly.
 */
-class VICoordinate
+class VIPrivateAPI VICoordinate
 {
 	friend class VICoordinate;
 	_Public enum class Dimension {
@@ -120,7 +120,7 @@ typedef VICoordinate VI4DCoordinate;
 #define VI4DCoor(x, y, z, w) VI4DCoordinate(VICoordinate::Dimension::D4, x, y, z, w)
 /*
 typedef QList<VICoordinate> VICoordinateList;
-class VIStraightLine :public VIObject {
+class VIAPI VIStraightLine :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
 	VI_PrivateProperty(VICoordinate, Start);
@@ -167,7 +167,7 @@ class VIStraightLine :public VIObject {
 		return Start.getDistanceTo(End);
 	}
 };
-class VIBesselLine :public VIObject
+class VIAPI VIBesselLine :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -222,7 +222,7 @@ class VIBesselLine :public VIObject
 	}
 };
 */
-class VIStepper :public VIObject
+class VIPublicAPI VIStepper :public VIObject
 {
 	Q_OBJECT;
 	VI_PrivateProperty(long long, Begin);

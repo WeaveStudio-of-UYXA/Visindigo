@@ -2,10 +2,10 @@
 #include "../VICore/VICore.h"
 
 typedef QHash<QString, QColor> VIColorMap;
-class VIPaletteGroup;
-class private_VIPaletteChangeAnimationBehavior;
+class VIPublicAPI VIPaletteGroup;
+class VIPublicAPI private_VIPaletteChangeAnimationBehavior;
 
-class VIPalette :public VIObject
+class VIPublicAPI VIPalette :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -33,7 +33,7 @@ class VIPalette :public VIObject
 };
 
 
-class VIPaletteGroup :public VIObject
+class VIPublicAPI VIPaletteGroup :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -62,7 +62,7 @@ class VIPaletteGroup :public VIObject
 	_Public void onPaletteChanged(const QString& raw, const QString& cur);
 };
 
-class private_VIPaletteChangeAnimationBehavior :public VIAnimationBehavior
+class VIPublicAPI private_VIPaletteChangeAnimationBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;

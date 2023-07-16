@@ -3,10 +3,11 @@
 #include "private/VIAbstractBehavior_m.h"
 #include "VIDuration.h"
 
-class VIAbstractBehaviorHost;
-class VIBehaviorHost;
-class VIQuantifyTickBehaviorHost;
-class VIAbstractBehavior :public VIObject
+class VIPublicAPI VIAbstractBehaviorHost;
+class VIPublicAPI VIBehaviorHost;
+class VIPublicAPI VIQuantifyTickBehaviorHost;
+
+class VIPublicAPI VIAbstractBehavior :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -34,7 +35,7 @@ class VIAbstractBehavior :public VIObject
 	_Public void subside();
 };
 
-class VIAbstractBehaviorHost :public VIObject
+class VIPublicAPI VIAbstractBehaviorHost :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -52,7 +53,7 @@ class VIAbstractBehaviorHost :public VIObject
 	_Private virtual void ergodicBehavior() PureVirtual;
 };
 
-class VIBehaviorLoopEvent :public QEvent
+class VIPublicAPI VIBehaviorLoopEvent :public QEvent
 {
 	_Public static QEvent::Type BehaviorLoopEvent;
 	_Public def_init VIBehaviorLoopEvent() :QEvent(QEvent::Type(QEvent::User + 1)) {};

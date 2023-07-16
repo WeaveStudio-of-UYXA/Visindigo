@@ -2,7 +2,7 @@
 #include "../VIObject.h"
 #include "../VIConsole.h"
 
-class VILanguageDoc :public VIObject
+class VIPublicAPI VILanguageDoc :public VIObject
 {
 	_Public typedef QHash<QString, QString> TranslationsTable;
 	Q_OBJECT;
@@ -64,7 +64,7 @@ class VILanguageDoc :public VIObject
 	_Public bool isLoaded() { return Loaded; }
 };
 
-class VIMappingTranslator :public VIObject
+class VIPublicAPI VIMappingTranslator :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

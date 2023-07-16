@@ -9,7 +9,7 @@
 * 并且使用宏VI_OBJECT初始化
 */
 
-class VIAbstractObject
+class VIPublicAPI VIAbstractObject
 {
 	_Public virtual const QString getClassName() PureVirtual;
 	_Public virtual const QString getSuperClassName() PureVirtual;
@@ -20,7 +20,7 @@ class VIAbstractObject
 };
 typedef VIAbstractObject VIBaseObject;
 typedef QObject VISuper;
-class VIObject :public VISuper, VIBaseObject
+class VIPublicAPI VIObject :public VISuper, VIBaseObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

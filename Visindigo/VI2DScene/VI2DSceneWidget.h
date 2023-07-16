@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "private/VI2DScene_m.h"
 
-class VI2DSceneWidget : public QGraphicsView
+class VIPublicAPI VI2DSceneWidget : public QGraphicsView
 {
 	Q_OBJECT;
 	_Public QLabel* TestLabel;

@@ -8,11 +8,17 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
+		DllDebug|x64 = DllDebug|x64
+		DllRelease|x64 = DllRelease|x64
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.Debug|x64.ActiveCfg = Debug|x64
 		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.Debug|x64.Build.0 = Debug|x64
+		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.DllDebug|x64.ActiveCfg = DllDebug|x64
+		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.DllDebug|x64.Build.0 = DllDebug|x64
+		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.DllRelease|x64.ActiveCfg = DllRelease|x64
+		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.DllRelease|x64.Build.0 = DllRelease|x64
 		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.Release|x64.ActiveCfg = Release|x64
 		{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection

@@ -1,15 +1,15 @@
-#pragma once
+﻿#pragma once
 #include<type_traits>
 #include"YcAllocator.h"
 #include"YcPair.h"
 #include"YcAlgorithm.h"
 namespace Yc
 {
-	template<class T>class shared_ptr;
-	template<class T>requires std::is_trivial_v<T>
-	class shared_ptr<T>
+	template<class VIAPI T>class VIAPI shared_ptr;
+	template<class VIAPI T>requires std::is_trivial_v<T>
+	class VIAPI shared_ptr<T>
 	{
-		template<class U,class ...args>friend  shared_ptr<U> make_shared<U,args...>(args&...);
+		template<class VIAPI U,class VIAPI ...args>friend  shared_ptr<U> make_shared<U,args...>(args&...);
 		pair<int, T>* ptr = nullptr;
 	public:
 		shared_ptr() = default;
@@ -111,10 +111,10 @@ namespace Yc
 			return &(ptr->second);
 		}
 	};
-	template<class T>requires (!std::is_trivial_v<T>)
-		class shared_ptr<T>
+	template<class VIAPI T>requires (!std::is_trivial_v<T>)
+		class VIAPI shared_ptr<T>
 	{
-		class ct :public pair<int, T*>
+		class VIAPI ct :public pair<int, T*>
 		{
 		public:
 			~ct()
@@ -122,7 +122,7 @@ namespace Yc
 				allocator.YcDelete(this->second);
 			}
 		};
-		template<class U, class ...args>friend  shared_ptr<U> make_shared<U, args...>(args&...);
+		template<class VIAPI U, class VIAPI ...args>friend  shared_ptr<U> make_shared<U, args...>(args&...);
 		ct* ptr = nullptr;
 	public:
 		shared_ptr() = default;
@@ -224,7 +224,7 @@ namespace Yc
 			return &(ptr->second);
 		}
 	};
-	template<class T, class... args>requires std::is_trivial_v<T>
+	template<class VIAPI T, class VIAPI... args>requires std::is_trivial_v<T>
 	shared_ptr<T> make_shared(args&... a)
 	{
 		shared_ptr<T>m;
@@ -233,7 +233,7 @@ namespace Yc
 		new(m.ptr->second)T(a...);
 		return m;
 	}
-	template<class T,class... args>requires (!std::is_trivial_v<T>)
+	template<class VIAPI T,class VIAPI... args>requires (!std::is_trivial_v<T>)
 	shared_ptr<T> make_shared(args&... a)
 	{
 		shared_ptr<T>m;
@@ -242,11 +242,11 @@ namespace Yc
 		m.ptr->second = allocator.YcNew<T>(a...);
 		return m;
 	}
-	template<class T>class unique_ptr
+	template<class VIAPI T>class VIAPI unique_ptr
 	{
 		T* ptr = nullptr;
-		template<class R, class... args>friend unique_ptr<R> make_unique<R, args>(args&...);
-		template<class R>friend void swap(unique_ptr<R>& a, unique_ptr<R>& b);
+		template<class VIAPI R, class VIAPI... args>friend unique_ptr<R> make_unique<R, args>(args&...);
+		template<class VIAPI R>friend void swap(unique_ptr<R>& a, unique_ptr<R>& b);
 	public:
 		T* operator->()
 		{
@@ -285,11 +285,11 @@ namespace Yc
 			return res;
 		}
 	};
-	template<class T, class... args>unique_ptr<T>make_unique(args&... arg)
+	template<class VIAPI T, class VIAPI... args>unique_ptr<T>make_unique(args&... arg)
 	{
 		return allocator.YcNew<T>(arg...);
 	}
-	template<class T>void swap(unique_ptr<T>& a, unique_ptr<T>& b)
+	template<class VIAPI T>void swap(unique_ptr<T>& a, unique_ptr<T>& b)
 	{
 		swap(a.ptr, b.ptr);
 	}

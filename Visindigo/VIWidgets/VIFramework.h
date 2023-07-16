@@ -2,7 +2,7 @@
 #include "../VICore/VICoreFramework.h"
 #include "VIStyleSheet.h"
 
-class VIFramework :public VICoreFramework
+class VIPublicAPI VIFramework :public VICoreFramework
 {
 	Q_OBJECT;
 	VI_OBJECT;

@@ -2,7 +2,7 @@
 #include <execution>
 #include <QtCore>
 #include "private/VIMacro.h"
-class VIException
+class VIPublicAPI VIException
 {
 	_Public enum class Type{
 		None,
@@ -41,21 +41,21 @@ class VIException
 	void print();
 };
 
-class VIDimensionError : public VIException {
+class VIPublicAPI VIDimensionError : public VIException {
 	_Public def_init VIDimensionError(const QString& rsn, const QString& help = "") : VIException(rsn, help) {
 		ExceptionType = Type::DimensionError;
 		ExceptionName = "Dimension Error";
 	};
 };
 
-class VISingletonError : public VIException {
+class VIPublicAPI VISingletonError : public VIException {
 	_Public def_init VISingletonError(const QString& rsn, const QString& help = "") : VIException(rsn, help) {
 		ExceptionType = Type::SingletonError;
 		ExceptionName = "Singleton Error";
 	};
 };
 
-class VINullPointerError :public VIException {
+class VIPublicAPI VINullPointerError :public VIException {
 	_Public def_init VINullPointerError(const QString& rsn, const QString& help = "") :VIException(rsn, help) {
 		ExceptionType = Type::NullPointerError;
 		ExceptionName = "Null Pointer Error";

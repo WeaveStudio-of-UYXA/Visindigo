@@ -3,7 +3,7 @@
 #include "../VIVersion.h"
 
 namespace VisindigoCore {
-	class PackageInfo :public VIPackageInfo
+	class VIPublicAPI PackageInfo :public VIPackageInfo
 	{
 		Q_OBJECT;
 		VI_OBJECT;
@@ -23,7 +23,7 @@ namespace VisindigoCore {
 		}
 	};
 
-	class Package :public VIPackage
+	class VIPublicAPI Package :public VIPackage
 	{
 		Q_OBJECT;
 		VI_OBJECT;

@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "VIAbstractBehavior.h"
 #include "VIDuration.h"
-class VIBehaviorHost;
-class VIBasicBehavior :public VIAbstractBehavior
+class VIPublicAPI VIBehaviorHost;
+class VIPublicAPI VIBasicBehavior :public VIAbstractBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -12,7 +12,7 @@ class VIBasicBehavior :public VIAbstractBehavior
 	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
 };
 
-class VITimedBehavior :public VIBasicBehavior
+class VIPublicAPI VITimedBehavior :public VIBasicBehavior
 {
 	Q_OBJECT;
 	friend class VIBehaviorHost;
@@ -25,7 +25,7 @@ class VITimedBehavior :public VIBasicBehavior
 	_Public VIMilliSecond getTickDuration();
 };
 //被动行为
-class VIPassiveBehavior :public VIBasicBehavior
+class VIPrivateAPI VIPassiveBehavior :public VIBasicBehavior
 {
 	Q_OBJECT;
 	friend class VIBehaviorHost;
@@ -33,8 +33,8 @@ class VIPassiveBehavior :public VIBasicBehavior
 	_Public State hostCall() override;
 	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
 };
-class VIBehaviorHost;
-class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
+class VIPublicAPI VIBehaviorHost;
+class VIPublicAPI VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
 {
 	Q_OBJECT;
 	friend class VIBasicBehavior;
@@ -61,7 +61,7 @@ class VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
 	_Slot void addBehavior(VIAbstractBehavior*, VIAbstractBehavior::QuantifyTickType) override;
 };
 
-class VIBehaviorHost final :public VIAbstractBehaviorHost
+class VIPublicAPI VIBehaviorHost final :public VIAbstractBehaviorHost
 {
 	Q_OBJECT;
 	friend class VIBasicBehavior;
@@ -85,7 +85,7 @@ class VIBehaviorHost final :public VIAbstractBehaviorHost
 	_Public void resumeQuantifyTickBehaviorHost(VIAbstractBehavior::QuantifyTickType type = VIAbstractBehavior::QuantifyTickType::T0);
 };
 
-class VIDebugBehavior final :public VIBasicBehavior
+class VIPublicAPI VIDebugBehavior final :public VIBasicBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -98,7 +98,7 @@ class VIDebugBehavior final :public VIBasicBehavior
 	_Public void onSubside() override;
 };
 
-class VIAnimationBehavior :public VITimedBehavior
+class VIPublicAPI VIAnimationBehavior :public VITimedBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;

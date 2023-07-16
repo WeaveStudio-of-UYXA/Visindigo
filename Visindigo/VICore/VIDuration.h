@@ -10,7 +10,7 @@ Remain: 剩余时间
 VIBehaviorDuration使用纳秒管理时间
 */
 
-class VIBehaviorDuration :public VIObject
+class VIPublicAPI VIBehaviorDuration :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -42,7 +42,7 @@ class VIBehaviorDuration :public VIObject
 	}
 };
 
-class VIDuration :public VIObject
+class VIPublicAPI VIDuration :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

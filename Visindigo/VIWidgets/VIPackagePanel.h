@@ -2,7 +2,7 @@
 #include "../VICore/VICore.h"
 #include "VIWidget.h"
 
-class VIPackagePanel :public VIWidget
+class VIPublicAPI VIPackagePanel :public VIWidget
 {
 	Q_OBJECT;
 	VI_OBJECT;

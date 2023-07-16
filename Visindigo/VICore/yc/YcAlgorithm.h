@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 namespace Yc
 {
-	template<class T>void swap(T& a, T& b)
+	template<class VIAPI T>void swap(T& a, T& b)
 	{
 		T tmp;
 		tmp = a;

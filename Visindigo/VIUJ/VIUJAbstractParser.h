@@ -3,15 +3,15 @@
 #include "../VIWidgets/VIWidget.h"
 
 typedef QMap<QString, QVariant> VIJsonValue;
-class VIUJParserHost;
+class VIPublicAPI VIUJParserHost;
 
 /*
 VIUJAbstractParser
-This class ONLY have ONE instance for each type of widget.
+This class VIAPI ONLY have ONE instance for each type of widget.
 so, if you must save some data, you must use stack.
 I know it's very foolish, but currently have no better way.
 */
-class VIUJAbstractParser
+class VIPublicAPI VIUJAbstractParser
 {
 	friend class VIUJParserHost;
 	VI_ProtectedProperty(QString, TypeName);
@@ -25,10 +25,10 @@ class VIUJAbstractParser
 		Host = host;
 	}
 };
-class VIUJWidgetBinder;
+class VIPublicAPI VIUJWidgetBinder;
 typedef QMap<QString, VIUJAbstractParser*> VIUIJsonMap;
 typedef QMap<QString, VIUJWidgetBinder*> VIUJWidgetBinderMap;
-class VIUJParserHost :public VIObject
+class VIPublicAPI VIUJParserHost :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

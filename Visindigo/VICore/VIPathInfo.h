@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "VIObject.h"
 
-class VIPathInfo {
+class VIPublicAPI VIPathInfo {
 	VI_STATIC_CLASS(VIPathInfo);
 	_Public static QString getWorkingPath() { return QDir::currentPath(); }
 	_Public static QString getProgramPath() { return QCoreApplication::applicationDirPath(); }

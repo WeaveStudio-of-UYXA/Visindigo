@@ -2,7 +2,7 @@
 #include "../../VICore/VICore.h"
 
 namespace VisindigoWidgets {
-	class PackageInfo :public VIPackageInfo
+	class VIPublicAPI PackageInfo :public VIPackageInfo
 	{
 		Q_OBJECT;
 		VI_OBJECT;
@@ -22,7 +22,7 @@ namespace VisindigoWidgets {
 		}
 	};
 
-	class Package :public VIPackage
+	class VIPublicAPI Package :public VIPackage
 	{
 		Q_OBJECT;
 		VI_OBJECT;

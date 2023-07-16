@@ -3,7 +3,7 @@
 
 
 
-class VIMainWindow : public VIWidget {
+class VIPublicAPI VIMainWindow : public VIWidget {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Signal void windowColorChanged(QColor color);

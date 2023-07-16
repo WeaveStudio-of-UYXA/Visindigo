@@ -2,8 +2,8 @@
 #include "../../VICore/VICore.h"
 #include "../VIWidgetsTransQt.h"
 
-class VISwitchButton;
-class private_VISwitchButtonDotAnimationBehavior :public VIAnimationBehavior
+class VIPublicAPI VISwitchButton;
+class VIPublicAPI private_VISwitchButtonDotAnimationBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;

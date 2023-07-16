@@ -3,8 +3,8 @@
 #include "VIConsole.h"
 
 typedef QMap<QString, QString> QStringMap;
-class VICommandHost;
-class VICommandHandler {
+class VIPublicAPI VICommandHost;
+class VIPublicAPI VICommandHandler {
 	friend class VICommandHost;
 	VI_ProtectedProperty(QString, CommandName);
 	VI_ProtectedProperty(QStringMap, NamedArgs);
@@ -21,11 +21,11 @@ class VICommandHandler {
 };
 
 #define VICommand_Reg(Name) new Name()
-#define VICommand_Handler(Name) class Name :public VICommandHandler { _Public def_init Name(): VICommandHandler()
+#define VICommand_Handler(Name) class VIPublicAPI Name :public VICommandHandler { _Public def_init Name(): VICommandHandler()
 #define VICommand_Name(Name) CommandName = Name; VICommandHost::getInstance()->addCommandHandler(this);}\
 	bool handleCommand() override
 
-class VICommandHost :public VIObject {
+class VIPublicAPI VICommandHost :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
 	friend class VICoreFramework;
@@ -39,7 +39,7 @@ class VICommandHost :public VIObject {
 	_Public static QStringList blankSplitter(QString str);
 };
 
-class CommandHandlerTestClass :public VIObject {
+class VIPublicAPI CommandHandlerTestClass :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Public def_init CommandHandlerTestClass(QObject* parent = VI_NULLPTR) :VIObject(parent) {};

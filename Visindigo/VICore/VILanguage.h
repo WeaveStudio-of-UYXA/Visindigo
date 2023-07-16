@@ -3,7 +3,7 @@
 #include "VIPathInfo.h"
 #include "VILang/VILangDoc.h"
 
-class VILanguageHost :public VIObject
+class VIPublicAPI VILanguageHost :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

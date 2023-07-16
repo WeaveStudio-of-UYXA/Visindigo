@@ -5,7 +5,7 @@
 
 //Decrepated
 //PLEASE use VIPaletteGroup instead
-class VIColorPalette : public VIObject
+class VIPublicAPI VIColorPalette : public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -15,7 +15,7 @@ class VIColorPalette : public VIObject
 	_Private QMap<QString, VIColorMap> PaletteMap;
 	_Public def_init VIColorPalette(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
 		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + 
-			"This class has been deprecated, please migrate to VIPalette and VIPaletteGroup"));
+			"This class VIAPI has been deprecated, please migrate to VIPalette and VIPaletteGroup"));
 		CurrentPalette = VI_NULLPTR;
 	}
 	_Public void createPalette(const QString& name) {
@@ -89,7 +89,7 @@ class VIColorPalette : public VIObject
 	}
 };
 
-class VIStyleSheetManager :public VIObject
+class VIPublicAPI VIStyleSheetManager :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -182,7 +182,7 @@ class VIStyleSheetManager :public VIObject
 	}
 };
 
-class private_VIColorChangeAnimationBehavior :public VIAnimationBehavior
+class VIPublicAPI private_VIColorChangeAnimationBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;

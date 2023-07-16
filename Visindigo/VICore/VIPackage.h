@@ -5,10 +5,10 @@
 #include "VIPathInfo.h"
 
 #define LOAD_PACKAGE(pack_name) VICoreFramework::getCoreInstance()->loadPackage(new pack_name());
-class VIPackage;
-class VICoreFramework;
+class VIPublicAPI VIPackage;
+class VIPublicAPI VICoreFramework;
 
-class VIPackageInfo :public VIObject
+class VIPublicAPI VIPackageInfo :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -47,7 +47,7 @@ class VIPackageInfo :public VIObject
 	}
 };
 
-class VIPackage :public VIBasicBehavior
+class VIPublicAPI VIPackage :public VIBasicBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;

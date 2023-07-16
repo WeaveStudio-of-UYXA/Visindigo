@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "../VIWidgets/VIWidgets.h"
 
-class VIUJWidgetBinder :public VIObject
+class VIPublicAPI VIUJWidgetBinder :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

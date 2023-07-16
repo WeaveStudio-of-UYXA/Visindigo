@@ -4,9 +4,9 @@
 #include "VIStyleSheet.h"
 #include <QtWidgets>
 #include <QtGui>
-class VIUJWidgetBinder;
+class VIPublicAPI VIUJWidgetBinder;
 
-class VIAbstractWidget :public VIAbstractObject {
+class VIPublicAPI VIAbstractWidget :public VIAbstractObject {
 	_Public VIStyleSheetManager* StyleSheetManager;
 	_Public VIUJWidgetBinder* UJWidgetBinder;
 	_Public QWidget* Self;
@@ -40,7 +40,7 @@ _Public virtual void onVTR(){\
 		}\
 	}\
 }
-class VIWidget :public QFrame, public VIBaseWidget {
+class VIPublicAPI VIWidget :public QFrame, public VIBaseWidget {
 	Q_OBJECT;
 	VI_WIDGET;
 	_Public def_init VIWidget(QWidget* parent = VI_NULLPTR) :QFrame(parent) {

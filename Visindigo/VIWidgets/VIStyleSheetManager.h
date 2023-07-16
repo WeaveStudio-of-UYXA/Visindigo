@@ -8,7 +8,7 @@ struct VIStyleSheetData
 	QStringList DynamicSizeNames;
 	QStringList DynamicColorNames;
 };
-class VIStyleSheetManager11 :public VIObject
+class VIPublicAPI VIStyleSheetManager11 :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

@@ -3,8 +3,8 @@
 #include "../VICore/VICore.h"
 #include "VIWidget.h"
 
-class VIMultiButtonGroup;
-class VIMultiButton :public VIWidget
+class VIPublicAPI VIMultiButtonGroup;
+class VIPublicAPI VIMultiButton :public VIWidget
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -121,7 +121,7 @@ class VIMultiButton :public VIWidget
 		StyleSheetManager->applyStyleSheet("Normal");
 	}
 };
-class private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
+class VIPublicAPI private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -164,7 +164,7 @@ class private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
 		Target->setGeometry(targetX, targetY, rawW, rawH);
 	}
 };
-class private_VIMultiButtonAnimationLabel :public VIWidget
+class VIPublicAPI private_VIMultiButtonAnimationLabel :public VIWidget
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -183,7 +183,7 @@ class private_VIMultiButtonAnimationLabel :public VIWidget
 		this->StyleSheetManager->applyStyleSheet("default");
 	}
 };
-class VIMultiButtonGroup :public VIWidget
+class VIPublicAPI VIMultiButtonGroup :public VIWidget
 {
 	Q_OBJECT;
 	VI_OBJECT;

@@ -13,4 +13,16 @@
 #include "VIWindowsTheme.h"
 
 #define Program main(int argc, char* argv[]){try
-#define ProgramEnd catch(std::exception& e){VIConsole::printLine(VIConsole::inErrorStyle(e.what()));}catch(VIException& e){VIPSOD* p = new VIPSOD(e);VICoreFramework::getAppInstance()->exec();}return VIFramework::getInstance()->getReturnCode();}
+#define ProgramEnd \
+	catch(std::exception& e){\
+		VIConsole::printLine(VIConsole::inErrorStyle(e.what()));\
+	}\
+	catch(VIException& e){\
+		if (qApp==VI_NULLPTR){\
+			QApplication app(sysArgv);\
+		}\
+		VIPSOD* p = new VIPSOD(e);\
+		qApp->exec();\
+	}\
+	return VIFramework::getInstance()->getReturnCode();\
+}

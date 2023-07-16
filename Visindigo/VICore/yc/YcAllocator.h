@@ -1,10 +1,10 @@
 ﻿#include <xkeycheck.h>
 #pragma once
-template<class T>concept largeClass = (sizeof(T) > 128);
-template<class T>concept smallClass = (sizeof(T) <= 128&&sizeof(T)>0);
+template<class VIAPI T>concept largeClass = (sizeof(T) > 128);
+template<class VIAPI T>concept smallClass = (sizeof(T) <= 128&&sizeof(T)>0);
 namespace Yc
 {
-	class Allocator
+	class VIAPI Allocator
 	{
 		char* memPoolBeginPtr = nullptr;
 		char* memPoolEndPtr = nullptr;
@@ -28,13 +28,13 @@ namespace Yc
 	public:
 		Allocator() = default;
 		~Allocator() = default;
-		template<largeClass T, class... args>T* YcNew(args& ...a)
+		template<largeClass T, class VIAPI... args>T* YcNew(args& ...a)
 		{
 			T* result=(T*)malloc(sizeUp(sizeof(T)));
 			new(result)T(a...);
 			return result;
 		};
-		template<smallClass T, class... args>T* YcNew(args& ...a)
+		template<smallClass T, class VIAPI... args>T* YcNew(args& ...a)
 		{
 			constexpr int n = index(sizeof(T));
 			if (memList[n] != nullptr)

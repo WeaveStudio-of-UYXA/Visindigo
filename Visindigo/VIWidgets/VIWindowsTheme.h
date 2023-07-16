@@ -9,7 +9,7 @@
 #pragma comment(lib,"Dwmapi.lib")
 #endif
 
-class VIWindowsTheme :public VIObject {
+class VIPublicAPI VIWindowsTheme :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
 #ifdef WINDOWS_DEPLOY

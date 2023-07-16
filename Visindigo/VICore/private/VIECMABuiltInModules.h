@@ -6,7 +6,7 @@
 #include "../VIMultiPlatform.h"
 #include <QtQml>
 
-class private_VIECMA_Console :public VIConsole
+class VIPublicAPI private_VIECMA_Console :public VIConsole
 {
 	Q_OBJECT;
 	VI_OBJECT;

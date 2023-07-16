@@ -2,7 +2,7 @@
 #include "VIWidget.h"
 
 //PSOD -> Purple Screen Of Death
-class VIPSOD :public VIWidget
+class VIPublicAPI VIPSOD :public VIWidget
 {
 	Q_OBJECT;
 	VI_WIDGET;

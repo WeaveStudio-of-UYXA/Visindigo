@@ -2,7 +2,7 @@
 #include <QtCore>
 #include "private/VIMacro.h"
 
-class VIMath {
+class VIPublicAPI VIMath {
 	VI_STATIC_CLASS(VIMath);
 public:
 	static float PI;
@@ -26,7 +26,7 @@ public:
 	
 };
 
-class VICommonMapping {
+class VIPublicAPI VICommonMapping {
 	VI_STATIC_CLASS(VICommonMapping);
 	_Public static double sin_0_1(double percent) {
 		return (qSin(-VIMath::PI / 2 + VIMath::PI * percent) + 1.0) / 2.0;

@@ -12,8 +12,8 @@
 #include "VIVersion.h"
 #include "VIECMAScripts.h"
 #define FrameBehaviorHost VICoreFramework::getBehaviorHostInstance()
-class VICoreFramework;
-class private_VICoreFramework :public QApplication
+class VIPublicAPI VICoreFramework;
+class VIPublicAPI private_VICoreFramework :public QApplication
 {
 	Q_OBJECT;
 	friend class VICoreFramework;
@@ -35,7 +35,7 @@ class private_VICoreFramework :public QApplication
 	}
 };
 
-class VICoreFramework :public VIObject
+class VIPublicAPI VICoreFramework :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

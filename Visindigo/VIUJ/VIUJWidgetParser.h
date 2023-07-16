@@ -2,7 +2,7 @@
 #include "VIUJAbstractParser.h"
 #include "../VIWidgets/VIWidgets.h"
 
-class VIUJParser_VIWidget : public VIUJAbstractParser
+class VIPublicAPI VIUJParser_VIWidget : public VIUJAbstractParser
 {
 	_Public def_init VIUJParser_VIWidget(VIUJParserHost* host) :VIUJAbstractParser(host) {
 		setTypeName("VIWidget");
@@ -45,7 +45,7 @@ class VIUJParser_VIWidget : public VIUJAbstractParser
 	}
 };
 
-class VIUJParser_VILabel :public VIUJParser_VIWidget
+class VIPublicAPI VIUJParser_VILabel :public VIUJParser_VIWidget
 {
 	_Public def_init VIUJParser_VILabel(VIUJParserHost* host) :VIUJParser_VIWidget(host) {
 		setTypeName("VILabel");
@@ -60,7 +60,7 @@ class VIUJParser_VILabel :public VIUJParser_VIWidget
 	}
 };
 
-class VIUJParser_VISwitchButton :public VIUJParser_VIWidget
+class VIPublicAPI VIUJParser_VISwitchButton :public VIUJParser_VIWidget
 {
 	_Public def_init VIUJParser_VISwitchButton(VIUJParserHost* host) :VIUJParser_VIWidget(host) {
 		setTypeName("VISwitchButton");

@@ -2,7 +2,7 @@
 #include "VIObject.h"
 #include <QtWidgets>
 
-class VIMultiPlatform {
+class VIPublicAPI VIMultiPlatform {
 	VI_STATIC_CLASS(VIMultiPlatform)
 	_Public static void exit() { QCoreApplication::exit(); }
 	_Public static QString getSystemName() { return QSysInfo::prettyProductName(); }

@@ -2,7 +2,7 @@
 #include "VIObject.h"
 #include <QtGui>
 
-class VIColorTools :public VIObject
+class VIPublicAPI VIColorTools :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

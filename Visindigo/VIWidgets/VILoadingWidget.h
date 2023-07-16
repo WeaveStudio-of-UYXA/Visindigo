@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "VIWidget.h"
 
-class VILoadingWidget :public VIWidget
+class VIPublicAPI VILoadingWidget :public VIWidget
 {
 	Q_OBJECT;
 	VI_OBJECT;
