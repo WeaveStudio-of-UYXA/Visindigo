@@ -176,12 +176,6 @@ class VIPublicAPI private_VIMultiButtonAnimationLabel :public VIWidget
 			"private_VIMultiButtonAnimationLabel{background-color:CLR__SystemThemeColor__CLR;border:0px solid white;border-radius:2px;}");
 		this->StyleSheetManager->applyStyleSheet("default");
 	}
-	_Public void setStyleSheetPalette(VIColorPalette* palette) override {
-		consoleLog("Palette setted");
-		VIWidget::setStyleSheetPalette(palette);
-		connect(StyleSheetManager->Palette, &VIColorPalette::PaletteChanged, this->StyleSheetManager, &VIStyleSheetManager::refreshStyleSheet);
-		this->StyleSheetManager->applyStyleSheet("default");
-	}
 };
 class VIPublicAPI VIMultiButtonGroup :public VIWidget
 {

@@ -7,6 +7,8 @@
 * Notice: All the code in this file is not tested.
 * Please do not use it directly.
 */
+//此项目控制VICoordinate的浮点置信度
+#define VI_COORDINATE_CONFIDENCE 0.0000000001
 class VIPrivateAPI VICoordinate
 {
 	friend class VICoordinate;

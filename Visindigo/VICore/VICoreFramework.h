@@ -8,7 +8,7 @@
 #include "VICommand.h"
 #include "VIPathInfo.h"
 #include "VIMultiPlatform.h"
-#include "VILanguage.h"
+#include "VITranslationHost.h"
 #include "VIVersion.h"
 #include "VIECMAScripts.h"
 #define FrameBehaviorHost VICoreFramework::getBehaviorHostInstance()
@@ -39,15 +39,18 @@ class VIPublicAPI VICoreFramework :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
+	friend class VIBehaviorHost;
+	friend class VITranslationHost;
 	_Private static VICoreFramework* _instance;
-	_Private private_VICoreFramework* AppInstance;
+	_Protected private_VICoreFramework* AppInstance;
 	_Private static VIBehaviorHost* BehaviorHost;
-	_Private static VILanguageHost* LanguageHost;
+	_Private static VITranslationHost* TranslationHost;
+	_Private Visindigo::Language LanguageType;
 	_Private QApplication* App;
 	_Public def_init VICoreFramework(int& argc, char** argv);
 	_Public void init();
 	_Public static VIBehaviorHost* getBehaviorHostInstance();
-	_Public static VILanguageHost* getLanguageHostInstance();
+	_Public static VITranslationHost* getTranslationHostInstance();
 	_Public void start();
 	_Public int getReturnCode();
 	_Public bool loadPackage(VIPackage* package);
@@ -57,5 +60,7 @@ class VIPublicAPI VICoreFramework :public VIObject
 	_Public static bool execCommand(QString);
 	_Public static QApplication* getAppInstance();
 	_Public static VICoreFramework* getCoreInstance();
+	_Public void setLanguageType(Visindigo::Language);
+	_Public Visindigo::Language getLanguageType();
 };
-#define VICoreFrame VICoreFramework::getInstance()
+#define VICoreFrame VICoreFramework::getCoreInstance()

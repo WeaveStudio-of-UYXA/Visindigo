@@ -8,7 +8,7 @@ struct VIStyleSheetData
 	QStringList DynamicSizeNames;
 	QStringList DynamicColorNames;
 };
-class VIPublicAPI VIStyleSheetManager11 :public VIObject
+class VIPublicAPI VIStyleSheetManager :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -16,7 +16,7 @@ class VIPublicAPI VIStyleSheetManager11 :public VIObject
 	_Private QWidget * MasterWidget;
 	_Private VIPaletteGroup* PaletteGroup;
 	VI_PrivateProperty(QString, CurrentStyleSheetName);
-	_Public def_init VIStyleSheetManager11(QWidget* MasterWidget);
+	_Public def_init VIStyleSheetManager(QWidget* MasterWidget);
 	_Slot void refreshStyleSheet() {
 		applyStyleSheet(CurrentStyleSheetName);
 	}

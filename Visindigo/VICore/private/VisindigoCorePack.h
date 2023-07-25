@@ -23,13 +23,26 @@ namespace VisindigoCore {
 		}
 	};
 
-	class VIPublicAPI Package :public VIPackage
+	class VIPublicAPI Package :public VIPackage, VITranslatableObject
 	{
 		Q_OBJECT;
 		VI_OBJECT;
+		_Private QString t;
 		_Public def_init Package() {
-			PackageInfo = new VisindigoCore::PackageInfo();
+			setPackageInfo(new VisindigoCore::PackageInfo);
+			PackageInfo->addTranslationFileName(Visindigo::Language::zh_SC, "zh_SC.vil", true);
+			PackageInfo->addTranslationFileName(Visindigo::Language::en_US, "en_US.vil", true);
+			PackageInfo->setDefaultLanguage(Visindigo::Language::zh_SC);
+			PackageInfo->addTranslatableObject(this);
+			PackageInfo->initTranslation();
 			qDebug() << PackageInfo->getPackageRootPath();
+		}
+		_Public virtual void onTranslating() override {
+			t = getTranslation("Core_LanguageHost_LoadLanguage_Success");
+			consoleLog("Translated!");
+		}
+		_Public void printT() {
+			qDebug() << t;
 		}
 	};
 }

@@ -43,9 +43,6 @@
     <ClCompile Include="VICore\cpp\VICommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VICore\cpp\VILanguage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VICore\cpp\VIMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -71,6 +68,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VIWidgets\cpp\VIStyleSheetManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VICore\VIDocument\VITR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VICore\cpp\VITranslationHost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VICore\cpp\VIObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -144,6 +150,12 @@
     <ClInclude Include="VICore\VIConsole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VIWidgets\VIMainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VICore\private\VisindigoNamespace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VICore\VIAbstractBehavior.h">
@@ -194,13 +206,7 @@
     <QtMoc Include="VIWidgets\VICodeEdit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VICore\VILanguage.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="VIWidgets\VIMultiButton.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIWidgets\VIStyleSheet.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIWidgets\VIWindowsTheme.h">
@@ -215,9 +221,6 @@
     <QtMoc Include="VIWidgets\VIWidgetsTransQt.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIWidgets\VIMainWindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="VIUJ\VIUJAbstractParser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -228,9 +231,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VICore\private\VisindigoCorePack.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VICore\VILang\VILangDoc.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIWidgets\VIPalette.h">
@@ -257,7 +257,10 @@
     <QtMoc Include="VIWidgets\VIStyleSheetManager.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VICore\VILang\VILanguageHost.h">
+    <QtMoc Include="VICore\VITranslationHost.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VICore\VIDocument\VITR.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

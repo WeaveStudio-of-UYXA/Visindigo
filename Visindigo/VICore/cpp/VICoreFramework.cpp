@@ -4,13 +4,14 @@
 #pragma execution_character_set("utf-8")
 VICoreFramework* VICoreFramework::_instance = Q_NULLPTR;
 VIBehaviorHost* VICoreFramework::BehaviorHost = Q_NULLPTR;
-VILanguageHost* VICoreFramework::LanguageHost = Q_NULLPTR;
+VITranslationHost* VICoreFramework::TranslationHost = Q_NULLPTR;
 
 def_init VICoreFramework::VICoreFramework(int& argc, char** argv) {
 	VI_CHECK_SingletonError(this);
 	AppInstance = new private_VICoreFramework(argc, argv);
 	AppInstance->DebugModeRuntime = true;
 	_instance = this;
+	LanguageType = Visindigo::Language::zh_SC;
 #ifdef QT_DEBUG
 	AppInstance->DebugModeCompilation = true;
 #else
@@ -37,20 +38,18 @@ void printWelcome() {
 
 void VICoreFramework::init() {
 	setObjectName(VIVersion::getVisindigoVersion());
+	TranslationHost = new VITranslationHost(this);
+	BehaviorHost = new VIBehaviorHost(this);
 	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Visindigo framework is initializing..."));
 	printWelcome();
-	LanguageHost = new VILanguageHost(VILanguageHost::LangType::zh_SC, VILanguageHost::LangType::zh_SC, "./Language", this);
-	if (LanguageHost->loadLanguage()) {
-		VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + VITR("Core_LanguageHost_LoadLanguage_Success")));
-	}
-	else {
-		VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix() + "LanguageHost cannot initiallize."));
-	}
-	BehaviorHost = new VIBehaviorHost(this);
 	new VICommandHost(this);
 	VICommand_Reg(VIECMAScripts::Command);
 	LOAD_PACKAGE(VisindigoCore::Package);
-	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + VITR("Core_Any_Initialized_Success").arg("Visindigo framework")));
+	for (auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++){
+		if ((*i)->PackageInfo->PackageName == "VisindigoCore") {
+			static_cast<VisindigoCore::Package*>(*i)->printT();
+		}
+	}
 }
 VIBehaviorHost* VICoreFramework::getBehaviorHostInstance() {
 	if (BehaviorHost == nullptr) {
@@ -62,9 +61,10 @@ VIBehaviorHost* VICoreFramework::getBehaviorHostInstance() {
 	return BehaviorHost;
 }
 
-VILanguageHost* VICoreFramework::getLanguageHostInstance() {
-	return LanguageHost;
+VITranslationHost* VICoreFramework::getTranslationHostInstance() {
+	return TranslationHost;
 }
+
 void VICoreFramework::start() {
 	for(auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++) {
 		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + (*i)->PackageInfo->getPackageName()));
@@ -121,3 +121,11 @@ QApplication* VICoreFramework::getAppInstance() {
 	return _instance->App;
 }
 
+void VICoreFramework::setLanguageType(Visindigo::Language type) {
+	LanguageType = type;
+	TranslationHost->changeLanguage(type);
+}
+
+Visindigo::Language VICoreFramework::getLanguageType() {
+	return LanguageType;
+}

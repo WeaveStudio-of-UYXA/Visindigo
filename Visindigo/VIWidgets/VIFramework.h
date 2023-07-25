@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "../VICore/VICoreFramework.h"
-#include "VIStyleSheet.h"
+#include "VIStyleSheetManager.h"
 
 class VIPublicAPI VIFramework :public VICoreFramework
 {

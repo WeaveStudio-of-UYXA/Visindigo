@@ -6,7 +6,7 @@
 #include "VIMultiButton.h"
 #include "VIPackagePanel.h"
 #include "VIPSOD.h"
-#include "VIStyleSheet.h"
+#include "VIStyleSheetManager.h"
 #include "VISwitchButton.h"
 #include "VIWidget.h"
 #include "VIWidgetsTransQt.h"

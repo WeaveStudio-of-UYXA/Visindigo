@@ -2,6 +2,7 @@
 #include <QtCore>
 #include "VIObject.h"
 #include "VIBehavior.h"
+#include "VITranslationHost.h"
 #include "VIPathInfo.h"
 
 #define LOAD_PACKAGE(pack_name) VICoreFramework::getCoreInstance()->loadPackage(new pack_name());
@@ -15,6 +16,8 @@ class VIPublicAPI VIPackageInfo :public VIObject
 	VI_MUST_INHERIT(VIPackageInfo);
 	friend class VICoreFramework;
 	friend class VIPackage;
+	friend class VITranslationSubHost;
+	friend class VITranslationHost;
 	VI_Singleton(VIPackageInfo);
 	VI_ProtectedProperty(QString, PackageName);
 	VI_ProtectedProperty(unsigned int, PackageVersionMajor);
@@ -26,25 +29,19 @@ class VIPublicAPI VIPackageInfo :public VIObject
 	VI_ProtectedProperty(QString, URL);
 	VI_ProtectedProperty(QString, Organization);
 	VI_ProtectedProperty(QString, OrganizationDomain);
-	_Public def_init VIPackageInfo(){
-		this->setPackageName("UnnamedVIPackage");
-		this->setPackageVersionMajor(0);
-		this->setPackageVersionMinor(0);
-		this->setPackageVersionPatch(0);
-		this->setAuthor(QStringList());
-		this->setDescription("");
-		this->setLicense("");
-		this->setURL("");
-		this->setOrganization("");
-		this->setOrganizationDomain("");
-		_instance = this;
-	}
-	_Public QString getPackageVersion() {
+	_Protected VITranslationSubHost* TranslationPackageHost;
+	_Public def_init VIPackageInfo();
+	_Public inline QString getPackageVersion() {
 		return QString("%1.%2.%3").arg(PackageVersionMajor).arg(PackageVersionMinor).arg(PackageVersionPatch);
 	}
-	_Public QString getPackageRootPath() {
+	_Public inline QString getPackageRootPath() {
 		return VIPathInfo::getProgramPath() + "/package/" + PackageName;
 	}
+	_Public QString TR(const QString& key);
+	_Public void addTranslationFileName(Visindigo::Language langType, const QString& filename, bool inRC = false);
+	_Public void setDefaultLanguage(Visindigo::Language langType);
+	_Public void initTranslation();
+	_Public void addTranslatableObject(VITranslatableObject* obj);
 };
 
 class VIPublicAPI VIPackage :public VIBasicBehavior
@@ -56,6 +53,7 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	_Public def_init VIPackage(){
 		this->setObjectName("UnnamedVIPackage");
 	};
+	
 	_Public virtual void onActive() HalfVirtual;
 	_Public virtual void onSubside() HalfVirtual;
 	_Public virtual void onTick() HalfVirtual;
