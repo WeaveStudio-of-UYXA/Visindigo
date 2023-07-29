@@ -168,3 +168,51 @@ void VIPaletteGroup::onPaletteChanged(const QString& raw, const QString& cur) {
 		emit paletteChanged(cur);
 	}
 }
+
+/*
+private_VIPaletteChangeAnimationBehavior
+此类按如下方式工作：
+1. 获取更换前的Palette对象和待更换的Palette对象
+2. 从更换前的Palette对象中获取颜色映射表，再从待更换的Palette对象中缓存最终颜色映射表，作差得到delta颜色映射表
+3. 将每刻的delta结果直接设到待更换的Palette对象中，然后发出paletteChanged信号，使用户可以在此信号中更新界面
+4. 当动画结束时，将待更换的Palette对象的颜色映射表设为最终的颜色映射表
+*/
+def_init private_VIPaletteChangeAnimationBehavior::private_VIPaletteChangeAnimationBehavior(VIPaletteGroup* parent) 
+	:VIAnimationBehavior(parent) {
+	Group = parent;
+}
+
+void private_VIPaletteChangeAnimationBehavior::setColorMap(const VIColorMap& raw, const VIColorMap& target) {
+	RawColorMap = raw;
+	CachedColorMap = target;
+	DeltaColorMap.clear();
+	CurrentColorMap.clear();
+	for (auto colorName : CachedColorMap.keys()) {
+		auto color = CachedColorMap[colorName];
+		auto rawColor = RawColorMap[colorName];
+		DeltaColorMap[colorName] = {
+			color.red() - rawColor.red(),
+			color.green() - rawColor.green(),
+			color.blue() - rawColor.blue(),
+			color.alpha() - rawColor.alpha()
+		};
+	}
+}
+
+void private_VIPaletteChangeAnimationBehavior::onActive() HalfVirtual;
+void private_VIPaletteChangeAnimationBehavior::onTick() {
+	float p = VICommonMapping::sin_0_1(Duration->getPercent());
+	for (auto colorName : CachedColorMap.keys()) {
+		CurrentColorMap[colorName] = QColor(
+			RawColorMap[colorName].red() + DeltaColorMap[colorName].r * p,
+			RawColorMap[colorName].green() + DeltaColorMap[colorName].g * p,
+			RawColorMap[colorName].blue() + DeltaColorMap[colorName].b * p,
+			RawColorMap[colorName].alpha() + DeltaColorMap[colorName].a * p
+		);
+	}
+	Group->PaletteMap[TargetPaletteName]->setColorMap(CurrentColorMap);
+	emit Group->paletteChanged(TargetPaletteName);
+}
+void private_VIPaletteChangeAnimationBehavior::onSubside() {
+	Group->PaletteMap[TargetPaletteName]->setColorMap(CurrentColorMap);
+}

@@ -2,16 +2,12 @@
 #include <QtCore>
 #include <QtWidgets>
 #include "VIPackage.h"
-#include "VIException.h"
 #include "VIObject.h"
-#include "VIConsole.h"
 #include "VICommand.h"
 #include "VIPathInfo.h"
 #include "VIMultiPlatform.h"
 #include "VITranslationHost.h"
-#include "VIVersion.h"
-#include "VIECMAScripts.h"
-#define FrameBehaviorHost VICoreFramework::getBehaviorHostInstance()
+
 class VIPublicAPI VICoreFramework;
 class VIPublicAPI private_VICoreFramework :public QApplication
 {
@@ -21,18 +17,8 @@ class VIPublicAPI private_VICoreFramework :public QApplication
 	_Public int ReturnCode = 0;
 	VI_Property(bool, DebugModeCompilation);
 	VI_Property(bool, DebugModeRuntime);
-	_Protected def_init private_VICoreFramework(int& argc, char** argv) :QApplication(argc, argv) {};
-	_Public virtual bool notify(QObject* receiver, QEvent* e) {
-		try {
-			return QApplication::notify(receiver, e);
-		}
-		catch (VIException& e) {
-			e.print();
-			VIMultiPlatform::exit();
-			return false;
-		}
-		return true;
-	}
+	_Protected def_init private_VICoreFramework(int& argc, char** argv);
+	_Public virtual bool notify(QObject* receiver, QEvent* e) override;
 };
 
 class VIPublicAPI VICoreFramework :public VIObject
@@ -57,10 +43,12 @@ class VIPublicAPI VICoreFramework :public VIObject
 	_Public bool isDebugModeCompilation();
 	_Public bool isDebugModeRuntime();
 	_Public bool useDebugModeRuntime();
-	_Public static bool execCommand(QString);
+	_Public bool execCommand(QString);
 	_Public static QApplication* getAppInstance();
 	_Public static VICoreFramework* getCoreInstance();
 	_Public void setLanguageType(Visindigo::Language);
 	_Public Visindigo::Language getLanguageType();
 };
+
 #define VICoreFrame VICoreFramework::getCoreInstance()
+#define FrameBehaviorHost VICoreFramework::getBehaviorHostInstance()

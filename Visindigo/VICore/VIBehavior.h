@@ -8,8 +8,8 @@ class VIPublicAPI VIBasicBehavior :public VIAbstractBehavior
 	VI_OBJECT;
 	friend class VIBehaviorHost;
 	_Public def_init VIBasicBehavior(QObject* parent = nullptr);
-	_Public State hostCall();
-	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
+	_Public Visindigo::BehaviorState hostCall();
+	_Public void active(Visindigo::QuantifyTickType = Visindigo::T0) override;
 };
 
 class VIPublicAPI VITimedBehavior :public VIBasicBehavior
@@ -20,8 +20,8 @@ class VIPublicAPI VITimedBehavior :public VIBasicBehavior
 	_Public def_init VITimedBehavior(QObject* parent = nullptr);
 	_Public void setDuration(VIMilliSecond duration);
 	_Public void setForeverDuration();
-	_Public State hostCall();
-	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
+	_Public Visindigo::BehaviorState hostCall();
+	_Public void active(Visindigo::QuantifyTickType = Visindigo::T0) override;
 	_Public VIMilliSecond getTickDuration();
 };
 //被动行为
@@ -30,8 +30,8 @@ class VIPrivateAPI VIPassiveBehavior :public VIBasicBehavior
 	Q_OBJECT;
 	friend class VIBehaviorHost;
 	_Public def_init VIPassiveBehavior(VIAbstractBehavior* parent = nullptr);
-	_Public State hostCall() override;
-	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T0) override;
+	_Public Visindigo::BehaviorState hostCall() override;
+	_Public void active(Visindigo::QuantifyTickType = Visindigo::T0) override;
 };
 class VIPublicAPI VIBehaviorHost;
 class VIPublicAPI VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
@@ -52,13 +52,14 @@ class VIPublicAPI VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHos
 	VI_PrivateFlag(Pause)
 	_Public def_init VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent = nullptr);
 	_Public void tickLoop() override;
+	_Public void manualTickLoop(VINanoSecond duration = -1); 
 	_Private void mergeBehavior() override;
 	_Private void ergodicBehavior() override;
 	_Public void start() override;
 	_Public void pause();
 	_Public void resume();
 	_Public void stop() override;
-	_Slot void addBehavior(VIAbstractBehavior*, VIAbstractBehavior::QuantifyTickType) override;
+	_Slot void addBehavior(VIAbstractBehavior*, Visindigo::QuantifyTickType) override;
 };
 
 class VIPublicAPI VIBehaviorHost final :public VIAbstractBehaviorHost
@@ -76,13 +77,14 @@ class VIPublicAPI VIBehaviorHost final :public VIAbstractBehaviorHost
 	_Public bool event(QEvent* event) override;
 	_Private void tickLoop() override;
 	_Public void stop() override;
-	_Slot void addBehavior(VIAbstractBehavior*, VIAbstractBehavior::QuantifyTickType) override;
+	_Slot void addBehavior(VIAbstractBehavior*, Visindigo::QuantifyTickType) override;
 	_Private void mergeBehavior() override;
 	_Private void ergodicBehavior() override;
 	_Public double getMagnification();
 	_Public void setMagnification(double m);
-	_Public void pauseQuantifyTickBehaviorHost(VIAbstractBehavior::QuantifyTickType type = VIAbstractBehavior::QuantifyTickType::T0);
-	_Public void resumeQuantifyTickBehaviorHost(VIAbstractBehavior::QuantifyTickType type = VIAbstractBehavior::QuantifyTickType::T0);
+	_Public void pauseQuantifyTickBehaviorHost(Visindigo::QuantifyTickType type = Visindigo::T0);
+	_Public void resumeQuantifyTickBehaviorHost(Visindigo::QuantifyTickType type = Visindigo::T0);
+	_Public void manualExecueQuantifyTickBehaviorHost(Visindigo::QuantifyTickType type = Visindigo::T0, VINanoSecond duration = -1);
 };
 
 class VIPublicAPI VIDebugBehavior final :public VIBasicBehavior
@@ -104,7 +106,7 @@ class VIPublicAPI VIAnimationBehavior :public VITimedBehavior
 	VI_OBJECT;
 	_Signal void finished();
 	_Public def_init VIAnimationBehavior(QObject* parent = nullptr) :VITimedBehavior(parent) {}
-	_Public void active(VIAbstractBehavior::QuantifyTickType = QuantifyTickType::T64) override {
-		VITimedBehavior::active(QuantifyTickType::T64);
+	_Public void active(Visindigo::QuantifyTickType = Visindigo::T64) override {
+		VITimedBehavior::active(Visindigo::T64);
 	}
 };

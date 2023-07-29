@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "../VICore/VICoreFramework.h"
-#include "VIStyleSheetManager.h"
+#include "VIDynamicStyleSheet.h"
+#include "VIPalette.h"
 
 class VIPublicAPI VIFramework :public VICoreFramework
 {
@@ -8,6 +9,7 @@ class VIPublicAPI VIFramework :public VICoreFramework
 	VI_OBJECT;
 	_Private static VIFramework* Instance;
 	VI_PrivateProperty(VIPaletteGroup*, PaletteGroup);
+	VI_PrivateProperty(VIDynamicStyleSheetManager*, StyleSheetManeger);
 	_Public def_init VIFramework(int& argc, char** argv);
 	_Public void init();
 	_Public void start();

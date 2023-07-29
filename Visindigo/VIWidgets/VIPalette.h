@@ -76,41 +76,10 @@ class VIPublicAPI private_VIPaletteChangeAnimationBehavior :public VIAnimationBe
 	_Private VIColorMap CachedColorMap;
 	_Private VIColorMap CurrentColorMap;
 	_Private QMap<QString, VectorColor> DeltaColorMap;
-	_Public def_init private_VIPaletteChangeAnimationBehavior(VISuper* parent) :VIAnimationBehavior(parent) {
-	}
-	_Public void setColorMap(const VIColorMap& raw, const VIColorMap& target) {
-		RawColorMap = raw;
-		CachedColorMap = target;
-		DeltaColorMap.clear();
-		CurrentColorMap.clear();
-		for (auto colorName : CachedColorMap.keys()) {
-			auto color = CachedColorMap[colorName];
-			auto rawColor = RawColorMap[colorName];
-			DeltaColorMap[colorName] = {
-				color.red() - rawColor.red(),
-				color.green() - rawColor.green(),
-				color.blue() - rawColor.blue(),
-				color.alpha() - rawColor.alpha()
-			};
-		}
-	}
-	_Public virtual void onActive() override {
-	}
-	_Public virtual void onTick() override {
-		float p = VICommonMapping::sin_0_1(Duration->getPercent());
-		for (auto colorName : CachedColorMap.keys()) {
-			CurrentColorMap[colorName] = QColor(
-				RawColorMap[colorName].red() + DeltaColorMap[colorName].r * p,
-				RawColorMap[colorName].green() + DeltaColorMap[colorName].g * p,
-				RawColorMap[colorName].blue() + DeltaColorMap[colorName].b * p,
-				RawColorMap[colorName].alpha() + DeltaColorMap[colorName].a * p
-			);
-		}
-		Group->PaletteMap[TargetPaletteName]->setColorMap(CurrentColorMap);
-		emit Group->paletteChanged(TargetPaletteName);
-	}
-	_Public virtual void onSubside()override {
-		Group->PaletteMap[TargetPaletteName]->setColorMap(CurrentColorMap);
-	}
+	_Public def_init private_VIPaletteChangeAnimationBehavior(VIPaletteGroup* parent);
+	_Public void setColorMap(const VIColorMap& raw, const VIColorMap& target);
+	_Public virtual void onActive() override;
+	_Public virtual void onTick() override;
+	_Public virtual void onSubside()override;
 };
 

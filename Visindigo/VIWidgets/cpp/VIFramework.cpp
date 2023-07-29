@@ -5,12 +5,14 @@ VIFramework* VIFramework::Instance = VI_NULLPTR;
 
 def_init VIFramework::VIFramework(int& argc, char** argv):VICoreFramework(argc, argv) {
 	PaletteGroup = VI_NULLPTR;
+	StyleSheetManeger = VI_NULLPTR;
 	Instance = this;
 }
 
 void VIFramework::init() {
 	VICoreFramework::init();
 	PaletteGroup = new VIPaletteGroup();
+	StyleSheetManeger = new VIDynamicStyleSheetManager(this);
 	LOAD_PACKAGE(VisindigoWidgets::Package);
 }
 

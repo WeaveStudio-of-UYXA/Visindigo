@@ -1,35 +1,25 @@
 ﻿#pragma once
-#include "../VICore/VICore.h"
+#include "../VICore/VIObject.h"
+#include "VIDynamicStyleSheet.h"
 #include "VIWindowsTheme.h"
-#include "VIStyleSheetManager.h"
 #include <QtWidgets>
 #include <QtGui>
 class VIPublicAPI VIUJWidgetBinder;
 
 class VIPublicAPI VIAbstractWidget :public VIAbstractObject {
-	_Public VIStyleSheetManager* StyleSheetManager;
-	_Public VIUJWidgetBinder* UJWidgetBinder;
-	_Public QWidget* Self;
-	_Public virtual void renewVTR() { onVTR(); }
-	_Public virtual void VTR() HalfVirtual;
-	_Public virtual void onVTR() PureVirtual;
+	_Public VIUJWidgetBinder* UJWidgetBinder = VI_NULLPTR;
+	_Public QWidget* Self = VI_NULLPTR;
+	_Public void setVIDStyleSheet(const QString& name, const QString& styleSheet);
+	_Public void applyVIDSS(const QString& name);
+	_Public QString getCurrentVIDSSName();
+	_Public void refreshVIDStyleSheet();
 };
 typedef VIAbstractWidget VIBaseWidget;
 #define VI_WIDGET_INIT \
-	StyleSheetManager = new VIStyleSheetManager(this);\
 	UJWidgetBinder = VI_NULLPTR;\
 	Self = this;
 
-#define VI_WIDGET VI_OBJECT;\
-_Public virtual void onVTR(){\
-	VTR();\
-	for (auto i = this->children().begin(); i != this->children().end(); i++) {\
-		VIAbstractWidget* w = dynamic_cast<VIAbstractWidget*>(*i);\
-		if (w != VI_NULLPTR) {\
-			w->onVTR();\
-		}\
-	}\
-}
+#define VI_WIDGET VI_OBJECT;
 class VIPublicAPI VIWidget :public QFrame, public VIBaseWidget {
 	Q_OBJECT;
 	VI_WIDGET;

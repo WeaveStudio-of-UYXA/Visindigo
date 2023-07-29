@@ -8,7 +8,7 @@ namespace VisindigoCore {
 		Q_OBJECT;
 		VI_OBJECT;
 		VI_HAS_INHERIT(VIPackageInfo);
-		_Public def_init PackageInfo() {
+		_Public def_init PackageInfo():VIPackageInfo() {
 			this->setPackageName("VisindigoCore");
 			this->setPackageVersionMajor(VI_VERSION_MAJOR);
 			this->setPackageVersionMinor(VI_VERSION_MINOR);
@@ -19,7 +19,9 @@ namespace VisindigoCore {
 			this->setURL("https://www.github.com/weavestudio-of-uyxa/visindigo");
 			this->setOrganization("Weave Studio of UYXA");
 			this->setOrganizationDomain("https://www.github.com/weavestudio-of-uyxa");
-			PackageInfo::setInstance(this);
+			this->addTranslationFileName(Visindigo::Language::zh_SC, "zh_SC.vil", true);
+			this->addTranslationFileName(Visindigo::Language::en_US, "en_US.vil", true);
+			this->setDefaultLanguage(Visindigo::Language::zh_SC);
 		}
 	};
 
@@ -30,12 +32,9 @@ namespace VisindigoCore {
 		_Private QString t;
 		_Public def_init Package() {
 			setPackageInfo(new VisindigoCore::PackageInfo);
-			PackageInfo->addTranslationFileName(Visindigo::Language::zh_SC, "zh_SC.vil", true);
-			PackageInfo->addTranslationFileName(Visindigo::Language::en_US, "en_US.vil", true);
-			PackageInfo->setDefaultLanguage(Visindigo::Language::zh_SC);
-			PackageInfo->addTranslatableObject(this);
-			PackageInfo->initTranslation();
-			qDebug() << PackageInfo->getPackageRootPath();
+			getPackageInfo()->addTranslatableObject(this);
+			getPackageInfo()->initTranslation();
+			qDebug() << getPackageInfo()->getPackageRootPath();
 		}
 		_Public virtual void onTranslating() override {
 			t = getTranslation("Core_LanguageHost_LoadLanguage_Success");

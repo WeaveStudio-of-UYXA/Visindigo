@@ -4,8 +4,8 @@
 VIAbstractBehavior
 */
 void VIAbstractBehavior::subside() {
-	if (BehaviorState == State::Active) {
-		BehaviorState = State::Subside;
+	if (BehaviorState == Visindigo::Active) {
+		BehaviorState = Visindigo::Subside;
 	}
 }
 

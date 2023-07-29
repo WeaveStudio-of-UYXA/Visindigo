@@ -235,10 +235,11 @@
     <ClCompile Include="VICore\cpp\VISettings.cpp" />
     <ClCompile Include="VICore\VIDocument\VITR.cpp" />
     <ClCompile Include="VICore\cpp\VITranslationHost.cpp" />
+    <ClCompile Include="VIWidgets\cpp\VIDynamicStyleSheet.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIFramework.cpp" />
     <ClCompile Include="VIUJ\cpp\VIUJAbstractParser.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIPalette.cpp" />
-    <ClCompile Include="VIWidgets\cpp\VIStyleSheetManager.cpp" />
+    <ClCompile Include="VIWidgets\cpp\VIWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="testCode.h" />
@@ -249,16 +250,13 @@
     <QtMoc Include="VIWidgets\VIMultiButton.h" />
     <QtMoc Include="VIWidgets\VILoadingWidget.h" />
     <ClInclude Include="VICore\private\VisindigoNamespace.h" />
+    <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h" />
     <ClInclude Include="VIWidgets\VIMainWindow.h" />
     <QtMoc Include="VICore\private\VisindigoCorePack.h" />
     <QtMoc Include="VICore\VIDocument\VITR.h" />
     <QtMoc Include="VICore\VIColorTools.h" />
     <QtMoc Include="VICore\VITranslationHost.h" />
     <ClInclude Include="VICore\VIPointer.h" />
-    <ClInclude Include="VICore\yc\YcAlgorithm.h" />
-    <ClInclude Include="VICore\yc\YcAllocator.h" />
-    <ClInclude Include="VICore\yc\YcPair.h" />
-    <ClInclude Include="VICore\yc\YcSmartPointer.h" />
     <QtMoc Include="VIUJ\VIUJAbstractParser.h" />
     <ClInclude Include="VIUJ\VIUJ.h" />
     <QtMoc Include="VIWidgets\VIFramework.h" />
@@ -268,7 +266,6 @@
     <QtMoc Include="VIWidgets\VISwitchButton.h" />
     <QtMoc Include="VIWidgets\private\VISwitchButton_p.h" />
     <QtMoc Include="VIWidgets\VIPSOD.h" />
-    <QtMoc Include="VIWidgets\VIStyleSheetManager.h" />
     <ClInclude Include="VIWidgets\private\VIPalette_p.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <ClInclude Include="VICore\VIPathInfo.h" />

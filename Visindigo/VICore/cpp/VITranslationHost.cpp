@@ -1,5 +1,6 @@
 ﻿#include "../VITranslationHost.h"
 #include "../VICoreFramework.h"
+#include "../VIVersion.h"
 
 QString VITranslatableObject::getTranslation(const QString& key) {
 	return TRHost->getTranslation(key);
@@ -99,11 +100,12 @@ VITranslationHost
 */
 
 def_init VITranslationHost::VITranslationHost(VISuper* parent):VIObject(parent) {
-	PASS;
+	setObjectName(VIVersion::getVisindigoVersion());
+	consoleLog("Host instance created");
 }
 void VITranslationHost::changeLanguage(Visindigo::Language lang) {
 	for(auto i = VICoreFrame->AppInstance->PackageList.begin(); i != VICoreFrame->AppInstance->PackageList.end(); i++) {
-		(*i)->PackageInfo->TranslationPackageHost->onGlobalLanguageChange(lang);
+		(*i)->getPackageInfo()->TranslationPackageHost->onGlobalLanguageChange(lang);
 	}
 }
 

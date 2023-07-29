@@ -27,7 +27,7 @@ namespace VisindigoWidgets {
 		Q_OBJECT;
 		VI_OBJECT;
 		_Public def_init Package() {
-			PackageInfo = new VisindigoWidgets::PackageInfo();
+			setPackageInfo(new VisindigoWidgets::PackageInfo);
 		}
 	};
 }

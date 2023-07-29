@@ -19,7 +19,7 @@ class VIPublicAPI VIPackageInfo :public VIObject
 	friend class VITranslationSubHost;
 	friend class VITranslationHost;
 	VI_Singleton(VIPackageInfo);
-	VI_ProtectedProperty(QString, PackageName);
+	_Private QString PackageName;
 	VI_ProtectedProperty(unsigned int, PackageVersionMajor);
 	VI_ProtectedProperty(unsigned int, PackageVersionMinor);
 	VI_ProtectedProperty(unsigned int, PackageVersionPatch);
@@ -42,6 +42,8 @@ class VIPublicAPI VIPackageInfo :public VIObject
 	_Public void setDefaultLanguage(Visindigo::Language langType);
 	_Public void initTranslation();
 	_Public void addTranslatableObject(VITranslatableObject* obj);
+	_Public void setPackageName(const QString& name);
+	_Public QString getPackageName();
 };
 
 class VIPublicAPI VIPackage :public VIBasicBehavior
@@ -49,11 +51,10 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	Q_OBJECT;
 	VI_OBJECT;
 	friend class VIFramework;
-	VI_Property(VIPackageInfo*, PackageInfo);
-	_Public def_init VIPackage(){
-		this->setObjectName("UnnamedVIPackage");
-	};
-	
+	_Private VIPackageInfo* PackageInfo;
+	_Public def_init VIPackage();
+	_Public VIPackageInfo* getPackageInfo();
+	_Public void setPackageInfo(VIPackageInfo* info);
 	_Public virtual void onActive() HalfVirtual;
 	_Public virtual void onSubside() HalfVirtual;
 	_Public virtual void onTick() HalfVirtual;

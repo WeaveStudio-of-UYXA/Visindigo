@@ -1,4 +1,7 @@
 ﻿#include "../VICoreFramework.h"
+#include "../VIConsole.h"
+#include "../VIException.h"
+#include "../VIECMAScripts.h"
 #include "../private/VisindigoCorePack.h"
 
 #pragma execution_character_set("utf-8")
@@ -6,18 +9,33 @@ VICoreFramework* VICoreFramework::_instance = Q_NULLPTR;
 VIBehaviorHost* VICoreFramework::BehaviorHost = Q_NULLPTR;
 VITranslationHost* VICoreFramework::TranslationHost = Q_NULLPTR;
 
+def_init private_VICoreFramework::private_VICoreFramework(int& argc, char** argv) :QApplication(argc, argv) HalfVirtual;
+
+bool private_VICoreFramework::notify(QObject* receiver, QEvent* e) {
+	try {
+		return QApplication::notify(receiver, e);
+	}
+	catch (VIException& e) {
+		e.print();
+		VIMultiPlatform::exit();
+		return false;
+	}
+	return true;
+}
+
 def_init VICoreFramework::VICoreFramework(int& argc, char** argv) {
 	VI_CHECK_SingletonError(this);
 	AppInstance = new private_VICoreFramework(argc, argv);
 	AppInstance->DebugModeRuntime = true;
 	_instance = this;
-	LanguageType = Visindigo::Language::zh_SC;
+	LanguageType = Visindigo::zh_SC;
 #ifdef QT_DEBUG
 	AppInstance->DebugModeCompilation = true;
 #else
 	AppInstance->DebugModeCompilation = false;
 #endif
 }
+
 
 void printWelcome() {
 	VIConsole::printLine("\033[38;2;237;28;36m===================================================================\033[0m");
@@ -38,15 +56,15 @@ void printWelcome() {
 
 void VICoreFramework::init() {
 	setObjectName(VIVersion::getVisindigoVersion());
+	printWelcome();
+	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Visindigo framework is initializing..."));
 	TranslationHost = new VITranslationHost(this);
 	BehaviorHost = new VIBehaviorHost(this);
-	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Visindigo framework is initializing..."));
-	printWelcome();
 	new VICommandHost(this);
 	VICommand_Reg(VIECMAScripts::Command);
 	LOAD_PACKAGE(VisindigoCore::Package);
 	for (auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++){
-		if ((*i)->PackageInfo->PackageName == "VisindigoCore") {
+		if ((*i)->getPackageInfo()->PackageName == "VisindigoCore") {
 			static_cast<VisindigoCore::Package*>(*i)->printT();
 		}
 	}
@@ -67,7 +85,7 @@ VITranslationHost* VICoreFramework::getTranslationHostInstance() {
 
 void VICoreFramework::start() {
 	for(auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++) {
-		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + (*i)->PackageInfo->getPackageName()));
+		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + (*i)->getPackageInfo()->getPackageName()));
 	}
 	BehaviorHost->start();
 	AppInstance->ReturnCode = App->exec();
@@ -89,7 +107,8 @@ int VICoreFramework::getReturnCode() {
 
 bool VICoreFramework::loadPackage(VIPackage* package) {
 	AppInstance->PackageList.append(package);
-	package->active(VIAbstractBehavior::QuantifyTickType::T20);
+	package->active(Visindigo::T20);
+	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package '"+package->getPackageInfo()->getPackageName() + "' loaded"));
 	return true;
 }
 

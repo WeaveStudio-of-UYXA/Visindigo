@@ -67,9 +67,6 @@
     <ClCompile Include="VIWidgets\cpp\VIFramework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VIWidgets\cpp\VIStyleSheetManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VICore\VIDocument\VITR.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -77,6 +74,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VICore\cpp\VIObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIWidgets\cpp\VIDynamicStyleSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIWidgets\cpp\VIWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -118,18 +121,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VICore\VIPointer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VICore\yc\YcAlgorithm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VICore\yc\YcAllocator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VICore\yc\YcPair.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VICore\yc\YcSmartPointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIUJ\VIUJWidgetParser.h">
@@ -254,13 +245,13 @@
     <QtMoc Include="VIWidgets\VIPSOD.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIWidgets\VIStyleSheetManager.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="VICore\VITranslationHost.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VICore\VIDocument\VITR.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

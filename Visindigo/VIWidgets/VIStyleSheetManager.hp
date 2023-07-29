@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "VIPalette.h"
+class VIAbstractWidget;
 struct VIStyleSheetData
 {
 	QString StyleSheet;
@@ -8,17 +9,17 @@ struct VIStyleSheetData
 	QStringList DynamicSizeNames;
 	QStringList DynamicColorNames;
 };
+typedef QHash<QString, VIStyleSheetData> VIStyleSheetDataMap;
+typedef QHash<VIAbstractWidget*, VIStyleSheetDataMap> VIStyleSheetWidgetMap;
 class VIPublicAPI VIStyleSheetManager :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Private QHash<QString, VIStyleSheetData> StyleSheetData;
-	_Private QWidget * MasterWidget;
+	_Private VIStyleSheetWidgetMap StyleSheetWidgetMap;
 	_Private VIPaletteGroup* PaletteGroup;
-	VI_PrivateProperty(QString, CurrentStyleSheetName);
 	_Public def_init VIStyleSheetManager(QWidget* MasterWidget);
 	_Slot void refreshStyleSheet() {
-		applyStyleSheet(CurrentStyleSheetName);
+		applyStyleSheet();
 	}
 	_Slot void onPaletteChanged(QString PaletteName) {
 		refreshStyleSheet();

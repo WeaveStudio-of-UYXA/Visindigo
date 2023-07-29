@@ -74,17 +74,17 @@ class VIPublicAPI VIMultiButton :public VIWidget
 		TextLabel->show();
 	}
 	_Public void setNormalStyleSheet(QString ss) {
-		StyleSheetManager->addStyleSheet("Normal", ss);
+		setVIDStyleSheet("Normal", ss);
 	}
 	_Public void setHoverStyleSheet(QString ss) {
-		StyleSheetManager->addStyleSheet("Hover", ss);
+		setVIDStyleSheet("Hover", ss);
 	}
 	_Public void setPressStyleSheet(QString ss) {
-		StyleSheetManager->addStyleSheet("Press", ss);
+		setVIDStyleSheet("Press", ss);
 	}
 	_Public void select() {
 		Selected = true;
-		StyleSheetManager->applyStyleSheet("Press");
+		applyVIDSS("Press");
 	}
 	_Public void setIcon(QString icon) {
 		IconLabel->setPixmap(QPixmap(icon));
@@ -97,20 +97,20 @@ class VIPublicAPI VIMultiButton :public VIWidget
 		SubTextLabel->setText(text);
 	}
 	_Public void enterEvent(QEvent* event) {
-		if (!Selected) { StyleSheetManager->applyStyleSheet("Hover"); }
+		if (!Selected) { applyVIDSS("Hover"); }
 	}
 	_Public void leaveEvent(QEvent* event) {
-		if (!Selected) { StyleSheetManager->applyStyleSheet("Normal"); }
+		if (!Selected) { applyVIDSS("Normal"); }
 	}
 	_Public void mousePressEvent(QMouseEvent* event) {
 		if (event->button() == Qt::LeftButton) {
-			StyleSheetManager->applyStyleSheet("Press");
+			applyVIDSS("Press");
 			emit pressed();
 		}
 	}
 	_Public void mouseReleaseEvent(QMouseEvent* event) {
 		if (event->button() == Qt::LeftButton) {
-			StyleSheetManager->applyStyleSheet("Press");
+			applyVIDSS("Press");
 			Selected = true;
 			emit clicked();
 			emit selected(ButtonGroupIndex);
@@ -118,7 +118,7 @@ class VIPublicAPI VIMultiButton :public VIWidget
 	}
 	_Protected void unSelect() {
 		Selected = false;
-		StyleSheetManager->applyStyleSheet("Normal");
+		applyVIDSS("Normal");
 	}
 };
 class VIPublicAPI private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
@@ -172,9 +172,9 @@ class VIPublicAPI private_VIMultiButtonAnimationLabel :public VIWidget
 	_Public def_init private_VIMultiButtonAnimationLabel(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
 		this->setObjectName("VIMultiButtonAnimationLabel");
 		Behavior = new private_VIMultiButtonAnimationBehavior(this);
-		this->StyleSheetManager->addStyleSheet("default",
+		setVIDStyleSheet("default",
 			"private_VIMultiButtonAnimationLabel{background-color:CLR__SystemThemeColor__CLR;border:0px solid white;border-radius:2px;}");
-		this->StyleSheetManager->applyStyleSheet("default");
+		applyVIDSS("default");
 	}
 };
 class VIPublicAPI VIMultiButtonGroup :public VIWidget
