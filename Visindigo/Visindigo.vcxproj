@@ -228,11 +228,12 @@
     <ClCompile Include="VICore\cpp\VICommand.cpp" />
     <ClCompile Include="VICore\cpp\VIConsole.cpp" />
     <ClCompile Include="VICore\cpp\VICoreFramework.cpp" />
+    <ClCompile Include="VICore\cpp\VIECMAScripts.cpp" />
     <ClCompile Include="VICore\cpp\VIException.cpp" />
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
     <ClCompile Include="VICore\cpp\VIObject.cpp" />
     <ClCompile Include="VICore\cpp\VIPackage.cpp" />
-    <ClCompile Include="VICore\cpp\VISettings.cpp" />
+    <ClCompile Include="VICore\VIDocument\VIJSON.cpp" />
     <ClCompile Include="VICore\VIDocument\VITR.cpp" />
     <ClCompile Include="VICore\cpp\VITranslationHost.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIDynamicStyleSheet.cpp" />
@@ -269,7 +270,7 @@
     <ClInclude Include="VIWidgets\private\VIPalette_p.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <ClInclude Include="VICore\VIPathInfo.h" />
-    <QtMoc Include="VICore\VISettings.h" />
+    <QtMoc Include="VICore\VIDocument\VIJSON.h" />
     <QtMoc Include="VIWidgets\VICodeEdit.h" />
     <QtMoc Include="VIWidgets\VIPackagePanel.h" />
     <QtMoc Include="VIWidgets\VIWidget.h" />

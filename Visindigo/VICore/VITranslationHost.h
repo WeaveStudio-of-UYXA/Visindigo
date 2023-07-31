@@ -11,7 +11,7 @@ class VIPublicAPI VITranslatableObject
 	_Public QString getTranslation(const QString& key);
 };
 
-class VIPackageInfo;
+class VIPackageMeta;
 class VITranslationHost;
 
 class VIPublicAPI VITranslationSubHost :public VIObject
@@ -19,7 +19,7 @@ class VIPublicAPI VITranslationSubHost :public VIObject
 	Q_OBJECT;
 	VI_OBJECT;
 	friend class VITranslationHost;
-	friend class VIPackageInfo;
+	friend class VIPackageMeta;
 	_Public struct VITRFileInfo{
 		QString FileName;
 		bool inRC;
@@ -29,9 +29,9 @@ class VIPublicAPI VITranslationSubHost :public VIObject
 	_Private VIDocument::VITR* CurrentDoc;
 	_Private VIDocument::VITR* DefaultDoc;
 	VI_PrivateProperty(Visindigo::Language, DefaultLanguage);
-	_Private VIPackageInfo* ParentPackage;
+	_Private VIPackageMeta* ParentPackage;
 	VI_Flag(UseGlobalSettings);
-	_Public def_init VITranslationSubHost(VIPackageInfo* parent = VI_NULL);
+	_Public def_init VITranslationSubHost(VIPackageMeta* parent = VI_NULL);
 	_Public void addTranslatableObject(VITranslatableObject* target);
 	_Public void addTranslationFileName(Visindigo::Language langName, const QString& fileName, bool inRC = false);
 	_Public void onGlobalLanguageChange(Visindigo::Language langName);

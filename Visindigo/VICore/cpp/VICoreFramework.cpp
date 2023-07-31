@@ -61,10 +61,9 @@ void VICoreFramework::init() {
 	TranslationHost = new VITranslationHost(this);
 	BehaviorHost = new VIBehaviorHost(this);
 	new VICommandHost(this);
-	VICommand_Reg(VIECMAScripts::Command);
 	LOAD_PACKAGE(VisindigoCore::Package);
 	for (auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++){
-		if ((*i)->getPackageInfo()->PackageName == "VisindigoCore") {
+		if ((*i)->getPackageMeta()->PackageName == "VisindigoCore") {
 			static_cast<VisindigoCore::Package*>(*i)->printT();
 		}
 	}
@@ -85,7 +84,7 @@ VITranslationHost* VICoreFramework::getTranslationHostInstance() {
 
 void VICoreFramework::start() {
 	for(auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++) {
-		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + (*i)->getPackageInfo()->getPackageName()));
+		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + (*i)->getPackageMeta()->getPackageName()));
 	}
 	BehaviorHost->start();
 	AppInstance->ReturnCode = App->exec();
@@ -108,7 +107,7 @@ int VICoreFramework::getReturnCode() {
 bool VICoreFramework::loadPackage(VIPackage* package) {
 	AppInstance->PackageList.append(package);
 	package->active(Visindigo::T20);
-	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package '"+package->getPackageInfo()->getPackageName() + "' loaded"));
+	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package '"+package->getPackageMeta()->getPackageName() + "' loaded"));
 	return true;
 }
 

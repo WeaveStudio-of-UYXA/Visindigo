@@ -6,7 +6,7 @@
         <file>JsVIAPI/VIESObject.js</file>
         <file>Resource/JSON/defaultProjectSettings.json</file>
     </qresource>
-    <qresource prefix="/VisindigoCore">
-        <file>i18n/zh_SC.vil</file>
+    <qresource prefix="/package">
+        <file>VisindigoCore/i18n/zh_SC.vil</file>
     </qresource>
 </RCC>

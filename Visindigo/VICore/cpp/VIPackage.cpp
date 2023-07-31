@@ -1,8 +1,8 @@
 ﻿#include "../VIPackage.h"
 
-VI_Singleton_Init(VIPackageInfo);
+VI_Singleton_Init(VIPackageMeta);
 
-def_init VIPackageInfo::VIPackageInfo() {
+def_init VIPackageMeta::VIPackageMeta() {
 	this->setPackageName("UnnamedVIPackage");
 	this->setPackageVersionMajor(0);
 	this->setPackageVersionMinor(0);
@@ -14,46 +14,68 @@ def_init VIPackageInfo::VIPackageInfo() {
 	this->setOrganization("");
 	this->setOrganizationDomain("");
 	this->TranslationPackageHost = new VITranslationSubHost(this);
+	this->PackageConfig = new VIDocument::VIJSON(this);
 	_instance = this;
 }
-QString VIPackageInfo::TR(const QString& key){
+QString VIPackageMeta::TR(const QString& key){
 	return TranslationPackageHost->getTranslation(key);
 }
-void VIPackageInfo::addTranslationFileName(Visindigo::Language langType, const QString& key, bool inRC) {
+void VIPackageMeta::addTranslationFileName(Visindigo::Language langType, const QString& key, bool inRC) {
 	TranslationPackageHost->addTranslationFileName(langType, key, inRC);
 }
-void VIPackageInfo::setDefaultLanguage(Visindigo::Language langType) {
+void VIPackageMeta::setDefaultLanguage(Visindigo::Language langType) {
 	TranslationPackageHost->setDefaultLanguage(langType);
 }
-void VIPackageInfo::initTranslation() {
+void VIPackageMeta::initTranslation() {
 	TranslationPackageHost->onInit();
 }
-void VIPackageInfo::addTranslatableObject(VITranslatableObject* obj) {
+void VIPackageMeta::addTranslatableObject(VITranslatableObject* obj) {
 	TranslationPackageHost->addTranslatableObject(obj);
 }
-void VIPackageInfo::setPackageName(const QString& name) {
+void VIPackageMeta::setPackageName(const QString& name) {
 	PackageName = name;
 	setObjectName(name);
 }
-QString VIPackageInfo::getPackageName() {
+QString VIPackageMeta::getPackageName() {
 	return PackageName;
+}
+QVariant VIPackageMeta::getConfig(const QString& key) {
+	return PackageConfig->getValueOf(key);
+}
+void VIPackageMeta::setConfig(const QString& key, const QVariant& value) {
+	PackageConfig->setValueOf(key, value);
+}
+void VIPackageMeta::initConfig() {
+	PackageConfig->loadDefault(getPackageInternalPath()+"/config.json");
+	PackageConfig->loadSettings(getPackageRootPath() + "/config.json");
+	PackageConfig->setObjectName(PackageName);
+}
+def_del VIPackageMeta::~VIPackageMeta() {
+	delete TranslationPackageHost;
+	PackageConfig->saveSettings();
+	delete PackageConfig;
 }
 /*
 VIPackage
 */
 def_init VIPackage::VIPackage() {
-	PackageInfo = VI_NULL;
+	PackageMeta = VI_NULL;
 }
-VIPackageInfo* VIPackage::getPackageInfo() {
-	return PackageInfo;
+VIPackageMeta* VIPackage::getPackageMeta() {
+	return PackageMeta;
 }
-void VIPackage::setPackageInfo(VIPackageInfo* info) {
+void VIPackage::setPackageMeta(VIPackageMeta* info) {
 	if (info != VI_NULL) {
-		if (PackageInfo != VI_NULL) {
+		if (PackageMeta != VI_NULL) {
 			return;
 		}
-		PackageInfo = info;
+		PackageMeta = info;
 		setObjectName(info->getPackageName());
 		VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix()+"Package Meta loaded."));
+	}
+}
+def_del VIPackage::~VIPackage() {
+	if (PackageMeta != VI_NULL) {
+		delete PackageMeta;
 	}
 }

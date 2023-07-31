@@ -2,7 +2,7 @@
 #include "../VICore/VIObject.h"
 #include <QtWidgets>
 
-class VIDynamicStyleSheet :public VIObject
+class VIPublicAPI VIDynamicStyleSheet :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
@@ -10,7 +10,7 @@ class VIDynamicStyleSheet :public VIObject
 	_Public static QStringList hasDynamicColor(const QString& qss);
 };
 
-class VIDynamicStyleSheetContainer  //此类一定不要继承自VIObject
+class VIPublicAPI VIDynamicStyleSheetContainer  //此类一定不要继承自VIObject
 {
 	_Private QString QSS;
 	_Private QWidget* MasterWidget;
@@ -33,7 +33,7 @@ class VIDynamicStyleSheetContainer  //此类一定不要继承自VIObject
 typedef QHash<QString, VIDynamicStyleSheetContainer> VIDynamicStyleSheetContainerHash;
 typedef QHash<QWidget*, VIDynamicStyleSheetContainerHash> VIDynamicStyleSheetContainerWidgetHash;
 typedef QHash<QWidget*, QString> VIDynamicStyleSheetNameHash;
-class VIDynamicStyleSheetManager :public VIObject
+class VIPublicAPI VIDynamicStyleSheetManager :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;

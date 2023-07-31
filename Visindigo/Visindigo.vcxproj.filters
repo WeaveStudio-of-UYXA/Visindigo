@@ -55,7 +55,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VICore\cpp\VISettings.cpp">
+    <ClCompile Include="VICore\VIDocument\VIJSON.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VIWidgets\cpp\VIPalette.cpp">
@@ -80,6 +80,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VIWidgets\cpp\VIWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VICore\cpp\VIECMAScripts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -191,7 +194,7 @@
     <QtMoc Include="VIWidgets\VIPackagePanel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VICore\VISettings.h">
+    <QtMoc Include="VICore\VIDocument\VIJSON.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIWidgets\VICodeEdit.h">

@@ -2,12 +2,12 @@
 #include "../../VICore/VICore.h"
 
 namespace VisindigoWidgets {
-	class VIPublicAPI PackageInfo :public VIPackageInfo
+	class VIPublicAPI PackageMeta :public VIPackageMeta
 	{
 		Q_OBJECT;
 		VI_OBJECT;
-		VI_HAS_INHERIT(VIPackageInfo);
-		_Public def_init PackageInfo() {
+		VI_HAS_INHERIT(VIPackageMeta);
+		_Public def_init PackageMeta() {
 			this->setPackageName("VisindigoWidgets");
 			this->setPackageVersionMajor(VI_VERSION_MAJOR);
 			this->setPackageVersionMinor(VI_VERSION_MINOR);
@@ -18,7 +18,7 @@ namespace VisindigoWidgets {
 			this->setURL("https://www.github.com/weavestudio-of-uyxa/visindigo");
 			this->setOrganization("Weave Studio of UYXA");
 			this->setOrganizationDomain("https://www.github.com/weavestudio-of-uyxa");
-			PackageInfo::setInstance(this);
+			PackageMeta::setInstance(this);
 		}
 	};
 
@@ -27,7 +27,7 @@ namespace VisindigoWidgets {
 		Q_OBJECT;
 		VI_OBJECT;
 		_Public def_init Package() {
-			setPackageInfo(new VisindigoWidgets::PackageInfo);
+			setPackageMeta(new VisindigoWidgets::PackageMeta);
 		}
 	};
 }

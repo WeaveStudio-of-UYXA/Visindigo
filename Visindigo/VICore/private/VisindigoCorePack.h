@@ -3,12 +3,12 @@
 #include "../VIVersion.h"
 
 namespace VisindigoCore {
-	class VIPublicAPI PackageInfo :public VIPackageInfo
+	class VIPublicAPI PackageMeta :public VIPackageMeta
 	{
 		Q_OBJECT;
 		VI_OBJECT;
-		VI_HAS_INHERIT(VIPackageInfo);
-		_Public def_init PackageInfo():VIPackageInfo() {
+		VI_HAS_INHERIT(VIPackageMeta);
+		_Public def_init PackageMeta():VIPackageMeta() {
 			this->setPackageName("VisindigoCore");
 			this->setPackageVersionMajor(VI_VERSION_MAJOR);
 			this->setPackageVersionMinor(VI_VERSION_MINOR);
@@ -31,10 +31,10 @@ namespace VisindigoCore {
 		VI_OBJECT;
 		_Private QString t;
 		_Public def_init Package() {
-			setPackageInfo(new VisindigoCore::PackageInfo);
-			getPackageInfo()->addTranslatableObject(this);
-			getPackageInfo()->initTranslation();
-			qDebug() << getPackageInfo()->getPackageRootPath();
+			setPackageMeta(new VisindigoCore::PackageMeta);
+			getPackageMeta()->addTranslatableObject(this);
+			getPackageMeta()->initTranslation();
+			qDebug() << getPackageMeta()->getPackageRootPath();
 		}
 		_Public virtual void onTranslating() override {
 			t = getTranslation("Core_LanguageHost_LoadLanguage_Success");

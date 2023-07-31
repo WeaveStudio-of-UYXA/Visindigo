@@ -1,0 +1,17 @@
+{
+    "Children": [
+        {
+            "Name": "SwitchButton",
+            "Type": "VISwitchButton"
+        }
+    ],
+    "Layout": "V",
+    "Name": "Root",
+    "Size": [
+        600,
+        400
+    ],
+    "StyleSheet": "VIWidget{border:1px solid black;}",
+    "Title": "Hey, this widget is implemented in VUS!",
+    "Type": "VIWidget"
+}
