@@ -19,7 +19,6 @@ class VIPublicAPI VIPackageMeta :public VIObject
 	friend class VIPackage;
 	friend class VITranslationSubHost;
 	friend class VITranslationHost;
-	VI_Singleton(VIPackageMeta);
 	_Private QString PackageName;
 	_Private VIDocument::VIJSON* PackageConfig;
 	VI_ProtectedProperty(unsigned int, PackageVersionMajor);
@@ -59,6 +58,7 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;
+	VI_MUST_INHERIT(VIPackage);
 	friend class VIFramework;
 	_Private VIPackageMeta* PackageMeta;
 	_Public def_init VIPackage();
@@ -70,3 +70,5 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	_Public virtual void onEvent(QEvent* e) HalfVirtual;
 	_Public def_del ~VIPackage();
 };
+
+typedef VIPackage* (* __VisindigoDllMain)(void);

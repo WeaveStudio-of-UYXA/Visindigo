@@ -1,6 +1,5 @@
 ﻿#include "../VIPackage.h"
 
-VI_Singleton_Init(VIPackageMeta);
 
 def_init VIPackageMeta::VIPackageMeta() {
 	this->setPackageName("UnnamedVIPackage");
@@ -15,7 +14,6 @@ def_init VIPackageMeta::VIPackageMeta() {
 	this->setOrganizationDomain("");
 	this->TranslationPackageHost = new VITranslationSubHost(this);
 	this->PackageConfig = new VIDocument::VIJSON(this);
-	_instance = this;
 }
 QString VIPackageMeta::TR(const QString& key){
 	return TranslationPackageHost->getTranslation(key);

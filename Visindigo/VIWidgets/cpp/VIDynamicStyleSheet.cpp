@@ -1,7 +1,7 @@
 ﻿#include "../VIDynamicStyleSheet.h"
 #include "../VIPalette.h"
 
-VI_Singleton_Init(VIDynamicStyleSheetManager);
+VI_Singleton_StaticInit(VIDynamicStyleSheetManager);
 
 QStringList VIDynamicStyleSheet::hasDynamicSize(const QString& ss) {
 	int index_auto = 0;
@@ -124,7 +124,7 @@ void VIDynamicStyleSheetContainer::setMasterWidget(QWidget* masterWidget) {
 VIDynamicStyleSheetManager
 */
 def_init VIDynamicStyleSheetManager::VIDynamicStyleSheetManager(VISuper* parent) :VIObject(parent) {
-	_instance = this;
+	VI_Singleton_Init;
 }
 
 void VIDynamicStyleSheetManager::addVIDSS(QWidget* masterWidget, const QString& name, const QString& qss) {

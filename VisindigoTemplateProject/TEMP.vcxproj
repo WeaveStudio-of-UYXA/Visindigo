@@ -18,14 +18,23 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$safeprojectname$Package.cpp" />
+    <ClCompile Include="VisindigoApp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="$safeprojectname$Package.h" />
+    <ClInclude Include="CompileMacro.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{86E1415A-BD6E-4BDF-8D0A-75D7AAFFE8F1}</ProjectGuid>
+    <ProjectGuid>{$guid1$}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <ProjectName>VisindigoTemplateProject</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -50,22 +59,22 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -91,74 +100,80 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <ExternalIncludePath>D:\Visindigo\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>D:\Visindigo\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">
-    <TargetName>$(ProjectName)d</TargetName>
+    <ExternalIncludePath>D:\Visindigo\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>D:\Visindigo\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>D:\Visindigo\x64\Release;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>D:\Visindigo\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>D:\Visindigo\x64\Release;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>D:\Visindigo\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalDependencies>Visindigod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PreBuildEvent>
-      <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
-    </PreBuildEvent>
     <ClCompile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <PreprocessorDefinitions>VI_EVERYWHERE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>$(ProjectName)_EVERYWHERE;_Public=public:;_Private=private:;_Protected=protected:;_Slot=public Q_SLOTS:;_Signal=Q_SIGNALS:;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "D:\Visindigo\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">
     <Link>
-      <EntryPointSymbol>_DllMainCRTStartup</EntryPointSymbol>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalDependencies>Visindigod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PreBuildEvent>
-      <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
-    </PreBuildEvent>
-    <ClCompile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <PreprocessorDefinitions>VI_DEVELOPER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
     <PostBuildEvent>
-      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py"</Command>
+      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py";
+xcopy /y /d "D:\Visindigo\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
+    <ClCompile>
+      <PreprocessorDefinitions>$(ProjectName)_DEVELOPER;_Public=public:;_Private=private:;_Protected=protected:;_Slot=public Q_SLOTS:;_Signal=Q_SIGNALS:;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <QtMoc>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </QtMoc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalDependencies>Visindigo.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PreBuildEvent>
-      <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
-    </PreBuildEvent>
     <ClCompile>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>$(ProjectName)_EVERYWHERE;_Public=public:;_Private=private:;_Protected=protected:;_Slot=public Q_SLOTS:;_Signal=Q_SIGNALS:</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
-    <ClCompile>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-    </ClCompile>
-    <ClCompile>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
-      <PreprocessorDefinitions>VI_EVERYWHERE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "D:\Visindigo\x64\Release\Visindigo.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">
     <Link>
-      <EntryPointSymbol>_DllMainCRTStartup</EntryPointSymbol>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalDependencies>Visindigo.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PreBuildEvent>
-      <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
-    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py";xcopy /y /d "D:\Visindigo\x64\Release\Visindigo.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
     <ClCompile>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-    </ClCompile>
-    <ClCompile>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-    </ClCompile>
-    <ClCompile>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
-      <PreprocessorDefinitions>VI_DEVELOPER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>$(ProjectName)_DEVELOPER;_Public=public:;_Private=private:;_Protected=protected:;_Slot=public Q_SLOTS:;_Signal=Q_SIGNALS:;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -181,7 +196,7 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>NotSet</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -205,102 +220,10 @@
       <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>NotSet</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <QtRcc Include="VIResource.qrc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">%(Filename).moc</QtMocFileName>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">%(Filename).moc</QtMocFileName>
-    </ClCompile>
-    <ClCompile Include="VICore\cpp\VIAbstractBehavior.cpp" />
-    <ClCompile Include="VICore\cpp\VIBehavior.cpp" />
-    <ClCompile Include="VICore\cpp\VICommand.cpp" />
-    <ClCompile Include="VICore\cpp\VIConsole.cpp" />
-    <ClCompile Include="VICore\cpp\VICoreFramework.cpp" />
-    <ClCompile Include="VICore\cpp\VIECMAScripts.cpp" />
-    <ClCompile Include="VICore\cpp\VIException.cpp" />
-    <ClCompile Include="VICore\cpp\VIMath.cpp" />
-    <ClCompile Include="VICore\cpp\VIObject.cpp" />
-    <ClCompile Include="VICore\cpp\VIPackage.cpp" />
-    <ClCompile Include="VICore\private\VisindigoCorePack.cpp" />
-    <ClCompile Include="VICore\VIDocument\VIJSON.cpp" />
-    <ClCompile Include="VICore\VIDocument\VITR.cpp" />
-    <ClCompile Include="VICore\cpp\VITranslationHost.cpp" />
-    <ClCompile Include="VIWidgets\cpp\VIDynamicStyleSheet.cpp" />
-    <ClCompile Include="VIWidgets\cpp\VIFramework.cpp" />
-    <ClCompile Include="VIUJ\cpp\VIUJAbstractParser.cpp" />
-    <ClCompile Include="VIWidgets\cpp\VIPalette.cpp" />
-    <ClCompile Include="VIWidgets\cpp\VIWidget.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="testCode.h" />
-    <QtMoc Include="VIUJ\VIUJWidgetBinder.h" />
-    <QtMoc Include="VIWidgets\VIWidgetsTransQt.h" />
-    <QtMoc Include="VIWidgets\VIWindowsTheme.h" />
-    <QtMoc Include="VI2DScene\VI2DSceneItemAnimationBehavior.h" />
-    <QtMoc Include="VIWidgets\VIMultiButton.h" />
-    <QtMoc Include="VIWidgets\VILoadingWidget.h" />
-    <ClInclude Include="VICore\private\VisindigoNamespace.h" />
-    <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h" />
-    <ClInclude Include="VIWidgets\VIMainWindow.h" />
-    <QtMoc Include="VICore\private\VisindigoCorePack.h" />
-    <QtMoc Include="VICore\VIDocument\VITR.h" />
-    <QtMoc Include="VICore\VIColorTools.h" />
-    <QtMoc Include="VICore\VITranslationHost.h" />
-    <ClInclude Include="VICore\VIPointer.h" />
-    <QtMoc Include="VIUJ\VIUJAbstractParser.h" />
-    <ClInclude Include="VIUJ\VIUJ.h" />
-    <QtMoc Include="VIWidgets\VIFramework.h" />
-    <ClInclude Include="VIUJ\VIUJWidgetParser.h" />
-    <QtMoc Include="VIWidgets\VIPalette.h" />
-    <QtMoc Include="VIWidgets\private\VisindigoWidgetsPack.h" />
-    <QtMoc Include="VIWidgets\VISwitchButton.h" />
-    <QtMoc Include="VIWidgets\private\VISwitchButton_p.h" />
-    <QtMoc Include="VIWidgets\VIPSOD.h" />
-    <ClInclude Include="VIWidgets\private\VIPalette_p.h" />
-    <ClInclude Include="VIWidgets\VIWidgets.h" />
-    <ClInclude Include="VICore\VIPathInfo.h" />
-    <QtMoc Include="VICore\VIDocument\VIJSON.h" />
-    <QtMoc Include="VIWidgets\VICodeEdit.h" />
-    <QtMoc Include="VIWidgets\VIPackagePanel.h" />
-    <QtMoc Include="VIWidgets\VIWidget.h" />
-    <QtMoc Include="VICore\VICommand.h" />
-    <QtMoc Include="VICore\VIECMAScripts.h" />
-    <QtMoc Include="VICore\private\VIECMABuiltInModules.h" />
-    <ClInclude Include="VICore\VIMath.h" />
-    <ClInclude Include="VICore\VIException.h" />
-    <QtMoc Include="VICore\VIVersion.h" />
-    <ClInclude Include="VI2DScene\private\VI2DScene_m.h" />
-    <QtMoc Include="VI2DScene\VI2DSceneWidget.h" />
-    <ClInclude Include="VI2DScene\VI2DUnit.h" />
-    <ClInclude Include="VICore\private\VIAbstractBehavior_m.h" />
-    <ClInclude Include="VICore\private\VIAutoVersion.h" />
-    <ClInclude Include="VICore\private\VICompileMacro.h" />
-    <ClInclude Include="VICore\private\VIDuration_m.h" />
-    <ClInclude Include="VICore\private\VIMacro.h" />
-    <ClInclude Include="VICore\VIConsole.h" />
-    <ClInclude Include="VICore\private\VIObject_m.h" />
-    <QtMoc Include="VICore\VIBasicType.h" />
-    <ClInclude Include="VICore\VICore.h" />
-    <QtMoc Include="VICore\VIPackage.h" />
-    <QtMoc Include="VICore\VICoreFramework.h" />
-    <QtMoc Include="VICore\VIBehavior.h" />
-    <QtMoc Include="VICore\VIDuration.h" />
-    <ClInclude Include="VICore\VIMultiPlatform.h" />
-    <QtMoc Include="VICore\VIObject.h" />
-    <QtMoc Include="VICore\VIAbstractBehavior.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />

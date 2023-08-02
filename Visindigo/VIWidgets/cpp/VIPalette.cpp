@@ -1,6 +1,6 @@
 ﻿#include "../VIPalette.h"
 
-VI_Singleton_Init(VIPaletteGroup);
+VI_Singleton_StaticInit(VIPaletteGroup);
 
 /*
 VIPalette
@@ -49,7 +49,7 @@ QString VIPalette::getDefaultColorName(DefaultColorName colorName)
 VIPaletteGroup
 */
 def_init VIPaletteGroup::VIPaletteGroup():VIObject(){
-	VI_CHECK_SingletonError(this);
+	VI_Singleton_Init;
 	CurrentPalette = VI_NULLPTR;
 	ChangePaletteUseAnimation = true;
 	ChangeAnimationBehavior = new private_VIPaletteChangeAnimationBehavior(this);

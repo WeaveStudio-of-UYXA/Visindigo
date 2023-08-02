@@ -18,7 +18,6 @@ namespace VisindigoWidgets {
 			this->setURL("https://www.github.com/weavestudio-of-uyxa/visindigo");
 			this->setOrganization("Weave Studio of UYXA");
 			this->setOrganizationDomain("https://www.github.com/weavestudio-of-uyxa");
-			PackageMeta::setInstance(this);
 		}
 	};
 
@@ -26,6 +25,7 @@ namespace VisindigoWidgets {
 	{
 		Q_OBJECT;
 		VI_OBJECT;
+		VI_HAS_INHERIT(VIPackage);
 		_Public def_init Package() {
 			setPackageMeta(new VisindigoWidgets::PackageMeta);
 		}

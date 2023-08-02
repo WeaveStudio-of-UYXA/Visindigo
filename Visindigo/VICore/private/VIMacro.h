@@ -3,6 +3,8 @@
 #include "VICompileMacro.h"
 #include "VisindigoNamespace.h"
 //This file contains the core macro definitions of the CE library
+#ifndef VI_MACRO
+#define VI_MACRO
 #define VI_NULLPTR Q_NULLPTR
 #define VI_NULL Q_NULLPTR
 #define _Public public:
@@ -38,15 +40,19 @@
 #define VI_HAS_INHERIT(name) public: virtual void __INHERIT_FLAG_##name__() HalfVirtual;
 
 #define VI_Singleton(name) protected: static name* _instance; public: static name* getInstance(){return _instance;} protected: void setInstance(name* value){_instance = value;}
-#define VI_CHECK_SingletonError(name) \
-if (name->_instance != VI_NULLPTR)\
-	{throw VISingletonError("Singleton Error: "+QString(name->metaObject()->className())+\
+#define VI_CHECK_SingletonError \
+if (this->_instance != VI_NULLPTR)\
+	{throw VISingletonError("Singleton Error: "+QString(this->metaObject()->className())+\
 	" has already been created!", "Check your code to ensure that this class is only created once.\nThis exception is thrown on line [ "+\
 	QString::number(__LINE__)+" ] of file: \n"+__FILE__);}
-#define VI_Singleton_Init(name) name* name::_instance = VI_NULLPTR;
-
+#define VI_Singleton_StaticInit(name) name* name::_instance = VI_NULLPTR;
+#define VI_Singleton_Init VI_CHECK_SingletonError else{_instance = this;}
 #define VI_CHECK_NullPointerError(name) \
 if (name == VI_NULLPTR)\
 	{throw VINullPointerError("NullPointer Error: Pointer '"+##name+\
 	"' should not be null", "Check your code to ensure that the memory pointed to by this pointer has been initialized before access, or avoid access after null.\nThis exception is thrown on line [ "+\
 	QString::number(__LINE__)+" ] of file: \n"+__FILE__);}
+
+
+
+#endif

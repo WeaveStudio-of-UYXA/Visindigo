@@ -1,5 +1,5 @@
 ﻿#include "../VICommand.h"
-VI_Singleton_Init(VICommandHost);
+VI_Singleton_StaticInit(VICommandHost);
 
 VICommandHandler::VICommandHandler() {
 }
@@ -20,7 +20,7 @@ bool VICommandHost::addCommandHandler(VICommandHandler* handler) {
 }
 
 def_init VICommandHost::VICommandHost(QObject* parent) :VIObject(parent) {
-	VI_CHECK_SingletonError(this);
+	VI_Singleton_Init;
 	setObjectName("VICommandHost");
 	setInstance(this);
 	consoleLog("Initialized");

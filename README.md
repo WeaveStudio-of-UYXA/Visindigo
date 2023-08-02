@@ -7,6 +7,16 @@
 
 [单击跳转到参考文档](https://www.yuque.com/tsingyayin/visindigo)
 
+# 使用Visindigo
+1. 安装Qt，当前Qt版本为5.15.2
+2. 安装Visual Studio 2022，安装C++桌面开发组件
+3. 在Visual Studio 2022中安装扩展“Qt Visual Studio Tools”、“Force UTF-8"
+4. 将Qt配置到Qt Visual Studio Tools中
+5. 将Visindigo安装文件放置在D:\Visindigo目录下，检查Visindigo Debug dll路径应该位于`D:\Visindigo\x64\Debug\Visindigod.dll`。
+6. 将Visindigo安装文件中的VisindigoTemplateProject文件夹复制到Visual Studio 2022的项目模板文件夹中，它位于`C:\Users\您的用户名\Documents\Visual Studio 2022\Templates\ProjectTemplates`。
+7. 在Visual Studio中新建项目，选择Visindigo TemplateProject，输入项目名称，点击确定。
+8. 如果您需要开发Visindigo dll，请您将Visindigo安装文件中的PyTools文件夹复制到您的解决方案根目录，即与您的解决方案文件（.sln）同级的目录中。并且您需要安装Python3.9，并在安装时勾选“Add Python to PATH”（将Python添加到环境变量中），若您忘记此项或不记得是否有勾选此项，您可以在网络上查找教程，即“如何将Python添加到环境变量中”。
+
 # 问题反馈和国际化 Feedback & i18n
 
 ## 问题反馈
@@ -31,6 +41,16 @@ With regard to multilingual translation in this software, we hope that users of 
 
 이 소프트웨어 내의 다국어 번역 문제에 관하여, 우리는 각 언어의 사용자가 공헌할 수 있기를 희망하며, 만약 후속으로 확실히 이러한 수요가 있다면, 우리는 번역되어야 할 내용을 지적할 것이다.
 
+# 源代码贡献
+如果您希望增加或修改Visindigo程序中的功能，请Fork本仓库，在修改完毕后提交Pull请求。
+
+请注意：
+* Visindigo主要C++内容只接受含有Qt、STL的源代码，请勿引入任何其他库，例如OpenCV、Windows API，boost等，如果必须引入，请将该库中未能跨平台的部分重新用Qt实现。（例如您如果希望引入Spine之类的东西，您应该取得Spine的全部C++源代码，并将部分内容改为Qt实现）
+* Visindigo Installer主要C++内容允许引入其他第三方库。
+* VIJS API指的是由Visindigo程序提供的JavaScript API，JSVI API指的是在Visindigo.JS框架下直接由JavaScript编写实现的API，您可以自由扩展JSVI API，只要您写的这些扩展能够在Visindigo.JS框架上面运行。
+* 不要使用“从Qt4继承，仍然提供支持但不再继续开发”的旧版Qt组件如Qt Script。
+* 不要使用C++20及之后版本中的新内容，不要使用MSVC支持不了的特性。
+
 # 致谢
 
 Visindigo是框架型应用程序，为了向用户讲解如何使用这样的框架，我们使用此框架了重构现在在明日方舟二创社区同人剧情中经常使用的软件YSP，感谢《明日方舟》的好故事为所有在看此文的各位带来了创作的热情与欲望。
@@ -41,59 +61,4 @@ Visindigo感谢万维工作室（Weave Studio）的各位同学协助了软件�
 
 Visindigo感谢紫靛工作室（Studio Indigo）的各位同学的协助与鞭策，如果没有这些同学细致广泛的运用YSP，发现其中的问题，就不会有Visindigo框架的提出与实现。由于我们最初希望的仍然是限于视觉小说框架而非通用二维场景框架之类的东西，所以我们最初的名字是Yayin Visual Story，考虑紫靛工作室名称中的Indigo可以作为靛青解释，与TsingYayin的姓氏一致，故而使框架最后得名为Visindigo，译为“流清”（或者`清流`？）
 
-# 源代码贡献
-如果您希望增加或修改Visindigo程序中的功能，请Fork本仓库，在修改完毕后提交Pull请求。
 
-请注意：
-* Visindigo主要C++内容只接受含有Qt、STL的源代码，请勿引入任何其他库，例如OpenCV、Windows API，boost等，如果必须引入，请将该库中未能跨平台的部分重新用Qt实现。（例如您如果希望引入Spine之类的东西，您应该取得Spine的全部C++源代码，并将部分内容改为Qt实现）
-* Visindigo Installer主要C++内容允许引入其他第三方库。
-* VIJS API指的是由Visindigo程序提供的JavaScript API，JSVI API指的是在Visindigo.JS框架下直接由JavaScript编写实现的API，您可以自由扩展JSVI API，只要您写的这些扩展能够在Visindigo.JS框架上面运行。
-* 不要使用“从Qt4继承，仍然提供支持但不再继续开发”的旧版Qt组件如Qt Script。
-* 不要使用C++17及之后版本中的新内容，不要使用MSVC支持不了的特性。
-
-# 使用Visindigo
-
-1. 新建一个Qt Empty项目
-2. 添加Qt模块`Core`, `Gui`, `Widgets`, `Qml`, `Multimedia`
-3. 将本仓库直接放在您的项目文件夹下，或如果您使用了Git，您可以将本仓库作为子模块添加到您的项目中，并在Visual Studio中右键Visindigo的文件夹，将其“包括到项目中”（注意，如果您在编译过程中遇到了来自Visindigo的错误文件，直接将其排除即可，这些文件很显然还没有准备好被编译）
-4. 在您的`main.cpp`代码中添加以下内容：
-   ```cpp
-   #pragma execution_character_set("utf-8")
-   #include "Visindigo/VICore"
-    /*
-    * Visindigo Main
-    * Every Visindigo program must start with "visindigo program" and end with "programEnd"
-    */
-    visindigo program {
-      VIFramework VIFrame(sysArgv);
-      // You can put your framework initialization code here
-      // ##########################################VVVVVVVVVVVVVVVVVVVV
-      VIFrame.useDebugModeRuntime();
-
-
-      // ##########################################AAAAAAAAAAAAAAAAAAA
-      // Here we initialize the framework
-      VIFrame.init();
-
-      // You can put your own code here
-      // ##########################################VVVVVVVVVVVVVVVVVVVV
-      VIConsole::printLine("Hello World!");
-
-      // ##########################################AAAAAAAAAAAAAAAAAAA
-      // Here we start the framework
-      VIFrame.start();
-      // Any code after this line will not be executed
-    } programEnd;
-      
-   ```
-5. 完事，你可以开始编写你的Visindigo程序了
-6. 如果你在Visual Studio上新建了Qt Empty项目，并且程序提示找不到winMain等，请在Debug调试属性->链接器->系统->子系统中选择“控制台”，并在调试属性->链接器->高级->入口点中填写`mainCRTStartup`。Release同理，不过可以把子系统改为“窗口”。
-
-# 运行Visindigo项目开发工具（仅限Windows）
-* 确保您的计算机上拥有`Python3.8`（或与之兼容的更高版本）
-* 确保您的Python有PySide2库，如果没有，您应该使用Pypi进行安装，在您的控制台执行以下命令：
-  ```
-  pip install pyside2
-  ```
-* 使用Visual Studio Code打开此项目文件夹，确保您的Visual Studio Code可以正常访问您的Python环境
-* 直接运行项目即可

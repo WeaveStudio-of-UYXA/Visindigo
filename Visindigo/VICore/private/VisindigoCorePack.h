@@ -8,7 +8,9 @@ namespace VisindigoCore {
 		Q_OBJECT;
 		VI_OBJECT;
 		VI_HAS_INHERIT(VIPackageMeta);
+		VI_Singleton(PackageMeta);
 		_Public def_init PackageMeta():VIPackageMeta() {
+			VI_Singleton_Init;
 			this->setPackageName("VisindigoCore");
 			this->setPackageVersionMajor(VI_VERSION_MAJOR);
 			this->setPackageVersionMinor(VI_VERSION_MINOR);
@@ -29,8 +31,11 @@ namespace VisindigoCore {
 	{
 		Q_OBJECT;
 		VI_OBJECT;
+		VI_HAS_INHERIT(VIPackage);
+		VI_Singleton(Package);
 		_Private QString t;
 		_Public def_init Package() {
+			VI_Singleton_Init;
 			setPackageMeta(new VisindigoCore::PackageMeta);
 			getPackageMeta()->addTranslatableObject(this);
 			getPackageMeta()->initTranslation();
