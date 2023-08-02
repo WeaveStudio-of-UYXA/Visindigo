@@ -24,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="$safeprojectname$Package.h" />
+    <QtMoc Include="$safeprojectname$PackageMeta.h" />
     <ClInclude Include="CompileMacro.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -34,7 +35,7 @@
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
-    <ProjectName>VisindigoTemplateProject</ProjectName>
+    <ProjectName>TEMP</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -100,22 +101,22 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <ExternalIncludePath>D:\Visindigo\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>D:\Visindigo\x64\Debug;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>D:\Visindigo\0.11.0\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>D:\Visindigo\0.11.0\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">
-    <ExternalIncludePath>D:\Visindigo\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>D:\Visindigo\x64\Debug;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>D:\Visindigo\0.11.0\x64\Debug\Visindigo;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>D:\Visindigo\0.11.0\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>D:\Visindigo\x64\Release;$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>D:\Visindigo\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+    <LibraryPath>D:\Visindigo\0.11.0\x64\Release;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>D:\Visindigo\0.11.0\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>D:\Visindigo\x64\Release;$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>D:\Visindigo\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+    <LibraryPath>D:\Visindigo\0.11.0\x64\Release;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>D:\Visindigo\0.11.0\x64\Release\Visindigo;$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
@@ -127,7 +128,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <PostBuildEvent>
-      <Command>xcopy /y /d "D:\Visindigo\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "D:\Visindigo\0.11.0\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">
@@ -137,7 +138,7 @@
     </Link>
     <PostBuildEvent>
       <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py";
-xcopy /y /d "D:\Visindigo\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
+xcopy /y /d "D:\Visindigo\0.11.0\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <ClCompile>
       <PreprocessorDefinitions>$(ProjectName)_DEVELOPER;_Public=public:;_Private=private:;_Protected=protected:;_Slot=public Q_SLOTS:;_Signal=Q_SIGNALS:;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -160,7 +161,7 @@ xcopy /y /d "D:\Visindigo\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <PostBuildEvent>
-      <Command>xcopy /y /d "D:\Visindigo\x64\Release\Visindigo.dll" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "D:\Visindigo\0.11.0\x64\Release\Visindigo.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">
@@ -169,7 +170,7 @@ xcopy /y /d "D:\Visindigo\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
       <AdditionalDependencies>Visindigo.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py";xcopy /y /d "D:\Visindigo\x64\Release\Visindigo.dll" "$(OutDir)"</Command>
+      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py";xcopy /y /d "D:\Visindigo\0.11.0\x64\Release\Visindigo.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <ClCompile>
       <PreprocessorDefinitions>$(ProjectName)_DEVELOPER;_Public=public:;_Private=private:;_Protected=protected:;_Slot=public Q_SLOTS:;_Signal=Q_SIGNALS:;%(PreprocessorDefinitions)</PreprocessorDefinitions>

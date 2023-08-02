@@ -46,7 +46,6 @@ With regard to multilingual translation in this software, we hope that users of 
 
 请注意：
 * Visindigo主要C++内容只接受含有Qt、STL的源代码，请勿引入任何其他库，例如OpenCV、Windows API，boost等，如果必须引入，请将该库中未能跨平台的部分重新用Qt实现。（例如您如果希望引入Spine之类的东西，您应该取得Spine的全部C++源代码，并将部分内容改为Qt实现）
-* Visindigo Installer主要C++内容允许引入其他第三方库。
 * VIJS API指的是由Visindigo程序提供的JavaScript API，JSVI API指的是在Visindigo.JS框架下直接由JavaScript编写实现的API，您可以自由扩展JSVI API，只要您写的这些扩展能够在Visindigo.JS框架上面运行。
 * 不要使用“从Qt4继承，仍然提供支持但不再继续开发”的旧版Qt组件如Qt Script。
 * 不要使用C++20及之后版本中的新内容，不要使用MSVC支持不了的特性。

@@ -8,7 +8,7 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "./PyTools/WindowsDllExport/WindowsDllExport.py",
+            "program": "./PyTools/WindowsInstallPack/WindowsInstallPack.py",
             "console": "externalTerminal",
             "justMyCode": true
         }

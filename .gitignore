@@ -43,6 +43,10 @@ bld/
 notPrepared/
 SEM/
 
+#Visindigo installer files
+InstallPack
+InstallPackCache
+VisindigoTemplateProjectBackup
 #Visindigo main
 Visindigo/main.cpp
 Visindigo/testCode.h

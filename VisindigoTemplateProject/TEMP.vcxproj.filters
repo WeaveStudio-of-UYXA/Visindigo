@@ -39,5 +39,8 @@
     <QtMoc Include="$safeprojectname$Package.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="$safeprojectname$PackageMeta.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

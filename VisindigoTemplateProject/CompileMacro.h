@@ -4,8 +4,8 @@
 */
 #pragma once
 #include <VICore>
-#if VI_VERSION_MAJOR != 0
-	#error "This package is only for Visindigo 0.x.x, please use the correct version of Visindigo!"
+#if VI_VERSION_MAJOR != 0 || VI_VERSION_MINOR == 11 || VI_VERSION_PATCH == 0
+ #error "This template is only for Visindigo 0.11.0, please use the correct version of Visindigo!"
 #endif
 
 #define $safeprojectname$_USER
