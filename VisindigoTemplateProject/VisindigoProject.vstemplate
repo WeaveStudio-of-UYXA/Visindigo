@@ -1,7 +1,7 @@
 ﻿<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>Visindigo Template Project</Name>
-    <Description>此模板适用于Visindigo0.11.0和Qt5.15的C++桌面开发</Description>
+    <Name>Visindigo 0.11.0 Template Project</Name>
+    <Description>适用于Visindigo0.11.0和Qt5.15开发的项目模板</Description>
     <ProjectType>VC</ProjectType>
     <ProjectSubType>
     </ProjectSubType>
@@ -24,12 +24,12 @@
   <TemplateContent>
     <Project TargetFileName="TEMP.vcxproj" File="TEMP.vcxproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.vcxproj.filters">TEMP.vcxproj.filters</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="VisindigoApp.cpp">VisindigoApp.cpp</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$Package.cpp">TEMPPackage.cpp</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="CompileMacro.h">CompileMacro.h</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$Package.h">TEMPPackage.h</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$PackageMeta.h">TEMPPackageMeta.h</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="README.md">README.md</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$Main.cpp">VisindigoApp.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$\$safeprojectname$PackageMeta.h">TEMPPackageMeta.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$\$safeprojectname$Package.h">TEMPPackage.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$\$safeprojectname$.h">TEMP.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$\cpp\$safeprojectname$Package.cpp">TEMPPackage.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$\private\$safeprojectname$CompileMacro.h">TEMPCompileMacro.h</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

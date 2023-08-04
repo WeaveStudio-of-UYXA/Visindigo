@@ -19,13 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$safeprojectname$Package.cpp" />
-    <ClCompile Include="VisindigoApp.cpp" />
+    <ClCompile Include="$safeprojectname$/cpp/$safeprojectname$Package.cpp" />
+    <ClCompile Include="$safeprojectname$Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="$safeprojectname$Package.h" />
-    <QtMoc Include="$safeprojectname$PackageMeta.h" />
-    <ClInclude Include="CompileMacro.h" />
+    <QtMoc Include="$safeprojectname$/$safeprojectname$Package.h" />
+    <QtMoc Include="$safeprojectname$/$safeprojectname$PackageMeta.h" />
+    <ClInclude Include="$safeprojectname$/private/$safeprojectname$CompileMacro.h" />
+    <ClInclude Include="$safeprojectname$/$safeprojectname$.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{$guid1$}</ProjectGuid>
@@ -51,6 +52,7 @@
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'" Label="Configuration">
+    <TargetName>$(ProjectName)d</TargetName>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
@@ -133,12 +135,11 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">
     <Link>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <EntryPointSymbol>_DllMainCRTStartup</EntryPointSymbol>
       <AdditionalDependencies>Visindigod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py";
-xcopy /y /d "D:\Visindigo\0.11.0\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
+      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py" "$(ProjectName)"</Command>
     </PostBuildEvent>
     <ClCompile>
       <PreprocessorDefinitions>$(ProjectName)_DEVELOPER;_Public=public:;_Private=private:;_Protected=protected:;_Slot=public Q_SLOTS:;_Signal=Q_SIGNALS:;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -166,11 +167,11 @@ xcopy /y /d "D:\Visindigo\0.11.0\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">
     <Link>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <EntryPointSymbol>_DllMainCRTStartup</EntryPointSymbol>
       <AdditionalDependencies>Visindigo.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py";xcopy /y /d "D:\Visindigo\0.11.0\x64\Release\Visindigo.dll" "$(OutDir)"</Command>
+      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py" "$(ProjectName)"</Command>
     </PostBuildEvent>
     <ClCompile>
       <PreprocessorDefinitions>$(ProjectName)_DEVELOPER;_Public=public:;_Private=private:;_Protected=protected:;_Slot=public Q_SLOTS:;_Signal=Q_SIGNALS:;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -197,7 +198,7 @@ xcopy /y /d "D:\Visindigo\0.11.0\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -221,7 +222,7 @@ xcopy /y /d "D:\Visindigo\0.11.0\x64\Debug\Visindigod.dll" "$(OutDir)"</Command>
       <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>

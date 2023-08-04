@@ -47,6 +47,7 @@ SEM/
 InstallPack
 InstallPackCache
 VisindigoTemplateProjectBackup
+VisindigoTemplateFileBackup
 #Visindigo main
 Visindigo/main.cpp
 Visindigo/testCode.h

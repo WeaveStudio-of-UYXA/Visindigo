@@ -23,23 +23,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="VisindigoApp.cpp">
+    <ClCompile Include="$safeprojectname$Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="$safeprojectname$Package.cpp">
+    <ClCompile Include="$safeprojectname$/cpp/$safeprojectname$Package.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CompileMacro.h">
+    <ClInclude Include="$safeprojectname$/private$safeprojectname$CompileMacro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$safeprojectname$/private$safeprojectname$.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="$safeprojectname$Package.h">
+    <QtMoc Include="$safeprojectname$/$safeprojectname$Package.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="$safeprojectname$PackageMeta.h">
+    <QtMoc Include="$safeprojectname$/$safeprojectname$PackageMeta.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

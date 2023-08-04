@@ -1,12 +1,12 @@
 import sys
 import os
-
+ProjectName = "Visindigo"
 
 def copyAllHeadFiles(path):
     """Step1: copy all head files to the include folder"""
-    RootFolder = path+"\\Visindigo"
-    NewFileFolderDebugRoot = path+"\\x64\\DllDebug\\Visindigo"
-    NewFileFolderReleaseRoot = path+"\\x64\\DllRelease\\Visindigo"
+    RootFolder = path+"\\"+ProjectName
+    NewFileFolderDebugRoot = path+"\\x64\\DllDebug\\"+ProjectName
+    NewFileFolderReleaseRoot = path+"\\x64\\DllRelease\\"+ProjectName
     #clear old files
     if os.path.exists(NewFileFolderDebugRoot):
         os.system("rd /s /q "+NewFileFolderDebugRoot)
@@ -17,8 +17,8 @@ def copyAllHeadFiles(path):
         for file in files:
             if file.endswith(".h"):
                 RawFilePath = root+"\\"+file
-                NewFileFolderDebug = path+"\\x64\\DllDebug\\Visindigo\\include\\"+os.path.relpath(root, RootFolder)
-                NewFileFolderRelease = path+"\\x64\\DllRelease\\Visindigo\\include\\"+os.path.relpath(root, RootFolder)
+                NewFileFolderDebug = path+"\\x64\\DllDebug\\"+ProjectName+"\\include\\"+os.path.relpath(root, RootFolder)
+                NewFileFolderRelease = path+"\\x64\\DllRelease\\"+ProjectName+"\\include\\"+os.path.relpath(root, RootFolder)
                 print(RawFilePath)
                 if not os.path.exists(NewFileFolderDebug):
                     os.makedirs(NewFileFolderDebug)
@@ -32,10 +32,10 @@ def copyAllHeadFiles(path):
 def createModuleHeadFiles(path):
     """Step2: create module head files"""
     RootFolder = path+"\\Visindigo"
-    NewFileFolderDebugRoot = path+"\\x64\\DllDebug\\Visindigo\\include"
-    NewFileFolderReleaseRoot = path+"\\x64\\DllRelease\\Visindigo\\include"
-    NewFileFolderDebugModuleRoot = path+"\\x64\\DllDebug\\Visindigo"
-    NewFileFolderReleaseModuleRoot = path+"\\x64\\DllRelease\\Visindigo"
+    NewFileFolderDebugRoot = path+"\\x64\\DllDebug\\"+ProjectName+"\\include"
+    NewFileFolderReleaseRoot = path+"\\x64\\DllRelease\\"+ProjectName+"\\include"
+    NewFileFolderDebugModuleRoot = path+"\\x64\\DllDebug\\"+ProjectName
+    NewFileFolderReleaseModuleRoot = path+"\\x64\\DllRelease\\"+ProjectName
     RootModule = os.listdir(NewFileFolderDebugRoot)
     ModuleNames = []
     for i in RootModule:
@@ -58,6 +58,9 @@ def createModuleHeadFiles(path):
 
 if __name__ == "__main__":
     path:str = sys.path[0]
+    pName:str = sys.argv[1]
+    ProjectName = pName
+    print("Current Project Name is: "+pName)
     print(path)
     os.chdir(path+"/../../")
     path = os.getcwd()

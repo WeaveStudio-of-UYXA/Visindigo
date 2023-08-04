@@ -1,0 +1,14 @@
+﻿<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>VIObjectExtend.h</DefaultName>
+    <Name>VIObject 派生定义模板</Name>
+    <Description>此模板创建一个文件，内含一个和文件名相同的类的定义框架，它继承VIObject。此模板适用于开发一般对象</Description>
+    <ProjectType>VC</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>VisindigoV.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.h" ReplaceParameters="true">VIObjectTEMP.h</ProjectItem>
+  </TemplateContent>
+</VSTemplate>
