@@ -8,7 +8,7 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "./PyTools/VisindigoPackMake/windows_x86_64.py",
+            "program": "${file}",
             "console": "externalTerminal",
             "justMyCode": true
         }

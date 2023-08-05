@@ -48,6 +48,8 @@ InstallPack
 InstallPackCache
 VisindigoTemplateProjectBackup
 VisindigoTemplateFileBackup
+PyTools/VisindigoDeployer/build
+PyTools/VisindigoDeployer/dist
 #Visindigo main
 Visindigo/main.cpp
 Visindigo/testCode.h

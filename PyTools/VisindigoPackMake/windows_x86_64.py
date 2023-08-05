@@ -1,5 +1,6 @@
 import sys
 import os
+import winreg
 """
 This file is only for Windows x86_64 deploy
 """
@@ -72,10 +73,10 @@ def changeVersionInTemplateProject(path):
         templateFile.close()
         for i in range(len(fileLines)):
             line = fileLines[i]
-            if "D:\\Visindigo\\" in line and "\\x64\\" in line:
-                index1 = line.find("D:\\Visindigo\\")
-                index2 = line.find("\\x64\\")
-                line = line[:index1]+"D:\\Visindigo\\"+versionFullString+line[index2:]
+            if "$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@" in line and ")\\x64\\" in line:
+                index1 = line.find("$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@")
+                index2 = line.find(")\\x64\\")
+                line = line[:index1]+"$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Visindigo@"+versionFullString+line[index2:]
                 fileLines[i] = line
         print("VCXProj has been updated")
         templateFile = open(path+"/VisindigoTemplateProject/TEMP.vcxproj", "w", encoding="utf-8")
@@ -108,6 +109,15 @@ def zipTemplateProject(path):
     print("zip template")
     os.system("bz a "+(path+"/"+VersionFolderName).replace("/","\\")+"\\VisindigoTemplateProject"+versionFullString+".zip "+path.replace("/","\\")+"\\VisindigoTemplateProject\\*.*")
     print("zip template done")
+
+def copyTemplateProject(path):
+    global VersionFolderName
+    #copy all the files in VisindigoTemplateProjectinto VersionFolderName/VisindigoTemplateProject
+    print("copy template Project")
+    if not os.path.exists(path+"/"+VersionFolderName+"/VisindigoTemplateProject"+versionFullString):
+        os.makedirs(path+"/"+VersionFolderName+"/VisindigoTemplateProject"+versionFullString)
+    os.system("xcopy "+path.replace("/","\\")+"\\VisindigoTemplateProject "+(path+"/"+VersionFolderName+"/VisindigoTemplateProject"+versionFullString).replace("/","\\")+" /e /i /h")
+    print("copy template Project done")
 
 def copyFileinDllDebug(path):
     global VersionFolderName
@@ -147,23 +157,26 @@ def zipFullFolder(path):
         print("delete old zip file")
         os.remove(path+"/InstallPack/Visindigo_"+versionFullString+"_Windows_x64.zip")
     os.system("bz a "+path+"/InstallPack/Visindigo_"+versionFullString+"_Windows_x64.zip "+(path+"/"+InstallPackName).replace("/","\\"))
+    os.system("bz a "+path+"/InstallPack/Visindigo_"+versionFullString+"_Windows_x64.zip "+(path+"/"+InstallPackName+"/../VisindigoDeployer.exe").replace("/","\\"))
     print("zip full folder done")
 
 def deployNow(path):
     global InstallPackName
     # copy all the files in version folder to the deploy version folder
     print("deploy now")
-    if not os.path.exists("D:/Visindigo"):
-        os.makedirs("D:/Visindigo")
-    os.system("xcopy "+path.replace("/","\\")+"\\"+InstallPackName+" D:\\Visindigo /e /i /h /y")
+    if not os.path.exists("D:/Visindigo/"+versionFullString):
+        os.makedirs("D:/Visindigo/"+versionFullString)
+    os.system("xcopy "+path.replace("/","\\")+"\\"+InstallPackName+"\\"+versionFullString+" D:\\Visindigo\\"+versionFullString+" /e /i /h /y")
+
     # copy template zip to VS document template folder
     print("copy template zip to VS document template folder")
     if not os.path.exists("C:/Users/"+os.getlogin()+"/Documents/Visual Studio 2022/Templates/ProjectTemplates"):
         print("Can not find Visual Studio 2022")
     else:
-        if os.path.isfile("C:/Users/"+os.getlogin()+"/Documents/Visual Studio 2022/Templates/ProjectTemplates"+"/VisindigoTemplateProject"+versionFullString+".zip"):
-            os.remove("C:/Users/"+os.getlogin()+"/Documents/Visual Studio 2022/Templates/ProjectTemplates"+"/VisindigoTemplateProject"+versionFullString+".zip")
-        os.system("copy "+(path+"/"+VersionFolderName).replace("/","\\")+"\\VisindigoTemplateProject"+versionFullString+".zip \"C:\\Users\\"+os.getlogin()+"\\Documents\\Visual Studio 2022\\Templates\\ProjectTemplates\" /y")
+        if os.path.exists("C:/Users/"+os.getlogin()+"/Documents/Visual Studio 2022/Templates/ProjectTemplates"+"/VisindigoTemplateProject"+versionFullString):
+            os.system("rd /s /q "+"C:\\Users\\"+os.getlogin()+"\\Documents\\Visual Studio 2022\\Templates\\ProjectTemplates"+"\\VisindigoTemplateProject"+versionFullString)
+        os.system("xcopy "+(path+"/"+InstallPackName+"/"+versionFullString).replace("/","\\")+"\\VisindigoTemplateProject"+versionFullString+
+                  " \"C:\\Users\\"+os.getlogin()+"\\Documents\\Visual Studio 2022\\Templates\\ProjectTemplates\\VisindigoTemplateProject"+versionFullString+"\" /e /i /h /y")
         #copy template files
     print("copy template files")
     if not os.path.exists("C:/Users/"+os.getlogin()+"/Documents/Visual Studio 2022/Templates/ItemTemplates"):
@@ -185,10 +198,10 @@ def windows_x86_64_PackMake(path):
         recoverTemplate(path)
         print("InstallPack failed, as Template version can not be changed, all changes have been recovered")
         return
-    zipTemplateProject(path) # zip the Visual Studio Project Template
+    copyTemplateProject(path) # copy the Visual Studio Project Template
     copyFileinDllDebug(path) # copy Visindigo Debug files (include, lib, dll, pdb, ilk, exp)
     copyFileinDllRelease(path) # copy Visindigo Release files (include, lib, dll, exp)
-    copyTemplateFile(path) # zip the Visual Studio Item Template
+    copyTemplateFile(path) # copy the Visual Studio Item Template
     zipFullFolder(path) # generate the full folder zip file
     deployNow(path) # copy Visindigo to the deploy folder, copy template to VS template folder
 
