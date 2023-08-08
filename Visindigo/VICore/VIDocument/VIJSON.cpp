@@ -21,18 +21,14 @@ namespace VIDocument {
 		this->DefaultSettings = QJsonDocument::fromJson(data.readAll().toUtf8()).object();
 		file.close();
 	}
-	bool VIJSON::loadSettings(const QString& path) {
+	bool VIJSON::loadSettings(const QString& path, bool autoCreate) {
 		QFile file(path);
 		if (!file.exists()) {
-			if (DefaultSettingsPath == "") {
-				QDir().mkpath(path.section('/', 0, -2));
-				file.open(QIODevice::WriteOnly);
-				file.write(QJsonDocument(this->DefaultSettings).toJson(QJsonDocument::Indented));
-				file.close();
-			}
-			else {
-				QFile::copy(DefaultSettingsPath, path);
-			}	
+			if (!autoCreate) { return false; }
+			QDir().mkpath(path.section('/', 0, -2));
+			file.open(QIODevice::WriteOnly);
+			file.write(QJsonDocument(this->DefaultSettings).toJson(QJsonDocument::Indented));
+			file.close();
 		}
 		file.open(QIODevice::ReadOnly);
 		if (!file.isOpen()) {
@@ -153,15 +149,18 @@ namespace VIDocument {
 		*successflag = false;
 		return QVariant();
 	}
-	void VIJSON::setValueOf(const QString& objName, const QVariant& value) {
+	void VIJSON::setValueOf(const QString& objName, const QVariant& value, bool allowAppend) {
 		if (objName == "") { return; }
 		bool haveValue = false;
-		getValueOfDefault(&haveValue, objName);
-		if (!haveValue) { return; }
+		if (!allowAppend) {
+			getValueOfDefault(&haveValue, objName);
+			if (!haveValue) { return; }
+		}
 		QStringList objNameList = objName.split('.');
 		QStringList::iterator it = objNameList.begin();
 		QJsonValue val = setValueOf(&objNameList, &it, this->Settings.object(), value);
 		this->Settings.setObject(val.toObject());
+		consoleLog("Set value of '" + objName + "' to '" + value.toString() + "'");
 		if (this->SaveOnSet) {
 			this->saveSettings();
 		}

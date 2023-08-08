@@ -130,4 +130,5 @@ bool VICommandHost::handleCommand(QString command) {
 			return false;
 		}
 	}
+	return true;
 }

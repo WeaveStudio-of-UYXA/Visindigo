@@ -368,3 +368,12 @@ void VIDebugBehavior::onTick() {
 	}
 	//qDebug() << Host->getTickDuration()<<((VIQuantifyTickBehaviorHost*)Host)->getNSPT()/1000000.0<<1000000000.0/Host->getTickDuration();
 }
+
+void VIAnimationBehavior::active(Visindigo::QuantifyTickType) {
+	VITimedBehavior::active(Visindigo::T64);
+}
+
+void VIAnimationBehavior::subside() {
+	VITimedBehavior::subside();
+	emit finished();
+}

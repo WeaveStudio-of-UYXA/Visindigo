@@ -41,6 +41,12 @@ void private_VIECMAScripts::onBoot(const QString& fileName, const QString& entry
 	if (InThread) {
 		ThreadMutex->lock();
 	}
+	for (auto i = BuiltInModules.begin(); i != BuiltInModules.end(); i++) {
+		registerBuiltInModule(engine, *i);
+	}
+	for (auto i = VIObjectModules.begin(); i != VIObjectModules.end(); i++) {
+		engine->globalObject().setProperty((*i)->getObjectName(), engine->newQObject(*i));
+	}
 	QFileInfo fileInfo(fileName);
 	QString path = fileInfo.absolutePath();
 	qDebug() << path;
@@ -50,12 +56,7 @@ void private_VIECMAScripts::onBoot(const QString& fileName, const QString& entry
 		QJSValue ModuleObject = engine->importModule(i.value());
 		engine->globalObject().setProperty(i.key(), ModuleObject);
 	}
-	for (auto i = BuiltInModules.begin(); i != BuiltInModules.end(); i++) {
-		registerBuiltInModule(engine, *i);
-	}
-	for (auto i = VIObjectModules.begin(); i != VIObjectModules.end(); i++) {
-		engine->globalObject().setProperty((*i)->getObjectName(), engine->newQObject(*i));
-	}
+	
 	QJSValue MainFunction = MainObject.property(entry);
 	QJSValue result = MainFunction.call();
 	if (result.isError()) {
@@ -171,8 +172,7 @@ QJSValue VIECMAScripts::getGlobalObject(QString name) {
 void VIECMAScripts::onExit() {
 	OnRunning = false;
 	ThreadWaitCondition->wakeAll();
-	Thread->wait();
-	Thread->quit();
+	Thread->exit();
 }
 
 def_del VIECMAScripts::~VIECMAScripts() {

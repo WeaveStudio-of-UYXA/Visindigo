@@ -24,7 +24,7 @@ class VIPublicAPI VIAbstractBehavior :public VIObject
 	_Public virtual void onSubside()  PureVirtual;
 	_Protected virtual Visindigo::BehaviorState hostCall()  PureVirtual;
 	_Public virtual void active(Visindigo::QuantifyTickType type = Visindigo::T0) PureVirtual;
-	_Public void subside();
+	_Public virtual void subside();
 };
 
 class VIPublicAPI VIAbstractBehaviorHost :public VIObject

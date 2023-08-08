@@ -106,7 +106,6 @@ class VIPublicAPI VIAnimationBehavior :public VITimedBehavior
 	VI_OBJECT;
 	_Signal void finished();
 	_Public def_init VIAnimationBehavior(QObject* parent = nullptr) :VITimedBehavior(parent) {}
-	_Public void active(Visindigo::QuantifyTickType = Visindigo::T64) override {
-		VITimedBehavior::active(Visindigo::T64);
-	}
+	_Public void active(Visindigo::QuantifyTickType = Visindigo::T64) override;
+	_Public void subside() override;
 };
