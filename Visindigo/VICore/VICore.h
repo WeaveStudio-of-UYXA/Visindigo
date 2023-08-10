@@ -19,7 +19,6 @@
 #include "VIDocument/VIJSON.h"
 #include "VIDocument/VITR.h"
 
-
 #define visindigo int
 #define CoreProgram main(int argc, char* argv[]){try
 #define CoreProgramEnd catch(std::exception& e){VIConsole::printLine(VIConsole::inErrorStyle(e.what()));}catch(VIException& e){e.print();}return VICoreFramework::getCoreInstance()->getReturnCode();}

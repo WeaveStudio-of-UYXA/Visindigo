@@ -1,5 +1,5 @@
 ﻿#include "../VIPalette.h"
-
+#include "../VIWindowsTheme.h"
 VI_Singleton_StaticInit(VIPaletteGroup);
 
 /*
@@ -10,7 +10,7 @@ QStringList VIPalette::getColorNames()
 	return ColorMap.keys();
 }
 
-QColor VIPalette::getColor(const QString &name)
+QColor VIPalette::getColor(const QString& name)
 {
 	if (!ColorMap.contains(name)) {
 		return QColor();
@@ -23,7 +23,7 @@ QColor VIPalette::getColor(DefaultColorName colorName)
 	return getColor(getDefaultColorName(colorName));
 }
 
-void VIPalette::setColor(const QString &name, const QColor &color)
+void VIPalette::setColor(const QString& name, const QColor& color)
 {
 	if (ColorMap.contains(name)) {
 		ColorMap.remove(name);
@@ -34,7 +34,7 @@ void VIPalette::setColor(const QString &name, const QColor &color)
 	ColorMap.insert(name, color);
 }
 
-void VIPalette::setColor(DefaultColorName colorName, const QColor &color)
+void VIPalette::setColor(DefaultColorName colorName, const QColor& color)
 {
 	setColor(getDefaultColorName(colorName), color);
 }
@@ -42,19 +42,21 @@ void VIPalette::setColor(DefaultColorName colorName, const QColor &color)
 QString VIPalette::getDefaultColorName(DefaultColorName colorName)
 {
 	//We think that it is not necessary to give default color a explicit name.
-	return QString("__DefaultColorName_" + QString::number((int)colorName))+"__";
+	return QString("DefaultColorName_" + QString::number((int)colorName)) + "";
 }
 
 /*
 VIPaletteGroup
 */
-def_init VIPaletteGroup::VIPaletteGroup():VIObject(){
+def_init VIPaletteGroup::VIPaletteGroup() :VIObject() {
 	VI_Singleton_Init;
 	CurrentPalette = VI_NULLPTR;
 	ChangePaletteUseAnimation = true;
 	ChangeAnimationBehavior = new private_VIPaletteChangeAnimationBehavior(this);
 	ChangeAnimationBehavior->setGroup(this);
 	ChangeAnimationBehavior->setDuration(1000);
+	this->addPalette("Default", VIColorMap());
+	this->setColor(VIPalette::DefaultColorName::Foreground, QColor(253, 114, 255)); //Purple
 }
 
 void VIPaletteGroup::addPalette(const QString& name, VIColorMap cmap) {
@@ -74,7 +76,7 @@ void VIPaletteGroup::addPalette(const QString& name, VIColorMap cmap) {
 	palette->setInPaletteGroup(true);
 }
 
-void VIPaletteGroup::addPalette(const QString&name, VIPalette* palette) {
+void VIPaletteGroup::addPalette(const QString& name, VIPalette* palette) {
 	if (name == CurrentPaletteName) {
 		return;
 	}
@@ -156,6 +158,12 @@ void VIPaletteGroup::setColorToPalette(const QString& paletteName, const QString
 	}
 }
 
+void VIPaletteGroup::setColorToPalette(const QString& paletteName, VIPalette::DefaultColorName colorName, const QColor& color) {
+	if (PaletteMap.contains(paletteName)) {
+		PaletteMap.value(paletteName)->setColor(colorName, color);
+	}
+}
+
 void VIPaletteGroup::onPaletteChanged(const QString& raw, const QString& cur) {
 	if (ChangePaletteUseAnimation) {
 		if (PaletteMap.contains(raw) && PaletteMap.contains(cur)) {
@@ -177,7 +185,7 @@ private_VIPaletteChangeAnimationBehavior
 3. 将每刻的delta结果直接设到待更换的Palette对象中，然后发出paletteChanged信号，使用户可以在此信号中更新界面
 4. 当动画结束时，将待更换的Palette对象的颜色映射表设为最终的颜色映射表
 */
-def_init private_VIPaletteChangeAnimationBehavior::private_VIPaletteChangeAnimationBehavior(VIPaletteGroup* parent) 
+def_init private_VIPaletteChangeAnimationBehavior::private_VIPaletteChangeAnimationBehavior(VIPaletteGroup* parent)
 	:VIAnimationBehavior(parent) {
 	Group = parent;
 }

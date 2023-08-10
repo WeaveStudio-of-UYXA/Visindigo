@@ -28,5 +28,4 @@ class VIPublicAPI VIObject :public VISuper, VIBaseObject
 };
 
 namespace Visindigo {
-	
 }

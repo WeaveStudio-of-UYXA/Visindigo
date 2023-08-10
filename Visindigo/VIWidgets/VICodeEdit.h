@@ -13,7 +13,7 @@ class VIPublicAPI VICodeEdit :public VIWidget
 	_Public def_init VICodeEdit(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
 		this->setWindowTitle("Visindigo Code Edit");
 		QFont font = QFont("Microsoft YaHei");
-		
+
 		LineNumberArea = new QTextEdit(this);
 		LineNumberArea->setReadOnly(true);
 		LineNumberArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

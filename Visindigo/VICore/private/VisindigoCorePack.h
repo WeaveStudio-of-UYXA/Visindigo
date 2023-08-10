@@ -9,7 +9,7 @@ namespace VisindigoCore {
 		VI_OBJECT;
 		VI_HAS_INHERIT(VIPackageMeta);
 		VI_Singleton(PackageMeta);
-		_Public def_init PackageMeta():VIPackageMeta() {
+		_Public def_init PackageMeta() :VIPackageMeta() {
 			VI_Singleton_Init;
 			this->setPackageName("VisindigoCore");
 			this->setPackageVersionMajor(VI_VERSION_MAJOR);

@@ -1,6 +1,7 @@
 ﻿//此文件中的杂按钮源于CommonEdit
 #pragma once
 #include "../VICore/VICore.h"
+#include "VIPalette.h"
 #include "VIWidget.h"
 
 class VIPublicAPI VIMultiButtonGroup;
@@ -173,7 +174,7 @@ class VIPublicAPI private_VIMultiButtonAnimationLabel :public VIWidget
 		this->setObjectName("VIMultiButtonAnimationLabel");
 		Behavior = new private_VIMultiButtonAnimationBehavior(this);
 		setVIDStyleSheet("default",
-			"private_VIMultiButtonAnimationLabel{background-color:CLR__SystemThemeColor__CLR;border:0px solid white;border-radius:2px;}");
+			"private_VIMultiButtonAnimationLabel{background-color:AUTO_" + VIPalette::getDefaultColorName(VIPalette::DefaultColorName::Foreground) + "_CLR;border:0px solid white;border-radius:2px;}");
 		applyVIDSS("default");
 	}
 };

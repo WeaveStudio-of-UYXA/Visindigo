@@ -137,7 +137,7 @@ void VIDynamicStyleSheetManager::addVIDSS(QWidget* masterWidget, const QString& 
 	else {
 		if (VIDSSContainerHash[masterWidget].contains(name)) {
 			VIDSSContainerHash[masterWidget][name] = container;
-			if (VIDSSNameHash.contains(masterWidget)){
+			if (VIDSSNameHash.contains(masterWidget)) {
 				if (VIDSSNameHash[masterWidget] == name) {
 					container.applyVIDSS();
 				}
@@ -150,7 +150,7 @@ void VIDynamicStyleSheetManager::addVIDSS(QWidget* masterWidget, const QString& 
 }
 
 void VIDynamicStyleSheetManager::applyVIDSS(QWidget* masterWidget, const QString& name) {
-	if (VIDSSContainerHash.contains(masterWidget)&&VIDSSContainerHash[masterWidget].contains(name)) {
+	if (VIDSSContainerHash.contains(masterWidget) && VIDSSContainerHash[masterWidget].contains(name)) {
 		VIDSSNameHash[masterWidget] = name;
 		VIDSSContainerHash[masterWidget][name].applyVIDSS();
 	}

@@ -20,18 +20,17 @@ class VIPublicAPI VIPalette :public VIObject
 	_Signal void colorChanged(QString colorName, QColor color);
 	VI_ProtectedProperty(VIColorMap, ColorMap);
 	VI_ProtectedFlag(InPaletteGroup);
-	_Public def_init VIPalette(VIColorMap cmap = {}) :VIObject() { 
+	_Public def_init VIPalette(VIColorMap cmap = {}) :VIObject() {
 		InPaletteGroup = false;
-		ColorMap = cmap; 
+		ColorMap = cmap;
 	}
 	_Public QStringList getColorNames();
 	_Public QColor getColor(const QString& colorName);
 	_Public QColor getColor(DefaultColorName colorName);
 	_Public void setColor(const QString& colorName, const QColor& color);
 	_Public void setColor(DefaultColorName colorName, const QColor& color);
-	_Private static QString getDefaultColorName(DefaultColorName colorName);
+	_Public static QString getDefaultColorName(DefaultColorName colorName);
 };
-
 
 class VIPublicAPI VIPaletteGroup :public VIObject
 {
@@ -59,6 +58,7 @@ class VIPublicAPI VIPaletteGroup :public VIObject
 	_Public void setColor(const QString& colorName, const QColor& color);
 	_Public void setColor(VIPalette::DefaultColorName colorName, const QColor& color);
 	_Public void setColorToPalette(const QString& paletteName, const QString& colorName, const QColor& color);
+	_Public void setColorToPalette(const QString& paletteName, VIPalette::DefaultColorName colorName, const QColor& color);
 	_Public void onPaletteChanged(const QString& raw, const QString& cur);
 };
 
@@ -82,4 +82,3 @@ class VIPublicAPI private_VIPaletteChangeAnimationBehavior :public VIAnimationBe
 	_Public virtual void onTick() override;
 	_Public virtual void onSubside()override;
 };
-

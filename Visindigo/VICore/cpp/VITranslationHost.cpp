@@ -14,14 +14,14 @@ def_init VITranslationSubHost::VITranslationSubHost(VIPackageMeta* parent) :VIOb
 }
 
 void VITranslationSubHost::addTranslatableObject(VITranslatableObject* t) {
-	if ( ! TargetList.contains(t)) {
+	if (!TargetList.contains(t)) {
 		TargetList.push_back(t);
 		t->TRHost = this;
 	}
 }
 
 void VITranslationSubHost::addTranslationFileName(Visindigo::Language lang, const QString& filename, bool inRC) {
-	if ( ! LanguageFileNames.contains(lang)) {
+	if (!LanguageFileNames.contains(lang)) {
 		VITRFileInfo info;
 		info.FileName = filename;
 		info.inRC = inRC;
@@ -53,7 +53,7 @@ QString VITranslationSubHost::getTranslation(const QString& key) {
 			if (DefaultDoc != VI_NULL) {
 				rtn = DefaultDoc->translate(key);
 				if (rtn != key) { return rtn; }
-				else { 
+				else {
 					rtn = VICoreFrame->getTranslationHostInstance()->topTranslation(key);
 					if (rtn != key) { return rtn; }
 					else { return key; }
@@ -71,13 +71,13 @@ bool VITranslationSubHost::loadVITRDocument(VIDocument::VITR** docPtr, Visindigo
 	}
 	QString fileName = LanguageFileNames[langName].FileName;
 	QString filePath;
-	if (! LanguageFileNames[langName].inRC) {
+	if (!LanguageFileNames[langName].inRC) {
 		filePath = ParentPackage->getPackageRootPath() + "/i18n/" + fileName;
 	}
 	else {
 		filePath = ParentPackage->getPackageInternalPath() + "/i18n/" + fileName;
 	}
-	consoleLog("Loading file in: '" + filePath+"'");
+	consoleLog("Loading file in: '" + filePath + "'");
 	VIDocument::VITR* doc = new VIDocument::VITR();
 	doc->setFilePath(filePath);
 	bool result = doc->load();
@@ -99,12 +99,12 @@ bool VITranslationSubHost::loadVITRDocument(VIDocument::VITR** docPtr, Visindigo
 VITranslationHost
 */
 
-def_init VITranslationHost::VITranslationHost(VISuper* parent):VIObject(parent) {
+def_init VITranslationHost::VITranslationHost(VISuper* parent) :VIObject(parent) {
 	setObjectName(VIVersion::getVisindigoVersion());
 	consoleLog("Host instance created");
 }
 void VITranslationHost::changeLanguage(Visindigo::Language lang) {
-	for(auto i = VICoreFrame->AppInstance->PackageList.begin(); i != VICoreFrame->AppInstance->PackageList.end(); i++) {
+	for (auto i = VICoreFrame->AppInstance->PackageList.begin(); i != VICoreFrame->AppInstance->PackageList.end(); i++) {
 		(*i)->getPackageMeta()->TranslationPackageHost->onGlobalLanguageChange(lang);
 	}
 }

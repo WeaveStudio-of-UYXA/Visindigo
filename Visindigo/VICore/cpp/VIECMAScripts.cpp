@@ -37,7 +37,7 @@ void private_VIECMAScripts::sideLoad(const QString& fileName) {
 	}
 }
 
-void private_VIECMAScripts::onBoot(const QString& fileName, const QString& entry ) {
+void private_VIECMAScripts::onBoot(const QString& fileName, const QString& entry) {
 	if (InThread) {
 		ThreadMutex->lock();
 	}
@@ -56,7 +56,7 @@ void private_VIECMAScripts::onBoot(const QString& fileName, const QString& entry
 		QJSValue ModuleObject = engine->importModule(i.value());
 		engine->globalObject().setProperty(i.key(), ModuleObject);
 	}
-	
+
 	QJSValue MainFunction = MainObject.property(entry);
 	QJSValue result = MainFunction.call();
 	if (result.isError()) {
@@ -73,7 +73,6 @@ void private_VIECMAScripts::onBoot(const QString& fileName, const QString& entry
 		(*i) = VI_NULLPTR;
 	}
 	if (DelLater) {
-		
 		deleteLater();
 	}
 }
@@ -93,11 +92,11 @@ void VIECMAScripts::boot(const QString& fileName, const QString& entry) {
 	boot(fileName, false, entry);
 }
 
-void VIECMAScripts::threadBoot(const QString& fileName, const QString& entry ) {
+void VIECMAScripts::threadBoot(const QString& fileName, const QString& entry) {
 	boot(fileName, true, entry);
 }
 
-void VIECMAScripts::boot(QString fileName, bool inThread , QString entry ) {
+void VIECMAScripts::boot(QString fileName, bool inThread, QString entry) {
 	if (OnRunning) {
 		return;
 	}

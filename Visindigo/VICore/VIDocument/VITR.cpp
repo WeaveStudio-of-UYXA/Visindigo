@@ -46,4 +46,3 @@ QString VITR::translate(const QString& key) {
 		return key;
 	}
 }
-

@@ -256,4 +256,3 @@ class VIPublicAPI VIStepper :public VIObject
 		}
 	}
 };
-

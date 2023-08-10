@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "../VIObject.h"
 #include "../VIConsole.h"
-
+#include "../VITranslationHost.h"
 namespace VIDocument {
 	class VIPublicAPI VIJSON :public VIObject {
 		Q_OBJECT;
@@ -22,4 +22,3 @@ namespace VIDocument {
 		_Private QJsonValue setValueOf(QStringList* nameList, QStringList::iterator* it, QJsonValue val, const QVariant& var);
 	};
 }
-

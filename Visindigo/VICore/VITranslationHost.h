@@ -20,7 +20,7 @@ class VIPublicAPI VITranslationSubHost :public VIObject
 	VI_OBJECT;
 	friend class VITranslationHost;
 	friend class VIPackageMeta;
-	_Public struct VITRFileInfo{
+	_Public struct VITRFileInfo {
 		QString FileName;
 		bool inRC;
 	};

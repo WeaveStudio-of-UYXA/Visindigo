@@ -13,22 +13,22 @@
 
 #define VI_USER
 #ifdef VI_EVERYWHERE
-	#undef VI_USER
+#undef VI_USER
 #endif
 #ifdef VI_DEVELOPER
-	#undef VI_USER
+#undef VI_USER
 #endif
 
 #ifdef _MSC_VER
-	#if defined VI_EVERYWHERE
-		#define VIPublicAPI 
-	#elif defined VI_DEVELOPER
-		#define VIPublicAPI __declspec(dllexport)
-	#elif defined VI_USER
-		#define VIPublicAPI __declspec(dllimport)
-	#endif
+#if defined VI_EVERYWHERE
+#define VIPublicAPI
+#elif defined VI_DEVELOPER
+#define VIPublicAPI __declspec(dllexport)
+#elif defined VI_USER
+#define VIPublicAPI __declspec(dllimport)
+#endif
 #else
-	#define VIPublicAPI
+#define VIPublicAPI
 #endif
 
 #define VIPrivateAPI

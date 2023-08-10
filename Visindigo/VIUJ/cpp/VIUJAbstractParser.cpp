@@ -4,7 +4,7 @@
 /*
 VIUJAbstractParser
 */
-QWidget* VIUJAbstractParser::preOnJson(const QJsonObject & jsonObj)
+QWidget* VIUJAbstractParser::preOnJson(const QJsonObject& jsonObj)
 {
 	QWidget* cuWidget = onJson(jsonObj);
 	if (cuWidget == nullptr) {
@@ -25,7 +25,7 @@ QWidget* VIUJAbstractParser::preOnJson(const QJsonObject & jsonObj)
 				cuWidget->setObjectName(QString(CurrentWidgetStack.top()->children().length()));
 			}
 		}
-		
+
 		if (jsonObj.contains("Children")) {
 			CurrentWidgetStack.push(cuWidget);
 			QJsonArray children = jsonObj["Children"].toArray();
@@ -135,7 +135,7 @@ QWidget* VIUJParserHost::parse(const QJsonObject& json) {
 	if (UIJsonMap.contains(type)) {
 		QWidget* cuWidget = UIJsonMap[type]->preOnJson(json);
 		for (auto i = UJWidgetBinderMap.begin(); i != UJWidgetBinderMap.end(); i++) {
-			qDebug()<<i.key();
+			qDebug() << i.key();
 			QWidget* Instance = findInstance(cuWidget, i.key());
 			if (Instance == nullptr) {
 				qDebug() << "VIUJParserHost::parse: can not find instance";
@@ -143,7 +143,7 @@ QWidget* VIUJParserHost::parse(const QJsonObject& json) {
 			}
 			i.value()->setMaster(Instance);
 		}
-		for(auto i = UJWidgetBinderMap.begin(); i != UJWidgetBinderMap.end(); i++) {
+		for (auto i = UJWidgetBinderMap.begin(); i != UJWidgetBinderMap.end(); i++) {
 			i.value()->onBindFinish();
 		}
 		return cuWidget;

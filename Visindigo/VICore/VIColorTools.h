@@ -6,7 +6,7 @@ class VIPublicAPI VIColorTools :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	VI_STATIC_CLASS (VIColorTools);
+	VI_STATIC_CLASS(VIColorTools);
 	_Public static QString toRGBString(const QColor& color) {
 		return QString("rgb(%1,%2,%3)").arg(color.red()).arg(color.green()).arg(color.blue());
 	}

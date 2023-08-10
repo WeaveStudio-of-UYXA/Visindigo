@@ -106,7 +106,7 @@ void VIQuantifyTickBehaviorHost::tickLoop() {
 		CurrentIndexRight = 0;
 		if (DurationNow > DurationLimit) {
 			DurationLimitNow = 2 * DurationLimit - DurationNow;
-			if (DurationLimitNow < 0) { DurationLimitNow = DurationLimit; }
+			if (DurationLimitNow <= 0) { DurationLimitNow = DurationLimit; }
 		}
 		else {
 			DurationLimitNow = DurationLimit;
@@ -123,8 +123,8 @@ void VIQuantifyTickBehaviorHost::tickLoop() {
 void VIQuantifyTickBehaviorHost::manualTickLoop(VINanoSecond duration) {
 	Pause = true;
 	bool LoopFinish = false;
-	if (duration < 0) { 
-		duration = DurationLimit; 
+	if (duration < 0) {
+		duration = DurationLimit;
 		DurationNow = DurationLimit;
 		CurrentIndexRight = BehaviorList.size();
 		LoopFinish = true;
@@ -375,5 +375,4 @@ void VIAnimationBehavior::active(Visindigo::QuantifyTickType) {
 
 void VIAnimationBehavior::subside() {
 	VITimedBehavior::subside();
-	emit finished();
 }

@@ -50,9 +50,9 @@ class VIPublicAPI VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHos
 	VI_PrivateProperty(unsigned long long, CurrentIndexLeft);
 	VI_PrivateProperty(unsigned long long, CurrentIndexRight);
 	VI_PrivateFlag(Pause)
-	_Public def_init VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent = nullptr);
+		_Public def_init VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent = nullptr);
 	_Public void tickLoop() override;
-	_Public void manualTickLoop(VINanoSecond duration = -1); 
+	_Public void manualTickLoop(VINanoSecond duration = -1);
 	_Private void mergeBehavior() override;
 	_Private void ergodicBehavior() override;
 	_Public void start() override;

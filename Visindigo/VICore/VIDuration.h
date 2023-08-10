@@ -14,7 +14,7 @@ class VIPublicAPI VIBehaviorDuration :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Public enum class PercentType{
+	_Public enum class PercentType {
 		Linear,
 		Nonlinear,
 	};

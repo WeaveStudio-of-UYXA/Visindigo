@@ -23,7 +23,6 @@ public:
 		}
 		return ret;
 	}
-	
 };
 
 class VIPublicAPI VICommonMapping {

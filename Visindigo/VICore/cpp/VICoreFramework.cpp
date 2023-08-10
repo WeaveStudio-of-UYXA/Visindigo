@@ -36,7 +36,6 @@ def_init VICoreFramework::VICoreFramework(int& argc, char** argv) {
 #endif
 }
 
-
 void printWelcome() {
 	VIConsole::printLine("\033[38;2;237;28;36m===================================================================\033[0m");
 	VIConsole::printLine("\033[38;2;234;54;128m╮ ╭\t─┬─\t╭──\t─┬─\t╭╮╭\t┌─╮\t─┬─\t╭─╮\t╭─╮\033[0m");
@@ -62,7 +61,7 @@ void VICoreFramework::init() {
 	BehaviorHost = new VIBehaviorHost(this);
 	new VICommandHost(this);
 	LOAD_PACKAGE(VisindigoCore::Package);
-	for (auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++){
+	for (auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++) {
 		if ((*i)->getPackageMeta()->PackageName == "VisindigoCore") {
 			static_cast<VisindigoCore::Package*>(*i)->printT();
 		}
@@ -83,7 +82,7 @@ VITranslationHost* VICoreFramework::getTranslationHostInstance() {
 }
 
 void VICoreFramework::start() {
-	for(auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++) {
+	for (auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++) {
 		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + (*i)->getPackageMeta()->getPackageName()));
 	}
 	BehaviorHost->start();
@@ -107,7 +106,7 @@ int VICoreFramework::getReturnCode() {
 bool VICoreFramework::loadPackage(VIPackage* package) {
 	AppInstance->PackageList.append(package);
 	package->active(Visindigo::T20);
-	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package '"+package->getPackageMeta()->getPackageName() + "' loaded"));
+	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package '" + package->getPackageMeta()->getPackageName() + "' loaded"));
 	return true;
 }
 

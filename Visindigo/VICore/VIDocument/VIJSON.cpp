@@ -1,5 +1,5 @@
 ﻿#include "VIJSON.h"
-
+#include "../private/VisindigoCorePack.h"
 namespace VIDocument {
 	def_init VIJSON::VIJSON(VISuper* parent) :VIObject(parent) {
 		this->setObjectName("VIJSON");
@@ -59,14 +59,14 @@ namespace VIDocument {
 		if (flag) {
 			return value;
 		}
-		VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix()+"Unable to find value for '"+objName+"', search for default document"));
+		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Unable to find value for '" + objName + "', search for default document"));
 		value = this->getValueOfDefault(&flag, objName);
 		if (flag) {
-			VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix()+"Found value for '"+objName+"' in default document, already written to the active document"));
+			VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Found value for '" + objName + "' in default document, already written to the active document"));
 			setValueOf(objName, value);
 			return value;
 		}
-		VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix()+"Unable to find value for '"+objName+"' in default document"));
+		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Unable to find value for '" + objName + "' in default document"));
 		return QVariant();
 	}
 	QVariant VIJSON::getValueOf(bool* successflag, const QString& objName) {

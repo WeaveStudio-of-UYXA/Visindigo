@@ -1,6 +1,5 @@
 ﻿#include "../VIPackage.h"
 
-
 def_init VIPackageMeta::VIPackageMeta() {
 	this->setPackageName("UnnamedVIPackage");
 	this->setPackageVersionMajor(0);
@@ -15,7 +14,7 @@ def_init VIPackageMeta::VIPackageMeta() {
 	this->TranslationPackageHost = new VITranslationSubHost(this);
 	this->PackageConfig = new VIDocument::VIJSON(this);
 }
-QString VIPackageMeta::TR(const QString& key){
+QString VIPackageMeta::TR(const QString& key) {
 	return TranslationPackageHost->getTranslation(key);
 }
 void VIPackageMeta::addTranslationFileName(Visindigo::Language langType, const QString& key, bool inRC) {
@@ -44,7 +43,7 @@ void VIPackageMeta::setConfig(const QString& key, const QVariant& value) {
 	PackageConfig->setValueOf(key, value);
 }
 void VIPackageMeta::initConfig() {
-	PackageConfig->loadDefault(getPackageInternalPath()+"/config.json");
+	PackageConfig->loadDefault(getPackageInternalPath() + "/config.json");
 	PackageConfig->loadSettings(getPackageRootPath() + "/config.json");
 	PackageConfig->setObjectName(PackageName);
 }
@@ -69,7 +68,7 @@ void VIPackage::setPackageMeta(VIPackageMeta* info) {
 		}
 		PackageMeta = info;
 		setObjectName(info->getPackageName());
-		VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix()+"Package Meta loaded."));
+		VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package Meta loaded."));
 	}
 }
 def_del VIPackage::~VIPackage() {

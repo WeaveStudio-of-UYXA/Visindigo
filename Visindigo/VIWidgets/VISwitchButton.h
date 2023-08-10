@@ -10,7 +10,7 @@ class VIPublicAPI VISwitchButton :public VIWidget
 	_Public VILabel* DotLabel;
 	_Private private_VISwitchButtonDotAnimationBehavior* DotAnimationBehavior;
 	_Private bool Pressed;
-	_Public def_init VISwitchButton(QWidget* parent = VI_NULLPTR):VIWidget(parent) {
+	_Public def_init VISwitchButton(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
 		DotLabel = new VILabel(this);
 		DotAnimationBehavior = new private_VISwitchButtonDotAnimationBehavior(this);
 		DotAnimationBehavior->setTargetDot(DotLabel);
@@ -20,8 +20,8 @@ class VIPublicAPI VISwitchButton :public VIWidget
 		this->setStyleSheet("VISwitchButton{background-color:rgb(255,255,255);border-radius:50px;border:3px solid blue;}");
 	};
 	_Public void resizeEvent(QResizeEvent* event) {
-		DotLabel->resize(this->width()*0.3, this->height()*0.8);
-		DotLabel->move(DotLabel->x(), this->height()*0.1);
+		DotLabel->resize(this->width() * 0.3, this->height() * 0.8);
+		DotLabel->move(DotLabel->x(), this->height() * 0.1);
 	}
 	_Public void enterEvent(QEvent* event) {
 		DotAnimationBehavior->setDuration(300);

@@ -19,4 +19,3 @@ class VIPublicAPI VIPathInfo {
 	_Public static QString getFontsPath() { return QStandardPaths::writableLocation(QStandardPaths::FontsLocation); }
 	_Public static QString getCachePath() { return QStandardPaths::writableLocation(QStandardPaths::CacheLocation); }
 };
-

@@ -8,10 +8,10 @@ class VIPublicAPI VIUJParser_VIWidget : public VIUJAbstractParser
 		setTypeName("VIWidget");
 	}
 	_Public void onGeneralParameters(const QJsonObject& json, QWidget* widget) {
-		if(json.contains("Title")) {
+		if (json.contains("Title")) {
 			widget->setWindowTitle(json["Title"].toString());
 		}
-		if (json.contains("Size")) {  
+		if (json.contains("Size")) {
 			QJsonArray size = json["Size"].toArray();
 			widget->resize(size[0].toInt(), size[1].toInt());
 		}
@@ -39,7 +39,7 @@ class VIPublicAPI VIUJParser_VIWidget : public VIUJAbstractParser
 		return widget;
 	}
 	_Public virtual void onNewChild(QWidget* child) override {
-		if (getCurrentWidget()->layout()!=nullptr) {
+		if (getCurrentWidget()->layout() != nullptr) {
 			getCurrentWidget()->layout()->addWidget(child);
 		}
 	}

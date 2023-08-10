@@ -20,7 +20,7 @@ class VIPublicAPI VIUJAbstractParser
 	_Public virtual QWidget* onJson(const QJsonObject& json) PureVirtual;
 	_Public virtual void onNewChild(QWidget* child) PureVirtual;
 	_Protected virtual QWidget* preOnJson(const QJsonObject& json) final;
-	_Public QWidget* getCurrentWidget(){ return CurrentWidgetStack.top(); }
+	_Public QWidget* getCurrentWidget() { return CurrentWidgetStack.top(); }
 	_Public def_init VIUJAbstractParser(VIUJParserHost* host) {
 		Host = host;
 	}
@@ -32,7 +32,7 @@ class VIPublicAPI VIUJParserHost :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Public def_init VIUJParserHost(VISuper* parent = VI_NULLPTR):VIObject(parent){}
+	_Public def_init VIUJParserHost(VISuper* parent = VI_NULLPTR) :VIObject(parent) {}
 	VI_PrivateProperty(VIUJAbstractParser*, RootUIJson);
 	VI_PrivateProperty(VIUIJsonMap, UIJsonMap);
 	VI_PrivateProperty(VIUJWidgetBinderMap, UJWidgetBinderMap);

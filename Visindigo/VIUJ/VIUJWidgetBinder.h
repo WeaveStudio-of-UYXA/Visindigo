@@ -7,13 +7,13 @@ class VIPublicAPI VIUJWidgetBinder :public VIObject
 	VI_OBJECT;
 	_Protected QWidget* self;
 	VI_ProtectedProperty(QString, TargetInstanceName);
-	_Public def_init VIUJWidgetBinder(VISuper* parent = VI_NULLPTR):VIObject(parent) {
+	_Public def_init VIUJWidgetBinder(VISuper* parent = VI_NULLPTR) :VIObject(parent) {
 		self = VI_NULLPTR;
 		TargetInstanceName = "";
 	}
 	//This function will be called after all binders have been save the master widget.
 	//If users want to connect the signal & slot , they should do it in this function.
-	_Public virtual void onBindFinish() PureVirtual; 
+	_Public virtual void onBindFinish() PureVirtual;
 	_Public void setMaster(QWidget* master) {
 		self = master;
 		self->installEventFilter(this);

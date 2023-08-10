@@ -4,7 +4,7 @@
 #include "private/VIMacro.h"
 class VIPublicAPI VIException
 {
-	_Public enum class Type{
+	_Public enum class Type {
 		None,
 		DivideByZero,
 		DimensionError,

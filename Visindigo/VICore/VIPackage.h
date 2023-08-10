@@ -71,4 +71,4 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	_Public def_del ~VIPackage();
 };
 
-typedef VIPackage* (* __VisindigoDllMain)(void);
+typedef VIPackage* (*__VisindigoDllMain)(void);

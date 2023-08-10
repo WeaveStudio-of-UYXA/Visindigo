@@ -23,13 +23,13 @@ class VIPublicAPI VIPSOD :public VIWidget
 \nYou can restart the program yourself later");
 		TitleLabel->setStyleSheet("QLabel{font-size:20px}");
 		TypeLabel = new QLabel(this);
-		TypeLabel->setText("Exception Type: "+error.getExceptionName());
+		TypeLabel->setText("Exception Type: " + error.getExceptionName());
 		TypeLabel->setStyleSheet("QLabel{font-size:30px}");
 		ReasonLabel = new QLabel(this);
-		ReasonLabel->setText("Exception Reason: "+error.getReason());
+		ReasonLabel->setText("Exception Reason: " + error.getReason());
 		ReasonLabel->setStyleSheet("QLabel{font-size:20px}");
 		HelpLabel = new QLabel(this);
-		HelpLabel->setText("Help: "+error.getHelp());
+		HelpLabel->setText("Help: " + error.getHelp());
 		HelpLabel->setStyleSheet("QLabel{font-size:20px}");
 #ifdef WINDOWS_DEPLOY
 		this->setStyleSheet("QWidget{background-color:#DF81E8;color:#FFFFFF;font-family:'Microsoft Yahei'}");

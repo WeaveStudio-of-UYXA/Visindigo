@@ -20,7 +20,7 @@
 
 #define VI_interface class
 
-#define VI_STATIC_CLASS(name) private: name(){} 
+#define VI_STATIC_CLASS(name) private: name(){}
 #define VI_Property(Type, name) public:Type name;void set##name(Type value){this->name = value;}Type get##name(){return name;}
 #define VI_PrivateProperty(Type, name) private:Type name;private: void set##name(Type value){this->name = value;}public:Type get##name(){return name;}
 #define VI_ProtectedProperty(Type, name) protected:Type name;protected: void set##name(Type value){this->name = value;}public:Type get##name(){return name;}
@@ -52,7 +52,5 @@ if (name == VI_NULLPTR)\
 	{throw VINullPointerError("NullPointer Error: Pointer '"+##name+\
 	"' should not be null", "Check your code to ensure that the memory pointed to by this pointer has been initialized before access, or avoid access after null.\nThis exception is thrown on line [ "+\
 	QString::number(__LINE__)+" ] of file: \n"+__FILE__);}
-
-
 
 #endif

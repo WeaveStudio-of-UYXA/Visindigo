@@ -30,4 +30,3 @@ class VIPublicAPI VIWidget :public QFrame, public VIBaseWidget {
 		VI_WIDGET_INIT;
 	}
 };
-
