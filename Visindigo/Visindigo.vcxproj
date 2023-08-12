@@ -259,6 +259,8 @@
     <QtMoc Include="VIWidgets\VILoadingWidget.h" />
     <ClInclude Include="VICore\private\VisindigoNamespace.h" />
     <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h" />
+    <ClInclude Include="VIWave\VIWave.h" />
+    <QtMoc Include="VIWave\VIOperationalWaveObject.h" />
     <ClInclude Include="VIWidgets\VIMainWindow.h" />
     <QtMoc Include="VICore\private\VisindigoCorePack.h" />
     <QtMoc Include="VICore\VIDocument\VITR.h" />

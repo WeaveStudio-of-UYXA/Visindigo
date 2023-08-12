@@ -62,7 +62,7 @@ VIQuantifyTickBehaviorHost
 */
 def_init VIQuantifyTickBehaviorHost::VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent) :VIAbstractBehaviorHost(parent) {
 	this->setObjectName("QTickBehaviorHost_" + QString::number((int)1000000000.0 / durationLimit));
-	DurationLimit = durationLimit - 50000;
+	DurationLimit = durationLimit ;
 	DurationLimitNow = DurationLimit;
 	TickDuration = durationLimit;
 	CurrentIndexLeft = 0;
@@ -320,6 +320,31 @@ void VIBehaviorHost::resumeQuantifyTickBehaviorHost(Visindigo::QuantifyTickType 
 		QuantifyTickBehaviorHost_128->resume();
 		break;
 	default:
+		break;
+	}
+}
+
+void VIBehaviorHost::manualExecueQuantifyTickBehaviorHost(Visindigo::QuantifyTickType type, VINanoSecond duration) {
+switch (type)
+	{
+	case Visindigo::T0:
+		if (duration < 0) { duration = 7812500; } // if duration < 0, set duration to 1/128 second
+		QuantifyTickBehaviorHost_20->manualTickLoop(duration);
+		QuantifyTickBehaviorHost_32->manualTickLoop(duration);
+		QuantifyTickBehaviorHost_64->manualTickLoop(duration);
+		QuantifyTickBehaviorHost_128->manualTickLoop(duration);
+		break;
+	case Visindigo::T20:
+		QuantifyTickBehaviorHost_20->manualTickLoop(duration);
+		break;
+	case Visindigo::T32:
+		QuantifyTickBehaviorHost_32->manualTickLoop(duration);
+		break;
+	case Visindigo::T64:
+		QuantifyTickBehaviorHost_64->manualTickLoop(duration);
+		break;
+	case Visindigo::T128:
+		QuantifyTickBehaviorHost_128->manualTickLoop(duration);
 		break;
 	}
 }

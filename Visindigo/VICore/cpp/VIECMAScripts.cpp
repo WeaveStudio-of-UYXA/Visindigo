@@ -51,18 +51,27 @@ void private_VIECMAScripts::onBoot(const QString& fileName, const QString& entry
 	QString path = fileInfo.absolutePath();
 	qDebug() << path;
 	QJSValue MainObject = engine->importModule(fileName);
-	qDebug() << MainObject.toString();
+	if (MainObject.isError()) {
+		consoleLog(VIConsole::inErrorStyle("The file serving as entry '"+fileName+"' cannot be parsed properly :"));
+		consoleLog(VIConsole::inErrorStyle(MainObject.toString()));
+		consoleLog(VIConsole::inErrorStyle("The inability of the file to be parsed is usually due to a syntax error , which usually occurs when the import fails, undefined objects are used, and so on."));
+	}
 	for (auto i = Modules.begin(); i != Modules.end(); i++) {
 		QJSValue ModuleObject = engine->importModule(i.value());
 		engine->globalObject().setProperty(i.key(), ModuleObject);
 	}
-
 	QJSValue MainFunction = MainObject.property(entry);
+	if (MainFunction.isError()) {
+		consoleLog(VIConsole::inErrorStyle("The entry function '"+entry+"' cannot be found :"));
+		consoleLog(VIConsole::inErrorStyle(MainFunction.toString()));
+		consoleLog(VIConsole::inErrorStyle("The inability to find the entry function is usually due to the entry function not being defined, or the entry function being defined incorrectly."));
+	}
 	QJSValue result = MainFunction.call();
 	if (result.isError()) {
-		VIConsole::printLine(getLogPrefix() + VIConsole::inErrorStyle(result.toString()));
+		consoleLog(VIConsole::inErrorStyle("The entry function '"+entry+"' cannot be executed :"));
+		consoleLog(VIConsole::inErrorStyle(result.toString()));
+		consoleLog(VIConsole::inErrorStyle("There are more or less issues in your code, please carefully check"));
 	}
-	qDebug() << result.toString();
 	consoleLog("VIECMA processing " + fileName + " finished.");
 	if (InThread) {
 		ThreadMutex->unlock();

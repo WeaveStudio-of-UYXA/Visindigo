@@ -44,7 +44,7 @@ void VIPackageMeta::setConfig(const QString& key, const QVariant& value) {
 }
 void VIPackageMeta::initConfig() {
 	PackageConfig->loadDefault(getPackageInternalPath() + "/config.json");
-	PackageConfig->loadSettings(getPackageRootPath() + "/config.json");
+	PackageConfig->loadSettings(getPackageRootPath() + "/config.json", true);
 	PackageConfig->setObjectName(PackageName);
 }
 def_del VIPackageMeta::~VIPackageMeta() {

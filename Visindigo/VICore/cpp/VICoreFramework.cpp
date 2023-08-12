@@ -29,6 +29,9 @@ def_init VICoreFramework::VICoreFramework(int& argc, char** argv) {
 	AppInstance->DebugModeRuntime = true;
 	_instance = this;
 	LanguageType = Visindigo::zh_SC;
+	qRegisterMetaType<Visindigo::BehaviorState>("Visindigo::BehaviorState");
+	qRegisterMetaType<Visindigo::QuantifyTickType>("Visindigo::QuantifyTickType");
+	qRegisterMetaType<Visindigo::Language>("Visindigo::Language");
 #ifdef QT_DEBUG
 	AppInstance->DebugModeCompilation = true;
 #else

@@ -153,6 +153,9 @@
     <ClInclude Include="VICore\private\VisindigoNamespace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VIWave\VIWave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VICore\VIAbstractBehavior.h">
@@ -258,6 +261,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWave\VIOperationalWaveObject.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

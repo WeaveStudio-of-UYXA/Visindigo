@@ -3,8 +3,8 @@
 #include <QtWidgets>
 
 class VIPublicAPI VIMultiPlatform {
-	VI_STATIC_CLASS(VIMultiPlatform)
-		_Public static void exit() { QCoreApplication::exit(); }
+	VI_STATIC_CLASS(VIMultiPlatform);
+	_Public static void exit() { QCoreApplication::exit(); }
 	_Public static QString getSystemName() { return QSysInfo::prettyProductName(); }
 	_Public static QString getSystemType() { return QSysInfo::productType(); }
 	_Public static QString getSystemVersion() { return QSysInfo::productVersion(); }
