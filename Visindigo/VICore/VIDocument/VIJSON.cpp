@@ -6,6 +6,9 @@ namespace VIDocument {
 		this->SaveOnSet = false;
 		this->DefaultSettingsPath = "";
 	}
+	void VIJSON::setDefaultFromStr(const QString& str) {
+		this->DefaultSettings = QJsonDocument::fromJson(str.toUtf8()).object();
+	}
 	void VIJSON::loadDefault(const QString& path) {
 		QFile file(path);
 		if (!file.exists()) {
@@ -68,6 +71,9 @@ namespace VIDocument {
 		}
 		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Unable to find value for '" + objName + "' in default document"));
 		return QVariant();
+	}
+	const QVariant VIJSON::operator[](const QString& objName) {
+		return this->getValueOf(objName);
 	}
 	QVariant VIJSON::getValueOf(bool* successflag, const QString& objName) {
 		QStringList objNameList = objName.split('.');

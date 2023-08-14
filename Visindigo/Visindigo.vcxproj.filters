@@ -266,5 +266,11 @@
     <QtMoc Include="VIWave\VIOperationalWaveObject.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="VIWidgets\VIGridTexture.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VICore\VIRIFFObject.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
