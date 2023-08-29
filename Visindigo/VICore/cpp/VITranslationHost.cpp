@@ -2,8 +2,19 @@
 #include "../VICoreFramework.h"
 #include "../VIVersion.h"
 
+VITranslationSubHost* VITranslatableObject::getTRHost() {
+	return TRHost;
+}
+void VITranslatableObject::setTRHost(VITranslationSubHost* host) {
+	TRHost = host;
+}
 QString VITranslatableObject::getTranslation(const QString& key) {
-	return TRHost->getTranslation(key);
+	if (TRHost == VI_NULL) {
+		return key;
+	}
+	else {
+		return TRHost->getTranslation(key);
+	}
 }
 
 def_init VITranslationSubHost::VITranslationSubHost(VIPackageMeta* parent) :VIObject() {
@@ -16,7 +27,7 @@ def_init VITranslationSubHost::VITranslationSubHost(VIPackageMeta* parent) :VIOb
 void VITranslationSubHost::addTranslatableObject(VITranslatableObject* t) {
 	if (!TargetList.contains(t)) {
 		TargetList.push_back(t);
-		t->TRHost = this;
+		t->setTRHost(this);
 	}
 }
 
@@ -110,5 +121,5 @@ void VITranslationHost::changeLanguage(Visindigo::Language lang) {
 }
 
 QString VITranslationHost::topTranslation(const QString& key) {
-	return "";
+	return ""; // Not implemented yet, maybe in the future
 }

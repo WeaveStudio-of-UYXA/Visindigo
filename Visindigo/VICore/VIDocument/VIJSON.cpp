@@ -40,7 +40,12 @@ namespace VIDocument {
 		SettingsPath = path;
 		setObjectName(path);
 		QTextStream data(&file);
+#if QT_VERSION_MAJOR == 5
 		data.setCodec("UTF-8");
+#pragma throw_warning(10000, "有一个已缓解的Qt5和Qt6的迁移兼容问题")
+#elif QT_VERSION_MAJOR == 6
+		data.setEncoding(QStringConverter::Utf8);
+#endif
 		this->Settings = QJsonDocument::fromJson(data.readAll().toUtf8());
 		file.close();
 		return true;

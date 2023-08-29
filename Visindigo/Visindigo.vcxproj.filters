@@ -88,6 +88,18 @@
     <ClCompile Include="VICore\private\VisindigoCorePack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VIWidgets\cpp\VIGridTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIWidgets\cpp\VIRatioWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIWidgets\cpp\VISettingsLabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VICore\cpp\VIPathInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VICore\private\VIMacro.h">
@@ -124,9 +136,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIWidgets\VIWidgets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VICore\VIPointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIUJ\VIUJWidgetParser.h">
@@ -270,6 +279,18 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VICore\VIRIFFObject.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWave\VISoundHost.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWidgets\VIRatioWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWidgets\VIMultiLabel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWidgets\VISettingsLabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

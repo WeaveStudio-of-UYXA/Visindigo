@@ -13,4 +13,19 @@ namespace Visindigo {
 	enum QuantifyTickType {
 		T0, T20, T32, T64, T128
 	};
+	enum BinarySizeUnit { // The number of this enum can't be changed, as it is used in calculation directly
+		bit = 1,
+		Byte = 8, 
+		Char = Byte
+	};
+	enum CountingUnit{ // The number of this enum can't be changed, as it is used in calculation directly
+		K = 1, M, G, T, P, E, Z, Y
+	};
+	enum BinarySizeFormat { // The number of this enum can't be changed, as it is used in calculation directly
+		IEC = 1024,
+		SI = 1000,
+	};
+	enum EmphasisSide {
+		Left, Top, Right, Bottom, DefaultEmphasis
+	};
 }

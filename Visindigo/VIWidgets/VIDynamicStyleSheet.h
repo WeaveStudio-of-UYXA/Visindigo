@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../VICore/VIObject.h"
+#include "VIPalette.h"
 #include <QtWidgets>
 
 class VIPublicAPI VIDynamicStyleSheet :public VIObject

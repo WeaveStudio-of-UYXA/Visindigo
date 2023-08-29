@@ -16,12 +16,19 @@ class VIPublicAPI VISwitchButton :public VIWidget
 		DotAnimationBehavior->setTargetDot(DotLabel);
 		DotAnimationBehavior->setTargetSwitchButton(this);
 		Pressed = false;
-		DotLabel->setStyleSheet("VILabel{background-color:rgb(0,0,0);border-radius:10px}");
+		DotLabel->setVIDStyleSheet("default", 
+			"VILabel{background-color:ACLR_"+VIPalette::getDefaultColorName(VIPalette::DefaultColorName::Foreground) +
+			"_CLR;border-radius:APR_50_PR;}"
+		);
+		qDebug()<<VIPaletteGroup::getInstance()->getColor(VIPalette::DefaultColorName::Foreground);
+		DotLabel->applyVIDSS("default");
 		this->setStyleSheet("VISwitchButton{background-color:rgb(255,255,255);border-radius:50px;border:3px solid blue;}");
 	};
 	_Public void resizeEvent(QResizeEvent* event) {
-		DotLabel->resize(this->width() * 0.3, this->height() * 0.8);
+		DotLabel->resize(this->width() * 0.4, this->height() * 0.8);
 		DotLabel->move(DotLabel->x(), this->height() * 0.1);
+		DotLabel->refreshVIDStyleSheet();
+		//refreshVIDStyleSheet();
 	}
 	_Public void enterEvent(QEvent* event) {
 		DotAnimationBehavior->setDuration(300);

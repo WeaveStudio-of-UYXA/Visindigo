@@ -8,12 +8,12 @@ QStringList VIDynamicStyleSheet::hasDynamicSize(const QString& ss) {
 	int index_pr = 0;
 	QStringList rtn;
 	while (true) {
-		index_auto = ss.indexOf("AUTO_", index_auto);
+		index_auto = ss.indexOf("APR_", index_auto);
 		index_pr = ss.indexOf("_PR", index_pr);
 		if (index_auto == -1 || index_pr == -1) {
 			break;
 		}
-		QString colorName = ss.mid(index_auto + 5, index_pr - index_auto - 5);
+		QString colorName = ss.mid(index_auto + 4, index_pr - index_auto - 4);
 		rtn << colorName;
 		index_auto = index_pr;
 		index_pr += 3;
@@ -26,7 +26,7 @@ QStringList VIDynamicStyleSheet::hasDynamicColor(const QString& ss) {
 	int index_clr = 0;
 	QStringList rtn;
 	while (true) {
-		index_auto = ss.indexOf("AUTO_", index_auto);
+		index_auto = ss.indexOf("ACLR_", index_auto);
 		index_clr = ss.indexOf("_CLR", index_clr);
 		if (index_auto == -1 || index_clr == -1) {
 			break;
@@ -95,17 +95,17 @@ void VIDynamicStyleSheetContainer::applyVIDSS() {
 
 void VIDynamicStyleSheetContainer::applyDynamicSize(QString* ss) {
 	for (auto& name : DynamicSizeList) {
-		float value = QString(name).toFloat();
+		float value = QString(name).toFloat() / 100;
 		value *= MasterWidget->height();
-		QString px = QString::number(value) + "px";
-		ss->replace("AUTO_" + name + "_PR", px);
+		QString px = QString::number((int)value) + "px";
+		ss->replace("APR_" + name + "_PR", px);
 	}
 }
 
 void VIDynamicStyleSheetContainer::applyDynamicColor(QString* ss) {
 	for (auto& name : DynamicColorList) {
 		QString color = VIColorTools::toRGBAString(VIPaletteGroup::getInstance()->getColor(name));
-		ss->replace("AUTO_" + name + "_CLR", color);
+		ss->replace("ACLR_" + name + "_CLR", color);
 	}
 }
 
@@ -113,7 +113,7 @@ void VIDynamicStyleSheetContainer::setVIDSS(const QString& qss) {
 	this->QSS = qss;
 	DynamicSizeList = VIDynamicStyleSheet::hasDynamicSize(QSS);
 	HasDynamicSize = !DynamicSizeList.isEmpty();
-	DynamicColorList = VIDynamicStyleSheet::hasDynamicSize(QSS);
+	DynamicColorList = VIDynamicStyleSheet::hasDynamicColor(QSS);
 	HasDynamicColor = !DynamicColorList.isEmpty();
 }
 
@@ -123,6 +123,7 @@ void VIDynamicStyleSheetContainer::setMasterWidget(QWidget* masterWidget) {
 /*
 VIDynamicStyleSheetManager
 */
+// Notice: VIDynamicStyleSheetManager 还未连接到VIPaletteGroup
 def_init VIDynamicStyleSheetManager::VIDynamicStyleSheetManager(VISuper* parent) :VIObject(parent) {
 	VI_Singleton_Init;
 }

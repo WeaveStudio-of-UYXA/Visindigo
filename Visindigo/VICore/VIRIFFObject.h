@@ -1,12 +1,6 @@
 ﻿#pragma once
 #include "VIObject.h"
 #include "VIConsole.h"
-/*
-Thia struct is used to store the data of a RIFF chunk.
-considering the fact that the data of a chunk is not always a string, we use a pointer to a byte array to store the data.
-Which means that the user of this struct should be responsible for the memory management of the data.
-In fact, we recommend that the user just use the VIRIFFObject class, which will do the memory management for you.
-*/
 class VIPublicAPI VIRIFFObject : public VIObject
 {
 	Q_OBJECT;
@@ -168,5 +162,35 @@ class VIPublicAPI VIRIFFObject : public VIObject
 				qDebug().noquote() <<QString("%1├Data: %2").arg(QString(level, '\t')).arg(dataAbstract+"...");
 			}
 		}
+	}
+	_Public QByteArray getDataOfChunk(qint32 chunkID) {
+		for (int i = 0; i < SubChunks.size(); i++) {
+			if (SubChunks[i]->ChunkID == chunkID) {
+				return SubChunks[i]->Data;
+			}
+		}
+		return QByteArray();
+	}
+	_Public QByteArray getDataOfChunk(QString chunkID) {
+		return getDataOfChunk(*(qint32*)chunkID.toLocal8Bit().data());
+	}
+	_Public QByteArray getDataOfChunk(QList<qint32> chunkID) {
+		if (chunkID.size() == 1) {
+			return getDataOfChunk(chunkID[0]);
+		}
+		else {
+			for(int i = 0; i < SubChunks.size(); i++) {
+				if (SubChunks[i]->ChunkID == chunkID[0]) {
+					return SubChunks[i]->getDataOfChunk(chunkID.mid(1));
+				}
+			}
+		}
+	}
+	_Public QByteArray getDataOfChunk(QList<QString> chunkID) {
+		QList<qint32> list;
+		for (int i = 0; i < chunkID.size(); i++) {
+			list.append(*(qint32*)chunkID[i].toLocal8Bit().data());
+		}
+		return getDataOfChunk(list);
 	}
 };

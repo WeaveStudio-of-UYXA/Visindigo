@@ -6,8 +6,11 @@ class VIPublicAPI VITranslationSubHost;
 
 class VIPublicAPI VITranslatableObject
 {
-	VI_Property(VITranslationSubHost*, TRHost);
-	_Public virtual void onTranslating() PureVirtual;
+	friend class VITranslationSubHost;
+	_Private VITranslationSubHost* TRHost = VI_NULL;
+	_Public VITranslationSubHost* getTRHost();
+	_Public virtual void setTRHost(VITranslationSubHost* host);
+	_Public virtual void onTranslating() HalfVirtual;
 	_Public QString getTranslation(const QString& key);
 };
 

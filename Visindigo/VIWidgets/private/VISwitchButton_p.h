@@ -26,31 +26,32 @@ class VIPublicAPI private_VISwitchButtonDotAnimationBehavior :public VIAnimation
 	_Public virtual void onActive()override {
 	}
 	_Public virtual void onTick() {
-		int avaliableWidth = TargetSwitchButton->width() - TargetDot->width();
+		int initialOffset = TargetSwitchButton->height() * 0.1;
+		int avaliableWidth = TargetSwitchButton->width() - TargetDot->width() - initialOffset * 2;
 		float du = VICommonMapping::sin_0_1(Duration->getPercent());
 		switch (CurrentAnimation) {
 		case CurrentAnimationType::Hover:
 			if (ButtonIO) {
-				TargetDot->move(avaliableWidth * (1 - 0.2 * du), TargetDot->y());
+				TargetDot->move(initialOffset + avaliableWidth * (1 - 0.2 * du), TargetDot->y());
 			}
 			else {
-				TargetDot->move(avaliableWidth * (0.2 * du), TargetDot->y());
+				TargetDot->move(initialOffset + avaliableWidth * (0.2 * du), TargetDot->y());
 			}
 			break;
 		case CurrentAnimationType::Leave:
 			if (ButtonIO) {
-				TargetDot->move(avaliableWidth * (1 - 0.2 * (1.0 - du)), TargetDot->y());
+				TargetDot->move(initialOffset + avaliableWidth * (1 - 0.2 * (1.0 - du)), TargetDot->y());
 			}
 			else {
-				TargetDot->move(avaliableWidth * 0.2 * (1.0 - du), TargetDot->y());
+				TargetDot->move(initialOffset + avaliableWidth * 0.2 * (1.0 - du), TargetDot->y());
 			}
 			break;
 		case CurrentAnimationType::Press:
 			if (ButtonIO) {
-				TargetDot->move(avaliableWidth * (0.8 - du * 0.8), TargetDot->y());
+				TargetDot->move(initialOffset + avaliableWidth * (0.8 - du * 0.8), TargetDot->y());
 			}
 			else {
-				TargetDot->move(avaliableWidth * (0.2 + du * 0.8), TargetDot->y());
+				TargetDot->move(initialOffset + avaliableWidth * (0.2 + du * 0.8), TargetDot->y());
 			}
 			break;
 		}

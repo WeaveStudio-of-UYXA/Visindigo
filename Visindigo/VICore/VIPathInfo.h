@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "VIObject.h"
 
+#define VI_ENUMSTR(enumName, enumValue) case enumName::enumValue: return #enumValue;
 class VIPublicAPI VIPathInfo {
 	VI_STATIC_CLASS(VIPathInfo);
 	_Public static QString getWorkingPath() { return QDir::currentPath(); }
@@ -18,4 +19,7 @@ class VIPublicAPI VIPathInfo {
 	_Public static QString getApplicationsPath() { return QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation); }
 	_Public static QString getFontsPath() { return QStandardPaths::writableLocation(QStandardPaths::FontsLocation); }
 	_Public static QString getCachePath() { return QStandardPaths::writableLocation(QStandardPaths::CacheLocation); }
+	_Public static qint64 getSizeOf(QString path);
+	_Public static QString getCountingUnitStr(Visindigo::CountingUnit c);
+	_Public static QString getReadableSize(double rawSize, Visindigo::BinarySizeUnit u = Visindigo::Byte, Visindigo::CountingUnit c = Visindigo::K, Visindigo::BinarySizeFormat f = Visindigo::IEC);
 };

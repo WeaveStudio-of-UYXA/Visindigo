@@ -126,7 +126,8 @@
       <PreprocessorDefinitions>VI_EVERYWHERE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
-      <Command>python "$(SolutionDir)PyTools\WindowsDllExport\WindowsDllExport.py" "$(ProjectName)"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -239,6 +240,7 @@
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
     <ClCompile Include="VICore\cpp\VIObject.cpp" />
     <ClCompile Include="VICore\cpp\VIPackage.cpp" />
+    <ClCompile Include="VICore\cpp\VIPathInfo.cpp" />
     <ClCompile Include="VICore\private\VisindigoCorePack.cpp" />
     <ClCompile Include="VICore\VIDocument\VIJSON.cpp" />
     <ClCompile Include="VICore\VIDocument\VITR.cpp" />
@@ -246,7 +248,28 @@
     <ClCompile Include="VIWidgets\cpp\VIDynamicStyleSheet.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIFramework.cpp" />
     <ClCompile Include="VIUJ\cpp\VIUJAbstractParser.cpp" />
+    <ClCompile Include="VIWidgets\cpp\VIGridTexture.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="VIWidgets\cpp\VIPalette.cpp" />
+    <ClCompile Include="VIWidgets\cpp\VIRatioWidget.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
+    <ClCompile Include="VIWidgets\cpp\VISettingsLabel.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +283,7 @@
     <ClInclude Include="VICore\private\VisindigoNamespace.h" />
     <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h" />
     <QtMoc Include="VICore\VIRIFFObject.h" />
+    <QtMoc Include="VIWave\VISoundHost.h" />
     <ClInclude Include="VIWave\VIWave.h" />
     <QtMoc Include="VIWave\VIOperationalWaveObject.h" />
     <QtMoc Include="VIWidgets\VIGridTexture.h" />
@@ -268,7 +292,6 @@
     <QtMoc Include="VICore\VIDocument\VITR.h" />
     <QtMoc Include="VICore\VIColorTools.h" />
     <QtMoc Include="VICore\VITranslationHost.h" />
-    <ClInclude Include="VICore\VIPointer.h" />
     <QtMoc Include="VIUJ\VIUJAbstractParser.h" />
     <ClInclude Include="VIUJ\VIUJ.h" />
     <QtMoc Include="VIWidgets\VIFramework.h" />
@@ -279,6 +302,9 @@
     <QtMoc Include="VIWidgets\private\VISwitchButton_p.h" />
     <QtMoc Include="VIWidgets\VIPSOD.h" />
     <ClInclude Include="VIWidgets\private\VIPalette_p.h" />
+    <QtMoc Include="VIWidgets\VIRatioWidget.h" />
+    <QtMoc Include="VIWidgets\VIMultiLabel.h" />
+    <QtMoc Include="VIWidgets\VISettingsLabel.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <ClInclude Include="VICore\VIPathInfo.h" />
     <QtMoc Include="VICore\VIDocument\VIJSON.h" />

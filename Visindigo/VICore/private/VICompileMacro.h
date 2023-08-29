@@ -32,3 +32,11 @@
 #endif
 
 #define VIPrivateAPI
+
+#define __AUX_STR_EXP(_exp_) #_exp_
+#define ___AUX_STR(_exp_) __AUX_STR_EXP(_exp_)
+#define __LOCATION_STR __FILE__ "("  ___AUX_STR(__LINE__) ")"
+
+#define throw_warning(_code_, _message_) message(__LOCATION_STR ": warning C" ___AUX_STR(_code_) ": " _message_)
+#define throw_error(_level_, _code_, _message_) message(__LOCATION_STR ":" _level_ " error C" ___AUX_STR(_code_) ": " _message_)
+

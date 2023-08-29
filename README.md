@@ -12,10 +12,9 @@
 2. 安装Visual Studio 2022，安装C++桌面开发组件
 3. 在Visual Studio 2022中安装扩展“Qt Visual Studio Tools”、“Force UTF-8"
 4. 将Qt配置到Qt Visual Studio Tools中
-5. 将Visindigo安装文件放置在D:\Visindigo目录下，检查Visindigo Debug dll路径应该位于`D:\Visindigo\x64\Debug\Visindigod.dll`。
-6. 将Visindigo安装文件中的VisindigoTemplateProject文件夹复制到Visual Studio 2022的项目模板文件夹中，它位于`C:\Users\您的用户名\Documents\Visual Studio 2022\Templates\ProjectTemplates`。
-7. 在Visual Studio中新建项目，选择Visindigo TemplateProject，输入项目名称，点击确定。
-8. 如果您需要开发Visindigo dll，请您将Visindigo安装文件中的PyTools文件夹复制到您的解决方案根目录，即与您的解决方案文件（.sln）同级的目录中。并且您需要安装Python3.9，并在安装时勾选“Add Python to PATH”（将Python添加到环境变量中），若您忘记此项或不记得是否有勾选此项，您可以在网络上查找教程，即“如何将Python添加到环境变量中”。
+5. 运行Visindigo安装程序中的`VisindigoDeployer.exe`，完成Visindigo安装。
+6. 打开Visual Studio 2022，在项目模板中找到Visindigo项目模板，新建项目即可。
+7. 如果您需要开发Visindigo dll，请您将Visindigo安装文件中的PyTools文件夹复制到您的解决方案根目录，即与您的解决方案文件（.sln）同级的目录中。并且您需要安装Python3.9，并在安装时勾选“Add Python to PATH”（将Python添加到环境变量中），若您忘记此项或不记得是否有勾选此项，您可以在网络上查找教程，即“如何将Python添加到环境变量中”。
 
 # 问题反馈和国际化 Feedback & i18n
 

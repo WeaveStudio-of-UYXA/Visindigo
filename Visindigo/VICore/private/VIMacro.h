@@ -14,6 +14,7 @@
 #define _Signal Q_SIGNALS:
 #define PureVirtual = 0
 #define HalfVirtual {}
+#define Removed = delete
 #define InitAsNull = Q_NULLPTR
 #define InitAsZero = 0
 #define InitAsNone = {}
