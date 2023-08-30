@@ -55,8 +55,6 @@ void VITranslationSubHost::onInit() {
 
 QString VITranslationSubHost::getTranslation(const QString& key) {
 	QString rtn;
-	qDebug() << CurrentDoc;
-	qDebug() << DefaultDoc;
 	if (CurrentDoc != VI_NULL) {
 		rtn = CurrentDoc->translate(key);
 		if (rtn != key) { return rtn; }

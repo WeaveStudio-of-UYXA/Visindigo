@@ -100,6 +100,9 @@
     <ClCompile Include="VICore\cpp\VIPathInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VIWidgets\private\VisindigoWidgetsPack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VICore\private\VIMacro.h">
@@ -154,9 +157,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VICore\VIConsole.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIWidgets\VIMainWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VICore\private\VisindigoNamespace.h">

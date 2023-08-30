@@ -3,7 +3,7 @@
 #include "../VIVersion.h"
 
 namespace VisindigoCore {
-	class VIPublicAPI PackageMeta :public VIPackageMeta
+	class VIPublicAPI PackageMeta :public VIPackageMeta, VITranslatableObject
 	{
 		Q_OBJECT;
 		VI_OBJECT;
@@ -15,8 +15,7 @@ namespace VisindigoCore {
 			this->setPackageVersionMajor(VI_VERSION_MAJOR);
 			this->setPackageVersionMinor(VI_VERSION_MINOR);
 			this->setPackageVersionPatch(VI_VERSION_PATCH);
-			this->setAuthor({ "Tsing Yayin", "Ayano Aishi", "v0v_tempest" });
-			this->setDescription("The Visindigo Core provides basic and non UI type components for Visindigo. To use Visindigo, the Visindigo Core must be included in the project");
+			this->setAuthor({ "Tsing Yayin" });
 			this->setLicense("GPLv3.0");
 			this->setURL("https://www.github.com/weavestudio-of-uyxa/visindigo");
 			this->setOrganization("Weave Studio of UYXA");
@@ -24,6 +23,10 @@ namespace VisindigoCore {
 			this->addTranslationFileName(Visindigo::Language::zh_SC, "zh_SC.vil", true);
 			this->addTranslationFileName(Visindigo::Language::en_US, "en_US.vil", true);
 			this->setDefaultLanguage(Visindigo::Language::zh_SC);
+			this->addTranslatableObject(this);
+		}
+		_Public virtual void onTranslating() override {
+			this->setDescription(getTranslation("Core_PackageMeta_Description"));
 		}
 	};
 

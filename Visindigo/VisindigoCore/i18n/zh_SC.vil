@@ -3,3 +3,4 @@ Core_LanguageHost_LoadLanguage_Success:Visindigo翻译主机已经完成目标�
 Core_Any_Initializing_Info:%1正在初始化
 Core_Any_Initialized_Success:%1已经初始化
 Core_Any_Initialized_Failed:%1初始化失败
+Core_PackageMeta_Description:Visindigo内核提供Visindigo的基本框架和组件。Visindigo内核是Visindigo开发必不可少的组件。

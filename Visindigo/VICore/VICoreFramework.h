@@ -48,6 +48,7 @@ class VIPublicAPI VICoreFramework :public VIObject
 	_Public static VICoreFramework* getCoreInstance();
 	_Public void setLanguageType(Visindigo::Language);
 	_Public Visindigo::Language getLanguageType();
+	_Public QList<VIPackage*> getPackageList();
 };
 
 #define VICoreFrame VICoreFramework::getCoreInstance()

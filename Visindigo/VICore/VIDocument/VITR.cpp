@@ -33,7 +33,7 @@ void VITR::parseLine(const QString& line) {
 	}
 	else {
 		Translations.insert(key, value);
-		VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Loaded key: '" + key + "' with value:\n" + value));
+		VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Loaded key: '" + key + "' with value:\t" + value));
 	}
 }
 

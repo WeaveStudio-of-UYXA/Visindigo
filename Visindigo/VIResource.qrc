@@ -7,5 +7,6 @@
     <qresource prefix="/package">
         <file>VisindigoCore/i18n/zh_SC.vil</file>
         <file>VisindigoCore/image/RNF.png</file>
+        <file>VisindigoWidgets/i18n/zh_SC.vil</file>
     </qresource>
 </RCC>

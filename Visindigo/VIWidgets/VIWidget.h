@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../VICore/VIObject.h"
+#include "private/VisindigoWidgetsPack.h"
 #include "VIDynamicStyleSheet.h"
 #include "VIWindowsTheme.h"
 #include <QtWidgets>

@@ -44,6 +44,7 @@
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'" Label="Configuration">
+    <TargetName>$(ProjectName)d</TargetName>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
@@ -52,7 +53,6 @@
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'" Label="Configuration">
-    <TargetName>$(ProjectName)d</TargetName>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
@@ -62,22 +62,22 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'" Label="QtSettings">
     <QtInstall>5.15.2</QtInstall>
-    <QtModules>core;network;gui;testlib;multimedia;widgets;</QtModules>
+    <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">

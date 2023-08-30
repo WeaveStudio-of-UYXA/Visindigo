@@ -7,9 +7,11 @@ class VIPublicAPI VISwitchButton :public VIWidget
 {
 	Q_OBJECT;
 	VI_WIDGET;
+	_Signal void clicked(bool);
 	_Public VILabel* DotLabel;
 	_Private private_VISwitchButtonDotAnimationBehavior* DotAnimationBehavior;
 	_Private bool Pressed;
+	_Private bool BoolState = false;
 	_Public def_init VISwitchButton(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
 		DotLabel = new VILabel(this);
 		DotAnimationBehavior = new private_VISwitchButtonDotAnimationBehavior(this);
@@ -43,10 +45,18 @@ class VIPublicAPI VISwitchButton :public VIWidget
 		}
 		Pressed = false;
 	};
-	_Public void mousePressEvent(QMouseEvent* event) {
+	_Public void mousePressEvent(QMouseEvent* event = VI_NULL) {
 		DotAnimationBehavior->setDuration(300);
 		DotAnimationBehavior->setCurrentAnimation(private_VISwitchButtonDotAnimationBehavior::CurrentAnimationType::Press);
 		DotAnimationBehavior->active();
 		Pressed = true;
+		BoolState = !BoolState;
 	};
+	_Public void setButtonState(bool state) {
+		if (state = BoolState) { return; }
+		else {
+			BoolState = !BoolState;
+			mousePressEvent();
+		}
+	}
 };

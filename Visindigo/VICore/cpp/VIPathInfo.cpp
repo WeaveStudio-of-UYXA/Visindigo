@@ -28,7 +28,7 @@ QString VIPathInfo::getCountingUnitStr(Visindigo::CountingUnit c) {
 	}
 }
 
-QString VIPathInfo::getReadableSize(double rawSize, Visindigo::BinarySizeUnit u = Visindigo::Byte, Visindigo::CountingUnit c = Visindigo::K, Visindigo::BinarySizeFormat f = Visindigo::IEC) {
+QString VIPathInfo::getReadableSize(double rawSize, Visindigo::BinarySizeUnit u, Visindigo::CountingUnit c , Visindigo::BinarySizeFormat f) {
 	if (rawSize >= (int)f) {
 		return getReadableSize(rawSize / (int)f, u, (Visindigo::CountingUnit)(c + 1), f);
 	}

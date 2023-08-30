@@ -149,3 +149,7 @@ void VICoreFramework::setLanguageType(Visindigo::Language type) {
 Visindigo::Language VICoreFramework::getLanguageType() {
 	return LanguageType;
 }
+
+QList<VIPackage*> VICoreFramework::getPackageList() {
+	return AppInstance->PackageList;
+}
