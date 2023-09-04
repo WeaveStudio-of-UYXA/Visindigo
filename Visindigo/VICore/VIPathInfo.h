@@ -19,7 +19,9 @@ class VIPublicAPI VIPathInfo {
 	_Public static QString getApplicationsPath() { return QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation); }
 	_Public static QString getFontsPath() { return QStandardPaths::writableLocation(QStandardPaths::FontsLocation); }
 	_Public static QString getCachePath() { return QStandardPaths::writableLocation(QStandardPaths::CacheLocation); }
-	_Public static qint64 getSizeOf(QString path);
+	_Public static qint64 getSizeOf(const QString& path);
 	_Public static QString getCountingUnitStr(Visindigo::CountingUnit c);
-	_Public static QString getReadableSize(double rawSize, Visindigo::BinarySizeUnit u = Visindigo::Byte, Visindigo::CountingUnit c = Visindigo::K, Visindigo::BinarySizeFormat f = Visindigo::IEC);
+	_Public static QString getReadableSize(double rawSize, Visindigo::BinarySizeUnit u = Visindigo::Byte, Visindigo::CountingUnit c = Visindigo::_0, Visindigo::BinarySizeFormat f = Visindigo::IEC);
+	_Public static void openExplorer(const QString& path);
+	_Public static void openBrowser(const QString& url);
 };

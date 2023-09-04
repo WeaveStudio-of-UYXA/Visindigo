@@ -37,6 +37,7 @@ class VIPublicAPI VIRatioWidgetContainer :public VIWidget
 	Q_OBJECT;
 	VI_WIDGET;
 	friend class private_VIRatioWidgetAnimation;
+	_Signal void selectWidgetChanged(VIAbstractRatioWidget* widget);
 	_Private QLayout* CurrentLayout = VI_NULL;
 	_Protected Qt::Orientation CurrentOrientation = Qt::Horizontal;
 	_Protected VILabel* AnimationLabel = VI_NULL;
@@ -59,7 +60,12 @@ class VIPrivateAPI private_VIRatioWidgetAnimation :public VIAnimationBehavior
 	_Public VIRatioWidgetContainer* MasterWidget = VI_NULL;
 	_Public VIAbstractRatioWidget* TargetWidget = VI_NULL;
 	_Public VILabel* AnimationLabel = VI_NULL;
-	_Public double delta;
+	_Private QPoint InitPos;
+	_Private QPoint TargetPos;
+	_Private double deltaMove;
+	_Private double deltaSize;
+	_Private double LastDurationPercent;
+	_Private int effectiveDeltaMove;
 	_Public def_init private_VIRatioWidgetAnimation(VIRatioWidgetContainer* master);
 	_Public void setTarget(VIAbstractRatioWidget* tar);
 	_Public virtual void onActive() override;

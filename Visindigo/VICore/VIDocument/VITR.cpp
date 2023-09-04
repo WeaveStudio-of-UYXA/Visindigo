@@ -7,6 +7,7 @@ def_init VITR::VITR() {
 
 bool VITR::load() {
 	if (FilePath == "") { return false; }
+	setObjectName(FilePath);
 	QFile file(FilePath);
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) { return false; }
 	QString LanguageName = FilePath.section("/", -1, -1).section(".", 0, -1);

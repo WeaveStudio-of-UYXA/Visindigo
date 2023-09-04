@@ -5,6 +5,7 @@ namespace VIDocument {
 		this->setObjectName("VIJSON");
 		this->SaveOnSet = false;
 		this->DefaultSettingsPath = "";
+		this->SettingsPath = "";
 	}
 	void VIJSON::setDefaultFromStr(const QString& str) {
 		this->DefaultSettings = QJsonDocument::fromJson(str.toUtf8()).object();
@@ -48,6 +49,11 @@ namespace VIDocument {
 #endif
 		this->Settings = QJsonDocument::fromJson(data.readAll().toUtf8());
 		file.close();
+		return true;
+	}
+	bool VIJSON::loadSettings(const QJsonObject& obj, const QString& path) {
+		this->Settings = QJsonDocument(obj);
+		this->SettingsPath = path;
 		return true;
 	}
 	bool VIJSON::saveSettings(QString path) {

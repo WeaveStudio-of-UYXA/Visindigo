@@ -20,7 +20,7 @@ class VIPublicAPI VIPackageMeta :public VIObject
 	friend class VITranslationSubHost;
 	friend class VITranslationHost;
 	_Private QString PackageName;
-	_Private VIDocument::VIJSON* PackageConfig;
+	_Protected VIDocument::VIJSON* PackageConfig;
 	VI_ProtectedProperty(unsigned int, PackageVersionMajor);
 	VI_ProtectedProperty(unsigned int, PackageVersionMinor);
 	VI_ProtectedProperty(unsigned int, PackageVersionPatch);
@@ -50,6 +50,7 @@ class VIPublicAPI VIPackageMeta :public VIObject
 	_Public QString getPackageName();
 	_Public QVariant getConfig(const QString& key);
 	_Public void setConfig(const QString& key, const QVariant& value);
+	_Public void saveConfig();
 	_Public void initConfig();
 	_Public def_del ~VIPackageMeta();
 };

@@ -19,7 +19,7 @@ namespace Visindigo {
 		Char = Byte
 	};
 	enum CountingUnit{ // The number of this enum can't be changed, as it is used in calculation directly
-		K = 1, M, G, T, P, E, Z, Y
+		_0 = 1, K , M, G, T, P, E, Z, Y
 	};
 	enum BinarySizeFormat { // The number of this enum can't be changed, as it is used in calculation directly
 		IEC = 1024,

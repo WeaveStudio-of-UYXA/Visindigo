@@ -30,6 +30,12 @@ class VIPublicAPI VICommonMapping {
 	_Public static double sin_0_1(double percent) {
 		return (qSin(-VIMath::PI / 2 + VIMath::PI * percent) + 1.0) / 2.0;
 	}
+	_Public static double cos_1_n1(double percent) {
+		return qCos(percent * VIMath::PI);
+	}
+	_Public static double sin2_0_1(double percent) {
+		return qPow(sin_0_1(percent), 2);
+	}
 	_Public static double sin_0_1_0(double percent) {
 		return qSin(percent * VIMath::PI);
 	}

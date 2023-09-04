@@ -15,6 +15,7 @@ namespace VIDocument {
 		_Public void setDefaultFromStr(const QString& str);
 		_Public void loadDefault(const QString& path);
 		_Public bool loadSettings(const QString& path, bool autoCreate = false);
+		_Public bool loadSettings(const QJsonObject& obj, const QString& path = "");
 		_Public bool saveSettings(QString path = "");
 		_Public const QVariant getValueOf(const QString& objName);
 		_Public const QVariant operator[](const QString& objName);

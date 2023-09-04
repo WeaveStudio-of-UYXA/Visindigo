@@ -32,7 +32,12 @@ void VIAbstractRatioWidget::leaveEvent(QEvent* event) {
 	emit leaved();
 }
 void VIAbstractRatioWidget::enterEvent(QEvent* event) {
-	applyVIDSS("hover");
+	if (isSelected) {
+		applyVIDSS("selected");
+	}
+	else {
+		applyVIDSS("hover");
+	}
 	emit entered();
 }
 void VIAbstractRatioWidget::unSelect() {
@@ -77,9 +82,11 @@ def_init VIRatioWidgetContainer::VIRatioWidgetContainer(Qt::Orientation ori, QWi
 		"VILabel{\
 			border:0px solid black; \
 			border-radius:5px;\
-			background-color:AUTO_" + VIPalette::getDefaultColorName(VIPalette::DefaultColorName::Foreground) + "_CLR;\
+			background-color:ACLR_" + VIPalette::getDefaultColorName(VIPalette::DefaultColorName::Foreground) + "_CLR;\
 		}"
 	);
+	AnimationLabel->applyVIDSS("default");
+	AnimationLabel->hide();
 	AnimationBehavior = new private_VIRatioWidgetAnimation(this);
 	switch (Side) {
 	case Visindigo::Left:
@@ -95,6 +102,20 @@ def_init VIRatioWidgetContainer::VIRatioWidgetContainer(Qt::Orientation ori, QWi
 		CurrentLayout->setContentsMargins(11, 11, 11, 22);
 		break;
 	}
+	switch (Side) {
+	case Visindigo::Left:
+		AnimationLabel->move(6, AnimationLabel->y());
+		break;
+	case Visindigo::Top:
+		AnimationLabel->move(AnimationLabel->x(), 6);
+		break;
+	case Visindigo::Right:
+		AnimationLabel->move(width() - 16, AnimationLabel->y());
+		break;
+	case Visindigo::Bottom:
+		AnimationLabel->move(AnimationLabel->x(), height() - 16);
+		break;
+	}
 };
 void VIRatioWidgetContainer::addWidget(VIAbstractRatioWidget* widget) {
 	if (WidgetList.contains(widget)) {
@@ -104,11 +125,11 @@ void VIRatioWidgetContainer::addWidget(VIAbstractRatioWidget* widget) {
 	WidgetList.append(widget);
 	connect(widget, &VIAbstractRatioWidget::selected, this, &VIRatioWidgetContainer::onSelected);
 	if (CurrentLayout->count() == 1) {
-		widget->select();
 		FirstWidget = widget;
 	}
 }
 void VIRatioWidgetContainer::onSelected() {
+	AnimationLabel->show();
 	VIAbstractRatioWidget* widget = static_cast<VIAbstractRatioWidget*>(sender());
 	if (LastSelectWidget == widget) {
 		return;
@@ -119,14 +140,19 @@ void VIRatioWidgetContainer::onSelected() {
 			WidgetList.at(i)->unSelect();
 		}
 	}
-	AnimationBehavior->setDuration(1000);
+	emit selectWidgetChanged(widget);
+	AnimationBehavior->setDuration(400);
 	AnimationBehavior->setTarget(widget);
+	AnimationBehavior->active();
 }
 void VIRatioWidgetContainer::removeWidget(VIAbstractRatioWidget* widget) {
 	CurrentLayout->removeWidget(widget);
 	WidgetList.removeOne(widget);
 }
 void VIRatioWidgetContainer::resizeEvent(QResizeEvent* event) {
+	if (FirstWidget == nullptr) {
+		return;
+	}
 	switch (CurrentOrientation)
 	{
 	case Qt::Horizontal:
@@ -159,24 +185,50 @@ def_init private_VIRatioWidgetAnimation::private_VIRatioWidgetAnimation(VIRatioW
 };
 void private_VIRatioWidgetAnimation::setTarget(VIAbstractRatioWidget* tar) {
 	TargetWidget = tar;
+	InitPos = AnimationLabel->pos();
 	switch (MasterWidget->CurrentOrientation) {
 	case Qt::Horizontal:
-		delta = tar->x() - AnimationLabel->x();
+		deltaMove = tar->x() - AnimationLabel->x();
+		TargetPos = QPoint(tar->x()+AnimationLabel->width()*0.1, AnimationLabel->y());
+		deltaSize = AnimationLabel->width() * 0.5;
 		break;
 	case Qt::Vertical:
-		delta = tar->y() - AnimationLabel->y();
+		deltaMove = tar->y() - AnimationLabel->y();
+		TargetPos = QPoint(AnimationLabel->x(), tar->y()+AnimationLabel->height()*0.1);
+		deltaSize = AnimationLabel->height() * 0.5;
 		break;
 	}
 }
-void private_VIRatioWidgetAnimation::onActive() HalfVirtual;
+void private_VIRatioWidgetAnimation::onActive() {
+	LastDurationPercent = 0;
+	effectiveDeltaMove = 0;
+}
 void private_VIRatioWidgetAnimation::onTick() {
+	float cd = 0;
+	cd = VICommonMapping::sin_0_1_0(Duration->getPercent()) - LastDurationPercent;
+	LastDurationPercent = VICommonMapping::sin_0_1_0(Duration->getPercent());
+	int ds =  deltaSize * cd;
+	effectiveDeltaMove += ds;
 	switch (MasterWidget->CurrentOrientation) {
 	case Qt::Horizontal:
-		AnimationLabel->move(AnimationLabel->x() + delta * Duration->getPercent(), AnimationLabel->y());
+		AnimationLabel->move(InitPos.x() + deltaMove * VICommonMapping::sin2_0_1(Duration->getPercent()), AnimationLabel->y());
+		AnimationLabel->resize(AnimationLabel->width() + ds, AnimationLabel->height());
 		break;
 	case Qt::Vertical:
-		AnimationLabel->move(AnimationLabel->x(), AnimationLabel->y() + delta * Duration->getPercent());
+		AnimationLabel->move(AnimationLabel->x(), InitPos.y() + deltaMove * VICommonMapping::sin2_0_1(Duration->getPercent()));
+		AnimationLabel->resize(AnimationLabel->width(), AnimationLabel->height() + ds);
 		break;
 	}
 }
-void private_VIRatioWidgetAnimation::onSubside() HalfVirtual;
+void private_VIRatioWidgetAnimation::onSubside() {
+	AnimationLabel->move(TargetPos);
+	switch (MasterWidget->CurrentOrientation)
+	{
+	case Qt::Horizontal:
+		AnimationLabel->resize(AnimationLabel->width() - effectiveDeltaMove, AnimationLabel->height());
+		break;
+	case Qt::Vertical:
+		AnimationLabel->resize(AnimationLabel->width(), AnimationLabel->height() - effectiveDeltaMove);
+		break;
+	}
+}

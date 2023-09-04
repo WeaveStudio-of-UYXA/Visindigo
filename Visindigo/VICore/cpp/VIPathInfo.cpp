@@ -1,6 +1,7 @@
 ﻿#include "../VIPathInfo.h"
+#include <QtGui>
 
-qint64 VIPathInfo::getSizeOf(QString path) {
+qint64 VIPathInfo::getSizeOf(const QString& path) {
 	QDir dir(path);
 	qint64 size = 0;
 	for (QFileInfo fileInfo : dir.entryInfoList(QDir::Files)) {
@@ -15,6 +16,9 @@ qint64 VIPathInfo::getSizeOf(QString path) {
 QString VIPathInfo::getCountingUnitStr(Visindigo::CountingUnit c) {
 	switch (c)
 	{
+		case Visindigo::_0:
+			return "";
+			break;
 		VI_ENUMSTR(Visindigo, K);
 		VI_ENUMSTR(Visindigo, M);
 		VI_ENUMSTR(Visindigo, G);
@@ -35,7 +39,7 @@ QString VIPathInfo::getReadableSize(double rawSize, Visindigo::BinarySizeUnit u,
 	else {
 		QString suffix = QString::number(rawSize, 'f', 2);
 		suffix += getCountingUnitStr(c);
-		if (f == Visindigo::IEC) {
+		if (f == Visindigo::IEC && c != Visindigo::_0) {
 			suffix += "i";
 		}
 		if (u == Visindigo::Byte) {
@@ -46,4 +50,12 @@ QString VIPathInfo::getReadableSize(double rawSize, Visindigo::BinarySizeUnit u,
 		}
 		return suffix;
 	}
+}
+
+void VIPathInfo::openExplorer(const QString& path) {
+	QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+}
+
+void VIPathInfo::openBrowser(const QString& url) {
+	QDesktopServices::openUrl(QUrl(url));
 }

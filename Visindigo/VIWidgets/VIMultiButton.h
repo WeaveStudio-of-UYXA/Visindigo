@@ -75,17 +75,17 @@ class VIPublicAPI VIMultiButton :public VIWidget
 		TextLabel->show();
 	}
 	_Public void setNormalStyleSheet(QString ss) {
-		setVIDStyleSheet("Normal", ss);
+		setVIDStyleSheet("normal", ss);
 	}
 	_Public void setHoverStyleSheet(QString ss) {
-		setVIDStyleSheet("Hover", ss);
+		setVIDStyleSheet("hover", ss);
 	}
 	_Public void setPressStyleSheet(QString ss) {
-		setVIDStyleSheet("Press", ss);
+		setVIDStyleSheet("pressed", ss);
 	}
 	_Public void select() {
 		Selected = true;
-		applyVIDSS("Press");
+		applyVIDSS("pressed");
 	}
 	_Public void setIcon(QString icon) {
 		IconLabel->setPixmap(QPixmap(icon));
@@ -98,20 +98,20 @@ class VIPublicAPI VIMultiButton :public VIWidget
 		SubTextLabel->setText(text);
 	}
 	_Public void enterEvent(QEvent* event) {
-		if (!Selected) { applyVIDSS("Hover"); }
+		if (!Selected) { applyVIDSS("hover"); }
 	}
 	_Public void leaveEvent(QEvent* event) {
-		if (!Selected) { applyVIDSS("Normal"); }
+		if (!Selected) { applyVIDSS("normal"); }
 	}
 	_Public void mousePressEvent(QMouseEvent* event) {
 		if (event->button() == Qt::LeftButton) {
-			applyVIDSS("Press");
+			applyVIDSS("pressed");
 			emit pressed();
 		}
 	}
 	_Public void mouseReleaseEvent(QMouseEvent* event) {
 		if (event->button() == Qt::LeftButton) {
-			applyVIDSS("Press");
+			applyVIDSS("pressed");
 			Selected = true;
 			emit clicked();
 			emit selected(ButtonGroupIndex);
@@ -119,166 +119,6 @@ class VIPublicAPI VIMultiButton :public VIWidget
 	}
 	_Protected void unSelect() {
 		Selected = false;
-		applyVIDSS("Normal");
+		applyVIDSS("normal");
 	}
-};
-class VIPublicAPI private_VIMultiButtonAnimationBehavior :public VIAnimationBehavior
-{
-	Q_OBJECT;
-	VI_OBJECT;
-	_Private QWidget* Target;
-	_Private int targetX, targetY;
-	_Private int rawH, rawW;
-	_Private int rawX, rawY;
-	_Private float maxExpandPercent = 0.5;
-	_Private bool PositiveDirection;
-	_Public Qt::Orientation Direction;
-	_Public def_init private_VIMultiButtonAnimationBehavior(QWidget* parent = VI_NULLPTR) :VIAnimationBehavior(parent) {
-		Target = parent;
-	}
-	_Public void setMoveTo(int X, int Y, Qt::Orientation orientation) {
-		targetX = X;
-		targetY = Y;
-		Direction = orientation;
-	}
-	_Public void setMaxExpandPercent(float p) {
-		maxExpandPercent = p;
-	}
-	_Public void onActive() override {
-		rawH = Target->height();
-		rawW = Target->width();
-		rawX = Target->x();
-		rawY = Target->y();
-		if (Direction == Qt::Orientation::Horizontal) {
-			PositiveDirection = targetX > rawX;
-		}
-		else {
-			PositiveDirection = targetY > rawY;
-		}
-	}
-	_Public void onTick() override {
-		Target->move((float)rawX + (float)(targetX - rawX) * VICommonMapping::sin_0_1(Duration->getPercent()),
-			(float)rawY + (float)(targetY - rawY) * VICommonMapping::sin_0_1(Duration->getPercent()));
-		Target->resize(rawW, rawH + rawH * maxExpandPercent * VICommonMapping::sin_0_1_0(Duration->getPercent()));
-	}
-	_Public void onSubside() override {
-		Target->setGeometry(targetX, targetY, rawW, rawH);
-	}
-};
-class VIPublicAPI private_VIMultiButtonAnimationLabel :public VIWidget
-{
-	Q_OBJECT;
-	VI_OBJECT;
-	_Public private_VIMultiButtonAnimationBehavior* Behavior;
-	_Public def_init private_VIMultiButtonAnimationLabel(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
-		this->setObjectName("VIMultiButtonAnimationLabel");
-		Behavior = new private_VIMultiButtonAnimationBehavior(this);
-		setVIDStyleSheet("default",
-			"private_VIMultiButtonAnimationLabel{background-color:AUTO_" + VIPalette::getDefaultColorName(VIPalette::DefaultColorName::Foreground) + "_CLR;border:0px solid white;border-radius:2px;}");
-		applyVIDSS("default");
-	}
-};
-class VIPublicAPI VIMultiButtonGroup :public VIWidget
-{
-	Q_OBJECT;
-	VI_OBJECT;
-	_Signal void selected(int index);
-	_Private QList<VIMultiButton*> Buttons;
-	_Private QLayout* Layout;
-	VI_PrivateProperty(int, SelectedIndex);
-	VI_Property(Qt::Orientation, Direction);
-	_Private int Spacing = 5;
-	_Private int AnimationLabelWidth = 4;
-	_Private private_VIMultiButtonAnimationLabel* AnimationLabel;
-	_Public def_init VIMultiButtonGroup(Qt::Orientation orientation, QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
-		Direction = orientation;
-		if (Direction == Qt::Orientation::Horizontal) {
-			Layout = new QHBoxLayout(this);
-		}
-		else {
-			Layout = new QVBoxLayout(this);
-		}
-		AnimationLabel = new private_VIMultiButtonAnimationLabel(this);
-		SelectedIndex = -1;
-	}
-	_Public void addButton(VIMultiButton* button) {
-		Buttons.append(button);
-		button->InButtonGroup = true;
-		button->ButtonGroupIndex = Buttons.size() - 1;
-		connect(button, &VIMultiButton::selected, this, &VIMultiButtonGroup::onSelected);
-		Layout->addWidget(button);
-		AnimationLabel->raise();
-	}
-	_Public void removeButton(int index) {
-		Buttons.removeAt(index);
-		Layout->removeWidget(Buttons[index]);
-		for (int i = index; i < Buttons.size(); i++) {
-			Buttons[i]->ButtonGroupIndex--;
-		}
-	}
-	_Public void removeButton(VIMultiButton* button) {
-		removeButton(button->ButtonGroupIndex);
-	}
-	_Public void setShrinkWidth(int width) {
-		for (int i = 0; i < Buttons.size(); i++) {
-			Buttons[i]->ShrinkWidth = width;
-		}
-	}
-	_Public void setSpacing(int spacing) {
-		Spacing = spacing;
-		for (int i = 0; i < Buttons.size(); i++) {
-			Buttons[i]->Spacing = spacing;
-		}
-		resizeEvent(VI_NULLPTR);
-	}
-	_Public int selectFirst() {
-		if (Buttons.size() == 0) { return -1; }
-		Buttons[0]->select();
-		SelectedIndex = 0;
-		AnimationLabel->move(Buttons[SelectedIndex]->x() + (Spacing - AnimationLabelWidth) / 2, Buttons[SelectedIndex]->y() + Spacing);
-		AnimationLabel->resize(AnimationLabelWidth, Buttons[SelectedIndex]->height() - Spacing * 2);
-		return 0;
-	}
-	_Public void setNormalStyleSheet(const QString& styleSheet) {
-		for (int i = 0; i < Buttons.size(); i++) {
-			Buttons[i]->setNormalStyleSheet(styleSheet);
-			Buttons[i]->setStyleSheet(styleSheet);
-		}
-	}
-	_Public void setPressStyleSheet(const QString& styleSheet) {
-		for (int i = 0; i < Buttons.size(); i++) {
-			Buttons[i]->setPressStyleSheet(styleSheet);
-		}
-	}
-	_Public void setHoverStyleSheet(const QString& styleSheet) {
-		for (int i = 0; i < Buttons.size(); i++) {
-			Buttons[i]->setHoverStyleSheet(styleSheet);
-		}
-	}
-	_Public void resizeEvent(QResizeEvent* event) {
-		if (SelectedIndex == -1) { return; }
-		AnimationLabel->move(Buttons[SelectedIndex]->x() + (Spacing - AnimationLabelWidth) / 2, Buttons[SelectedIndex]->y() + Spacing);
-		AnimationLabel->resize(AnimationLabelWidth, Buttons[SelectedIndex]->height() - Spacing * 2);
-		qDebug() << AnimationLabel->width() << AnimationLabel->height();
-	}
-	_Public VIMultiButton* spawnButton(QString text, QString icon = "", QString subText = "") {
-		VIMultiButton* button = new VIMultiButton(this, text, subText != "");
-		if (icon != "") { button->setIcon(icon); }
-		if (subText != "") { button->setSubText(subText); }
-		addButton(button);
-		AnimationLabel->raise();
-		return button;
-	}
-private slots: void onSelected(int index) {
-	SelectedIndex = index;
-	for (int i = 0; i < Buttons.size(); i++) {
-		if (i != index) {
-			Buttons[i]->unSelect();
-		}
-	}
-	AnimationLabel->Behavior->setDuration(300);
-	AnimationLabel->Behavior->setMoveTo(AnimationLabel->x(), Buttons[index]->y() + Spacing, Direction);
-	AnimationLabel->Behavior->active();
-	emit selected(index);
-}
 };
