@@ -35,8 +35,9 @@ class VIPublicAPI VICommandHost :public VIObject {
 	_Protected def_init VICommandHost(QObject* parent = VI_NULLPTR);
 	_Public bool addCommandHandler(VICommandHandler* handler);
 	_Public void removeCommandHandler(VICommandHandler* handler);
-	_Public bool handleCommand(QString command);
-	_Public static QStringList blankSplitter(QString str);
+	_Public bool handleCommand(const QString& command);
+	_Public static QStringList blankSplitter(const QString& str);
+	_Public static QStringList scientificSplitter(const QString& str, const QChar& ch);
 };
 
 class VIPublicAPI CommandHandlerTestClass :public VIObject {

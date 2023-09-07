@@ -3,13 +3,14 @@ import os
 import datetime
 
 defaultNickName = "Visindigo"
-dateNickName = {
+dateNickName = { 
     "0401": "我知道有的人喜欢在这种日子往程序里面加点小故障",
     "0410": "噩梦开始的日子",
     "0521": "用歌声将世界染成天蓝色",
     "0601": "你怎么敢讲德克萨斯的坏话",
     "0712": "梦开始的日子",
     "0806": "天雨尽，终作长烟",
+    "0831": "这里为啥掉了一根葱",
     "1224": "多给她烤点苹果派"
 }
 def getCommitCount():

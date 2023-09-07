@@ -230,6 +230,13 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
+    <ClCompile Include="VIARCP\cpp\VIARCPDataObject.cpp" />
+    <ClCompile Include="VIARCP\cpp\VIARCPEnum.cpp" />
+    <ClCompile Include="VIARCP\cpp\VIARCPPackage.cpp" />
+    <ClCompile Include="VIARCP\cpp\VIARCPPeerPort.cpp" />
+    <ClCompile Include="VIARCP\cpp\VIARCPRemoteObject.cpp" />
+    <ClCompile Include="VIARCP\cpp\VIARCPSocket.cpp" />
+    <ClCompile Include="VIARCP\cpp\VIARCPTypeManager.cpp" />
     <ClCompile Include="VICore\cpp\VIAbstractBehavior.cpp" />
     <ClCompile Include="VICore\cpp\VIBehavior.cpp" />
     <ClCompile Include="VICore\cpp\VICommand.cpp" />
@@ -281,6 +288,17 @@
     <QtMoc Include="VI2DScene\VI2DSceneItemAnimationBehavior.h" />
     <QtMoc Include="VIWidgets\VIMultiButton.h" />
     <QtMoc Include="VIWidgets\VILoadingWidget.h" />
+    <QtMoc Include="VIARCP\VIARCP.h" />
+    <ClInclude Include="VIARCP\VIARCPBaseChunk.h" />
+    <QtMoc Include="VIARCP\VIARCPDataObject.h" />
+    <QtMoc Include="VIARCP\VIARCPEnum.h" />
+    <QtMoc Include="VIARCP\VIARCPPackage.h" />
+    <QtMoc Include="VIARCP\VIARCPPackageMeta.h" />
+    <QtMoc Include="VIARCP\VIARCPPeerPort.h" />
+    <QtMoc Include="VIARCP\VIARCPRemoteObject.h" />
+    <QtMoc Include="VIARCP\VIARCPSocket.h" />
+    <QtMoc Include="VIARCP\VIARCPStructConverter.h" />
+    <QtMoc Include="VIARCP\VIARCPTypeManager.h" />
     <ClInclude Include="VICore\private\VisindigoNamespace.h" />
     <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h" />
     <QtMoc Include="VICore\VIRIFFObject.h" />

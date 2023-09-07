@@ -103,6 +103,27 @@
     <ClCompile Include="VIWidgets\private\VisindigoWidgetsPack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VIARCP\cpp\VIARCPDataObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIARCP\cpp\VIARCPEnum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIARCP\cpp\VIARCPPackage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIARCP\cpp\VIARCPPeerPort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIARCP\cpp\VIARCPRemoteObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIARCP\cpp\VIARCPSocket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIARCP\cpp\VIARCPTypeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VICore\private\VIMacro.h">
@@ -163,6 +184,36 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIWave\VIWave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPDataObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPPackage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPPackageMeta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPPeerPort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPRemoteObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPStructConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPTypeManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPBaseChunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -291,6 +342,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIWidgets\VISettingsLabel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCP.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

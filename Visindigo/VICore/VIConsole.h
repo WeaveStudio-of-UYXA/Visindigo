@@ -21,4 +21,8 @@ class VIPublicAPI VIConsole :public QObject {
 	_Public static QString inSuccessStyle(QString rawText);
 	_Public static QString inNoticeStyle(QString rawText);
 	_Public static void printLine(QString msg);
+	_Public static void printBinary(const QByteArray& data);
+	_Public template<typename T> static void printMemory(T* data) {
+		printBinary(QByteArray((char*)data, sizeof(T)));
+	};
 };

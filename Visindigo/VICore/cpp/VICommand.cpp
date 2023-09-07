@@ -35,47 +35,7 @@ void VICommandHost::removeCommandHandler(VICommandHandler* handler) {
 	}
 }
 
-QStringList VICommandHost::blankSplitter(QString str) {
-	QStringList result;
-	QString current = "";
-	bool inString = false;
-	for (int i = 0; i < str.size(); i++) {
-		if ((str[i] == ' ' || str[i] == "\t") && !inString) {
-			if (current != "") {
-				result.append(current);
-				current = "";
-			}
-			continue;
-		}
-		if (str[i] == '|' && !inString) {
-			if (current != "") {
-				result.append(current);
-				current = "";
-			}
-			result.append("|");
-		}
-		else if (str[i] == '"' && str[i - 1] != '\\') {
-			if (inString) {
-				if (current != "") {
-					result.append(current);
-					current = "";
-				}
-				inString = false;
-			}
-			else {
-				inString = true;
-			}
-		}
-		else {
-			current += str[i];
-		}
-	}
-	if (current != "") {
-		result.append(current);
-	}
-	return result;
-}
-bool VICommandHost::handleCommand(QString command) {
+bool VICommandHost::handleCommand(const QString& command) {
 	if (command == "") {
 		return false;
 	}
@@ -131,4 +91,68 @@ bool VICommandHost::handleCommand(QString command) {
 		}
 	}
 	return true;
+}
+
+QStringList VICommandHost::blankSplitter(const QString& str) {
+	QStringList result;
+	QString current = "";
+	bool inString = false;
+	for (int i = 0; i < str.size(); i++) {
+		if ((str[i] == ' ' || str[i] == "\t") && !inString) {
+			if (current != "") {
+				result.append(current);
+				current = "";
+			}
+			continue;
+		}
+		if (str[i] == '|' && !inString) {
+			if (current != "") {
+				result.append(current);
+				current = "";
+			}
+			result.append("|");
+		}
+		else if (str[i] == '"' && str[i - 1] != '\\') {
+			if (inString) {
+				if (current != "") {
+					result.append(current);
+					current = "";
+				}
+				inString = false;
+			}
+			else {
+				inString = true;
+			}
+		}
+		else {
+			current += str[i];
+		}
+	}
+	if (current != "") {
+		result.append(current);
+	}
+	return result;
+}
+
+QStringList VICommandHost::scientificSplitter(const QString& str, const QChar& ch) {
+	QStringList result;
+	QString temp = "";
+	bool backslash = false;
+	for (auto i = 0; i < str.length(); i++) {
+		if (str[i] == ch && !backslash) {
+			result.append(temp);
+			temp = "";
+		}
+		else {
+			if (str[i] == '\\') {
+				backslash = true;
+			}
+			else {
+				backslash = false;
+			}
+			temp += str[i];
+		}
+	}
+	if (temp != "") { result.append(temp); }
+	return result;
 }

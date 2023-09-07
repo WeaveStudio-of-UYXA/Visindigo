@@ -11,16 +11,6 @@ namespace $safeprojectname$ {
 		VI_OBJECT;
 		VI_HAS_INHERIT(VIPackage);
 		VI_Singleton(Package);
-		_Private QString t;
-		_Public def_init Package() {
-			VI_Singleton_Init;
-			setPackageMeta(new $safeprojectname$::PackageMeta);
-			getPackageMeta()->addTranslatableObject(this);
-			getPackageMeta()->initTranslation();
-		}
-		_Public virtual void onTranslating() override {
-
-		}
-
+		_Public def_init Package();
 	};
 }

@@ -148,3 +148,36 @@ QString VIConsole::inNoticeStyle(QString rawText) {
 void VIConsole::printLine(QString msg) {
 	qDebug().noquote() << msg;
 }
+
+void VIConsole::printBinary(const QByteArray& data) {
+	if (data.isEmpty()) { return; }
+	printLine("L\\B\t00  01  02  03  04  05  06  07  |  0 1 2 3 4 5 6 7  |");
+	printLine("-------------------------------------------------------------");
+	int B = 0;
+	int L = 0;
+	QString rawText = "";
+	QString chatText = "";
+	for (auto i = data.begin(); i != data.end(); i++) {
+		rawText.append(QString::number(*i, 16).rightJustified(2, '0') + "  ");
+		if (*i >= 0x20 && *i <= 0x7E) {
+			chatText.append(QString(QChar(*i))+" ");
+		}
+		else {
+			chatText.append(". ");
+		}
+		B++;
+		L++;
+		if (B == 8) {
+			printLine(QString::number(L, 16) + "\t" + rawText + "|  " + chatText + " |");
+			rawText = "";
+			chatText = "";
+			B = 0;
+		}
+	}
+	for (int i = 0; i < 8 - B; i++) {
+		rawText.append("    ");
+		chatText.append("  ");
+	}
+	printLine(QString::number(L, 16) + "\t" + rawText + "|  " + chatText + " |");
+	printLine("-------------------------------------------------------------");
+}
