@@ -23,7 +23,7 @@ class VIPublicAPI private_VISwitchButtonDotAnimationBehavior :public VIAnimation
 		TargetSwitchButton = VI_NULLPTR;
 		ButtonIO = false;
 	}
-	_Public virtual void onActive()override {
+	_Public virtual void onStart()override {
 	}
 	_Public virtual void onTick() {
 		int initialOffset = TargetSwitchButton->height() * 0.1;
@@ -56,7 +56,7 @@ class VIPublicAPI private_VISwitchButtonDotAnimationBehavior :public VIAnimation
 			break;
 		}
 	}
-	_Public virtual void onSubside() {
+	_Public virtual void onStop() {
 		switch (CurrentAnimation) {
 		case CurrentAnimationType::Press:
 			ButtonIO = !ButtonIO;

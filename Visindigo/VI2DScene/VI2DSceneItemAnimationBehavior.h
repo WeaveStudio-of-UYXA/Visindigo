@@ -14,10 +14,10 @@ class VIPublicAPI VI2DSceneRotateAnimationBehavior :public VI2DSceneAnimationBeh
 	Q_OBJECT;
 	VI_OBJECT;
 	_Public def_init VI2DSceneRotateAnimationBehavior(VISuper* parent = VI_NULLPTR) :VI2DSceneAnimationBehavior(parent) {}
-	_Public void onActive() {
+	_Public void onStart() {
 	}
 	_Public void onTick() {
 	}
-	_Public void onSubside() {
+	_Public void onStop() {
 	}
 };

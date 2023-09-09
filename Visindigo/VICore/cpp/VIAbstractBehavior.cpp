@@ -3,7 +3,7 @@
 /*
 VIAbstractBehavior
 */
-void VIAbstractBehavior::subside() {
+void VIAbstractBehavior::stop() {
 	if (BehaviorState == Visindigo::Active) {
 		BehaviorState = Visindigo::Subside;
 	}

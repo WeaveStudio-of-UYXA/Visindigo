@@ -143,7 +143,7 @@ void VIRatioWidgetContainer::onSelected() {
 	emit selectWidgetChanged(widget);
 	AnimationBehavior->setDuration(400);
 	AnimationBehavior->setTarget(widget);
-	AnimationBehavior->active();
+	AnimationBehavior->start();
 }
 void VIRatioWidgetContainer::removeWidget(VIAbstractRatioWidget* widget) {
 	CurrentLayout->removeWidget(widget);
@@ -199,7 +199,7 @@ void private_VIRatioWidgetAnimation::setTarget(VIAbstractRatioWidget* tar) {
 		break;
 	}
 }
-void private_VIRatioWidgetAnimation::onActive() {
+void private_VIRatioWidgetAnimation::onStart() {
 	LastDurationPercent = 0;
 	effectiveDeltaMove = 0;
 }
@@ -220,7 +220,7 @@ void private_VIRatioWidgetAnimation::onTick() {
 		break;
 	}
 }
-void private_VIRatioWidgetAnimation::onSubside() {
+void private_VIRatioWidgetAnimation::onStop() {
 	AnimationLabel->move(TargetPos);
 	switch (MasterWidget->CurrentOrientation)
 	{

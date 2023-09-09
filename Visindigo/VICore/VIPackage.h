@@ -65,8 +65,8 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	_Public def_init VIPackage();
 	_Public VIPackageMeta* getPackageMeta();
 	_Public void setPackageMeta(VIPackageMeta* info);
-	_Public virtual void onActive() HalfVirtual;
-	_Public virtual void onSubside() HalfVirtual;
+	_Public virtual void onStart() HalfVirtual;
+	_Public virtual void onStop() HalfVirtual;
 	_Public virtual void onTick() HalfVirtual;
 	_Public virtual void onEvent(QEvent* e) HalfVirtual;
 	_Public def_del ~VIPackage();

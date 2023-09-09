@@ -14,16 +14,16 @@ Visindigo::BehaviorState VIBasicBehavior::hostCall() {
 		onTick();
 		break;
 	case Visindigo::Subside:
-		onSubside();
+		onStop();
 		BehaviorState = Visindigo::Idle;
 		break;
 	}
 	return BehaviorState;
 }
-void VIBasicBehavior::active(Visindigo::QuantifyTickType type) {
+void VIBasicBehavior::start(Visindigo::QuantifyTickType type) {
 	if (BehaviorState == Visindigo::Idle) {
 		BehaviorState = Visindigo::Active;
-		onActive();
+		onStart();
 		this->Host->addBehavior(this, type);
 	}
 }
@@ -46,11 +46,11 @@ Visindigo::BehaviorState VITimedBehavior::hostCall() {
 	if (Duration->isTimeout()) { BehaviorState = Visindigo::Subside; }
 	return VIBasicBehavior::hostCall();
 }
-void VITimedBehavior::active(Visindigo::QuantifyTickType type) {
+void VITimedBehavior::start(Visindigo::QuantifyTickType type) {
 	if (BehaviorState == Visindigo::Idle) {
 		BehaviorState = Visindigo::Active;
 		Duration->initDuration();
-		onActive();
+		onStart();
 		this->Host->addBehavior(this, type);
 	}
 }
@@ -357,11 +357,11 @@ def_init VIDebugBehavior::VIDebugBehavior(QObject* parent) :VIBasicBehavior(pare
 	Index = 0;
 	consoleLog("VIDebugBehavior init");
 }
-void VIDebugBehavior::onActive() {
-	consoleLog("VIDebugBehavior onActive");
+void VIDebugBehavior::onStart() {
+	consoleLog("VIDebugBehavior onStart");
 }
-void VIDebugBehavior::onSubside() {
-	consoleLog("VIDebugBehavior onSubside");
+void VIDebugBehavior::onStop() {
+	consoleLog("VIDebugBehavior onStop");
 }
 #include <iostream>
 void VIDebugBehavior::onTick() {
@@ -394,10 +394,10 @@ void VIDebugBehavior::onTick() {
 	//qDebug() << Host->getTickDuration()<<((VIQuantifyTickBehaviorHost*)Host)->getNSPT()/1000000.0<<1000000000.0/Host->getTickDuration();
 }
 
-void VIAnimationBehavior::active(Visindigo::QuantifyTickType) {
-	VITimedBehavior::active(Visindigo::T64);
+void VIAnimationBehavior::start(Visindigo::QuantifyTickType) {
+	VITimedBehavior::start(Visindigo::T64);
 }
 
-void VIAnimationBehavior::subside() {
-	VITimedBehavior::subside();
+void VIAnimationBehavior::stop() {
+	VITimedBehavior::stop();
 }

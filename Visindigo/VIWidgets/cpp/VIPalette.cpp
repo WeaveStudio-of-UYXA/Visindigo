@@ -169,7 +169,7 @@ void VIPaletteGroup::onPaletteChanged(const QString& raw, const QString& cur) {
 		if (PaletteMap.contains(raw) && PaletteMap.contains(cur)) {
 			ChangeAnimationBehavior->setColorMap(PaletteMap.value(raw)->getColorMap(), PaletteMap.value(cur)->getColorMap());
 			ChangeAnimationBehavior->setTargetPaletteName(cur);
-			ChangeAnimationBehavior->active();
+			ChangeAnimationBehavior->start();
 		}
 	}
 	else {
@@ -207,7 +207,7 @@ void private_VIPaletteChangeAnimationBehavior::setColorMap(const VIColorMap& raw
 	}
 }
 
-void private_VIPaletteChangeAnimationBehavior::onActive() HalfVirtual;
+void private_VIPaletteChangeAnimationBehavior::onStart() HalfVirtual;
 void private_VIPaletteChangeAnimationBehavior::onTick() {
 	float p = VICommonMapping::sin_0_1(Duration->getPercent());
 	for (auto colorName : CachedColorMap.keys()) {
@@ -221,6 +221,6 @@ void private_VIPaletteChangeAnimationBehavior::onTick() {
 	Group->PaletteMap[TargetPaletteName]->setColorMap(CurrentColorMap);
 	emit Group->paletteChanged(TargetPaletteName);
 }
-void private_VIPaletteChangeAnimationBehavior::onSubside() {
+void private_VIPaletteChangeAnimationBehavior::onStop() {
 	Group->PaletteMap[TargetPaletteName]->setColorMap(CurrentColorMap);
 }

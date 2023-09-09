@@ -68,7 +68,7 @@ class VIPrivateAPI private_VIRatioWidgetAnimation :public VIAnimationBehavior
 	_Private int effectiveDeltaMove;
 	_Public def_init private_VIRatioWidgetAnimation(VIRatioWidgetContainer* master);
 	_Public void setTarget(VIAbstractRatioWidget* tar);
-	_Public virtual void onActive() override;
+	_Public virtual void onStart() override;
 	_Public virtual void onTick() override;
-	_Public virtual void onSubside() override;
+	_Public virtual void onStop() override;
 };

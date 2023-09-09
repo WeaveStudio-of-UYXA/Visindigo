@@ -35,20 +35,20 @@ class VIPublicAPI VISwitchButton :public VIWidget
 	_Public void enterEvent(QEvent* event) {
 		DotAnimationBehavior->setDuration(300);
 		DotAnimationBehavior->setCurrentAnimation(private_VISwitchButtonDotAnimationBehavior::CurrentAnimationType::Hover);
-		DotAnimationBehavior->active();
+		DotAnimationBehavior->start();
 	};
 	_Public void leaveEvent(QEvent* event) {
 		if (!Pressed) {
 			DotAnimationBehavior->setDuration(300);
 			DotAnimationBehavior->setCurrentAnimation(private_VISwitchButtonDotAnimationBehavior::CurrentAnimationType::Leave);
-			DotAnimationBehavior->active();
+			DotAnimationBehavior->start();
 		}
 		Pressed = false;
 	};
 	_Public void mousePressEvent(QMouseEvent* event = VI_NULL) {
 		DotAnimationBehavior->setDuration(300);
 		DotAnimationBehavior->setCurrentAnimation(private_VISwitchButtonDotAnimationBehavior::CurrentAnimationType::Press);
-		DotAnimationBehavior->active();
+		DotAnimationBehavior->start();
 		Pressed = true;
 		BoolState = !BoolState;
 	};

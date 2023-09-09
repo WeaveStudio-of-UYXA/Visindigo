@@ -7,7 +7,7 @@ def_init VIARCPSocket::VIARCPSocket(QTcpSocket* s) {
 QString VIARCPSocket::getRandomString(int length) {
 	QString str;
 	for (int i = 0; i < length; i++) {
-		str.append(QChar('a' + qrand() % 26));
+		str.append(QChar('A' + qrand() % 26));
 	}
 	return str;
 }
@@ -51,7 +51,9 @@ void VIARCPSocket::onDisconnected() {
 }
 void VIARCPSocket::onErrorOccurred(QAbstractSocket::SocketError error) {
 	consoleLog(VIConsole::inErrorStyle(QString("Socket error occurred: %1").arg(error)));
-	reConnect();
+	if (!AsServer) {
+		reConnect();
+	}
 }
 void VIARCPSocket::sendData(VIARCPCallDataObject& obj) {
 	Socket->write(obj.toByte());

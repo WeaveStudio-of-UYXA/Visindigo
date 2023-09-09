@@ -9,7 +9,7 @@ class VIPublicAPI VIBasicBehavior :public VIAbstractBehavior
 	friend class VIBehaviorHost;
 	_Public def_init VIBasicBehavior(QObject* parent = nullptr);
 	_Public Visindigo::BehaviorState hostCall();
-	_Public void active(Visindigo::QuantifyTickType = Visindigo::T0) override;
+	_Public void start(Visindigo::QuantifyTickType = Visindigo::T0) override;
 };
 
 class VIPublicAPI VITimedBehavior :public VIBasicBehavior
@@ -21,7 +21,7 @@ class VIPublicAPI VITimedBehavior :public VIBasicBehavior
 	_Public void setDuration(VIMilliSecond duration);
 	_Public void setForeverDuration();
 	_Public Visindigo::BehaviorState hostCall();
-	_Public void active(Visindigo::QuantifyTickType = Visindigo::T0) override;
+	_Public void start(Visindigo::QuantifyTickType = Visindigo::T0) override;
 	_Public VIMilliSecond getTickDuration();
 };
 //被动行为
@@ -31,7 +31,7 @@ class VIPrivateAPI VIPassiveBehavior :public VIBasicBehavior
 	friend class VIBehaviorHost;
 	_Public def_init VIPassiveBehavior(VIAbstractBehavior* parent = nullptr);
 	_Public Visindigo::BehaviorState hostCall() override;
-	_Public void active(Visindigo::QuantifyTickType = Visindigo::T0) override;
+	_Public void start(Visindigo::QuantifyTickType = Visindigo::T0) override;
 };
 class VIPublicAPI VIBehaviorHost;
 class VIPublicAPI VIQuantifyTickBehaviorHost final :public VIAbstractBehaviorHost
@@ -95,9 +95,9 @@ class VIPublicAPI VIDebugBehavior final :public VIBasicBehavior
 	VI_Property(float, TMSPT);
 	VI_Property(int, Index);
 	_Public def_init VIDebugBehavior(QObject* parent = nullptr);
-	_Public void onActive() override;
+	_Public void onStart() override;
 	_Public void onTick() override;
-	_Public void onSubside() override;
+	_Public void onStop() override;
 };
 
 class VIPublicAPI VIAnimationBehavior :public VITimedBehavior
@@ -106,6 +106,6 @@ class VIPublicAPI VIAnimationBehavior :public VITimedBehavior
 	VI_OBJECT;
 	_Signal void finished();
 	_Public def_init VIAnimationBehavior(QObject* parent = nullptr) :VITimedBehavior(parent) {}
-	_Public void active(Visindigo::QuantifyTickType = Visindigo::T64) override;
-	_Public void subside() override;
+	_Public void start(Visindigo::QuantifyTickType = Visindigo::T64) override;
+	_Public void stop() override;
 };

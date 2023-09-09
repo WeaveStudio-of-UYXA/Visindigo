@@ -39,10 +39,10 @@ class VIPublicAPI VIGridTextureAbstractDriver :public VIAnimationBehavior
 	_Private int Index = 0;
 	_Public def_init VIGridTextureAbstractDriver(QObject* parent = VI_NULL);
 	_Public void setGridTexture(VIGridTexture* gridTexture);
-	_Public void active(Visindigo::QuantifyTickType = Visindigo::T64) override;
-	_Public void onActive() override;
+	_Public void start(Visindigo::QuantifyTickType = Visindigo::T64) override;
+	_Public void onStart() override;
 	_Public void onTick() override;
-	_Public void onSubside() override;
+	_Public void onStop() override;
 	_Public virtual void onImage(const QImage& image) PureVirtual;
 };
 
