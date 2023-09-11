@@ -17,12 +17,12 @@ namespace VIARCP {
 			this->setPackageVersionMajor(VI_VERSION_MAJOR);
 			this->setPackageVersionMinor(VI_VERSION_MINOR);
 			this->setPackageVersionPatch(VI_VERSION_PATCH);
-			this->setAuthor({ "VIARCP `s author"});
-			this->setDescription("VIARCP do not have description yet!");
-			this->setLicense("GPLv3.0");
-			this->setURL("https://www.github.com/!!!YOUR_NAME!!!/VIARCP");
-			this->setOrganization("!!!YOUR_ORG_NAME!!!");
-			this->setOrganizationDomain("https://www.github.com/!!!YOUR_ORG_NAME!!!");
+			this->setAuthor({ "Tsing Yayin"});
+			this->setDescription("Application Remote Call Protocol, suitable for program transmission of short messages in secure links");
+			this->setLicense("LGPLv2.1");
+			this->setURL("");
+			this->setOrganization("Weave Studio");
+			this->setOrganizationDomain("");
 			this->addTranslationFileName(Visindigo::Language::zh_SC, "zh_SC.vil", true);
 			this->addTranslationFileName(Visindigo::Language::en_US, "en_US.vil", true);
 			this->setDefaultLanguage(Visindigo::Language::zh_SC);

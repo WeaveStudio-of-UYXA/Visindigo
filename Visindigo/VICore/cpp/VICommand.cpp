@@ -1,4 +1,6 @@
 ﻿#include "../VICommand.h"
+#include <iostream>
+
 VI_Singleton_StaticInit(VICommandHost);
 
 VICommandHandler::VICommandHandler() {
@@ -19,11 +21,39 @@ bool VICommandHost::addCommandHandler(VICommandHandler* handler) {
 	}
 }
 
-def_init VICommandHost::VICommandHost(QObject* parent) :VIObject(parent) {
+def_init VIStdIOCommandHandler::VIStdIOCommandHandler(QObject* parent) :QThread(parent) {
+	setObjectName("VIStdIOCommandHandler");
+}
+
+void VIStdIOCommandHandler::run() {
+	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "The standard input/output listener is started."));
+	while (true) {
+		Mutex.lock();
+		bool running = Running;
+		Mutex.unlock();
+		if (!running) {
+			break;
+		}
+		std::cout << ">>>";
+		std::string commandStd;
+		std::getline(std::cin, commandStd);
+		QString command = QString::fromStdString(commandStd);
+		if (command == "") {
+			continue;
+		}
+		emit commandReceived(command);
+	}
+	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "The standard input/output listener is stopped."));
+}
+def_init VICommandHost::VICommandHost(bool listenStdIO, QObject* parent) :VIObject(parent) {
 	VI_Singleton_Init;
+	ListenStdIO = listenStdIO;
+	if (ListenStdIO) {
+		enableStdIOListener();
+	}
 	setObjectName("VICommandHost");
-	setInstance(this);
 	consoleLog("Initialized");
+	addCommandHandler(new  CommandHandlerTestClass::TestHandler());
 }
 void VICommandHost::removeCommandHandler(VICommandHandler* handler) {
 	if (CommandHandlers.contains(handler->CommandName)) {
@@ -93,6 +123,26 @@ bool VICommandHost::handleCommand(const QString& command) {
 	return true;
 }
 
+void VICommandHost::enableStdIOListener() {
+	if (StdIOListener != nullptr) {
+		return;
+	}
+	StdIOListener = new VIStdIOCommandHandler(this);
+	connect(StdIOListener, &VIStdIOCommandHandler::commandReceived, this, &VICommandHost::handleCommand,
+		Qt::BlockingQueuedConnection);
+	StdIOListener->start();
+}
+
+void VICommandHost::disableStdIOListener() {
+	if (StdIOListener == nullptr) {
+		return;
+	}
+	StdIOListener->Mutex.lock();
+	StdIOListener->Running = false;
+	StdIOListener->Mutex.unlock();
+	StdIOListener->deleteLater();
+	StdIOListener = nullptr;
+}
 QStringList VICommandHost::blankSplitter(const QString& str) {
 	QStringList result;
 	QString current = "";

@@ -186,33 +186,6 @@
     <ClInclude Include="VIWave\VIWave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPDataObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPEnum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPPackage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPPackageMeta.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPPeerPort.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPRemoteObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPSocket.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPStructConverter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPTypeManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VIARCP\VIARCPBaseChunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -347,5 +320,35 @@
     <QtMoc Include="VIARCP\VIARCP.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPDataObject.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPEnum.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPPackage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPPackageMeta.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPPeerPort.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPRemoteObject.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPSocket.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPStructConverter.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPTypeManager.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
