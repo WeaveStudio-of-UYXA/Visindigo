@@ -53,7 +53,7 @@ class VIPublicAPI VIRatioWidgetContainer :public VIWidget
 	_Public void resizeEvent(QResizeEvent* event) override;
 };
 
-class VIPrivateAPI private_VIRatioWidgetAnimation :public VIAnimationBehavior 
+class VIPrivateAPI private_VIRatioWidgetAnimation :public VIAnimationBehavior
 {
 	Q_OBJECT;
 	VI_OBJECT;

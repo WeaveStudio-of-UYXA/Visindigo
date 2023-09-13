@@ -20,11 +20,6 @@ class VIPublicAPI VICommandHandler {
 	_Public def_del ~VICommandHandler();
 };
 
-#define VICommand_Reg(Name) new Name()
-#define VICommand_Handler(Name) class VIPublicAPI Name :public VICommandHandler { _Public def_init Name(): VICommandHandler()
-#define VICommand_Name(Name) CommandName = Name; VICommandHost::getInstance()->addCommandHandler(this);}\
-	bool handleCommand() override
-
 class VIPublicAPI VIStdIOCommandHandler :public QThread, VIBaseObject
 {
 	Q_OBJECT;
@@ -54,17 +49,4 @@ class VIPublicAPI VICommandHost :public VIObject {
 	_Public void disableStdIOListener();
 	_Public static QStringList blankSplitter(const QString& str);
 	_Public static QStringList scientificSplitter(const QString& str, const QChar& ch);
-};
-
-
-class VIPublicAPI CommandHandlerTestClass :public VIObject {
-	Q_OBJECT;
-	VI_OBJECT;
-	_Public def_init CommandHandlerTestClass(QObject* parent = VI_NULLPTR) :VIObject(parent) {};
-	_Public VICommand_Handler(TestHandler) {
-		VICommand_Name("TH") {
-			qDebug() << "TestCommand";
-			return true;
-		}
-	};
 };

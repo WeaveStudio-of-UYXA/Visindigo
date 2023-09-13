@@ -1,5 +1,5 @@
 ﻿#include "../VIConsole.h"
-
+#include <iostream>
 /*
 VIConsole
 */
@@ -129,6 +129,11 @@ QString VIConsole::getColorString(QString rawText, QColor rgb, VIConsole::Style 
 	return getColorString(rawText, rgb, QList<VIConsole::Style>({ style }));
 }
 
+QString VIConsole::getLine() {
+	std::string commandStd;
+	std::getline(std::cin, commandStd);
+	return QString::fromLocal8Bit(QByteArray::fromStdString(commandStd));
+}
 QString VIConsole::inWarningStyle(QString rawText) {
 	return getColorString(rawText, QColor(255, 253, 85), Style::Bold);
 }
@@ -151,33 +156,57 @@ void VIConsole::printLine(QString msg) {
 
 void VIConsole::printBinary(const QByteArray& data) {
 	if (data.isEmpty()) { return; }
-	printLine("L\\B\t00  01  02  03  04  05  06  07  |  0 1 2 3 4 5 6 7  |");
-	printLine("-------------------------------------------------------------");
+	printLine("L\\B\t00  01  02  03  04  05  06  07  |  00 01 02 03 04 05 06 07  |");
+	printLine("---------------------------------------------------------------------");
 	int B = 0;
 	int L = 0;
 	QString rawText = "";
 	QString chatText = "";
+	bool UninitializedMemory = false;
 	for (auto i = data.begin(); i != data.end(); i++) {
-		rawText.append(QString::number(*i, 16).rightJustified(2, '0') + "  ");
-		if (*i >= 0x20 && *i <= 0x7E) {
-			chatText.append(QString(QChar(*i))+" ");
+		if (*i < 0 || *i>255) {
+			rawText.append("??  ");
+			UninitializedMemory = true;
 		}
 		else {
-			chatText.append(". ");
+			rawText.append(QString::number(*i, 16).rightJustified(2, '0').toUpper() + "  ");
+		}
+		if (*i >= 0x20 && *i <= 0x7E) {
+			chatText.append(" " % QChar(*i) % " ");
+		}
+		else if (*i == 0x0A) {
+			chatText.append("\\n ");
+		}
+		else if (*i == 0x0D) {
+			chatText.append("\\r ");
+		}
+		else if (*i == 0x09) {
+			chatText.append("\\t ");
+		}
+		else if (*i < 0 || *i>255) {
+			chatText.append("?? ");
+		}
+		else {
+			chatText.append(" . ");
 		}
 		B++;
 		L++;
 		if (B == 8) {
-			printLine(QString::number(L, 16) + "\t" + rawText + "|  " + chatText + " |");
+			printLine(QString::number(L, 10) % "\t" % rawText % "|  " % chatText % " |");
 			rawText = "";
 			chatText = "";
 			B = 0;
 		}
 	}
-	for (int i = 0; i < 8 - B; i++) {
-		rawText.append("    ");
-		chatText.append("  ");
+	if (B != 0) {
+		for (int i = 0; i < 8 - B; i++) {
+			rawText.append("    ");
+			chatText.append("   ");
+		}
+		printLine(QString::number(L, 10) % "\t" % rawText % "|  " % chatText % " |");
 	}
-	printLine(QString::number(L, 16) + "\t" + rawText + "|  " + chatText + " |");
-	printLine("-------------------------------------------------------------");
+	printLine("---------------------------------------------------------------------");
+	if (UninitializedMemory) {
+		printLine(inWarningStyle("Warning: Uninitialized memory detected.(Part marked as '??')\nIf this data directly comes from a struct or class, please ignore this issue"));
+	}
 }

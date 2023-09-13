@@ -17,7 +17,7 @@ namespace VIARCP {
 			this->setPackageVersionMajor(VI_VERSION_MAJOR);
 			this->setPackageVersionMinor(VI_VERSION_MINOR);
 			this->setPackageVersionPatch(VI_VERSION_PATCH);
-			this->setAuthor({ "Tsing Yayin"});
+			this->setAuthor({ "Tsing Yayin" });
 			this->setDescription("Application Remote Call Protocol, suitable for program transmission of short messages in secure links");
 			this->setLicense("LGPLv2.1");
 			this->setURL("");

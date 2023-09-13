@@ -62,7 +62,7 @@ VIQuantifyTickBehaviorHost
 */
 def_init VIQuantifyTickBehaviorHost::VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent) :VIAbstractBehaviorHost(parent) {
 	this->setObjectName("QTickBehaviorHost_" + QString::number((int)1000000000.0 / durationLimit));
-	DurationLimit = durationLimit ;
+	DurationLimit = durationLimit;
 	DurationLimitNow = DurationLimit;
 	TickDuration = durationLimit;
 	CurrentIndexLeft = 0;
@@ -325,7 +325,7 @@ void VIBehaviorHost::resumeQuantifyTickBehaviorHost(Visindigo::QuantifyTickType 
 }
 
 void VIBehaviorHost::manualExecueQuantifyTickBehaviorHost(Visindigo::QuantifyTickType type, VINanoSecond duration) {
-switch (type)
+	switch (type)
 	{
 	case Visindigo::T0:
 		if (duration < 0) { duration = 7812500; } // if duration < 0, set duration to 1/128 second

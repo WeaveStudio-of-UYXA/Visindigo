@@ -16,9 +16,9 @@ qint64 VIPathInfo::getSizeOf(const QString& path) {
 QString VIPathInfo::getCountingUnitStr(Visindigo::CountingUnit c) {
 	switch (c)
 	{
-		case Visindigo::_0:
-			return "";
-			break;
+	case Visindigo::_0:
+		return "";
+		break;
 		VI_ENUMSTR(Visindigo, K);
 		VI_ENUMSTR(Visindigo, M);
 		VI_ENUMSTR(Visindigo, G);
@@ -32,7 +32,7 @@ QString VIPathInfo::getCountingUnitStr(Visindigo::CountingUnit c) {
 	}
 }
 
-QString VIPathInfo::getReadableSize(double rawSize, Visindigo::BinarySizeUnit u, Visindigo::CountingUnit c , Visindigo::BinarySizeFormat f) {
+QString VIPathInfo::getReadableSize(double rawSize, Visindigo::BinarySizeUnit u, Visindigo::CountingUnit c, Visindigo::BinarySizeFormat f) {
 	if (rawSize >= (int)f) {
 		return getReadableSize(rawSize / (int)f, u, (Visindigo::CountingUnit)(c + 1), f);
 	}

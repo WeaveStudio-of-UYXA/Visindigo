@@ -1,4 +1,8 @@
-﻿#pragma once
+﻿/*
+Still under development
+DO NOT USE IT IN PRODUCTION ENVIRONMENT
+*/
+#pragma once
 #include "../VICore/VICore.h"
 #include <QtMultimedia>
 
@@ -30,7 +34,7 @@ class VIPublicAPI VIWaveData {
 	_Private short sampleSize = 16;
 	_Public void setSampleSize(short bit) {
 		short i = bit % 8;
-		sampleSize = (int)(bit / 8)*8;
+		sampleSize = (int)(bit / 8) * 8;
 		if (i != 0) {
 			sampleSize += 8;
 		}
@@ -180,21 +184,21 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 		QAudioBuffer buffer = decoder.read();
 		RawData.setSampleSize(AudioFormat.sampleSize());
 		switch (AudioFormat.sampleSize()) {
-			case 8:
-				for (int i = 0; i < buffer.sampleCount(); i++) {
-					RawData.append(((qint8*)buffer.constData())[i]);
-				}
-				break;
-			case 16:
-				for (int i = 0; i < buffer.sampleCount(); i++) {
-					RawData.append(((qint16*)buffer.constData())[i]);
-				}
-				break;
-			case 32:
-				for (int i = 0; i < buffer.sampleCount(); i++) {
-					RawData.append(((qint32*)buffer.constData())[i]);
-				}
-				break;
+		case 8:
+			for (int i = 0; i < buffer.sampleCount(); i++) {
+				RawData.append(((qint8*)buffer.constData())[i]);
+			}
+			break;
+		case 16:
+			for (int i = 0; i < buffer.sampleCount(); i++) {
+				RawData.append(((qint16*)buffer.constData())[i]);
+			}
+			break;
+		case 32:
+			for (int i = 0; i < buffer.sampleCount(); i++) {
+				RawData.append(((qint32*)buffer.constData())[i]);
+			}
+			break;
 		}
 	}
 	_Public void append(VIMilliSecond ms) {
@@ -203,7 +207,7 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 		}
 	}
 	_Public void prepend(VIMilliSecond ms) {
-		for (int i = 0; i < get5MsCountForLength(ms)*get5MilliSecondSampleLength(); i++) {
+		for (int i = 0; i < get5MsCountForLength(ms) * get5MilliSecondSampleLength(); i++) {
 			RawData.append(0);
 		}
 	}
@@ -216,12 +220,12 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 		return ((long long)RawData.size() * 1000) / (AudioFormat.sampleRate() * AudioFormat.channelCount());
 	}
 	_Public quint64 getIndexOf(VIMilliSecond ms) {
-		return get5MsCountForIndex(ms)*get5MilliSecondSampleLength();
+		return get5MsCountForIndex(ms) * get5MilliSecondSampleLength();
 	}
 	_Public quint64 getSecondSampleLength() {
 		return AudioFormat.sampleRate() * AudioFormat.channelCount();
 	}
-	_Public quint64 get5MilliSecondSampleLength() {  
+	_Public quint64 get5MilliSecondSampleLength() {
 		// Visindigo uses 5ms as the shortest unit
 		return getSecondSampleLength() / 200;
 	}
@@ -240,13 +244,13 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 		if (tarEnd == -1) {
 			tarEnd = wave.getSoundLength();
 		}
-		consoleLog("Current Wave Length: "+QString::number(getSoundLength()));
+		consoleLog("Current Wave Length: " + QString::number(getSoundLength()));
 		if (start + tarEnd - tarStart > getSoundLength()) {
 			append(start + tarEnd - tarStart - getSoundLength());
 		}
 		consoleLog("Current Wave Length: " + QString::number(getSoundLength()));
 		int j = getIndexOf(start);
-		
+
 		for (int i = wave.getIndexOf(tarStart); i < wave.getIndexOf(tarEnd); i++) {
 			// 由于序号以5ms为最小分度单位，因此末尾不足5ms的部分会被忽略
 			if (j == RawData.size()) {
@@ -256,12 +260,12 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 				RawData.set(j, RawData[j] + wave.RawData[i] * wave.Volume);
 			}
 			else if (AudioFormat.channelCount() == 1 && wave.AudioFormat.channelCount() == 2) {
-				RawData.set(j, RawData[j] + (wave.RawData[i]*0.5+wave.RawData[i+1]*0.5)* wave.Volume);
+				RawData.set(j, RawData[j] + (wave.RawData[i] * 0.5 + wave.RawData[i + 1] * 0.5) * wave.Volume);
 				i++;
 			}
 			else if (AudioFormat.channelCount() == 2 && wave.AudioFormat.channelCount() == 1) {
 				RawData.set(j, RawData[j] + wave.RawData[i] * wave.Volume);
-				RawData.set(j+1, RawData[j+1] + wave.RawData[i] * wave.Volume);
+				RawData.set(j + 1, RawData[j + 1] + wave.RawData[i] * wave.Volume);
 				j++;
 			}
 			j++;
@@ -288,15 +292,15 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 		for (int i = 0; i < RawData.size(); i++) {
 			qint64 data = RawData[i] * Volume;
 			switch (AudioFormat.sampleSize()) {
-				case 8:
-					file.write((char*)&data, sizeof(qint8));
-					break;
-				case 16:
-					file.write((char*)&data, sizeof(qint16));
-					break;
-				case 32:
-					file.write((char*)&data, sizeof(qint32));
-					break;
+			case 8:
+				file.write((char*)&data, sizeof(qint8));
+				break;
+			case 16:
+				file.write((char*)&data, sizeof(qint16));
+				break;
+			case 32:
+				file.write((char*)&data, sizeof(qint32));
+				break;
 			}
 		}
 		file.close();

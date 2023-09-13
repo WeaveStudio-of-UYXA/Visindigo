@@ -6,13 +6,13 @@ class VIPublicAPI VIARCPTypeManager :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	VI_STATIC_CLASS (VIARCPTypeManager);
-	_Public enum class TypeName{
+	VI_STATIC_CLASS(VIARCPTypeManager);
+	_Public enum class TypeName {
 		Unknown,
 		Any,
 		None,
 		UInt32, Int32, UInt64, Int64, Bool,
-		Float, Double, 
+		Float, Double,
 		String,
 		Json,
 		Binary,

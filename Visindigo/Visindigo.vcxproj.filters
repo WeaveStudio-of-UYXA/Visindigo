@@ -189,6 +189,18 @@
     <ClInclude Include="VIARCP\VIARCPBaseChunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VIWidgets\VICodeEdit\VISyntaxHighlighter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPDataObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPStructConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VICore\VIAbstractBehavior.h">
@@ -236,7 +248,7 @@
     <QtMoc Include="VICore\VIDocument\VIJSON.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIWidgets\VICodeEdit.h">
+    <QtMoc Include="VIWidgets\VICodeEdit\VICodeEdit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIWidgets\VIMultiButton.h">
@@ -320,12 +332,6 @@
     <QtMoc Include="VIARCP\VIARCP.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIARCP\VIARCPDataObject.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIARCP\VIARCPEnum.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="VIARCP\VIARCPPackage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -339,9 +345,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIARCP\VIARCPSocket.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VIARCP\VIARCPStructConverter.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIARCP\VIARCPTypeManager.h">

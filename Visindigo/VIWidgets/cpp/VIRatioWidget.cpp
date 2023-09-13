@@ -1,8 +1,6 @@
 ﻿#include "../VIRatioWidget.h"
 
-
 def_init VIAbstractRatioWidget::VIAbstractRatioWidget(QWidget* parent) :VIWidget(parent) {
-
 };
 void VIAbstractRatioWidget::mouseReleaseEvent(QMouseEvent* event) {
 	isSelected = true;
@@ -178,7 +176,6 @@ void VIRatioWidgetContainer::resizeEvent(QResizeEvent* event) {
 	}
 }
 
-
 def_init private_VIRatioWidgetAnimation::private_VIRatioWidgetAnimation(VIRatioWidgetContainer* master) {
 	MasterWidget = master;
 	AnimationLabel = master->AnimationLabel;
@@ -189,12 +186,12 @@ void private_VIRatioWidgetAnimation::setTarget(VIAbstractRatioWidget* tar) {
 	switch (MasterWidget->CurrentOrientation) {
 	case Qt::Horizontal:
 		deltaMove = tar->x() - AnimationLabel->x();
-		TargetPos = QPoint(tar->x()+AnimationLabel->width()*0.1, AnimationLabel->y());
+		TargetPos = QPoint(tar->x() + AnimationLabel->width() * 0.1, AnimationLabel->y());
 		deltaSize = AnimationLabel->width() * 0.5;
 		break;
 	case Qt::Vertical:
 		deltaMove = tar->y() - AnimationLabel->y();
-		TargetPos = QPoint(AnimationLabel->x(), tar->y()+AnimationLabel->height()*0.1);
+		TargetPos = QPoint(AnimationLabel->x(), tar->y() + AnimationLabel->height() * 0.1);
 		deltaSize = AnimationLabel->height() * 0.5;
 		break;
 	}
@@ -207,7 +204,7 @@ void private_VIRatioWidgetAnimation::onTick() {
 	float cd = 0;
 	cd = VICommonMapping::sin_0_1_0(Duration->getPercent()) - LastDurationPercent;
 	LastDurationPercent = VICommonMapping::sin_0_1_0(Duration->getPercent());
-	int ds =  deltaSize * cd;
+	int ds = deltaSize * cd;
 	effectiveDeltaMove += ds;
 	switch (MasterWidget->CurrentOrientation) {
 	case Qt::Horizontal:

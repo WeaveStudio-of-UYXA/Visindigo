@@ -18,11 +18,11 @@ class VIPublicAPI VISwitchButton :public VIWidget
 		DotAnimationBehavior->setTargetDot(DotLabel);
 		DotAnimationBehavior->setTargetSwitchButton(this);
 		Pressed = false;
-		DotLabel->setVIDStyleSheet("default", 
-			"VILabel{background-color:ACLR_"+VIPalette::getDefaultColorName(VIPalette::DefaultColorName::Foreground) +
+		DotLabel->setVIDStyleSheet("default",
+			"VILabel{background-color:ACLR_" + VIPalette::getDefaultColorName(VIPalette::DefaultColorName::Foreground) +
 			"_CLR;border-radius:APR_50_PR;}"
 		);
-		qDebug()<<VIPaletteGroup::getInstance()->getColor(VIPalette::DefaultColorName::Foreground);
+		qDebug() << VIPaletteGroup::getInstance()->getColor(VIPalette::DefaultColorName::Foreground);
 		DotLabel->applyVIDSS("default");
 		this->setStyleSheet("VISwitchButton{background-color:rgb(255,255,255);border-radius:50px;border:3px solid blue;}");
 	};

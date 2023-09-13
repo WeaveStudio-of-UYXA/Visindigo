@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "../VICore/VICore.h"
-#include "VIWidget.h"
+#include "../../VICore/VICore.h"
+#include "../VIWidget.h"
 
 class VIPublicAPI VICodeEdit :public VIWidget
 {

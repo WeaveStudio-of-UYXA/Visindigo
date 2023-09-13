@@ -1,6 +1,5 @@
 ﻿#include "../VIARCPSocket.h"
 
-
 def_init VIARCPSocket::VIARCPSocket(QTcpSocket* s) {
 	setTcpSocket(s);
 }
@@ -42,7 +41,6 @@ void VIARCPSocket::onConnected() {
 	RandomString = getRandomString();
 	obj.addDataChunk(VIARCPTypeManager::fromString(RandomString));
 	sendData(obj);
-	
 }
 void VIARCPSocket::onDisconnected() {
 	consoleLog("Connection lost");
@@ -114,7 +112,7 @@ void VIARCPSocket::handleCache() {
 VIARCPEnum::Status VIARCPSocket::onChunkData(const VIARCPDataChunk& chunk) {
 	if (DataChunkList.size() == 0) {
 		VIARCPHeadChunk head;
-		if (chunk.DataLength + chunk.TypeNameLength != sizeof(VIARCPHeadChunk)-sizeof(quint32)-sizeof(quint16)) {
+		if (chunk.DataLength + chunk.TypeNameLength != sizeof(VIARCPHeadChunk) - sizeof(quint32) - sizeof(quint16)) {
 			consoleLog(VIConsole::inWarningStyle("Head length error"));
 			return VIARCPEnum::Status::HeadChunkLengthIsNotARCP;
 		}

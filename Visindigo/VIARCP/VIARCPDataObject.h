@@ -43,4 +43,3 @@ class VIPublicAPI VIARCPReturnDataObject : public VIARCPAbstractDataObject
 	_Public VIARCPEnum::Status getStatusCode();
 	_Public QByteArray toByte();
 };
-

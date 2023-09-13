@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "VICodeEdit.h"
+#include "VICodeEdit/VICodeEdit.h"
 #include "VIDynamicStyleSheet.h"
 #include "VIFramework.h"
 #include "VIGridTexture.h"

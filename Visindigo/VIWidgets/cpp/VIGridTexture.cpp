@@ -126,7 +126,6 @@ void VIGridTexture::save() {
 	json.saveSettings(ConfigPath + ".json");
 }
 
-
 def_init VIGridTextureAbstractDriver::VIGridTextureAbstractDriver(QObject* parent) :VIAnimationBehavior(parent) {
 	this->setForeverDuration();
 };
@@ -135,7 +134,7 @@ void VIGridTextureAbstractDriver::setGridTexture(VIGridTexture* gridTexture) {
 		GridTexture = gridTexture;
 	}
 }
-void VIGridTextureAbstractDriver::start(Visindigo::QuantifyTickType){
+void VIGridTextureAbstractDriver::start(Visindigo::QuantifyTickType) {
 	if (GridTexture == VI_NULL) {
 		return;
 	}
@@ -159,7 +158,7 @@ void VIGridTextureAbstractDriver::start(Visindigo::QuantifyTickType){
 	}
 }
 void VIGridTextureAbstractDriver::onStart() HalfVirtual;
-void VIGridTextureAbstractDriver::onTick(){
+void VIGridTextureAbstractDriver::onTick() {
 	if (Index < GridTexture->getSize()) {
 		onImage(GridTexture->getImage(Index));
 		Index++;
