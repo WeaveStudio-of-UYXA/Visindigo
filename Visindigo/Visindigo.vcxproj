@@ -303,6 +303,10 @@
     <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h" />
     <QtMoc Include="VICore\VIRIFFObject.h" />
     <QtMoc Include="VIWave\VISoundHost.h" />
+    <QtMoc Include="VIGitTools\VIGitEnvironment.h" />
+    <ClInclude Include="VICore\VIProcess.h" />
+    <QtMoc Include="VIGitTools\VIDifferenceAnalyzer.h" />
+    <ClInclude Include="VIGitTools\VIGitTools.h" />
     <ClInclude Include="VIWave\VIWave.h" />
     <QtMoc Include="VIWave\VIOperationalWaveObject.h" />
     <QtMoc Include="VIWidgets\VIGridTexture.h" />
@@ -323,7 +327,6 @@
     <QtMoc Include="VIWidgets\VIRatioWidget.h" />
     <QtMoc Include="VIWidgets\VIMultiLabel.h" />
     <QtMoc Include="VIWidgets\VISettingsLabel.h" />
-    <ClInclude Include="VIWidgets\VICodeEdit\VISyntaxHighlighter.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <ClInclude Include="VICore\VIPathInfo.h" />
     <QtMoc Include="VICore\VIDocument\VIJSON.h" />

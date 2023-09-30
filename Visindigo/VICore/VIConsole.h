@@ -26,4 +26,5 @@ class VIPublicAPI VIConsole :public QObject {
 	_Public template<typename T> static void printMemory(T* data) {
 		printBinary(QByteArray((char*)data, sizeof(T)));
 	};
+	_Public static unsigned int exec(const QString& cmd);
 };

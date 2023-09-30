@@ -189,9 +189,6 @@
     <ClInclude Include="VIARCP\VIARCPBaseChunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIWidgets\VICodeEdit\VISyntaxHighlighter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VIARCP\VIARCPDataObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -199,6 +196,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIARCP\VIARCPStructConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VIGitTools\VIGitTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VICore\VIProcess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -348,6 +351,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIARCP\VIARCPTypeManager.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIGitTools\VIGitEnvironment.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIGitTools\VIDifferenceAnalyzer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

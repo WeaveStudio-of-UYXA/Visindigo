@@ -19,6 +19,7 @@ class VIPublicAPI VITimedBehavior :public VIBasicBehavior
 	VI_Property(VIBehaviorDuration*, Duration);
 	_Public def_init VITimedBehavior(QObject* parent = nullptr);
 	_Public void setDuration(VIMilliSecond duration);
+	_Public double getDurationPercent();
 	_Public void setForeverDuration();
 	_Public Visindigo::BehaviorState hostCall();
 	_Public void start(Visindigo::QuantifyTickType = Visindigo::T0) override;

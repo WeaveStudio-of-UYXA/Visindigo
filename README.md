@@ -3,6 +3,13 @@
 
 **Visindigo**最开始只是YSP的重构，但在重构过程中，我们认为某些内容对于应用程序开发来说实际上具有一定的可复用性，于是我们决定将其拆分出来，作为一个独立的框架存在。有关YSP程序的开发，已经转移到了其他仓库，此处不再赘述。
 
+# Visindigo Project
+此项目是清流计划的一部分。
+
+清流计划是一个开源项目，旨在为开发者、研究者提供一些基础的开发框架、简化接口甚至是低代码工具。
+
+Visindigo是从CommonEdit、Python CommonEdit、Java CommonEdit等项目演变而来，Visindigo现在已经接替CommonEdit的工作，并成为清流计划的核心项目。
+
 # 参考文档
 
 [单击跳转到参考文档](https://www.yuque.com/tsingyayin/visindigo)

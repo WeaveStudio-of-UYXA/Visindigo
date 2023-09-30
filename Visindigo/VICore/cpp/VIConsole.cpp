@@ -210,3 +210,7 @@ void VIConsole::printBinary(const QByteArray& data) {
 		printLine(inWarningStyle("Warning: Uninitialized memory detected.(Part marked as '??')\nIf this data directly comes from a struct or class, please ignore this issue"));
 	}
 }
+
+unsigned int VIConsole::exec(const QString& cmd) {
+	return system(cmd.toLocal8Bit().data());
+}

@@ -93,3 +93,18 @@ class VIPublicAPI VICodeEdit :public VIWidget
 		LineNumberArea->verticalScrollBar()->setValue(CodeEdit->verticalScrollBar()->value());
 	}
 };
+
+class VICodeEditTestWidget :public VIWidget
+{
+	Q_OBJECT;
+	VI_WIDGET;
+	_Private VICodeEdit* CodeEdit;
+	_Private QGridLayout* Layout;
+	_Public def_init VICodeEditTestWidget(QWidget* parent = VI_NULL) :VIWidget(parent) {
+		CodeEdit = new VICodeEdit(this);
+		Layout = new QGridLayout(this);
+		Layout->addWidget(CodeEdit);
+		this->setLayout(Layout);
+		this->setMinimumSize(800, 600);
+	}
+};

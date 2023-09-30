@@ -37,6 +37,9 @@ def_init VITimedBehavior::VITimedBehavior(QObject* parent) :VIBasicBehavior(pare
 void VITimedBehavior::setDuration(VIMilliSecond duration) {
 	Duration->setDuration(duration * 1000000);
 }
+double VITimedBehavior::getDurationPercent() {
+	return Duration->getPercent();
+}
 void VITimedBehavior::setForeverDuration() {
 	Duration->setDuration(VIMilliSecond_MAX);
 }
