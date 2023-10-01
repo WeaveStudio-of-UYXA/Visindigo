@@ -183,9 +183,6 @@ QStringList VICommandHost::blankSplitter(const QString& str) {
 static QStringList scientificSplitter_dot(const QString& str);
 
 QStringList VICommandHost::scientificSplitter(const QString& str, const QChar& ch) {
-	if (ch == '.') {
-		return scientificSplitter_dot(str);
-	}
 	QStringList result;
 	QString temp = "";
 	bool backslash = false;
@@ -196,49 +193,6 @@ QStringList VICommandHost::scientificSplitter(const QString& str, const QChar& c
 				temp.append(ch);
 			}
 			else {
-				result.append(temp);
-				temp.clear();
-			}
-		}
-		else {
-			if (str[i] == '\\') {
-				backslash = !backslash;
-				if (backslash) {
-					backslashIndex = i;
-					continue;
-				}
-			}
-			if (!backslash) {
-				temp.append(str[i]);
-			}
-		}
-		if (backslash && backslashIndex - i >= 1) {
-			temp.append(str[i]);
-			backslash = false;
-		}
-	}
-	if (temp != "") { result.append(temp); }
-	return result;
-}
-
-QStringList scientificSplitter_dot(const QString& str) {
-	QStringList result;
-	QChar ch = '.';
-	QString temp = "";
-	bool backslash = false;
-	int backslashIndex = -1;
-	for (auto i = 0; i < str.length(); i++) {
-		if (str[i] == ch) {
-			if (backslash) {
-				temp.append(ch);
-			}
-			else {
-				if (i > 0 && i < str.length() - 1) {
-					if (str[i - 1] >= '0' && str[i - 1] <= '9' && str[i + 1] >= '0' && str[i + 1] <= '9') {
-						temp += str[i];
-						continue;
-					}
-				}
 				result.append(temp);
 				temp.clear();
 			}

@@ -2,12 +2,156 @@
 #include "../../VICore/VICore.h"
 #include "../VIWidget.h"
 
+class VIPublicAPI private_VICodeEdit :public QTextEdit
+{
+	Q_OBJECT;
+	_Public def_init private_VICodeEdit(QWidget* parent = Q_NULLPTR) :QTextEdit(parent) {
+		this->setTabStopWidth(4 * QFontMetrics(this->font()).width(' '));
+	}
+	_Public void keyPressEvent(QKeyEvent* event) override {
+		if (event->key() == Qt::Key_Tab) {
+			//if cursor is not in selection
+			if (!textCursor().hasSelection()) {
+				//if the text before is empty, insert 4 spaces, else insert a tab
+				QTextCursor cursor = textCursor();
+				cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
+				QString lineText = cursor.selectedText();
+				for (auto i : lineText) {
+					if (i != ' ' && i != '\t') {
+						insertPlainText("\t");
+						return;
+					}
+				}
+				insertPlainText("    ");
+				return;
+			}
+			else {
+				//if cursor is in selection, insert 4 spaces before every line, no matter how many lines are selected
+				QTextCursor cursor = textCursor();
+				//get the selection start
+				int startPosition = cursor.selectionStart();
+				int endPosition = cursor.selectionEnd();
+				//get the start line and end line
+				int startLine = document()->findBlock(startPosition).blockNumber();
+				int endLine = document()->findBlock(endPosition).blockNumber();
+				cursor.setPosition(startPosition);
+				cursor.movePosition(QTextCursor::StartOfLine);
+				int fixStartPos = cursor.position();
+				//add 4 spaces before every line
+				for (int i = startLine; i <= endLine; i++) {
+					cursor.movePosition(QTextCursor::StartOfLine);
+					cursor.insertText("    ");
+					cursor.movePosition(QTextCursor::Down);
+				}
+				cursor.setPosition(fixStartPos, QTextCursor::KeepAnchor);
+				return;
+			}
+		}
+		if (event->key() == Qt::Key_Backtab) {
+			if (!textCursor().hasSelection()) {
+				//if the text before is empty, remove 4 spaces, else do nothing
+				qDebug() << "Shift+Tab";
+				QTextCursor cursor = textCursor();
+				cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
+				QString lineText = cursor.selectedText();
+				int removeCharCount = 0;
+				for (auto i : lineText) {
+					if (i != ' ' && i != '\t') {
+						return;
+					}
+				}
+				for (auto i : lineText) {
+					if (i == ' ') {
+						removeCharCount++;
+					}
+					else if (i == '\t') {
+						removeCharCount += 4;
+					}
+					if (removeCharCount >= 4) {
+						removeCharCount = 4;
+						break;
+					}
+				}
+				for (int i = 0; i < removeCharCount; i++) {
+					textCursor().deletePreviousChar();
+				}
+				return;
+			}
+			else {
+				//if cursor is in selection, insert 4 spaces before every line, no matter how many lines are selected
+				QTextCursor cursor = textCursor();
+				//get the selection start
+				int startPosition = cursor.selectionStart();
+				int endPosition = cursor.selectionEnd();
+				//get the start line and end line
+				int startLine = document()->findBlock(startPosition).blockNumber();
+				int endLine = document()->findBlock(endPosition).blockNumber();
+				cursor.setPosition(startPosition);
+				cursor.movePosition(QTextCursor::StartOfLine);
+				int fixStartPos = cursor.position();
+				//add 4 spaces before every line
+				for (int i = startLine; i <= endLine; i++) {
+					cursor.movePosition(QTextCursor::StartOfLine);
+					cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+					QString lineText = cursor.selectedText();
+					int removeCharCount = 0;
+					for (auto i : lineText) {
+						if (i == ' ') {
+							removeCharCount++;
+						}
+						else if (i == '\t') {
+							removeCharCount += 4;
+						}
+						else {
+							break;
+						}
+						if (removeCharCount >= 4) {
+							removeCharCount = 4;
+							break;
+						}
+					}
+					cursor.movePosition(QTextCursor::StartOfLine);
+					for (int i = 0; i < removeCharCount; i++) {
+						cursor.deleteChar();
+					}
+					cursor.movePosition(QTextCursor::Down);
+				}
+				cursor.setPosition(fixStartPos, QTextCursor::KeepAnchor);
+				return;
+			}
+		}
+		if (event->key() == Qt::Key_Return) {
+			//get the text of current line
+			QTextCursor cursor = textCursor();
+			cursor.movePosition(QTextCursor::StartOfLine);
+			cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+			QString lineText = cursor.selectedText();
+			//get the number of spaces at the beginning of the line
+			int spaceCount = 0;
+			for (int i = 0; i < lineText.size(); i++) {
+				if (lineText[i] == ' ') {
+					spaceCount++;
+				}
+				else {
+					break;
+				}
+			}
+			//create a new line and insert spaces
+			insertPlainText("\n");
+			for (int i = 0; i < spaceCount; i++) {
+				insertPlainText(" ");
+			}
+			return ;
+		}
+		QTextEdit::keyPressEvent(event);
+	}
+};
 class VIPublicAPI VICodeEdit :public VIWidget
 {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Private QTextEdit* LineNumberArea;
-	_Private QTextEdit* CodeEdit;
+	_Private private_VICodeEdit* CodeEdit;
 	_Private QSyntaxHighlighter* CodeHighlighter;
 	_Public QCompleter* CodeCompleter;
 	_Public def_init VICodeEdit(QWidget* parent = VI_NULLPTR) :VIWidget(parent) {
@@ -20,16 +164,17 @@ class VIPublicAPI VICodeEdit :public VIWidget
 		LineNumberArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		LineNumberArea->setAlignment(Qt::AlignRight);
 		LineNumberArea->setFont(font);
-		CodeEdit = new QTextEdit(this);
+		CodeEdit = new private_VICodeEdit(this);
 		CodeEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		CodeEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+		//关闭自动换行
+		CodeEdit->setLineWrapMode(QTextEdit::NoWrap);
 		CodeEdit->setFont(font);
 		connect(CodeEdit->document(), &QTextDocument::blockCountChanged, this, &VICodeEdit::updateLineNumber);
 		connect(LineNumberArea->verticalScrollBar(), &QScrollBar::valueChanged, this, &VICodeEdit::scrollEveryEdit);
 		connect(CodeEdit->verticalScrollBar(), &QScrollBar::valueChanged, this, &VICodeEdit::scrollEveryEdit);
 		connect(CodeEdit->document(), &QTextDocument::cursorPositionChanged, this, &VICodeEdit::debugCursorInfo);
 		this->setStyleSheet("QWidget{background-color:#202020;color:#FFFFFF}");
-		CodeEdit->setTabStopWidth(4 * QFontMetrics(CodeEdit->font()).width(' '));
 		CodeCompleter = new QCompleter(this);
 		CodeCompleter->setWidget(CodeEdit);
 		CodeCompleter->setCompletionMode(QCompleter::PopupCompletion);
