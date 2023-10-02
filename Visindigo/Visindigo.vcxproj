@@ -252,6 +252,7 @@
     <ClCompile Include="VICore\VIDocument\VIJSON.cpp" />
     <ClCompile Include="VICore\VIDocument\VITR.cpp" />
     <ClCompile Include="VICore\cpp\VITranslationHost.cpp" />
+    <ClCompile Include="VIGitTools\cpp\VIDifferenceAnalyzer.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIDynamicStyleSheet.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIFramework.cpp" />
     <ClCompile Include="VIUJ\cpp\VIUJAbstractParser.cpp" />

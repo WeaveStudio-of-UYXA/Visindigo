@@ -124,6 +124,9 @@
     <ClCompile Include="VIARCP\cpp\VIARCPTypeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VIGitTools\cpp\VIDifferenceAnalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VICore\private\VIMacro.h">
