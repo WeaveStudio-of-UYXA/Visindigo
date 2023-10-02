@@ -1,4 +1,5 @@
 ﻿#include "VIJSON.h"
+#include "../VICommand.h"
 #include "../private/VisindigoCorePack.h"
 namespace VIDocument {
 	def_init VIJSON::VIJSON(VISuper* parent) :VIObject(parent) {
@@ -86,8 +87,160 @@ namespace VIDocument {
 	const QVariant VIJSON::operator[](const QString& objName) {
 		return this->getValueOf(objName);
 	}
+	const QStringList VIJSON::getKeysOf(const QString& objName) {
+		bool flag = false;
+		QStringList keys = this->getKeysOf(&flag, objName);
+		if (flag) {
+			return keys;
+		}
+		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Unable to find keys for '" + objName + "', search for default document"));
+		keys = this->getKeysOfDefault(&flag, objName);
+		if (flag) {
+			VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Found keys for '" + objName + "' in default document, already written to the active document"));
+			setValueOf(objName, keys);
+			return keys;
+		}
+		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Unable to find keys for '" + objName + "' in default document"));
+		return QStringList();
+	}
+	const QStringList VIJSON::getKeysOf(bool* successflag, const QString& objName) {
+		QStringList objNameList = VICommandHost::scientificSplitter(objName, '.');
+		QJsonObject obj = this->Settings.object();
+		QJsonArray arr;
+		bool isArray = false;//下面这些鬼扯玩意就应该用递归
+		for (auto i = objNameList.begin(); i != objNameList.end(); i++) {
+			if (isArray) {
+				if (i->toInt() > arr.size() || i->toInt() < 0) { break; }
+				if (i == objNameList.end() - 1) {
+					*successflag = true;
+					QJsonValue la = arr.at(i->toInt());
+					if (la.isArray()) {
+						int size = la.toArray().size();
+						QStringList result;
+						for (int i = 0; i < size; i++) {
+							result.append(QString::number(i));
+						}
+						return result;
+					}
+					else if (la.isObject()) {
+						return la.toObject().keys();
+					}
+					else {
+						return QStringList();
+					}
+				}
+				else {
+					if (arr.at(i->toInt()).isArray()) { arr = arr.at(i->toInt()).toArray(); }
+					else {
+						obj = arr.at(i->toInt()).toObject();
+						isArray = false;
+					}
+				}
+			}
+			else {
+				if (obj.contains(*i)) {
+					if (i == objNameList.end() - 1) {
+						*successflag = true;
+						QJsonValue la = obj.value(*i);
+						if (la.isArray()) {
+							int size = la.toArray().size();
+							QStringList result;
+							for (int i = 0; i < size; i++) {
+								result.append(QString::number(i));
+							}
+							return result;
+						}
+						else if (la.isObject()) {
+							return la.toObject().keys();
+						}
+						else {
+							return QStringList();
+						}
+					}
+					else {
+						if (obj.value(*i).isArray()) {
+							arr = obj.value(*i).toArray();
+							isArray = true;
+						}
+						else { obj = obj.value(*i).toObject(); }
+					}
+				}
+				else { break; }
+			}
+		}
+		*successflag = false;
+		return QStringList();
+	}
+	const QStringList VIJSON::getKeysOfDefault(bool* successflag, const QString& objName) {
+		QStringList objNameList = VICommandHost::scientificSplitter(objName, '.');
+		QJsonObject obj = this->DefaultSettings; //没记错的话这玩意有隐式共享，问题不大
+		QJsonArray arr;
+		bool isArray = false;//下面这些鬼扯玩意就应该用递归
+		for (auto i = objNameList.begin(); i != objNameList.end(); i++) {
+			if (isArray) {
+				if (i->toInt() > arr.size() || i->toInt() < 0) { break; }
+				if (i == objNameList.end() - 1) {
+					*successflag = true;
+					QJsonValue la = arr.at(i->toInt());
+					if (la.isArray()) {
+						int size = la.toArray().size();
+						QStringList result;
+						for (int i = 0; i < size; i++) {
+							result.append(QString::number(i));
+						}
+						return result;
+					}
+					else if (la.isObject()) {
+						return la.toObject().keys();
+					}
+					else {
+						return QStringList();
+					}
+				}
+				else {
+					if (arr.at(i->toInt()).isArray()) { arr = arr.at(i->toInt()).toArray(); }
+					else {
+						obj = arr.at(i->toInt()).toObject();
+						isArray = false;
+					}
+				}
+			}
+			else {
+				if (obj.contains(*i)) {
+					if (i == objNameList.end() - 1) {
+						*successflag = true;
+						QJsonValue la = obj.value(*i);
+						if (la.isArray()) {
+							int size = la.toArray().size();
+							QStringList result;
+							for (int i = 0; i < size; i++) {
+								result.append(QString::number(i));
+							}
+							return result;
+						}
+						else if (la.isObject()) {
+							return la.toObject().keys();
+						}
+						else {
+							return QStringList();
+						}
+					}
+					else {
+						if (obj.value(*i).isArray()) {
+							arr = obj.value(*i).toArray();
+							isArray = true;
+						}
+						else { obj = obj.value(*i).toObject(); }
+					}
+				}
+				else { break; }
+			}
+		}
+		*successflag = false;
+		return QStringList();
+	}
 	QVariant VIJSON::getValueOf(bool* successflag, const QString& objName) {
-		QStringList objNameList = objName.split('.');
+		QStringList objNameList = VICommandHost::scientificSplitter(objName, '.');
 		QJsonObject obj = this->Settings.object();
 		QJsonArray arr;
 		bool isArray = false;//下面这些鬼扯玩意就应该用递归
@@ -127,7 +280,7 @@ namespace VIDocument {
 		return QVariant();
 	}
 	QVariant VIJSON::getValueOfDefault(bool* successflag, const QString& objName) {
-		QStringList objNameList = objName.split('.');
+		QStringList objNameList = VICommandHost::scientificSplitter(objName, '.');
 		QJsonObject obj = this->DefaultSettings; //没记错的话这玩意有隐式共享，问题不大
 		QJsonArray arr;
 		bool isArray = false;//下面这些鬼扯玩意就应该用递归
@@ -173,7 +326,7 @@ namespace VIDocument {
 			getValueOfDefault(&haveValue, objName);
 			if (!haveValue) { return; }
 		}
-		QStringList objNameList = objName.split('.');
+		QStringList objNameList = VICommandHost::scientificSplitter(objName, '.');
 		QStringList::iterator it = objNameList.begin();
 		QJsonValue val = setValueOf(&objNameList, &it, this->Settings.object(), value);
 		this->Settings.setObject(val.toObject());

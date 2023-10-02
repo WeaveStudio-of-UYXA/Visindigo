@@ -18,11 +18,11 @@ class VIPublicAPI VISwitchButton :public VIWidget
 		DotAnimationBehavior->setTargetDot(DotLabel);
 		DotAnimationBehavior->setTargetSwitchButton(this);
 		Pressed = false;
-		DotLabel->setVIDStyleSheet("default", 
-			"VILabel{background-color:ACLR_"+VIPalette::getDefaultColorName(VIPalette::DefaultColorName::Foreground) +
+		DotLabel->setVIDStyleSheet("default",
+			"VILabel{background-color:ACLR_" + VIPalette::getDefaultColorName(VIPalette::DefaultColorName::Foreground) +
 			"_CLR;border-radius:APR_50_PR;}"
 		);
-		qDebug()<<VIPaletteGroup::getInstance()->getColor(VIPalette::DefaultColorName::Foreground);
+		qDebug() << VIPaletteGroup::getInstance()->getColor(VIPalette::DefaultColorName::Foreground);
 		DotLabel->applyVIDSS("default");
 		this->setStyleSheet("VISwitchButton{background-color:rgb(255,255,255);border-radius:50px;border:3px solid blue;}");
 	};
@@ -35,20 +35,20 @@ class VIPublicAPI VISwitchButton :public VIWidget
 	_Public void enterEvent(QEvent* event) {
 		DotAnimationBehavior->setDuration(300);
 		DotAnimationBehavior->setCurrentAnimation(private_VISwitchButtonDotAnimationBehavior::CurrentAnimationType::Hover);
-		DotAnimationBehavior->active();
+		DotAnimationBehavior->start();
 	};
 	_Public void leaveEvent(QEvent* event) {
 		if (!Pressed) {
 			DotAnimationBehavior->setDuration(300);
 			DotAnimationBehavior->setCurrentAnimation(private_VISwitchButtonDotAnimationBehavior::CurrentAnimationType::Leave);
-			DotAnimationBehavior->active();
+			DotAnimationBehavior->start();
 		}
 		Pressed = false;
 	};
 	_Public void mousePressEvent(QMouseEvent* event = VI_NULL) {
 		DotAnimationBehavior->setDuration(300);
 		DotAnimationBehavior->setCurrentAnimation(private_VISwitchButtonDotAnimationBehavior::CurrentAnimationType::Press);
-		DotAnimationBehavior->active();
+		DotAnimationBehavior->start();
 		Pressed = true;
 		BoolState = !BoolState;
 	};

@@ -15,7 +15,7 @@ class VISettingsLabel :public VIWidget
 		Combo,
 		MultiCombo,
 		Ratio,
-		Slider,	
+		Slider,
 		SelectFile,
 	};
 	_Public VIMultiLabel* TitleLabel;
@@ -95,7 +95,7 @@ class VISettingsLabel :public VIWidget
 		onBindSettingsChanged();
 	}
 	_Public virtual void onBindSettingsChanged() PureVirtual;
-	_Public void changeValue(const QVariant &value) {
+	_Public void changeValue(const QVariant& value) {
 		CurrentValue = value;
 		if (BindSettings != VI_NULL) {
 			BindSettings->setValueOf(BindSettingsKey, value);

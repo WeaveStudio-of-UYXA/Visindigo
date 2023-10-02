@@ -2,7 +2,6 @@
 #include "../VIARCPPeerPort.h"
 
 void VIARCPRemoteCallRouter::preOnRemoteCall(VIARCPCallDataObject& obj, VIARCPSocket* who) {
-
 	Who = who;
 	if (obj.getDataChunkLength() != TypeNames.length()) {
 		RET.setStatusCode(VIARCPEnum::Status::ParmeterCountMismatch);
@@ -32,8 +31,6 @@ void VIARCPRemoteCallRouter::addReturnData(VIARCPDataChunk& data) {
 	RET.addDataChunk(data);
 }
 
-
-
 void VIARCPRemoteCaller::setFunctionName(QString name) {
 	Call.setFunctionName(name);
 }
@@ -56,6 +53,3 @@ void VIARCPRemoteCaller::doRemoteCall() {
 void VIARCPRemoteCaller::preOnReturn(VIARCPReturnDataObject& obj) {
 	onReturn(obj.getDataChunks());
 }
-
-
-

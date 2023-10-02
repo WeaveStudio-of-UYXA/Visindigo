@@ -19,12 +19,12 @@ class VIPublicAPI VIAbstractBehavior :public VIObject
 	};
 	VI_Property(VIAbstractBehaviorHost*, Host);
 	VI_Property(Visindigo::BehaviorState, BehaviorState);
-	_Public virtual void onActive()  PureVirtual;
+	_Public virtual void onStart()  PureVirtual;
 	_Public virtual void onTick()  PureVirtual;
-	_Public virtual void onSubside()  PureVirtual;
+	_Public virtual void onStop()  PureVirtual;
 	_Protected virtual Visindigo::BehaviorState hostCall()  PureVirtual;
-	_Public virtual void active(Visindigo::QuantifyTickType type = Visindigo::T0) PureVirtual;
-	_Public virtual void subside();
+	_Public virtual void start(Visindigo::QuantifyTickType type = Visindigo::T0) PureVirtual;
+	_Public virtual void stop();
 };
 
 class VIPublicAPI VIAbstractBehaviorHost :public VIObject

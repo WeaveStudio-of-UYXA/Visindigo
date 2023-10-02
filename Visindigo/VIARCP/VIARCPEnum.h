@@ -2,7 +2,7 @@
 #include "VIARCPPackageMeta.h"
 class VIARCPEnum
 {
-	_Public enum Version: quint16 {
+	_Public enum Version : quint16 {
 		V1_0 = 0x0001,
 		Latest = V1_0
 	};

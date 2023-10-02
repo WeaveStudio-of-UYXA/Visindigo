@@ -11,7 +11,7 @@ void VIARCPAbstractDataObject::addDataChunk(VIARCPTypeManager::TypeName type, co
 	QByteArray typeNameArray = VIARCPTypeManager::getTypeNameString(type).toUtf8();
 	chunk.TypeNameLength = typeNameArray.size();
 	chunk.DataLength = data.size();
-	chunk.AllData = data+typeNameArray;
+	chunk.AllData = data + typeNameArray;
 	addDataChunk(chunk);
 }
 void VIARCPAbstractDataObject::addDataChunk(const VIARCPDataChunk& data) {

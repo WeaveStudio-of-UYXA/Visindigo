@@ -126,7 +126,6 @@ void VIGridTexture::save() {
 	json.saveSettings(ConfigPath + ".json");
 }
 
-
 def_init VIGridTextureAbstractDriver::VIGridTextureAbstractDriver(QObject* parent) :VIAnimationBehavior(parent) {
 	this->setForeverDuration();
 };
@@ -135,7 +134,7 @@ void VIGridTextureAbstractDriver::setGridTexture(VIGridTexture* gridTexture) {
 		GridTexture = gridTexture;
 	}
 }
-void VIGridTextureAbstractDriver::active(Visindigo::QuantifyTickType){
+void VIGridTextureAbstractDriver::start(Visindigo::QuantifyTickType) {
 	if (GridTexture == VI_NULL) {
 		return;
 	}
@@ -145,35 +144,35 @@ void VIGridTextureAbstractDriver::active(Visindigo::QuantifyTickType){
 	GridTexture->Playing = true;
 	switch (GridTexture->getFps()) {
 	case 32:
-		VIAnimationBehavior::active(Visindigo::T32);
+		VIAnimationBehavior::start(Visindigo::T32);
 		return;
 	case 64:
-		VIAnimationBehavior::active(Visindigo::T64);
+		VIAnimationBehavior::start(Visindigo::T64);
 		return;
 	case 128:
-		VIAnimationBehavior::active(Visindigo::T128);
+		VIAnimationBehavior::start(Visindigo::T128);
 		return;
 	default:
-		VIAnimationBehavior::active(Visindigo::T32);
+		VIAnimationBehavior::start(Visindigo::T32);
 		return;
 	}
 }
-void VIGridTextureAbstractDriver::onActive() HalfVirtual;
-void VIGridTextureAbstractDriver::onTick(){
+void VIGridTextureAbstractDriver::onStart() HalfVirtual;
+void VIGridTextureAbstractDriver::onTick() {
 	if (Index < GridTexture->getSize()) {
 		onImage(GridTexture->getImage(Index));
 		Index++;
 	}
 	else {
 		if (GridTexture->getLoop() < 0) {
-			subside();
+			stop();
 		}
 		else {
 			Index = GridTexture->getLoop();
 		}
 	}
 }
-void VIGridTextureAbstractDriver::onSubside() {
+void VIGridTextureAbstractDriver::onStop() {
 	GridTexture->Playing = false;
 	Index = 0;
 }

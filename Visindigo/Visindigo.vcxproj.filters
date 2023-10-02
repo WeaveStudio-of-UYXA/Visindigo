@@ -124,6 +124,9 @@
     <ClCompile Include="VIARCP\cpp\VIARCPTypeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VIGitTools\cpp\VIDifferenceAnalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VICore\private\VIMacro.h">
@@ -186,34 +189,22 @@
     <ClInclude Include="VIWave\VIWave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VIARCP\VIARCPBaseChunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="VIARCP\VIARCPDataObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VIARCP\VIARCPEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPPackage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPPackageMeta.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPPeerPort.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPRemoteObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPSocket.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VIARCP\VIARCPStructConverter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPTypeManager.h">
+    <ClInclude Include="VIGitTools\VIGitTools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VIARCP\VIARCPBaseChunk.h">
+    <ClInclude Include="VICore\VIProcess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -263,7 +254,7 @@
     <QtMoc Include="VICore\VIDocument\VIJSON.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VIWidgets\VICodeEdit.h">
+    <QtMoc Include="VIWidgets\VICodeEdit\VICodeEdit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIWidgets\VIMultiButton.h">
@@ -347,5 +338,32 @@
     <QtMoc Include="VIARCP\VIARCP.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPPackage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPPackageMeta.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPPeerPort.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPRemoteObject.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPSocket.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIARCP\VIARCPTypeManager.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIGitTools\VIGitEnvironment.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIGitTools\VIDifferenceAnalyzer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

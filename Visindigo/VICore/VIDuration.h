@@ -14,17 +14,12 @@ class VIPublicAPI VIBehaviorDuration :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
-	_Public enum class PercentType {
-		Linear,
-		Nonlinear,
-	};
 	_Signal void timeout();
 	VI_Property(VINanoSecond, Duration);
 	VI_PrivateProperty(VINanoSecond, Elapse);
 	VI_PrivateProperty(float, Percent);
 	VI_PrivateFlag(Timeout);
 	_Public def_init VIBehaviorDuration(VISuper* parent = Q_NULLPTR) : VIObject(parent) {
-		consoleLog("VIBehaviorDuration init");
 		Duration = 1;
 	}
 	_Public void initDuration() {

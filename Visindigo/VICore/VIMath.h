@@ -2,28 +2,11 @@
 #include <QtCore>
 #include "private/VIMacro.h"
 
-class VIPublicAPI VIMath {
-	VI_STATIC_CLASS(VIMath);
-public:
-	static float PI;
-	static int combination(int n, int m) {
-		int ret = 1;
-		for (int i = 0; i < m; i++) {
-			ret *= (n - i);
-		}
-		for (int i = 0; i < m; i++) {
-			ret /= (m - i);
-		}
-		return ret;
-	}
-	static int permutation(int n, int m) {
-		int ret = 1;
-		for (int i = 0; i < m; i++) {
-			ret *= (n - i);
-		}
-		return ret;
-	}
-};
+namespace VIMath {
+	const float PI = 3.141592653;
+	int combination(int n, int m);
+	int permutation(int n, int m);
+}
 
 class VIPublicAPI VICommonMapping {
 	VI_STATIC_CLASS(VICommonMapping);
@@ -38,5 +21,31 @@ class VIPublicAPI VICommonMapping {
 	}
 	_Public static double sin_0_1_0(double percent) {
 		return qSin(percent * VIMath::PI);
+	}
+	_Public static double simpleTransformation(double percent, Visindigo::SimpleTransformation t = Visindigo::Line) {
+		switch (t) {
+		case Visindigo::Line:
+			return percent;
+		case Visindigo::Exponential:
+			return (qExp(percent) - 1) / (qExp(1) - 1);
+		case Visindigo::Logarithmic:
+			return qLn(percent * (qExp(1) - 1) + 1);
+		case Visindigo::Sqrt:
+			return qSqrt(percent);
+		case Visindigo::Square:
+			return qPow(percent, 2);
+		case Visindigo::Invert:
+			return 1 - percent;
+		case Visindigo::InvertExponential:
+			return 1 - (qExp(percent) - 1) / (qExp(1) - 1);
+		case Visindigo::InvertLogarithmic:
+			return 1 - qLn(percent * (qExp(1) - 1) + 1);
+		case Visindigo::InvertSqrt:
+			return 1 - qSqrt(percent);
+		case Visindigo::InvertSquare:
+			return 1 - qPow(percent, 2);
+		default:
+			return percent;
+		}
 	}
 };

@@ -1,13 +1,12 @@
 ﻿#include "../VIARCPSocket.h"
 
-
 def_init VIARCPSocket::VIARCPSocket(QTcpSocket* s) {
 	setTcpSocket(s);
 }
 QString VIARCPSocket::getRandomString(int length) {
 	QString str;
 	for (int i = 0; i < length; i++) {
-		str.append(QChar('a' + qrand() % 26));
+		str.append(QChar('A' + qrand() % 26));
 	}
 	return str;
 }
@@ -42,7 +41,6 @@ void VIARCPSocket::onConnected() {
 	RandomString = getRandomString();
 	obj.addDataChunk(VIARCPTypeManager::fromString(RandomString));
 	sendData(obj);
-	
 }
 void VIARCPSocket::onDisconnected() {
 	consoleLog("Connection lost");
@@ -51,7 +49,9 @@ void VIARCPSocket::onDisconnected() {
 }
 void VIARCPSocket::onErrorOccurred(QAbstractSocket::SocketError error) {
 	consoleLog(VIConsole::inErrorStyle(QString("Socket error occurred: %1").arg(error)));
-	reConnect();
+	if (!AsServer) {
+		reConnect();
+	}
 }
 void VIARCPSocket::sendData(VIARCPCallDataObject& obj) {
 	Socket->write(obj.toByte());
@@ -112,7 +112,7 @@ void VIARCPSocket::handleCache() {
 VIARCPEnum::Status VIARCPSocket::onChunkData(const VIARCPDataChunk& chunk) {
 	if (DataChunkList.size() == 0) {
 		VIARCPHeadChunk head;
-		if (chunk.DataLength + chunk.TypeNameLength != sizeof(VIARCPHeadChunk)-sizeof(quint32)-sizeof(quint16)) {
+		if (chunk.DataLength + chunk.TypeNameLength != sizeof(VIARCPHeadChunk) - sizeof(quint32) - sizeof(quint16)) {
 			consoleLog(VIConsole::inWarningStyle("Head length error"));
 			return VIARCPEnum::Status::HeadChunkLengthIsNotARCP;
 		}

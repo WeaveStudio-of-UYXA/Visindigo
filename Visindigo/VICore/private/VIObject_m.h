@@ -9,7 +9,7 @@ _Slot const QString getSuperClassName() {return metaObject()->superClass()->clas
 _Slot const QString getObjectName() {return objectName();} \
 _Slot const void consoleLog(QString log) {qDebug().noquote() << getLogPrefix()<<log;}\
 _Slot QString getLogPrefix() {\
-	return "[" + QDateTime::currentDateTime().toString("hh:mm:ss") + "]" + this->getClassName() + "(" + this->getObjectName() + "):";\
+	return "[" % QDateTime::currentDateTime().toString("hh:mm:ss") % "]" % this->getClassName() % "(" % this->getObjectName() % "):";\
 }\
 _Slot const void consoleLogPure (QString log) {qDebug().noquote() << log;}\
 _Slot void throwThis(){throw VIException("Unknown Exception throwed by class "+this->getClassName()+",instance name "+this->getObjectName()),"please check your code";}

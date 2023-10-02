@@ -53,6 +53,6 @@ class VIPublicAPI VIECMAScripts :public VIObject {
 	_Public void sideLoad(QString fileName);
 	_Public void unload();
 	_Public QJSValue getGlobalObject(QString name);
-private slots: void onExit();
-	 _Public def_del ~VIECMAScripts();
+	_Private void onExit();
+	_Public def_del ~VIECMAScripts();
 };

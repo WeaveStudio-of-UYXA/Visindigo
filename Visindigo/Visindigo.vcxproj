@@ -252,6 +252,7 @@
     <ClCompile Include="VICore\VIDocument\VIJSON.cpp" />
     <ClCompile Include="VICore\VIDocument\VITR.cpp" />
     <ClCompile Include="VICore\cpp\VITranslationHost.cpp" />
+    <ClCompile Include="VIGitTools\cpp\VIDifferenceAnalyzer.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIDynamicStyleSheet.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIFramework.cpp" />
     <ClCompile Include="VIUJ\cpp\VIUJAbstractParser.cpp" />
@@ -290,19 +291,23 @@
     <QtMoc Include="VIWidgets\VILoadingWidget.h" />
     <QtMoc Include="VIARCP\VIARCP.h" />
     <ClInclude Include="VIARCP\VIARCPBaseChunk.h" />
-    <QtMoc Include="VIARCP\VIARCPDataObject.h" />
-    <QtMoc Include="VIARCP\VIARCPEnum.h" />
+    <ClInclude Include="VIARCP\VIARCPDataObject.h" />
+    <ClInclude Include="VIARCP\VIARCPEnum.h" />
     <QtMoc Include="VIARCP\VIARCPPackage.h" />
     <QtMoc Include="VIARCP\VIARCPPackageMeta.h" />
     <QtMoc Include="VIARCP\VIARCPPeerPort.h" />
     <QtMoc Include="VIARCP\VIARCPRemoteObject.h" />
     <QtMoc Include="VIARCP\VIARCPSocket.h" />
-    <QtMoc Include="VIARCP\VIARCPStructConverter.h" />
+    <ClInclude Include="VIARCP\VIARCPStructConverter.h" />
     <QtMoc Include="VIARCP\VIARCPTypeManager.h" />
     <ClInclude Include="VICore\private\VisindigoNamespace.h" />
     <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h" />
     <QtMoc Include="VICore\VIRIFFObject.h" />
     <QtMoc Include="VIWave\VISoundHost.h" />
+    <QtMoc Include="VIGitTools\VIGitEnvironment.h" />
+    <ClInclude Include="VICore\VIProcess.h" />
+    <QtMoc Include="VIGitTools\VIDifferenceAnalyzer.h" />
+    <ClInclude Include="VIGitTools\VIGitTools.h" />
     <ClInclude Include="VIWave\VIWave.h" />
     <QtMoc Include="VIWave\VIOperationalWaveObject.h" />
     <QtMoc Include="VIWidgets\VIGridTexture.h" />
@@ -326,7 +331,7 @@
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <ClInclude Include="VICore\VIPathInfo.h" />
     <QtMoc Include="VICore\VIDocument\VIJSON.h" />
-    <QtMoc Include="VIWidgets\VICodeEdit.h" />
+    <QtMoc Include="VIWidgets\VICodeEdit\VICodeEdit.h" />
     <QtMoc Include="VIWidgets\VIPackagePanel.h" />
     <QtMoc Include="VIWidgets\VIWidget.h" />
     <QtMoc Include="VICore\VICommand.h" />
@@ -354,6 +359,9 @@
     <ClInclude Include="VICore\VIMultiPlatform.h" />
     <QtMoc Include="VICore\VIObject.h" />
     <QtMoc Include="VICore\VIAbstractBehavior.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

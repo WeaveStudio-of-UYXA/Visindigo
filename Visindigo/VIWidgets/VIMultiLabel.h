@@ -12,7 +12,7 @@ class VIPublicAPI VIMultiLabel :public VIWidget
 	_Public Visindigo::EmphasisSide IconSide;
 	_Public bool InverseText;
 	_Public QGridLayout* CurrentLayout;
-	_Public def_init VIMultiLabel(QWidget* parent = VI_NULL, Visindigo::EmphasisSide iconSide = Visindigo::Left, bool inverseText = false):VIWidget(parent) {
+	_Public def_init VIMultiLabel(QWidget* parent = VI_NULL, Visindigo::EmphasisSide iconSide = Visindigo::Left, bool inverseText = false) :VIWidget(parent) {
 		IconSide = iconSide;
 		InverseText = inverseText;
 		IconLabel = new VILabel(this);
@@ -27,7 +27,7 @@ class VIPublicAPI VIMultiLabel :public VIWidget
 		switch (IconSide) {
 		case Visindigo::Left:
 			CurrentLayout->addWidget(IconLabel, 0, 0, 2, 1);
-			CurrentLayout->addWidget(SubTextLabel, !InverseText, 1, 1, 1); 
+			CurrentLayout->addWidget(SubTextLabel, !InverseText, 1, 1, 1);
 			CurrentLayout->addWidget(TextLabel, InverseText, 1, 1, 1);
 			break;
 		case Visindigo::Right:

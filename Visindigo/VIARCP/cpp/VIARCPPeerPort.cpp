@@ -1,13 +1,13 @@
 ﻿#include "../VIARCPPeerPort.h"
 
-def_init VIARCPPeerPort::VIARCPPeerPort(bool enableListening, bool local, quint16 listenPort, VISuper* parent ) :VIObject(parent) {
+def_init VIARCPPeerPort::VIARCPPeerPort(bool enableListening, bool local, quint16 listenPort, VISuper* parent) :VIObject(parent) {
 	if (enableListening) {
 		Server = new QTcpServer(this);
 		if (local) { Server->listen(QHostAddress::LocalHost, listenPort); }
 		else { Server->listen(QHostAddress::Any, listenPort); }
 		//上面有问题，可能发生端口冲突，需要处理
 		connect(Server, &QTcpServer::newConnection, this, &VIARCPPeerPort::onNewConnection);
-		setObjectName("Server "+QString::number(listenPort));
+		setObjectName("Server " + QString::number(listenPort));
 		setMaxConnectionCount(1);
 	}
 	else {
@@ -63,8 +63,8 @@ void VIARCPPeerPort::onNewConnection() {
 }
 void VIARCPPeerPort::onDisconnected(VIARCPSocket* handler) {
 	Connections.removeOne(handler);
-	if (handler->AsServer) { 
-		handler->deleteLater(); 
+	if (handler->AsServer) {
+		handler->deleteLater();
 	}
 }
 void VIARCPPeerPort::onRemoteReturnDataPrepared(VIARCPSocket* handler, VIARCPReturnDataObject& data) {

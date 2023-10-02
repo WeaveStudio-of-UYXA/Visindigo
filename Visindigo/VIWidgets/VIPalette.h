@@ -78,7 +78,7 @@ class VIPublicAPI private_VIPaletteChangeAnimationBehavior :public VIAnimationBe
 	_Private QMap<QString, VectorColor> DeltaColorMap;
 	_Public def_init private_VIPaletteChangeAnimationBehavior(VIPaletteGroup* parent);
 	_Public void setColorMap(const VIColorMap& raw, const VIColorMap& target);
-	_Public virtual void onActive() override;
+	_Public virtual void onStart() override;
 	_Public virtual void onTick() override;
-	_Public virtual void onSubside()override;
+	_Public virtual void onStop()override;
 };

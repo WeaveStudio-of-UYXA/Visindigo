@@ -6,7 +6,7 @@ class VIPublicAPI VIRIFFObject : public VIObject
 	Q_OBJECT;
 	VI_OBJECT;
 	friend class VIRIFFObject;
-	_Public enum class ChunkType{
+	_Public enum class ChunkType {
 		RIFF,
 		LIST,
 		Chunk,
@@ -19,7 +19,6 @@ class VIPublicAPI VIRIFFObject : public VIObject
 	_Protected qint32 ChunkSize;
 	_Protected qint32 FormType;
 	_Public def_init VIRIFFObject(VISuper* parent = VI_NULL) :VIObject(parent) {
-		
 	}
 	_Public void loadFrom(const QString& FileName) {
 		QFile file(FileName);
@@ -132,11 +131,11 @@ class VIPublicAPI VIRIFFObject : public VIObject
 				str += (char)(FormType >> (i * 8));
 			}
 			if (level == 0) {
-				qDebug().noquote() <<QString("%1ListType: %2").arg(QString(level, 'data')).arg(str);
+				qDebug().noquote() << QString("%1ListType: %2").arg(QString(level, 'data')).arg(str);
 				VIConsole::printLine(VIConsole::inSuccessStyle("%1SubChunks:").arg(QString(level, '\t')));
 			}
 			else {
-				qDebug().noquote() <<QString("%1├ListType: %2").arg(QString(level, '\t')).arg(str);
+				qDebug().noquote() << QString("%1├ListType: %2").arg(QString(level, '\t')).arg(str);
 				VIConsole::printLine(VIConsole::inSuccessStyle("%1├SubChunks:").arg(QString(level, '\t')));
 			}
 			for (int i = 0; i < SubChunks.size(); i++) {
@@ -147,7 +146,7 @@ class VIPublicAPI VIRIFFObject : public VIObject
 			//将前32字节的数据转换为十六进制字符串
 			QString dataAbstract;
 			for (int i = 0; i < 32; i++) {
-				if (i>=Data.size()) {
+				if (i >= Data.size()) {
 					break;
 				}
 				if (i % 2 == 0) {
@@ -156,10 +155,10 @@ class VIPublicAPI VIRIFFObject : public VIObject
 				dataAbstract += QString("%1").arg((quint8)Data.at(i), 2, 16, QChar('0')).toUpper();
 			}
 			if (level == 0) {
-				qDebug().noquote() <<QString("%1Data: %2").arg(QString(level, '\t')).arg(dataAbstract+"...");
+				qDebug().noquote() << QString("%1Data: %2").arg(QString(level, '\t')).arg(dataAbstract + "...");
 			}
 			else {
-				qDebug().noquote() <<QString("%1├Data: %2").arg(QString(level, '\t')).arg(dataAbstract+"...");
+				qDebug().noquote() << QString("%1├Data: %2").arg(QString(level, '\t')).arg(dataAbstract + "...");
 			}
 		}
 	}
@@ -179,7 +178,7 @@ class VIPublicAPI VIRIFFObject : public VIObject
 			return getDataOfChunk(chunkID[0]);
 		}
 		else {
-			for(int i = 0; i < SubChunks.size(); i++) {
+			for (int i = 0; i < SubChunks.size(); i++) {
 				if (SubChunks[i]->ChunkID == chunkID[0]) {
 					return SubChunks[i]->getDataOfChunk(chunkID.mid(1));
 				}

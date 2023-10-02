@@ -1,4 +1,6 @@
 ﻿#include "../VICommand.h"
+#include <iostream>
+
 VI_Singleton_StaticInit(VICommandHost);
 
 VICommandHandler::VICommandHandler() {
@@ -19,10 +21,34 @@ bool VICommandHost::addCommandHandler(VICommandHandler* handler) {
 	}
 }
 
-def_init VICommandHost::VICommandHost(QObject* parent) :VIObject(parent) {
+def_init VIStdIOCommandHandler::VIStdIOCommandHandler(QObject* parent) :QThread(parent) {
+	setObjectName("VIStdIOCommandHandler");
+}
+
+void VIStdIOCommandHandler::run() {
+	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "The standard input/output listener is started."));
+	while (true) {
+		Mutex.lock();
+		bool running = Running;
+		Mutex.unlock();
+		if (!running) {
+			break;
+		}
+		QString command = VIConsole::getLine();
+		if (command == "") {
+			continue;
+		}
+		emit commandReceived(command);
+	}
+	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "The standard input/output listener is stopped."));
+}
+def_init VICommandHost::VICommandHost(bool listenStdIO, QObject* parent) :VIObject(parent) {
 	VI_Singleton_Init;
+	ListenStdIO = listenStdIO;
+	if (ListenStdIO) {
+		enableStdIOListener();
+	}
 	setObjectName("VICommandHost");
-	setInstance(this);
 	consoleLog("Initialized");
 }
 void VICommandHost::removeCommandHandler(VICommandHandler* handler) {
@@ -93,6 +119,26 @@ bool VICommandHost::handleCommand(const QString& command) {
 	return true;
 }
 
+void VICommandHost::enableStdIOListener() {
+	if (StdIOListener != nullptr) {
+		return;
+	}
+	StdIOListener = new VIStdIOCommandHandler(this);
+	connect(StdIOListener, &VIStdIOCommandHandler::commandReceived, this, &VICommandHost::handleCommand,
+		Qt::BlockingQueuedConnection);
+	StdIOListener->start();
+}
+
+void VICommandHost::disableStdIOListener() {
+	if (StdIOListener == nullptr) {
+		return;
+	}
+	StdIOListener->Mutex.lock();
+	StdIOListener->Running = false;
+	StdIOListener->Mutex.unlock();
+	StdIOListener->deleteLater();
+	StdIOListener = nullptr;
+}
 QStringList VICommandHost::blankSplitter(const QString& str) {
 	QStringList result;
 	QString current = "";
@@ -134,23 +180,38 @@ QStringList VICommandHost::blankSplitter(const QString& str) {
 	return result;
 }
 
+static QStringList scientificSplitter_dot(const QString& str);
+
 QStringList VICommandHost::scientificSplitter(const QString& str, const QChar& ch) {
 	QStringList result;
 	QString temp = "";
 	bool backslash = false;
+	int backslashIndex = -1;
 	for (auto i = 0; i < str.length(); i++) {
-		if (str[i] == ch && !backslash) {
-			result.append(temp);
-			temp = "";
+		if (str[i] == ch) {
+			if (backslash) {
+				temp.append(ch);
+			}
+			else {
+				result.append(temp);
+				temp.clear();
+			}
 		}
 		else {
 			if (str[i] == '\\') {
-				backslash = true;
+				backslash = !backslash;
+				if (backslash) {
+					backslashIndex = i;
+					continue;
+				}
 			}
-			else {
-				backslash = false;
+			if (!backslash) {
+				temp.append(str[i]);
 			}
-			temp += str[i];
+		}
+		if (backslash && backslashIndex - i >= 1) {
+			temp.append(str[i]);
+			backslash = false;
 		}
 	}
 	if (temp != "") { result.append(temp); }

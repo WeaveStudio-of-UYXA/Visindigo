@@ -19,8 +19,6 @@ namespace VIARCP {
 			getPackageMeta()->initTranslation();
 		}
 		_Public virtual void onTranslating() override {
-
 		}
-
 	};
 }

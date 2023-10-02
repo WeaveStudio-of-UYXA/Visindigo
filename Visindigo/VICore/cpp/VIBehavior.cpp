@@ -14,16 +14,16 @@ Visindigo::BehaviorState VIBasicBehavior::hostCall() {
 		onTick();
 		break;
 	case Visindigo::Subside:
-		onSubside();
+		onStop();
 		BehaviorState = Visindigo::Idle;
 		break;
 	}
 	return BehaviorState;
 }
-void VIBasicBehavior::active(Visindigo::QuantifyTickType type) {
+void VIBasicBehavior::start(Visindigo::QuantifyTickType type) {
 	if (BehaviorState == Visindigo::Idle) {
 		BehaviorState = Visindigo::Active;
-		onActive();
+		onStart();
 		this->Host->addBehavior(this, type);
 	}
 }
@@ -37,6 +37,9 @@ def_init VITimedBehavior::VITimedBehavior(QObject* parent) :VIBasicBehavior(pare
 void VITimedBehavior::setDuration(VIMilliSecond duration) {
 	Duration->setDuration(duration * 1000000);
 }
+double VITimedBehavior::getDurationPercent() {
+	return Duration->getPercent();
+}
 void VITimedBehavior::setForeverDuration() {
 	Duration->setDuration(VIMilliSecond_MAX);
 }
@@ -46,11 +49,11 @@ Visindigo::BehaviorState VITimedBehavior::hostCall() {
 	if (Duration->isTimeout()) { BehaviorState = Visindigo::Subside; }
 	return VIBasicBehavior::hostCall();
 }
-void VITimedBehavior::active(Visindigo::QuantifyTickType type) {
+void VITimedBehavior::start(Visindigo::QuantifyTickType type) {
 	if (BehaviorState == Visindigo::Idle) {
 		BehaviorState = Visindigo::Active;
 		Duration->initDuration();
-		onActive();
+		onStart();
 		this->Host->addBehavior(this, type);
 	}
 }
@@ -62,7 +65,7 @@ VIQuantifyTickBehaviorHost
 */
 def_init VIQuantifyTickBehaviorHost::VIQuantifyTickBehaviorHost(VIBehaviorHost* host, VINanoSecond durationLimit, QObject* parent) :VIAbstractBehaviorHost(parent) {
 	this->setObjectName("QTickBehaviorHost_" + QString::number((int)1000000000.0 / durationLimit));
-	DurationLimit = durationLimit ;
+	DurationLimit = durationLimit;
 	DurationLimitNow = DurationLimit;
 	TickDuration = durationLimit;
 	CurrentIndexLeft = 0;
@@ -325,7 +328,7 @@ void VIBehaviorHost::resumeQuantifyTickBehaviorHost(Visindigo::QuantifyTickType 
 }
 
 void VIBehaviorHost::manualExecueQuantifyTickBehaviorHost(Visindigo::QuantifyTickType type, VINanoSecond duration) {
-switch (type)
+	switch (type)
 	{
 	case Visindigo::T0:
 		if (duration < 0) { duration = 7812500; } // if duration < 0, set duration to 1/128 second
@@ -357,11 +360,11 @@ def_init VIDebugBehavior::VIDebugBehavior(QObject* parent) :VIBasicBehavior(pare
 	Index = 0;
 	consoleLog("VIDebugBehavior init");
 }
-void VIDebugBehavior::onActive() {
-	consoleLog("VIDebugBehavior onActive");
+void VIDebugBehavior::onStart() {
+	consoleLog("VIDebugBehavior onStart");
 }
-void VIDebugBehavior::onSubside() {
-	consoleLog("VIDebugBehavior onSubside");
+void VIDebugBehavior::onStop() {
+	consoleLog("VIDebugBehavior onStop");
 }
 #include <iostream>
 void VIDebugBehavior::onTick() {
@@ -394,10 +397,10 @@ void VIDebugBehavior::onTick() {
 	//qDebug() << Host->getTickDuration()<<((VIQuantifyTickBehaviorHost*)Host)->getNSPT()/1000000.0<<1000000000.0/Host->getTickDuration();
 }
 
-void VIAnimationBehavior::active(Visindigo::QuantifyTickType) {
-	VITimedBehavior::active(Visindigo::T64);
+void VIAnimationBehavior::start(Visindigo::QuantifyTickType) {
+	VITimedBehavior::start(Visindigo::T64);
 }
 
-void VIAnimationBehavior::subside() {
-	VITimedBehavior::subside();
+void VIAnimationBehavior::stop() {
+	VITimedBehavior::stop();
 }

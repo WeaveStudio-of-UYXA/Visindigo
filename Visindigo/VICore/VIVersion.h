@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include "VIObject.h"
 #include "private/VIAutoVersion.h"
-#define VI_VERSION_MAJOR 0
-#define VI_VERSION_MINOR 11
-#define VI_VERSION_PATCH 1
+#define VI_VERSION_MAJOR 1
+#define VI_VERSION_MINOR 2
+#define VI_VERSION_PATCH 0
 
 class VIPublicAPI VIVersion :public VIObject {
 	Q_OBJECT;

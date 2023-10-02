@@ -1,0 +1,19 @@
+﻿#pragma once
+#include "../VICore/VICore.h"
+struct VIDifferenceData
+{
+	QStringList PreviousDocument;
+	QStringList CurrentDocument;
+	QList<qint32> RemovedLines;
+	QList<qint32> AddedLines;
+	QList<qint32> LongestCommonSubsequencePrevious;
+	QList<qint32> LongestCommonSubsequenceCurrent;
+};
+class VIDifferenceAnalyzer :public VIObject
+{
+	Q_OBJECT;
+	VI_OBJECT;
+	_Public static void analyze(const QString& previous, const QString& current, VIDifferenceData* data);
+	_Public static void analyze(VIDifferenceData* data);
+	_Public static void debugPrint(VIDifferenceData* data);
+};

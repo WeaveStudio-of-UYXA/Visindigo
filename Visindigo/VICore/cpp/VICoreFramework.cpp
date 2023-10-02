@@ -108,7 +108,7 @@ int VICoreFramework::getReturnCode() {
 
 bool VICoreFramework::loadPackage(VIPackage* package) {
 	AppInstance->PackageList.append(package);
-	package->active(Visindigo::T20);
+	package->start(Visindigo::T20);
 	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package '" + package->getPackageMeta()->getPackageName() + "' loaded"));
 	return true;
 }

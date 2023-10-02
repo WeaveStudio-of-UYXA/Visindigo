@@ -16,6 +16,7 @@ class VIPublicAPI VIConsole :public QObject {
 	_Public static QString getColorString(QString rawText, VIConsole::Color color, VIConsole::Style style = VIConsole::Style::Normal);
 	_Public static QString getColorString(QString rawText, QColor rgb, QList<VIConsole::Style> styleList = { VIConsole::Style::Normal });
 	_Public static QString getColorString(QString rawText, QColor rgb, VIConsole::Style style = VIConsole::Style::Normal);
+	_Public static QString getLine();
 	_Public static QString inWarningStyle(QString rawText);
 	_Public static QString inErrorStyle(QString rawText);
 	_Public static QString inSuccessStyle(QString rawText);
@@ -25,4 +26,5 @@ class VIPublicAPI VIConsole :public QObject {
 	_Public template<typename T> static void printMemory(T* data) {
 		printBinary(QByteArray((char*)data, sizeof(T)));
 	};
+	_Public static unsigned int exec(const QString& cmd);
 };
