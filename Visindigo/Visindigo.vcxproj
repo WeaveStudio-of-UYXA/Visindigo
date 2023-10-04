@@ -280,6 +280,8 @@
     <ClCompile Include="VIWidgets\cpp\VISettingsLabel.cpp" />
     <ClCompile Include="VIWidgets\cpp\VIWidget.cpp" />
     <ClCompile Include="VIWidgets\private\VisindigoWidgetsPack.cpp" />
+    <ClCompile Include="VIWidgets\VICodeEdit\cpp\VICodeEdit.cpp" />
+    <ClCompile Include="VIWidgets\VICodeEdit\cpp\VICodeEditUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="testCode.h" />
@@ -328,6 +330,7 @@
     <QtMoc Include="VIWidgets\VIRatioWidget.h" />
     <QtMoc Include="VIWidgets\VIMultiLabel.h" />
     <QtMoc Include="VIWidgets\VISettingsLabel.h" />
+    <QtMoc Include="VIWidgets\VICodeEdit\VICodeEditUnit.h" />
     <ClInclude Include="VIWidgets\VIWidgets.h" />
     <ClInclude Include="VICore\VIPathInfo.h" />
     <QtMoc Include="VICore\VIDocument\VIJSON.h" />

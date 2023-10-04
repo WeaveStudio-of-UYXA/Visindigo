@@ -12,6 +12,7 @@ class VIPublicAPI VITranslatableObject
 	_Public virtual void setTRHost(VITranslationSubHost* host);
 	_Public virtual void onTranslating() HalfVirtual;
 	_Public QString getTranslation(const QString& key);
+	_Public def_del ~VITranslatableObject();
 };
 
 class VIPackageMeta;
@@ -37,6 +38,7 @@ class VIPublicAPI VITranslationSubHost :public VIObject
 	_Public def_init VITranslationSubHost(VIPackageMeta* parent = VI_NULL);
 	_Public void addTranslatableObject(VITranslatableObject* target);
 	_Public void addTranslationFileName(Visindigo::Language langName, const QString& fileName, bool inRC = false);
+	_Public void removeTranslatableObject(VITranslatableObject* target);
 	_Public void onGlobalLanguageChange(Visindigo::Language langName);
 	_Public void onInit();
 	_Public QString getTranslation(const QString& key);

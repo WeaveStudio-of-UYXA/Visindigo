@@ -42,14 +42,8 @@ namespace VisindigoCore {
 			setPackageMeta(new VisindigoCore::PackageMeta);
 			getPackageMeta()->addTranslatableObject(this);
 			getPackageMeta()->initTranslation();
-			qDebug() << getPackageMeta()->getPackageRootPath();
 		}
 		_Public virtual void onTranslating() override {
-			t = getTranslation("Core_LanguageHost_LoadLanguage_Success");
-			consoleLog("Translated!");
-		}
-		_Public void printT() {
-			qDebug() << t;
 		}
 	};
 }

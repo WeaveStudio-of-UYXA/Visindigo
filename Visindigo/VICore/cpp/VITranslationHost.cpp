@@ -17,6 +17,11 @@ QString VITranslatableObject::getTranslation(const QString& key) {
 	}
 }
 
+def_del VITranslatableObject::~VITranslatableObject() {
+	if (TRHost != VI_NULL) {
+		TRHost->removeTranslatableObject(this);
+	}
+}
 def_init VITranslationSubHost::VITranslationSubHost(VIPackageMeta* parent) :VIObject() {
 	ParentPackage = parent;
 	CurrentDoc = VI_NULL;
@@ -40,6 +45,12 @@ void VITranslationSubHost::addTranslationFileName(Visindigo::Language lang, cons
 	}
 }
 
+void VITranslationSubHost::removeTranslatableObject(VITranslatableObject* t) {
+	if (TargetList.contains(t)) {
+		TargetList.removeOne(t);
+		t->setTRHost(VI_NULL);
+	}
+}
 void VITranslationSubHost::onGlobalLanguageChange(Visindigo::Language langName) {
 	loadVITRDocument(&CurrentDoc, langName);
 	for (int i = 0; i < TargetList.size(); i++) {
@@ -90,7 +101,6 @@ bool VITranslationSubHost::loadVITRDocument(VIDocument::VITR** docPtr, Visindigo
 	VIDocument::VITR* doc = new VIDocument::VITR();
 	doc->setFilePath(filePath);
 	bool result = doc->load();
-	qDebug() << result;
 	if (result) {
 		if ((*docPtr) != VI_NULL) {
 			(*docPtr)->deleteLater();

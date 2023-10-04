@@ -1,4 +1,4 @@
-Widgets_PackageMeta_Description:Visindigo小部件提供Visindigo桌面开发常用的小部件。
+﻿Widgets_PackageMeta_Description:Visindigo小部件提供Visindigo桌面开发常用的小部件。
 Widgets_PackagePanel_Name:包名称
 Widgets_PackagePanel_Version:版本
 Widgets_PackagePanel_Description:描述
@@ -7,3 +7,12 @@ Widgets_PackagePanel_Website:网站
 Widgets_PackagePanel_License:许可证
 Widgets_PackagePanel_Org:组织
 Widgets_PackagePanel_OrgUrl:组织网址
+
+Widgets_CodeEdit_FindAndReplace_Title:查找和替换
+Widgets_CodeEdit_FindAndReplace_Find:查找
+Widgets_CodeEdit_FindAndReplace_Replace:替换
+Widgets_CodeEdit_FindAndReplace_CaseSensitive:区分大小写
+Widgets_CodeEdit_FindAndReplace_WholeWord:全词匹配
+Widgets_CodeEdit_FindAndReplace_FindNext:查找下一个
+Widgets_CodeEdit_FindAndReplace_ReplaceNext:替换下一个
+Widgets_CodeEdit_FindAndReplace_ReplaceAll:全部替换

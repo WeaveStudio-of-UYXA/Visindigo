@@ -64,11 +64,6 @@ void VICoreFramework::init() {
 	BehaviorHost = new VIBehaviorHost(this);
 	new VICommandHost(this);
 	LOAD_PACKAGE(VisindigoCore::Package);
-	for (auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++) {
-		if ((*i)->getPackageMeta()->PackageName == "VisindigoCore") {
-			static_cast<VisindigoCore::Package*>(*i)->printT();
-		}
-	}
 }
 VIBehaviorHost* VICoreFramework::getBehaviorHostInstance() {
 	if (BehaviorHost == nullptr) {

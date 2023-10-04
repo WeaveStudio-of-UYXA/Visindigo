@@ -127,6 +127,12 @@
     <ClCompile Include="VIGitTools\cpp\VIDifferenceAnalyzer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VIWidgets\VICodeEdit\cpp\VICodeEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VIWidgets\VICodeEdit\cpp\VICodeEditUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VICore\private\VIMacro.h">
@@ -360,6 +366,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIGitTools\VIDifferenceAnalyzer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VIWidgets\VICodeEdit\VICodeEditUnit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -209,11 +209,11 @@ QStringList VICommandHost::scientificSplitter(const QString& str, const QChar& c
 				temp.append(str[i]);
 			}
 		}
-		if (backslash && backslashIndex - i >= 1) {
-			temp.append(str[i]);
+		if (backslash && i - backslashIndex >= 1) {
 			backslash = false;
 		}
 	}
 	if (temp != "") { result.append(temp); }
+	if (!backslash && str[str.length()-1]==ch) { result.append(""); }
 	return result;
 }
