@@ -58,24 +58,31 @@ void VIAbstractRatioWidget::doubleClick() {
 }
 
 def_init VIRatioWidgetContainer::VIRatioWidgetContainer(Qt::Orientation ori, QWidget* parent, Visindigo::EmphasisSide side) :VIWidget(parent) {
+	Panel = new QWidget(this);
+	ScrollArea = new QScrollArea(this);
+	ScrollArea->setWidget(Panel);
 	CurrentOrientation = ori;
 	Side = side;
+	WidgetPerPage = 7;
+	AllowDragToRerange = false;
 	switch (CurrentOrientation)
 	{
 	case Qt::Horizontal:
-		CurrentLayout = new QHBoxLayout(this);
+		CurrentLayout = new QHBoxLayout(Panel);
+		ScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		if (side == Visindigo::DefaultEmphasis) {
 			side = Visindigo::Bottom;
 		}
 		break;
 	case Qt::Vertical:
-		CurrentLayout = new QVBoxLayout(this);
+		CurrentLayout = new QVBoxLayout(Panel);
+		ScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		if (side == Visindigo::DefaultEmphasis) {
 			side = Visindigo::Right;
 		}
 		break;
 	}
-	AnimationLabel = new VILabel(this);
+	AnimationLabel = new VILabel(Panel);
 	AnimationLabel->setVIDStyleSheet("default",
 		"VILabel{\
 			border:0px solid black; \
@@ -115,16 +122,39 @@ def_init VIRatioWidgetContainer::VIRatioWidgetContainer(Qt::Orientation ori, QWi
 		break;
 	}
 };
-void VIRatioWidgetContainer::addWidget(VIAbstractRatioWidget* widget) {
+void VIRatioWidgetContainer::addWidget(VIAbstractRatioWidget* widget, int index) {
 	if (WidgetList.contains(widget)) {
 		return;
 	}
-	CurrentLayout->addWidget(widget);
-	WidgetList.append(widget);
+	if (index != -1) {
+		index = index < 0 ? 0 : index;
+		index = index > WidgetList.count() ? WidgetList.count() : index;
+		WidgetList.insert(index, widget);
+		switch (CurrentOrientation) {
+		case Qt::Horizontal: {
+			QHBoxLayout* layout = static_cast<QHBoxLayout*>(CurrentLayout);
+			layout->insertWidget(index, widget);
+			break; }
+		case Qt::Vertical: {
+			QVBoxLayout* layout2 = static_cast<QVBoxLayout*>(CurrentLayout);
+			layout2->insertWidget(index, widget);
+			break; }
+		}
+	}
+	else {
+		CurrentLayout->addWidget(widget);
+		WidgetList.append(widget);
+	}
+	widget->installEventFilter(this);
+	widget->setParent(Panel);
 	connect(widget, &VIAbstractRatioWidget::selected, this, &VIRatioWidgetContainer::onSelected);
 	if (CurrentLayout->count() == 1) {
 		FirstWidget = widget;
 	}
+	updateWidgetSize();
+}
+void VIRatioWidgetContainer::insertWidget(int index, VIAbstractRatioWidget* widget) {
+	addWidget(widget, index);
 }
 void VIRatioWidgetContainer::onSelected() {
 	AnimationLabel->show();
@@ -146,17 +176,26 @@ void VIRatioWidgetContainer::onSelected() {
 void VIRatioWidgetContainer::removeWidget(VIAbstractRatioWidget* widget) {
 	CurrentLayout->removeWidget(widget);
 	WidgetList.removeOne(widget);
+	widget->removeEventFilter(this);
+	widget->setParent(this);
+	if (WidgetList.count() == 0) {
+		FirstWidget = VI_NULL;
+	}
+	updateWidgetSize();
 }
 void VIRatioWidgetContainer::resizeEvent(QResizeEvent* event) {
+	ScrollArea->resize(width(), height());
 	if (FirstWidget == nullptr) {
 		return;
 	}
 	switch (CurrentOrientation)
 	{
 	case Qt::Horizontal:
+		Panel->resize(Panel->width(), height());
 		AnimationLabel->resize(FirstWidget->width() * 0.8, 10);
 		break;
 	case Qt::Vertical:
+		Panel->resize(width(), Panel->height());
 		AnimationLabel->resize(10, FirstWidget->height() * 0.8);
 		break;
 	}
@@ -174,8 +213,162 @@ void VIRatioWidgetContainer::resizeEvent(QResizeEvent* event) {
 		AnimationLabel->move(AnimationLabel->x(), height() - 16);
 		break;
 	}
+	updateWidgetSize();
+}
+void VIRatioWidgetContainer::leaveEvent(QEvent* event) {
+	consoleLog("leaveEvent");
+	eventFilter_MouseButtonRelease();
+}
+bool VIRatioWidgetContainer::eventFilter(QObject* watched, QEvent* event) {
+	switch (event->type()) {
+	case QEvent::MouseButtonPress:
+		eventFilter_MouseButtonPress(watched, event);
+		break;
+	case QEvent::MouseButtonRelease:
+		eventFilter_MouseButtonRelease(event);
+		break;
+	case QEvent::MouseMove: 
+		eventFilter_MouseMove(event);
+		break;
+	}
+	return false;
 }
 
+bool VIRatioWidgetContainer::eventFilter_MouseButtonPress(QObject* watched, QEvent* event) {
+	VIAbstractRatioWidget* tar = dynamic_cast<VIAbstractRatioWidget*>(watched);
+	if (tar == nullptr) {
+		return false;
+	}
+	mousePressed = true;
+	DraggingWidget = tar;
+	mousePressPos = Panel->mapFromGlobal(QCursor::pos());
+	return false;
+}
+bool VIRatioWidgetContainer::eventFilter_MouseButtonRelease(QEvent* event) {
+	mousePressed = false;
+	if (dragging) {
+		QPoint pos = Panel->mapFromGlobal(QCursor::pos());
+		VIAbstractRatioWidget* hoverOnRatio = VI_NULL;
+		switch (CurrentOrientation) {
+		case Qt::Horizontal:
+			hoverOnRatio = WidgetList.first();
+			for (int i = 1; i < WidgetList.length(); i++) {
+				if (WidgetList[i]->x() > pos.x()) {
+					hoverOnRatio = WidgetList[i - 1];
+					break;
+				}
+			}
+			if (WidgetList.last()->x() < pos.x()) {
+				hoverOnRatio = WidgetList.last();
+			}
+			break;
+		case Qt::Vertical:
+			hoverOnRatio = WidgetList.first();
+			for (int i = 1; i < WidgetList.length(); i++) {
+				if (WidgetList[i]->y() > pos.y()) {
+					hoverOnRatio = WidgetList[i - 1];
+					break;
+				}
+			}
+			if (WidgetList.last()->y() < pos.y()) {
+				hoverOnRatio = WidgetList.last();
+			}
+			break;
+		}
+		if (hoverOnRatio != VI_NULL && WidgetList.contains(hoverOnRatio)) {
+			consoleLog("Rerange");
+			switch (CurrentOrientation) {
+			case Qt::Horizontal: {
+				int half = hoverOnRatio->x() + hoverOnRatio->width() / 2;
+				bool bottom = Panel->mapFromGlobal(QCursor::pos()).x() > half;
+				int index = WidgetList.indexOf(hoverOnRatio) + bottom;
+				index = index < 0 ? 0 : index;
+				index = index > WidgetList.count() ? WidgetList.count() : index;
+				WidgetList.insert(index, DraggingWidget);
+				QHBoxLayout* layout = static_cast<QHBoxLayout*>(CurrentLayout);
+				layout->insertWidget(index, DraggingWidget);
+				break; }
+			case Qt::Vertical: {
+				int half = hoverOnRatio->y() + hoverOnRatio->height() / 2;
+				bool bottom = Panel->mapFromGlobal(QCursor::pos()).y() > half;
+				int index = WidgetList.indexOf(hoverOnRatio) + bottom;
+				index = index < 0 ? 0 : index;
+				index = index > WidgetList.count() ? WidgetList.count() : index;
+				WidgetList.insert(index, DraggingWidget);
+				QVBoxLayout* layout2 = static_cast<QVBoxLayout*>(CurrentLayout);
+				layout2->insertWidget(index, DraggingWidget);
+				break; }
+			}
+			dragging = false;
+		}
+		else {
+			switch (CurrentOrientation) {
+			case Qt::Horizontal: {
+				QHBoxLayout* layout = static_cast<QHBoxLayout*>(CurrentLayout);
+				layout->insertWidget(DraggingIndex, DraggingWidget);
+				WidgetList.insert(DraggingIndex, DraggingWidget);
+				break; }
+			case Qt::Vertical: {
+				QVBoxLayout* layout2 = static_cast<QVBoxLayout*>(CurrentLayout);
+				layout2->insertWidget(DraggingIndex, DraggingWidget);
+				WidgetList.insert(DraggingIndex, DraggingWidget);
+				break; }
+			}
+			dragging = false;
+		}
+		DraggingWidget = VI_NULL;
+	}
+	return false;
+}
+bool VIRatioWidgetContainer::eventFilter_MouseMove(QEvent* event) {
+	QMouseEvent* e = static_cast<QMouseEvent*>(event);
+	if (mousePressed && DraggingWidget != VI_NULL) {
+		if (AllowDragToRerange) {
+			DraggingIndex = WidgetList.indexOf(DraggingWidget);
+			QPoint currentPos = Panel->mapFromGlobal(QCursor::pos());
+			switch (CurrentOrientation) {
+			case Qt::Horizontal:
+				if (abs(currentPos.x() - mousePressPos.x()) < FirstWidget->width() / 3) {
+					break;
+				}
+				CurrentLayout->removeWidget(DraggingWidget);
+				WidgetList.removeOne(DraggingWidget);
+				DraggingWidget->move(currentPos.x()-DraggingWidget->width()/2, DraggingWidget->y());
+				DraggingWidget->raise();
+				dragging = true;
+				break;
+			case Qt::Vertical:
+				if (abs(currentPos.y() - mousePressPos.y()) < FirstWidget->height() / 3) {
+					break;
+				}
+				CurrentLayout->removeWidget(DraggingWidget);
+				WidgetList.removeOne(DraggingWidget);
+				DraggingWidget->move(DraggingWidget->x(), currentPos.y()-DraggingWidget->height()/2);
+				DraggingWidget->raise();
+				dragging = true;
+				break;
+			}
+		}
+	}
+	return false;
+}
+void VIRatioWidgetContainer::updateWidgetSize() {
+	switch (CurrentOrientation)
+	{
+	case Qt::Horizontal:
+		{
+			int width = (this->width() / WidgetPerPage + 22 ) * WidgetList.count();
+			Panel->resize(width, Panel->height());
+		}
+		break;
+	case Qt::Vertical:
+		{
+			int height = (this->height() / WidgetPerPage +22) * WidgetList.count();
+			Panel->resize(Panel->width(), height);
+		}
+		break;
+	}
+}
 def_init private_VIRatioWidgetAnimation::private_VIRatioWidgetAnimation(VIRatioWidgetContainer* master) {
 	MasterWidget = master;
 	AnimationLabel = master->AnimationLabel;

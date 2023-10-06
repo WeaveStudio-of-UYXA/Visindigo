@@ -123,7 +123,8 @@ def_init VITranslationHost::VITranslationHost(VISuper* parent) :VIObject(parent)
 	consoleLog("Host instance created");
 }
 void VITranslationHost::changeLanguage(Visindigo::Language lang) {
-	for (auto i = VICoreFrame->AppInstance->PackageList.begin(); i != VICoreFrame->AppInstance->PackageList.end(); i++) {
+	QList<VIPackage* > packageList = VICoreFrame->getPackageList();
+	for (auto i = packageList.begin(); i != packageList.end(); i++) {
 		(*i)->getPackageMeta()->TranslationPackageHost->onGlobalLanguageChange(lang);
 	}
 }

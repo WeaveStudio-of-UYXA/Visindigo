@@ -13,12 +13,12 @@ class VIPublicAPI private_VICoreFramework :public QApplication
 {
 	Q_OBJECT;
 	friend class VICoreFramework;
-	_Public QList<VIPackage*> PackageList = {};
+	_Protected QMap<QString, VIPackage*> PackageMap = {};
 	_Public int ReturnCode = 0;
 	VI_Property(bool, DebugModeCompilation);
 	VI_Property(bool, DebugModeRuntime);
 	_Protected def_init private_VICoreFramework(int& argc, char** argv);
-	_Public virtual bool notify(QObject* receiver, QEvent* e) override;
+	_Protected virtual bool notify(QObject* receiver, QEvent* e) override;
 };
 
 class VIPublicAPI VICoreFramework :public VIObject
@@ -27,16 +27,17 @@ class VIPublicAPI VICoreFramework :public VIObject
 	VI_OBJECT;
 	friend class VIBehaviorHost;
 	friend class VITranslationHost;
-	_Private static VICoreFramework* _instance;
-	_Protected private_VICoreFramework* AppInstance;
+	_Private static VICoreFramework* _instance;	
 	_Private static VIBehaviorHost* BehaviorHost;
 	_Private static VITranslationHost* TranslationHost;
+	_Protected private_VICoreFramework* PrivateCoreFramework;
 	_Private Visindigo::Language LanguageType;
-	_Private QApplication* App;
-	_Public def_init VICoreFramework(int& argc, char** argv);
-	_Public void init();
 	_Public static VIBehaviorHost* getBehaviorHostInstance();
 	_Public static VITranslationHost* getTranslationHostInstance();
+	_Public static QApplication* getQAppInstance();
+	_Public static VICoreFramework* getCoreInstance();
+	_Public def_init VICoreFramework(int& argc, char** argv);
+	_Public void init();
 	_Public void start();
 	_Public int getReturnCode();
 	_Public bool loadPackage(VIPackage* package);
@@ -44,8 +45,6 @@ class VIPublicAPI VICoreFramework :public VIObject
 	_Public bool isDebugModeRuntime();
 	_Public bool useDebugModeRuntime();
 	_Public bool execCommand(QString);
-	_Public static QApplication* getAppInstance();
-	_Public static VICoreFramework* getCoreInstance();
 	_Public void setLanguageType(Visindigo::Language);
 	_Public Visindigo::Language getLanguageType();
 	_Public QList<VIPackage*> getPackageList();

@@ -2,6 +2,7 @@
 #include "../VIWidget.h"
 #include "../VIWidgetsTransQt.h"
 #include "../VISwitchButton.h"
+#include "../VIRatioWidget.h"
 
 class VIPublicAPI private_VICodeEdit_FindAndReplaceWidget :public VIWidget
 {
@@ -26,3 +27,4 @@ class VIPublicAPI private_VICodeEdit_FindAndReplaceWidget :public VIWidget
 	//_Public void resizeEvent(QResizeEvent* event)override;
 	_Public void onTranslating()override;
 };
+

@@ -1,4 +1,5 @@
 ﻿#include "../VIPackage.h"
+#include "../VICoreFramework.h"
 
 def_init VIPackageMeta::VIPackageMeta() {
 	this->setPackageName("UnnamedVIPackage");
@@ -77,5 +78,39 @@ void VIPackage::setPackageMeta(VIPackageMeta* info) {
 def_del VIPackage::~VIPackage() {
 	if (PackageMeta != VI_NULL) {
 		delete PackageMeta;
+	}
+}
+
+def_init VIDllPackageInfo::VIDllPackageInfo(const QString& dllpath) {
+	DllPath = dllpath;
+	Dll = new QLibrary(dllpath);
+}
+Visindigo::LoadState VIDllPackageInfo::load() {
+	if (!Dll->load()) {
+		return Visindigo::LoadState::LoadFailed;
+	}
+	__VisindigoDllMain main = (__VisindigoDllMain)Dll->resolve("VisindigoDllMain");
+	if (main == VI_NULL) {
+		return Visindigo::LoadState::EntryFailed;
+	}
+	Package = main();
+	if (Package == VI_NULL) {
+		return Visindigo::LoadState::InitFailed;
+	}
+	try {
+		VICoreFramework::getCoreInstance()->loadPackage(Package);
+	}
+	catch (...) {
+		return Visindigo::LoadState::InitFailed;
+	}
+	return Visindigo::LoadState::Succeed;
+}
+def_del VIDllPackageInfo::~VIDllPackageInfo() {
+	if (Package != VI_NULL) {
+		delete Package;
+	}
+	if (Dll != VI_NULL) {
+		Dll->unload();
+		delete Dll;
 	}
 }

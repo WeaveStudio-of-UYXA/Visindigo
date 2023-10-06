@@ -28,6 +28,9 @@ namespace Visindigo {
 		tr_TR, ms_MY, fil_PH, ar_SA, hi_IN, bn_IN, gu_IN, kn_IN, //I am not sure if they are correct
 		ml_IN, mr_IN, ta_IN, te_IN, ne_NP, si_LK, ur_PK, fa_IR,
 	};
+	enum LoadState {
+		LoadFailed, EntryFailed, InitFailed, Succeed
+	};
 	enum QuantifyTickType {
 		T0, T20, T32, T64, T128
 	};	

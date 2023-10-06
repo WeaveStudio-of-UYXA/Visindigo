@@ -41,16 +41,32 @@ class VIPublicAPI VIRatioWidgetContainer :public VIWidget
 	_Private QLayout* CurrentLayout = VI_NULL;
 	_Protected Qt::Orientation CurrentOrientation = Qt::Horizontal;
 	_Protected VILabel* AnimationLabel = VI_NULL;
+	VI_Flag(AllowDragToRerange); 
+	VI_Property(int, WidgetPerPage);
 	_Private private_VIRatioWidgetAnimation* AnimationBehavior = VI_NULL;
 	_Private QList<VIAbstractRatioWidget*> WidgetList;
 	_Private VIAbstractRatioWidget* FirstWidget = VI_NULL;
 	_Private VIAbstractRatioWidget* LastSelectWidget = VI_NULL;
+	_Private QWidget* Panel = VI_NULL;
+	_Private QScrollArea* ScrollArea = VI_NULL;
+	_Private QPoint mousePressPos;
+	_Private bool mousePressed = false;
+	_Private bool dragging = false;
+	_Private int DraggingIndex = -1;
+	_Private VIAbstractRatioWidget* DraggingWidget = VI_NULL;
 	_Protected Visindigo::EmphasisSide Side = Visindigo::DefaultEmphasis;
 	_Public def_init VIRatioWidgetContainer(Qt::Orientation ori, QWidget* parent = VI_NULL, Visindigo::EmphasisSide side = Visindigo::DefaultEmphasis);
-	_Public void addWidget(VIAbstractRatioWidget* widget);
+	_Public void addWidget(VIAbstractRatioWidget* widget, int index = -1);
+	_Public void insertWidget(int index, VIAbstractRatioWidget* widget);
 	_Slot void onSelected();
 	_Public void removeWidget(VIAbstractRatioWidget* widget);
-	_Public void resizeEvent(QResizeEvent* event) override;
+	_Public void resizeEvent(QResizeEvent* event) override; 
+	_Public void leaveEvent(QEvent* event) override;
+	_Private bool eventFilter(QObject* watched, QEvent* event) override;
+	_Private bool eventFilter_MouseButtonPress(QObject* watched, QEvent* event);
+	_Private bool eventFilter_MouseButtonRelease(QEvent* event = VI_NULL);
+	_Private bool eventFilter_MouseMove(QEvent* event);
+	_Private void updateWidgetSize();
 };
 
 class VIPrivateAPI private_VIRatioWidgetAnimation :public VIAnimationBehavior

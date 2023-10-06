@@ -25,17 +25,17 @@ bool private_VICoreFramework::notify(QObject* receiver, QEvent* e) {
 
 def_init VICoreFramework::VICoreFramework(int& argc, char** argv) {
 	VI_CHECK_SingletonError(this);
-	AppInstance = new private_VICoreFramework(argc, argv);
-	AppInstance->DebugModeRuntime = true;
+	PrivateCoreFramework = new private_VICoreFramework(argc, argv);
+	PrivateCoreFramework->DebugModeRuntime = true;
 	_instance = this;
 	LanguageType = Visindigo::zh_SC;
 	qRegisterMetaType<Visindigo::BehaviorState>("Visindigo::BehaviorState");
 	qRegisterMetaType<Visindigo::QuantifyTickType>("Visindigo::QuantifyTickType");
 	qRegisterMetaType<Visindigo::Language>("Visindigo::Language");
 #ifdef QT_DEBUG
-	AppInstance->DebugModeCompilation = true;
+	PrivateCoreFramework->DebugModeCompilation = true;
 #else
-	AppInstance->DebugModeCompilation = false;
+	PrivateCoreFramework->DebugModeCompilation = false;
 #endif
 }
 
@@ -80,11 +80,12 @@ VITranslationHost* VICoreFramework::getTranslationHostInstance() {
 }
 
 void VICoreFramework::start() {
-	for (auto i = AppInstance->PackageList.begin(); i != AppInstance->PackageList.end(); i++) {
-		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + (*i)->getPackageMeta()->getPackageName()));
+	QStringList packageList = PrivateCoreFramework->PackageMap.keys();
+	for (auto i = packageList.begin(); i != packageList.end(); i++) {
+		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + PrivateCoreFramework->PackageMap[(*i)]->getPackageMeta()->getPackageName()));
 	}
 	BehaviorHost->start();
-	AppInstance->ReturnCode = App->exec();
+	PrivateCoreFramework->ReturnCode = qApp->exec();
 }
 
 VICoreFramework* VICoreFramework::getCoreInstance() {
@@ -98,31 +99,36 @@ VICoreFramework* VICoreFramework::getCoreInstance() {
 }
 
 int VICoreFramework::getReturnCode() {
-	return AppInstance->ReturnCode;
+	return PrivateCoreFramework->ReturnCode;
 }
 
 bool VICoreFramework::loadPackage(VIPackage* package) {
-	AppInstance->PackageList.append(package);
+	QString packageName = package->getPackageMeta()->getPackageName();
+	if (PrivateCoreFramework->PackageMap.contains(packageName)) {
+		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Package name'" + packageName + "' already existed"));
+		return false;
+	}
+	PrivateCoreFramework->PackageMap[packageName] = package;
 	package->start(Visindigo::T20);
 	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package '" + package->getPackageMeta()->getPackageName() + "' loaded"));
 	return true;
 }
 
 bool VICoreFramework::isDebugModeCompilation() {
-	return AppInstance->DebugModeCompilation;
+	return PrivateCoreFramework->DebugModeCompilation;
 }
 
 bool VICoreFramework::isDebugModeRuntime() {
-	return AppInstance->DebugModeRuntime;
+	return PrivateCoreFramework->DebugModeRuntime;
 }
 
 bool VICoreFramework::useDebugModeRuntime() {
-	if (AppInstance->DebugModeRuntime) {
+	if (PrivateCoreFramework->DebugModeRuntime) {
 		consoleLogPure(VIConsole::inWarningStyle("The program is already running in debug mode."));
 		return false;
 	}
 	else {
-		AppInstance->DebugModeRuntime = true;
+		PrivateCoreFramework->DebugModeRuntime = true;
 		consoleLogPure(VIConsole::inSuccessStyle("The program is now running in debug mode."));
 		return true;
 	}
@@ -132,8 +138,8 @@ bool VICoreFramework::execCommand(QString command) {
 	return VICommandHost::getInstance()->handleCommand(command);
 }
 
-QApplication* VICoreFramework::getAppInstance() {
-	return _instance->App;
+QApplication* VICoreFramework::getQAppInstance() {
+	return qApp;
 }
 
 void VICoreFramework::setLanguageType(Visindigo::Language type) {
@@ -146,5 +152,9 @@ Visindigo::Language VICoreFramework::getLanguageType() {
 }
 
 QList<VIPackage*> VICoreFramework::getPackageList() {
-	return AppInstance->PackageList;
+	QList<VIPackage*> rtn = {};
+	for (auto i = PrivateCoreFramework->PackageMap.begin(); i != PrivateCoreFramework->PackageMap.end(); i++) {
+		rtn.append(i.value());
+	}
+	return rtn;
 }

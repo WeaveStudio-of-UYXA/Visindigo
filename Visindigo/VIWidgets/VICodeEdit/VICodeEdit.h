@@ -13,6 +13,7 @@ class VIPublicAPI private_VICodeEdit :public QTextEdit
 	_Private void keyPressEvent_BackTab(QKeyEvent* event);
 	_Private void keyPressEvent_Return(QKeyEvent* event);
 };
+
 class VIPublicAPI VICodeEdit :public VIWidget
 {
 	Q_OBJECT;
@@ -43,6 +44,26 @@ class VIPublicAPI VICodeEdit :public VIWidget
 	_Public void mousePressEvent(QMouseEvent* event);
 	_Public void scrollEveryEdit(int value);
 	_Public void updateLineNumber();
+};
+
+class VIPublicAPI private_VIMultiCodeEdit_DocLabel :public VIAbstractRatioWidget
+{
+	Q_OBJECT;
+	VI_OBJECT;
+	_Private VILabel* TypeIconLabel;
+	_Private VILabel* DocNameLabel;
+	_Private VICodeEdit* CodeEdit; // that is to say, this label class also works as a container
+};
+
+//This class allows you to edit multiple files at the same time
+class VIPublicAPI VIMultiCodeEdit :public VIWidget
+{
+	Q_OBJECT;
+	VI_OBJECT;
+	_Private int MaxDocAllowed;
+	_Private VIRatioWidgetContainer* DocLabelTopContainer; // label on the top
+	_Private VIRatioWidgetContainer* DocLabelSideContainer; // label on the side, or shrinked/hidden
+	_Public VICodeEdit* openFile(const QString& filePath);
 };
 
 class VICodeEditTestWidget :public VIWidget

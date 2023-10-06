@@ -61,7 +61,7 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	VI_OBJECT;
 	VI_MUST_INHERIT(VIPackage);
 	friend class VIFramework;
-	_Private VIPackageMeta* PackageMeta;
+	_Protected VIPackageMeta* PackageMeta;
 	_Public def_init VIPackage();
 	_Public VIPackageMeta* getPackageMeta();
 	_Public void setPackageMeta(VIPackageMeta* info);
@@ -73,3 +73,20 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 };
 
 typedef VIPackage* (*__VisindigoDllMain)(void);
+
+class VIPublicAPI VIDllPackageInfo {
+	QString PackageName;
+	QString DllPath;
+	QLibrary* Dll = VI_NULL;
+	VIPackage* Package = VI_NULL;
+	_Public def_init VIDllPackageInfo(const QString& dllpath);
+	_Public Visindigo::LoadState load();
+	_Public def_del ~VIDllPackageInfo();
+};
+class VIPublicAPI VIDllPackageContainer :public VIObject {
+	Q_OBJECT;
+	VI_OBJECT;
+	_Private QMap<QString, VIDllPackageInfo*> DllPackageMap;
+	_Public def_init VIDllPackageContainer(const QString& dllpath);
+	_Public def_del ~VIDllPackageContainer();
+};
