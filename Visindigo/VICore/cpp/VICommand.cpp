@@ -180,40 +180,77 @@ QStringList VICommandHost::blankSplitter(const QString& str) {
 	return result;
 }
 
-static QStringList scientificSplitter_dot(const QString& str);
-
 QStringList VICommandHost::scientificSplitter(const QString& str, const QChar& ch) {
-	QStringList result;
-	QString temp = "";
-	bool backslash = false;
-	int backslashIndex = -1;
-	for (auto i = 0; i < str.length(); i++) {
-		if (str[i] == ch) {
-			if (backslash) {
-				temp.append(ch);
+	return scientificSplitter(str, QString(ch));
+}
+
+QStringList VICommandHost::scientificSplitter(const QString& str, const QString& ch) {
+	QStringList result = str.split(ch);
+	for (auto i = 0; i < result.length() - 1;) {
+		quint32 count = 0;
+		for (auto j = result[i].length() - 1; j > 0;j--) {
+			if (result[i][j] == '\\') {
+				count++;
 			}
 			else {
-				result.append(temp);
-				temp.clear();
+				break;
 			}
+		}
+		if (count % 2) {
+			result[i].remove(result[i].length() - 1, 1);
+			result[i].replace("\\\\", "\\");
+			result[i] += ch + result[i+1];
+			result.removeAt(i + 1);
 		}
 		else {
-			if (str[i] == '\\') {
-				backslash = !backslash;
-				if (backslash) {
-					backslashIndex = i;
-					continue;
-				}
-			}
-			if (!backslash) {
-				temp.append(str[i]);
-			}
-		}
-		if (backslash && i - backslashIndex >= 1) {
-			backslash = false;
+			result[i].replace("\\\\", "\\");
+			i++;
 		}
 	}
-	if (temp != "") { result.append(temp); }
-	if (!backslash && str[str.length()-1]==ch) { result.append(""); }
 	return result;
+}
+
+quint32 VICommandHost::getIndentLevel(const QString& str, quint8 levelSize) {
+	quint32 result = 0;
+	for (auto i = 0; i < str.length(); i++) {
+		if (str[i] == ' ') {
+			result++;
+		}
+		else if (str[i] == '\t') {
+			result += levelSize;
+		}
+		else {
+			break;
+		}
+	}
+	return result / levelSize;
+}
+
+quint32 VICommandHost::getIndentCount(const QString& str) {
+	quint32 result = 0;
+	for (auto i = 0; i < str.length(); i++) {
+		if (str[i] == ' ') {
+			result++;
+		}
+		else if (str[i] == '\t') {
+			result++;
+		}
+		else {
+			break;
+		}
+	}
+	return result;
+}
+
+void VICommandHost::removeIndent(QString* str) {
+	quint32 indentCount = getIndentCount(*str);
+	str->remove(0, indentCount);
+}
+
+void VICommandHost::stringIndentStandardization(QString* str, quint8 levelSize) {
+	quint32 indentStandard = getIndentLevel(*str, levelSize)*levelSize;
+	removeIndent(str);
+	for (auto i = 0; i < indentStandard; i++) {
+		str->insert(0, " ");
+	}
 }

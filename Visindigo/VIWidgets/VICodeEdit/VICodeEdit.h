@@ -7,11 +7,13 @@ class VIPublicAPI private_VICodeEdit :public QTextEdit
 {
 	Q_OBJECT;
 	_Signal void shortcutKey_Find();
+	_Signal void lineIndentChanged(quint32 line, quint32 indentLevel);
 	_Public def_init private_VICodeEdit(QWidget* parent = Q_NULLPTR);
 	_Public void keyPressEvent(QKeyEvent* event) override;
 	_Private void keyPressEvent_Tab(QKeyEvent* event);
 	_Private void keyPressEvent_BackTab(QKeyEvent* event);
 	_Private void keyPressEvent_Return(QKeyEvent* event);
+	_Private void keyPressEvent_V(QKeyEvent* event); // ctrl + v, paste without format (override raw)
 };
 
 class VIPublicAPI VICodeEdit :public VIWidget
@@ -20,6 +22,7 @@ class VIPublicAPI VICodeEdit :public VIWidget
 	VI_OBJECT;
 	_Signal void languageTypeChanged(const QString& typeName);
 	_Signal void cursorPositionChanged(int line, int column, int position, const QString& lineText);
+	VI_PrivateProperty(quint32, CurrentLineCount);
 	_Private QTextEdit* LineNumberArea;
 	_Private private_VICodeEdit* CodeEdit;
 	_Private QTextBrowser* LineInfoArea;
@@ -36,7 +39,7 @@ class VIPublicAPI VICodeEdit :public VIWidget
 	_Public bool saveFile(const QString& filePath = "");
 	_Private void closeEvent(QCloseEvent* event) override;
 	_Public bool find(const QString& substr, QTextDocument::FindFlags flags);
-	_Public void onShortcutKey_Find();
+	_Public void showFindAndReplaceWidget();
 	_Public void setFont(const QFont& font);
 	_Public void setCodeSyntaxHighlighter(QSyntaxHighlighter* highlighter);
 	_Public void resizeEvent(QResizeEvent* event);
@@ -44,6 +47,7 @@ class VIPublicAPI VICodeEdit :public VIWidget
 	_Public void mousePressEvent(QMouseEvent* event);
 	_Public void scrollEveryEdit(int value);
 	_Public void updateLineNumber();
+	_Private void updateLineInfoArea(quint32 line, quint32 indentLevel);
 };
 
 class VIPublicAPI private_VIMultiCodeEdit_DocLabel :public VIAbstractRatioWidget
@@ -53,17 +57,6 @@ class VIPublicAPI private_VIMultiCodeEdit_DocLabel :public VIAbstractRatioWidget
 	_Private VILabel* TypeIconLabel;
 	_Private VILabel* DocNameLabel;
 	_Private VICodeEdit* CodeEdit; // that is to say, this label class also works as a container
-};
-
-//This class allows you to edit multiple files at the same time
-class VIPublicAPI VIMultiCodeEdit :public VIWidget
-{
-	Q_OBJECT;
-	VI_OBJECT;
-	_Private int MaxDocAllowed;
-	_Private VIRatioWidgetContainer* DocLabelTopContainer; // label on the top
-	_Private VIRatioWidgetContainer* DocLabelSideContainer; // label on the side, or shrinked/hidden
-	_Public VICodeEdit* openFile(const QString& filePath);
 };
 
 class VICodeEditTestWidget :public VIWidget

@@ -48,5 +48,10 @@ class VIPublicAPI VICommandHost :public VIObject {
 	_Public void enableStdIOListener();
 	_Public void disableStdIOListener();
 	_Public static QStringList blankSplitter(const QString& str);
-	_Public static QStringList scientificSplitter(const QString& str, const QChar& ch);
+	_Public static QStringList scientificSplitter(const QString& str, const QChar& ch); //just for compatibility
+	_Public static QStringList scientificSplitter(const QString& str, const QString& ch);
+	_Public static quint32 getIndentLevel(const QString& str, quint8 levelSize = 4);
+	_Public static quint32 getIndentCount(const QString& str);
+	_Public static void removeIndent(QString* str);
+	_Public static void stringIndentStandardization(QString* str, quint8 levelSize = 4);
 };

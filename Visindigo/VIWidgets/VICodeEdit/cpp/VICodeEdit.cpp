@@ -21,6 +21,9 @@ void private_VICodeEdit::keyPressEvent(QKeyEvent* event) {
 	case Qt::Key_Return:
 		keyPressEvent_Return(event);
 		return;
+	case Qt::Key_V:
+		keyPressEvent_V(event);
+		return;
 	default:
 		QTextEdit::keyPressEvent(event);
 		return;
@@ -41,6 +44,7 @@ void private_VICodeEdit::keyPressEvent_Tab(QKeyEvent* event) {
 			}
 		}
 		insertPlainText("    ");
+		emit lineIndentChanged(cursor.blockNumber(), VICommandHost::getIndentLevel(cursor.block().text()));
 		return;
 	}
 	else {
@@ -59,6 +63,7 @@ void private_VICodeEdit::keyPressEvent_Tab(QKeyEvent* event) {
 		for (int i = startLine; i <= endLine; i++) {
 			cursor.movePosition(QTextCursor::StartOfLine);
 			cursor.insertText("    ");
+			emit lineIndentChanged(cursor.blockNumber(), VICommandHost::getIndentLevel(cursor.block().text()));
 			cursor.movePosition(QTextCursor::Down);
 		}
 		cursor.setPosition(fixStartPos, QTextCursor::KeepAnchor);
@@ -94,6 +99,7 @@ void private_VICodeEdit::keyPressEvent_BackTab(QKeyEvent* event) {
 		for (int i = 0; i < removeCharCount; i++) {
 			textCursor().deletePreviousChar();
 		}
+		emit lineIndentChanged(cursor.blockNumber(), VICommandHost::getIndentLevel(cursor.block().text()));
 		return;
 	}
 	else {
@@ -133,6 +139,7 @@ void private_VICodeEdit::keyPressEvent_BackTab(QKeyEvent* event) {
 			for (int i = 0; i < removeCharCount; i++) {
 				cursor.deleteChar();
 			}
+			emit lineIndentChanged(cursor.blockNumber(), VICommandHost::getIndentLevel(cursor.block().text()));
 			cursor.movePosition(QTextCursor::Down);
 		}
 		cursor.setPosition(fixStartPos, QTextCursor::KeepAnchor);
@@ -164,8 +171,27 @@ void private_VICodeEdit::keyPressEvent_Return(QKeyEvent* event) {
 	return;
 }
 
+void private_VICodeEdit::keyPressEvent_V(QKeyEvent* event) {
+	//ctrl + v, paste without format(override raw)
+	if (event->modifiers() == Qt::ControlModifier) {
+		QClipboard* clipboard = QApplication::clipboard();
+		QString text = clipboard->text();
+		QStringList textList = text.split("\n");
+		for (int i = 0; i < textList.size(); i++) {
+			VICommandHost::stringIndentStandardization(&textList[i]);
+		}
+		insertPlainText(textList.join("\n"));
+		return;
+	}
+	else {
+		QTextEdit::keyPressEvent(event);
+		return;
+	}
+	
+}
 def_init VICodeEdit::VICodeEdit(QWidget* parent) :VIWidget(parent) {
 	this->setWindowTitle("Visindigo Code Edit");
+	CurrentLineCount = 0;
 	QFont font = QFont("Microsoft YaHei");
 
 	LineNumberArea = new QTextEdit(this);
@@ -188,7 +214,8 @@ def_init VICodeEdit::VICodeEdit(QWidget* parent) :VIWidget(parent) {
 	connect(LineNumberArea->verticalScrollBar(), &QScrollBar::valueChanged, this, &VICodeEdit::scrollEveryEdit);
 	connect(CodeEdit->verticalScrollBar(), &QScrollBar::valueChanged, this, &VICodeEdit::scrollEveryEdit);
 	connect(CodeEdit->document(), &QTextDocument::cursorPositionChanged, this, &VICodeEdit::debugCursorInfo);
-	connect(CodeEdit, &private_VICodeEdit::shortcutKey_Find, this, &VICodeEdit::onShortcutKey_Find);
+	connect(CodeEdit, &private_VICodeEdit::shortcutKey_Find, this, &VICodeEdit::showFindAndReplaceWidget);
+	connect(CodeEdit, &private_VICodeEdit::lineIndentChanged, this, &VICodeEdit::updateLineInfoArea);
 	this->setStyleSheet("QWidget{background-color:#202020;color:#FFFFFF}");
 	LineInfoArea = new QTextBrowser(this);
 	LineInfoArea->setReadOnly(true);
@@ -309,7 +336,7 @@ bool VICodeEdit::find(const QString& substr, QTextDocument::FindFlags flags) {
 	return CodeEdit->find(substr, flags);
 }
 
-void VICodeEdit::onShortcutKey_Find() {
+void VICodeEdit::showFindAndReplaceWidget() {
 	if (FindAndReplaceWidget != VI_NULL) {
 		FindAndReplaceWidget->show();
 		return;
@@ -378,43 +405,95 @@ void VICodeEdit::scrollEveryEdit(int value) {
 	LineInfoArea->verticalScrollBar()->setValue(value);
 }
 void VICodeEdit::updateLineNumber() {
-	QString text = "<p align=\"right\">";
-	for (int i = 1; i <= CodeEdit->document()->blockCount(); i++) {
-		text += QString::number(i) + "<br>";
+	int latestlineCount = CodeEdit->document()->blockCount();
+	int delta = latestlineCount - CurrentLineCount;
+	if (delta > 0) {
+		quint32 startLine = CurrentLineCount + 1;
+		quint32 endLine = latestlineCount;
+		QString text = "<p align=\"right\">";
+		for (int i = startLine; i <= endLine; i++) {
+			text += QString::number(i) + "<br>";
+		}
+		text += "</p>";
+		QTextCursor cursor = LineNumberArea->textCursor();
+		cursor.movePosition(QTextCursor::End);
+		cursor.insertHtml(text);
+
+		QTextCursor editCursor = CodeEdit->textCursor();
+		editCursor.movePosition(QTextCursor::Up, QTextCursor::MoveAnchor, delta);
+		quint32 lineIndex = editCursor.blockNumber();
+		QList<int> indentLevelList;
+		quint32 fixDelta = lineIndex + delta + 1 > CodeEdit->document()->blockCount() ? delta : delta + 1;
+		for (int i = 0; i < fixDelta; i++) {
+			indentLevelList.append(VICommandHost::getIndentLevel(editCursor.block().text()));
+			editCursor.movePosition(QTextCursor::Down);
+		}
+		QTextCursor lineInfoCursor = LineInfoArea->textCursor();
+		lineInfoCursor.movePosition(QTextCursor::Start);
+		lineInfoCursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, lineIndex);
+		lineInfoCursor.movePosition(QTextCursor::StartOfLine);
+		for (auto i = indentLevelList.begin(); i != indentLevelList.end();i++) {
+			lineInfoCursor.movePosition(QTextCursor::StartOfLine);
+			if (*i == 0) {
+				if (i + 1 != indentLevelList.end()) {
+					lineInfoCursor.insertText("\n");
+				}
+				lineInfoCursor.movePosition(QTextCursor::Down);
+				continue;
+			}
+			QString line = "";
+			for (int j = 0; j < *i ; j++) {
+				line += ":   ";
+			}
+			if (i + 1 != indentLevelList.end()) {
+				line += "\n";
+			}
+			lineInfoCursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+			lineInfoCursor.insertText(line);
+		}
 	}
-	text += "</p>";
-	LineNumberArea->setText(text);
-	text = "<p align=\"left\">";
-	for (int i = 1; i <= CodeEdit->document()->blockCount(); i++) {
-		text += QString::number(i) + " Debug Info Text<br>";
+	else {
+		QTextCursor cursor = LineNumberArea->textCursor();
+		cursor.movePosition(QTextCursor::Start);
+		cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, latestlineCount);
+		cursor.movePosition(QTextCursor::StartOfLine);
+		cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+		cursor.removeSelectedText();
+
+		QTextCursor editCursor = CodeEdit->textCursor();
+		editCursor.movePosition(QTextCursor::Up, QTextCursor::MoveAnchor, -delta);
+		quint32 lineIndex = editCursor.blockNumber();
+		QTextCursor lineInfoCursor = LineInfoArea->textCursor();
+		lineInfoCursor.movePosition(QTextCursor::Start);
+		lineInfoCursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, lineIndex-1);
+		for (int i = 0; i < -delta; i++) {
+			lineInfoCursor.movePosition(QTextCursor::StartOfLine);
+			lineInfoCursor.movePosition(QTextCursor::Down, QTextCursor::KeepAnchor);
+			lineInfoCursor.removeSelectedText();
+		}
 	}
-	text += "</p>";
+	CurrentLineCount = latestlineCount;
 	LineNumberArea->verticalScrollBar()->setRange(CodeEdit->verticalScrollBar()->minimum(), CodeEdit->verticalScrollBar()->maximum());
 	LineNumberArea->verticalScrollBar()->setValue(CodeEdit->verticalScrollBar()->value());
-	//识别每一行的缩进字符生成对齐线
-	int Indenet = 0;
-	QString alignText = "";
-	for (int i = 0; i < CodeEdit->document()->blockCount(); i++) {
-		QTextBlock block = CodeEdit->document()->findBlockByNumber(i);
-		QString lineText = block.text();
-		for (int j = 0; j < lineText.size(); j++) {
-			if (lineText[j] == ' ') {
-				Indenet++;
-			}
-			else if (lineText[j] == '\t') {
-				Indenet += 4;
-			}
-			else {
-				break;
-			}
-		}
-		QString lineAlignText = "";
-		int indentLevel = Indenet / 4;
-		for (int j = 0; j < indentLevel; j++) {
-			lineAlignText += ":   ";
-		}
-		alignText += lineAlignText + "\n";
-		Indenet = 0;
+	LineInfoArea->verticalScrollBar()->setRange(CodeEdit->verticalScrollBar()->minimum(), CodeEdit->verticalScrollBar()->maximum());
+	LineInfoArea->verticalScrollBar()->setValue(CodeEdit->verticalScrollBar()->value());
+}
+
+void VICodeEdit::updateLineInfoArea(quint32 lineIndex, quint32 indentLevel) {
+	if (indentLevel == 0) {
+		return;
 	}
-	LineInfoArea->setText(alignText);
+	QString line = "";
+	for (int i = 0; i < indentLevel ; i++) {
+		line += ":   ";
+	}
+	//修改LineInfoArea的内容
+	QTextCursor cursor = LineInfoArea->textCursor();
+	cursor.movePosition(QTextCursor::Start);
+	for (int i = 0; i < lineIndex; i++) {
+		cursor.movePosition(QTextCursor::Down);
+	}
+	cursor.movePosition(QTextCursor::StartOfLine);
+	cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+	cursor.insertText(line);
 }
