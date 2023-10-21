@@ -1,8 +1,15 @@
 ﻿#include "../VICodeEdit.h"
 
-def_init private_VICodeEdit::private_VICodeEdit(QWidget* parent ) :QTextEdit(parent) {}
+def_init private_VICodeEdit::private_VICodeEdit(QWidget* parent) :QTextEdit(parent) {
+	KeyBoardFreeTimer = new QTimer(this);
+	KeyBoardFreeTimer->setSingleShot(true);
+	KeyBoardFreeTimer->setInterval(3000);
+	connect(KeyBoardFreeTimer, &QTimer::timeout, this, &private_VICodeEdit::keyBoardFree);
+	KeyBoardFreeTimer->start();
+}
 
 void private_VICodeEdit::keyPressEvent(QKeyEvent* event) {
+	KeyBoardFreeTimer->start();
 	switch (event->key()) {
 	case Qt::Key_F:
 		if (event->modifiers() == Qt::ControlModifier) {
@@ -23,6 +30,12 @@ void private_VICodeEdit::keyPressEvent(QKeyEvent* event) {
 		return;
 	case Qt::Key_V:
 		keyPressEvent_V(event);
+		return;
+	case Qt::Key_S:
+		keyPressEvent_S(event);
+		return;
+	case Qt::Key_R:
+		keyPressEvent_R(event);
 		return;
 	default:
 		QTextEdit::keyPressEvent(event);
@@ -187,13 +200,35 @@ void private_VICodeEdit::keyPressEvent_V(QKeyEvent* event) {
 		QTextEdit::keyPressEvent(event);
 		return;
 	}
-	
+}
+
+void private_VICodeEdit::keyPressEvent_S(QKeyEvent* event) {
+	if (event->modifiers() == Qt::ControlModifier) {
+		emit saveNeeded(false);
+		return;
+	}
+	else {
+		QTextEdit::keyPressEvent(event);
+		return;
+	}
+}
+
+void private_VICodeEdit::keyPressEvent_R(QKeyEvent* event) {
+	if (event->modifiers() == Qt::ControlModifier) {
+		emit saveNeeded(true);
+		return;
+	}
+	else {
+		QTextEdit::keyPressEvent(event);
+		return;
+	}
 }
 def_init VICodeEdit::VICodeEdit(QWidget* parent) :VIWidget(parent) {
 	this->setWindowTitle("Visindigo Code Edit");
+	FilePath = "";
+	needSave = false;
 	CurrentLineCount = 0;
 	QFont font = QFont("Microsoft YaHei");
-
 	LineNumberArea = new QTextEdit(this);
 	LineNumberArea->setReadOnly(true);
 	LineNumberArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -216,6 +251,7 @@ def_init VICodeEdit::VICodeEdit(QWidget* parent) :VIWidget(parent) {
 	connect(CodeEdit->document(), &QTextDocument::cursorPositionChanged, this, &VICodeEdit::debugCursorInfo);
 	connect(CodeEdit, &private_VICodeEdit::shortcutKey_Find, this, &VICodeEdit::showFindAndReplaceWidget);
 	connect(CodeEdit, &private_VICodeEdit::lineIndentChanged, this, &VICodeEdit::updateLineInfoArea);
+	connect(CodeEdit, &private_VICodeEdit::saveNeeded, this, &VICodeEdit::save);
 	this->setStyleSheet("QWidget{background-color:#202020;color:#FFFFFF}");
 	LineInfoArea = new QTextBrowser(this);
 	LineInfoArea->setReadOnly(true);
@@ -268,7 +304,7 @@ bool VICodeEdit::openFile(const QString& filePath) {
 	FilePath = filePath;
 	QString langType = filePath.split(".").last();
 	if (langType != LanguageType) {
-		LanguageType = langType;
+		LanguageType = langType.toLower();
 		emit languageTypeChanged(LanguageType);
 	}
 	return true;
@@ -304,6 +340,30 @@ bool VICodeEdit::saveFile(const QString& filePath) {
 		FilePath = filePath;
 		needSave = false;
 		return true;
+	}
+}
+
+void VICodeEdit::save(bool saveAs) {
+	if (FilePath == "" || saveAs) {
+		//save as dialog
+		QString filePath = QFileDialog::getSaveFileName(this, "Save As", "", "All Files(*.*)");
+		if (filePath == "") {
+			QMessageBox::critical(this, "Error", "Save Failed!");
+			return;
+		}
+		else {
+			if (!saveFile(filePath)) {
+				QMessageBox::critical(this, "Error", "Save Failed!");
+			}
+			else {
+				FilePath = filePath;
+			}
+		}
+	}
+	else {
+		if (!saveFile()) {
+			QMessageBox::critical(this, "Error", "Save Failed!");
+		}
 	}
 }
 
@@ -422,9 +482,9 @@ void VICodeEdit::updateLineNumber() {
 		QTextCursor editCursor = CodeEdit->textCursor();
 		editCursor.movePosition(QTextCursor::Up, QTextCursor::MoveAnchor, delta);
 		quint32 lineIndex = editCursor.blockNumber();
+		qDebug() << lineIndex;
 		QList<int> indentLevelList;
-		quint32 fixDelta = lineIndex + delta + 1 > CodeEdit->document()->blockCount() ? delta : delta + 1;
-		for (int i = 0; i < fixDelta; i++) {
+		for (int i = 0; i < delta; i++) {
 			indentLevelList.append(VICommandHost::getIndentLevel(editCursor.block().text()));
 			editCursor.movePosition(QTextCursor::Down);
 		}
@@ -432,24 +492,19 @@ void VICodeEdit::updateLineNumber() {
 		lineInfoCursor.movePosition(QTextCursor::Start);
 		lineInfoCursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, lineIndex);
 		lineInfoCursor.movePosition(QTextCursor::StartOfLine);
-		for (auto i = indentLevelList.begin(); i != indentLevelList.end();i++) {
+		for (auto i = indentLevelList.begin(); i != indentLevelList.end(); i++) {
 			lineInfoCursor.movePosition(QTextCursor::StartOfLine);
 			if (*i == 0) {
-				if (i + 1 != indentLevelList.end()) {
-					lineInfoCursor.insertText("\n");
-				}
-				lineInfoCursor.movePosition(QTextCursor::Down);
+				lineInfoCursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+				lineInfoCursor.insertText("\n");
+				//lineInfoCursor.movePosition(QTextCursor::Down);
 				continue;
 			}
-			QString line = "";
-			for (int j = 0; j < *i ; j++) {
-				line += ":   ";
-			}
-			if (i + 1 != indentLevelList.end()) {
-				line += "\n";
-			}
+			QString line = getIndentNotice(*i);
+			line += "\n";
 			lineInfoCursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
 			lineInfoCursor.insertText(line);
+			//lineInfoCursor.movePosition(QTextCursor::Down);
 		}
 	}
 	else {
@@ -465,7 +520,7 @@ void VICodeEdit::updateLineNumber() {
 		quint32 lineIndex = editCursor.blockNumber();
 		QTextCursor lineInfoCursor = LineInfoArea->textCursor();
 		lineInfoCursor.movePosition(QTextCursor::Start);
-		lineInfoCursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, lineIndex-1);
+		lineInfoCursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, lineIndex + 1);
 		for (int i = 0; i < -delta; i++) {
 			lineInfoCursor.movePosition(QTextCursor::StartOfLine);
 			lineInfoCursor.movePosition(QTextCursor::Down, QTextCursor::KeepAnchor);
@@ -483,10 +538,7 @@ void VICodeEdit::updateLineInfoArea(quint32 lineIndex, quint32 indentLevel) {
 	if (indentLevel == 0) {
 		return;
 	}
-	QString line = "";
-	for (int i = 0; i < indentLevel ; i++) {
-		line += ":   ";
-	}
+	QString line = getIndentNotice(indentLevel);
 	//修改LineInfoArea的内容
 	QTextCursor cursor = LineInfoArea->textCursor();
 	cursor.movePosition(QTextCursor::Start);
@@ -496,4 +548,12 @@ void VICodeEdit::updateLineInfoArea(quint32 lineIndex, quint32 indentLevel) {
 	cursor.movePosition(QTextCursor::StartOfLine);
 	cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
 	cursor.insertText(line);
+}
+
+QString VICodeEdit::getIndentNotice(quint32 indentLevel) {
+	QString result = "";
+	for (int i = 0; i < indentLevel; i++) {
+		result += ":   ";
+	}
+	return result;
 }

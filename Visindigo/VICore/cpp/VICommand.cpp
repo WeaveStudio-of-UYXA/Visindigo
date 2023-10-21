@@ -188,7 +188,7 @@ QStringList VICommandHost::scientificSplitter(const QString& str, const QString&
 	QStringList result = str.split(ch);
 	for (auto i = 0; i < result.length() - 1;) {
 		quint32 count = 0;
-		for (auto j = result[i].length() - 1; j > 0;j--) {
+		for (auto j = result[i].length() - 1; j > 0; j--) {
 			if (result[i][j] == '\\') {
 				count++;
 			}
@@ -199,7 +199,7 @@ QStringList VICommandHost::scientificSplitter(const QString& str, const QString&
 		if (count % 2) {
 			result[i].remove(result[i].length() - 1, 1);
 			result[i].replace("\\\\", "\\");
-			result[i] += ch + result[i+1];
+			result[i] += ch + result[i + 1];
 			result.removeAt(i + 1);
 		}
 		else {
@@ -248,7 +248,7 @@ void VICommandHost::removeIndent(QString* str) {
 }
 
 void VICommandHost::stringIndentStandardization(QString* str, quint8 levelSize) {
-	quint32 indentStandard = getIndentLevel(*str, levelSize)*levelSize;
+	quint32 indentStandard = getIndentLevel(*str, levelSize) * levelSize;
 	removeIndent(str);
 	for (auto i = 0; i < indentStandard; i++) {
 		str->insert(0, " ");

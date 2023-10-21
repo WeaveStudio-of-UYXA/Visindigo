@@ -6,14 +6,19 @@
 class VIPublicAPI private_VICodeEdit :public QTextEdit
 {
 	Q_OBJECT;
+	_Private QTimer* KeyBoardFreeTimer;
 	_Signal void shortcutKey_Find();
+	_Signal void keyBoardFree();
 	_Signal void lineIndentChanged(quint32 line, quint32 indentLevel);
+	_Signal void saveNeeded(bool saveAs);
 	_Public def_init private_VICodeEdit(QWidget* parent = Q_NULLPTR);
 	_Public void keyPressEvent(QKeyEvent* event) override;
 	_Private void keyPressEvent_Tab(QKeyEvent* event);
 	_Private void keyPressEvent_BackTab(QKeyEvent* event);
 	_Private void keyPressEvent_Return(QKeyEvent* event);
 	_Private void keyPressEvent_V(QKeyEvent* event); // ctrl + v, paste without format (override raw)
+	_Private void keyPressEvent_S(QKeyEvent* event); // ctrl + s, save file
+	_Private void keyPressEvent_R(QKeyEvent* event); // ctrl + r, save as file
 };
 
 class VIPublicAPI VICodeEdit :public VIWidget
@@ -30,13 +35,14 @@ class VIPublicAPI VICodeEdit :public VIWidget
 	_Public QCompleter* CodeCompleter;
 	_Private QString LanguageType;
 	_Private QString FilePath;
-	_Private bool needSave;
+	VI_PrivateProperty(bool, needSave);
 	_Private private_VICodeEdit_FindAndReplaceWidget* FindAndReplaceWidget = VI_NULL;
 	_Public def_init VICodeEdit(QWidget* parent = VI_NULL);
 	_Private void cursorInfoGenerator();
 	_Public bool eventFilter(QObject* tar, QEvent* eve);
 	_Public bool openFile(const QString& filePath);
 	_Public bool saveFile(const QString& filePath = "");
+	_Public void save(bool saveAs = false);
 	_Private void closeEvent(QCloseEvent* event) override;
 	_Public bool find(const QString& substr, QTextDocument::FindFlags flags);
 	_Public void showFindAndReplaceWidget();
@@ -48,6 +54,7 @@ class VIPublicAPI VICodeEdit :public VIWidget
 	_Public void scrollEveryEdit(int value);
 	_Public void updateLineNumber();
 	_Private void updateLineInfoArea(quint32 line, quint32 indentLevel);
+	_Private static QString getIndentNotice(quint32 indentLevel);
 };
 
 class VIPublicAPI private_VIMultiCodeEdit_DocLabel :public VIAbstractRatioWidget

@@ -33,7 +33,7 @@ namespace Visindigo {
 	};
 	enum QuantifyTickType {
 		T0, T20, T32, T64, T128
-	};	
+	};
 	enum SimpleTransformation
 	{
 		Line, Exponential, Logarithmic, Sqrt, Square,

@@ -27,4 +27,3 @@ class VIPublicAPI private_VICodeEdit_FindAndReplaceWidget :public VIWidget
 	//_Public void resizeEvent(QResizeEvent* event)override;
 	_Public void onTranslating()override;
 };
-

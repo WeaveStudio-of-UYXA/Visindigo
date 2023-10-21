@@ -25,36 +25,23 @@ Visindigo是从CommonEdit、Python CommonEdit、Java CommonEdit等项目演变�
 
 # 问题反馈和国际化 Feedback & i18n
 
-## 问题反馈
 此项目维护时采用中文进行交流（无论是简体中文或者繁体中文），如果您的母语不是中文，您应该采用双语进行沟通。
 
-我们希望您首先用您的母语进行表达，之后再附上对应的中文翻译。如果您不能自己将其译为中文，您可以考虑采用翻译引擎，例如Bing，Baidu，Google等。
+我们希望您首先用您的母语进行表达，之后再附上对应的中文翻译。如果您不能自己将其译为中文，您可以考虑采用翻译引擎，例如Bing，Baidu，Google等。我们的回复也会遵循类似顺序，我们会首先用您的母语进行回复，这一回复是由翻译引擎翻译自中文的，在这之后我们会附上中文原文。
 
-我们的回复也会遵循类似顺序，我们会首先用您的母语进行回复，这一回复是由翻译引擎翻译自中文的，在这之后我们会附上中文原文。
+不是所有问题都会被回复或处理，因为作者的精力和水平有限。如果您的问题没有被回复或处理，您可以考虑自己解决并提交PR，或者您可以考虑寻求其他人的帮助。我们向您保证，只要您提出问题并被我们看到，无论如何首先就是我们自己有问题，我们会尽力解决。
 
-This project is maintained in Chinese (either simplified Chinese or traditional Chinese). If your mother tongue is not Chinese, you should communicate in bilingual.
+此软件内可能含有需要国际化的内容，我们会首先用AI翻译，如果您发现翻译有问题，请向我们指出。
 
-We hope you will first express in your native language, and then attach the corresponding Chinese translation. If you cannot translate it into Chinese yourself, you can consider using translation engines, such as Bing, Baidu, Google, etc.
-
-Our reply will follow a similar order. We will reply in your native language first. This reply is translated from Chinese by the translation engine. After that, we will attach the original Chinese text.
-
-## 国际化
-關於此軟體內的多語言翻譯問題，我們希望有各個語種的用戶能做出貢獻，如果後續確有此需要，我們會指出需要被翻譯的內容。
-
-With regard to multilingual translation in this software, we hope that users of all languages can contribute. If this is really necessary in the future, we will point out what needs to be translated.
-
-このソフトウェア内の多言語翻訳の問題については、各言語のユーザーが貢献することを期待しています。もしその後、この必要があれば、翻訳される必要がある内容を指摘します。
-
-이 소프트웨어 내의 다국어 번역 문제에 관하여, 우리는 각 언어의 사용자가 공헌할 수 있기를 희망하며, 만약 후속으로 확실히 이러한 수요가 있다면, 우리는 번역되어야 할 내용을 지적할 것이다.
-
-# 源代码贡献
+# 源代码贡献（Pull Request）
 如果您希望增加或修改Visindigo程序中的功能，请Fork本仓库，在修改完毕后提交Pull请求。
 
 请注意：
 * Visindigo主要C++内容只接受含有Qt、STL的源代码，请勿引入任何其他库，例如OpenCV、Windows API，boost等，如果必须引入，请将该库中未能跨平台的部分重新用Qt实现。（例如您如果希望引入Spine之类的东西，您应该取得Spine的全部C++源代码，并将部分内容改为Qt实现）
 * VIJS API指的是由Visindigo程序提供的JavaScript API，JSVI API指的是在Visindigo.JS框架下直接由JavaScript编写实现的API，您可以自由扩展JSVI API，只要您写的这些扩展能够在Visindigo.JS框架上面运行。
 * 不要使用“从Qt4继承，仍然提供支持但不再继续开发”的旧版Qt组件如Qt Script。
-* 不要使用C++20及之后版本中的新内容，不要使用MSVC支持不了的特性。
+* 当前C++版本为C++17，请勿使用更新的C++特性。（并且请注意，编译器是Qt5.15支持的MSVC 2019）
+* 作者水平有限，如果她看不懂您的代码，会和您深度讨论并学习您的PR，直到她能够看懂为止（如果彻底没戏的话，她会选择关闭您的PR，请不要伤心）。
 
 # 致谢
 

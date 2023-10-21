@@ -227,7 +227,7 @@ bool VIRatioWidgetContainer::eventFilter(QObject* watched, QEvent* event) {
 	case QEvent::MouseButtonRelease:
 		eventFilter_MouseButtonRelease(event);
 		break;
-	case QEvent::MouseMove: 
+	case QEvent::MouseMove:
 		eventFilter_MouseMove(event);
 		break;
 	}
@@ -333,7 +333,7 @@ bool VIRatioWidgetContainer::eventFilter_MouseMove(QEvent* event) {
 				}
 				CurrentLayout->removeWidget(DraggingWidget);
 				WidgetList.removeOne(DraggingWidget);
-				DraggingWidget->move(currentPos.x()-DraggingWidget->width()/2, DraggingWidget->y());
+				DraggingWidget->move(currentPos.x() - DraggingWidget->width() / 2, DraggingWidget->y());
 				DraggingWidget->raise();
 				dragging = true;
 				break;
@@ -343,7 +343,7 @@ bool VIRatioWidgetContainer::eventFilter_MouseMove(QEvent* event) {
 				}
 				CurrentLayout->removeWidget(DraggingWidget);
 				WidgetList.removeOne(DraggingWidget);
-				DraggingWidget->move(DraggingWidget->x(), currentPos.y()-DraggingWidget->height()/2);
+				DraggingWidget->move(DraggingWidget->x(), currentPos.y() - DraggingWidget->height() / 2);
 				DraggingWidget->raise();
 				dragging = true;
 				break;
@@ -356,17 +356,17 @@ void VIRatioWidgetContainer::updateWidgetSize() {
 	switch (CurrentOrientation)
 	{
 	case Qt::Horizontal:
-		{
-			int width = (this->width() / WidgetPerPage + 22 ) * WidgetList.count();
-			Panel->resize(width, Panel->height());
-		}
-		break;
+	{
+		int width = (this->width() / WidgetPerPage + 22) * WidgetList.count();
+		Panel->resize(width, Panel->height());
+	}
+	break;
 	case Qt::Vertical:
-		{
-			int height = (this->height() / WidgetPerPage +22) * WidgetList.count();
-			Panel->resize(Panel->width(), height);
-		}
-		break;
+	{
+		int height = (this->height() / WidgetPerPage + 22) * WidgetList.count();
+		Panel->resize(Panel->width(), height);
+	}
+	break;
 	}
 }
 def_init private_VIRatioWidgetAnimation::private_VIRatioWidgetAnimation(VIRatioWidgetContainer* master) {

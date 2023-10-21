@@ -1,7 +1,7 @@
 ﻿#include "../VIPackage.h"
 #include "../VICoreFramework.h"
 
-def_init VIPackageMeta::VIPackageMeta() {
+def_init VIPackageMeta::VIPackageMeta(const QString& packagePath) {
 	this->setPackageName("UnnamedVIPackage");
 	this->setPackageVersionMajor(0);
 	this->setPackageVersionMinor(0);
@@ -14,6 +14,22 @@ def_init VIPackageMeta::VIPackageMeta() {
 	this->setOrganizationDomain("");
 	this->TranslationPackageHost = new VITranslationSubHost(this);
 	this->PackageConfig = new VIDocument::VIJSON(this);
+	if (packagePath != "") {
+		DllPackage = true;
+		DllPackagePath = packagePath;
+	}
+	else {
+		DllPackage = false;
+		DllPackagePath = "";
+	}
+}
+QString VIPackageMeta::getPackageRootPath() {
+	if (DllPackage) {
+		return DllPackagePath;
+	}
+	else {
+		return VIPathInfo::getProgramPath() + "/package/" + PackageName;
+	}
 }
 QString VIPackageMeta::TR(const QString& key) {
 	return TranslationPackageHost->getTranslation(key);
@@ -81,11 +97,11 @@ def_del VIPackage::~VIPackage() {
 	}
 }
 
-def_init VIDllPackageInfo::VIDllPackageInfo(const QString& dllpath) {
+def_init VIDllPackage::VIDllPackage(const QString& dllpath) {
 	DllPath = dllpath;
 	Dll = new QLibrary(dllpath);
 }
-Visindigo::LoadState VIDllPackageInfo::load() {
+Visindigo::LoadState VIDllPackage::load() {
 	if (!Dll->load()) {
 		return Visindigo::LoadState::LoadFailed;
 	}
@@ -93,7 +109,8 @@ Visindigo::LoadState VIDllPackageInfo::load() {
 	if (main == VI_NULL) {
 		return Visindigo::LoadState::EntryFailed;
 	}
-	Package = main();
+	QString packageRoot = DllPath.section("/", 0, -2);
+	Package = main(packageRoot);
 	if (Package == VI_NULL) {
 		return Visindigo::LoadState::InitFailed;
 	}
@@ -105,7 +122,7 @@ Visindigo::LoadState VIDllPackageInfo::load() {
 	}
 	return Visindigo::LoadState::Succeed;
 }
-def_del VIDllPackageInfo::~VIDllPackageInfo() {
+def_del VIDllPackage::~VIDllPackage() {
 	if (Package != VI_NULL) {
 		delete Package;
 	}

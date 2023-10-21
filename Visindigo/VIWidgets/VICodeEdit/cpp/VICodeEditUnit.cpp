@@ -55,4 +55,3 @@ void private_VICodeEdit_FindAndReplaceWidget::onTranslating() {
 	ReplaceNext->setText(getTranslation("Widgets_CodeEdit_FindAndReplace_ReplaceNext"));
 	ReplaceAll->setText(getTranslation("Widgets_CodeEdit_FindAndReplace_ReplaceAll"));
 }
-

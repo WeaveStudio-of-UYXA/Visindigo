@@ -7,8 +7,9 @@
 #include "VIDocument/VIJSON.h"
 
 #define LOAD_PACKAGE(pack_name) VICoreFramework::getCoreInstance()->loadPackage(new pack_name());
-class VIPublicAPI VIPackage;
-class VIPublicAPI VICoreFramework;
+class VIPackage;
+class VICoreFramework;
+class VIDllPackage;
 
 class VIPublicAPI VIPackageMeta :public VIObject
 {
@@ -19,8 +20,11 @@ class VIPublicAPI VIPackageMeta :public VIObject
 	friend class VIPackage;
 	friend class VITranslationSubHost;
 	friend class VITranslationHost;
+	friend class VIDllPackageManager;
 	_Private QString PackageName;
 	_Protected VIDocument::VIJSON* PackageConfig;
+	VI_ProtectedFlag(DllPackage);
+	VI_ProtectedProperty(QString, DllPackagePath);
 	VI_ProtectedProperty(unsigned int, PackageVersionMajor);
 	VI_ProtectedProperty(unsigned int, PackageVersionMinor);
 	VI_ProtectedProperty(unsigned int, PackageVersionPatch);
@@ -31,13 +35,11 @@ class VIPublicAPI VIPackageMeta :public VIObject
 	VI_ProtectedProperty(QString, Organization);
 	VI_ProtectedProperty(QString, OrganizationDomain);
 	_Protected VITranslationSubHost* TranslationPackageHost;
-	_Public def_init VIPackageMeta();
+	_Public def_init VIPackageMeta(const QString& packageRootPath = "");
 	_Public inline QString getPackageVersion() {
 		return QString("%1.%2.%3").arg(PackageVersionMajor).arg(PackageVersionMinor).arg(PackageVersionPatch);
 	}
-	_Public inline QString getPackageRootPath() {
-		return VIPathInfo::getProgramPath() + "/package/" + PackageName;
-	}
+	_Public QString getPackageRootPath();
 	_Public inline QString getPackageInternalPath() {
 		return ":/package/" + PackageName;
 	}
@@ -61,6 +63,7 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	VI_OBJECT;
 	VI_MUST_INHERIT(VIPackage);
 	friend class VIFramework;
+
 	_Protected VIPackageMeta* PackageMeta;
 	_Public def_init VIPackage();
 	_Public VIPackageMeta* getPackageMeta();
@@ -72,21 +75,22 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	_Public def_del ~VIPackage();
 };
 
-typedef VIPackage* (*__VisindigoDllMain)(void);
+typedef VIPackage* (*__VisindigoDllMain)(QString);
 
-class VIPublicAPI VIDllPackageInfo {
+class VIPublicAPI VIDllPackage {
 	QString PackageName;
 	QString DllPath;
 	QLibrary* Dll = VI_NULL;
 	VIPackage* Package = VI_NULL;
-	_Public def_init VIDllPackageInfo(const QString& dllpath);
+	_Public def_init VIDllPackage(const QString& dllpath);
 	_Public Visindigo::LoadState load();
-	_Public def_del ~VIDllPackageInfo();
+	_Public def_del ~VIDllPackage();
 };
-class VIPublicAPI VIDllPackageContainer :public VIObject {
+
+class VIPublicAPI VIDllPackageManager :public VIObject
+{
 	Q_OBJECT;
 	VI_OBJECT;
-	_Private QMap<QString, VIDllPackageInfo*> DllPackageMap;
-	_Public def_init VIDllPackageContainer(const QString& dllpath);
-	_Public def_del ~VIDllPackageContainer();
+	_Private QList<VIDllPackage*> DllPackageList;
+	_Private QString PackageRootPath;
 };
