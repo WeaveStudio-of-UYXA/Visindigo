@@ -133,6 +133,9 @@
     <ClCompile Include="VIWidgets\VICodeEdit\cpp\VICodeEditUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VICore\cpp\VIMathFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VICore\private\VIMacro.h">
@@ -160,9 +163,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VICore\private\VIAutoVersion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VICore\VIMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VICore\VIException.h">
@@ -213,6 +213,9 @@
     <ClInclude Include="VICore\VIProcess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VICore\VIMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VICore\VIAbstractBehavior.h">
@@ -237,9 +240,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VICore\VIObject.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VICore\VIBasicType.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VICore\VICommand.h">
@@ -371,8 +371,8 @@
     <QtMoc Include="VIWidgets\VICodeEdit\VICodeEditUnit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <QtMoc Include="VICore\VIMathFunction.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

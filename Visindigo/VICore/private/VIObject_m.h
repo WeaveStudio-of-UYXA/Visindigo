@@ -1,6 +1,16 @@
 ﻿#pragma once
 #include "VIMacro.h"
 
+#define VI_VERSION_MAJOR 1
+#define VI_VERSION_MINOR 2
+#define VI_VERSION_PATCH 0
+
+#define Visindigo_ROOT "cn.yxgeneral.weavestudio.visindigo"
+#define Unique_Visindigo_Core Visindigo_ROOT ".core"
+#define Unique_Visindigo_Widget Visindigo_ROOT ".widget"
+#define Unique_Visindigo_ARCP Visindigo_ROOT ".arcp"
+#define Unique_Visindigo_UIJson Visindigo_ROOT ".uijson"
+#define Unique_Visindigo_GitTools Visindigo_ROOT ".gittools"
 #define VI_OBJECT p_VI_OBJECT_CONTENT
 
 #define p_VI_OBJECT_CONTENT \

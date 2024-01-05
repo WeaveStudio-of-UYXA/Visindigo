@@ -2,7 +2,7 @@
 #include "private/VIECMABuiltInModules.h"
 #include "VICommand.h"
 
-typedef QMap<QString, QString> VIECMAModuleMap;
+using VIECMAModuleMap = QMap<QString, QString>;
 enum class VIECMABuiltInModule {
 	System, Console
 };
@@ -54,5 +54,6 @@ class VIPublicAPI VIECMAScripts :public VIObject {
 	_Public void unload();
 	_Public QJSValue getGlobalObject(QString name);
 	_Private void onExit();
+
 	_Public def_del ~VIECMAScripts();
 };

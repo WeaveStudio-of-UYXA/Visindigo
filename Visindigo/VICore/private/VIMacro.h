@@ -37,6 +37,8 @@
 #define PASS
 #define VI_NO_PARENT
 
+#define VI_MarkMember(className) markMember(className::staticMetaObject)
+
 #define VI_MUST_INHERIT(name) public: virtual void __INHERIT_FLAG_##name__() PureVirtual;
 #define VI_HAS_INHERIT(name) public: virtual void __INHERIT_FLAG_##name__() HalfVirtual;
 

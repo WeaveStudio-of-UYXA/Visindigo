@@ -20,6 +20,7 @@
 #endif
 
 #ifdef _MSC_VER
+#define VISoftAPI __declspec(dllimport)
 #if defined VI_EVERYWHERE
 #define VIPublicAPI
 #elif defined VI_DEVELOPER

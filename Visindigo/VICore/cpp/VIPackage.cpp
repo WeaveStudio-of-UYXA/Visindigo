@@ -1,7 +1,7 @@
 ﻿#include "../VIPackage.h"
 #include "../VICoreFramework.h"
 
-def_init VIPackageMeta::VIPackageMeta(const QString& packagePath) {
+def_init VIPackageMeta::VIPackageMeta() {
 	this->setPackageName("UnnamedVIPackage");
 	this->setPackageVersionMajor(0);
 	this->setPackageVersionMinor(0);
@@ -14,21 +14,13 @@ def_init VIPackageMeta::VIPackageMeta(const QString& packagePath) {
 	this->setOrganizationDomain("");
 	this->TranslationPackageHost = new VITranslationSubHost(this);
 	this->PackageConfig = new VIDocument::VIJSON(this);
-	if (packagePath != "") {
-		DllPackage = true;
-		DllPackagePath = packagePath;
-	}
-	else {
-		DllPackage = false;
-		DllPackagePath = "";
-	}
 }
 QString VIPackageMeta::getPackageRootPath() {
-	if (DllPackage) {
-		return DllPackagePath;
+	if (PackageRootPath == "") {
+		return VIPathInfo::getProgramPath() + "/ProgramData/" + PackageName;
 	}
 	else {
-		return VIPathInfo::getProgramPath() + "/package/" + PackageName;
+		return PackageRootPath + "/"+ PackageName;
 	}
 }
 QString VIPackageMeta::TR(const QString& key) {
@@ -50,8 +42,14 @@ void VIPackageMeta::setPackageName(const QString& name) {
 	PackageName = name;
 	setObjectName(name);
 }
+void VIPackageMeta::setPackageUniqueName(const VIPackageUniqueName& name) {
+	UniqueName = name;
+}
 QString VIPackageMeta::getPackageName() {
 	return PackageName;
+}
+VIPackageUniqueName VIPackageMeta::getPackageUniqueName() {
+	return UniqueName;
 }
 QVariant VIPackageMeta::getConfig(const QString& key) {
 	return PackageConfig->getValueOf(key);
@@ -97,24 +95,25 @@ def_del VIPackage::~VIPackage() {
 	}
 }
 
-def_init VIDllPackage::VIDllPackage(const QString& dllpath) {
+def_init VIDllPackageContainer::VIDllPackageContainer(const QString& dllpath) {
 	DllPath = dllpath;
 	Dll = new QLibrary(dllpath);
 }
-Visindigo::LoadState VIDllPackage::load() {
+Visindigo::LoadState VIDllPackageContainer::load() {
 	if (!Dll->load()) {
 		return Visindigo::LoadState::LoadFailed;
 	}
-	__VisindigoDllMain main = (__VisindigoDllMain)Dll->resolve("VisindigoDllMain");
+	__VisindigoDllMain main = (__VisindigoDllMain)Dll->resolve(VisindigoDllEntryPointName);
 	if (main == VI_NULL) {
 		return Visindigo::LoadState::EntryFailed;
 	}
 	QString packageRoot = DllPath.section("/", 0, -2);
-	Package = main(packageRoot);
+	Package = main();
 	if (Package == VI_NULL) {
 		return Visindigo::LoadState::InitFailed;
 	}
 	try {
+		Package->PackageMeta->PackageRootPath = packageRoot;
 		VICoreFramework::getCoreInstance()->loadPackage(Package);
 	}
 	catch (...) {
@@ -122,7 +121,7 @@ Visindigo::LoadState VIDllPackage::load() {
 	}
 	return Visindigo::LoadState::Succeed;
 }
-def_del VIDllPackage::~VIDllPackage() {
+def_del VIDllPackageContainer::~VIDllPackageContainer() {
 	if (Package != VI_NULL) {
 		delete Package;
 	}

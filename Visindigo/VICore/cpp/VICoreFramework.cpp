@@ -82,6 +82,7 @@ VITranslationHost* VICoreFramework::getTranslationHostInstance() {
 void VICoreFramework::start() {
 	QStringList packageList = PrivateCoreFramework->PackageMap.keys();
 	for (auto i = packageList.begin(); i != packageList.end(); i++) {
+		PrivateCoreFramework->PackageMap[(*i)]->start(Visindigo::T20);
 		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + PrivateCoreFramework->PackageMap[(*i)]->getPackageMeta()->getPackageName()));
 	}
 	BehaviorHost->start();
@@ -103,13 +104,13 @@ int VICoreFramework::getReturnCode() {
 }
 
 bool VICoreFramework::loadPackage(VIPackage* package) {
-	QString packageName = package->getPackageMeta()->getPackageName();
-	if (PrivateCoreFramework->PackageMap.contains(packageName)) {
-		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Package name'" + packageName + "' already existed"));
+	VIPackageUniqueName uniqueName = package->getPackageMeta()->getPackageUniqueName();
+	if (PrivateCoreFramework->PackageMap.contains(uniqueName)) {
+		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix()  +"Package '" + uniqueName + "' already existed"));
 		return false;
 	}
-	PrivateCoreFramework->PackageMap[packageName] = package;
-	package->start(Visindigo::T20);
+	PrivateCoreFramework->PackageMap[uniqueName] = package;
+	package->onEnable();
 	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package '" + package->getPackageMeta()->getPackageName() + "' loaded"));
 	return true;
 }
@@ -158,3 +159,61 @@ QList<VIPackage*> VICoreFramework::getPackageList() {
 	}
 	return rtn;
 }
+
+bool VICoreFramework::softCall(const QString& uniqueName, const QString& methodName, QVariantList& args, QGenericReturnArgument& result){
+	//uniqueName should be package unique name, not imply yet
+	const QMetaObject* TargetMetaObject = metaObject();
+	int methodIndex = TargetMetaObject->indexOfMethod(QMetaObject::normalizedSignature(methodName.toStdString().c_str()));
+	if (methodIndex == -1) {
+		return false;
+	}
+	int variantCount = args.size();
+	if (variantCount > 10) {
+		VIConsole::printLine(VIConsole::inErrorStyle("The number of parameters exceeds the maximum limit of 10"));
+		return false;
+	}
+	for (int i = 0; i < 10 - variantCount; i++) {
+		args.append(QVariant());	
+	}
+	QList<QGenericArgument> argList = {};
+	for (int i = 0; i < 10; i++) {
+		argList.append(QGenericArgument(args[i].typeName(), args[i].data()));
+	}
+	bool rtn = false;
+	switch (variantCount) {
+	case 0:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result);
+		break;
+	case 1:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0]);
+		break;
+	case 2:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1]);
+		break;
+	case 3:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2]);
+		break;
+	case 4:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3]);
+		break;
+	case 5:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4]);
+		break;
+	case 6:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5]);
+		break;
+	case 7:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5], argList[6]);
+		break;
+	case 8:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5], argList[6], argList[7]);
+		break;
+	case 9:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5], argList[6], argList[7], argList[8]);
+		break;
+	case 10:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5], argList[6], argList[7], argList[8], argList[9]);
+		break;
+	}
+return rtn;
+};

@@ -13,7 +13,7 @@ class VIPublicAPI private_VICoreFramework :public QApplication
 {
 	Q_OBJECT;
 	friend class VICoreFramework;
-	_Protected QMap<QString, VIPackage*> PackageMap = {};
+	_Protected QMap<VIPackageUniqueName, VIPackage*> PackageMap = {};
 	_Public int ReturnCode = 0;
 	VI_Property(bool, DebugModeCompilation);
 	VI_Property(bool, DebugModeRuntime);
@@ -48,6 +48,7 @@ class VIPublicAPI VICoreFramework :public VIObject
 	_Public void setLanguageType(Visindigo::Language);
 	_Public Visindigo::Language getLanguageType();
 	_Public QList<VIPackage*> getPackageList();
+	_Public bool softCall(const QString& uniqueName, const QString& methodName, QVariantList& args, QGenericReturnArgument& result);
 };
 
 #define VICoreFrame VICoreFramework::getCoreInstance()

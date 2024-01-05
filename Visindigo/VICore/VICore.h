@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "VIAbstractBehavior.h"
-#include "VIBasicType.h"
 #include "VIBehavior.h"
 #include "VIColorTools.h"
 #include "VICommand.h"

@@ -1,0 +1,16 @@
+{
+    "Dependence":[
+        {
+            "uniqueName": "cn.yxgeneral.weavestudio.visindigo.core",
+            "version": "1.2.0",
+            "url": "weavestudio.yxgeneral.cn/visindigo/core"
+        },
+        {
+            "uniqueName": "cn.yxgeneral.weavestudio.visindigo.widgets",
+            "version": "1.2.0",
+            "url": "weavestudio.yxgeneral.cn/visindigo/widgets"
+        }
+    ],
+    "uniqueName": "cn.yxgeneral.weavestudio.visindigo.demo",
+    "version": "1.2.0"
+}
