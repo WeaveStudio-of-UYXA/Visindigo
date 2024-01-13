@@ -35,7 +35,7 @@ def recoverTemplate(path):
 def changeVersionInTemplateProject(path):
     global versionMajor, versionMinor, versionPatch, versionFullString, InstallPackName, VersionFolderName
     # get version from Visindigo/VICore/VIVersion.h, the macro is VI_VERSION_MAJOR and VI_VERSION_MINOR
-    versionFile = open(path+"/Visindigo/VICore/VIVersion.h", "r", encoding="utf-8")
+    versionFile = open(path+"/Visindigo/VICore/private/VIMacro.h", "r", encoding="utf-8")
     for line in versionFile.readlines():
         if "#define VI_VERSION_MAJOR" in line:
             versionMajor = int(line.split(" ")[-1])
@@ -45,7 +45,7 @@ def changeVersionInTemplateProject(path):
             versionPatch = int(line.split(" ")[-1])
     versionFile.close()
     if versionMajor == 0 and versionMinor == 0 and versionPatch == 0:
-        print("Can not get version from Visindigo/VICore/VIVersion.h")
+        print("Can not get version from Visindigo/VICore/private/VIMacro.h")
         return False
     try:
         versionString = str(versionMajor)+"."+str(versionMinor)
@@ -123,6 +123,8 @@ def copyFileinDllDebug(path):
     global VersionFolderName
     #copy all the files in x64/DllDebug into VersionFolderName/x64/Debug
     print("copy debug files")
+    if os.path.exists(path+"/"+VersionFolderName+"/x64/Debug"):
+        os.system("rd /s /q "+(path+"/"+VersionFolderName+"/x64/Debug").replace("/","\\"))
     if not os.path.exists(path+"/"+VersionFolderName+"/x64/Debug"):
         os.makedirs(path+"/"+VersionFolderName+"/x64/Debug")
     os.system("xcopy "+path.replace("/","\\")+"\\x64\\DllDebug "+(path+"/"+VersionFolderName+"/x64/Debug").replace("/","\\")+" /e /i /h")
@@ -132,6 +134,8 @@ def copyFileinDllRelease(path):
     global VersionFolderName
     #copy all the files in x64/DllRelease into VersionFolderName/x64/Release
     print("copy release files")
+    if os.path.exists(path+"/"+VersionFolderName+"/x64/Release"):
+        os.system("rd /s /q "+(path+"/"+VersionFolderName+"/x64/Release").replace("/","\\"))
     if not os.path.exists(path+"/"+VersionFolderName+"/x64/Release"):
         os.makedirs(path+"/"+VersionFolderName+"/x64/Release")
     os.system("xcopy "+path.replace("/","\\")+"\\x64\\DllRelease "+(path+"/"+VersionFolderName+"/x64/Release").replace("/","\\")+" /e /i /h")

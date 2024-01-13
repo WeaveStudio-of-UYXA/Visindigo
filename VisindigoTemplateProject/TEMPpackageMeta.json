@@ -1,0 +1,15 @@
+{
+    "Name": "$safeprojectname$",
+    "UniqueName": "unknown.domain.$safeprojectname$",
+    "Version": "1.0.0",
+    "Author": ["unknown"],
+    "Description": "VICore",
+    "License": "GPLv3",
+    "URL": "",
+    "EntryPoint": "",
+    "Dependence":[],
+    "Language": {
+        "Default": "zh_SC",
+        "Support": ["zh_SC", "en_US"]
+    }
+}

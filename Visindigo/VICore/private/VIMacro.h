@@ -3,6 +3,10 @@
 #include "VICompileMacro.h"
 #include "VisindigoNamespace.h"
 
+#define VI_VERSION_MAJOR 1
+#define VI_VERSION_MINOR 2
+#define VI_VERSION_PATCH 0
+
 #ifndef VI_MACRO
 #define VI_MACRO
 #define VI_NULLPTR Q_NULLPTR

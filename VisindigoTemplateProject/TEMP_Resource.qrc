@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/package">
+        <file>$safeprojectname$/resource/packageMeta.json</file>
+    </qresource>
+</RCC>

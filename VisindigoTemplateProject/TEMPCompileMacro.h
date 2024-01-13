@@ -8,11 +8,6 @@
  #error "This template is only for Visindigo 1.2.0, please use the correct version of Visindigo!"
 #endif
 
-// 请在此处定义您的项目的版本号，这样定义的版本号符合Visindigo项目规范，可以快速和Visindigo开发工具对接
-#define $safeprojectname$_VERSION_MAJOR 0
-#define $safeprojectname$_VERSION_MINOR 1
-#define $safeprojectname$_VERSION_PATCH 0
-
 #define $safeprojectname$_USER
 #ifdef $safeprojectname$_EVERYWHERE // 此宏在非Dll编译选项中项目内部定义，参见项目调试属性->C/C++ ->预定义宏
 	#undef $safeprojectname$_USER

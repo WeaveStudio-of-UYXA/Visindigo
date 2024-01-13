@@ -30,6 +30,8 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$\$safeprojectname$.h">TEMP.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$\cpp\$safeprojectname$Package.cpp">TEMPPackage.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$\private\$safeprojectname$CompileMacro.h">TEMPCompileMacro.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$\resource\packageMeta.json">TEMPpackageMeta.json</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$_Resource.qrc">TEMP_Resource.qrc</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

@@ -19,6 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <QtRcc Include="$safeprojectname$_Resource.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$safeprojectname$\resource\packageMeta.json" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="$safeprojectname$/cpp/$safeprojectname$Package.cpp" />
     <ClCompile Include="$safeprojectname$Main.cpp" />
   </ItemGroup>
