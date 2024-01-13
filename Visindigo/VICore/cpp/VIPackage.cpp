@@ -3,17 +3,43 @@
 
 def_init VIPackageMeta::VIPackageMeta() {
 	this->setPackageName("UnnamedVIPackage");
-	this->setPackageVersionMajor(0);
-	this->setPackageVersionMinor(0);
-	this->setPackageVersionPatch(0);
-	this->setAuthor(QStringList());
-	this->setDescription("");
-	this->setLicense("");
-	this->setURL("");
-	this->setOrganization("");
-	this->setOrganizationDomain("");
 	this->TranslationPackageHost = new VITranslationSubHost(this);
 	this->PackageConfig = new VIDocument::VIJSON(this);
+}
+bool VIPackageMeta::initFromMetaJson() {
+	QString metaJsonPath = getPackageInternalPath() + "/resource/packageMeta.json";
+	if (!QFile::exists(metaJsonPath)) {
+		VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix() + "Package meta file not found."));
+		return false;
+	}
+	VIDocument::VIJSON metaJson = VIDocument::VIJSON(this);
+	if (!metaJson.loadSettings(metaJsonPath)) {
+		VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix() + "Package meta file load failed."));
+		return false;
+	}
+	QString packageName = metaJson["Name"].toString();
+	if (packageName!=getPackageName()) {
+		VIConsole::printLine(VIConsole::inErrorStyle(getLogPrefix() + "Package name not match."));
+		return false;
+	}
+	QString packageUniqueName = metaJson["UniqueName"].toString();
+	if (packageUniqueName.isEmpty()) { return false; }
+	else { setUniqueName(packageUniqueName); }
+	VIVersion packageVersion = VIVersion::fromString(metaJson["Version"].toString());
+	setPackageVersion(VIVersion::fromString(metaJson["Version"].toString()));
+	setAuthor(metaJson["Author"].toStringList());
+	setDescription(metaJson["Description"].toString());
+	setLicense(metaJson["License"].toString());
+	setURL(metaJson["URL"].toString());
+	QStringList dependencyKeys = metaJson.getKeysOf("Dependence");
+	for (auto i : dependencyKeys) {
+		VIPackageUniqueName depName = metaJson["Dependence."+i+".UniqueName"].toString();
+		if (depName.isEmpty()) { continue; }
+		VIVersion depVersion = VIVersion::fromString(metaJson["Dependence." + i + ".Version"].toString());
+		VIPackageDependency dep(depName, depVersion);
+		PackageDependencies.insert(depName, dep);
+	}
+	return true;
 }
 QString VIPackageMeta::getPackageRootPath() {
 	if (PackageRootPath == "") {
@@ -41,15 +67,6 @@ void VIPackageMeta::addTranslatableObject(VITranslatableObject* obj) {
 void VIPackageMeta::setPackageName(const QString& name) {
 	PackageName = name;
 	setObjectName(name);
-}
-void VIPackageMeta::setPackageUniqueName(const VIPackageUniqueName& name) {
-	UniqueName = name;
-}
-QString VIPackageMeta::getPackageName() {
-	return PackageName;
-}
-VIPackageUniqueName VIPackageMeta::getPackageUniqueName() {
-	return UniqueName;
 }
 QVariant VIPackageMeta::getConfig(const QString& key) {
 	return PackageConfig->getValueOf(key);

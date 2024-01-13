@@ -5,8 +5,8 @@
         <file>Resource/JSON/defaultProjectSettings.json</file>
     </qresource>
     <qresource prefix="/package">
-        <file>VisindigoCore/i18n/zh_SC.vil</file>
-        <file>VisindigoCore/image/RNF.png</file>
-        <file>VisindigoWidgets/i18n/zh_SC.vil</file>
+        <file>VICore/resource/packageMeta.json</file>
+        <file>VICore/resource/i18n/zh_SC.vil</file>
+        <file>VIWidgets/resource/i18n/zh_SC.vil</file>
     </qresource>
 </RCC>

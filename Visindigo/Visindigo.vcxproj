@@ -242,12 +242,14 @@
     <ClCompile Include="VICore\cpp\VICommand.cpp" />
     <ClCompile Include="VICore\cpp\VIConsole.cpp" />
     <ClCompile Include="VICore\cpp\VICoreFramework.cpp" />
+    <ClCompile Include="VICore\cpp\VIFileTools.cpp" />
     <ClCompile Include="VICore\cpp\VIMathFunction.cpp" />
     <ClCompile Include="VICore\cpp\VIECMAScripts.cpp" />
     <ClCompile Include="VICore\cpp\VIException.cpp" />
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
     <ClCompile Include="VICore\cpp\VIObject.cpp" />
     <ClCompile Include="VICore\cpp\VIPackage.cpp" />
+    <ClCompile Include="VICore\cpp\VIPackageManager.cpp" />
     <ClCompile Include="VICore\cpp\VIPathInfo.cpp" />
     <ClCompile Include="VICore\private\VisindigoCorePack.cpp" />
     <ClCompile Include="VICore\VIDocument\VIJSON.cpp" />
@@ -309,6 +311,9 @@
     <QtMoc Include="VIWave\VISoundHost.h" />
     <QtMoc Include="VIGitTools\VIGitEnvironment.h" />
     <QtMoc Include="VICore\VIMathFunction.h" />
+    <QtMoc Include="VICore\VIPackageManager.h" />
+    <QtMoc Include="VICore\VIFileTools.h" />
+    <ClInclude Include="VICore\VILogger.h" />
     <ClInclude Include="VICore\VIProcess.h" />
     <QtMoc Include="VIGitTools\VIDifferenceAnalyzer.h" />
     <ClInclude Include="VIGitTools\VIGitTools.h" />
@@ -344,7 +349,7 @@
     <QtMoc Include="VICore\private\VIECMABuiltInModules.h" />
     <ClInclude Include="VICore\VIMath.h" />
     <ClInclude Include="VICore\VIException.h" />
-    <QtMoc Include="VICore\VIVersion.h" />
+    <ClInclude Include="VICore\VIVersion.h" />
     <ClInclude Include="VI2DScene\private\VI2DScene_m.h" />
     <QtMoc Include="VI2DScene\VI2DSceneWidget.h" />
     <ClInclude Include="VI2DScene\VI2DUnit.h" />

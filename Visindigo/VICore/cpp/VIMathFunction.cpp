@@ -1,6 +1,6 @@
 ﻿#include "../VIMathFunction.h"
 
-double VIMathFunctionTools::SimpsonD1(VIMathFunction* function, double infinitesimal) {
+double VIMathFunctionTools::simpsonD1(VIMathFunction* function, double infinitesimal) {
 	double rt1 = 0, rt2 = 0;
 	double length = function->xmax() - function->xmin();
 	rt1 = function->f(function->xmin()) * length;

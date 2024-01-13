@@ -136,6 +136,12 @@
     <ClCompile Include="VICore\cpp\VIMathFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VICore\cpp\VIPackageManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VICore\cpp\VIFileTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VICore\private\VIMacro.h">
@@ -216,6 +222,12 @@
     <ClInclude Include="VICore\VIMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VICore\VILogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VICore\VIVersion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VICore\VIAbstractBehavior.h">
@@ -234,9 +246,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VICore\VIPackage.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VICore\VIVersion.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VICore\VIObject.h">
@@ -372,6 +381,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VICore\VIMathFunction.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VICore\VIPackageManager.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VICore\VIFileTools.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

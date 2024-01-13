@@ -2,7 +2,7 @@
 #include <QtCore>
 #include "VICompileMacro.h"
 #include "VisindigoNamespace.h"
-//This file contains the core macro definitions of the CE library
+
 #ifndef VI_MACRO
 #define VI_MACRO
 #define VI_NULLPTR Q_NULLPTR
