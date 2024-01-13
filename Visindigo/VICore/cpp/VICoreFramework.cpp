@@ -3,11 +3,13 @@
 #include "../VIException.h"
 #include "../VIECMAScripts.h"
 #include "../private/VisindigoCorePack.h"
+#include "../private/VIAutoVersion.h"
 
 #pragma execution_character_set("utf-8")
 VICoreFramework* VICoreFramework::_instance = Q_NULLPTR;
 VIBehaviorHost* VICoreFramework::BehaviorHost = Q_NULLPTR;
 VITranslationHost* VICoreFramework::TranslationHost = Q_NULLPTR;
+VIPackageManager* VICoreFramework::PackageManager = Q_NULLPTR;
 
 def_init private_VICoreFramework::private_VICoreFramework(int& argc, char** argv) :QApplication(argc, argv) HalfVirtual;
 
@@ -32,6 +34,7 @@ def_init VICoreFramework::VICoreFramework(int& argc, char** argv) {
 	qRegisterMetaType<Visindigo::BehaviorState>("Visindigo::BehaviorState");
 	qRegisterMetaType<Visindigo::QuantifyTickType>("Visindigo::QuantifyTickType");
 	qRegisterMetaType<Visindigo::Language>("Visindigo::Language");
+	PackageManager = new VIPackageManager(this);
 #ifdef QT_DEBUG
 	PrivateCoreFramework->DebugModeCompilation = true;
 #else
@@ -46,18 +49,19 @@ void printWelcome() {
 	VIConsole::printLine("\033[38;2;115;43;235m ╰╯\t─┴─\t──╯\t─┴─\t╯╰╯\t└─╯\t─┴─\t╰─╯\t╰─╯\033[0m");
 	VIConsole::printLine("   \t   \t———\t  流\t   \t清  \t———\t   \t   \t");
 	VIConsole::printLine("\033[38;2;50;130;246m===================================================================\033[0m");
+	VIConsole::printLine("\033[38;2;234;54;128mVisindigo \033[0m" + VICoreFramework::getVisindigoVersion() + " \"" + QString(VI_VERSION_NICKNAME) + "\"" + 
 #ifdef QT_DEBUG
-	VIConsole::printLine("\033[38;2;234;54;128mVisindigo \033[0m" + VIVersion::getVisindigoVersion() + " \"" + VIVersion::getVisindigoNickname() + "\"" + " \033[38;2;255;253;85m[DEBUG compilation mode]\033[0m");
+	" \033[38;2;255;253;85m[DEBUG compilation mode]\033[0m");
 #else
-	VIConsole::printLine("\033[38;2;234;54;128mVisindigo \033[0m" + VIVersion::getVisindigoVersion() + " \"" + VIVersion::getVisindigoNickname() + "\"" + " \033[38;2;255;253;85m[RELEASE compilation mode]\033[0m");
+	" \033[38;2;255;253;85m[RELEASE compilation mode]\033[0m");
 #endif
-	VIConsole::printLine("\033[38;2;234;63;247mVersion Compilation Time \033[0m: \033[38;2;255;253;85m" + VIVersion::getVisindigoCompileTime() + " [" + VIMultiPlatform::getCPUBuildType() + "]\033[0m");
+	VIConsole::printLine("\033[38;2;234;63;247mVersion Compilation Time \033[0m: \033[38;2;255;253;85m" + QString(VI_VERSION_BUILD_DATE) + " " + QString(VI_VERSION_BUILD_TIME) + " [" + VIMultiPlatform::getCPUBuildType() + "]\033[0m");
 	VIConsole::printLine(VIConsole::inWarningStyle("Working Path: ") + VIConsole::inNoticeStyle(VIPathInfo::getWorkingPath()));
 	VIConsole::printLine("Hello, " + VIPathInfo::getUserName() + "! Welcome to Visindigo!");
 }
 
 void VICoreFramework::init() {
-	setObjectName(VIVersion::getVisindigoVersion());
+	setObjectName(getVisindigoVersion());
 	printWelcome();
 	VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Visindigo framework is initializing..."));
 	TranslationHost = new VITranslationHost(this);
@@ -80,10 +84,7 @@ VITranslationHost* VICoreFramework::getTranslationHostInstance() {
 }
 
 void VICoreFramework::start() {
-	QStringList packageList = PrivateCoreFramework->PackageMap.keys();
-	for (auto i = packageList.begin(); i != packageList.end(); i++) {
-		VIConsole::printLine(VIConsole::inNoticeStyle(getLogPrefix() + "Loaded package: " + PrivateCoreFramework->PackageMap[(*i)]->getPackageMeta()->getPackageName()));
-	}
+	PackageManager->startAll();
 	BehaviorHost->start();
 	PrivateCoreFramework->ReturnCode = qApp->exec();
 }
@@ -103,15 +104,7 @@ int VICoreFramework::getReturnCode() {
 }
 
 bool VICoreFramework::loadPackage(VIPackage* package) {
-	QString packageName = package->getPackageMeta()->getPackageName();
-	if (PrivateCoreFramework->PackageMap.contains(packageName)) {
-		VIConsole::printLine(VIConsole::inWarningStyle(getLogPrefix() + "Package name'" + packageName + "' already existed"));
-		return false;
-	}
-	PrivateCoreFramework->PackageMap[packageName] = package;
-	package->start(Visindigo::T20);
-	VIConsole::printLine(VIConsole::inSuccessStyle(getLogPrefix() + "Package '" + package->getPackageMeta()->getPackageName() + "' loaded"));
-	return true;
+	return PackageManager->loadPackage(package);
 }
 
 bool VICoreFramework::isDebugModeCompilation() {
@@ -151,10 +144,71 @@ Visindigo::Language VICoreFramework::getLanguageType() {
 	return LanguageType;
 }
 
-QList<VIPackage*> VICoreFramework::getPackageList() {
-	QList<VIPackage*> rtn = {};
-	for (auto i = PrivateCoreFramework->PackageMap.begin(); i != PrivateCoreFramework->PackageMap.end(); i++) {
-		rtn.append(i.value());
-	}
-	return rtn;
+QList<VIPackageUniqueName> VICoreFramework::getPackageNames() {
+	return PackageManager->getPackageNames();
 }
+
+VIPackage* VICoreFramework::getPackage(VIPackageUniqueName name) {
+	return PackageManager->getPackage(name);
+}
+const QString VICoreFramework::getVisindigoVersion() { 
+	return QString::number(VI_VERSION_MAJOR) + "." + QString::number(VI_VERSION_MINOR) + "." + QString::number(VI_VERSION_PATCH) + "." + QString::number(VI_VERSION_BUILD); 
+}
+
+bool VICoreFramework::softCall(const QString& uniqueName, const QString& methodName, QVariantList& args, QGenericReturnArgument& result){
+	//uniqueName should be package unique name, not imply yet
+	const QMetaObject* TargetMetaObject = metaObject();
+	int methodIndex = TargetMetaObject->indexOfMethod(QMetaObject::normalizedSignature(methodName.toStdString().c_str()));
+	if (methodIndex == -1) {
+		return false;
+	}
+	int variantCount = args.size();
+	if (variantCount > 10) {
+		VIConsole::printLine(VIConsole::inErrorStyle("The number of parameters exceeds the maximum limit of 10"));
+		return false;
+	}
+	for (int i = 0; i < 10 - variantCount; i++) {
+		args.append(QVariant());	
+	}
+	QList<QGenericArgument> argList = {};
+	for (int i = 0; i < 10; i++) {
+		argList.append(QGenericArgument(args[i].typeName(), args[i].data()));
+	}
+	bool rtn = false;
+	switch (variantCount) {
+	case 0:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result);
+		break;
+	case 1:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0]);
+		break;
+	case 2:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1]);
+		break;
+	case 3:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2]);
+		break;
+	case 4:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3]);
+		break;
+	case 5:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4]);
+		break;
+	case 6:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5]);
+		break;
+	case 7:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5], argList[6]);
+		break;
+	case 8:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5], argList[6], argList[7]);
+		break;
+	case 9:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5], argList[6], argList[7], argList[8]);
+		break;
+	case 10:
+		rtn = TargetMetaObject->method(methodIndex).invoke(this, Qt::DirectConnection, result, argList[0], argList[1], argList[2], argList[3], argList[4], argList[5], argList[6], argList[7], argList[8], argList[9]);
+		break;
+	}
+return rtn;
+};

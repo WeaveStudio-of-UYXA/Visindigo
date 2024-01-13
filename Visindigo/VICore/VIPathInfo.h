@@ -5,6 +5,7 @@
 class VIPublicAPI VIPathInfo {
 	VI_STATIC_CLASS(VIPathInfo);
 	_Public static QString getWorkingPath() { return QDir::currentPath(); }
+	_Public static QString getPackageRootPath() { return QCoreApplication::applicationDirPath() + "/package"; }
 	_Public static QString getProgramPath() { return QCoreApplication::applicationDirPath(); }
 	_Public static QString getHomePath() { return QDir::homePath(); }
 	_Public static QString getUserName() { return QDir::home().dirName(); }

@@ -2,7 +2,7 @@
 #include "../VIObject.h"
 #include "../VIConsole.h"
 
-typedef QHash<QString, QString> VITranslationsMap;
+using QStringHashMap = QHash<QString, QString> ;
 
 class VITranslationSubHost;
 namespace  VIDocument {
@@ -10,7 +10,7 @@ namespace  VIDocument {
 		Q_OBJECT;
 		VI_OBJECT;
 		friend class VITranslationSubHost;
-		_Private VITranslationsMap Translations;
+		_Private QStringHashMap Translations;
 		VI_Property(QString, FilePath);
 		VI_PrivateFlag(Loaded);
 		_Private def_init VITR();

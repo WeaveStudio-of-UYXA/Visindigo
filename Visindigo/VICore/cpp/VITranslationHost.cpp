@@ -92,10 +92,10 @@ bool VITranslationSubHost::loadVITRDocument(VIDocument::VITR** docPtr, Visindigo
 	QString fileName = LanguageFileNames[langName].FileName;
 	QString filePath;
 	if (!LanguageFileNames[langName].inRC) {
-		filePath = ParentPackage->getPackageRootPath() + "/i18n/" + fileName;
+		filePath = ParentPackage->getPackageRootPath() + "/resource/i18n/" + fileName;
 	}
 	else {
-		filePath = ParentPackage->getPackageInternalPath() + "/i18n/" + fileName;
+		filePath = ParentPackage->getPackageInternalPath() + "/resource/i18n/" + fileName;
 	}
 	consoleLog("Loading file in: '" + filePath + "'");
 	VIDocument::VITR* doc = new VIDocument::VITR();
@@ -119,13 +119,13 @@ VITranslationHost
 */
 
 def_init VITranslationHost::VITranslationHost(VISuper* parent) :VIObject(parent) {
-	setObjectName(VIVersion::getVisindigoVersion());
+	setObjectName(VICoreFramework::getVisindigoVersion());
 	consoleLog("Host instance created");
 }
 void VITranslationHost::changeLanguage(Visindigo::Language lang) {
-	QList<VIPackage* > packageList = VICoreFrame->getPackageList();
+	QList<VIPackageUniqueName> packageList = VICoreFrame->getPackageNames();
 	for (auto i = packageList.begin(); i != packageList.end(); i++) {
-		(*i)->getPackageMeta()->TranslationPackageHost->onGlobalLanguageChange(lang);
+		VICoreFrame->getPackage(*i)->getPackageMeta()->TranslationPackageHost->onGlobalLanguageChange(lang);
 	}
 }
 

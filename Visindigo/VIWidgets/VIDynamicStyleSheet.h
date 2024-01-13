@@ -31,9 +31,9 @@ class VIPublicAPI VIDynamicStyleSheetContainer  //此类一定不要继承自VIO
 	_Public void setMasterWidget(QWidget* masterWidget);
 };
 
-typedef QHash<QString, VIDynamicStyleSheetContainer> VIDynamicStyleSheetContainerHash;
-typedef QHash<QWidget*, VIDynamicStyleSheetContainerHash> VIDynamicStyleSheetContainerWidgetHash;
-typedef QHash<QWidget*, QString> VIDynamicStyleSheetNameHash;
+using VIDynamicStyleSheetContainerHash = QHash<QString, VIDynamicStyleSheetContainer>;
+using VIDynamicStyleSheetContainerWidgetHash = QHash<QWidget*, VIDynamicStyleSheetContainerHash>;
+using VIDynamicStyleSheetNameHash = QHash<QWidget*, QString>;
 class VIPublicAPI VIDynamicStyleSheetManager :public VIObject
 {
 	Q_OBJECT;

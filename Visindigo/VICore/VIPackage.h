@@ -5,11 +5,77 @@
 #include "VITranslationHost.h"
 #include "VIPathInfo.h"
 #include "VIDocument/VIJSON.h"
+#include "VIVersion.h"
 
+/*
+Visindigo Package File Structure (for user)
+
+All the Visindigo packages are stored in the package folder, no matter it is a soft package or
+built-in package. The folder for each built-in package will be created automatically when the
+package is loaded, and the name of the folder is the same as the package name. The folder for
+each soft package is created by the user, and the name of the folder is arbitrary.
+Visindigo uses the packageMeta.json file to describe the package meta information, so the folder name
+for soft package is not important, but the package name in the packageMeta.json file must be the same
+as the one that compiled into the package dll file. That is to say, when you create a soft package,
+you need to provide the packageMeta.json used during development as-is.
+- package
+	- egPackage
+		- resource
+		- packageMeta.json # (if dll package）
+		- 1.dll # (if dll package)
+		- 2.dll # (if dll package)
+		- ...
+
+Visindigo Package File Structure (for developer)
+- project
+	- egPackage
+		- resource
+			- packageMeta.json
+		- cpp
+			- cpp files
+		- h files
+*/
+
+/*
+Visindigo Package Meta Json Structure
+* NOTICE: EntryPoint is not required for built-in packages, but it is required for soft packages.
+* NOTICE: While the built-in packages can be loaded without 'Dependence' fieid, it is highly
+* recommended to provide the 'Dependence' field for built-in packages, so that the package
+* can check the version of the dependence packages.
+{
+	"Name": "VICore",
+	"UniqueName": "cn.yxgeneral.weavestudio.visindigo.core",
+	"Version": "1.2.0",
+	"Author": ["Tsing Yayin"],
+	"Description": "VICore",
+	"License": "GPLv3",
+	"URL": "",
+	"EntryPoint": "",
+	"Dependence":[],
+	"Language": {
+		"Default": "zh_SC",
+		"Support": ["zh_SC", "en_US"]
+	}
+}
+*/
 #define LOAD_PACKAGE(pack_name) VICoreFramework::getCoreInstance()->loadPackage(new pack_name());
+using VIPackageUniqueName = QString;
+
 class VIPackage;
 class VICoreFramework;
-class VIDllPackage;
+class VIDllPackageContainer;
+
+struct VIPackageDependency {
+	VIPackageUniqueName UniqueName;
+	VIVersion Version;
+	QString PackageUrl;
+	def_init VIPackageDependency(const VIPackageUniqueName& name, const VIVersion& version, const QString& url = "") {
+		UniqueName = name;
+		Version = version;
+		PackageUrl = url;
+	}
+};
+using VIPackageDependencyMap = QMap<VIPackageUniqueName, VIPackageDependency>;
 
 class VIPublicAPI VIPackageMeta :public VIObject
 {
@@ -20,26 +86,29 @@ class VIPublicAPI VIPackageMeta :public VIObject
 	friend class VIPackage;
 	friend class VITranslationSubHost;
 	friend class VITranslationHost;
-	friend class VIDllPackageManager;
-	_Private QString PackageName;
-	_Protected VIDocument::VIJSON* PackageConfig;
-	VI_ProtectedFlag(DllPackage);
-	VI_ProtectedProperty(QString, DllPackagePath);
-	VI_ProtectedProperty(unsigned int, PackageVersionMajor);
-	VI_ProtectedProperty(unsigned int, PackageVersionMinor);
-	VI_ProtectedProperty(unsigned int, PackageVersionPatch);
+	friend class VIDllPackageContainer;
+	_Protected QString PackageName;
+	_Protected QString PackageRootPath;
+	VI_ProtectedProperty(VIPackageUniqueName, UniqueName); // recommend org.orgname.project.package, eg. cn.yxgeneral.visindigo.core
+	VI_ProtectedProperty(VIVersion, PackageVersion);
 	VI_ProtectedProperty(QStringList, Author);
 	VI_ProtectedProperty(QString, Description);
 	VI_ProtectedProperty(QString, License);
 	VI_ProtectedProperty(QString, URL);
-	VI_ProtectedProperty(QString, Organization);
-	VI_ProtectedProperty(QString, OrganizationDomain);
+	_Protected VIPackageDependencyMap PackageDependencies;
+	_Protected VIDocument::VIJSON* PackageConfig;
+	_Protected VIDocument::VIJSON* PackageMeta;
 	_Protected VITranslationSubHost* TranslationPackageHost;
-	_Public def_init VIPackageMeta(const QString& packageRootPath = "");
-	_Public inline QString getPackageVersion() {
-		return QString("%1.%2.%3").arg(PackageVersionMajor).arg(PackageVersionMinor).arg(PackageVersionPatch);
+	_Public def_init VIPackageMeta();
+	_Public bool initFromMetaJson();
+	_Public void setPackageName(const QString& name);
+	_Public inline QString getPackageName() {
+		return PackageName;
 	}
 	_Public QString getPackageRootPath();
+	_Public void call(const QString& funcName) {
+		QMetaObject::invokeMethod(this, funcName.toLocal8Bit().data(), Qt::QueuedConnection);
+	}
 	_Public inline QString getPackageInternalPath() {
 		return ":/package/" + PackageName;
 	}
@@ -48,8 +117,6 @@ class VIPublicAPI VIPackageMeta :public VIObject
 	_Public void setDefaultLanguage(Visindigo::Language langType);
 	_Public void initTranslation();
 	_Public void addTranslatableObject(VITranslatableObject* obj);
-	_Public void setPackageName(const QString& name);
-	_Public QString getPackageName();
 	_Public QVariant getConfig(const QString& key);
 	_Public void setConfig(const QString& key, const QVariant& value);
 	_Public void saveConfig();
@@ -63,34 +130,45 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	VI_OBJECT;
 	VI_MUST_INHERIT(VIPackage);
 	friend class VIFramework;
-
+	friend class VIDllPackageContainer;
+	_Private QVector<const QMetaObject*> PackageMember;
 	_Protected VIPackageMeta* PackageMeta;
 	_Public def_init VIPackage();
 	_Public VIPackageMeta* getPackageMeta();
 	_Public void setPackageMeta(VIPackageMeta* info);
+	_Public virtual void onEnable() HalfVirtual;
+	_Public virtual void registerMetaInfo() HalfVirtual;
+	_Public virtual void onDisable() HalfVirtual;
+	_Public virtual void onReload() HalfVirtual;
 	_Public virtual void onStart() HalfVirtual;
 	_Public virtual void onStop() HalfVirtual;
 	_Public virtual void onTick() HalfVirtual;
 	_Public virtual void onEvent(QEvent* e) HalfVirtual;
+	_Protected void addMember(const QMetaObject& meta);
 	_Public def_del ~VIPackage();
 };
 
-typedef VIPackage* (*__VisindigoDllMain)(QString);
+using __VisindigoDllMain= VIPackage* (*)(void);
 
-class VIPublicAPI VIDllPackage {
+#define VisindigoDllEntryPoint VisindigoDllMain
+#define VisindigoDllEntryPointName "VisindigoDllMain"
+#define VisindigoPlugin(PackageClassName) VIPackage* VisindigoDllEntryPoint(){ return new PackageClassName();}
+
+class VIPublicAPI VIDllPackageContainer {
 	QString PackageName;
 	QString DllPath;
 	QLibrary* Dll = VI_NULL;
 	VIPackage* Package = VI_NULL;
-	_Public def_init VIDllPackage(const QString& dllpath);
+	_Public def_init VIDllPackageContainer(const QString& dllpath);
 	_Public Visindigo::LoadState load();
-	_Public def_del ~VIDllPackage();
+	_Public def_del ~VIDllPackageContainer();
 };
 
-class VIPublicAPI VIDllPackageManager :public VIObject
-{
-	Q_OBJECT;
-	VI_OBJECT;
-	_Private QList<VIDllPackage*> DllPackageList;
-	_Private QString PackageRootPath;
-};
+/*
+Visindigo Dll Package 
+	- PackageFolder
+		- package.json # this file describe the package info, include entry dll, package dependencies, etc.
+		- 1.dll
+		- 2.dll
+		- ...
+*/

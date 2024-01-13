@@ -1,0 +1,15 @@
+{
+    "Name": "VICore",
+    "UniqueName": "cn.yxgeneral.weavestudio.visindigo.core",
+    "Version": "1.2.0",
+    "Author": ["Tsing Yayin"],
+    "Description": "VICore",
+    "License": "GPLv3",
+    "URL": "https://www.github.com/weavestudio-of-uyxa/visindigo",
+    "EntryPoint": "",
+    "Dependence":[],
+    "Language": {
+        "Default": "zh_SC",
+        "Support": ["zh_SC", "en_US"]
+    }
+}

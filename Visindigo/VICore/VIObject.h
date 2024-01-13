@@ -18,14 +18,12 @@ class VIPublicAPI VIAbstractObject
 	_Public virtual const void consoleLogPure(QString log) PureVirtual;
 	_Public virtual void throwThis() PureVirtual;
 };
-typedef VIAbstractObject VIBaseObject;
-typedef QObject VISuper;
+using VIBaseObject = VIAbstractObject;
+using VISuper = QObject;
+
 class VIPublicAPI VIObject :public VISuper, VIBaseObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Public def_init VIObject(VISuper* parent = VI_NULLPTR) :VISuper(parent) {};
 };
-
-namespace Visindigo {
-}

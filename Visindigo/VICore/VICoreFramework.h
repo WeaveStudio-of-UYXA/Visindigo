@@ -7,13 +7,14 @@
 #include "VIPathInfo.h"
 #include "VIMultiPlatform.h"
 #include "VITranslationHost.h"
+#include "VIPackageManager.h"
 
 class VIPublicAPI VICoreFramework;
 class VIPublicAPI private_VICoreFramework :public QApplication
 {
 	Q_OBJECT;
 	friend class VICoreFramework;
-	_Protected QMap<QString, VIPackage*> PackageMap = {};
+	_Protected QMap<VIPackageUniqueName, VIPackage*> PackageMap = {};
 	_Public int ReturnCode = 0;
 	VI_Property(bool, DebugModeCompilation);
 	VI_Property(bool, DebugModeRuntime);
@@ -30,6 +31,7 @@ class VIPublicAPI VICoreFramework :public VIObject
 	_Private static VICoreFramework* _instance;	
 	_Private static VIBehaviorHost* BehaviorHost;
 	_Private static VITranslationHost* TranslationHost;
+	_Private static VIPackageManager* PackageManager;
 	_Protected private_VICoreFramework* PrivateCoreFramework;
 	_Private Visindigo::Language LanguageType;
 	_Public static VIBehaviorHost* getBehaviorHostInstance();
@@ -47,7 +49,10 @@ class VIPublicAPI VICoreFramework :public VIObject
 	_Public bool execCommand(QString);
 	_Public void setLanguageType(Visindigo::Language);
 	_Public Visindigo::Language getLanguageType();
-	_Public QList<VIPackage*> getPackageList();
+	_Public QList<VIPackageUniqueName> getPackageNames();
+	_Public VIPackage* getPackage(VIPackageUniqueName name);
+	_Public bool softCall(const QString& uniqueName, const QString& methodName, QVariantList& args, QGenericReturnArgument& result);
+	_Public static const QString getVisindigoVersion();
 };
 
 #define VICoreFrame VICoreFramework::getCoreInstance()

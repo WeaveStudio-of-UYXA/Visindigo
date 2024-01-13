@@ -8,6 +8,7 @@ namespace VIMath {
 	int permutation(int n, int m);
 }
 
+
 class VIPublicAPI VICommonMapping {
 	VI_STATIC_CLASS(VICommonMapping);
 	_Public static double sin_0_1(double percent) {

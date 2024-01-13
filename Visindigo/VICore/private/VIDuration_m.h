@@ -2,13 +2,13 @@
 #include "VIMacro.h"
 #include <chrono>
 #include <limits>
-typedef double VISecond;
-typedef double VIMilliSecond;
-typedef long long VIMicroSecond;
-typedef long long VINanoSecond;
+using VISecond = double; 
+using VIMilliSecond = double;
+using VIMicroSecond = long long;
+using VINanoSecond = long long;
 
-typedef std::chrono::system_clock::time_point STD_TimePoint;
-typedef STD_TimePoint VITimePoint;
+using STD_TimePoint = std::chrono::system_clock::time_point;
+using VITimePoint = STD_TimePoint;
 #define STD_clock_now std::chrono::system_clock::now
 #define STD_Nano_duration(current, before) (float)(std::chrono::duration_cast<std::chrono::nanoseconds>(current.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::nanoseconds>(before.time_since_epoch()).count())
 #define STD_Milli_duration(current, before) (float)(std::chrono::duration_cast<std::chrono::milliseconds>(current.time_since_epoch()).count() - std::chrono::duration_cast<std::chrono::milliseconds>(before.time_since_epoch()).count())

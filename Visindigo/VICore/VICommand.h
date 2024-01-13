@@ -2,7 +2,7 @@
 #include "VIObject.h"
 #include "VIConsole.h"
 
-typedef QMap<QString, QString> QStringMap;
+using QStringMap = QMap<QString, QString> ;
 class VIPublicAPI VICommandHost;
 class VIPublicAPI VICommandHandler {
 	friend class VICommandHost;

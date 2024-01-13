@@ -2,7 +2,7 @@
 #include <QtCore>
 #include "VICompileMacro.h"
 #include "VisindigoNamespace.h"
-//This file contains the core macro definitions of the CE library
+
 #ifndef VI_MACRO
 #define VI_MACRO
 #define VI_NULLPTR Q_NULLPTR
@@ -36,6 +36,8 @@
 #define def_move
 #define PASS
 #define VI_NO_PARENT
+
+#define VI_MarkMember(className) markMember(className::staticMetaObject)
 
 #define VI_MUST_INHERIT(name) public: virtual void __INHERIT_FLAG_##name__() PureVirtual;
 #define VI_HAS_INHERIT(name) public: virtual void __INHERIT_FLAG_##name__() HalfVirtual;
