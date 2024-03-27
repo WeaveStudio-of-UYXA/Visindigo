@@ -22,7 +22,7 @@ namespace VIDocument {
 		}
 		DefaultSettingsPath = path;
 		QTextStream data(&file);
-		data.setCodec("UTF-8");
+		data.setEncoding(QStringConverter::Utf8);
 		this->DefaultSettings = QJsonDocument::fromJson(data.readAll().toUtf8()).object();
 		file.close();
 	}

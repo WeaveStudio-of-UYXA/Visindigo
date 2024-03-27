@@ -25,7 +25,7 @@ class VIPublicAPI VIAbstractRatioWidget :public VIWidget
 	_Public virtual void mousePressEvent(QMouseEvent* event) override final;
 	_Public virtual void mouseDoubleClickEvent(QMouseEvent* event) override final;
 	_Public virtual void leaveEvent(QEvent* event) override final;
-	_Public virtual void enterEvent(QEvent* event) override final;
+	_Public virtual void enterEvent(QEnterEvent* event) override final;
 	_Protected void unSelect();
 	_Public void select();
 	_Public void click();

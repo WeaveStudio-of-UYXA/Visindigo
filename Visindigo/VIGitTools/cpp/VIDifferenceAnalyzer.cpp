@@ -13,8 +13,8 @@ void VIDifferenceAnalyzer::analyze(const QString& previous, const QString& curre
 	}
 	QTextStream previousStream(&previousFile);
 	QTextStream currentStream(&currentFile);
-	previousStream.setCodec("UTF-8");
-	currentStream.setCodec("UTF-8");
+	previousStream.setEncoding(QStringConverter::Utf8);
+	currentStream.setEncoding(QStringConverter::Utf8);
 	while (!previousStream.atEnd()) {
 		data->PreviousDocument.append(previousStream.readLine());
 	}

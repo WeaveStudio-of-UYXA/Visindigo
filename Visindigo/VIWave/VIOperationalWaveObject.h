@@ -163,7 +163,7 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 	}
 	_Public def_init VIOperationalWaveObject(QString filePath) {
 		FilePath = filePath;
-		decoder.setSourceFilename(filePath);
+		decoder.setSource(filePath);
 		connect(&decoder, &QAudioDecoder::bufferReady, this, &VIOperationalWaveObject::_onBufferReady);
 		connect(&decoder, &QAudioDecoder::finished, this, &VIOperationalWaveObject::onFinished);
 		Volume = 1.0;
@@ -171,7 +171,7 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 	_Public void load(QString filePath = "") {
 		if (filePath != "") {
 			FilePath = filePath;
-			decoder.setSourceFilename(filePath);
+			decoder.setSource(filePath);
 		}
 		decoder.start();
 	}
@@ -182,21 +182,21 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 	_Private void _onBufferReady() {
 		AudioFormat = decoder.audioFormat();
 		QAudioBuffer buffer = decoder.read();
-		RawData.setSampleSize(AudioFormat.sampleSize());
-		switch (AudioFormat.sampleSize()) {
+		RawData.setSampleSize(AudioFormat.bytesPerSample()*8);
+		switch (AudioFormat.bytesPerSample() * 8) {
 		case 8:
 			for (int i = 0; i < buffer.sampleCount(); i++) {
-				RawData.append(((qint8*)buffer.constData())[i]);
+				RawData.append((buffer.constData<quint8>())[i]);
 			}
 			break;
 		case 16:
 			for (int i = 0; i < buffer.sampleCount(); i++) {
-				RawData.append(((qint16*)buffer.constData())[i]);
+				RawData.append((buffer.constData<quint16>())[i]);
 			}
 			break;
 		case 32:
 			for (int i = 0; i < buffer.sampleCount(); i++) {
-				RawData.append(((qint32*)buffer.constData())[i]);
+				RawData.append((buffer.constData<quint32>())[i]);
 			}
 			break;
 		}
@@ -276,22 +276,22 @@ class VIPublicAPI VIOperationalWaveObject :public VIObject
 		file.open(QIODevice::WriteOnly);
 		VIWaveHeadData head;
 		head.ChunkID = 0x46464952; // "RIFF"
-		head.ChunkSize = 36 + RawData.size() * AudioFormat.sampleSize() / 8;
+		head.ChunkSize = 36 + RawData.size() * AudioFormat.bytesPerSample();
 		head.Format = 0x45564157; // "WAVE"
 		head.SubChunk1ID = 0x20746d66; // "fmt "
 		head.SubChunk1Size = 16;
 		head.AudioFormat = 1;
 		head.NumChannels = AudioFormat.channelCount();
 		head.SampleRate = AudioFormat.sampleRate();
-		head.ByteRate = AudioFormat.sampleRate() * AudioFormat.channelCount() * AudioFormat.sampleSize() / 8;
-		head.BlockAlign = AudioFormat.channelCount() * AudioFormat.sampleSize() / 8;
-		head.BitsPerSample = AudioFormat.sampleSize();
+		head.ByteRate = AudioFormat.sampleRate() * AudioFormat.channelCount() * AudioFormat.bytesPerSample();
+		head.BlockAlign = AudioFormat.channelCount() * AudioFormat.bytesPerSample();
+		head.BitsPerSample = AudioFormat.bytesPerSample() * 8;
 		head.SubChunk2ID = 0x61746164; // "data"
-		head.SubChunk2Size = RawData.size() * AudioFormat.sampleSize() / 8;
+		head.SubChunk2Size = RawData.size() * AudioFormat.bytesPerSample();
 		file.write((char*)&head, sizeof(head));
 		for (int i = 0; i < RawData.size(); i++) {
 			qint64 data = RawData[i] * Volume;
-			switch (AudioFormat.sampleSize()) {
+			switch (AudioFormat.bytesPerSample()*8) {
 			case 8:
 				file.write((char*)&data, sizeof(qint8));
 				break;

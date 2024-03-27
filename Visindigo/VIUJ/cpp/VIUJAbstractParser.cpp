@@ -22,7 +22,7 @@ QWidget* VIUJAbstractParser::preOnJson(const QJsonObject& jsonObj)
 				cuWidget->setObjectName("Root");
 			}
 			else {
-				cuWidget->setObjectName(QString(CurrentWidgetStack.top()->children().length()));
+				cuWidget->setObjectName(QString::number(CurrentWidgetStack.top()->children().length()));
 			}
 		}
 
@@ -110,7 +110,7 @@ QWidget* VIUJParserHost::parse(const QString& fileName) {
 		return nullptr;
 	}
 	QTextStream in(&file);
-	in.setCodec("utf-8");
+	in.setEncoding(QStringConverter::Utf8);
 	QString jsonStr = in.readAll();
 	file.close();
 	QJsonParseError jsonError;

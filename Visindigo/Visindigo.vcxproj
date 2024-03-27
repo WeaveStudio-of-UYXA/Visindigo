@@ -49,22 +49,22 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'" Label="QtSettings">
-    <QtInstall>5.15.2</QtInstall>
+    <QtInstall>6.5.2</QtInstall>
     <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="QtSettings">
-    <QtInstall>5.15.2</QtInstall>
+    <QtInstall>6.5.2</QtInstall>
     <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>5.15.2</QtInstall>
+    <QtInstall>6.5.2</QtInstall>
     <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'" Label="QtSettings">
-    <QtInstall>5.15.2</QtInstall>
+    <QtInstall>6.5.2</QtInstall>
     <QtModules>core;network;gui;testlib;multimedia;widgets;qml;multimediawidgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
@@ -107,7 +107,7 @@
       <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
     </PreBuildEvent>
     <ClCompile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>VI_DEVELOPER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
@@ -122,7 +122,7 @@
       <Command>python "$(SolutionDir)PyTools\AutoVersionFromGIT\AutoVersionFromGIT.py"</Command>
     </PreBuildEvent>
     <ClCompile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>VI_EVERYWHERE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
@@ -146,7 +146,7 @@
     <ClCompile>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <PreprocessorDefinitions>VI_EVERYWHERE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">
@@ -165,7 +165,7 @@
     <ClCompile>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <PreprocessorDefinitions>VI_DEVELOPER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'" Label="Configuration">
@@ -294,7 +294,6 @@
     <QtMoc Include="VIWidgets\VIMultiButton.h" />
     <QtMoc Include="VIWidgets\VILoadingWidget.h" />
     <QtMoc Include="VIARCP\VIARCP.h" />
-    <ClInclude Include="TestCode\TerrainGenerator.h" />
     <ClInclude Include="VIARCP\VIARCPBaseChunk.h" />
     <ClInclude Include="VIARCP\VIARCPDataObject.h" />
     <ClInclude Include="VIARCP\VIARCPEnum.h" />

@@ -13,7 +13,7 @@ bool VITR::load() {
 	QString LanguageName = FilePath.section("/", -1, -1).section(".", 0, -1);
 	Translations.clear();
 	QTextStream in(&file);
-	in.setCodec("utf-8");
+	in.setEncoding(QStringConverter::Utf8);
 	QString line;
 	while (!in.atEnd()) {
 		line = in.readLine();

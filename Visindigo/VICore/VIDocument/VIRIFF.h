@@ -132,11 +132,11 @@ namespace VIDocument {
 					str += (char)(FormType >> (i * 8));
 				}
 				if (level == 0) {
-					qDebug().noquote() << QString("%1ListType: %2").arg(QString(level, 'data')).arg(str);
+					qDebug().noquote() << QString("%1ListType: %2").arg(QString::number(level)+"data").arg(str);
 					VIConsole::printLine(VIConsole::inSuccessStyle("%1SubChunks:").arg(QString(level, '\t')));
 				}
 				else {
-					qDebug().noquote() << QString("%1├ListType: %2").arg(QString(level, '\t')).arg(str);
+					qDebug().noquote() << QString("%1├ListType: %2").arg(QString::number(level)+ "\t").arg(str);
 					VIConsole::printLine(VIConsole::inSuccessStyle("%1├SubChunks:").arg(QString(level, '\t')));
 				}
 				for (int i = 0; i < SubChunks.size(); i++) {

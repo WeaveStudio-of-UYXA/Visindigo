@@ -73,7 +73,7 @@ bool VIPackageManager::loadPluginPackages(QString rootPath) {
 	for (auto i : dependenceCount.keys()) {
 		dependenceCountVector.push_back(QPair<VIPackageUniqueName, quint32>(i, dependenceCount[i]));
 	}
-	qSort(dependenceCountVector.begin(), dependenceCountVector.end(), 
+	std::sort(dependenceCountVector.begin(), dependenceCountVector.end(), 
 		[](QPair<VIPackageUniqueName, quint32> a, QPair<VIPackageUniqueName, quint32> b) {
 			return a.second > b.second;
 		});

@@ -6,7 +6,7 @@ def_init VIARCPSocket::VIARCPSocket(QTcpSocket* s) {
 QString VIARCPSocket::getRandomString(int length) {
 	QString str;
 	for (int i = 0; i < length; i++) {
-		str.append(QChar('A' + qrand() % 26));
+		str.append(QChar('A' + QRandomGenerator::global()->generate() % 26));
 	}
 	return str;
 }

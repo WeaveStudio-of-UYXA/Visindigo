@@ -241,7 +241,7 @@ def_init VICodeEdit::VICodeEdit(QWidget* parent) :VIWidget(parent) {
 	//关闭自动换行
 	CodeEdit->setLineWrapMode(QTextEdit::NoWrap);
 	CodeEdit->setFont(font);
-	CodeEdit->setTabStopWidth(4 * QFontMetrics(font).width(' '));
+	CodeEdit->setTabStopDistance(4 * QFontMetrics(font).lineWidth());
 	CodeEdit->setAcceptRichText(false);
 	CodeEdit->installEventFilter(this);
 	connect(CodeEdit->document(), &QTextDocument::blockCountChanged, this, &VICodeEdit::updateLineNumber);
@@ -298,7 +298,7 @@ bool VICodeEdit::openFile(const QString& filePath) {
 		return false;
 	}
 	QTextStream in(&file);
-	in.setCodec("UTF-8");
+	in.setEncoding(QStringConverter::Utf8);
 	CodeEdit->setText(in.readAll());
 	file.close();
 	FilePath = filePath;
@@ -321,7 +321,7 @@ bool VICodeEdit::saveFile(const QString& filePath) {
 				return false;
 			}
 			QTextStream out(&file);
-			out.setCodec("UTF-8");
+			out.setEncoding(QStringConverter::Utf8);
 			out << CodeEdit->toPlainText();
 			file.close();
 			needSave = false;
@@ -334,7 +334,7 @@ bool VICodeEdit::saveFile(const QString& filePath) {
 			return false;
 		}
 		QTextStream out(&file);
-		out.setCodec("UTF-8");
+		out.setEncoding(QStringConverter::Utf8);
 		out << CodeEdit->toPlainText();
 		file.close();
 		FilePath = filePath;
@@ -414,7 +414,7 @@ void VICodeEdit::showFindAndReplaceWidget() {
 void VICodeEdit::setFont(const QFont& font) {
 	LineNumberArea->setFont(font);
 	CodeEdit->setFont(font);
-	CodeEdit->setTabStopWidth(4 * QFontMetrics(CodeEdit->font()).width(' '));
+	CodeEdit->setTabStopDistance(4 * QFontMetrics(font).lineWidth());
 }
 
 void VICodeEdit::setCodeSyntaxHighlighter(QSyntaxHighlighter* highlighter) {

@@ -29,7 +29,7 @@ void VIAbstractRatioWidget::leaveEvent(QEvent* event) {
 	}
 	emit leaved();
 }
-void VIAbstractRatioWidget::enterEvent(QEvent* event) {
+void VIAbstractRatioWidget::enterEvent(QEnterEvent* event) {
 	if (isSelected) {
 		applyVIDSS("selected");
 	}

@@ -144,7 +144,7 @@ QStringList VICommandHost::blankSplitter(const QString& str) {
 	QString current = "";
 	bool inString = false;
 	for (int i = 0; i < str.size(); i++) {
-		if ((str[i] == ' ' || str[i] == "\t") && !inString) {
+		if ((str[i] == ' ' || str[i] == '\t') && !inString) {
 			if (current != "") {
 				result.append(current);
 				current = "";

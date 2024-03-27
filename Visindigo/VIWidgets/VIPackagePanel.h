@@ -35,7 +35,7 @@ class VIPublicAPI VIPackagePanel :public VIWidget
 		VisindigoWidgets::PackageMeta::getInstance()->addTranslatableObject(this);
 		onTranslating();
 	}
-	_Public virtual void enterEvent(QEvent* event) override {
+	_Public virtual void enterEvent(QEnterEvent* event) override {
 		License->show();
 		URL->show();
 	}
