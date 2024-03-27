@@ -247,7 +247,6 @@
     <ClCompile Include="VICore\cpp\VIECMAScripts.cpp" />
     <ClCompile Include="VICore\cpp\VIException.cpp" />
     <ClCompile Include="VICore\cpp\VIMath.cpp" />
-    <ClCompile Include="VICore\cpp\VIObject.cpp" />
     <ClCompile Include="VICore\cpp\VIPackage.cpp" />
     <ClCompile Include="VICore\cpp\VIPackageManager.cpp" />
     <ClCompile Include="VICore\cpp\VIPathInfo.cpp" />
@@ -295,6 +294,7 @@
     <QtMoc Include="VIWidgets\VIMultiButton.h" />
     <QtMoc Include="VIWidgets\VILoadingWidget.h" />
     <QtMoc Include="VIARCP\VIARCP.h" />
+    <ClInclude Include="TestCode\TerrainGenerator.h" />
     <ClInclude Include="VIARCP\VIARCPBaseChunk.h" />
     <ClInclude Include="VIARCP\VIARCPDataObject.h" />
     <ClInclude Include="VIARCP\VIARCPEnum.h" />
@@ -307,7 +307,7 @@
     <QtMoc Include="VIARCP\VIARCPTypeManager.h" />
     <ClInclude Include="VICore\private\VisindigoNamespace.h" />
     <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h" />
-    <QtMoc Include="VICore\VIRIFFObject.h" />
+    <QtMoc Include="VICore\VIDocument\VIRIFF.h" />
     <QtMoc Include="VIWave\VISoundHost.h" />
     <QtMoc Include="VIGitTools\VIGitEnvironment.h" />
     <QtMoc Include="VICore\VIMathFunction.h" />
@@ -353,13 +353,11 @@
     <ClInclude Include="VI2DScene\private\VI2DScene_m.h" />
     <QtMoc Include="VI2DScene\VI2DSceneWidget.h" />
     <ClInclude Include="VI2DScene\VI2DUnit.h" />
-    <ClInclude Include="VICore\private\VIAbstractBehavior_m.h" />
     <ClInclude Include="VICore\private\VIAutoVersion.h" />
     <ClInclude Include="VICore\private\VICompileMacro.h" />
     <ClInclude Include="VICore\private\VIDuration_m.h" />
     <ClInclude Include="VICore\private\VIMacro.h" />
     <ClInclude Include="VICore\VIConsole.h" />
-    <ClInclude Include="VICore\private\VIObject_m.h" />
     <ClInclude Include="VICore\VICore.h" />
     <QtMoc Include="VICore\VIPackage.h" />
     <QtMoc Include="VICore\VICoreFramework.h" />

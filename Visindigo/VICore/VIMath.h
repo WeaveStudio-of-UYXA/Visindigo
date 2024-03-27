@@ -2,6 +2,14 @@
 #include <QtCore>
 #include "private/VIMacro.h"
 
+using qbyte = quint8;
+using qword = quint16;
+using q2byte = quint16;
+using qdword = quint32;
+using q4byte = quint32;
+using qtword = quint64;
+using q8byte = quint64;
+
 namespace VIMath {
 	const float PI = 3.141592653;
 	int combination(int n, int m);
@@ -49,4 +57,8 @@ class VIPublicAPI VICommonMapping {
 			return percent;
 		}
 	}
+};
+
+class VIInteger {
+	QVector<qbyte> data;
 };

@@ -12,7 +12,7 @@ namespace VIDocument {
 		_Private QJsonObject DefaultSettings;
 		VI_Flag(SaveOnSet);
 		_Public def_init VIJSON(QObject* parent = VI_NULLPTR);
-		_Public void setDefaultFromStr(const QString& str);
+		_Public void loadDefaultFromStr(const QString& str);
 		_Public void loadDefault(const QString& path);
 		_Public bool loadSettings(const QString& path, bool autoCreate = false);
 		_Public bool loadSettings(const QJsonObject& obj, const QString& path = "");

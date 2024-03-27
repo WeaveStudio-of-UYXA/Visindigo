@@ -1,4 +1,4 @@
-﻿#pragma once
+﻿#pragma once	
 #include "private/VIECMABuiltInModules.h"
 #include "VICommand.h"
 
@@ -14,6 +14,7 @@ class VIPublicAPI private_VIECMAScripts :public VIObject {
 	VI_OBJECT;
 	friend class VIECMAScripts;
 	_Signal void finished();
+	_Signal void sideLoaded();
 	_Signal void boot(QString fileName, QString entry = "main");
 	VI_ProtectedProperty(QJSEngine*, engine);
 	VI_ProtectedProperty(QList<VIECMABuiltInModule>, BuiltInModules);
@@ -34,6 +35,7 @@ class VIPublicAPI VIECMAScripts :public VIObject {
 	Q_OBJECT;
 	VI_OBJECT;
 	_Signal void finished();
+	_Signal void sideLoaded();
 	VI_Property(QThread*, Thread);
 	VI_PrivateProperty(QWaitCondition*, ThreadWaitCondition);
 	VI_PrivateProperty(QMutex*, ThreadMutex);
@@ -44,6 +46,7 @@ class VIPublicAPI VIECMAScripts :public VIObject {
 	VI_Flag(OnRunning);
 	VI_Flag(SideLoaded);
 	_Public def_init VIECMAScripts();
+	_Public def_del ~VIECMAScripts();
 	_Public void boot(const QString& fileName, const QString& entry = "main");
 	_Public void threadBoot(const QString& fileName, const QString& entry = "main");
 	_Private void boot(QString fileName, bool inThread = false, QString entry = "main");
@@ -54,6 +57,4 @@ class VIPublicAPI VIECMAScripts :public VIObject {
 	_Public void unload();
 	_Public QJSValue getGlobalObject(QString name);
 	_Private void onExit();
-
-	_Public def_del ~VIECMAScripts();
 };

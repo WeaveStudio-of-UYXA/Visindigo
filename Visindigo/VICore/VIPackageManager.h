@@ -15,9 +15,10 @@ class VIPublicAPI VIPackageManager :public VIObject
 	_Public bool loadPluginPackages(QString rootPath);
 	_Protected bool startAll();
 	_Protected bool disableAll();
-	_Protected bool reloadAll();
-	_Protected bool disablePackage(VIPackage* package);
-	_Protected bool enablePackage(VIPackage* package);
+	_Protected bool reloadAll(); // just 'soft' reload, such as reload package config, clear temp data, etc.
+	_Protected bool reInitAll(); // 'hard' reload, means release the dll then reload it, useful for debug. Just for soft package.
+	_Protected bool disablePackage(VIPackageUniqueName packageName);
+	_Protected bool enablePackage(VIPackageUniqueName package);
 	_Public VIPackage* getPackage(VIPackageUniqueName name);
 	_Public QList<VIPackageUniqueName> getPackageNames();
 	_Public 

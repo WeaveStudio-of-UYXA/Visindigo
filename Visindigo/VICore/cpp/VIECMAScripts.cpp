@@ -35,6 +35,7 @@ void private_VIECMAScripts::sideLoad(const QString& fileName) {
 	for (auto i = BuiltInModules.begin(); i != BuiltInModules.end(); i++) {
 		registerBuiltInModule(engine, *i);
 	}
+	emit sideLoaded();
 }
 
 void private_VIECMAScripts::onBoot(const QString& fileName, const QString& entry) {
@@ -66,7 +67,8 @@ void private_VIECMAScripts::onBoot(const QString& fileName, const QString& entry
 		consoleLog(VIConsole::inErrorStyle(MainFunction.toString()));
 		consoleLog(VIConsole::inErrorStyle("The inability to find the entry function is usually due to the entry function not being defined, or the entry function being defined incorrectly."));
 	}
-	QJSValue result = MainFunction.call();
+	
+	QJSValue result = MainFunction.call(); // essentially execute the whole script
 	if (result.isError()) {
 		consoleLog(VIConsole::inErrorStyle("The entry function '" + entry + "' cannot be executed :"));
 		consoleLog(VIConsole::inErrorStyle(result.toString()));
@@ -111,8 +113,8 @@ void VIECMAScripts::boot(QString fileName, bool inThread, QString entry) {
 	}
 	private_VIECMAScripts* VIECMA = new private_VIECMAScripts();
 	connect(VIECMA, &private_VIECMAScripts::boot, VIECMA, &private_VIECMAScripts::onBoot);
-	connect(VIECMA, &private_VIECMAScripts::finished, this, &VIECMAScripts::finished);
 	connect(VIECMA, &private_VIECMAScripts::finished, this, &VIECMAScripts::onExit);
+	connect(VIECMA, &private_VIECMAScripts::sideLoaded, this, &VIECMAScripts::sideLoaded);
 	VIECMA->setBuiltInModules(BuiltInModules);
 	VIECMA->setModules(Modules);
 	VIECMA->setVIObjectModules(VIObjectModules);
@@ -181,6 +183,7 @@ void VIECMAScripts::onExit() {
 	OnRunning = false;
 	ThreadWaitCondition->wakeAll();
 	Thread->exit();
+	emit finished();
 }
 
 def_del VIECMAScripts::~VIECMAScripts() {

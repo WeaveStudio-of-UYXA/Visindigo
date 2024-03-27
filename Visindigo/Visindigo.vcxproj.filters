@@ -73,9 +73,6 @@
     <ClCompile Include="VICore\cpp\VITranslationHost.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VICore\cpp\VIObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VIWidgets\cpp\VIDynamicStyleSheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -153,9 +150,6 @@
     <ClInclude Include="VICore\private\VIDuration_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VICore\private\VIAbstractBehavior_m.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VICore\VICore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -163,9 +157,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VI2DScene\VI2DUnit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VICore\private\VIObject_m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VICore\private\VIAutoVersion.h">
@@ -226,6 +217,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VICore\VIVersion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCode\TerrainGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -335,7 +329,7 @@
     <QtMoc Include="VIWidgets\VIGridTexture.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="VICore\VIRIFFObject.h">
+    <QtMoc Include="VICore\VIDocument\VIRIFF.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VIWave\VISoundHost.h">
@@ -389,5 +383,8 @@
     <QtMoc Include="VICore\VIFileTools.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VICore\resource\packageMeta.json" />
   </ItemGroup>
 </Project>

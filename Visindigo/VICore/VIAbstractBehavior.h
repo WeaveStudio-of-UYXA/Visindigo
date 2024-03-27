@@ -1,12 +1,12 @@
 ﻿#pragma once
 #include "VIObject.h"
-#include "private/VIAbstractBehavior_m.h"
 #include "VIDuration.h"
 
 class VIPublicAPI VIAbstractBehaviorHost;
 class VIPublicAPI VIBehaviorHost;
 class VIPublicAPI VIQuantifyTickBehaviorHost;
 
+VI_PIMPL(VIAbstractBehavior);
 class VIPublicAPI VIAbstractBehavior :public VIObject
 {
 	Q_OBJECT;

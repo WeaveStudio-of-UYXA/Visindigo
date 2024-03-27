@@ -8,7 +8,7 @@ namespace VIDocument {
 		this->DefaultSettingsPath = "";
 		this->SettingsPath = "";
 	}
-	void VIJSON::setDefaultFromStr(const QString& str) {
+	void VIJSON::loadDefaultFromStr(const QString& str) {
 		this->DefaultSettings = QJsonDocument::fromJson(str.toUtf8()).object();
 	}
 	void VIJSON::loadDefault(const QString& path) {

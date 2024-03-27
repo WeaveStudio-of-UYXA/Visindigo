@@ -87,10 +87,43 @@ bool VIPackageManager::loadPluginPackages(QString rootPath) {
 
 bool VIPackageManager::startAll() {
 	for (auto i : Packages.keys()) {
-		Packages[i]->start(Visindigo::T20);
+		try {
+			Packages[i]->start(Visindigo::T20);
+		}
+		catch (...) {
+			return false;
+		}
 	}
 	return true;
 }
+
+bool VIPackageManager::disableAll() {
+	for (auto i : Packages.keys()) {
+		Packages[i]->onDisable(); // may need exception handle
+	}
+	return true;
+}
+
+bool VIPackageManager::reloadAll() {
+	for (auto i : Packages.keys()) {
+		Packages[i]->onReload(); // S.F
+	}
+	return true;
+}
+
+bool VIPackageManager::reInitAll() {
+	PASS; // need implyment
+	return true;
+}
+
+bool VIPackageManager::disablePackage(VIPackageUniqueName packageName) {
+	if (Packages.contains(packageName)) {
+		Packages[packageName]->onDisable();
+	}
+	return true;
+}
+
+
 
 VIPackage* VIPackageManager::getPackage(VIPackageUniqueName name) {
 	if (Packages.keys().contains(name)) {

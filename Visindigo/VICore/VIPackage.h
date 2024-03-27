@@ -131,6 +131,7 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	VI_MUST_INHERIT(VIPackage);
 	friend class VIFramework;
 	friend class VIDllPackageContainer;
+	friend class VIPackageManager;
 	_Private QVector<const QMetaObject*> PackageMember;
 	_Protected VIPackageMeta* PackageMeta;
 	_Public def_init VIPackage();
@@ -138,8 +139,8 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 	_Public void setPackageMeta(VIPackageMeta* info);
 	_Public virtual void onEnable() HalfVirtual;
 	_Public virtual void registerMetaInfo() HalfVirtual;
-	_Public virtual void onDisable() HalfVirtual;
-	_Public virtual void onReload() HalfVirtual;
+	_Protected virtual void onDisable() HalfVirtual;
+	_Protected virtual void onReload() HalfVirtual;
 	_Public virtual void onStart() HalfVirtual;
 	_Public virtual void onStop() HalfVirtual;
 	_Public virtual void onTick() HalfVirtual;
@@ -149,7 +150,11 @@ class VIPublicAPI VIPackage :public VIBasicBehavior
 };
 
 using __VisindigoDllMain= VIPackage* (*)(void);
-
+/*
+	VIPackage* VisindigoDllMain(void){
+		new YourPackage();
+	}
+*/
 #define VisindigoDllEntryPoint VisindigoDllMain
 #define VisindigoDllEntryPointName "VisindigoDllMain"
 #define VisindigoPlugin(PackageClassName) VIPackage* VisindigoDllEntryPoint(){ return new PackageClassName();}

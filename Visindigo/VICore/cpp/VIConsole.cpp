@@ -164,12 +164,12 @@ void VIConsole::printBinary(const QByteArray& data) {
 	QString chatText = "";
 	bool UninitializedMemory = false;
 	for (auto i = data.begin(); i != data.end(); i++) {
-		if (*i < 0 || *i>255) {
+		if ((unsigned char)(*i) < (unsigned char)0x00 || (unsigned char)(*i) > (unsigned char)0xFF) {
 			rawText.append("??  ");
 			UninitializedMemory = true;
 		}
 		else {
-			rawText.append(QString::number(*i, 16).rightJustified(2, '0').toUpper() + "  ");
+			rawText.append(QString::number((unsigned char)(*i), 16).rightJustified(2, '0').toUpper() + "  ");
 		}
 		if (*i >= 0x20 && *i <= 0x7E) {
 			chatText.append(" " % QChar(*i) % " ");
@@ -182,9 +182,6 @@ void VIConsole::printBinary(const QByteArray& data) {
 		}
 		else if (*i == 0x09) {
 			chatText.append("\\t ");
-		}
-		else if (*i < 0 || *i>255) {
-			chatText.append("?? ");
 		}
 		else {
 			chatText.append(" . ");

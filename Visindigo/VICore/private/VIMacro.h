@@ -7,6 +7,13 @@
 #define VI_VERSION_MINOR 2
 #define VI_VERSION_PATCH 0
 
+#define Visindigo_ROOT "cn.yxgeneral.weavestudio.visindigo"
+#define Unique_Visindigo_Core Visindigo_ROOT ".core"
+#define Unique_Visindigo_Widget Visindigo_ROOT ".widget"
+#define Unique_Visindigo_ARCP Visindigo_ROOT ".arcp"
+#define Unique_Visindigo_UIJson Visindigo_ROOT ".uijson"
+#define Unique_Visindigo_GitTools Visindigo_ROOT ".gittools"
+
 #ifndef VI_MACRO
 #define VI_MACRO
 #define VI_NULLPTR Q_NULLPTR
@@ -24,7 +31,7 @@
 #define InitAsNone = {}
 
 #define VI_interface class
-
+#define VI_PIMPL(classname) class className##Private
 #define VI_STATIC_CLASS(name) private: name(){}
 #define VI_Property(Type, name) public:Type name;void set##name(Type value){this->name = value;}Type get##name(){return name;}
 #define VI_PrivateProperty(Type, name) private:Type name;private: void set##name(Type value){this->name = value;}public:Type get##name(){return name;}

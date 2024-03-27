@@ -1,7 +1,7 @@
 ﻿#include "../VIGridTexture.h"
 
 def_init VIGridTexture::VIGridTexture(VISuper* parent) :VIObject(parent) {
-	json.setDefaultFromStr("{\"Row\": 1,\"Column\":1,\"Effective\":1,\"Loop\":0, \"Fps\":32}");
+	json.loadDefaultFromStr("{\"Row\": 1,\"Column\":1,\"Effective\":1,\"Loop\":0, \"Fps\":32}");
 };
 bool VIGridTexture::load(const QString& configPath) {
 	if (Playing) {
