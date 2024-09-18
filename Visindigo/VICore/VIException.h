@@ -11,7 +11,7 @@ class VIPublicAPI VIException
 		BehaviorError,
 		IndexOutOfRange,
 		NullPointerError,
-		FrameworkNotInit,
+		FrameworkNotInit, 
 		MethodIsInvalid, //Method is not implemented
 		SingletonError,
 		Others

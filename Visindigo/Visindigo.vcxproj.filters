@@ -219,6 +219,12 @@
     <ClInclude Include="VICore\VIVersion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VICore\private\VICoreFrameworkPrivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VICore\VIPimpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VICore\VIAbstractBehavior.h">

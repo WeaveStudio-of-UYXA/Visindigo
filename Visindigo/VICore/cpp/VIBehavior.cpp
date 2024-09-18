@@ -366,30 +366,31 @@ void VIDebugBehavior::onStart() {
 void VIDebugBehavior::onStop() {
 	consoleLog("VIDebugBehavior onStop");
 }
+
 #include <iostream>
 void VIDebugBehavior::onTick() {
 	MSPT += Host->getTickDuration() / 1000000.0;
 	TMSPT += ((VIQuantifyTickBehaviorHost*)Host)->getNSPT() / 1000000.0;
 
 	Index++;
-	if (Index == 10) {
+	if (Index == 100) {
 		std::cout << "                                                                                                   \r" << std::ends;
-		std::cout << "  QMSPT: " << QString::number(MSPT / 10.0, 'f', 2).toStdString() << "ms\t  TMSPT:";
-		if (TMSPT > 500) {
-			std::cout << VIConsole::inErrorStyle(QString::number(TMSPT / 10.0, 'f', 2) + "ms").toStdString();
+		std::cout << "  QMSPT: " << QString::number(MSPT / Index, 'f', 2).toStdString() << "ms\t  TMSPT:";
+		if (TMSPT > 500* Index) {
+			std::cout << VIConsole::inErrorStyle(QString::number(TMSPT / Index, 'f', 2) + "ms").toStdString();
 		}
-		else if (TMSPT > 350)
+		else if (TMSPT > 350 * Index)
 		{
-			std::cout << VIConsole::inWarningStyle(QString::number(TMSPT / 10.0, 'f', 2) + "ms").toStdString();
+			std::cout << VIConsole::inWarningStyle(QString::number(TMSPT / Index, 'f', 2) + "ms").toStdString();
 		}
-		else if (TMSPT > 250)
+		else if (TMSPT > 250 * Index)
 		{
-			std::cout << VIConsole::inNoticeStyle(QString::number(TMSPT / 10.0, 'f', 2) + "ms").toStdString();
+			std::cout << VIConsole::inNoticeStyle(QString::number(TMSPT / Index, 'f', 2) + "ms").toStdString();
 		}
 		else {
-			std::cout << VIConsole::inSuccessStyle(QString::number(TMSPT / 10.0, 'f', 2) + "ms").toStdString();
+			std::cout << VIConsole::inSuccessStyle(QString::number(TMSPT / Index, 'f', 2) + "ms").toStdString();
 		}
-		std::cout << "\t  TPS: " << QString::number(10000.0 / MSPT, 'f', 2).toStdString() << "\t  CPUTP: " << QString::number(100 * TMSPT / MSPT, 'f', 2).toStdString() << "%\r" << std::ends;
+		std::cout << "\t  TPS: " << QString::number(1000.0 * Index / MSPT, 'f', 2).toStdString() << "\t  CPUTP: " << QString::number(100 * TMSPT / MSPT, 'f', 2).toStdString() << "%\r" << std::ends;
 		Index = 0;
 		MSPT = 0;
 		TMSPT = 0;

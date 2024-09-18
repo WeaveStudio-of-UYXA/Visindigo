@@ -304,6 +304,7 @@
     <QtMoc Include="VIARCP\VIARCPSocket.h" />
     <ClInclude Include="VIARCP\VIARCPStructConverter.h" />
     <QtMoc Include="VIARCP\VIARCPTypeManager.h" />
+    <ClInclude Include="VICore\private\VICoreFrameworkPrivate.h" />
     <ClInclude Include="VICore\private\VisindigoNamespace.h" />
     <QtMoc Include="VIWidgets\VIDynamicStyleSheet.h" />
     <QtMoc Include="VICore\VIDocument\VIRIFF.h" />
@@ -313,6 +314,7 @@
     <QtMoc Include="VICore\VIPackageManager.h" />
     <QtMoc Include="VICore\VIFileTools.h" />
     <ClInclude Include="VICore\VILogger.h" />
+    <ClInclude Include="VICore\VIPimpl.h" />
     <ClInclude Include="VICore\VIProcess.h" />
     <QtMoc Include="VIGitTools\VIDifferenceAnalyzer.h" />
     <ClInclude Include="VIGitTools\VIGitTools.h" />

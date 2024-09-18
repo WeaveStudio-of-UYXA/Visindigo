@@ -11,12 +11,7 @@
 
 class VIPublicAPI VIAbstractObject
 {
-	_Public virtual const QString getClassName() PureVirtual;
-	_Public virtual const QString getSuperClassName() PureVirtual;
-	_Public virtual const QString getObjectName() PureVirtual;
-	_Public virtual const void consoleLog(QString log) PureVirtual;
-	_Public virtual const void consoleLogPure(QString log) PureVirtual;
-	_Public virtual void throwThis() PureVirtual;
+
 };
 using VIBaseObject = VIAbstractObject;
 using VISuper = QObject;

@@ -26,6 +26,7 @@ class VIPublicAPI VICoreFramework :public VIObject
 {
 	Q_OBJECT;
 	VI_OBJECT;
+	
 	friend class VIBehaviorHost;
 	friend class VITranslationHost;
 	_Private static VICoreFramework* _instance;	

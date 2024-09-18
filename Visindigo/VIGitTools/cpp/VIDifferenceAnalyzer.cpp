@@ -33,8 +33,8 @@ void VIDifferenceAnalyzer::analyze(VIDifferenceData* data) {
 	bool addPreviousOrCurrent = true;
 	while (previous != data->PreviousDocument.end() && current != data->CurrentDocument.end()) {
 		if (*previous == *current) {
-			data->LongestCommonSubsequencePrevious.append(previousIndex);
-			data->LongestCommonSubsequenceCurrent.append(currentIndex);
+			data->CommonSubsequencePrevious.append(previousIndex);
+			data->CommonSubsequenceCurrent.append(currentIndex);
 			addPreviousOrCurrent = !addPreviousOrCurrent;
 			previous++;
 			previousIndex++;
@@ -46,7 +46,7 @@ void VIDifferenceAnalyzer::analyze(VIDifferenceData* data) {
 				previous++;
 				previousIndex++;
 				if (previous == data->PreviousDocument.end()) {
-					previousIndex = data->LongestCommonSubsequencePrevious.last();
+					previousIndex = data->CommonSubsequencePrevious.last();
 					previous = data->PreviousDocument.begin() + previousIndex;
 					currentIndex++;
 					current++;
@@ -59,7 +59,7 @@ void VIDifferenceAnalyzer::analyze(VIDifferenceData* data) {
 				current++;
 				currentIndex++;
 				if (current == data->CurrentDocument.end()) {
-					currentIndex = data->LongestCommonSubsequenceCurrent.last();
+					currentIndex = data->CommonSubsequenceCurrent.last();
 					current = data->CurrentDocument.begin() + currentIndex;
 					previousIndex++;
 					previous++;
@@ -71,12 +71,12 @@ void VIDifferenceAnalyzer::analyze(VIDifferenceData* data) {
 		}
 	}
 	for (auto i = 0; i < data->PreviousDocument.length(); i++) {
-		if (!data->LongestCommonSubsequencePrevious.contains(i)) {
+		if (!data->CommonSubsequencePrevious.contains(i)) {
 			data->RemovedLines.append(i);
 		}
 	}
 	for (auto i = 0; i < data->CurrentDocument.length(); i++) {
-		if (!data->LongestCommonSubsequenceCurrent.contains(i)) {
+		if (!data->CommonSubsequenceCurrent.contains(i)) {
 			data->AddedLines.append(i);
 		}
 	}

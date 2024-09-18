@@ -6,8 +6,8 @@ struct VIDifferenceData
 	QStringList CurrentDocument;
 	QList<qint32> RemovedLines;
 	QList<qint32> AddedLines;
-	QList<qint32> LongestCommonSubsequencePrevious;
-	QList<qint32> LongestCommonSubsequenceCurrent;
+	QList<qint32> CommonSubsequencePrevious;
+	QList<qint32> CommonSubsequenceCurrent;
 };
 class VIDifferenceAnalyzer :public VIObject
 {

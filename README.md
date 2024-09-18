@@ -1,3 +1,10 @@
+<img src="http://www.yxgeneral.cn/VisindigoV.png" width="200" height="200" style="float:right"/>
+
+![](https://img.shields.io/badge/Project-Visindigo-purple)
+![](https://img.shields.io/badge/C++-20-blue)
+![](https://img.shields.io/badge/Qt-6.5+-lightgreen)
+![](https://img.shields.io/badge/GPL-3.0-red)
+
 # 前言和授权
 **Visindigo**是基于Qt的应用程序开发拓展，在Qt的基础上提供一些适用于游戏开发的基本对象，以及适用于桌面程序开发的小组件。
 
@@ -6,9 +13,9 @@
 # Visindigo Project
 此项目是清流计划的一部分。
 
-清流计划是一个开源项目，旨在为开发者、研究者提供一些基础的开发框架、简化接口甚至是低代码工具。
+清流计划是一个开源项目，旨在为开发者、研究者提供一些基础的开发框架、简化接口甚至是低代码工具。这里说的“低代码”指的是进一步简化开发流程，使得开发者可以更加专注于业务逻辑的实现而非底层的实现，而不是指那种仅仅通过拖拽就能完成的开发工具。
 
-Visindigo是从CommonEdit、Python CommonEdit、Java CommonEdit等项目演变而来，Visindigo现在已经接替CommonEdit的工作，并成为清流计划的核心项目。
+Visindigo是从CommonEdit、Python CommonEdit、Java CommonEdit等项目演变而来的，Visindigo现在已经接替CommonEdit的工作，并成为清流计划的核心项目。
 
 # 参考文档
 
