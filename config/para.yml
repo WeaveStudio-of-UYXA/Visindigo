@@ -1,0 +1,9 @@
+visindigo:
+  version:
+    major: 2
+    minor: 0
+    patch: 0
+
+qt:
+  installPath: "D:\\Qt\\6.5.2\\6.5.2\\msvc2019_64"
+  docIndexPath: "D:\\Qt\\6.5.2\\Docs\\Qt-6.5.2\\qtdoc\\qtdoc.index"

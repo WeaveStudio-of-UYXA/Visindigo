@@ -1,0 +1,29 @@
+/*!
+    \page VICompileMacro.html
+    \title Visindigo编译宏
+    \brief Visindigo编译(用)宏为Visindigo提供一些编译上的便利.
+    \ingroup VIMiCore
+    \since Visindigo 2.0.0
+    VICompileMacro由许多条件编译 \c {#ifdef} 宏组成，用于在编译时控制Visindigo的行为。
+
+    \section1 有关部署平台的宏
+    这部分宏的定义严格来说有失偏颇，因为他们仅提供当前的部署系统，既不指示编译器，也不指示硬件平台。
+            目前这些宏及供参考，未来可能会有所变化.
+    
+    \section2 LINUX_DEPLOY
+    定义了当前部署系统为Linux，不指定具体的发行版，也不指示特定的硬件平台.
+
+    \section2 ANDROID_DEPLOY
+    定义了当前部署系统为Android，不指定Android的版本，但指示arm64_v8a.
+
+    \section2 ANDROID_DEPLOY_OLD
+    定义了当前部署系统为Android，不指定Android的版本，但指示arm_v7a.
+
+    \section2 WINDWOS_DEPLOY
+    定义了当前部署系统为Windows，不指定Windows的版本，但指示x86_64.
+
+    \section2 WINDWOS_DEPLOY_32
+    定义了当前部署系统为Windows，不指定Windows的版本，但指示x86.
+
+
+*/

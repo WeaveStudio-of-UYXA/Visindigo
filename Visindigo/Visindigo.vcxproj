@@ -220,16 +220,6 @@
     <QtRcc Include="VIResource.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">input</DynamicSource>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='DllDebug|x64'">%(Filename).moc</QtMocFileName>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='DllRelease|x64'">%(Filename).moc</QtMocFileName>
-    </ClCompile>
     <ClCompile Include="VIARCP\cpp\VIARCPDataObject.cpp" />
     <ClCompile Include="VIARCP\cpp\VIARCPEnum.cpp" />
     <ClCompile Include="VIARCP\cpp\VIARCPPackage.cpp" />
@@ -286,7 +276,6 @@
     <ClCompile Include="VIWidgets\VICodeEdit\cpp\VICodeEditUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="testCode.h" />
     <QtMoc Include="VIUJ\VIUJWidgetBinder.h" />
     <QtMoc Include="VIWidgets\VIWidgetsTransQt.h" />
     <QtMoc Include="VIWidgets\VIWindowsTheme.h" />

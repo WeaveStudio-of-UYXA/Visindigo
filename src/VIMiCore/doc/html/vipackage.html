@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+<!-- VIPackage.cpp -->
+  <meta name="description" content="VIPackage定义了Visindigo的功能集合。">
+  <title>VIPackage Class | VIMiCore</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+    <div class="main">
+    <div class="main-rounded">
+        <div class="navigationbar">
+        <ul>
+<li><a href="vimicore-module.html" translate="no">VIMiCore</a></li>
+<li>VIPackage</li>
+    </ul>
+    </div>
+</div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#protected-functions">Protected Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">VIPackage Class</h1>
+<!-- $$$VIPackage-brief -->
+<p>VIPackage定义了Visindigo的功能集合。. <a href="#details">More...</a></p>
+<!-- @@@VIPackage -->
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;VIPackage&gt;</span></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Visindigo 2.0&#x2e;0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <a href="viobject.html" translate="no">VIObject</a></td></tr>
+</table></div>
+<ul>
+<li><a href="vipackage-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="vipackage.html#name-prop" translate="no">name</a></b> : const QString</li>
+<li class="fn" translate="no"><b><a href="vipackage.html#uniqueName-prop" translate="no">uniqueName</a></b> : const QString</li>
+</ul>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#VIPackage" translate="no">VIPackage</a></b>(QString <i>uniqueName</i>, QObject *<i>parent</i> = nullptr)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#absolutePath" translate="no">absolutePath</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> VIJsonDocument *</td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#config" translate="no">config</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#externalPath" translate="no">externalPath</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#internalPath" translate="no">internalPath</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> VILogger *</td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#logger" translate="no">logger</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#name" translate="no">name</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#packageContainsClass" translate="no">packageContainsClass</a></b>(const QString &amp;<i>className</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#recordClass" translate="no">recordClass</a></b>(const QMetaObject *<i>metaObject</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#uniqueName" translate="no">uniqueName</a></b>() const</td></tr>
+</table></div>
+<h2 id="protected-functions">Protected Functions</h2>
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#setName" translate="no">setName</a></b>(const QString &amp;<i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="vipackage.html#setUniqueName" translate="no">setUniqueName</a></b>(const QString &amp;<i>value</i>)</td></tr>
+</table></div>
+<!-- $$$VIPackage-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>VIPackage定义了Visindigo的功能集合，所有在C++或VisindigoJS中的功能集合都应利用此类进行封装。 无论对于C++还是VisindigoJS，VIPackage都是一个抽象类，不能直接实例化。</p>
+<p>对于C++上构造的VIPackage，如果其需要在动态链接库中携带资源文件，则资源文件的路径被限定于<code translate="no">/package/包唯一名称</code> 目录下。例如，包唯一名称为<code translate="no">com.visindigo.example</code>，则资源文件的路径应为<code translate="no">/package/com.visindigo.example</code>。</p>
+<pre class="cpp" translate="no">
+ <span class="type">QImage</span> image(<span class="string">&quot;:/package/com.visindigo.example/image.png&quot;</span>);
+</pre>
+<p>内部qrc路径字符串在设置了唯一名称后，可以通过<a href="vipackage.html#internalPath" translate="no">VIPackage::internalPath</a>()获取，其是从冒号开始，斜杠结束的字符串。 与其类似的是包的外部路径，即调用<a href="vipackage.html#externalPath" translate="no">VIPackage::externalPath</a>()获取的路径。这个路径是相对于Visindigo程序执行目录的。 要知晓资源文件的绝对路径，可以调用<a href="vipackage.html#absolutePath" translate="no">VIPackage::absolutePath</a>()获取。</p>
+</div>
+<!-- @@@VIPackage -->
+<div class="prop">
+<h2>Property Documentation</h2>
+<!-- $$$name-prop$$$name -->
+<h3 class="fn" translate="no" id="name-prop"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">name</span> : const <span class="type">QString</span></h3>
+<p>获取功能集合的名称。 获取功能集合的名称。</p>
+<p>This property was introduced in Visindigo 2.0&#x2e;0.</p>
+<p><b>Access functions:</b></p>
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft topAlign rightAlign"> QString </td><td class="memItemRight bottomAlign"><span class="name"><b><a href="vipackage.html#name" translate="no">name</a></b></span>() const</td></tr>
+</table></div>
+<!-- @@@name -->
+<!-- $$$uniqueName-prop$$$uniqueName -->
+<h3 class="fn" translate="no" id="uniqueName-prop"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">uniqueName</span> : const <span class="type">QString</span></h3>
+<p>获取功能集合的唯一名称。 获取功能集合的唯一名称。</p>
+<p>This property was introduced in Visindigo 2.0&#x2e;0.</p>
+<p><b>Access functions:</b></p>
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft topAlign rightAlign"> QString </td><td class="memItemRight bottomAlign"><span class="name"><b><a href="vipackage.html#uniqueName" translate="no">uniqueName</a></b></span>() const</td></tr>
+</table></div>
+<!-- @@@uniqueName -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$VIPackage[overload1]$$$VIPackageQStringQObject* -->
+<h3 class="fn" translate="no" id="VIPackage"><code translate="no">[since Visindigo 2.0.0] </code>VIPackage::<span class="name">VIPackage</span>(<span class="type">QString</span> <i>uniqueName</i>, <span class="type">QObject</span> *<i>parent</i> = nullptr)</h3>
+<p><i translate="no">parent</i> 为VIPackage的父对象。 VIPackage的默认构造函数</p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VIPackage -->
+<!-- $$$absolutePath[overload1]$$$absolutePath -->
+<h3 class="fn" translate="no" id="absolutePath"><code translate="no">[since Visindigo 2.0.0] </code><span class="type">QString</span> VIPackage::<span class="name">absolutePath</span>() const</h3>
+<p>返回包的绝对路径。 这是文件系统规定的格式，此返回值从盘符开始，正斜杠结束，例如<code translate="no">C:/visindigoProgram/package/cn.yxgeneral.visindigo.micore/</code></p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@absolutePath -->
+<!-- $$$config[overload1]$$$config -->
+<h3 class="fn" translate="no" id="config"><code translate="no">[since Visindigo 2.0.0] </code><span class="type"><a href="vijsondocument.html" translate="no">VIJsonDocument</a></span> *VIPackage::<span class="name">config</span>() const</h3>
+<p>返回包的配置文档。</p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@config -->
+<!-- $$$externalPath[overload1]$$$externalPath -->
+<h3 class="fn" translate="no" id="externalPath"><code translate="no">[since Visindigo 2.0.0] </code><span class="type">QString</span> VIPackage::<span class="name">externalPath</span>() const</h3>
+<p>返回包的外部路径。 这是文件系统规定的格式，此返回值从正斜杠开始，正斜杠结束，例如<code translate="no">/package/cn.yxgeneral.visindigo.micore/</code></p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@externalPath -->
+<!-- $$$internalPath[overload1]$$$internalPath -->
+<h3 class="fn" translate="no" id="internalPath"><code translate="no">[since Visindigo 2.0.0] </code><span class="type">QString</span> VIPackage::<span class="name">internalPath</span>() const</h3>
+<p>返回包的内部路径。 这是qrc规定的格式，此返回值从冒号开始，正斜杠结束，例如<code translate="no">:/package/cn.yxgeneral.visindigo.micore/</code></p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@internalPath -->
+<!-- $$$logger[overload1]$$$logger -->
+<h3 class="fn" translate="no" id="logger"><code translate="no">[since Visindigo 2.0.0] </code><span class="type"><a href="vilogger.html" translate="no">VILogger</a></span> *VIPackage::<span class="name">logger</span>() const</h3>
+<p>返回包的日志记录器。</p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@logger -->
+<!-- $$$name -->
+<h3 class="fn" translate="no" id="name"><code translate="no">[since Visindigo 2.0.0] </code><span class="type">QString</span> VIPackage::<span class="name">name</span>() const</h3>
+<p>获取包的名称。 一般来说，包的名称形如&quot;MiCore&quot;</p>
+<div class="admonition note">
+<p><b>Note: </b>注意这不是包的唯一名称，请参见<a href="vipackage.html#uniqueName" translate="no">uniqueName</a>()。</p>
+</div>
+<div class="admonition note"><p><b>Note: </b>Getter function for property name. </p>
+</div><p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<p><b>See also </b><a href="vipackage.html#setName" translate="no">setName</a>().</p>
+<!-- @@@name -->
+<!-- $$$packageContainsClass[overload1]$$$packageContainsClassconstQString& -->
+<h3 class="fn" translate="no" id="packageContainsClass"><code translate="no">[since Visindigo 2.0.0] </code><span class="type">bool</span> VIPackage::<span class="name">packageContainsClass</span>(const <span class="type">QString</span> &amp;<i>className</i>) const</h3>
+<p><i translate="no">className</i> 为要检查的类名。 返回包是否包含指定的类。</p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@packageContainsClass -->
+<!-- $$$recordClass[overload1]$$$recordClassconstQMetaObject* -->
+<h3 class="fn" translate="no" id="recordClass"><code translate="no">[since Visindigo 2.0.0] </code><span class="type">void</span> VIPackage::<span class="name">recordClass</span>(const <span class="type">QMetaObject</span> *<i>metaObject</i>)</h3>
+<p><i translate="no">metaObject</i> 为要记录的类的元对象。 记录一个类。</p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@recordClass -->
+<!-- $$$setName[overload1]$$$setNameconstQString& -->
+<h3 class="fn" translate="no" id="setName"><code translate="no">[protected, since Visindigo 2.0.0] </code><span class="type">void</span> VIPackage::<span class="name">setName</span>(const <span class="type">QString</span> &amp;<i>value</i>)</h3>
+<p><i translate="no">value</i> 为要设置的名称。 设置包的名称。</p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<p><b>See also </b><a href="vipackage.html#name" translate="no">name</a>().</p>
+<!-- @@@setName -->
+<!-- $$$setUniqueName[overload1]$$$setUniqueNameconstQString& -->
+<h3 class="fn" translate="no" id="setUniqueName"><code translate="no">[protected, since Visindigo 2.0.0] </code><span class="type">void</span> VIPackage::<span class="name">setUniqueName</span>(const <span class="type">QString</span> &amp;<i>value</i>)</h3>
+<p><i translate="no">value</i> 为要设置的唯一名称。 设置包的唯一名称。</p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<p><b>See also </b><a href="vipackage.html#uniqueName" translate="no">uniqueName</a>().</p>
+<!-- @@@setUniqueName -->
+<!-- $$$uniqueName -->
+<h3 class="fn" translate="no" id="uniqueName"><code translate="no">[since Visindigo 2.0.0] </code><span class="type">QString</span> VIPackage::<span class="name">uniqueName</span>() const</h3>
+<p>获取包的唯一名称。 一般来说，包的唯一名称形如&quot;cn.yxgeneral.visindigo.micore&quot;</p>
+<div class="admonition note">
+<p><b>Note: </b>注意这不是包的名称，请参见<a href="vipackage.html#name" translate="no">name</a>()。</p>
+</div>
+<div class="admonition note"><p><b>Note: </b>Getter function for property uniqueName. </p>
+</div><p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<p><b>See also </b><a href="vipackage.html#setUniqueName" translate="no">setUniqueName</a>().</p>
+<!-- @@@uniqueName -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2023 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are <a href="https://doc.qt.io/qt/trademarks.html">    trademarks</a> of The Qt Company Ltd. in Finland and/or other countries
+   worldwide. All other trademarks are property of their respective owners. </p>
+</div>
+</body>
+</html>

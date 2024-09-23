@@ -1,0 +1,9 @@
+/*!
+    \module VIMiCore
+    \title Visindigo 最小内核 模块
+    \brief 包括了 Visindigo 最小内核的所有类.
+    \since Visindigo 2.0.0
+    Visindigo 最小内核是构建 Visindigo 内核的基础。
+
+    如果要查看 VIMiCore 的预编译宏，请参见 \l VICompileMacro.html.
+*/

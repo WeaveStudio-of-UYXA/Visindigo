@@ -1,0 +1,12 @@
+#pragma once
+#include "VIAbstractObject.h"
+#include "VIConsole.h"
+#include "VIJsonConfig.h"
+#include "VIJsonDocument.h"
+#include "VILogger.h"
+#include "VILoggerManager.h"
+#include "VIMiCoreFramework.h"
+#include "VIObject.h"
+#include "VIMacro.h"
+#include "VIPackage.h"
+#include "VIQCoreApplication.h"

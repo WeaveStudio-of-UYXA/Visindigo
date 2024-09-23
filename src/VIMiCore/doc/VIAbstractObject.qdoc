@@ -1,0 +1,10 @@
+/*!
+    \class VIAbstractObject
+    \inmodule VIMiCore
+    \brief VIAbstractObject 是Visindigo框架大部分类型的基类，用于在其中提供通用功能.
+    \since Visindigo 2.0.0
+    用户不应该直接使用VIAbstractObject，而应该使用VIObject或者其子类，除非用户需要将一个
+    已经继承自QObject的类转换为VIObject。
+
+    当前VIAbstactObject是空的。
+*/

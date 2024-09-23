@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE QDOCINDEX>
+<INDEX url="" title="VIMiCore Reference Documentation" version="" project="VIMiCore">
+    <namespace name="" status="active" access="public" module="vimicore">
+        <function name="VI_OBJECT" href="viobject.html#VI_OBJECT" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="33" documented="true" related="0" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_OBJECT"/>
+        <function name="VI_VERSION_BUILD" href="viobject.html#VI_VERSION_BUILD" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="15" documented="true" related="1" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_VERSION_BUILD"/>
+        <function name="VI_VERSION_DATE" href="viobject.html#VI_VERSION_DATE" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="21" documented="true" related="2" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_VERSION_DATE"/>
+        <function name="VI_VERSION_NICKNAME" href="viobject.html#VI_VERSION_NICKNAME" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="9" documented="true" related="3" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_VERSION_NICKNAME"/>
+        <function name="VI_VERSION_TIME" href="viobject.html#VI_VERSION_TIME" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="27" documented="true" related="4" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_VERSION_TIME"/>
+        <function name="p_VI_OBJECT_CONTENT" href="viobject.html#p_VI_OBJECT_CONTENT" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="39" documented="true" related="5" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="p_VI_OBJECT_CONTENT"/>
+        <class name="VIAbstractObject" href="viabstractobject.html" status="active" access="public" location="VIAbstractObject.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIAbstractObject.h" lineno="7" since="Visindigo 2.0.0" documented="true" module="VIMiCore" brief="是Visindigo框架大部分类型的基类，用于在其中提供通用功能. 用户不应该直接使用VIAbstractObject，而应该使用VIObject或者其子类，除非用户需要将一个 已经继承自QObject的类转换为VIObject。"/>
+        <class name="VIConsole" href="viconsole.html" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="5" since="Visindigo 2.0.0" documented="true" module="VIMiCore" brief="VIConsole为Visindigo提供初级的控制台快捷功能。">
+            <function name="exec" fullname="VIConsole::exec" href="viconsole.html#exec" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="30" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="unsigned int" signature="unsigned int exec(const QString &amp;cmd)">
+                <parameter type="const QString &amp;" name="cmd" default=""/>
+            </function>
+            <function name="getColorString" fullname="VIConsole::getColorString" href="viconsole.html#getColorString" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="15" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="QString" signature="QString getColorString(QString rawText, VIConsole::Color color, QList&lt;VIConsole::Style&gt; styleList)">
+                <parameter type="QString" name="rawText" default=""/>
+                <parameter type="VIConsole::Color" name="color" default=""/>
+                <parameter type="QList&lt;VIConsole::Style&gt;" name="styleList" default="..."/>
+            </function>
+            <function name="getColorString" fullname="VIConsole::getColorString" href="viconsole.html#getColorString-1" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="16" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" overload="true" overload-number="1" type="QString" signature="QString getColorString(QString rawText, VIConsole::Color color, VIConsole::Style style)">
+                <parameter type="QString" name="rawText" default=""/>
+                <parameter type="VIConsole::Color" name="color" default=""/>
+                <parameter type="VIConsole::Style" name="style" default="VIConsole::Style::Normal"/>
+            </function>
+            <function name="getColorString" fullname="VIConsole::getColorString" href="viconsole.html#getColorString-2" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="17" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" overload="true" overload-number="2" type="QString" signature="QString getColorString(QString rawText, QColor rgb, QList&lt;VIConsole::Style&gt; styleList)">
+                <parameter type="QString" name="rawText" default=""/>
+                <parameter type="QColor" name="rgb" default=""/>
+                <parameter type="QList&lt;VIConsole::Style&gt;" name="styleList" default="{ VIConsole::Style::Normal }"/>
+            </function>
+            <function name="getColorString" fullname="VIConsole::getColorString" href="viconsole.html#getColorString-3" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="18" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" overload="true" overload-number="3" type="QString" signature="QString getColorString(QString rawText, QColor rgb, VIConsole::Style style)">
+                <parameter type="QString" name="rawText" default=""/>
+                <parameter type="QColor" name="rgb" default=""/>
+                <parameter type="VIConsole::Style" name="style" default="VIConsole::Style::Normal"/>
+            </function>
+            <function name="getLine" fullname="VIConsole::getLine" href="viconsole.html#getLine" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="19" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="QString" signature="QString getLine()"/>
+            <function name="getRawText" fullname="VIConsole::getRawText" href="viconsole.html#getRawText" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="24" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="QString" signature="QString getRawText(QString colorString)">
+                <parameter type="QString" name="colorString" default=""/>
+            </function>
+            <function name="inErrorStyle" fullname="VIConsole::inErrorStyle" href="viconsole.html#inErrorStyle" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="21" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="QString" signature="QString inErrorStyle(QString rawText)">
+                <parameter type="QString" name="rawText" default=""/>
+            </function>
+            <function name="inNoticeStyle" fullname="VIConsole::inNoticeStyle" href="viconsole.html#inNoticeStyle" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="23" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="QString" signature="QString inNoticeStyle(QString rawText)">
+                <parameter type="QString" name="rawText" default=""/>
+            </function>
+            <function name="inSuccessStyle" fullname="VIConsole::inSuccessStyle" href="viconsole.html#inSuccessStyle" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="22" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="QString" signature="QString inSuccessStyle(QString rawText)">
+                <parameter type="QString" name="rawText" default=""/>
+            </function>
+            <function name="inWarningStyle" fullname="VIConsole::inWarningStyle" href="viconsole.html#inWarningStyle" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="20" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="QString" signature="QString inWarningStyle(QString rawText)">
+                <parameter type="QString" name="rawText" default=""/>
+            </function>
+            <function name="print" fullname="VIConsole::print" href="viconsole.html#print" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="25" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="void" signature="void print(QString msg)">
+                <parameter type="QString" name="msg" default=""/>
+            </function>
+            <function name="printBinary" fullname="VIConsole::printBinary" href="viconsole.html#printBinary" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="26" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="void" signature="void printBinary(const QByteArray &amp;data)">
+                <parameter type="const QByteArray &amp;" name="data" default=""/>
+            </function>
+            <function name="printMemory" fullname="VIConsole::printMemory" href="viconsole.html#printMemory" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="27" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="void" signature="void printMemory(const T *data)">
+                <parameter type="const T *" name="data" default=""/>
+            </function>
+            <enum name="Color" fullname="VIConsole::Color" href="viconsole.html#Color-enum" status="active" access="public" location="VIConsole.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIConsole.h" lineno="6" since="Visindigo 2.0.0" documented="true" scoped="true">
+                <value name="None" value="0"/>
+                <value name="Black" value="1"/>
+                <value name="Gray" value="2"/>
+                <value name="Red" value="3"/>
+                <value name="LightRed" value="4"/>
+                <value name="Green" value="5"/>
+                <value name="LightGreen" value="6"/>
+                <value name="Yellow" value="7"/>
+                <value name="LightYellow" value="8"/>
+                <value name="Blue" value="9"/>
+                <value name="LightBlue" value="10"/>
+                <value name="Purple" value="11"/>
+                <value name="LightPurple" value="12"/>
+                <value name="Cyan" value="13"/>
+                <value name="LightCyan" value="14"/>
+                <value name="LightGray" value="15"/>
+                <value name="White" value="16"/>
+            </enum>
+        </class>
+        <class name="VIJsonConfig" href="vijsonconfig.html" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="7" since="Visindigo 2.0.0" documented="true" module="VIMiCore" brief="VIJsonConfig定义了对Json配置的操作。">
+            <function name="VIJsonConfig" fullname="VIJsonConfig::VIJsonConfig" href="vijsonconfig.html#VIJsonConfig" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="10" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VIJsonConfig()"/>
+            <function name="VIJsonConfig" fullname="VIJsonConfig::VIJsonConfig" href="vijsonconfig.html#VIJsonConfig-1" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="11" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" overload="true" overload-number="1" type="" signature="VIJsonConfig(const QString &amp;jsonStr)">
+                <parameter type="const QString &amp;" name="jsonStr" default=""/>
+            </function>
+            <function name="VIJsonConfig" fullname="VIJsonConfig::VIJsonConfig" href="vijsonconfig.html#VIJsonConfig-2" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="12" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" overload="true" overload-number="2" type="" signature="VIJsonConfig(const QJsonDocument &amp;json)">
+                <parameter type="const QJsonDocument &amp;" name="json" default=""/>
+            </function>
+            <function name="VIJsonConfig" fullname="VIJsonConfig::VIJsonConfig" href="vijsonconfig.html#VIJsonConfig-3" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="13" documented="true" since="Visindigo 2.0.0" meta="copy-constructor" virtual="non" const="false" static="false" final="false" override="false" overload="true" overload-number="3" type="" signature="VIJsonConfig(const VIJsonConfig &amp;other)">
+                <parameter type="const VIJsonConfig &amp;" name="other" default=""/>
+            </function>
+            <function name="VIJsonConfig" fullname="VIJsonConfig::VIJsonConfig" href="vijsonconfig.html#VIJsonConfig-4" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="14" documented="true" since="Visindigo 2.0.0" meta="move-constructor" virtual="non" const="false" static="false" final="false" override="false" overload="true" overload-number="4" type="" signature="VIJsonConfig(VIJsonConfig &amp;&amp;other)">
+                <parameter type="VIJsonConfig &amp;&amp;" name="other" default=""/>
+            </function>
+            <function name="contains" fullname="VIJsonConfig::contains" href="vijsonconfig.html#contains" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="28" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool contains(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+            </function>
+            <function name="getArray" fullname="VIJsonConfig::getArray" href="vijsonconfig.html#getArray" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="27" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="QList&lt;VIJsonConfig&gt;" signature="QList&lt;VIJsonConfig&gt; getArray(const QString &amp;key, bool *ok)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+                <parameter type="bool *" name="ok" default="nullptr"/>
+            </function>
+            <function name="getBool" fullname="VIJsonConfig::getBool" href="vijsonconfig.html#getBool" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="24" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool getBool(const QString &amp;key, bool *ok)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+                <parameter type="bool *" name="ok" default="nullptr"/>
+            </function>
+            <function name="getDouble" fullname="VIJsonConfig::getDouble" href="vijsonconfig.html#getDouble" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="25" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="double" signature="double getDouble(const QString &amp;key, bool *ok)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+                <parameter type="bool *" name="ok" default="nullptr"/>
+            </function>
+            <function name="getInt" fullname="VIJsonConfig::getInt" href="vijsonconfig.html#getInt" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="22" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="qint64" signature="qint64 getInt(const QString &amp;key, bool *ok)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+                <parameter type="bool *" name="ok" default="nullptr"/>
+            </function>
+            <function name="getObject" fullname="VIJsonConfig::getObject" href="vijsonconfig.html#getObject" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="26" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="VIJsonConfig" signature="VIJsonConfig getObject(const QString &amp;key, bool *ok)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+                <parameter type="bool *" name="ok" default="nullptr"/>
+            </function>
+            <function name="getString" fullname="VIJsonConfig::getString" href="vijsonconfig.html#getString" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="23" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="QString" signature="QString getString(const QString &amp;key, bool *ok)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+                <parameter type="bool *" name="ok" default="nullptr"/>
+            </function>
+            <function name="getValue" fullname="VIJsonConfig::getValue" href="vijsonconfig.html#getValue" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="21" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="QJsonValue" signature="QJsonValue getValue(const QString &amp;key, bool *ok)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+                <parameter type="bool *" name="ok" default="nullptr"/>
+            </function>
+            <function name="isArray" fullname="VIJsonConfig::isArray" href="vijsonconfig.html#isArray" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="39" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool isArray(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isBool" fullname="VIJsonConfig::isBool" href="vijsonconfig.html#isBool" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="41" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool isBool(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isDouble" fullname="VIJsonConfig::isDouble" href="vijsonconfig.html#isDouble" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="43" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool isDouble(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isEmpty" fullname="VIJsonConfig::isEmpty" href="vijsonconfig.html#isEmpty" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="36" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool isEmpty(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isInt" fullname="VIJsonConfig::isInt" href="vijsonconfig.html#isInt" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="42" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool isInt(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isNull" fullname="VIJsonConfig::isNull" href="vijsonconfig.html#isNull" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="37" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool isNull(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isObject" fullname="VIJsonConfig::isObject" href="vijsonconfig.html#isObject" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="38" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool isObject(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isString" fullname="VIJsonConfig::isString" href="vijsonconfig.html#isString" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="40" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" signature="bool isString(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="keys" fullname="VIJsonConfig::keys" href="vijsonconfig.html#keys" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="18" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="QStringList" signature="QStringList keys(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="operator=" fullname="VIJsonConfig::operator=" href="vijsonconfig.html#operator-eq" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="16" documented="true" since="Visindigo 2.0.0" meta="copy-assign" virtual="non" const="false" static="false" final="false" override="false" type="VIJsonConfig &amp;" signature="VIJsonConfig &amp; operator=(const VIJsonConfig &amp;other)">
+                <parameter type="const VIJsonConfig &amp;" name="other" default=""/>
+            </function>
+            <function name="operator=" fullname="VIJsonConfig::operator=" href="vijsonconfig.html#operator-eq-1" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="17" documented="true" since="Visindigo 2.0.0" meta="move-assign" virtual="non" const="false" static="false" final="false" override="false" overload="true" overload-number="1" type="VIJsonConfig &amp;" signature="VIJsonConfig &amp; operator=(VIJsonConfig &amp;&amp;other)">
+                <parameter type="VIJsonConfig &amp;&amp;" name="other" default=""/>
+            </function>
+            <function name="parse" fullname="VIJsonConfig::parse" href="vijsonconfig.html#parse" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="19" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="int" signature="int parse(const QString &amp;)">
+                <parameter type="const QString &amp;" name="" default=""/>
+            </function>
+            <function name="setArray" fullname="VIJsonConfig::setArray" href="vijsonconfig.html#setArray" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="35" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setArray(const QString &amp;key, const QList&lt;VIJsonConfig&gt; &amp;value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="const QList&lt;VIJsonConfig&gt; &amp;" name="value" default=""/>
+            </function>
+            <function name="setBool" fullname="VIJsonConfig::setBool" href="vijsonconfig.html#setBool" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="32" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setBool(const QString &amp;key, bool value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="bool" name="value" default=""/>
+            </function>
+            <function name="setDouble" fullname="VIJsonConfig::setDouble" href="vijsonconfig.html#setDouble" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="33" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setDouble(const QString &amp;key, double value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="double" name="value" default=""/>
+            </function>
+            <function name="setInt" fullname="VIJsonConfig::setInt" href="vijsonconfig.html#setInt" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="30" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setInt(const QString &amp;key, qint64 value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="qint64" name="value" default=""/>
+            </function>
+            <function name="setObject" fullname="VIJsonConfig::setObject" href="vijsonconfig.html#setObject" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="34" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setObject(const QString &amp;key, const VIJsonConfig &amp;value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="const VIJsonConfig &amp;" name="value" default=""/>
+            </function>
+            <function name="setString" fullname="VIJsonConfig::setString" href="vijsonconfig.html#setString" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="31" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setString(const QString &amp;key, const QString &amp;value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="const QString &amp;" name="value" default=""/>
+            </function>
+            <function name="setValue" fullname="VIJsonConfig::setValue" href="vijsonconfig.html#setValue" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="29" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setValue(const QString &amp;key, const QJsonValue &amp;value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="const QJsonValue &amp;" name="value" default=""/>
+            </function>
+            <function name="toString" fullname="VIJsonConfig::toString" href="vijsonconfig.html#toString" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="20" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="QString" signature="QString toString(int format)">
+                <parameter type="int" name="format" default="..."/>
+            </function>
+            <function name="~VIJsonConfig" fullname="VIJsonConfig::~VIJsonConfig" href="vijsonconfig.html#dtor.VIJsonConfig" status="active" access="public" location="VIJsonConfig.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonConfig.h" lineno="15" documented="true" since="Visindigo 2.0.0" meta="destructor" virtual="non" const="false" static="false" final="false" override="false" type="" signature="~VIJsonConfig()"/>
+        </class>
+        <class name="VIJsonDocument" href="vijsondocument.html" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="5" since="Visindigo 2.0.0" documented="true" module="VIMiCore" brief="此类在VIJsonConfig的基础上增加了一种允许存在默认值的配置文件的处理方式。">
+            <function name="VIJsonDocument" fullname="VIJsonDocument::VIJsonDocument" href="vijsondocument.html#VIJsonDocument" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="8" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" type="" brief="构造一个空的VIJsonDocument对象。" signature="VIJsonDocument()"/>
+            <function name="VIJsonDocument" fullname="VIJsonDocument::VIJsonDocument" href="vijsondocument.html#VIJsonDocument-1" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="9" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" overload="true" overload-number="1" type="" brief="构造一个VIJsonDocument对象。 configPath 配置文件路径。 defaultConfigPath 默认配置文件路径。" signature="VIJsonDocument(const QString &amp;configPath, const QString &amp;defaultConfigPath)">
+                <parameter type="const QString &amp;" name="configPath" default=""/>
+                <parameter type="const QString &amp;" name="defaultConfigPath" default=""/>
+            </function>
+            <function name="contains" fullname="VIJsonDocument::contains" href="vijsondocument.html#contains" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="23" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="判断指定键是否存在。 key 键的路径。" signature="bool contains(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+            </function>
+            <function name="getArray" fullname="VIJsonDocument::getArray" href="vijsondocument.html#getArray" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="22" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="QList&lt;VIJsonConfig&gt;" brief="获取指定键的数组。 key 键的路径。" signature="QList&lt;VIJsonConfig&gt; getArray(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="getBool" fullname="VIJsonDocument::getBool" href="vijsondocument.html#getBool" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="19" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="获取指定键的布尔值。 key 键的路径。" signature="bool getBool(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="getDouble" fullname="VIJsonDocument::getDouble" href="vijsondocument.html#getDouble" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="20" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="double" brief="获取指定键的浮点数值。 key 键的路径。" signature="double getDouble(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="getInt" fullname="VIJsonDocument::getInt" href="vijsondocument.html#getInt" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="17" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="qint64" brief="获取指定键的整数值。 key 键的路径。" signature="qint64 getInt(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="getObject" fullname="VIJsonDocument::getObject" href="vijsondocument.html#getObject" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="21" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="VIJsonConfig" brief="获取指定键的对象。 key 键的路径。" signature="VIJsonConfig getObject(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="getString" fullname="VIJsonDocument::getString" href="vijsondocument.html#getString" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="18" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="QString" brief="获取指定键的字符串值。 key 键的路径。" signature="QString getString(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="getValue" fullname="VIJsonDocument::getValue" href="vijsondocument.html#getValue" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="16" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="QJsonValue" brief="获取指定键的值。 key 键的路径。" signature="QJsonValue getValue(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isArray" fullname="VIJsonDocument::isArray" href="vijsondocument.html#isArray" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="34" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="判断指定键的值是否为数组。 key 键的路径。" signature="bool isArray(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isBool" fullname="VIJsonDocument::isBool" href="vijsondocument.html#isBool" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="36" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="判断指定键的值是否为布尔值。 key 键的路径。" signature="bool isBool(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isDouble" fullname="VIJsonDocument::isDouble" href="vijsondocument.html#isDouble" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="38" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="判断指定键的值是否为浮点数。 key 键的路径。" signature="bool isDouble(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isEmpty" fullname="VIJsonDocument::isEmpty" href="vijsondocument.html#isEmpty" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="31" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="判断指定键的值是否为空。 key 键的路径。" signature="bool isEmpty(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isInt" fullname="VIJsonDocument::isInt" href="vijsondocument.html#isInt" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="37" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="判断指定键的值是否为整数。 key 键的路径。" signature="bool isInt(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isNull" fullname="VIJsonDocument::isNull" href="vijsondocument.html#isNull" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="32" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="判断指定键的值是否为null。 key 键的路径。" signature="bool isNull(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isObject" fullname="VIJsonDocument::isObject" href="vijsondocument.html#isObject" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="33" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="判断指定键的值是否为对象。 key 键的路径。" signature="bool isObject(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="isString" fullname="VIJsonDocument::isString" href="vijsondocument.html#isString" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="35" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="bool" brief="判断指定键的值是否为字符串。 key 键的路径。" signature="bool isString(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="keys" fullname="VIJsonDocument::keys" href="vijsondocument.html#keys" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="15" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="QStringList" brief="获取配置文件中的所有键。 key 键的路径。" signature="QStringList keys(const QString &amp;key)">
+                <parameter type="const QString &amp;" name="key" default="..."/>
+            </function>
+            <function name="load" fullname="VIJsonDocument::load" href="vijsondocument.html#load" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="13" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="int" brief="从配置文件中加载配置。 configPath 配置文件路径。 defaultConfigPath 默认配置文件路径。 whichError 指示是谁加载失败，1表示默认配置，2表示当前配置，0表示成功。 configAutoCreate 是否自动创建配置文件，默认为true。当默认配置文件读入成功但当前配置文件读入失败时， 会自动在指定位置创建当前配置文件。" signature="int load(const QString &amp;, const QString &amp;, uchar *, bool)">
+                <parameter type="const QString &amp;" name="" default=""/>
+                <parameter type="const QString &amp;" name="" default=""/>
+                <parameter type="uchar *" name="" default=""/>
+                <parameter type="bool" name="" default=""/>
+            </function>
+            <function name="save" fullname="VIJsonDocument::save" href="vijsondocument.html#save" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="14" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" brief="保存配置到文件。" signature="void save()"/>
+            <function name="setArray" fullname="VIJsonDocument::setArray" href="vijsondocument.html#setArray" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="30" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" brief="设置指定键的数组。 key 键的路径。 value 值。" signature="void setArray(const QString &amp;key, const QList&lt;VIJsonConfig&gt; &amp;value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="const QList&lt;VIJsonConfig&gt; &amp;" name="value" default=""/>
+            </function>
+            <function name="setBool" fullname="VIJsonDocument::setBool" href="vijsondocument.html#setBool" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="27" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" brief="设置指定键的布尔值。 key 键的路径。 value 值。" signature="void setBool(const QString &amp;key, bool value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="bool" name="value" default=""/>
+            </function>
+            <function name="setDouble" fullname="VIJsonDocument::setDouble" href="vijsondocument.html#setDouble" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="28" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" brief="设置指定键的浮点数值。 key 键的路径。 value 值。" signature="void setDouble(const QString &amp;key, double value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="double" name="value" default=""/>
+            </function>
+            <function name="setInt" fullname="VIJsonDocument::setInt" href="vijsondocument.html#setInt" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="25" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" brief="设置指定键的整数值。 key 键的路径。 value 值。" signature="void setInt(const QString &amp;key, qint64 value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="qint64" name="value" default=""/>
+            </function>
+            <function name="setObject" fullname="VIJsonDocument::setObject" href="vijsondocument.html#setObject" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="29" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" brief="设置指定键的对象。 key 键的路径。 value 值。" signature="void setObject(const QString &amp;key, const VIJsonConfig &amp;value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="const VIJsonConfig &amp;" name="value" default=""/>
+            </function>
+            <function name="setString" fullname="VIJsonDocument::setString" href="vijsondocument.html#setString" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="26" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" brief="设置指定键的字符串值。 key 键的路径。 value 值。" signature="void setString(const QString &amp;key, const QString &amp;value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="const QString &amp;" name="value" default=""/>
+            </function>
+            <function name="setValue" fullname="VIJsonDocument::setValue" href="vijsondocument.html#setValue" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="24" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" brief="设置指定键的值。 key 键的路径。 value 值。" signature="void setValue(const QString &amp;key, const QJsonValue &amp;value)">
+                <parameter type="const QString &amp;" name="key" default=""/>
+                <parameter type="const QJsonValue &amp;" name="value" default=""/>
+            </function>
+            <function name="~VIJsonDocument" fullname="VIJsonDocument::~VIJsonDocument" href="vijsondocument.html#dtor.VIJsonDocument" status="active" access="public" location="VIJsonDocument.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIJsonDocument.h" lineno="12" documented="true" since="Visindigo 2.0.0" meta="destructor" virtual="non" const="false" static="false" final="false" override="false" type="" brief="析构VIJsonDocument对象。" signature="~VIJsonDocument()"/>
+        </class>
+        <class name="VILogger" href="vilogger.html" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="7" since="Visindigo 2.0.0" documented="true" bases="VIObject" module="VIMiCore" brief="VILogger定义了Visindigo的日志记录器。">
+            <function name="LevelToString" fullname="VILogger::LevelToString" href="vilogger.html#LevelToString" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="19" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="QString" signature="QString LevelToString(VILogger::Level level)">
+                <parameter type="VILogger::Level" name="level" default=""/>
+            </function>
+            <function name="VILogger" fullname="VILogger::VILogger" href="vilogger.html#VILogger" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="24" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VILogger(VISuper *parent)">
+                <parameter type="VISuper *" name="parent" default="nullptr"/>
+            </function>
+            <function name="debug" fullname="VILogger::debug" href="vilogger.html#debug" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="31" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void debug(QString msg)">
+                <parameter type="QString" name="msg" default=""/>
+            </function>
+            <function name="error" fullname="VILogger::error" href="vilogger.html#error" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="34" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void error(QString msg)">
+                <parameter type="QString" name="msg" default=""/>
+            </function>
+            <function name="fatal" fullname="VILogger::fatal" href="vilogger.html#fatal" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="35" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void fatal(QString msg)">
+                <parameter type="QString" name="msg" default=""/>
+            </function>
+            <function name="info" fullname="VILogger::info" href="vilogger.html#info" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="32" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void info(QString msg)">
+                <parameter type="QString" name="msg" default=""/>
+            </function>
+            <function name="level" fullname="VILogger::level" href="vilogger.html#level" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="25" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" associated-property="level" type="VILogger::Level" signature="VILogger::Level level() const"/>
+            <function name="log" fullname="VILogger::log" href="vilogger.html#log" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="29" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void log(QString msg, VILogger::Level level)">
+                <parameter type="QString" name="msg" default=""/>
+                <parameter type="VILogger::Level" name="level" default="Level::Info"/>
+            </function>
+            <function name="loggerName" fullname="VILogger::loggerName" href="vilogger.html#loggerName" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="27" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" associated-property="loggerName" type="QString" signature="QString loggerName() const"/>
+            <function name="setLevel" fullname="VILogger::setLevel" href="vilogger.html#setLevel" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="26" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" associated-property="level" type="void" signature="void setLevel(const VILogger::Level &amp;level)">
+                <parameter type="const VILogger::Level &amp;" name="level" default=""/>
+            </function>
+            <function name="setLoggerName" fullname="VILogger::setLoggerName" href="vilogger.html#setLoggerName" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="28" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" associated-property="loggerName" type="void" signature="void setLoggerName(const QString &amp;name)">
+                <parameter type="const QString &amp;" name="name" default=""/>
+            </function>
+            <function name="trace" fullname="VILogger::trace" href="vilogger.html#trace" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="30" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void trace(QString msg)">
+                <parameter type="QString" name="msg" default=""/>
+            </function>
+            <function name="warn" fullname="VILogger::warn" href="vilogger.html#warn" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="33" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void warn(QString msg)">
+                <parameter type="QString" name="msg" default=""/>
+            </function>
+            <enum name="Level" fullname="VILogger::Level" href="vilogger.html#Level-enum" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="15" since="Visindigo 2.0.0" documented="true" scoped="true">
+                <value name="Trace" value="VI_LOG_LEVEL_TRACE"/>
+                <value name="Debug" value="VI_LOG_LEVEL_DEBUG"/>
+                <value name="Info" value="VI_LOG_LEVEL_INFO"/>
+                <value name="Warn" value="VI_LOG_LEVEL_WARN"/>
+                <value name="Error" value="VI_LOG_LEVEL_ERROR"/>
+                <value name="Fatal" value="VI_LOG_LEVEL_FATAL"/>
+            </enum>
+            <property name="level" fullname="VILogger::level" href="vilogger.html#level-prop" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="21" since="Visindigo 2.0.0" documented="true" brief="获取日志记录器的日志截止级别。 获取日志记录器的日志截止级别。小于此等级的日志将不会被记录。">
+                <getter name="level"/>
+                <setter name="setLevel"/>
+            </property>
+            <property name="loggerName" fullname="VILogger::loggerName" href="vilogger.html#loggerName-prop" status="active" access="public" location="VILogger.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILogger.h" lineno="22" since="Visindigo 2.0.0" documented="true" brief="获取日志记录器的名称。 获取日志记录器的名称。">
+                <getter name="loggerName"/>
+                <setter name="setLoggerName"/>
+            </property>
+        </class>
+        <class name="VILoggerManager" href="viloggermanager.html" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="4" since="Visindigo 2.0.0" documented="true" bases="VIObject" module="VIMiCore" brief="VILoggerManager定义了Visindigo的日志记录器管理器。">
+            <function name="Instance" fullname="VILoggerManager::Instance" href="viloggermanager.html#Instance" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="11" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="true" final="false" override="false" type="VILoggerManager *" signature="VILoggerManager * Instance()"/>
+            <function name="VILoggerManager" fullname="VILoggerManager::VILoggerManager" href="viloggermanager.html#VILoggerManager" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="12" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VILoggerManager(VISuper *parent)">
+                <parameter type="VISuper *" name="parent" default="nullptr"/>
+            </function>
+            <function name="addLogger" fullname="VILoggerManager::addLogger" href="viloggermanager.html#addLogger" status="active" access="protected" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="23" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void addLogger(VILogger *logger)">
+                <parameter type="VILogger *" name="logger" default=""/>
+            </function>
+            <function name="log" fullname="VILoggerManager::log" href="viloggermanager.html#log" status="active" access="protected" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="24" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void log(VILogger *logger, QString msg, VILogger::Level level)">
+                <parameter type="VILogger *" name="logger" default=""/>
+                <parameter type="QString" name="msg" default=""/>
+                <parameter type="VILogger::Level" name="level" default=""/>
+            </function>
+            <function name="logger" fullname="VILoggerManager::logger" href="viloggermanager.html#logger" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="22" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="VILogger *" signature="VILogger * logger(const QString &amp;name)">
+                <parameter type="const QString &amp;" name="name" default="..."/>
+            </function>
+            <function name="setLogFileCacheSize" fullname="VILoggerManager::setLogFileCacheSize" href="viloggermanager.html#setLogFileCacheSize" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="21" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setLogFileCacheSize(int bytes)">
+                <parameter type="int" name="bytes" default=""/>
+            </function>
+            <function name="setLogFileMaxSize" fullname="VILoggerManager::setLogFileMaxSize" href="viloggermanager.html#setLogFileMaxSize" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="20" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setLogFileMaxSize(int bytes)">
+                <parameter type="int" name="bytes" default=""/>
+            </function>
+            <function name="setLogFileTimeFormat" fullname="VILoggerManager::setLogFileTimeFormat" href="viloggermanager.html#setLogFileTimeFormat" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="17" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setLogFileTimeFormat(const QString &amp;format)">
+                <parameter type="const QString &amp;" name="format" default=""/>
+            </function>
+            <function name="setLogFolder" fullname="VILoggerManager::setLogFolder" href="viloggermanager.html#setLogFolder" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="16" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setLogFolder(const QString &amp;folder)">
+                <parameter type="const QString &amp;" name="folder" default=""/>
+            </function>
+            <function name="setLogFormat" fullname="VILoggerManager::setLogFormat" href="viloggermanager.html#setLogFormat" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="19" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setLogFormat(const QString &amp;format)">
+                <parameter type="const QString &amp;" name="format" default=""/>
+            </function>
+            <function name="setLoggerLevel" fullname="VILoggerManager::setLoggerLevel" href="viloggermanager.html#setLoggerLevel" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="15" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setLoggerLevel(VILogger::Level level)">
+                <parameter type="VILogger::Level" name="level" default=""/>
+            </function>
+            <function name="setTimeFormat" fullname="VILoggerManager::setTimeFormat" href="viloggermanager.html#setTimeFormat" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="18" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setTimeFormat(const QString &amp;format)">
+                <parameter type="const QString &amp;" name="format" default=""/>
+            </function>
+            <function name="start" fullname="VILoggerManager::start" href="viloggermanager.html#start" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="14" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void start()"/>
+            <function name="~VILoggerManager" fullname="VILoggerManager::~VILoggerManager" href="viloggermanager.html#dtor.VILoggerManager" status="active" access="public" location="VILoggerManager.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VILoggerManager.h" lineno="13" documented="true" since="Visindigo 2.0.0" meta="destructor" virtual="non" const="false" static="false" final="false" override="false" type="" signature="~VILoggerManager()"/>
+        </class>
+        <page name="VICompileMacro.html" href="vicompilemacro.html" status="active" location="VICompileMacro.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VICompileMacro.qdoc" lineno="1" since="Visindigo 2.0.0" documented="true" groups="VIMiCore" subtype="page" title="Visindigo编译宏" fulltitle="Visindigo编译宏" subtitle="" brief="Visindigo编译(用)宏为Visindigo提供一些编译上的便利. VICompileMacro由许多条件编译 #ifdef 宏组成，用于在编译时控制Visindigo的行为。">
+            <contents name="" title="有关部署平台的宏" level="1"/>
+            <contents name="linux-deploy" title="LINUX_DEPLOY" level="2"/>
+            <contents name="android-deploy" title="ANDROID_DEPLOY" level="2"/>
+            <contents name="android-deploy-old" title="ANDROID_DEPLOY_OLD" level="2"/>
+            <contents name="windwos-deploy" title="WINDWOS_DEPLOY" level="2"/>
+            <contents name="windwos-deploy-32" title="WINDWOS_DEPLOY_32" level="2"/>
+        </page>
+        <typedef name="VIBaseObject" href="viobject.html#VIBaseObject-typedef" status="active" access="public" location="VIAbstractObject.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIAbstractObject.h" lineno="12" related="6" since="Visindigo 2.0.0" documented="true"/>
+        <class name="VIObject" href="viobject.html" status="active" access="public" location="VIObject.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIObject.h" lineno="4" since="Visindigo 2.0.0" documented="true" module="VIMiCore" brief="VIObject是Visindigo框架的基类 VIObject是Visindigo框架的基类，所有的Visindigo框架的类都应该继承自VIObject。 如果用户需要将一个已经继承自QObject的类转换为VIObject，可以使用VIAbstractObject。">
+            <function name="VIObject" fullname="VIObject::VIObject" href="viobject.html#VIObject" status="active" access="public" location="VIObject.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIObject.h" lineno="6" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VIObject(VISuper *parent)">
+                <parameter type="VISuper *" name="parent" default="nullptr"/>
+            </function>
+            <function name="VI_OBJECT" href="viobject.html#VI_OBJECT" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="33" documented="true" related="0" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_OBJECT"/>
+            <function name="VI_VERSION_BUILD" href="viobject.html#VI_VERSION_BUILD" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="15" documented="true" related="1" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_VERSION_BUILD"/>
+            <function name="VI_VERSION_DATE" href="viobject.html#VI_VERSION_DATE" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="21" documented="true" related="2" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_VERSION_DATE"/>
+            <function name="VI_VERSION_NICKNAME" href="viobject.html#VI_VERSION_NICKNAME" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="9" documented="true" related="3" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_VERSION_NICKNAME"/>
+            <function name="VI_VERSION_TIME" href="viobject.html#VI_VERSION_TIME" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="27" documented="true" related="4" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VI_VERSION_TIME"/>
+            <function name="p_VI_OBJECT_CONTENT" href="viobject.html#p_VI_OBJECT_CONTENT" status="active" access="public" location="VIObject.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VIObject.qdoc" lineno="39" documented="true" related="5" since="Visindigo 2.0.0" meta="macrowithoutparams" virtual="non" const="false" static="false" final="false" override="false" type="" signature="p_VI_OBJECT_CONTENT"/>
+            <typedef name="VIBaseObject" href="viobject.html#VIBaseObject-typedef" status="active" access="public" location="VIAbstractObject.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIAbstractObject.h" lineno="12" related="6" since="Visindigo 2.0.0" documented="true"/>
+            <typedef name="VISuper" href="viobject.html#VISuper-typedef" status="active" access="public" location="VIAbstractObject.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIAbstractObject.h" lineno="5" related="7" since="Visindigo 2.0.0" documented="true"/>
+        </class>
+        <class name="VIPackage" href="vipackage.html" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="7" since="Visindigo 2.0.0" documented="true" bases="VIObject" module="VIMiCore" brief="VIPackage定义了Visindigo的功能集合。">
+            <function name="VIPackage" fullname="VIPackage::VIPackage" href="vipackage.html#VIPackage" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="17" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" type="" signature="VIPackage(QString uniqueName, QObject *parent)">
+                <parameter type="QString" name="uniqueName" default=""/>
+                <parameter type="QObject *" name="parent" default="nullptr"/>
+            </function>
+            <function name="absolutePath" fullname="VIPackage::absolutePath" href="vipackage.html#absolutePath" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="26" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" type="QString" signature="QString absolutePath() const"/>
+            <function name="config" fullname="VIPackage::config" href="vipackage.html#config" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="29" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" type="VIJsonDocument *" signature="VIJsonDocument * config() const"/>
+            <function name="externalPath" fullname="VIPackage::externalPath" href="vipackage.html#externalPath" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="25" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" type="QString" signature="QString externalPath() const"/>
+            <function name="internalPath" fullname="VIPackage::internalPath" href="vipackage.html#internalPath" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="24" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" type="QString" signature="QString internalPath() const"/>
+            <function name="logger" fullname="VIPackage::logger" href="vipackage.html#logger" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="30" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" type="VILogger *" signature="VILogger * logger() const"/>
+            <function name="name" fullname="VIPackage::name" href="vipackage.html#name" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="20" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" associated-property="name" type="QString" signature="QString name() const"/>
+            <function name="packageContainsClass" fullname="VIPackage::packageContainsClass" href="vipackage.html#packageContainsClass" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="22" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" type="bool" signature="bool packageContainsClass(const QString &amp;className) const">
+                <parameter type="const QString &amp;" name="className" default=""/>
+            </function>
+            <function name="recordClass" fullname="VIPackage::recordClass" href="vipackage.html#recordClass" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="23" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void recordClass(const QMetaObject *metaObject)">
+                <parameter type="const QMetaObject *" name="metaObject" default=""/>
+            </function>
+            <function name="setName" fullname="VIPackage::setName" href="vipackage.html#setName" status="active" access="protected" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="21" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setName(const QString &amp;value)">
+                <parameter type="const QString &amp;" name="value" default=""/>
+            </function>
+            <function name="setUniqueName" fullname="VIPackage::setUniqueName" href="vipackage.html#setUniqueName" status="active" access="protected" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="19" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="void" signature="void setUniqueName(const QString &amp;value)">
+                <parameter type="const QString &amp;" name="value" default=""/>
+            </function>
+            <function name="uniqueName" fullname="VIPackage::uniqueName" href="vipackage.html#uniqueName" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="18" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="true" static="false" final="false" override="false" associated-property="uniqueName" type="QString" signature="QString uniqueName() const"/>
+            <property name="name" fullname="VIPackage::name" href="vipackage.html#name-prop" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="16" since="Visindigo 2.0.0" documented="true" brief="获取功能集合的名称。 获取功能集合的名称。">
+                <getter name="name"/>
+            </property>
+            <property name="uniqueName" fullname="VIPackage::uniqueName" href="vipackage.html#uniqueName-prop" status="active" access="public" location="VIPackage.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIPackage.h" lineno="15" since="Visindigo 2.0.0" documented="true" brief="获取功能集合的唯一名称。 获取功能集合的唯一名称。">
+                <getter name="uniqueName"/>
+            </property>
+        </class>
+        <class name="VIQCoreApplication" href="viqcoreapplication.html" status="active" access="public" location="VIQCoreApplication.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIQCoreApplication.h" lineno="5" since="Visindigo 2.0.0" documented="true" bases="VIAbstractObject" module="VIMiCore" brief="对QCoreApplication的加壳，以便进行异常处理。">
+            <function name="notify" fullname="VIQCoreApplication::notify" href="viqcoreapplication.html#notify" status="active" access="protected" location="VIQCoreApplication.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIQCoreApplication.h" lineno="13" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="virtual" const="false" static="false" final="false" override="true" type="bool" signature="bool notify(QObject *receiver, QEvent *e) override">
+                <parameter type="QObject *" name="receiver" default=""/>
+                <parameter type="QEvent *" name="e" default=""/>
+            </function>
+        </class>
+        <typedef name="VISuper" href="viobject.html#VISuper-typedef" status="active" access="public" location="VIAbstractObject.h" filepath="E:/source/repos/Visindigo/src/VIMiCore/VIAbstractObject.h" lineno="5" related="7" since="Visindigo 2.0.0" documented="true"/>
+        <page name="VICompileMacro.html" href="vicompilemacro.html" status="active" location="VICompileMacro.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/VICompileMacro.qdoc" lineno="1" since="Visindigo 2.0.0" documented="true" groups="VIMiCore" subtype="page" title="Visindigo编译宏" fulltitle="Visindigo编译宏" subtitle="" brief="Visindigo编译(用)宏为Visindigo提供一些编译上的便利. VICompileMacro由许多条件编译 #ifdef 宏组成，用于在编译时控制Visindigo的行为。">
+            <contents name="" title="有关部署平台的宏" level="1"/>
+            <contents name="linux-deploy" title="LINUX_DEPLOY" level="2"/>
+            <contents name="android-deploy" title="ANDROID_DEPLOY" level="2"/>
+            <contents name="android-deploy-old" title="ANDROID_DEPLOY_OLD" level="2"/>
+            <contents name="windwos-deploy" title="WINDWOS_DEPLOY" level="2"/>
+            <contents name="windwos-deploy-32" title="WINDWOS_DEPLOY_32" level="2"/>
+        </page>
+        <group name="VIMiCore" href="vimicore.html" status="internal" seen="false" title=""/>
+        <module name="VIMiCore" href="vimicore-module.html" status="active" location="module.qdoc" filepath="E:/source/repos/Visindigo/src/VIMiCore/doc/module.qdoc" lineno="1" since="Visindigo 2.0.0" documented="true" seen="true" title="Visindigo 最小内核 模块" brief="包括了 Visindigo 最小内核的所有类. Visindigo 最小内核是构建 Visindigo 内核的基础。"/>
+    </namespace>
+</INDEX>

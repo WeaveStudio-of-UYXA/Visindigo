@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+<!-- VIObject.qdoc -->
+  <meta name="description" content="VIObject是Visindigo框架的基类 VIObject是Visindigo框架的基类，所有的Visindigo框架的类都应该继承自VIObject。 如果用户需要将一个已经继承自QObject的类转换为VIObject，可以使用<a href="viabstractobject.html" translate="no">VIAbstractObject</a>。">
+  <title>VIObject Class | VIMiCore</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+    <div class="main">
+    <div class="main-rounded">
+        <div class="navigationbar">
+        <ul>
+<li><a href="vimicore-module.html" translate="no">VIMiCore</a></li>
+<li>VIObject</li>
+    </ul>
+    </div>
+</div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#related-non-members">Related Non-Members</a></li>
+<li class="level1"><a href="#macros">Macros</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">VIObject Class</h1>
+<!-- $$$VIObject-brief -->
+<p>VIObject是Visindigo框架的基类 VIObject是Visindigo框架的基类，所有的Visindigo框架的类都应该继承自VIObject。 如果用户需要将一个已经继承自QObject的类转换为VIObject，可以使用<a href="viabstractobject.html" translate="no">VIAbstractObject</a>。. <a href="#details">More...</a></p>
+<!-- @@@VIObject -->
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;VIObject&gt;</span></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Visindigo 2.0&#x2e;0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="vilogger.html" translate="no">VILogger</a>, <a href="viloggermanager.html" translate="no">VILoggerManager</a>, and <a href="vipackage.html" translate="no">VIPackage</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="viobject-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viobject.html#VIObject" translate="no">VIObject</a></b>(VISuper *<i>parent</i> = nullptr)</td></tr>
+</table></div>
+<h2 id="related-non-members">Related Non-Members</h2>
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viobject.html#VIBaseObject-typedef" translate="no">VIBaseObject</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viobject.html#VISuper-typedef" translate="no">VISuper</a></b></td></tr>
+</table></div>
+<h2 id="macros">Macros</h2>
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viobject.html#VI_OBJECT" translate="no">VI_OBJECT</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viobject.html#VI_VERSION_BUILD" translate="no">VI_VERSION_BUILD</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viobject.html#VI_VERSION_DATE" translate="no">VI_VERSION_DATE</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viobject.html#VI_VERSION_NICKNAME" translate="no">VI_VERSION_NICKNAME</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viobject.html#VI_VERSION_TIME" translate="no">VI_VERSION_TIME</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viobject.html#p_VI_OBJECT_CONTENT" translate="no">p_VI_OBJECT_CONTENT</a></b></td></tr>
+</table></div>
+<!-- $$$VIObject-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+</div>
+<!-- @@@VIObject -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$VIObject[overload1]$$$VIObjectVISuper* -->
+<h3 class="fn" translate="no" id="VIObject"><code translate="no">[since Visindigo 2.0.0] </code>VIObject::<span class="name">VIObject</span>(<span class="type"><a href="viobject.html#VISuper-typedef" translate="no">VISuper</a></span> *<i>parent</i> = nullptr)</h3>
+<p><i translate="no">parent</i> 为VIObject的父对象。 VIObject的默认构造函数</p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VIObject -->
+</div>
+<div class="relnonmem">
+<h2>Related Non-Members</h2>
+<!-- $$$VIBaseObject -->
+<h3 class="fn" translate="no" id="VIBaseObject-typedef"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">VIBaseObject</span></h3>
+<p><a href="viabstractobject.html" translate="no">VIAbstractObject</a>的别名。</p>
+<p>This typedef was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VIBaseObject -->
+<!-- $$$VISuper -->
+<h3 class="fn" translate="no" id="VISuper-typedef"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">VISuper</span></h3>
+<p>作为Visindigo统一风格命名的一部分，是QObject的别名。</p>
+<p>This typedef was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VISuper -->
+</div>
+<div class="macros">
+<h2>Macro Documentation</h2>
+<!-- $$$VI_OBJECT[overload1]$$$VI_OBJECT -->
+<h3 class="fn" translate="no" id="VI_OBJECT"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">VI_OBJECT</span></h3>
+<p><a href="viobject.html#p_VI_OBJECT_CONTENT" translate="no">p_VI_OBJECT_CONTENT</a>的别名。</p>
+<p>This macro was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VI_OBJECT -->
+<!-- $$$VI_VERSION_BUILD[overload1]$$$VI_VERSION_BUILD -->
+<h3 class="fn" translate="no" id="VI_VERSION_BUILD"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">VI_VERSION_BUILD</span></h3>
+<p>由Python脚本生成的宏。此宏定义当前版本的构建号，实质上是Git的提交次数。</p>
+<p>This macro was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VI_VERSION_BUILD -->
+<!-- $$$VI_VERSION_DATE[overload1]$$$VI_VERSION_DATE -->
+<h3 class="fn" translate="no" id="VI_VERSION_DATE"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">VI_VERSION_DATE</span></h3>
+<p>由Python脚本生成的宏。此宏定义一个YYYY-MM-DD格式的字符串，表示当前版本的日期。</p>
+<p>This macro was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VI_VERSION_DATE -->
+<!-- $$$VI_VERSION_NICKNAME[overload1]$$$VI_VERSION_NICKNAME -->
+<h3 class="fn" translate="no" id="VI_VERSION_NICKNAME"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">VI_VERSION_NICKNAME</span></h3>
+<p>由Python脚本生成的宏。此宏定义当前版本的昵称。</p>
+<p>This macro was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VI_VERSION_NICKNAME -->
+<!-- $$$VI_VERSION_TIME[overload1]$$$VI_VERSION_TIME -->
+<h3 class="fn" translate="no" id="VI_VERSION_TIME"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">VI_VERSION_TIME</span></h3>
+<p>由Python脚本生成的宏。此宏定义一个HH:MM:SS格式的字符串，表示当前版本的时间。</p>
+<p>This macro was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VI_VERSION_TIME -->
+<!-- $$$p_VI_OBJECT_CONTENT[overload1]$$$p_VI_OBJECT_CONTENT -->
+<h3 class="fn" translate="no" id="p_VI_OBJECT_CONTENT"><code translate="no">[since Visindigo 2.0.0] </code><span class="name">p_VI_OBJECT_CONTENT</span></h3>
+<p>用于为<a href="viobject.html" translate="no">VIObject</a>添加额外的内容，当前是空的。</p>
+<p>This macro was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@p_VI_OBJECT_CONTENT -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2023 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are <a href="https://doc.qt.io/qt/trademarks.html">    trademarks</a> of The Qt Company Ltd. in Finland and/or other countries
+   worldwide. All other trademarks are property of their respective owners. </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+<!-- module.qdoc -->
+  <meta name="description" content="包括了 Visindigo 最小内核的所有类. Visindigo 最小内核是构建 Visindigo 内核的基础。">
+  <title>Visindigo 最小内核 模块 | VIMiCore</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+    <div class="main">
+    <div class="main-rounded">
+        <div class="navigationbar">
+        <ul>
+    </ul>
+    </div>
+</div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#namespaces">Namespaces</a></li>
+<li class="level1"><a href="#classes">Classes</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">Visindigo 最小内核 模块</h1>
+<!-- $$$VIMiCore-brief -->
+<p>包括了 Visindigo 最小内核的所有类. Visindigo 最小内核是构建 Visindigo 内核的基础。. <a href="#details">More...</a></p>
+<!-- @@@VIMiCore -->
+<p>This module was introduced in Visindigo 2.0&#x2e;0.</p>
+<h2 id="classes">Classes</h2>
+<div class="table"><table class="annotated">
+<tr class="odd topAlign"><td class="tblName" translate="no"><p><a href="viabstractobject.html">VIAbstractObject</a></p></td><td class="tblDescr"><p>是Visindigo框架大部分类型的基类，用于在其中提供通用功能. 用户不应该直接使用VIAbstractObject，而应该使用VIObject或者其子类，除非用户需要将一个 已经继承自QObject的类转换为VIObject。</p></td></tr>
+<tr class="even topAlign"><td class="tblName" translate="no"><p><a href="viconsole.html">VIConsole</a></p></td><td class="tblDescr"><p>VIConsole为Visindigo提供初级的控制台快捷功能。</p></td></tr>
+<tr class="odd topAlign"><td class="tblName" translate="no"><p><a href="vijsonconfig.html">VIJsonConfig</a></p></td><td class="tblDescr"><p>VIJsonConfig定义了对Json配置的操作。</p></td></tr>
+<tr class="even topAlign"><td class="tblName" translate="no"><p><a href="vijsondocument.html">VIJsonDocument</a></p></td><td class="tblDescr"><p>此类在VIJsonConfig的基础上增加了一种允许存在默认值的配置文件的处理方式。</p></td></tr>
+<tr class="odd topAlign"><td class="tblName" translate="no"><p><a href="vilogger.html">VILogger</a></p></td><td class="tblDescr"><p>VILogger定义了Visindigo的日志记录器。</p></td></tr>
+<tr class="even topAlign"><td class="tblName" translate="no"><p><a href="viloggermanager.html">VILoggerManager</a></p></td><td class="tblDescr"><p>VILoggerManager定义了Visindigo的日志记录器管理器。</p></td></tr>
+<tr class="odd topAlign"><td class="tblName" translate="no"><p><a href="viobject.html">VIObject</a></p></td><td class="tblDescr"><p>VIObject是Visindigo框架的基类 VIObject是Visindigo框架的基类，所有的Visindigo框架的类都应该继承自VIObject。 如果用户需要将一个已经继承自QObject的类转换为VIObject，可以使用VIAbstractObject。</p></td></tr>
+<tr class="even topAlign"><td class="tblName" translate="no"><p><a href="vipackage.html">VIPackage</a></p></td><td class="tblDescr"><p>VIPackage定义了Visindigo的功能集合。</p></td></tr>
+<tr class="odd topAlign"><td class="tblName" translate="no"><p><a href="viqcoreapplication.html">VIQCoreApplication</a></p></td><td class="tblDescr"><p>对QCoreApplication的加壳，以便进行异常处理。</p></td></tr>
+</table></div>
+<!-- $$$VIMiCore-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>如果要查看 VIMiCore 的预编译宏，请参见 <a href="vicompilemacro.html" translate="no">VICompileMacro.html</a>.</p>
+</div>
+<!-- @@@VIMiCore -->
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2023 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are <a href="https://doc.qt.io/qt/trademarks.html">    trademarks</a> of The Qt Company Ltd. in Finland and/or other countries
+   worldwide. All other trademarks are property of their respective owners. </p>
+</div>
+</body>
+</html>
