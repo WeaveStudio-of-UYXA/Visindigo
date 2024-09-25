@@ -39,7 +39,7 @@
 #define VIMiCoreAPI __declspec(dllimport)
 #endif
 #else
-#define VIPublicAPI
+#define VIMiCoreAPI
 #endif
 
 #define VIPrivateAPI

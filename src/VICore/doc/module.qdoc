@@ -1,0 +1,7 @@
+/*!
+    \module VICore
+    \title Visindigo 内核 模块
+    \brief 包括了 Visindigo 最小内核的所有类.
+    \since Visindigo 2.0.0
+    Visindigo 内核是构建 Visindigo 内核的基础。
+*/

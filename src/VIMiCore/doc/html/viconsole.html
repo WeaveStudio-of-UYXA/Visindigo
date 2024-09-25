@@ -111,7 +111,7 @@
 <div class="func">
 <h2>Member Function Documentation</h2>
 <!-- $$$exec[overload1]$$$execconstQString& -->
-<h3 class="fn" translate="no" id="exec"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">unsigned</span> <span class="type">int</span> VIConsole::<span class="name">exec</span>(const <span class="type">QString</span> &amp;<i>cmd</i>)</h3>
+<h3 class="fn" translate="no" id="exec"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">unsigned</span> <span class="type">int</span> VIConsole::<span class="name">exec</span>(const <span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> &amp;<i>cmd</i>)</h3>
 <p><i translate="no">cmd</i> 为要执行的命令。</p>
 <p>执行一个命令。</p>
 <div class="admonition note">
@@ -120,71 +120,71 @@
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@exec -->
 <!-- $$$getColorString[overload1]$$$getColorStringQStringVIConsole::ColorQList<VIConsole::Style> -->
-<h3 class="fn" translate="no" id="getColorString"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">getColorString</span>(<span class="type">QString</span> <i>rawText</i>, <span class="type"><a href="viconsole.html#Color-enum" translate="no">VIConsole::Color</a></span> <i>color</i>, <span class="type">QList</span>&lt;<span class="type">VIConsole::Style</span>&gt; <i>styleList</i> = ...)</h3>
+<h3 class="fn" translate="no" id="getColorString"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">getColorString</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>rawText</i>, <span class="type"><a href="viconsole.html#Color-enum" translate="no">VIConsole::Color</a></span> <i>color</i>, <span class="type"><a href="https://doc.qt.io/qt/qlist.html" translate="no">QList</a></span>&lt;<span class="type">VIConsole::Style</span>&gt; <i>styleList</i> = ...)</h3>
 <p><i translate="no">rawText</i> 为要设置颜色的文本。 <i translate="no">color</i> 为颜色。 <i translate="no">styleList</i> 为样式列表。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@getColorString -->
 <!-- $$$getColorString$$$getColorStringQStringVIConsole::ColorVIConsole::Style -->
-<h3 class="fn" translate="no" id="getColorString-1"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">getColorString</span>(<span class="type">QString</span> <i>rawText</i>, <span class="type"><a href="viconsole.html#Color-enum" translate="no">VIConsole::Color</a></span> <i>color</i>, <span class="type">VIConsole::Style</span> <i>style</i> = VIConsole::Style::Normal)</h3>
+<h3 class="fn" translate="no" id="getColorString-1"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">getColorString</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>rawText</i>, <span class="type"><a href="viconsole.html#Color-enum" translate="no">VIConsole::Color</a></span> <i>color</i>, <span class="type">VIConsole::Style</span> <i>style</i> = VIConsole::Style::Normal)</h3>
 <p>This is an overloaded function.</p>
 <p>允许只设置一个样式。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@getColorString -->
 <!-- $$$getColorString$$$getColorStringQStringQColorQList<VIConsole::Style> -->
-<h3 class="fn" translate="no" id="getColorString-2"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">getColorString</span>(<span class="type">QString</span> <i>rawText</i>, <span class="type">QColor</span> <i>rgb</i>, <span class="type">QList</span>&lt;<span class="type">VIConsole::Style</span>&gt; <i>styleList</i> = { VIConsole::Style::Normal })</h3>
+<h3 class="fn" translate="no" id="getColorString-2"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">getColorString</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>rawText</i>, <span class="type">QColor</span> <i>rgb</i>, <span class="type"><a href="https://doc.qt.io/qt/qlist.html" translate="no">QList</a></span>&lt;<span class="type">VIConsole::Style</span>&gt; <i>styleList</i> = { VIConsole::Style::Normal })</h3>
 <p>This is an overloaded function.</p>
 <p>允许使用RGB颜色。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@getColorString -->
 <!-- $$$getColorString$$$getColorStringQStringQColorVIConsole::Style -->
-<h3 class="fn" translate="no" id="getColorString-3"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">getColorString</span>(<span class="type">QString</span> <i>rawText</i>, <span class="type">QColor</span> <i>rgb</i>, <span class="type">VIConsole::Style</span> <i>style</i> = VIConsole::Style::Normal)</h3>
+<h3 class="fn" translate="no" id="getColorString-3"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">getColorString</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>rawText</i>, <span class="type">QColor</span> <i>rgb</i>, <span class="type">VIConsole::Style</span> <i>style</i> = VIConsole::Style::Normal)</h3>
 <p>This is an overloaded function.</p>
 <p>允许在只设置一个样式的情况下使用RGB颜色。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@getColorString -->
 <!-- $$$getLine[overload1]$$$getLine -->
-<h3 class="fn" translate="no" id="getLine"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">getLine</span>()</h3>
+<h3 class="fn" translate="no" id="getLine"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">getLine</span>()</h3>
 <p>获取一行输入。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@getLine -->
 <!-- $$$getRawText[overload1]$$$getRawTextQString -->
-<h3 class="fn" translate="no" id="getRawText"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">getRawText</span>(<span class="type">QString</span> <i>colorString</i>)</h3>
+<h3 class="fn" translate="no" id="getRawText"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">getRawText</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>colorString</i>)</h3>
 <p><i translate="no">colorString</i> 为带有颜色样式的文本。</p>
 <p>返回一个不带颜色样式的文本。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@getRawText -->
 <!-- $$$inErrorStyle[overload1]$$$inErrorStyleQString -->
-<h3 class="fn" translate="no" id="inErrorStyle"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">inErrorStyle</span>(<span class="type">QString</span> <i>rawText</i>)</h3>
+<h3 class="fn" translate="no" id="inErrorStyle"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">inErrorStyle</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>rawText</i>)</h3>
 <p><i translate="no">rawText</i> 为要设置样式的文本。</p>
 <p>返回一个带有错误样式的文本，即红色加粗。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@inErrorStyle -->
 <!-- $$$inNoticeStyle[overload1]$$$inNoticeStyleQString -->
-<h3 class="fn" translate="no" id="inNoticeStyle"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">inNoticeStyle</span>(<span class="type">QString</span> <i>rawText</i>)</h3>
+<h3 class="fn" translate="no" id="inNoticeStyle"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">inNoticeStyle</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>rawText</i>)</h3>
 <p><i translate="no">rawText</i> 为要设置样式的文本。</p>
 <p>返回一个带有通知样式的文本，即蓝色加粗。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@inNoticeStyle -->
 <!-- $$$inSuccessStyle[overload1]$$$inSuccessStyleQString -->
-<h3 class="fn" translate="no" id="inSuccessStyle"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">inSuccessStyle</span>(<span class="type">QString</span> <i>rawText</i>)</h3>
+<h3 class="fn" translate="no" id="inSuccessStyle"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">inSuccessStyle</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>rawText</i>)</h3>
 <p><i translate="no">rawText</i> 为要设置样式的文本。</p>
 <p>返回一个带有成功样式的文本，即绿色加粗。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@inSuccessStyle -->
 <!-- $$$inWarningStyle[overload1]$$$inWarningStyleQString -->
-<h3 class="fn" translate="no" id="inWarningStyle"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">QString</span> VIConsole::<span class="name">inWarningStyle</span>(<span class="type">QString</span> <i>rawText</i>)</h3>
+<h3 class="fn" translate="no" id="inWarningStyle"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> VIConsole::<span class="name">inWarningStyle</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>rawText</i>)</h3>
 <p><i translate="no">rawText</i> 为要设置样式的文本。</p>
 <p>返回一个带有警告样式的文本，即黄色加粗。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@inWarningStyle -->
 <!-- $$$print[overload1]$$$printQString -->
-<h3 class="fn" translate="no" id="print"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">void</span> VIConsole::<span class="name">print</span>(<span class="type">QString</span> <i>msg</i>)</h3>
+<h3 class="fn" translate="no" id="print"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">void</span> VIConsole::<span class="name">print</span>(<span class="type"><a href="https://doc.qt.io/qt/qstring.html" translate="no">QString</a></span> <i>msg</i>)</h3>
 <p><i translate="no">msg</i> 为要输出的文本。</p>
 <p>此输出自动换行。</p>
 <p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
 <!-- @@@print -->
 <!-- $$$printBinary[overload1]$$$printBinaryconstQByteArray& -->
-<h3 class="fn" translate="no" id="printBinary"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">void</span> VIConsole::<span class="name">printBinary</span>(const <span class="type">QByteArray</span> &amp;<i>data</i>)</h3>
+<h3 class="fn" translate="no" id="printBinary"><code translate="no">[static, since Visindigo 2.0.0] </code><span class="type">void</span> VIConsole::<span class="name">printBinary</span>(const <span class="type"><a href="https://doc.qt.io/qt/qbytearray.html" translate="no">QByteArray</a></span> &amp;<i>data</i>)</h3>
 <p><i translate="no">data</i> 为要进行二进制显示的数据。</p>
 <p>一般来说，这个函数在控制台上的输出如下所示：</p>
 <pre class="cpp" translate="no">

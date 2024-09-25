@@ -13,4 +13,5 @@ if __name__ == "__main__":
     QDocPath = QtInstallPath + "\\bin\\qdoc.exe"
     print(os.curdir)
     QDocConfig = os.curdir + "\\..\\doc\\config.qdocconf"
-    os.system(QDocPath + " " + QDocConfig+" -indexdir D:/Qt/6.5.2/Docs/Qt-6.5.2/qtcore")
+    os.system(QDocPath + " " + QDocConfig + " -indexdir E:/source/repos/Visindigo/src/VIMiCore/doc/html/vimicore.index"
+              + " -indexdir D:/Qt/6.5.2/Docs/Qt-6.5.2/qtcore/qtcore.index")

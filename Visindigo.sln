@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Visindigo", "Visindigo\Visi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VIMiCore", "src\VIMiCore\VIMiCore.vcxproj", "{49823AFC-0934-490E-8476-BFAEAA8B8E04}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VICore", "src\VICore\VICore.vcxproj", "{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,18 @@ Global
 		{49823AFC-0934-490E-8476-BFAEAA8B8E04}.DllReleaseExport|x64.Build.0 = DllReleaseExport|x64
 		{49823AFC-0934-490E-8476-BFAEAA8B8E04}.Release|x64.ActiveCfg = Release|x64
 		{49823AFC-0934-490E-8476-BFAEAA8B8E04}.Release|x64.Build.0 = Release|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.Debug|x64.ActiveCfg = Debug|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.Debug|x64.Build.0 = Debug|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.DllDebug|x64.ActiveCfg = Debug|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.DllDebug|x64.Build.0 = Debug|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.DllDebugExport|x64.ActiveCfg = Debug|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.DllDebugExport|x64.Build.0 = Debug|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.DllRelease|x64.ActiveCfg = Release|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.DllRelease|x64.Build.0 = Release|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.DllReleaseExport|x64.ActiveCfg = Release|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.DllReleaseExport|x64.Build.0 = Release|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.Release|x64.ActiveCfg = Release|x64
+		{B2ABDCAA-1B26-4FD9-A2E5-B3354B251B7C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

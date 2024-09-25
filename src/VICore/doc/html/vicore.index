@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE QDOCINDEX>
+<INDEX url="" title="VICore Reference Documentation" version="" project="VICore">
+    <namespace name="" status="active" access="public" module="vicore">
+        <class name="VIAbstractBehavior" href="viabstractbehavior.html" status="active" access="public" location="VIAbstractBehavior.h" filepath="E:/source/repos/Visindigo/src/VICore/VIAbstractBehavior.h" lineno="5" since="Visindigo 2.0.0" documented="true" module="VICore" brief="VIAbstractBehavior是所有需要按刻更新的内容的基类">
+            <function name="VIAbstractBehavior" fullname="VIAbstractBehavior::VIAbstractBehavior" href="viabstractbehavior.html#VIAbstractBehavior" status="active" access="public" documented="true" since="Visindigo 2.0.0" meta="constructor" virtual="non" const="false" static="false" final="false" override="false" type="" brief="构造函数 parent 父对象" signature="VIAbstractBehavior(int *parent)">
+                <parameter type="int *" name="parent" default=""/>
+            </function>
+            <function name="onEnd" fullname="VIAbstractBehavior::onEnd" href="viabstractbehavior.html#onEnd" status="active" access="private" location="VIAbstractBehavior.h" filepath="E:/source/repos/Visindigo/src/VICore/VIAbstractBehavior.h" lineno="11" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="int" brief="结束函数" signature="int onEnd()"/>
+            <function name="onStart" fullname="VIAbstractBehavior::onStart" href="viabstractbehavior.html#onStart" status="active" access="private" location="VIAbstractBehavior.h" filepath="E:/source/repos/Visindigo/src/VICore/VIAbstractBehavior.h" lineno="10" documented="true" since="Visindigo 2.0.0" meta="plain" virtual="non" const="false" static="false" final="false" override="false" type="int" brief="开始函数" signature="int onStart()"/>
+        </class>
+        <module name="VICore" href="vicore-module.html" status="active" location="module.qdoc" filepath="E:/source/repos/Visindigo/src/VICore/doc/module.qdoc" lineno="1" since="Visindigo 2.0.0" documented="true" seen="true" title="Visindigo 内核 模块" brief="包括了 Visindigo 最小内核的所有类. Visindigo 内核是构建 Visindigo 内核的基础。"/>
+    </namespace>
+</INDEX>

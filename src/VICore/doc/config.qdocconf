@@ -1,12 +1,18 @@
 include(D:\Qt\6.5.2\Docs\Qt-6.5.2\global\qt-html-templates-offline.qdocconf)
 
-project = VIMiCore
+project = VICore
 
-indexes = D:/Qt/6.5.2/Docs/Qt-6.5.2/qtcore/qtcore.index
+indexes = \
+    E:/source/repos/Visindigo/src/VIMiCore/doc/html/vimicore.index \
+	D:/Qt/6.5.2/Docs/Qt-6.5.2/qtcore/qtcore.index
 
-depends = qtcore
+depends = \
+    vimicore \
+    qtcore 
 
-includepaths = D:/Qt/6.5.2/6.5.2/msvc2019_64/include/QtCore \
+includepaths = \
+    D:/Qt/6.5.2/6.5.2/msvc2019_64/include/QtCore \
+    E:/source/repos/Visindigo/src/VIMiCore
 
 headers.fileextensions  = "*.h *.hpp"
 sources.fileextensions  = "*.cpp *.qml *.qdoc"
@@ -16,6 +22,8 @@ outputdir   = html
 headerdirs  = ../
 
 sourcedirs  = ../
+
+excludedirs = ../x64
 
 sourceencoding = UTF-8
 

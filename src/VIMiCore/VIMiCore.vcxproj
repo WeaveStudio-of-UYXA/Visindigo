@@ -92,16 +92,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)dev\$(Platform)\Debug\$(ProjectName)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllDebugExport|x64'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Platform)\Debug\$(ProjectName)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)dev\$(Platform)\Release\$(ProjectName)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DllReleaseExport|x64'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Platform)\Release\$(ProjectName)</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PreBuildEvent>
@@ -123,6 +123,9 @@
     <Link>
       <EntryPointSymbol>_DllMainCRTStartup</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>python "$(ProjectDir)pytools\IncludeExport.py" "VIMiCore" "Debug"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <PreBuildEvent>
@@ -144,6 +147,9 @@
     <Link>
       <EntryPointSymbol>_DllMainCRTStartup</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>python "$(ProjectDir)pytools\IncludeExport.py" "VIMiCore" "Release"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>

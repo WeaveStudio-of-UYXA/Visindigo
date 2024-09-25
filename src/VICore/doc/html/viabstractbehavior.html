@@ -2,9 +2,9 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="utf-8">
-<!-- VIAbstractObject.qdoc -->
-  <meta name="description" content="VIAbstractObject 是Visindigo框架大部分类型的基类，用于在其中提供通用功能. 用户不应该直接使用VIAbstractObject，而应该使用<a href="viobject.html" translate="no">VIObject</a>或者其子类，除非用户需要将一个 已经继承自<a href="https://doc.qt.io/qt/qobject.html" translate="no">QObject</a>的类转换为<a href="viobject.html" translate="no">VIObject</a>。">
-  <title>VIAbstractObject Class | VIMiCore</title>
+<!-- VIAbstractBehavior.cpp -->
+  <meta name="description" content="VIAbstractBehavior是所有需要按刻更新的内容的基类">
+  <title>VIAbstractBehavior Class | VICore</title>
   <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
   <script type="text/javascript">
     document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
@@ -26,8 +26,8 @@
     <div class="main-rounded">
         <div class="navigationbar">
         <ul>
-<li><a href="vimicore-module.html" translate="no">VIMiCore</a></li>
-<li>VIAbstractObject</li>
+<li><a href="vicore-module.html" translate="no">VICore</a></li>
+<li>VIAbstractBehavior</li>
     </ul>
     </div>
 </div>
@@ -38,26 +38,40 @@
 <div class="toc">
 <h3 id="toc">Contents</h3>
 <ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
 <li class="level1"><a href="#details">Detailed Description</a></li>
 </ul>
 </div>
 <div class="sidebar-content" id="sidebar-content"></div></div>
-<h1 class="title" translate="no">VIAbstractObject Class</h1>
-<!-- $$$VIAbstractObject-brief -->
-<p>VIAbstractObject 是Visindigo框架大部分类型的基类，用于在其中提供通用功能. 用户不应该直接使用VIAbstractObject，而应该使用<a href="viobject.html" translate="no">VIObject</a>或者其子类，除非用户需要将一个 已经继承自<a href="https://doc.qt.io/qt/qobject.html" translate="no">QObject</a>的类转换为<a href="viobject.html" translate="no">VIObject</a>。. <a href="#details">More...</a></p>
-<!-- @@@VIAbstractObject -->
+<h1 class="title" translate="no">VIAbstractBehavior Class</h1>
+<!-- $$$VIAbstractBehavior-brief -->
+<p>VIAbstractBehavior是所有需要按刻更新的内容的基类. <a href="#details">More...</a></p>
+<!-- @@@VIAbstractBehavior -->
 <div class="table"><table class="alignedsummary" translate="no">
-<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;VIAbstractObject&gt;</span></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;VIAbstractBehavior&gt;</span></td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Visindigo 2.0&#x2e;0</td></tr>
-<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="viqcoreapplication.html" translate="no">VIQCoreApplication</a></p>
-</td></tr>
 </table></div>
-<!-- $$$VIAbstractObject-description -->
+<ul>
+<li><a href="viabstractbehavior-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="viabstractbehavior.html#VIAbstractBehavior" translate="no">VIAbstractBehavior</a></b>(int *<i>parent</i>)</td></tr>
+</table></div>
+<!-- $$$VIAbstractBehavior-description -->
 <div class="descr">
 <h2 id="details">Detailed Description</h2>
-<p>当前VIAbstactObject是空的。</p>
+<p>此类是所有需要按刻更新的内容的基类，所有继承此类的类都需要实现onStart()和onEnd()函数。</p>
 </div>
-<!-- @@@VIAbstractObject -->
+<!-- @@@VIAbstractBehavior -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$VIAbstractBehavior[overload1]$$$VIAbstractBehaviorint* -->
+<h3 class="fn" translate="no" id="VIAbstractBehavior"><code translate="no">[default, since Visindigo 2.0.0] </code>VIAbstractBehavior::<span class="name">VIAbstractBehavior</span>(<span class="type">int</span> *<i>parent</i>)</h3>
+<p>构造函数 <i translate="no">parent</i> 父对象</p>
+<p>This function was introduced in Visindigo 2.0&#x2e;0.</p>
+<!-- @@@VIAbstractBehavior -->
+</div>
         </div>
        </div>
    </div>
