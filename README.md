@@ -1,3 +1,8 @@
+# ! ARCHIVED 已存档 !
+由于Visindigo的开发过程有多数情况属于面对假设需求开发，因此许多设计都不符合实际需要。目前Visindigo项目是[Yayin Story Studio](https://github.com/tsingyayin/YayinStoryStudio)项目的一部分，作为Yayin Story Studio的内核存在，以求在实际需求中构建一个设计良好的程序支持框架。因此，该Visindigo独立仓库在当前一段时间内不会再继续开发，后续也不会再对这个仓库进行兼容性维护。ABI、API兼容性从Yayin Story Studio内的Visindigo项目重新开始。
+
+Due to the fact that the development process of Visindigo mostly involves developing based on hypothetical requirements, many designs do not meet actual needs. At present, the Visindigo project is part of the [Yayin Story Studio](https://github.com/tsingyayin/YayinStoryStudio) project, serving as the core of Yayin Story Studio to build a well-designed program support framework in practical needs. Therefore, the Visindigo independent repo will not continue to be developed for the current period of time, and there will be no compatibility maintenance for this in the future. ABI and API compatibility have been restarted from the Visindigo project within Yayin Story Studio.
+
 # 前言和授权
 **Visindigo**是基于Qt的应用程序开发拓展，在Qt的基础上提供一些适用于游戏开发的基本对象，以及适用于桌面程序开发的小组件。
 
